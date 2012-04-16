@@ -4,3 +4,11 @@ footer{
 	text-align: center;
 	font-size: $meta-size;
 }
+
+div.vcard{
+  img.photo{float: left; height: 120px; padding-right: 60px; margin-left: 25%;}
+  div#info{float: left; padding-top: 32px;}
+}
+div#copyright-notice{
+  clear:both
+}
