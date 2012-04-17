@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Presentation | Matt Aimonetti]]></title>
+  <link href="http://mattetti.github.com/articles/categories/presentation/atom.xml" rel="self"/>
+  <link href="http://mattetti.github.com/"/>
+  <updated>2012-04-17T14:51:33+02:00</updated>
+  <id>http://mattetti.github.com/</id>
+  <author>
+    <name><![CDATA[Matt Aimonetti]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[My RubyConf 2011 talk is online]]></title>
+    <link href="http://mattetti.github.com/posts/2011/12/09/my-rubyconf-2011-talk-is-online/"/>
+    <updated>2011-12-09T06:47:59+01:00</updated>
+    <id>http://mattetti.github.com/posts/2011/12/09/my-rubyconf-2011-talk-is-online</id>
+    <content type="html"><![CDATA[<p>I realize I forgot to mention that my RubyConf talk is now online on the <a href="http://confreaks.net/videos/714-rubyconf2011-complex-ruby-concepts-dummified">confreaks site</a> (wait until the end, Matz actually answers a question from the audience).</p>
+
+<p><img src="https://img.skitch.com/20111209-pdfksgd2sufg8ywrpnjd4dnru4.jpg" alt="Photo of Matt Aimonetti giving a talk at RubyConf 2011 with one of his slides showing how thread scheduling works" /></p>
+
+<p>I wrote a couple follow up posts you might also be interested in:</p>
+
+<ul>
+<li><p><a href="http://merbist.com/2011/10/03/about-concurrency-and-the-gil/">About concurrency and the GIL</a></p></li>
+<li><p><a href="http://merbist.com/2011/10/18/data-safety-and-gil-removal/">Data safety and GIL removal</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RubyConf 2010 - MacRuby talk]]></title>
+    <link href="http://mattetti.github.com/posts/2010/11/12/rubyconf-2010-macruby-talk/"/>
+    <updated>2010-11-12T16:00:51+01:00</updated>
+    <id>http://mattetti.github.com/posts/2010/11/12/rubyconf-2010-macruby-talk</id>
+    <content type="html"><![CDATA[<p>This year I gave the traditional Apple's MacRuby talk at RubyConf.
+My presentation focused on 2 axis:</p>
+
+<ul>
+<li><p>What's new since last RubyConf</p></li>
+<li><p>Show some examples of how fun it is to hack with MacRuby</p></li>
+</ul>
+
+
+<p><strong><a href="http://www.slideshare.net/mattetti/macruby-rubyconf-presentation-2010">Macruby - RubyConf Presentation 2010</a></strong></p>
+
+<p>View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/mattetti">Matt Aimonetti</a>.</p>
+
+<p>MacRuby is currently at version 0.7.1 and version 0.8 is in preparation.
+Since last new a lot of things happened, here is a quick summary:</p>
+
+<ul>
+<li><p>Cocoa dev is now considered stable.  Apple gave its seal of approval, most of the bugs are fixed and it's currently used on production projects and some apps were even submitted to the Mac App Store.</p></li>
+<li><p>Ahead of Time compilation. This is quite a major improvement with many repercussions. Being to compile your Ruby source code means faster boot time and source obfuscation. Two major things to consider when you want to ship a desktop app.</p></li>
+<li><p>Debugger. MacRuby now ships with its own debugger. Of course you can still use GDB and DTrace, but MacRuby's debugger is really easy to use and very powerful.</p></li>
+<li><p>Grand Central Dispatch support and wrapper API. Having to manage threads can be hard for both developers and for the machines having to run the developer code. GCD is an abstraction layer allowing developers to only focus on business logic without having to worry about the underlying details if you don't want to. The end result is an optimum use of all the cores available on a machine and truly concurrent code. Two important notions when writing desktop apps.</p></li>
+<li><p>ControlTower - A webserver for Rack apps written in MacRuby and using GCD for concurrency.</p></li>
+<li><p>New rewritten and more efficient dispatcher. Practically that means that the dispatcher is now thread safe with a per thread cache.</p></li>
+<li><p>RegExp lib switch from Oniguruma to ICU. This was quite a big change and it was required because Oniguruma isn't thread safe and while C Ruby uses a Global Interpreter Lock. MacRuby on the other hand uses native POSIX threads running on their own non-locking, reentrant VM making thread safety critical.</p></li>
+<li><p>More solid foundations - Some key classes we rewritten to improve performance and flexibility.</p></li>
+<li><p>Support for C blocks - Objective-C has been supporting C blocks for a while and some Cocoa APIs require the use of blocks. MacRuby now allows you to use Ruby blocks and to pass them as C blocks. (new BridgeSupport required)</p></li>
+<li><p>Sandboxing - For safety reasons, MacRuby allows you to now sandbox your applications. You can restrict your app from doing some potential dangerous things such as writing to disk, calling the system, accessing internet etc...</p></li>
+<li><p>Mac App Store - This is not something done by the MacRuby team. But it directly affects MacRuby developers wanting to distribute their applications. Think about the exposure that you can app can have. Even if you have a web app, you can use WebKit to wrap it up, hook up a notification, add to that a local backup solution and geo location. Brilliant way to provide an even better user experience and better product exposure. All that really easily if you already know Ruby.</p></li>
+</ul>
+
+
+<p>To give an idea of what can be done I showed some code samples hopefully showing the cool hacking things one can play with:</p>
+
+<ul>
+<li><p>The first demo shows how to use the speech recognizer. The example is really sample you speak the name of someone and his/her picture shows up on screen. Just a few lines of code and you can start screaming commands to your TV to get it to change channel.</p></li>
+<li><p>The second demo is an extremely simple Gowala client using CoreLocation. Yes, Mac desktop and laptops support geo location.</p></li>
+<li><p>Another example of what you do is a sample letting you import all your twitter followers to your address book.</p></li>
+<li><p>You can also use some of the low level OS features such as the Tokenizer. The next example showed how to extend Ruby and use a C function to detect the language of a string.</p></li>
+<li><p>Finally, the last demo shows how to integrate a bluetooth device to control a HTML view via MacRuby and Javascript. All that in just a few lines of code!</p></li>
+</ul>
+
+
+<p>Basically, MacRuby is now mature and it's time for hackers and people trying to get exposure to give it a try.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RailsSummit - an amazing adventure]]></title>
+    <link href="http://mattetti.github.com/posts/2009/10/23/railssummit-2009/"/>
+    <updated>2009-10-23T10:17:45+02:00</updated>
+    <id>http://mattetti.github.com/posts/2009/10/23/railssummit-2009</id>
+    <content type="html"><![CDATA[<p>I have had the opportunity to go to and speak at many conferences but this year was the first time I had the chance to go to <a href="http://railssummit.com.br">RailsSummit</a> in São Paulo, Brazil.</p>
+
+<p>I was really looking forward to this trip and I have to say it went beyond my expectations. I had really good feedback from people like the <a href="http://www.phusion.nl/">Phusion guys</a> (Ninh &amp; Hongli), Gregg Pollack and others.</p>
+
+<p>For those who don't know, RailsSummit is one of the biggest, if not the biggest, Ruby event in Latin America. It's organized yearly by <a href="http://www.locaweb.com.br/">Locaweb</a>, the #1 hosting company in Brazil (props to Akita &amp; Cristiane for their work).</p>
+
+<p><img src="http://farm3.static.flickr.com/2761/4027342992_789777fd03_m_d.jpg" alt="" /></p>
+
+<p>As part of my involvement in the Ruby community I have met a lot of Brazilians always willing to help and especially giving time to translate content. (A good example would be the <a href="http://wiki.rubyonrails.org/pt/start">Portuguese version of the Rails wiki</a> or <a href="http://blog.plataformatec.com.br/">José Valim</a> GSOC contribution) However, I did not realize how fast Rails was growing over here.</p>
+
+<p>To come back to the conference, I have to say it was one of the best conference I have gone to. Chad Fowler, who gave the opening keynote, later told me that it reminded him of the first Ruby conferences in the US . For me, what made a huge difference was the fact that it was a very positive conference. People were happy to be here, eager to share and you could feel the passion. Unfortunately, I missed the first few Ruby conferences, but I can totally imagine how must have been. Passionate people, not trying to push their products but instead, share the cool stuff they've been working on. This is exactly the feeling I had during this conference.</p>
+
+<p>Maybe it's because I don't understand Portuguese well enough or maybe it's just a cultural thing, but the people at the conference were just super friendly and always willing to help. I was really glad to meet those who have been using some of my work, some new people to Ruby and people who don't do Ruby but were just interested in knowing what was going on in the Ruby world.</p>
+
+<p><img src="http://farm3.static.flickr.com/2719/4027357802_1082f38090.jpg" alt="" /></p>
+
+<p>The schedule was pretty packed and the discussions very interesting, you could certainly feel the excitement in the air. Ruby seems to catching up quickly over there. Brazilian Rubyists seem to be very pragmatic and a good illustration of that was certainly made by <a href="http://improveit.com.br/en">Vinicus Teles</a>, Brazil Agile XPert, who shared tips on how to release a successful product.</p>
+
+<p>I stayed a few days after the conference and went to visit the Rubyists in Rio. Rio is a great city. It has some of the best soccer players in the world and some seriously talented software developers. Ruby &amp; Rails are not just the new trendy startup secret to success, companies like globo.com, currently the largest TV network in <a href="http://en.wikipedia.org/wiki/Latin_America">Latin America</a> and the fourth largest in the world, also started using Ruby and Rails. I had the opportunity to visit their office and meet their teams. It's very exciting to see how they use Agile/XP and Ruby and how they seem to be so successful. But I will keep that for another post.</p>
+
+<p>Overall, even though the actual traveling to/from Brazil was a bit long, RailsSummit was a blast. I really hope to be able to come back next year, and by then, hopefully my Portuguese will have improved.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RailsConf 2009]]></title>
+    <link href="http://mattetti.github.com/posts/2009/05/08/railsconf-2009/"/>
+    <updated>2009-05-08T12:18:18+02:00</updated>
+    <id>http://mattetti.github.com/posts/2009/05/08/railsconf-2009</id>
+    <content type="html"><![CDATA[<p>RailsConf 2009 has now finished.  This time last year, no one would have ever guessed that the Merb and Rails teams would join forces and focus on what will hopefully be known as one of the best Web Frameworks.</p>
+
+<p>It was encouraging to see so many people excited about what's being ported over from Merb and the new options available to people who are currently limited by the existing stack. For those interested in pushing Rails further and doing stuff out of the norm, here are my slides. <a href="http://www.workingwithrails.com/person/5919-arthur-zapparoli">Arthur Zapparoli</a> from <a href="http://www.rubyonrails.pro.br/">Brazilian Rails squad</a> recorded most of the talk and told me he will upload the video ASAP. You can also read <a href="http://yehudakatz.com/2009/05/08/railsconf-wrapup/">Yehuda Katz' blog</a> which covers what he talked about.</p>
+
+<p><a href="http://www.slideshare.net/mattetti/rails3-stepping-off-of-the-golden-path?type=presentation">Rails3: Stepping off of the golden path</a></p>
+
+<p>View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/mattetti">Matt Aimonetti</a>.</p>
+
+<p>It was really great to meet a lot of new people as well as people I only knew via IRC/IM/twitter.</p>
+
+<p>It was a great honor to finally meet <a href="http://twitter.com/dkubb">Dan Kubb</a> (DataMapper), <a href="http://twitter.com/ninh">Ninh Hernandez-Búi</a> &amp; <a href="http://twitter.com/phusion_nl">Hongli McLovin Lai (Phusion)</a>, <a href="http://twitter.com/peterc">Peter Cooper</a> (<a href="http://www.rubyinside.com/">RubyInside</a>), <a href="http://twitter.com/rsim">Raimonds Simanovskis</a> (Oracle adapter for AR), <a href="http://weblogs.java.net/blog/arungupta/">Arun Gupta</a> (Sun/Glassfish),  <a href="http://twitter.com/copiousfreetime">Jeremy Hinegardner</a> (crate), <a href="http://maximilien.org">Michael Maxilien</a> (IBM), Dana Jones (<a href="http://railsbridge.org/">railsbridge</a>), Zach Zolton &amp; Geoff Buesing (CouchRest) and of course the Brazilian crew (lots of awesome .br guys came this year, I'm looking forward to RailsSummit) and last but not least, the French speaking crew (I'm glad to see Ruby is picking up back home). (I know I'm forgetting people... sorry about that)</p>
+
+<p>It was also really nice to talk with some experts like Dave Astels, Aslak Hellesøy, Rich Kilmer, David Chelimsky, Ryan Brown, Derek Neighbors etc.. to get their feedback on various projects I'm working on.</p>
+
+<p>Leaving Vegas, I feel like the Rails community is expanding quickly (it was the first RailsConf for 1/4 to 1/5 of the attendees) and that the community is organizing itself to welcome a new audience (better documentation, great initiatives like <a href="http://railsbridge.org/">railsbridge.org</a>, willingness to help), as well as trying to be more available to the 'Enterprise' world.</p>
+
+<p>These feelings were enforced during our Rails Activism BOF and after talking with 3rd party developers and sponsors really trying to solve problems that newcomers to Rails are now facing. This is an exciting time.</p>
+]]></content>
+  </entry>
+  
+</feed>
