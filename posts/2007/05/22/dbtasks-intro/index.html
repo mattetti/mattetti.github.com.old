@@ -1,0 +1,197 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>db_tasks or how to easily manage your db - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Db_tasks or How to Easily Manage Your Db Josh knowles and Matt Heidemann from Integrum and I released few weeks a go a cool plugin called rake_tasks &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2007/05/22/dbtasks-intro/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  </head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Db_tasks or How to Easily Manage Your Db</h1>
+    <div class="entry"><p><a href="http://joshknowles.com">Josh knowles</a> and Matt Heidemann from <a href="http://integrumtech.com">Integrum</a> and I released few weeks a go a cool plugin called <a href="http://svn.integrumtech.com/public/plugins/rake_tasks/">rake_tasks</a></p>
+
+<p>The thing is that the plugin was getting too big when I started hacking the MySQL adapter and adding utf-8 support we figured out it was smarter to split the plugin and create <a href="http://svn.aimonetti.net/public/plugins/db_tasks/">db_tasks</a> and svn_tasks</p>
+
+<p>I temporarily hosted db_tasks there:</p>
+
+<p>http://svn.aimonetti.net/public/plugins/db_tasks/</p>
+
+<pre><code>&lt;code&gt;ruby script/plugin install http://svn.aimonetti.net/public/plugins/db_tasks/
+&lt;/code&gt;
+</code></pre>
+
+<p>check your Rake tasks:</p>
+
+<ul>
+<li><p><em>rake db:create</em>      Creates the databases defined in your config/database.yml (unless they already exist) You can also specify the charset and collation you want your dbs to use: rake db:create CHARSET=&#8217;latin1&#8217; COLLATION=&#8217;latin1_bin&#8217;)</p></li>
+<li><p><em>rake db:drop</em>       Drops the database for your currenet RAILS_ENV as defined in config/database.yml</p></li>
+<li><p><em>rake db:reset</em>       Drops, creates and then migrates the database for your current RAILS_ENV</p></li>
+<li><p><em>rake db:shell</em>       Launches the database shell using the values defined in config/database.yml</p></li>
+<li><p><em>rake db:charset</em>    Returns the charset of your current RAILS_ENV database</p></li>
+<li><p><em>rake db:collation</em>   Returns the collation of your current RAILS_ENV database</p></li>
+<li><p><em>rake db:update_connection_settings</em>  add the encoding format to each environment in the database.yml file</p></li>
+</ul>
+
+
+<p>By default, your new databases will be utf8, you can automatically create your databases by typing:</p>
+
+<p>rake db:create</p>
+
+<p>or reset your databases (drop, create, migrate)</p>
+
+<p>rake db:reset</p>
+
+<h2>Another simple plugin for lazy developers.</h2>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-05-22T05:02:00+02:00" pubdate data-updated="true">May 22<span>nd</span>, 2007</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

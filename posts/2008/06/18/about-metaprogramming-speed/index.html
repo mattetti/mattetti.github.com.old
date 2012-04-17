@@ -1,0 +1,391 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>About Metaprogramming speed - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="About Metaprogramming Speed In a previous article I took an example of bad metaprogramming and I pushed people to think twice before using &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2008/06/18/about-metaprogramming-speed/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  </head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">About Metaprogramming Speed</h1>
+    <div class="entry"><p>In a <a href="http://railsontherun.com/2008/5/4/avoid-using-metaprogramming">previous article</a> I took an example of bad metaprogramming and I pushed people to think twice before using metaprogramming.</p>
+
+<p>My main points were that:</p>
+
+<ul>
+<li><p>you might make your code way slower if you don&#8217;t know what you are doing</p></li>
+<li><p>readability might drop considerably</p></li>
+<li><p>maintainability can become an issue</p></li>
+</ul>
+
+
+<p>People left some very good comments about how to write the same module using metaprogramming and keep things fast.</p>
+
+<p>Today <a href="http://yehudakatz.com">Wycats</a> pinged me about this post and told me that the issue was define_method and that class_eval is effectively the same as regular code, it gets evaluated in eval.c, just like regular Ruby code. On the other hand, defined_method has to marshall the proc.</p>
+
+<p>I cleaned up my benchmarks using <a href="http://github.com/somebee/rbench/tree/master">rbench</a>, added some of the solutions provided to me and obtained the following results:</p>
+
+<p><img src="http://img.skitch.com/20080618-ju8hy1b1pw8c3hb882ksr3hbed.jpg" alt="results" /></p>
+
+<p>Here is the original/bad metaprogramming example:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;8&lt;tt&gt;
+&lt;/tt&gt;9&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;10&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;11&lt;tt&gt;
+&lt;/tt&gt;12&lt;tt&gt;
+&lt;/tt&gt;13&lt;tt&gt;
+&lt;/tt&gt;14&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;15&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;16&lt;tt&gt;
+&lt;/tt&gt;17&lt;tt&gt;
+&lt;/tt&gt;18&lt;tt&gt;
+&lt;/tt&gt;19&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="r"&gt;module&lt;/span&gt; &lt;span class="cl"&gt;MetaTimeDSL&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;    {&lt;span class="sy"&gt;:second&lt;/span&gt; =&gt; &lt;span class="i"&gt;1&lt;/span&gt;, &lt;tt&gt;
+&lt;/tt&gt;     &lt;span class="sy"&gt;:minute&lt;/span&gt; =&gt; &lt;span class="i"&gt;60&lt;/span&gt;, &lt;tt&gt;
+&lt;/tt&gt;     &lt;span class="sy"&gt;:hour&lt;/span&gt; =&gt; &lt;span class="i"&gt;3600&lt;/span&gt;, &lt;tt&gt;
+&lt;/tt&gt;     &lt;span class="sy"&gt;:day&lt;/span&gt; =&gt; [&lt;span class="i"&gt;24&lt;/span&gt;,&lt;span class="sy"&gt;:hours&lt;/span&gt;], &lt;tt&gt;
+&lt;/tt&gt;     &lt;span class="sy"&gt;:week&lt;/span&gt; =&gt; [&lt;span class="i"&gt;7&lt;/span&gt;,&lt;span class="sy"&gt;:days&lt;/span&gt;], &lt;tt&gt;
+&lt;/tt&gt;     &lt;span class="sy"&gt;:month&lt;/span&gt; =&gt; [&lt;span class="i"&gt;30&lt;/span&gt;,&lt;span class="sy"&gt;:days&lt;/span&gt;], &lt;tt&gt;
+&lt;/tt&gt;     &lt;span class="sy"&gt;:year&lt;/span&gt; =&gt; [&lt;span class="fl"&gt;364.25&lt;/span&gt;, &lt;span class="sy"&gt;:days&lt;/span&gt;]}.each &lt;span class="r"&gt;do&lt;/span&gt; |meth, amount|&lt;tt&gt;
+&lt;/tt&gt;      define_method &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="il"&gt;&lt;span class="dl"&gt;#{&lt;/span&gt;meth&lt;span class="dl"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt; &lt;span class="r"&gt;do&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;        amount = amount.is_a?(&lt;span class="co"&gt;Array&lt;/span&gt;) ? amount[&lt;span class="i"&gt;0&lt;/span&gt;].send(amount[&lt;span class="i"&gt;1&lt;/span&gt;]) : amount&lt;tt&gt;
+&lt;/tt&gt;        &lt;span class="pc"&gt;self&lt;/span&gt; * amount&lt;tt&gt;
+&lt;/tt&gt;      &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;      alias_method &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="il"&gt;&lt;span class="dl"&gt;#{&lt;/span&gt;meth&lt;span class="dl"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class="k"&gt;s&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;.intern, &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="il"&gt;&lt;span class="dl"&gt;#{&lt;/span&gt;meth&lt;span class="dl"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="co"&gt;Numeric&lt;/span&gt;.send &lt;span class="sy"&gt;:include&lt;/span&gt;, &lt;span class="co"&gt;MetaTimeDSL&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;
+</code></pre>
+
+<p>The no metaprogramming module is available <a href="http://pastie.textmate.org/217046">there</a></p>
+
+<p>Refactored:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;8&lt;tt&gt;
+&lt;/tt&gt;9&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;10&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;11&lt;tt&gt;
+&lt;/tt&gt;12&lt;tt&gt;
+&lt;/tt&gt;13&lt;tt&gt;
+&lt;/tt&gt;14&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;15&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;16&lt;tt&gt;
+&lt;/tt&gt;17&lt;tt&gt;
+&lt;/tt&gt;18&lt;tt&gt;
+&lt;/tt&gt;19&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;20&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="r"&gt;module&lt;/span&gt; &lt;span class="cl"&gt;RefaMetaTimeDSL&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;  {&lt;span class="sy"&gt;:second&lt;/span&gt; =&gt; &lt;span class="i"&gt;1&lt;/span&gt;, &lt;tt&gt;
+&lt;/tt&gt;   &lt;span class="sy"&gt;:minute&lt;/span&gt; =&gt; &lt;span class="i"&gt;60&lt;/span&gt;, &lt;tt&gt;
+&lt;/tt&gt;   &lt;span class="sy"&gt;:hour&lt;/span&gt; =&gt; &lt;span class="i"&gt;3600&lt;/span&gt;, &lt;tt&gt;
+&lt;/tt&gt;   &lt;span class="sy"&gt;:day&lt;/span&gt; =&gt; [&lt;span class="i"&gt;24&lt;/span&gt;,&lt;span class="sy"&gt;:hours&lt;/span&gt;], &lt;tt&gt;
+&lt;/tt&gt;   &lt;span class="sy"&gt;:week&lt;/span&gt; =&gt; [&lt;span class="i"&gt;7&lt;/span&gt;,&lt;span class="sy"&gt;:days&lt;/span&gt;], &lt;tt&gt;
+&lt;/tt&gt;   &lt;span class="sy"&gt;:month&lt;/span&gt; =&gt; [&lt;span class="i"&gt;30&lt;/span&gt;,&lt;span class="sy"&gt;:days&lt;/span&gt;], &lt;tt&gt;
+&lt;/tt&gt;   &lt;span class="sy"&gt;:year&lt;/span&gt; =&gt; [&lt;span class="fl"&gt;364.25&lt;/span&gt;, &lt;span class="sy"&gt;:days&lt;/span&gt;]}.each &lt;span class="r"&gt;do&lt;/span&gt; |meth, amount|&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="pc"&gt;self&lt;/span&gt;.class_eval &lt;span class="s"&gt;&lt;span class="dl"&gt;&lt;&lt;-RUBY&lt;/span&gt;&lt;/span&gt;&lt;span class="s"&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt;      def r_&lt;/span&gt;&lt;span class="il"&gt;&lt;span class="dl"&gt;#{&lt;/span&gt;meth&lt;span class="dl"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt;        &lt;/span&gt;&lt;span class="il"&gt;&lt;span class="dl"&gt;#{&lt;/span&gt;amount.is_a?(&lt;span class="co"&gt;Array&lt;/span&gt;) ? &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="il"&gt;&lt;span class="dl"&gt;#{&lt;/span&gt;amount[&lt;span class="i"&gt;0&lt;/span&gt;]&lt;span class="dl"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class="k"&gt;.&lt;/span&gt;&lt;span class="il"&gt;&lt;span class="dl"&gt;#{&lt;/span&gt;amount[&lt;span class="i"&gt;1&lt;/span&gt;]&lt;span class="dl"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt; : &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="il"&gt;&lt;span class="dl"&gt;#{&lt;/span&gt;amount&lt;span class="dl"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;&lt;span class="dl"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt;      end&lt;tt&gt;
+&lt;/tt&gt;      alias_method :r_&lt;/span&gt;&lt;span class="il"&gt;&lt;span class="dl"&gt;#{&lt;/span&gt;meth&lt;span class="dl"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class="k"&gt;s, :r_&lt;/span&gt;&lt;span class="il"&gt;&lt;span class="dl"&gt;#{&lt;/span&gt;meth&lt;span class="dl"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class="dl"&gt;&lt;tt&gt;
+&lt;/tt&gt;    RUBY&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;span class="co"&gt;Numeric&lt;/span&gt;.send &lt;span class="sy"&gt;:include&lt;/span&gt;, &lt;span class="co"&gt;RefaMetaTimeDSL&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;
+</code></pre>
+
+<p>the refactor 2 or eval based solution provided by <a href="http://pastie.caboo.se/191414">Matt Jones</a> which uses class_eval like the previous refactor.</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;8&lt;tt&gt;
+&lt;/tt&gt;9&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;10&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;11&lt;tt&gt;
+&lt;/tt&gt;12&lt;tt&gt;
+&lt;/tt&gt;13&lt;tt&gt;
+&lt;/tt&gt;14&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;15&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;16&lt;tt&gt;
+&lt;/tt&gt;17&lt;tt&gt;
+&lt;/tt&gt;18&lt;tt&gt;
+&lt;/tt&gt;19&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="r"&gt;module&lt;/span&gt; &lt;span class="cl"&gt;EvalMetaTimeDSL&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="r"&gt;def&lt;/span&gt; &lt;span class="pc"&gt;self&lt;/span&gt;.included(base)&lt;tt&gt;
+&lt;/tt&gt;      base.class_eval &lt;span class="r"&gt;do&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;        [ [&lt;span class="sy"&gt;:e_second&lt;/span&gt;, &lt;span class="i"&gt;1&lt;/span&gt;], &lt;tt&gt;
+&lt;/tt&gt;          [&lt;span class="sy"&gt;:e_minute&lt;/span&gt;, &lt;span class="i"&gt;60&lt;/span&gt;], &lt;tt&gt;
+&lt;/tt&gt;          [&lt;span class="sy"&gt;:e_hour&lt;/span&gt;, &lt;span class="i"&gt;3600&lt;/span&gt;], &lt;tt&gt;
+&lt;/tt&gt;          [&lt;span class="sy"&gt;:e_day&lt;/span&gt;, [&lt;span class="i"&gt;24&lt;/span&gt;,&lt;span class="sy"&gt;:e_hours&lt;/span&gt;]], &lt;tt&gt;
+&lt;/tt&gt;          [&lt;span class="sy"&gt;:e_week&lt;/span&gt;, [&lt;span class="i"&gt;7&lt;/span&gt;,&lt;span class="sy"&gt;:e_days&lt;/span&gt;]], &lt;tt&gt;
+&lt;/tt&gt;          [&lt;span class="sy"&gt;:e_month&lt;/span&gt;, [&lt;span class="i"&gt;30&lt;/span&gt;,&lt;span class="sy"&gt;:e_days&lt;/span&gt;]], &lt;tt&gt;
+&lt;/tt&gt;          [&lt;span class="sy"&gt;:e_year&lt;/span&gt;, [&lt;span class="fl"&gt;365.25&lt;/span&gt;, &lt;span class="sy"&gt;:e_days&lt;/span&gt;]]].each &lt;span class="r"&gt;do&lt;/span&gt; |meth, amount|&lt;tt&gt;
+&lt;/tt&gt;            amount = amount.is_a?(&lt;span class="co"&gt;Array&lt;/span&gt;) ? amount[&lt;span class="i"&gt;0&lt;/span&gt;].send(amount[&lt;span class="i"&gt;1&lt;/span&gt;]) : amount&lt;tt&gt;
+&lt;/tt&gt;            eval &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="il"&gt;&lt;span class="dl"&gt;#{&lt;/span&gt;meth&lt;span class="dl"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class="k"&gt;; self*&lt;/span&gt;&lt;span class="il"&gt;&lt;span class="dl"&gt;#{&lt;/span&gt;amount&lt;span class="dl"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class="k"&gt;; end&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;            alias_method &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="il"&gt;&lt;span class="dl"&gt;#{&lt;/span&gt;meth&lt;span class="dl"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class="k"&gt;s&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, meth&lt;tt&gt;
+&lt;/tt&gt;          &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;      &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="co"&gt;Numeric&lt;/span&gt;.send &lt;span class="sy"&gt;:include&lt;/span&gt;, &lt;span class="co"&gt;EvalMetaTimeDSL&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;
+</code></pre>
+
+<p>and finally, the &#8220;better metaprogramming&#8221; version:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;8&lt;tt&gt;
+&lt;/tt&gt;9&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;10&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;11&lt;tt&gt;
+&lt;/tt&gt;12&lt;tt&gt;
+&lt;/tt&gt;13&lt;tt&gt;
+&lt;/tt&gt;14&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;15&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;16&lt;tt&gt;
+&lt;/tt&gt;17&lt;tt&gt;
+&lt;/tt&gt;18&lt;tt&gt;
+&lt;/tt&gt;19&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;20&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;21&lt;tt&gt;
+&lt;/tt&gt;22&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&lt;tt&gt;
+&lt;/tt&gt; &lt;span class="r"&gt;module&lt;/span&gt; &lt;span class="cl"&gt;GoodMetaTimeDSL&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="co"&gt;SECOND&lt;/span&gt;  = &lt;span class="i"&gt;1&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="co"&gt;MINUTE&lt;/span&gt;  = &lt;span class="co"&gt;SECOND&lt;/span&gt; * &lt;span class="i"&gt;60&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="co"&gt;HOUR&lt;/span&gt;    = &lt;span class="co"&gt;MINUTE&lt;/span&gt; * &lt;span class="i"&gt;60&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="co"&gt;DAY&lt;/span&gt;     = &lt;span class="co"&gt;HOUR&lt;/span&gt; * &lt;span class="i"&gt;24&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="co"&gt;WEEK&lt;/span&gt;    = &lt;span class="co"&gt;DAY&lt;/span&gt; * &lt;span class="i"&gt;7&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="co"&gt;MONTH&lt;/span&gt;   = &lt;span class="co"&gt;DAY&lt;/span&gt; * &lt;span class="i"&gt;30&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="co"&gt;YEAR&lt;/span&gt;    = &lt;span class="co"&gt;DAY&lt;/span&gt; * &lt;span class="fl"&gt;364.25&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="s"&gt;&lt;span class="dl"&gt;%w[&lt;/span&gt;&lt;span class="k"&gt;SECOND MINUTE HOUR DAY WEEK MONTH YEAR&lt;/span&gt;&lt;span class="dl"&gt;]&lt;/span&gt;&lt;/span&gt;.each &lt;span class="r"&gt;do&lt;/span&gt; |const_name|&lt;tt&gt;
+&lt;/tt&gt;      meth = const_name.downcase&lt;tt&gt;
+&lt;/tt&gt;      class_eval &lt;span class="s"&gt;&lt;span class="dl"&gt;&lt;&lt;-RUBY&lt;/span&gt;&lt;/span&gt; &lt;span class="s"&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt;        def g_&lt;/span&gt;&lt;span class="il"&gt;&lt;span class="dl"&gt;#{&lt;/span&gt;meth&lt;span class="dl"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class="k"&gt; &lt;tt&gt;
+&lt;/tt&gt;          self * &lt;/span&gt;&lt;span class="il"&gt;&lt;span class="dl"&gt;#{&lt;/span&gt;const_name&lt;span class="dl"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class="k"&gt; &lt;tt&gt;
+&lt;/tt&gt;        end &lt;tt&gt;
+&lt;/tt&gt;        alias g_&lt;/span&gt;&lt;span class="il"&gt;&lt;span class="dl"&gt;#{&lt;/span&gt;meth&lt;span class="dl"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class="k"&gt;s g_&lt;/span&gt;&lt;span class="il"&gt;&lt;span class="dl"&gt;#{&lt;/span&gt;meth&lt;span class="dl"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class="k"&gt; &lt;/span&gt;&lt;span class="dl"&gt;&lt;tt&gt;
+&lt;/tt&gt;      RUBY&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;span class="co"&gt;Numeric&lt;/span&gt;.send &lt;span class="sy"&gt;:include&lt;/span&gt;, &lt;span class="co"&gt;GoodMetaTimeDSL&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;
+</code></pre>
+
+<p>Looking at the refactored version by Wycats, you can see he&#8217;s right and the major issue with the original version was define_method. Using class_eval does make things almost as fast and even faster than the no metaprogramming version.</p>
+
+<p>Interesting enough, the benchmarks show that some methods from the meta modules are faster than the ones from the no meta module. Overall, an optimized metaprogramming can be more or else as fast as a non meta code. Of course, with the new VMs coming up, things might change a little bit depending on the language implementation.</p>
+
+<p><em>In conclusion, metaprogramming can be as fast as no metaprogramming but that won&#8217;t help your code readability and maintainability, so make sure to only use this great trick when needed!</em></p>
+
+<p>p.s: <a href="http://pastie.textmate.org/217071">here</a> is the benchmark file if you don&#8217;t believe me ;)</p>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-06-18T07:03:00+02:00" pubdate data-updated="true">Jun 18<span>th</span>, 2008</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

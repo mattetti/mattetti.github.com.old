@@ -1,0 +1,270 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ajax Pagination in less than 5 minutes - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Ajax Pagination in Less Than 5 Minutes updated Nov 26 to reflect the recent low pro changes. (please use low pro 0.5 and Prototype 1.6) Recently one &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2007/09/27/ajax-pagination-in-less-than-5-minutes/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  </head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Ajax Pagination in Less Than 5 Minutes</h1>
+    <div class="entry"><h2>updated Nov 26 to reflect the recent low pro changes. (please use low pro 0.5 and Prototype 1.6)</h2>
+
+<p>Recently one of my client asked me to add &#8216;ajax&#8217; pagination to his application. His site already had a very nice pagination using the excellent <a href="http://plugins.require.errtheblog.com/browser/will_paginate">will_paginate</a> from <a href="http://www.workingwithrails.com/person/2764-mislav-marohni">Mislav</a> and the guys(PJ &amp; Chris) from <a href="http://errtheblog.com/">err the blog</a> but since my client had a special need where he had to have Ajax.</p>
+
+<p>It took me <strong>virtually no time to convert the standard pagination into an Ajax navigation</strong> while still degrading gracefully.(it works even without Javascript)</p>
+
+<p>I really enjoy using will_paginate, it&#8217;s very well written and the authors keep up with the <a href="http://err.lighthouseapp.com/projects/466-plugins/tickets?q=tagged%3Awill_paginate">bugs</a> and <a href="http://err.lighthouseapp.com/projects/466-plugins/tickets?q=tagged%3Awill_paginate">new features</a>.</p>
+
+<h2>Start by installing will_paginate:</h2>
+
+<pre><code>&lt;code&gt;ruby script/plugin install svn://errtheblog.com/svn/plugins/will_paginate
+&lt;/code&gt;
+</code></pre>
+
+<h2>Then go watch the <a href="http://railscasts.com/episodes/51">Railcast screencast</a> about will paginate.</h2>
+
+<p>Once you have your pagination working, we will do some &#8217;<a href="http://en.wikipedia.org/wiki/Progressive_enhancement">progressive enhancement</a>&#8217;.</p>
+
+<p>What we want is to <strong>add a behavior to the pagination link</strong>. The behavior would make the same call than the normal link but via an ajax(Javascript) call.</p>
+
+<h2>Add lowpro</h2>
+
+<p>To do that, you simply need to add the excellent <a href="http://www.danwebb.net/lowpro">&#8216;lowpro&#8217;</a> Prototype extension from <a href="http://www.danwebb.net">Dan Webb</a></p>
+
+<p>You can get the files directly from the <a href="http://svn.danwebb.net/external/lowpro/trunk/dist/lowpro.js">lowpro&#8217;s repository</a>.</p>
+
+<p>Add <a href="http://svn.danwebb.net/external/lowpro/trunk/dist/lowpro.js">lowpro.js</a> to your public/javascript folder.</p>
+
+<p>Don&#8217;t forget to include the javascript in your page. (</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&lt;tt&gt;
+&lt;/tt&gt;  &lt;%= javascript_include_tag &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;lowpro&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;%&gt;&lt;/span&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;/span&gt;&lt;/span&gt;
+</code></pre>
+
+<h2>Create a behavior</h2>
+
+<p>Now open your application.js file (or whichever Javascript file you&#8217;re using) and add the following:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="co"&gt;Event&lt;/span&gt;.addBehavior.reassignAfterAjax = &lt;span class="pc"&gt;true&lt;/span&gt;;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="co"&gt;Event&lt;/span&gt;.addBehavior({&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;div.pagination a&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt; : &lt;span class="co"&gt;Remote&lt;/span&gt;.&lt;span class="co"&gt;Link&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  })&lt;tt&gt;
+&lt;/tt&gt;
+</code></pre>
+
+<p>Refresh your cache, reload your page, and test the link. It will probably look like it doesn&#8217;t do anything but if you are using <a href="http://www.getfirebug.com/">firebug</a> or if you are checking your logs, you&#8217;ll notice something happened. The problem is that we didn&#8217;t tell our action to send an Ajax response so we get the html full page all over again.</p>
+
+<h2>Setup a response for javascript requests</h2>
+
+<p>Got to your action handling the pagination and let&#8217;s setup a response for Javascript:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;8&lt;tt&gt;
+&lt;/tt&gt;9&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;10&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;11&lt;tt&gt;
+&lt;/tt&gt;12&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="r"&gt;def&lt;/span&gt; &lt;span class="fu"&gt;index&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="iv"&gt;@photos&lt;/span&gt; = &lt;span class="co"&gt;Photo&lt;/span&gt;.paginate(&lt;span class="sy"&gt;:all&lt;/span&gt;, &lt;span class="sy"&gt;:conditions&lt;/span&gt; =&gt; [&lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;photos.user_id = ?&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, current_user.id], &lt;span class="sy"&gt;:page&lt;/span&gt; =&gt; params[&lt;span class="sy"&gt;:page&lt;/span&gt;])&lt;tt&gt;
+&lt;/tt&gt;    respond_to &lt;span class="r"&gt;do&lt;/span&gt; |format|&lt;tt&gt;
+&lt;/tt&gt;      format.html &lt;span class="c"&gt;# index.html.erb&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;      format.js &lt;span class="r"&gt;do&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;        render &lt;span class="sy"&gt;:update&lt;/span&gt; &lt;span class="r"&gt;do&lt;/span&gt; |page|&lt;tt&gt;
+&lt;/tt&gt;          page.replace_html &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;photos&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;, &lt;span class="sy"&gt;:partial&lt;/span&gt; =&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;photos&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;        &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;      &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;
+</code></pre>
+
+<p>Perfect! Now when a visitor clicks on my pagination links, only the photos are paginated, the rest of the page stays the same. Note that my navigation bar is inside the partial so it gets &#8216;updated&#8217; after a visitor clicks on any pagination link.</p>
+
+<h2>Read more and convert to UJS (unobtrusive javascript)</h2>
+
+<p>Read more about <a href="http://jlaine.net/2007/8/3/from-rails-ajax-helpers-to-low-pro-part-i">UJS</a> and think about replacing all your nasty inline javascript snippets by pretty behaviors :) (Think about stopping using the obtrusive rails helpers)</p>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-09-27T03:40:00+02:00" pubdate data-updated="true">Sep 27<span>th</span>, 2007</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

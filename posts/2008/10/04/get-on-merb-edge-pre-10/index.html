@@ -1,0 +1,226 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Get on Merb Edge pre 1.0 - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Get on Merb Edge Pre 1.0 Merb 1.0 is almost ready to be pushed out and you might be impatient to start playing with some of the goodies not yet &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://merbist.com/2008/10/04/get-on-merb-edge-pre-10/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  </head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Get on Merb Edge Pre 1.0</h1>
+    <div class="entry"><p>Merb 1.0 is almost ready to be pushed out and you might be impatient to start playing with some of the goodies not yet available in the latest stable release. Before getting started, you should know that not everything has been ironed out yet so don&#8217;t expect to have a fully stable Edge.</p>
+
+<p>The easiest way to get started requires that you have <a href="http://git.or.cz/">git</a> installed as well as a gem called <a href="http://github.com/wycats/thor/tree/master">thor</a>.</p>
+
+<p>I let you take care of installing git on your machine, Ruby dev without git became quite challenging since <a href="http://github.com">GitHub</a> started ruling the Ruby OSS world.</p>
+
+<pre><code>&lt;code class="shell"&gt;sudo gem install wycats-thor -s http://gems.github.com&lt;/code&gt;
+</code></pre>
+
+<p>[caption id=&#8221;&#8221; align=&#8221;alignright&#8221; width=&#8221;240&#8221; caption=&#8221;Hops, used primarily as a flavoring and stability agent in beer, and also in other beverages and in herbal medicine.&#8221;]<a href="http://flickr.com/photos/fturmog/1438235253/"><img src="http://farm2.static.flickr.com/1418/1438235253_5b10c24732_m.jpg" alt="Hops, used primarily as a flavoring and stability agent in beer, and also in other beverages and in herbal medicine." /></a>[/caption]</p>
+
+<p><a href="http://yehudakatz.com/2008/05/12/by-thors-hammer/">Thor</a> is a sort if mix between rake, <a href="http://errtheblog.com/posts/60-sake-bomb">sake</a> with a better argument parser and based on Ruby classes.</p>
+
+<p>Thor on its own won&#8217;t be very helpful, we need some thor tasks.</p>
+
+<p>Create a folder where you want to store Merb&#8217;s source code and cd in it.</p>
+
+<p>Once there download the latest merb thor tasks:</p>
+
+<pre><code>&lt;code class="shell"&gt;curl -L http://merbivore.com/merb.thor &gt; merb.thor
+&lt;/code&gt;
+</code></pre>
+
+<p>You can now look at the available task by doing</p>
+
+<pre><code>&lt;code class="shell"&gt;thor -T&lt;/code&gt;
+</code></pre>
+
+<p>At this point you be overwhelmed by the multitude of options, we are working on making things a be nicer for 1.0. But anyways, let&#8217;s get started:</p>
+
+<pre><code>&lt;code class="shell"&gt;sudo thor merb:edge --install&lt;/code&gt;
+</code></pre>
+
+<p>The command above will install extlib, merb-core and merb-more from git HEAD. You now have the latest version of Merb&#8217;s libs installed locally as gems.</p>
+
+<p>You might also want to install Merb extra plugins, if that&#8217;s the case do:</p>
+
+<pre><code>&lt;code class="shell"&gt; sudo thor merb:edge:plugins --install&lt;/code&gt;
+</code></pre>
+
+<p>If you decided to use DataMapper instead of ActiveRecord or Sequel, you will also need to install the gems you might need:</p>
+
+<p>Install data_objects and an adapter: (replace mysql by the adapter you want to install)</p>
+
+<pre><code>&lt;code class="shell"&gt; sudo thor merb:edge:do mysql --install&lt;/code&gt;
+</code></pre>
+
+<p>Install DataMapper core from Git HEAD</p>
+
+<pre><code>&lt;code class="shell"&gt; sudo thor merb:edge:dm_core --install&lt;/code&gt;
+</code></pre>
+
+<p>Install DataMapper more from Git HEAD</p>
+
+<pre><code>&lt;code class="shell"&gt; sudo thor merb:edge:dm_more --install&lt;/code&gt;
+</code></pre>
+
+<p>You should be all setup by now.</p>
+
+<p><strong>
+Next time you want to update, just come back to the same folder and do the same thing. Hopefully by then we will have a 1 task solution and will offer a merb-stack version of our gems to let you install everything at once with all setup done.</strong></p>
+
+<p>p.s: this post is dedicated <a href="http://derekneighbors.com/">Derek Neighbors</a> ;)</p>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-10-04T13:00:01+02:00" pubdate data-updated="true">Oct 4<span>th</span>, 2008</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/tutorial/'>Tutorial</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/merbist-com/'>merbist.com</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

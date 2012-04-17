@@ -1,0 +1,276 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>keeping my javascript files organized - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Keeping My Javascript Files Organized I was recently asked by Rubyist friend (Josh Knowles) how I was organizing my Javascript files when using &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2007/12/05/keeping-my-javascript-files-organized/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  </head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Keeping My Javascript Files Organized</h1>
+    <div class="entry"><p>I was recently asked by Rubyist friend (<a href="http://joshknowles.com/">Josh Knowles</a>) how I was organizing my Javascript files when using <a href="http://lowpro.stikipad.com/home/show/HomePage">LowPro</a>.</p>
+
+<p><a href="http://lowpro.stikipad.com/home/show/HomePage">LowPro</a> is the best solution for doing <a href="http://en.wikipedia.org/wiki/Unobtrusive_JavaScript">Unobtrusive Javascript</a> using <a href="http://www.prototypejs.org/">Prototype</a>.</p>
+
+<p>With the help of <a href="http://lowpro.stikipad.com/home/show/HomePage">LowPro</a>, you define behaviors that get triggered by the user. This is great, however, you&#8217;ll notice that some behaviors are used all over the place (a date chooser for instance) and some complicated behaviors only get used on very specific pages.</p>
+
+<p>First things first, let&#8217;s look at the header in my application.html.erb file (located in app/views/layouts).
+This is the default layout used by all my views, I rarely use more than 5 layouts per app and always use a default layout.</p>
+
+<p>Please note that I&#8217;m using Rails 2.0 so some features you&#8217;ll see in my file won&#8217;t work in Rails 1.2.x. (if you want to know about all the new Rails sexiness, check on <a href="http://peepcode.com/products/rails2-pdf">this awesome Peepcode PDF</a>.</p>
+
+<p>Here we go:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+  &lt;%= javascript_include_tag &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;prototype&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;, &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;effects&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;, &lt;span class="sy"&gt;:cache&lt;/span&gt; =&gt; &lt;span class="pc"&gt;true&lt;/span&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;%&gt;&lt;/span&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;%= javascript_include_tag 'lowpro', :cache =&lt;/span&gt;&lt;span class="dl"&gt;&gt;&lt;/span&gt;&lt;/span&gt; &lt;span class="pc"&gt;true&lt;/span&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;%&gt;&lt;/span&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;%= javascript_include_tag  'application', :cache =&lt;/span&gt;&lt;span class="dl"&gt;&gt;&lt;/span&gt;&lt;/span&gt; &lt;span class="pc"&gt;true&lt;/span&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;%&gt;&lt;/span&gt;&lt;/span&gt;
+</code></pre>
+
+<p>The first thing you might notice is that I don&#8217;t use</p>
+
+<pre><code>&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+  &lt;%= javascript_include_tag &lt;span class="sy"&gt;:defaults&lt;/span&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;%&gt;&lt;/span&gt;&lt;/span&gt;
+</code></pre>
+
+<p>The reason? I don&#8217;t want to load prototype.js, effects.js, controls.js, dragdrop.js, and application.js all at once. I almost never use drag&#8217;n&#8217;drop and seldom use Autocompleter and InPlaceEditor so why loading them in each and every single page of my apps? I&#8217;m not saying they are bad libraries, I&#8217;m just saying that in more than 80% of my page, I don&#8217;t use them, so they should not be in my default page load.</p>
+
+<p>The second thing you might notice, I use :cache => true. Asset caching is a new feature in Rails 2.0 which combines related assets into a single file (works with css and js and only in production mode)
+ Note that the above code is untested, but everything should be loaded properly, otherwise, make sure proto gets loaded first, then lowpro, then application. (and you can probably create a one-liner)</p>
+
+<p>All the default behaviors are defined in the application.js file, so they get loaded on all page. However to handle action specific behaviors, I use another Rails trick right in the header:</p>
+
+<pre><code>&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+ &lt;%= &lt;span class="r"&gt;yield&lt;/span&gt; &lt;span class="sy"&gt;:javascript&lt;/span&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;%&gt;&lt;/span&gt;&lt;/span&gt;
+</code></pre>
+
+<p>Why? Very simple, I want to load some custom JS in the header depending on the action that is used. For instance, when a visitor goes to my fancy ajax photo editor, I want to load the content editor javascript right in the header where it belongs.</p>
+
+<p>For that, I simply need to add the following to my view:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+  &lt;% content_for &lt;span class="sy"&gt;:javascript&lt;/span&gt; &lt;span class="r"&gt;do&lt;/span&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;%&gt;&lt;/span&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;%= javascript_include_tag "photos_show" %&lt;/span&gt;&lt;span class="dl"&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;% &lt;span class="r"&gt;end&lt;/span&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;%&gt;&lt;/span&gt;&lt;/span&gt;
+</code></pre>
+
+<p>If content_for :javascript isn&#8217;t define, noting is yield in my header and therefore nothing is included but whenever I need, I can access my header directly from the view and insert javascript code in a very clean way.</p>
+
+<p>photos_show.js is the javascript defining all the behaviors related to the photos controller and the show action. I usually only have few actions with a lot of custom behaviors so, these structure works well for me.</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+  javascripts&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="er"&gt;\&lt;/span&gt;controller_action.js&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="er"&gt;\&lt;/span&gt;controller_another_action.js&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="er"&gt;\&lt;/span&gt;another_controller_action.js&lt;tt&gt;
+&lt;/tt&gt;    ...
+</code></pre>
+
+<p>However in the case of an app with a lot of custom behaviors, I recommend using the following structure:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+  javascripts&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="er"&gt;\&lt;/span&gt; controller_name_&lt;tt&gt;
+&lt;/tt&gt;            &lt;span class="er"&gt;\&lt;/span&gt;action_name_.js&lt;tt&gt;
+&lt;/tt&gt;      &lt;span class="er"&gt;\&lt;/span&gt;another_controller_name&lt;tt&gt;
+&lt;/tt&gt;              &lt;span class="er"&gt;\&lt;/span&gt;action_name_.js&lt;tt&gt;
+&lt;/tt&gt;  ...
+</code></pre>
+
+<p>That&#8217;s it folks, I&#8217;m not a javascript expert, and if you know better, don&#8217;t hesitate to leave me a comment. What I know for sure, is that since I started using LowPro and behavior driven with Prototype, I have much more fun. Adding a bit of structure is a simple way for me to keep my code clear and help other people who have to work with me. (more on that later)</p>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-05T04:01:00+01:00" pubdate data-updated="true">Dec 5<span>th</span>, 2007</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

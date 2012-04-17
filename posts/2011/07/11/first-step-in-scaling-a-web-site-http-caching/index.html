@@ -1,0 +1,278 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>First step in scaling a web site: HTTP caching - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="First Step in Scaling a Web Site: HTTP Caching Today my friend Patrick Crowley and I were talking about scaling his website: http://cinematreasures. &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://merbist.com/2011/07/11/first-step-in-scaling-a-web-site-http-caching/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  </head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">First Step in Scaling a Web Site: HTTP Caching</h1>
+    <div class="entry"><p>Today my friend <a href="http://twitter.com/mokolabs">Patrick Crowley</a> and I were talking about scaling his website: <a href="http://cinematreasures.org/">http://cinematreasures.org</a> since an article covering his work will soon be published in a very popular newspaper. Patrick&#8217;s site is hosted on <a href="http://www.heroku.com/">Heroku</a> which comes by default with <a href="https://www.varnish-cache.org/">Varnish caching</a> enabled.</p>
+
+<p>The challenge is that a lot of people using the Rails framework are used to doing page caching instead of relying on HTTP caching, even though this feature was added a long time ago. The major problem with page caching is that it doesn&#8217;t scale that well as soon as you run more than one server. Indeed you would need to store the page content to a shared drive between your servers or use memcached and do some work to avoid hitting your app every single time. On the other hand, HTTP caching is extremely easy to handle at the application level and it will dramatically reduce the amount of requests hitting your app. Let me explain a little more about HTTP caching.</p>
+
+<p>Ryan Tomako wrote an <a href="http://tomayko.com/writings/things-caches-do">excellent post</a> about the details of caching, I strongly recommend you <a href="http://tomayko.com/writings/things-caches-do">read it</a>. In a nutshell, the HTTP caching layer (usually) seats before your application layer and allows you, the developer to store some responses that can be send back to the users based on optional conditions. That might still seem vague, let&#8217;s take a concrete example. If you look at <a href="http://cinematreasures.org">http://cinematreasures.org</a>&#8217;s home page you can see that it&#8217;s an agglomerate of various information:</p>
+
+<p><a href="http://cinematreasures.org"><img src="https://img.skitch.com/20110709-dnxjhikxr14tdr7e35n97madhn.jpg" alt="CinemaTreasures homepage" /></a></p>
+
+<p>And the bottom of the page contains even more dynamic data such as the popular movie theater photos, latest movie theater videos and latest tweets. One might look at that and say that this page can&#8217;t really be cached and that the caching should be done at the model layer (i.e. cache the data coming from the database). I would certainly agree that caching the data layer is probably a good idea, but you shouldn&#8217;t start by that. In fact without caching, this page renders fast enough. The problem is when someone like <a href="http://rogerebert.suntimes.com/">Roger Ebert</a> tweets about <a href="http://twitter.com/#!/ebertchicago/status/85912164648497152">CinemaTreasures</a> the load on the app peaks significantly. At the point, the amount of concurrent connections your app can handle gets put to the challenge. Even though your page load is &#8220;fast enough&#8221;, requests will queue up and some will eventually time out. That&#8217;s actually a perfect case of HTTP caching.</p>
+
+<p>What we want to do in that case is to cache a version of the home page in Varnish for 60 seconds. During that time, all requests coming to the site, will be served by Varnish and will all get the same cached content. That allows our servers to handle the non cached requests and therefore increase our throughput. What&#8217;s even better, is that if a user refreshes the home page in his/her browser during the first 60 seconds the requests won&#8217;t even make it all the way to our servers. All of that thanks to conditions set on the response. The first user hitting the HTTP cache layer (Varnish in this case) won&#8217;t find a fresh cached response, so varnish will forward the request to our application layer which will send back the homepage to varnish and tell Varnish that this content is good for a full minute so please don&#8217;t ask for it again until a minute from now. Varnish serves this response to the users&#8217; browser and let the browser know that the server said that the response was good enough for a minute so don&#8217;t bother asking for it again. But now, if during these 60 seconds another user comes in, he will hit Varnish and Varnish will have the cached response from the first user and because the cache is still fresh (it&#8217;s not been 60 seconds since the first request) and the cache is public, then the same response will be sent to the second user.</p>
+
+<p>As you can see, the real strength of HTTP caching is the fact that it&#8217;s a conditional caching. It&#8217;s based on the request&#8217;s URL and some &#8220;flags&#8221; set in the request/response headers.</p>
+
+<p>Setting these conditions in your app is actually very simple since you just need to set the response&#8217;s headers. If you are using a Ruby framework you will more than likely have access to the request object via the &#8220;request&#8221; method and you can set the headers directly like that: &#8220;response.headers[&#8216;Cache-Control&#8217;] = &#8216;public, max-age=60&#8217;&#8221;.
+In Rails, you can actually use a helper method instead: expires_in 1.minute, :public => true.</p>
+
+<p>You might have a case where you HAVE TO serve fresh content if available and can&#8217;t serve stale cached content even for a few seconds. In this case, you can rely on the Etag header value. The Etag is meant to validate the freshness of a cached response. Think of it as a signature (unique ID) that is set on the response and used by the client (or cache layer) to see if the server response has changed or not. The way it works is that the client keeps track of the Etag received for each request (attached to the cached response) and then sends it with the next requests. The HTTP layer or application sees the Etag in the request and can check if it is still valid and the content didn&#8217;t change. If that&#8217;s the case, an empty response can be sent with a special HTTP status code (304) to let know the client that the old cached value is still good to be used.  Rails has a helper called &#8220;stale?&#8221; that helps you do the Etag/last modified check and allows you to not fetch all the objects from the database by doing a cheap check on an attribute (For instance you can check the updated_at value and use that as a condition to pull an object and its relationships).</p>
+
+<p>So I explain HTTP caching, I often hear people telling me: &#8220;that&#8217;s great Matt, but you know what, that won&#8217;t work for us because we have custom content that we display specifically to our users&#8221;. So in that case, you can always set the Cache-Control header to private which will only cache the response in the client&#8217;s browser and not the cache layer. That&#8217;s good to some extent, but it can definitely be improved by rethinking a bit your view layer. In most web apps, the page content is rendered by server side code (Rails, Django, node.js, PHP..) and sent to the user all prepared for him. There are a few challenges with this approach, the biggest one is that the server has to wait until everything is ready (all data fetched, view rendered etc&#8230;) before sending back a response and before the client&#8217;s browser can start rendering (there are ways to chunk the response but that&#8217;s besides the scope of this post). The other is that the same expensive content has to be calculated/rendered for two different users because you might be inserting the username of the current user at the top of the page for instance. A classic way to deal with that is often to use fragment caching, where the expensive rendering is cached and reused by different requests. That&#8217;s good but if the only reason to do that is because we are displaying some user specific data, there is a simpler way: async page rendering. The concept is extremely simple: remove all user specific content from the rendered page and then inject the user content in a second step once the page is displayed. The advantage is that now the full page can be cached in Varnish (or Squid or whatever you use for HTTP caching). To inject the user content, the easiest way is to use JavaScript.</p>
+
+<p>Let&#8217;s stay on CinemaTreasures, when you&#8217;re logged in, the username is shown on the top of each page:</p>
+
+<p>[caption id=&#8221;&#8221; align=&#8221;aligncenter&#8221; width=&#8221;574&#8221; caption=&#8221;Once logged in, the username is displayed on all pages&#8221;]<img src="https://img.skitch.com/20110710-mh5tqxuw1txf9kppn1smkkarrs.jpg" alt="" />[/caption]</p>
+
+<p>The only things that differs from the page rendered when the user is not logged in and when he is, are these 2 links and an avatar. So let&#8217;s write some code to inject that after rendering the page.</p>
+
+<p>In Rails, in the sessions controller or whatever code logs you in, you need to create a new cookie containing the username:</p>
+
+<pre><code>cookies[:username] = {
+         :value =&gt; session[:username],
+         :expires =&gt; 2.days.from_now,
+         :domain =&gt; ".cinematreasures.org"
+       }
+</code></pre>
+
+<p>As you can see, we don&#8217;t store the data in the session cookie and the data won&#8217;t be encrypted. You need to be careful that someone changing his cookie value can&#8217;t access data he/should shouldn&#8217;t. But that&#8217;s a different discussion. Now that the cookie is set, we can read it from JavaScript when the page is loaded.</p>
+
+<pre><code>document.observe("dom:loaded", function() {
+  displayLoggedinUserLinks();
+});
+
+function readCookie(name) {
+     var nameEQ = name + "=";
+     var ca = document.cookie.split(';');
+     for(var i=0;i &lt; ca.length;i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1,c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+     }
+     return null;
+}
+
+function displayLoggedinUserLinks() {
+  var username            = readCookie('username');
+  var loginLink           = $('login');
+  var logout              = $('logout');
+  if (username == null){
+    loginLink.show();
+    logout.hide();
+  }else{
+    // user is logged in and we have his/her username
+    loginLink.hide();
+    if(userGreetings){ userGreetings.update("&lt;span id="username"&gt;username&lt;/span&gt;"); }
+    logout.show();
+    showAvatar(username);
+  };
+  return true;
+}
+</code></pre>
+
+<p>The code above doesn&#8217;t do much, once the DOM is loaded, the displayLoggedinUserLinks() function gets trigger. This function reads the cookie via the readCookie() function and if a username is found, the login link is hidden, the user name is displayed, as well as the logout link and the avatar. (You can also use a jQuery cookie plugin to handle the cookie, but this is an old example using Prototype, replace the code accordingly)
+When the user logs out, we just need to delete the username cookie and the cached page will be rendered properly. In Rails, you would do delete the cookie like that: cookies.delete(&#8216;username&#8217;).
+Quite often you might even want to make an Ajax call to get some information such as the number of user messages or notifications. Using jQuery or whatever JS framework you fancy you can do that once the page is rendered. Here is an example, on this page, you can see the learderboards for MLB The Show. The leaderboards don&#8217;t change that often, especially the overall leaderboards so they can be cached for a little while, however the player&#8217;s presence can change anytime. The smart way to deal with that, would be to cache the  leaderboards for a few seconds/minutes and make an ajax call to a presence service passing it a list of user ids collected from the DOM. The service called via Ajax could also be cached  depending on the requirements.</p>
+
+<p>Now there is one more problem that people using might encouter: flash notices. For those of you not familiar with Rails, flash notices are messages set in the controller and passed to the view via the session (at least last time I checked). The problem happens if I&#8217;m the home page isn&#8217;t cached anymore and I logged in which redirects me to the home page with a flash message like so:</p>
+
+<p><img src="https://img.skitch.com/20110710-1u6dn8rrc6r62rsg6niphhd2pi.jpg" alt="" /></p>
+
+<p>The problem is that the message is part of the rendered page and now for 60 seconds, all people hitting the home page will get the same message. This is why you would want to write a helper that would put this message in a custom cookie that you&#8217;d pull JS and then delete once displayed. You could use a helper like that to set the cookie:</p>
+
+<pre><code>def flash_notice_cookie(msg, expiration=nil)
+  cookies[:flash_notice] = {
+    :value =&gt; msg,
+    :expires =&gt; expiration || 1.minutes.from_now,
+    :domain =&gt; ".cinematreasures.com"
+   }
+end
+</code></pre>
+
+<p>And then add a function called when the DOM is ready which loads the message and injects it in the DOM. Once the cookie read, delete it so the message isn&#8217;t displayed again.</p>
+
+<p> </p>
+
+<p>So there you have it, if you follow these few steps, you should be able to handle easily 10x more traffic without increasing hardware or making any type of crazy code change. Before you start looking into memcached, redis, cdns or whatever, consider HTTP caching and async DOM manipulation. Finally, note that if you can&#8217;t use Varnish or Squid, you can very easily setup <a href="http://rtomayko.github.com/rack-cache/">Rack-Cache</a> locally and share the cache via memcached. It&#8217;s also a great way to test locally.</p>
+
+<hr />
+
+<p><strong>Update:</strong> CinemaTreasures was updated to use HTTP caching as described above. The hosting cost is now half of what it used to be and the throughput is actually higher which offers a better protection against peak traffic.</p>
+
+<hr />
+
+<p> </p>
+
+<p>External resources:</p>
+
+<ul>
+<li><p><a href="http://tomayko.com/writings/things-caches-do">http://tomayko.com/writings/things-caches-do</a></p></li>
+<li><p><a href="http://devcenter.heroku.com/articles/http-caching">HTTP Caching at Heroku</a></p></li>
+<li><p><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html">W3 caching protocol </a></p></li>
+<li><p><a href="http://rtomayko.github.com/rack-cache/">Rack-Cache middleware</a></p></li>
+<li><p><a href="http://www.nolanevans.com/2011/03/optimizing-your-rails-site-with-http.html">Blog post covering HTTP Caching/Varnish/Rails</a></p></li>
+<li><p><a href="http://plugins.jquery.com/project/Cookie">jQuery cookie plugin</a></p></li>
+</ul>
+
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-11T10:21:02+02:00" pubdate data-updated="true">Jul 11<span>th</span>, 2011</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/javascript/'>JavaScript</a>, <a class='category' href='/articles/categories/misc/'>Misc</a>, <a class='category' href='/articles/categories/software-design/'>Software Design</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/merbist-com/'>merbist.com</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

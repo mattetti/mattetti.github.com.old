@@ -1,0 +1,248 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Rails 2.0.2 with few changes - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Rails 2.0.2 With Few Changes What&#8217;s new? Rails default database is now sqlite3. If you are running Leopard, everything is already setup for &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2007/12/17/rails-2-0-2-with-few-changes/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  </head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Rails 2.0.2 With Few Changes</h1>
+    <div class="entry"><h2>What&#8217;s new?</h2>
+
+<ul>
+<li><p>Rails default database is now sqlite3. If you are running Leopard, everything is already setup for you. As DHH mentioned, just &#8220;rails -d mysql your_app_name&#8221; if you want to generate a new app preconfigured for MySQL.
+Sqlite3 is great and if the only reason why you didn&#8217;t give it a try is because you have to use CocoaMySQL, then check out <a href="http://sqlitebrowser.sourceforge.net/">sqlitebrowser</a></p></li>
+<li><p>Other new feature: rake secret  to generate a key used to encrypt your session. Really useful task when you&#8217;re migrating an app to 2.x</p></li>
+<li><p>To improve performance, some changes were made to the template caching and you have to restart your production server after a template modification.</p></li>
+<li><p>Validates acceptance of still works for non-existent tables . (sorry <a href="http://blog.hasmanythrough.com/">Josh</a>, I won&#8217;t post after 2am, especially when I forget your life changing bug fix ;) )</p></li>
+<li><p>Added option to pass proc to ActionController::Base.asset_host for maximum configurability. Example:</p>
+
+<p>1<tt>
+</tt>2<tt>
+</tt>3<tt>
+</tt>4<tt>
+</tt><strong>5</strong><tt>
+</tt>6<tt>
+</tt>7<tt>
+</tt></p>
+
+<pre><code>&lt;span class="co"&gt;ActionController&lt;/span&gt;::&lt;span class="co"&gt;Base&lt;/span&gt;.asset_host = &lt;span class="co"&gt;Proc&lt;/span&gt;.new { |source|&lt;tt&gt;
+</code></pre>
+
+<p></tt>      <span class="r">if</span> source.starts_with?(<span class="s"><span class="dl">&#8217;</span><span class="k">/images</span><span class="dl">&#8217;</span></span>)<tt>
+</tt>        <span class="s"><span class="dl">&#8220;</span><span class="k">http://images.example.com</span><span class="dl">&#8221;</span></span><tt>
+</tt>      <span class="r">else</span><tt>
+</tt>        <span class="s"><span class="dl">&#8220;</span><span class="k">http://assets.example.com</span><span class="dl">&#8221;</span></span><tt>
+</tt>      <span class="r">end</span><tt>
+</tt>    }</p></li>
+<li><p>Finally, I added 2 new rake tasks: db:migrate:redo and db:migrate:reset</p></li>
+</ul>
+
+
+<p>db:migrate:redo rolls back your database and then migrates it up. You can define the STEP constant to specify the amount of steps you want to rollback. This task is very useful in development mode when making a modification to the latest migration(s).
+db:migrate:reset will drop your database, re create it and migrate it up. Only use this task if you really have to and only in development/test environment.  Use db:reset in production mode since it uses the schema.rb file and won&#8217;t go through the hundreds of migrations you might have.</p>
+
+<h2>Changeset</h2>
+
+<p><em>2.0.2</em> (December 16th, 2007)</p>
+
+<ul>
+<li><p>Changed the default database from mysql to sqlite3, so now running &#8220;rails myapp&#8221; will have a config/database.yml that&#8217;s setup for SQLite3 (which in OS X Leopard is installed by default, so is the gem, so everything Just Works with no database configuration at all). To get a Rails application preconfigured for MySQL, just run &#8220;rails -d mysql myapp&#8221; [DHH]</p></li>
+<li><p>Turned on ActionView::Base.cache_template_loading by default in config/environments/production.rb to prevent file system stat calls for every template loading to see if it changed (this means that you have to restart the application to see template changes in production mode) [DHH]</p></li>
+<li><p>Introduce <code>rake secret</code> to output a crytographically secure secret key for use with cookie sessions #10363 [revans]</p></li>
+<li><p>Fixed that local database creation should consider 127.0.0.1 local #9026 [parcelbrat]</p></li>
+<li><p>Fixed that functional tests generated for scaffolds should use fixture calls instead of hard-coded IDs #10435 [boone]</p></li>
+<li><p>Added db:migrate:redo and db:migrate:reset for rerunning existing migrations #10431, #10432  [matt]</p></li>
+<li><p>RAILS_GEM_VERSION may be double-quoted also.  #10443 [James Cox]</p></li>
+<li><p>Update rails:freeze:gems to work with RubyGems 0.9.5.  [Jeremy Kemper]</p></li>
+<li><p>Added delete_via_redirect and put_via_redirect to integration testing #10497 [philodespotos]</p></li>
+<li><p>Allow headers[&#8216;Accept&#8217;] to be set by hand when calling xml_http_request #10461 [BMorearty]</p></li>
+<li><p>Added OPTIONS to list of default accepted HTTP methods #10449 [holoway]</p></li>
+<li><p>Added option to pass proc to ActionController::Base.asset_host for maximum configurability #10521 [chuyeow]. Example:</p></li>
+</ul>
+
+
+<p>ActionController::Base.asset_host = Proc.new { |source|
+  if source.starts_with?(&#8216;/images&#8217;)</p>
+
+<pre><code>"http://images.example.com"
+</code></pre>
+
+<p>  else</p>
+
+<pre><code>"http://assets.example.com"
+</code></pre>
+
+<p>  end
+}</p>
+
+<ul>
+<li><p>Fixed that ActionView#file_exists? would be incorrect if @first_render is set #10569 [dbussink]</p></li>
+<li><p>Added that Array#to_param calls to_param on all it&#8217;s elements #10473 [brandon]</p></li>
+<li><p>Ensure asset cache directories are automatically created.  #10337 [Josh Peek, Cheah Chu Yeow]</p></li>
+<li><p>render :xml and :json preserve custom content types.  #10388 [jmettraux, Cheah Chu Yeow]</p></li>
+<li><p>Refactor Action View template handlers.  #10437, #10455 [Josh Peek]</p></li>
+<li><p>Fix DoubleRenderError message and leave out mention of returning false from filters.  Closes #10380 [Frederick Cheung]</p></li>
+<li><p>Clean up some cruft around ActionController::Base#head.  Closes #10417 [ssoroka]</p></li>
+<li><p>Ensure optimistic locking handles nil #lock_version values properly.  Closes #10510 [rick]</p></li>
+<li><p>Make the Fixtures Test::Unit enhancements more supporting for double-loaded test cases.  Closes #10379 [brynary]</p></li>
+<li><p>Fix that validates_acceptance_of still works for non-existent tables (useful for bootstrapping new databases).  Closes #10474 [hasmanyjosh]</p></li>
+<li><p>Ensure that the :uniq option for has_many :through associations retains the order.  #10463 [remvee]</p></li>
+<li><p>Base.exists? doesn&#8217;t rescue exceptions to avoid hiding SQL errors.  #10458 [Michael Klishin]</p></li>
+<li><p>Documentation: Active Record exceptions, destroy_all and delete_all.  #10444, #10447 [Michael Klishin]</p></li>
+</ul>
+
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-17T09:52:00+01:00" pubdate data-updated="true">Dec 17<span>th</span>, 2007</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,210 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>GumGum launch, or how to avoid a disastrous launch. - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="GumGum Launch, or How to Avoid a Disastrous Launch. For the last few months I worked on a Rails app called GumGum. GumGum is a licensing and &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2008/02/28/gumgum-launch-or-how-to-avoid-a-disastrous-launch/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  </head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">GumGum Launch, or How to Avoid a Disastrous Launch.</h1>
+    <div class="entry"><p>For the last few months I worked on a Rails app called <a href="http://gumgum.com">GumGum</a>. <a href="http://gumgum.com">GumGum</a> is a licensing and distribution platform for online content. <a href="http://gumgum.com">GumGum</a> believes paying a flat rate to license content for online use is illogical. Offline, the flat rate model works because distribution is finite. Online, thanks to Google and other search engines, a story lives forever. <a href="http://gumgum.com">GumGum</a> has developed two usage models to fairly monetize a license: pay-per-use and ad supported. Pay-per-use allows publishers to license content on a CPM basis. Ad supported subsidizes the licensing revenue through advertisements, providing the publisher a free license.</p>
+
+<p>Simple concept and great team. When Ari Mir and Ophir Tanz approached me to work on their app I was impressed by their understanding of Web Business. It was not their first start up and as a consultant, you usually prefer to work with some experienced clients. Ari, GumGum&#8217;s CPO was great at defining realistic expectations, and limit the scope of the application which was great since I&#8217;m an Agile/XP fanboy. I believe that really helped us meeting our dead line without feature creeping the app.</p>
+
+<p>We were finally ready to enter a public beta phase, we were running our production server on a godaddy VPS (no comment) and were on the process of migrating to <a href="http://www.slicehost.com/">slicehost</a> where we were running our staging environment. The plan was to go public on Tuesday 12 and have a feel for the load. We also setup an <a href="http://www.amazon.com/gp/browse.html?node=201590011">EC2</a> image to handle some of the background tasks and were thinking of moving to <a href="http://engineyard.com">Engine Yard</a> within few months.</p>
+
+<p>Everything was ready for a launch, when the day before D Day, Ari calls me telling me: &#8220;Good news Matt, <a href="http://www.techcrunch.com/">TechCrunch</a> is going to publish a blog post about us!&#8221;. While he sounded really excited, I couldn&#8217;t believe me ears.</p>
+
+<ol>
+<li><p>The app wasn&#8217;t optimized, darn it all, I hadn&#8217;t even properly indexed the database, no caching, nothing. (it was in the backlog, things I was planning on doing after the public beta launch)</p></li>
+<li><p>We would never be able to handle the load. Running an app like ours definitely needs more than a 256Mb shared CPU shared host.</p></li>
+<li><p>Ari asked me if they could embed one of our license object in <a href="http://www.techcrunch.com/">TechCrunch</a> home page.</p></li>
+<li><p>I had 12 hours to get stuff ready.</p></li>
+</ol>
+
+
+<h1>Trying to be ready:</h1>
+
+<p><a href="http://www.techcrunch.com/">TechCrunch</a> has 688k <a href="http://feeds.feedburner.com/Techcrunch">RSS subscribers</a>! Even though I asked Ari not to embed one of our protected object inside TC&#8217;s home page, I knew he couldn&#8217;t say no to <a href="http://www.techcrunch.com/about-michael-arrington/">Mike Arrington</a>. (little did I know, they would end up embedding 2 licenses)</p>
+
+<p>I hurried up and started properly indexing the database, ask advice to some of my <a href="http://blog.caboo.se/">cabooser</a> friends, did some quick re-factoring but obviously didn&#8217;t have enough time to rewrite the way we handle tags and tooltips (the overlay popup window that displays when you rollover a picture in our browse page). <a href="http://notch8.com">Rob</a> helped me getting ready and we transformed our staging environment into a secondary production server hoping we would split the load.</p>
+
+<p>Since we didn&#8217;t have a load balancer, we tried to cheat by setting up two A records for gumgum.com. The idea was that browsers would pick an ip randomly and since we were only using 1 database, everything should be fine. That was the theory, during our tests we realized that our Flash object was not using the same IP than the webpage and that was creating random issues with our licensing system.</p>
+
+<p>We were running out of time, I turned on page caching on few actions (home page) so even though my mongrels would die, I knew we would at least be able to display something. Because of our complex authentication system, I couldn&#8217;t cache much and I didn&#8217;t have time to re-factor a lot of my code or to setup <a href="http://www.danga.com/memcached/">memcached</a>. (on top of that I knew the product was stable and I didn&#8217;t want to mess up with it).</p>
+
+<h1>The Storm:</h1>
+
+<p><a href="http://www.techcrunch.com/2008/02/13/gumgum-launches-new-image-licensing-platform/">The article got published</a> and in seconds we saw the load on the main box going from 0.2 to 2.0! We were still dealing with the DNS issues and some pictures were not getting loaded. When Rails got above 60 req/s we started dropping some requests and returning 500s. That was bad, really bad. Our browse page (not optimized) was down and we handled around 80k requests in a matter of few hours. What you don&#8217;t know is that each of our flash object generates a couple of requests, and that <a href="http://techcrunch.com">TechCrunch</a> decided to embed 2 objects on their home page.</p>
+
+<p>Remember, it was our launch, which was not meant to be a big launch, we were not prepared for that!</p>
+
+<h1>Dealing with the load:</h1>
+
+<p>The good thing is that my code didn&#8217;t leak memory, Rails was stable and it was a good sign. We all know that &#8220;Rails CAN scale&#8221;, but we also know that you need to have a proper hosting to do that. Godaddy was not handling the load and it was just the beginning. So what do you do when you have to scale and that your code isn&#8217;t total junk? You call a real hosting company like <a href="http://engineyard.com">EngineYard</a> or <a href="http://joyent.com">Joyent</a>. I was lucky <a href="http://www.workingwithrails.com/person/5421-ezra-zygmuntowicz">Ezra</a> was online. I quickly explained to him the situation, we discussed the reason why our site was not doing so great and defined the bottlenecks. It was simple, we needed more humph. The normal waiting time to get a slice on EY was around 2 weeks back then. Ezra knew that we couldn&#8217;t wait 2 weeks :p He was simply awesome, managed to find us 2 slices, set them up for us and setup our app in less than 2 hours. He even helped us configuring our old server to get NginX to bounce the requests to EY while the DNS was propagating.</p>
+
+<p>As soon as the switch was done, everything loaded perfectly, not a single request dropped, it was simply great.</p>
+
+<p>Since we are talking about scaling, hosting and facing issues, I&#8217;d like to make a simple point: $349.00 a month for a slice is NOT expensive for what you get. First off, EY slices are setup superbly, you get awesome performances out of them, they come ready for your app and you don&#8217;t have to do much. Secondly, I&#8217;m not a sys admin, I really hate dealing with servers, packages, configuration, compiling crap that won&#8217;t compile because I&#8217;m lame&#8230; etc&#8230;</p>
+
+<p>EY has a bunch of experts (both Ruby and Sys admin experts) available 24/7 that always go the extra mile to help you. Last time I checked I couldn&#8217;t hire a good sys admin for, let&#8217;s say the price of 3 or 4 slices. Now, we get a team of guys, available, knowing their stuff and helping me for way cheaper than hiring a sys admin dude. The other thing is, I&#8217;m a consultant, I don&#8217;t want to deal with servers and charge my clients for that. I also want them to be reassured and know that &#8220;yes, we can scale&#8221;. The price of an EY/Joyent slice is the price you pay to be confident you can take the load.</p>
+
+<h1>So what now?</h1>
+
+<p>We have a lot of optimization to do, we are working on moving more of our stuff to EC2 to avoid being charged for bandwidth twice (user => EY => S3), we are setting up a queuing system and we have a lot of nice features to deploy. But one thing for sure, I can focus on my code since I know EY has my back and I don&#8217;t have to worry about our servers.</p>
+
+<p>p.s: <a href="http://gumgum.com">GumGum</a> is doing great, a lot of people are really interested in the product, new features are coming up (we already auto import content from some major Paparazzi agencies) and we are getting a <a href="http://blog.gumgum.com/2008/02/gumgums-press.html">good press coverage</a></p>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-28T08:42:00+01:00" pubdate data-updated="true">Feb 28<span>th</span>, 2008</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

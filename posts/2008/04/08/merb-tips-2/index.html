@@ -1,0 +1,261 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Merb tips II - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Merb Tips II * this content is now outdated and only applied to Merb 0.9* I the previous post I covered few useful tips for Merb 0.9. The good news &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2008/04/08/merb-tips-2/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  </head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Merb Tips II</h1>
+    <div class="entry"><p><em>* this content is now outdated and only applied to Merb 0.9</em>*</p>
+
+<p>I the <a href="http://railsontherun.com/2008/4/5/merb-tips-1">previous post</a> I covered few useful tips for Merb 0.9. The good news is that Merb should get its wiki setup over the week end!</p>
+
+<p>Here is another batch of hopefully useful tips:</p>
+
+<ul>
+<li><p>In init.rb, you can define a dependency and specify a version number: <em>dependency &#8220;merb_fu&#8221;, &#8220;>= 1.0&#8221;</em></p></li>
+<li><p>If you want to run your application from a subdirectory, once again, in your init.rb file, add: <em>c[:path_prefix] = &#8220;/your_prefix&#8221;</em> <em>(note, that you can also do that in a specific environment file.)</em></p></li>
+<li><p>You feel like limiting a route to a specific request such as a DELETE? In your router.rb file add the following:</p>
+
+<p>1<tt>
+</tt>2<tt>
+</tt></p>
+
+<p><tt>
+</tt>  r.match(<span class="s"><span class="dl">&#8221;</span><span class="k">/:bucket_id</span><span class="dl">&#8221;</span></span>, <span class="sy">:method</span> => <span class="sy">:delete</span>).to(<span class="sy">:controller</span> => <span class="s"><span class="dl">&#8220;</span><span class="k">buckets</span><span class="dl">&#8221;</span></span>, <span class="sy">:action</span> => <span class="s"><span class="dl">&#8220;</span><span class="k">destroy</span><span class="dl">&#8221;</span></span>)<tt>
+</tt></p></li>
+<li><p>Since we are talking about routes, what about an iPhone only route?</p>
+
+<p>1<tt>
+</tt>2<tt>
+</tt></p>
+
+<p><tt>
+</tt>  r.match(<span class="rx"><span class="dl">%r[</span><span class="k"><sup>/(.+)</span>&lt;span</sup> class=&#8221;dl&#8221;>]</span></span>, <span class="sy">:user_agent</span> => <span class="rx"><span class="dl">/</span><span class="k">iPhone</span><span class="dl">/</span></span>).to(<span class="sy">:controller</span> => <span class="s"><span class="dl">&#8220;</span><span class="k">mobile</span><span class="dl">&#8221;</span></span>, <span class="sy">:title</span> => <span class="s"><span class="dl">&#8220;</span><span class="k">Welcome Apple FanBoy</span><span class="dl">&#8221;</span></span>, <span class="sy">:action</span> => <span class="s"><span class="dl">&#8220;</span><span class="k">show</span><span class="dl">&#8221;</span></span>)<tt>
+</tt></p></li>
+<li><p>what about an admin section for my blogposts?</p>
+
+<p>1<tt>
+</tt>2<tt>
+</tt>3<tt>
+</tt>4<tt>
+</tt></p>
+
+<p><tt>
+</tt>  r.match(<span class="s"><span class="dl">&#8217;</span><span class="k">/admin</span><span class="dl">&#8217;</span></span>) <span class="r">do</span> |admin|<tt>
+</tt>    admin.resources <span class="sy">:blogposts</span><tt>
+</tt>  <span class="r">end</span><tt>
+</tt></p></li>
+<li><p>To finish with the routes, look at the <a href="http://github.com/wycats/merb-core/tree/master/spec/public/router/special_spec.rb#L39-46">following merb-core spec</a></p>
+
+<p>1<tt>
+</tt>2<tt>
+</tt>3<tt>
+</tt>4<tt>
+</tt><strong>5</strong><tt>
+</tt>6<tt>
+</tt>7<tt>
+</tt>8<tt>
+</tt>9<tt>
+</tt></p>
+
+<p><tt>
+</tt>  it <span class="s"><span class="dl">&#8220;</span><span class="k">should allow you to restrict routes based on protocol</span><span class="dl">&#8221;</span></span> <span class="r">do</span><tt>
+</tt>    <span class="co">Merb</span>::<span class="co">Router</span>.prepare <span class="r">do</span> |r|<tt>
+</tt>      r.match(<span class="sy">:protocol</span> => <span class="s"><span class="dl">&#8220;</span><span class="k">http://</span><span class="dl">&#8221;</span></span>).to(<span class="sy">:controller</span> => <span class="s"><span class="dl">&#8220;</span><span class="k">foo</span><span class="dl">&#8221;</span></span>, <span class="sy">:action</span> => <span class="s"><span class="dl">&#8220;</span><span class="k">bar</span><span class="dl">&#8221;</span></span>)<tt>
+</tt>      r.default_routes<tt>
+</tt>    <span class="r">end</span><tt>
+</tt>    route_to(<span class="s"><span class="dl">&#8221;</span><span class="k">/foo/bar</span><span class="dl">&#8221;</span></span>).should have_route(<span class="sy">:controller</span> => <span class="s"><span class="dl">&#8220;</span><span class="k">foo</span><span class="dl">&#8221;</span></span>, <span class="sy">:action</span> => <span class="s"><span class="dl">&#8220;</span><span class="k">bar</span><span class="dl">&#8221;</span></span>)<tt>
+</tt>    route_to(<span class="s"><span class="dl">&#8221;</span><span class="k">/boo/hoo</span><span class="dl">&#8221;</span></span>, <span class="sy">:protocol</span> => <span class="s"><span class="dl">&#8220;</span><span class="k">https://</span><span class="dl">&#8221;</span></span>).should have_route(<span class="sy">:controller</span> => <span class="s"><span class="dl">&#8220;</span><span class="k">boo</span><span class="dl">&#8221;</span></span>, <span class="sy">:action</span> => <span class="s"><span class="dl">&#8220;</span><span class="k">hoo</span><span class="dl">&#8221;</span></span>)<tt>
+</tt>  <span class="r">end</span><tt>
+</tt></p></li>
+</ul>
+
+
+<p>You can set custom routes to only work when connected via SSL, that&#8217;s just really nice!</p>
+
+<ul>
+<li><p>Other quick tip. <a href="http://railsontherun.com/2008/4/5/merb-tips-1">Last time</a> we saw how to install locally all the required gems. Well, you can also freeze merb by doing:</p>
+
+<p>1<tt>
+</tt>2<tt>
+</tt></p>
+
+<p><tt>
+</tt>  merb-gen frozen-merb<tt>
+</tt></p></li>
+<li><p>Another common IRC question, how do I use Merb&#8217;s logger. It&#8217;s really easy:</p>
+
+<p>1<tt>
+</tt>2<tt>
+</tt></p>
+
+<p><tt>
+</tt>  <span class="co">Merb</span>.logger.info(<span class="s"><span class="dl">&#8217;</span><span class="k">our stuff</span><span class="dl">&#8217;</span></span>)<tt>
+</tt></p></li>
+</ul>
+
+
+<p>Where info is the debugging level you want to send your message to.</p>
+
+<ul>
+<li>Finally, today in IRC a Rails user asked how reset a session in Merb. Rails has a <em>reset_session</em> method that resets the session by clearing out all the objects stored within and initializing a new session object. Merb simply uses a hash to store sessions, so <em>session.clear</em> will do it ;)</li>
+</ul>
+
+
+<p>Feel free to add a comment with your Merb tips or leave a question regarding something you can&#8217;t seem to be able to do with Merb.</p>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-04-08T02:11:00+02:00" pubdate data-updated="true">Apr 8<span>th</span>, 2008</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

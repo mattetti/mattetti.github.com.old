@@ -1,0 +1,319 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>LowPro trunk, what's new? - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="LowPro Trunk, What's New? If you&#8217;ve read my post on Ajax pagination you know that I&#8217;m a big fan of Dan Webb&#8217;s LowPro unobtrusive &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2007/11/27/lowpro-0-5-what-s-new/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  </head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">LowPro Trunk, What's New?</h1>
+    <div class="entry"><p>If you&#8217;ve read my <a href="http://railsontherun.com/2007/9/27/ajax-pagination-in-less-than-5-minutes">post on Ajax pagination</a> you know that I&#8217;m a big fan of <a href="http://www.danwebb.net">Dan Webb</a>&#8217;s <a href="http://www.danwebb.net/lowpro">LowPro</a> unobtrusive javascript library.</p>
+
+<p>Doing Unobtrusive Javascript (UJS) is basically registering event handlers programmatically using CSS selectors to select the elements to register. In other words : keeping things separate and avoiding inline javascript.</p>
+
+<p>If you&#8217;ve been using LowPro 0.4 and recently tried to upgrade to <a href="http://www.prototypejs.org/">Prototype 1.6</a> you probably noticed that things don&#8217;t work as they used to.</p>
+
+<p>The first thing you want to do, is to update to the <a href="http://svn.danwebb.net/external/lowpro/trunk/dist/">latest version of Lowpro</a>.</p>
+
+<h2>So what&#8217;s new in 0.5 trunk?</h2>
+
+<p>First off, you need to know that a lot of lowpro features were moved in Prototype 1.6 core :)</p>
+
+<ul>
+<li><p>You now get a warning via firebug if you try to use Low Pro with a version of Prototype that its not designed to work with.</p></li>
+<li><p>Alternative event system ripped out: uses core events</p></li>
+<li><p>DOM method mixins ripped out: alternatives all in prototype</p></li>
+<li><p>Event.onReady delegates to the new dom:loaded event.  However this doesn&#8217;t fire immediately if the dom is already loaded like Event.onReady did. (might be patched to work as before)</p></li>
+<li><p>DOMBuilder is staying but now is a thin shell around the new proto 1.6 Element stuff.</p></li>
+<li><p>You can still return false from event handlers in addEvent and Behaviors to stop the event but now if you use Event.observe raw you don&#8217;t get this.</p></li>
+<li><p>Behavior.create now works like Class.create in 1.6 so behaviors can have full inheritance:</p>
+
+<p>1<tt>
+</tt>2<tt>
+</tt>3<tt>
+</tt>4<tt>
+</tt><strong>5</strong><tt>
+</tt>6<tt>
+</tt>7<tt>
+</tt>8<tt>
+</tt>9<tt>
+</tt><strong>10</strong><tt>
+</tt>11<tt>
+</tt>12<tt>
+</tt></p>
+
+<p>  <span class="co">Basic</span> = <span class="co">Behavior</span>.create({<tt>
+</tt>   onclick: function() {<tt>
+</tt>    alert(<span class="s"><span class="dl">&#8217;</span><span class="k">woo</span><span class="dl">&#8217;</span></span>);<tt>
+</tt>   }<tt>
+</tt>  });<tt>
+</tt><tt>
+</tt>  <span class="co">SuppedUp</span> = <span class="co">Behavior</span>.create({<tt>
+</tt>   onclick: function(<span class="gv">$super</span>) {<tt>
+</tt>    alert(<span class="s"><span class="dl">&#8217;</span><span class="k">wee</span><span class="dl">&#8217;</span></span>);<tt>
+</tt>    <span class="gv">$super</span>();<tt>
+</tt>   }<tt>
+</tt>  });</p></li>
+</ul>
+
+
+<p>Works really nicely.</p>
+
+<ul>
+<li><p>core behaviors : Remote and Observed are now moved into the lowpro core (you don&#8217;t need to include the external files).</p></li>
+<li><p>Event.addBehavior.reassignAfterAjax defaults to false. If you want re assign behaviors after an ajax call, you need to turn this option to true.</p></li>
+<li><p>Event.addBehavior.reload(); added to reload/re assign behaviors. Very useful if you dynamically insert elements you want to observe!</p></li>
+<li><p><a href="http://lowprojs.com">new website</a> has been set up and will contain documentation and tips - Full API docs coming soon.  There&#8217;s also a dedicated <a href="http://groups.google.co.uk/group/low-pro">google group</a>.</p></li>
+</ul>
+
+
+<p>Here is a quick example with real life code. (which could be refactored, I know)</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;8&lt;tt&gt;
+&lt;/tt&gt;9&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;10&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;11&lt;tt&gt;
+&lt;/tt&gt;12&lt;tt&gt;
+&lt;/tt&gt;13&lt;tt&gt;
+&lt;/tt&gt;14&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;15&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;16&lt;tt&gt;
+&lt;/tt&gt;17&lt;tt&gt;
+&lt;/tt&gt;18&lt;tt&gt;
+&lt;/tt&gt;19&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;20&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;21&lt;tt&gt;
+&lt;/tt&gt;22&lt;tt&gt;
+&lt;/tt&gt;23&lt;tt&gt;
+&lt;/tt&gt;24&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;25&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;26&lt;tt&gt;
+&lt;/tt&gt;27&lt;tt&gt;
+&lt;/tt&gt;28&lt;tt&gt;
+&lt;/tt&gt;29&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;30&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;31&lt;tt&gt;
+&lt;/tt&gt;32&lt;tt&gt;
+&lt;/tt&gt;33&lt;tt&gt;
+&lt;/tt&gt;34&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;35&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;36&lt;tt&gt;
+&lt;/tt&gt;37&lt;tt&gt;
+&lt;/tt&gt;38&lt;tt&gt;
+&lt;/tt&gt;39&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;40&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;41&lt;tt&gt;
+&lt;/tt&gt;42&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&lt;span class="c"&gt;// Make sure the behaviors still work even after navigating to another page using the ajax navigation.&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;Event.addBehavior.reassignAfterAjax = &lt;span class="pc"&gt;true&lt;/span&gt;;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;span class="c"&gt;// Behaviors&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;Event.addBehavior({&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="c"&gt;// Pagination links  &lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;div.pagination a&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt; : Remote.&lt;span class="pt"&gt;Link&lt;/span&gt;,&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="c"&gt;// Reset the list when a user clicks on cancel.&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;a.cancel_button:click&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt; : &lt;span class="r"&gt;function&lt;/span&gt;() {&lt;tt&gt;
+&lt;/tt&gt;    $(&lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;list_of_things&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;).update(&lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;);&lt;tt&gt;
+&lt;/tt&gt;  },&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="c"&gt;// carousel navigation prev&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;a#carousel_prev:click&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt; : &lt;span class="r"&gt;function&lt;/span&gt;() {&lt;tt&gt;
+&lt;/tt&gt;    moveCarousel(&lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;prev&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;); &lt;span class="r"&gt;return&lt;/span&gt; &lt;span class="pc"&gt;false&lt;/span&gt;;&lt;tt&gt;
+&lt;/tt&gt;  },&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="c"&gt;// carousel navigation next&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;a#carousel_next:click&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt; : &lt;span class="r"&gt;function&lt;/span&gt;() {&lt;tt&gt;
+&lt;/tt&gt;    moveCarousel(&lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;next&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;); &lt;span class="r"&gt;return&lt;/span&gt; &lt;span class="pc"&gt;false&lt;/span&gt;;&lt;tt&gt;
+&lt;/tt&gt;  },&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;div.panel_pic:click&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt; : &lt;span class="r"&gt;function&lt;/span&gt;() {&lt;tt&gt;
+&lt;/tt&gt;    removePanelPic(&lt;span class="pc"&gt;this&lt;/span&gt;);&lt;tt&gt;
+&lt;/tt&gt;  },&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;div.photo_from_row img:click&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt; : &lt;span class="r"&gt;function&lt;/span&gt;() {&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="c"&gt;// Get the div holding the pic and use it as a target&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="r"&gt;var&lt;/span&gt; target = &lt;span class="pc"&gt;this&lt;/span&gt;.up();&lt;tt&gt;
+&lt;/tt&gt;    addPicToPanel(target);&lt;tt&gt;
+&lt;/tt&gt;    new Effect.Highlight(target);&lt;tt&gt;
+&lt;/tt&gt;  }&lt;tt&gt;
+&lt;/tt&gt;});&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;span class="r"&gt;function&lt;/span&gt; addPicToPanel(target){&lt;tt&gt;
+&lt;/tt&gt;  new Insertion.Bottom(&lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;control_panel_photos&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;, &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;&lt;div id='edit_&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;+ target.id +&lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;' class='panel_pic'&gt;&lt;img class='panel_pic' src='&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt; +  target.immediateDescendants()[0].src + &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;'/&gt;&lt;/div&gt;&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;);&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="c"&gt;// Reload the behaviors so the new inserted pic can be monitored &lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="c"&gt;// and the 'div.panel_pic:click' behavior can be triggered&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  Event.addBehavior.&lt;span class="fu"&gt;reload&lt;/span&gt;();&lt;tt&gt;
+&lt;/tt&gt;}&lt;tt&gt;
+&lt;/tt&gt;  
+</code></pre>
+
+<p>LowPro is a great way of keeping your code really clean and your views very accessible.</p>
+
+<p>If you are interested in knowing more about UJS, come to our <a href="http://sdruby.com/">SDruby group meeting</a> on Dec 6 @ 7:30pm (<a href="http://tinyurl.com/2f486e">directions</a>). And if you don&#8217;t care about UJS, come later to hear about Facebook API. Don&#8217;t forger to bring your questions for our first <a href="http://groups.google.com/group/sdruby/browse_thread/thread/d488b70d67f84a5f#">Rails roundtable</a>.</p>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-11-27T06:44:00+01:00" pubdate data-updated="true">Nov 27<span>th</span>, 2007</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

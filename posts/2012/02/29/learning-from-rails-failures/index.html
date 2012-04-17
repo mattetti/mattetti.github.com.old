@@ -1,0 +1,224 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Learning from Rails' failures - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Learning From Rails' Failures Ruby on Rails undisputedly changed the way web frameworks are designed. Rails became a reference when it comes to &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://merbist.com/2012/02/29/learning-from-rails-failures/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  </head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Learning From Rails' Failures</h1>
+    <div class="entry"><p>Ruby on Rails undisputedly changed the way web frameworks are designed. Rails became a reference when it comes to leveraging conventions, easy baked in feature set and a rich ecosystem. However, I think that Rails did and still does a lot of things pretty poorly.  By writing this post, I&#8217;m not trying to denigrate Rails, there are many other people out there already doing that. My hope is that by listing what I think didn&#8217;t and still doesn&#8217;t go well, we can learn from our mistakes and improve existing solutions or create better new ones.</p>
+
+<p><a href="http://merbist.com/2012/02/29/learning-from-rails-failures/train_fail/"><img src="http://merbist.com/wp-content/uploads/2012/02/train_fail-300x188.jpg" alt="" /></a></p>
+
+<h2>Migration/upgrades</h2>
+
+<p>Migrating a Rails App from a version to the other is very much like playing the lottery, you are almost sure you will lose. To be more correct, you know things will break, you just don&#8217;t know what, when and how. The Rails team seems to think that everybody is always running on the cutting edge version and don&#8217;t consider people who prefer to stay a few version behind for stability reasons. What&#8217;s worse is that plugins/gems might or might not compatible with the version you are updating to, but you will only know that by trying yourself and letting others try and report potential issues.</p>
+
+<p>This is for me, by far, the biggest issue with Rails and something that should have been fixed a long time ago. If you&#8217;re using the WordPress blog engine, you know how easy and safe it is to upgrade the engine or the plugins. Granted WordPress isn&#8217;t a web dev framework, but it gives you an idea of what kind of experience we should be striving for.</p>
+
+<p> </p>
+
+<h2>Stability vs playground zone</h2>
+
+<p>New features are cool and they help make the platform more appealing to new comers. They also help shape the future of a framework. But from my perspective, that shouldn&#8217;t come to the cost of stability. Rails 3&#8217;s new asset pipeline is a good example of a half-baked solution shoved in a release at the last minute and creating a nightmare for a lot of us trying to upgrade. I know, I know, you can turn off the asset pipeline and it got better since it was first released. But shouldn&#8217;t that be the other way around? Shouldn&#8217;t fun new ideas risking the stability of an app or making migration harder, be off by default and turned on only by people wanting to experiment? When your framework is young, it&#8217;s normal that you move fast and sometimes break, but once it matures, these things shouldn&#8217;t happen.</p>
+
+<p> </p>
+
+<h2>Public/private/plugin APIs</h2>
+
+<p>This is more of a recommendation than anything else. When you write a framework in a very dynamic language like Ruby, people will &#8220;monkey patch&#8221; your code to inject features. Sometimes it is due to software design challenges, sometimes it&#8217;s because people don&#8217;t know better. However,  by not explicitly specifying what APIs are private (they can change at anytime, don&#8217;t touch), what APIs are public (stable, will be slowly deprecated when they need to be changed) and which ones are for plugin devs only (APIs meant for instrumentation, extension etc..), you are making migration to newer versions much harder. You see, if you have a small, clean public API, then it&#8217;s easy to see what could break, warn developers and avoid migration nightmares. However, you need to start doing that early on in your project, otherwise you will end up like Rails where all code can potentially change anytime.</p>
+
+<p> </p>
+
+<h2>Rails/Merb merge was a mistake</h2>
+
+<p>This is my personal opinion and well, feel free to disagree, nobody will ever be able to know to for sure. Without explaining what happened behind closed doors and the various personal motivations, looking at the end result, I agree with the group of people thinking that the merge didn&#8217;t turn up to be a good thing. For me, Rails 3 isn&#8217;t significantly better than Rails 2 and it took forever to be released. You still can&#8217;t really run a mini Rails stack like promised. I did hear that Strobe (company who was hiring Carl Lerche, Yehuda Katz and contracted Jose Valim) used to have an ActionPack based, mini stack but it was never released and apparently only Rails core members really knew what was going on there. Performance in vanilla Rails 3 are only now getting close to what you had with Rails 2 (and therefore far from the perf you were getting with Merb). Thread-safety is still OFF by default meaning that by default your app uses a giant lock only allowing a process to handle 1 request at a time. For me, the flexibility and performance focus of Merb were mainly lost in the merge with Rails. (Granted, some important things such as ActiveModel, cleaner internals and others have made their way into Rails 3)</p>
+
+<p>But what&#8217;s worse than everything listed so far is that the lack of competition and the internal rewrites made Rails lose its headstart.  Rails is very much HTML/view focused, its primarily strength is to make server side views trivial and it does an amazing job at that. But let&#8217;s be honest, that&#8217;s not the future for web dev. The future is more and more logic pushed to run on the client side (in JS) and the server side being used as an API serving data for the view layer. I&#8217;m sorry but adding support for CoffeeScript doesn&#8217;t really do much to making Rails evolve ahead of what it currently is. Don&#8217;t get me wrong, I&#8217;m a big fan of CoffeeScript, that said I still find that Rails is far from being optimized to developer web APIs in Rails. You can certainly do it, but you are basically using a tool that wasn&#8217;t designed to write APIs and you pay the overhead for that. If there is one thing I wish Rails will get better at is to make writing pure web APIs better (thankfully there is Sinatra). But at the end of the day, I think that two projects with different philosophies and different approaches are really hard to merge, especially in the open source world. I wouldn&#8217;t go as far as saying like others that Rails lost its sexiness to node.js because of the wasted time, but I do think that things would have been better for all if that didn&#8217;t happen. However, I also have to admit that I&#8217;m not sure how much of a big deal that is. I prefer to leave the past behind, learn from my own mistake and move on.</p>
+
+<p> </p>
+
+<h2>Technical debts</h2>
+
+<p>Here I&#8217;d like to stop to give a huge props to Aaron &#8221;<a href="http://twitter.com/tenderlove">@tenderlove</a>&#8221; Patterson, the man who&#8217;s actively working to reduce the <a href="http://en.wikipedia.org/wiki/Technical_debt">technical debts</a> in the Rails code base. This is a really hard job and definitely not a very glamorous one. He&#8217;s been working on various parts of Rails including its router and its ORM (ActiveRecord). Technical debts are unfortunately normal in most project, but sometimes they are overwhelming to the point that nobody dares touching the code base to clean it up. This is a hard problem, especially when projects move fast like Rails did. But looking back, I think that you want to start tackling technical debts on the side as you move on so you avoid getting to the point that you need a hero to come up and clean the piled errors made in the past. But don&#8217;t pause your entire project to clean things up otherwise you will lose market, momentum and excitement. I feel that this is also very much true for any legacy project you might pick up as a developer.</p>
+
+<p> </p>
+
+<h2>Keep the cost of entry level low</h2>
+
+<p>Getting started with Rails used to be easier. This can obviously argued since it&#8217;s very subjective, but from my perspective I think we forgot where we come from and we involuntary expect new comers to come with unrealistic knowledge. Sure, Rails does much more than it used to do, but it&#8217;s also much harder to get started. I&#8217;m not going to argue how harder  it is now or why we got there. Let&#8217;s just keep in mind that it is a critical thing that should always be re-evaluated. Sure, it&#8217;s harder when you have an open source project, but it&#8217;s also up to the leadership to show that they care and to encourage and mentor volunteers to  focus on this important part of a project.</p>
+
+<p> </p>
+
+<h2>Documentation</h2>
+
+<p>Rails documentation isn&#8217;t bad, but it&#8217;s far from being great. Documentation certainly isn&#8217;t one of the Ruby&#8217;s community strength, especially compared with the Python community, but what saddens me is to see the state of <a href="http://guides.rubyonrails.org/">the official documentation</a> which, should, in theory be the reference. Note that the Rails guides are usually well written and provide value, but they too often seem too light and not useful when you try to do something not totally basic (for instance use an ActiveModel compliant object). That&#8217;s probably why most people don&#8217;t refer to them or don&#8217;t spend too much time there. I&#8217;m not trying to blame anyone there. I think that the people who contributed theses guides did an amazing job, but if you want to build a strong and easy to access community, great documentation is key. Look at the <a href="https://docs.djangoproject.com/en/1.3/">Django</a> documentation as a good example. That said, I also need to acknowledge the amazing job done by many community members such as <a href="http://railscasts.com/">Ryan Bates</a> and <a href="http://ruby.railstutorial.org/">Michael Hartl</a> consistently providing high value external documentation via the <a href="http://railscasts.com/">railscasts</a> and the intro to <a href="http://ruby.railstutorial.org/">Rails tutorial</a> available for free.</p>
+
+<p> </p>
+
+<p>In conclusion, I think that there is a lot to learn from Rails, lots of great things as well as lots of things you would want to avoid. We can certainly argue on Hacker News or via comments about whether or not I&#8217;m right about Rails failures, my point will still be that the mentioned issues should be avoided in any projects, Rails here is just an example. Many of these issues are currently being addressed by the Rails team but wouldn&#8217;t it be great if new projects learn from older ones and avoid making the same mistakes? So what other mistakes do you think I forgot to mention and that one should be very careful of avoiding?</p>
+
+<p> </p>
+
+<h3>Updates:</h3>
+
+<ol>
+<li><p>Rails 4 had an API centric app generator but it <a href="https://github.com/rails/rails/commit/6db930cb5bbff9ad824590b5844e04768de240b1">was quickly reverted</a> and will live as gem until it&#8217;s mature enough.</p></li>
+<li><p>Rails 4 improved the ActiveModel API to be simpler to get started with. See <a href="http://blog.plataformatec.com.br/2012/03/barebone-models-to-use-with-actionpack-in-rails-4-0/">this blog</a> post for more info.</p></li>
+</ol>
+
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-29T07:48:08+01:00" pubdate data-updated="true">Feb 29<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/misc/'>Misc</a>, <a class='category' href='/articles/categories/software-design/'>Software Design</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/merbist-com/'>merbist.com</a>, <a class='category' href='/articles/categories/rails/'>rails</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

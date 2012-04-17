@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Node.js | Matt Aimonetti]]></title>
+  <link href="http://mattetti.github.com/articles/categories/node-js/atom.xml" rel="self"/>
+  <link href="http://mattetti.github.com/"/>
+  <updated>2012-04-17T18:40:13+02:00</updated>
+  <id>http://mattetti.github.com/</id>
+  <author>
+    <name><![CDATA[Matt Aimonetti]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[LA RubyConf 2012 - Ruby: time to move on]]></title>
+    <link href="http://mattetti.github.com/posts/2012/02/04/larubyconf-2012/"/>
+    <updated>2012-02-04T15:09:00+01:00</updated>
+    <id>http://mattetti.github.com/posts/2012/02/04/larubyconf-2012</id>
+    <content type="html"><![CDATA[<p>During <a href="http://larubyconf.org/">LA RubyConf 2012</a> in Los Angeles, CA Matt
+Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>Let's be honest, Ruby became mainstream a few years back and it isn't the cool underground programming language it once was. It's quite likely that your cousin's boyfriend who's "into computers" knows what Ruby on Rails is. There are hundreds of books, conferences, training and meetups for Rubyists. Recruiters fight to hire whoever knows how to generate a scaffolded Rails app. But now cool kids can't stop talking about node.js, CoffeeScript, Clojure, Haskell and pushing code to the UI layer. What does it mean for the new, existing and prospecting Ruby developers? Is it time to jump ship and move on to something else?</p>
+
+<p><img src="/images/matt_aimonetti_timeToMoveOn.jpg" alt="Matt Aimonetti showing that the end result is what matters the most" /></p>
+
+<h2>Slides</h2>
+
+<p><a href="">The slides can be donwloaded here</a>.</p>
+
+<h2>Video</h2>
+
+<p>The video isn't yet available but will be posted <a href="http://confreaks.com/events/larubyconf2012">here</a> once processed.</p>
+]]></content>
+  </entry>
+  
+</feed>

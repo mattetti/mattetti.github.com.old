@@ -1,0 +1,368 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Avoid using metaprogramming (seriously!) - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Avoid Using Metaprogramming (Seriously!) Ruby is sexy, Ruby is cool and its metaprogramming potential offers some really cook features. However you &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2008/05/04/avoid-using-metaprogramming/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  </head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Avoid Using Metaprogramming (Seriously!)</h1>
+    <div class="entry"><p>Ruby is sexy, Ruby is cool and its metaprogramming potential offers some really cook features. However you might not realize that your cleverness is slowing down your code.</p>
+
+<p>Today I was working on cleaning up merb_helper a Merb plugin that brings a lot of the stuff Rails developers are used to. In Merb we aim for speed and try to avoid magic.</p>
+
+<p>merb_plugin didn&#8217;t receive a lot of love from the main contributors but few features were added by different contributors and the code became hard to maintain.</p>
+
+<p>Looking at the code I quickly found this bad boy:</p>
+
+<p>(Old Merb Time DSL using metaprogramming)</p>
+
+<pre><code>module MetaTimeDSL
+
+    {:second =&gt; 1, 
+     :minute =&gt; 60, 
+     :hour =&gt; 3600, 
+     :day =&gt; [24,:hours], 
+     :week =&gt; [7,:days], 
+     :month =&gt; [30,:days], 
+     :year =&gt; [364.25, :days]}.each do |meth, amount|
+      define_method "m_#{meth}" do
+        amount = amount.is_a?(Array) ? amount[0].send(amount[1]) : amount
+        self * amount
+      end
+      alias_method "m_#{meth}s".intern, "m_#{meth}"
+    end
+
+  end
+  Numeric.send :include, MetaTimeDSL
+</code></pre>
+
+<p>The above code looks awful to me and I decided to rewrite it a way I thought would be more efficient:</p>
+
+<pre><code> module TimeDSL
+
+    def second
+      self * 1
+    end
+    alias_method :seconds, :second
+
+    def minute
+      self * 60
+    end
+    alias_method :minutes, :minute
+
+    def hour
+      self * 3600
+    end
+    alias_method :hours, :hour
+
+    def day
+      self * 86400
+    end
+    alias_method :days, :day
+
+    def week
+      self * 604800
+    end
+    alias_method :weeks, :week
+
+    def month
+      self * 2592000
+    end
+    alias_method :months, :month
+
+    def year
+      self * 31471200
+    end
+    alias_method :years, :year
+
+  end
+  Numeric.send :include, TimeDSL
+</code></pre>
+
+<p>To make sure I was right, I run the following benchmarks:</p>
+
+<pre><code>require 'benchmark'
+TIMES = (ARGV[0] || 100_000).to_i
+
+Benchmark.bmbm do |x|
+
+  x.report("metaprogramming 360.seconds") do
+    TIMES.times do    
+      360.m_seconds
+    end
+  end
+
+  x.report("no metaprogramming 360.hours") do
+    TIMES.times do
+      360.seconds
+    end
+  end
+
+  x.report("metaprogramming 360.minutes") do
+    TIMES.times do    
+      360.m_minutes
+    end
+  end
+
+  x.report("no metaprogramming 360.minutes") do
+    TIMES.times do
+      360.minutes
+    end
+  end
+
+  x.report("metaprogramming 360.hours") do
+    TIMES.times do    
+      360.m_hours
+    end
+  end
+
+  x.report("no metaprogramming 360.hours") do
+    TIMES.times do
+      360.hours
+    end
+  end
+
+  x.report("metaprogramming 360.days") do
+    TIMES.times do    
+      360.m_days
+    end
+  end
+
+  x.report("no metaprogramming 360.days") do
+    TIMES.times do
+      360.days
+    end
+  end
+
+  x.report("metaprogramming 360.weeks") do
+    TIMES.times do    
+      360.m_weeks
+    end
+  end
+
+  x.report("no metaprogramming 360.weeks") do
+    TIMES.times do
+      360.weeks
+    end
+  end
+
+  x.report("metaprogramming 18.months") do
+    TIMES.times do    
+      18.m_months
+    end
+  end
+
+  x.report("no metaprogramming 18.months") do
+    TIMES.times do
+      18.months
+    end
+  end
+
+  x.report("metaprogramming 7.years") do
+    TIMES.times do    
+      7.m_years
+    end
+  end
+
+  x.report("no metaprogramming 7.years") do
+    TIMES.times do
+      7.years
+    end
+  end
+
+end
+
+
+ Rehearsal ------------------------------------------------------------------
+metaprogramming 360.seconds      0.130000   0.000000   0.130000 (  0.133164)
+no metaprogramming 360.hours     0.050000   0.000000   0.050000 (  0.042655)
+metaprogramming 360.minutes      0.130000   0.000000   0.130000 (  0.133327)
+no metaprogramming 360.minutes   0.040000   0.000000   0.040000 (  0.042401)
+metaprogramming 360.hours        0.140000   0.000000   0.140000 (  0.134312)
+no metaprogramming 360.hours     0.040000   0.000000   0.040000 (  0.043125)
+metaprogramming 360.days         0.130000   0.000000   0.130000 (  0.134949)
+no metaprogramming 360.days      0.050000   0.000000   0.050000 (  0.043745)
+metaprogramming 360.weeks        0.130000   0.000000   0.130000 (  0.135581)
+no metaprogramming 360.weeks     0.050000   0.000000   0.050000 (  0.043544)
+metaprogramming 18.months        0.130000   0.000000   0.130000 (  0.135234)
+no metaprogramming 18.months     0.050000   0.000000   0.050000 (  0.044354)
+metaprogramming 7.years          0.140000   0.000000   0.140000 (  0.144062)
+no metaprogramming 7.years       0.050000   0.000000   0.050000 (  0.044392)
+--------------------------------------------------------- total: 1.260000sec
+
+                                     user     system      total        real
+metaprogramming 360.seconds      0.130000   0.000000   0.130000 (  0.132567)
+no metaprogramming 360.hours     0.040000   0.000000   0.040000 (  0.042777)
+metaprogramming 360.minutes      0.140000   0.000000   0.140000 (  0.132554)
+no metaprogramming 360.minutes   0.040000   0.000000   0.040000 (  0.043193)
+metaprogramming 360.hours        0.130000   0.000000   0.130000 (  0.133027)
+no metaprogramming 360.hours     0.050000   0.000000   0.050000 (  0.042613)
+metaprogramming 360.days         0.130000   0.000000   0.130000 (  0.138637)
+no metaprogramming 360.days      0.050000   0.000000   0.050000 (  0.043213)
+metaprogramming 360.weeks        0.130000   0.000000   0.130000 (  0.134049)
+no metaprogramming 360.weeks     0.040000   0.000000   0.040000 (  0.043713)
+metaprogramming 18.months        0.140000   0.000000   0.140000 (  0.134941)
+no metaprogramming 18.months     0.040000   0.000000   0.040000 (  0.043980)
+metaprogramming 7.years          0.150000   0.000000   0.150000 (  0.143389)
+no metaprogramming 7.years       0.040000   0.000000   0.040000 (  0.044585)
+ 0.136591)
+</code></pre>
+
+<p>The metaprogramming version of the same implementation is almost 3 times slower!</p>
+
+<p>Moral of the story: be careful when using metaprogramming, you might end up slowing down your code considerably.</p>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-04T08:29:00+02:00" pubdate data-updated="true">May 4<span>th</span>, 2008</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

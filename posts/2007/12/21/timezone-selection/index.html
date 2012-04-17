@@ -1,0 +1,252 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>TimeZone selection - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="TimeZone Selection Supporting TimeZones is a serious pain in a developer&#8217;s neck. Thankfully, Rails comes with a bunch of tools making our life &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2007/12/21/timezone-selection/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  </head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">TimeZone Selection</h1>
+    <div class="entry"><p>Supporting TimeZones is a serious pain in a developer&#8217;s neck. Thankfully, Rails comes with a bunch of tools making our life easier. One of my Rails patch <a href="http://dev.rubyonrails.org/changeset/8473">just got merged</a> in Rails Edge (Future Rails 2.1)  and I believe it will make my life just a tiny be more enjoyable.</p>
+
+<p>Let&#8217;s look at a simple scenario, your application has many users and each user has the option of setting his own TimeZone. Most of your users are in the US and actually on the West Coast. You probably don&#8217;t want to list all the time zones on earth, and you don&#8217;t really want to include a blank option. What we want is to have a list of top priority time zones (US zones) and to pre select the most comment zone. (L.A. / PST)</p>
+
+<p>I won&#8217;t go into TZ support in the back-end, check <a href="http://weblog.jamisbuck.org/2007/2/2/introducing-tztime">this post</a>, <a href="http://www.caboo.se/articles/2007/2/23/adding-timezone-to-your-rails-app">this other one</a> or yet <a href="http://www.marklunds.com/articles/one/311">that one</a> for more information.</p>
+
+<p>Let&#8217;s look at our views, option one, you want to use the Rails built-in TimeZones:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;8&lt;tt&gt;
+&lt;/tt&gt;9&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;10&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;11&lt;tt&gt;
+&lt;/tt&gt;12&lt;tt&gt;
+&lt;/tt&gt;13&lt;tt&gt;
+&lt;/tt&gt;14&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&lt;% form_for &lt;span class="sy"&gt;:user&lt;/span&gt; &lt;span class="r"&gt;do&lt;/span&gt; |f| -&lt;span class="s"&gt;&lt;span class="dl"&gt;%&gt;&lt;/span&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;p&lt;/span&gt;&lt;span class="dl"&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;label &lt;span class="r"&gt;for&lt;/span&gt;=&lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;name&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;&gt;&lt;span class="co"&gt;Name&lt;/span&gt;: &lt;em&gt;(full name)&lt;&lt;span class="rx"&gt;&lt;span class="dl"&gt;/&lt;/span&gt;&lt;span class="k"&gt;em&gt;&lt;&lt;/span&gt;&lt;span class="dl"&gt;/&lt;/span&gt;&lt;/span&gt;label&gt;&lt;br/&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;%= f.text_field &lt;span class="sy"&gt;:name&lt;/span&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;%&gt;&lt;/span&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;/p&lt;/span&gt;&lt;span class="dl"&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;p&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;label&gt;&lt;span class="co"&gt;Default&lt;/span&gt; timezone&lt;span class="sy"&gt;:&lt;&lt;/span&gt;/label&gt;&lt;br/&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;%= f.time_zone_select (&lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;time_zone&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;, &lt;span class="co"&gt;TimeZone&lt;/span&gt;.us_zones, &lt;tt&gt;
+&lt;/tt&gt;                                          &lt;span class="sy"&gt;:default&lt;/span&gt; =&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;Pacific Time (US &amp; Canada)&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;) &lt;span class="s"&gt;&lt;span class="dl"&gt;%&gt;&lt;/span&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;/p&lt;/span&gt;&lt;span class="dl"&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;div &lt;span class="r"&gt;class&lt;/span&gt;=&lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;actions&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;&gt;&lt;%= submit_tag &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;register&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;%&gt;&lt;/span&gt;&lt;span class="k"&gt;&lt;/div&lt;/span&gt;&lt;span class="dl"&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;% &lt;span class="r"&gt;end&lt;/span&gt; -&lt;span class="s"&gt;&lt;span class="dl"&gt;%&gt;&lt;/span&gt;&lt;/span&gt;
+</code></pre>
+
+<p><img src="http://myskitch.com/matt_a/time_zone_select-20071221-182928.jpg" alt="builtin timezones" /></p>
+
+<p>Option 2, we are using <a href="http://rubyforge.org/projects/tzinfo/">TZinfo</a>:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;8&lt;tt&gt;
+&lt;/tt&gt;9&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;10&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;11&lt;tt&gt;
+&lt;/tt&gt;12&lt;tt&gt;
+&lt;/tt&gt;13&lt;tt&gt;
+&lt;/tt&gt;14&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;15&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&lt;% form_for &lt;span class="sy"&gt;:user&lt;/span&gt; &lt;span class="r"&gt;do&lt;/span&gt; |f| -&lt;span class="s"&gt;&lt;span class="dl"&gt;%&gt;&lt;/span&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;p&lt;/span&gt;&lt;span class="dl"&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;label &lt;span class="r"&gt;for&lt;/span&gt;=&lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;name&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;&gt;&lt;span class="co"&gt;Name&lt;/span&gt;: &lt;em&gt;(full name)&lt;&lt;span class="rx"&gt;&lt;span class="dl"&gt;/&lt;/span&gt;&lt;span class="k"&gt;em&gt;&lt;&lt;/span&gt;&lt;span class="dl"&gt;/&lt;/span&gt;&lt;/span&gt;label&gt;&lt;br/&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;%= f.text_field &lt;span class="sy"&gt;:name&lt;/span&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;%&gt;&lt;/span&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;/p&lt;/span&gt;&lt;span class="dl"&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;p&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;label&gt;&lt;span class="co"&gt;Default&lt;/span&gt; timezone&lt;span class="sy"&gt;:&lt;&lt;/span&gt;/label&gt;&lt;br/&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;%= f.time_zone_select(&lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;time_zone&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;, &lt;span class="co"&gt;TZInfo&lt;/span&gt;::&lt;span class="co"&gt;Timezone&lt;/span&gt;.us_zones, &lt;tt&gt;
+&lt;/tt&gt;                                         &lt;span class="sy"&gt;:default&lt;/span&gt; =&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;America/Los_Angeles&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;tt&gt;
+&lt;/tt&gt;                                         &lt;span class="sy"&gt;:model&lt;/span&gt; =&gt; &lt;span class="co"&gt;TZInfo&lt;/span&gt;::&lt;span class="co"&gt;Timezone&lt;/span&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;%&gt;&lt;/span&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;/p&lt;/span&gt;&lt;span class="dl"&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;div &lt;span class="r"&gt;class&lt;/span&gt;=&lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;actions&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;&gt;&lt;%= submit_tag &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;register&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;%&gt;&lt;/span&gt;&lt;span class="k"&gt;&lt;/div&lt;/span&gt;&lt;span class="dl"&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;% &lt;span class="r"&gt;end&lt;/span&gt; -&lt;span class="s"&gt;&lt;span class="dl"&gt;%&gt;&lt;/span&gt;&lt;/span&gt;
+</code></pre>
+
+<p><img src="http://myskitch.com/matt_a/timezone_select_tzinfo-20071221-183443.jpg" alt="TZinfo" /></p>
+
+<p>Obviously, the default timezone is used only if the user didn&#8217;t set one already.</p>
+
+<p>Pretty simple feature but hopefully quite helpful!</p>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-21T23:47:00+01:00" pubdate data-updated="true">Dec 21<span>st</span>, 2007</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>
