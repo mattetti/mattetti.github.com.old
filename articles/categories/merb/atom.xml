@@ -4,7 +4,7 @@
   <title><![CDATA[Category: merb | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/merb/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-18T00:58:38+02:00</updated>
+  <updated>2012-04-18T01:02:34+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -757,7 +757,7 @@ Sequel is a really wonderful tool, and I was finding that just not that many peo
     <link href="http://matt.aimonetti.net/posts/2008/12/15/meet-the-merbists-derek-neighbors/"/>
     <updated>2008-12-15T10:46:27+01:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/12/15/meet-the-merbists-derek-neighbors</id>
-    <content type="html"><![CDATA[<p>[caption id="attachment_348" align="alignleft" width="300" caption="Derek Neighbors"]<a href="http://derekneighbors.com/"><img src="http://merbist.com/wp-content/uploads/2008/12/derek_pr2-300x199.jpg" alt="Derek Neighbors" /></a>[/caption]</p>
+    <content type="html"><![CDATA[<p><a href="http://derekneighbors.com/"><img src="http://merbist.com/wp-content/uploads/2008/12/derek_pr2-300x199.jpg" alt="Derek Neighbors" /></a></p>
 
 <p>Today, I'm starting a new series called <strong>meet the the merbists</strong>. My goal is to feature various people from our community and ask them a few questions about Ruby, Merb and their projects.</p>
 
