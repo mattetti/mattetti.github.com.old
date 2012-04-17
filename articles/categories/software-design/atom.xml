@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Software Design | Matt Aimonetti]]></title>
-  <link href="http://mattetti.github.com/articles/categories/software-design/atom.xml" rel="self"/>
-  <link href="http://mattetti.github.com/"/>
-  <updated>2012-04-18T00:53:22+02:00</updated>
-  <id>http://mattetti.github.com/</id>
+  <link href="http://matt.aimonetti.net/articles/categories/software-design/atom.xml" rel="self"/>
+  <link href="http://matt.aimonetti.net/"/>
+  <updated>2012-04-18T00:58:38+02:00</updated>
+  <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Building and implementing a Single Sign-On solution]]></title>
-    <link href="http://mattetti.github.com/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution/"/>
+    <link href="http://matt.aimonetti.net/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution/"/>
     <updated>2012-04-04T07:29:16+02:00</updated>
-    <id>http://mattetti.github.com/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution</id>
+    <id>http://matt.aimonetti.net/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution</id>
     <content type="html"><![CDATA[<p>Most modern web applications start as a monolithic code base and, as complexity increases, the once small app gets split apart into many "modules". In other cases, engineers opt for a <a href="http://en.wikipedia.org/wiki/Service-oriented_architecture">SOA</a> design approach from the beginning. One way or another, we start running multiple separate applications that need to interact seamlessly. My goal will be to describe some of the high-level challenges and solutions found in implementing a Single-Sign-On service.</p>
 
 <h2>Authentication vs Authorization</h2>
@@ -185,9 +185,9 @@
   
   <entry>
     <title type="html"><![CDATA[Learning from Rails' failures]]></title>
-    <link href="http://mattetti.github.com/posts/2012/02/29/learning-from-rails-failures/"/>
+    <link href="http://matt.aimonetti.net/posts/2012/02/29/learning-from-rails-failures/"/>
     <updated>2012-02-29T07:48:08+01:00</updated>
-    <id>http://mattetti.github.com/posts/2012/02/29/learning-from-rails-failures</id>
+    <id>http://matt.aimonetti.net/posts/2012/02/29/learning-from-rails-failures</id>
     <content type="html"><![CDATA[<p>Ruby on Rails undisputedly changed the way web frameworks are designed. Rails became a reference when it comes to leveraging conventions, easy baked in feature set and a rich ecosystem. However, I think that Rails did and still does a lot of things pretty poorly.  By writing this post, I'm not trying to denigrate Rails, there are many other people out there already doing that. My hope is that by listing what I think didn't and still doesn't go well, we can learn from our mistakes and improve existing solutions or create better new ones.</p>
 
 <p><a href="http://merbist.com/2012/02/29/learning-from-rails-failures/train_fail/"><img src="http://merbist.com/wp-content/uploads/2012/02/train_fail-300x188.jpg" alt="" /></a></p>
@@ -254,9 +254,9 @@
   
   <entry>
     <title type="html"><![CDATA[Quick dive into Ruby ORM object initialization]]></title>
-    <link href="http://mattetti.github.com/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/"/>
+    <link href="http://matt.aimonetti.net/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/"/>
     <updated>2012-02-23T09:46:49+01:00</updated>
-    <id>http://mattetti.github.com/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization</id>
+    <id>http://matt.aimonetti.net/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization</id>
     <content type="html"><![CDATA[<p>Yesterday I did some quick digging into how ORM objects are initialized and the performance cost associated to that. In other words, I wanted to see what's going on when you initialize an ActiveRecord object.</p>
 
 <p>Before I show you the benchmark numbers and you jump to conclusions, it's important to realize that in the grand scheme of things, the performance cost we are talking is small enough that it is certainly not the main reason why your application is slow. Spoiler alert: ActiveRecord is slow but the cost of initialization isn't by far the worse part of ActiveRecord. Also, even though this article doesn't make activeRecord look good, and I'm not trying to diss it. It's a decent ORM that does a great job in most cases.</p>
@@ -342,9 +342,9 @@
   
   <entry>
     <title type="html"><![CDATA[First step in scaling a web site: HTTP caching]]></title>
-    <link href="http://mattetti.github.com/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching/"/>
     <updated>2011-07-11T10:21:02+02:00</updated>
-    <id>http://mattetti.github.com/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching</id>
+    <id>http://matt.aimonetti.net/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching</id>
     <content type="html"><![CDATA[<p>Today my friend <a href="http://twitter.com/mokolabs">Patrick Crowley</a> and I were talking about scaling his website: <a href="http://cinematreasures.org/">http://cinematreasures.org</a> since an article covering his work will soon be published in a very popular newspaper. Patrick's site is hosted on <a href="http://www.heroku.com/">Heroku</a> which comes by default with <a href="https://www.varnish-cache.org/">Varnish caching</a> enabled.</p>
 
 <p>The challenge is that a lot of people using the Rails framework are used to doing page caching instead of relying on HTTP caching, even though this feature was added a long time ago. The major problem with page caching is that it doesn't scale that well as soon as you run more than one server. Indeed you would need to store the page content to a shared drive between your servers or use memcached and do some work to avoid hitting your app every single time. On the other hand, HTTP caching is extremely easy to handle at the application level and it will dramatically reduce the amount of requests hitting your app. Let me explain a little more about HTTP caching.</p>
@@ -465,9 +465,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Video game web framework design]]></title>
-    <link href="http://mattetti.github.com/posts/2011/04/14/video-game-web-framework-design/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/04/14/video-game-web-framework-design/"/>
     <updated>2011-04-14T10:28:39+02:00</updated>
-    <id>http://mattetti.github.com/posts/2011/04/14/video-game-web-framework-design</id>
+    <id>http://matt.aimonetti.net/posts/2011/04/14/video-game-web-framework-design</id>
     <content type="html"><![CDATA[<p>In this post I will do my best to explain why and how I reinvented the wheel and wrote a custom web framework for some of Sony's <a href="http://www.gameproducer.net/2006/05/26/what-are-aaa-titles/">AAA console titles</a>. My goal is to reflect on my work by walking you through the design process and some of the implementation decisions. This is not about being right or being wrong, it's about designing a technical solution to solve concrete business challenges.</p>
 
 <h2>Problem Domain</h2>
@@ -570,9 +570,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Ruby concurrency explained]]></title>
-    <link href="http://mattetti.github.com/posts/2011/02/22/concurrency-in-ruby-explained/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained/"/>
     <updated>2011-02-22T22:34:30+01:00</updated>
-    <id>http://mattetti.github.com/posts/2011/02/22/concurrency-in-ruby-explained</id>
+    <id>http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained</id>
     <content type="html"><![CDATA[<p>Concurrency is certainly <a href="http://en.wikipedia.org/wiki/Petri_Net">not a new problem</a> but it's getting more and more attention as machines start having more than 1 core, that web traffic increases drastically and that some new technologies show up saying that they are better because they handle concurrency better.
 If that helps, think of concurrency as multitasking. When people say that they want concurrency, they say that they want their code to do multiple different things at the same time. When you are on your computer, you don't expect to have to choose between browsing the web and listening to some music. You more than likely want to run both concurrently. It's the same thing with your code, if you are running a webserver, you probably don't want it to only process one request at a time.
 The aim of this article is to explain as simply as possible the concept of concurrency in Ruby, the reason why it's a complicated topic and finally the different solutions to achieve concurrency.</p>
@@ -653,9 +653,9 @@ The aim of this article is to explain as simply as possible the concept of concu
   
   <entry>
     <title type="html"><![CDATA[Designing for scalability]]></title>
-    <link href="http://mattetti.github.com/posts/2011/01/31/designing-for-scalability/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/01/31/designing-for-scalability/"/>
     <updated>2011-01-31T13:30:55+01:00</updated>
-    <id>http://mattetti.github.com/posts/2011/01/31/designing-for-scalability</id>
+    <id>http://matt.aimonetti.net/posts/2011/01/31/designing-for-scalability</id>
     <content type="html"><![CDATA[<p>Designing beautiful and scalable software is hard. Really hard.</p>
 
 <p>It's hard for many reasons. But what makes it even harder is that software scalability is a relatively new challenge, something only really done in big companies, companies that are not really keen on sharing their knowledge. The amount of academic work done on software design is quite limited compared to other types of design, but shared knowledge about scalable design is almost nonexistent <em>(Don't expect to find detailed information about scaling online video games either, the industry is super secretive. And even if this is a niche market where finding skilled/experienced developers is really challenging, information is not shared outside a game project).</em></p>
@@ -842,9 +842,9 @@ Please people! This is 2011, stop using print statement as a means of debugging!
   
   <entry>
     <title type="html"><![CDATA[Causality of scalability]]></title>
-    <link href="http://mattetti.github.com/posts/2011/01/18/causality-of-scalability/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/01/18/causality-of-scalability/"/>
     <updated>2011-01-18T08:00:42+01:00</updated>
-    <id>http://mattetti.github.com/posts/2011/01/18/causality-of-scalability</id>
+    <id>http://matt.aimonetti.net/posts/2011/01/18/causality-of-scalability</id>
     <content type="html"><![CDATA[<p>Part of my job at <a href="http://us.playstation.com/">Sony PlayStation</a> is to architect scalable systems which can handle a horde of excited players eager to be the first to play the latest awesome game and who would play for 14-24 hours straight. In other words, I need to make sure a system can "scale". In my case, a scalable system is a system that can go from a few hundred concurrent users/players to hundreds of thousands of concurrent users/players and stay stable for months.</p>
 
 <p>One can achieve scalability in many ways, and if you expect me to provide you with a magical formula you will be disappointed. I actually believe that you can scale almost anything if you have the adequate resources. So saying that X or Y doesn't scale is for me a sign that people are taking shortcuts in their explanations (X or Y are really hard to scale so they don't scale) or that they don't understand the causality of scaling. However what I am exploring in this post is the relationship between cause and effect when trying to make a system scalable. We will see that the scalability challenge is not new and not exclusive to the tech world. We will study the traditional approach to scaling and as well as the challenge of scaling in relation to the web and what to be aware of when planning to make a solution scalable.</p>

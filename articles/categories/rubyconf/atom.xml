@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: RubyConf | Matt Aimonetti]]></title>
-  <link href="http://mattetti.github.com/articles/categories/rubyconf/atom.xml" rel="self"/>
-  <link href="http://mattetti.github.com/"/>
-  <updated>2012-04-18T00:53:22+02:00</updated>
-  <id>http://mattetti.github.com/</id>
+  <link href="http://matt.aimonetti.net/articles/categories/rubyconf/atom.xml" rel="self"/>
+  <link href="http://matt.aimonetti.net/"/>
+  <updated>2012-04-18T00:58:38+02:00</updated>
+  <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[LA RubyConf 2012 - Ruby: time to move on]]></title>
-    <link href="http://mattetti.github.com/posts/2012/02/04/larubyconf-2012/"/>
+    <link href="http://matt.aimonetti.net/posts/2012/02/04/larubyconf-2012/"/>
     <updated>2012-02-04T15:09:00+01:00</updated>
-    <id>http://mattetti.github.com/posts/2012/02/04/larubyconf-2012</id>
+    <id>http://matt.aimonetti.net/posts/2012/02/04/larubyconf-2012</id>
     <content type="html"><![CDATA[<p>During <a href="http://larubyconf.org/">LA RubyConf 2012</a> in Los Angeles, CA Matt
 Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
 
@@ -39,9 +39,9 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
   
   <entry>
     <title type="html"><![CDATA[RubyConf Argentina 2011]]></title>
-    <link href="http://mattetti.github.com/posts/2011/11/08/rubyconf-argentina-2011/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011/"/>
     <updated>2011-11-08T15:42:00+01:00</updated>
-    <id>http://mattetti.github.com/posts/2011/11/08/rubyconf-argentina-2011</id>
+    <id>http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011</id>
     <content type="html"><![CDATA[<p>During <a href="http://rubyconfargentina.org/en">RubyConf Argentina 2011</a> in Buenos Aires, Argentina Matt
 Aimonetti gave a talk entitled <em>Inside Ruby: concurrency &amp; garbage collection explained</em>.</p>
 
@@ -79,9 +79,9 @@ management works to get better performance out of your code.</p>
   
   <entry>
     <title type="html"><![CDATA[RubyConf 2011 - Complex Ruby concepts simplified]]></title>
-    <link href="http://mattetti.github.com/posts/2011/10/01/rubyconf-2011/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/10/01/rubyconf-2011/"/>
     <updated>2011-10-01T15:09:00+02:00</updated>
-    <id>http://mattetti.github.com/posts/2011/10/01/rubyconf-2011</id>
+    <id>http://matt.aimonetti.net/posts/2011/10/01/rubyconf-2011</id>
     <content type="html"><![CDATA[<p>During <a href="http://rubyconf.org/">RubyConf 2011</a> in New Orleans, LA Matt
 Aimonetti gave a talk entitled <em>Complex Ruby concepts simplified</em>.</p>
 

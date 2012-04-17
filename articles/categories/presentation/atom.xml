@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Presentation | Matt Aimonetti]]></title>
-  <link href="http://mattetti.github.com/articles/categories/presentation/atom.xml" rel="self"/>
-  <link href="http://mattetti.github.com/"/>
-  <updated>2012-04-18T00:53:22+02:00</updated>
-  <id>http://mattetti.github.com/</id>
+  <link href="http://matt.aimonetti.net/articles/categories/presentation/atom.xml" rel="self"/>
+  <link href="http://matt.aimonetti.net/"/>
+  <updated>2012-04-18T00:58:38+02:00</updated>
+  <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[LA RubyConf 2012 - Ruby: time to move on]]></title>
-    <link href="http://mattetti.github.com/posts/2012/02/04/larubyconf-2012/"/>
+    <link href="http://matt.aimonetti.net/posts/2012/02/04/larubyconf-2012/"/>
     <updated>2012-02-04T15:09:00+01:00</updated>
-    <id>http://mattetti.github.com/posts/2012/02/04/larubyconf-2012</id>
+    <id>http://matt.aimonetti.net/posts/2012/02/04/larubyconf-2012</id>
     <content type="html"><![CDATA[<p>During <a href="http://larubyconf.org/">LA RubyConf 2012</a> in Los Angeles, CA Matt
 Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
 
@@ -39,9 +39,9 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
   
   <entry>
     <title type="html"><![CDATA[RubyConf Argentina 2011]]></title>
-    <link href="http://mattetti.github.com/posts/2011/11/08/rubyconf-argentina-2011/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011/"/>
     <updated>2011-11-08T15:42:00+01:00</updated>
-    <id>http://mattetti.github.com/posts/2011/11/08/rubyconf-argentina-2011</id>
+    <id>http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011</id>
     <content type="html"><![CDATA[<p>During <a href="http://rubyconfargentina.org/en">RubyConf Argentina 2011</a> in Buenos Aires, Argentina Matt
 Aimonetti gave a talk entitled <em>Inside Ruby: concurrency &amp; garbage collection explained</em>.</p>
 
@@ -79,9 +79,9 @@ management works to get better performance out of your code.</p>
   
   <entry>
     <title type="html"><![CDATA[RubyConf 2011 - Complex Ruby concepts simplified]]></title>
-    <link href="http://mattetti.github.com/posts/2011/10/01/rubyconf-2011/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/10/01/rubyconf-2011/"/>
     <updated>2011-10-01T15:09:00+02:00</updated>
-    <id>http://mattetti.github.com/posts/2011/10/01/rubyconf-2011</id>
+    <id>http://matt.aimonetti.net/posts/2011/10/01/rubyconf-2011</id>
     <content type="html"><![CDATA[<p>During <a href="http://rubyconf.org/">RubyConf 2011</a> in New Orleans, LA Matt
 Aimonetti gave a talk entitled <em>Complex Ruby concepts simplified</em>.</p>
 
@@ -118,9 +118,9 @@ for the talk is available <a href="">here</a>.</p>
   
   <entry>
     <title type="html"><![CDATA[RubyConf 2010 - MacRuby talk]]></title>
-    <link href="http://mattetti.github.com/posts/2010/11/12/rubyconf-2010-macruby-talk/"/>
+    <link href="http://matt.aimonetti.net/posts/2010/11/12/rubyconf-2010-macruby-talk/"/>
     <updated>2010-11-12T16:00:51+01:00</updated>
-    <id>http://mattetti.github.com/posts/2010/11/12/rubyconf-2010-macruby-talk</id>
+    <id>http://matt.aimonetti.net/posts/2010/11/12/rubyconf-2010-macruby-talk</id>
     <content type="html"><![CDATA[<p>This year I gave the traditional Apple's MacRuby talk at RubyConf.
 My presentation focused on 2 axis:</p>
 
@@ -169,9 +169,9 @@ Since last new a lot of things happened, here is a quick summary:</p>
   
   <entry>
     <title type="html"><![CDATA[RailsSummit - an amazing adventure]]></title>
-    <link href="http://mattetti.github.com/posts/2009/10/23/railssummit-2009/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/10/23/railssummit-2009/"/>
     <updated>2009-10-23T10:17:45+02:00</updated>
-    <id>http://mattetti.github.com/posts/2009/10/23/railssummit-2009</id>
+    <id>http://matt.aimonetti.net/posts/2009/10/23/railssummit-2009</id>
     <content type="html"><![CDATA[<p>I have had the opportunity to go to and speak at many conferences but this year was the first time I had the chance to go to <a href="http://railssummit.com.br">RailsSummit</a> in São Paulo, Brazil.</p>
 
 <p>I was really looking forward to this trip and I have to say it went beyond my expectations. I had really good feedback from people like the <a href="http://www.phusion.nl/">Phusion guys</a> (Ninh &amp; Hongli), Gregg Pollack and others.</p>
@@ -198,9 +198,9 @@ Since last new a lot of things happened, here is a quick summary:</p>
   
   <entry>
     <title type="html"><![CDATA[RailsConf 2009]]></title>
-    <link href="http://mattetti.github.com/posts/2009/05/08/railsconf-2009/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/05/08/railsconf-2009/"/>
     <updated>2009-05-08T12:18:18+02:00</updated>
-    <id>http://mattetti.github.com/posts/2009/05/08/railsconf-2009</id>
+    <id>http://matt.aimonetti.net/posts/2009/05/08/railsconf-2009</id>
     <content type="html"><![CDATA[<p>RailsConf 2009 has now finished.  This time last year, no one would have ever guessed that the Merb and Rails teams would join forces and focus on what will hopefully be known as one of the best Web Frameworks.</p>
 
 <p>It was encouraging to see so many people excited about what's being ported over from Merb and the new options available to people who are currently limited by the existing stack. For those interested in pushing Rails further and doing stuff out of the norm, here are my slides. <a href="http://www.workingwithrails.com/person/5919-arthur-zapparoli">Arthur Zapparoli</a> from <a href="http://www.rubyonrails.pro.br/">Brazilian Rails squad</a> recorded most of the talk and told me he will upload the video ASAP. You can also read <a href="http://yehudakatz.com/2009/05/08/railsconf-wrapup/">Yehuda Katz' blog</a> which covers what he talked about.</p>

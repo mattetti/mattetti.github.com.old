@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: rails | Matt Aimonetti]]></title>
-  <link href="http://mattetti.github.com/articles/categories/rails/atom.xml" rel="self"/>
-  <link href="http://mattetti.github.com/"/>
-  <updated>2012-04-18T00:53:22+02:00</updated>
-  <id>http://mattetti.github.com/</id>
+  <link href="http://matt.aimonetti.net/articles/categories/rails/atom.xml" rel="self"/>
+  <link href="http://matt.aimonetti.net/"/>
+  <updated>2012-04-18T00:58:38+02:00</updated>
+  <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Learning from Rails' failures]]></title>
-    <link href="http://mattetti.github.com/posts/2012/02/29/learning-from-rails-failures/"/>
+    <link href="http://matt.aimonetti.net/posts/2012/02/29/learning-from-rails-failures/"/>
     <updated>2012-02-29T07:48:08+01:00</updated>
-    <id>http://mattetti.github.com/posts/2012/02/29/learning-from-rails-failures</id>
+    <id>http://matt.aimonetti.net/posts/2012/02/29/learning-from-rails-failures</id>
     <content type="html"><![CDATA[<p>Ruby on Rails undisputedly changed the way web frameworks are designed. Rails became a reference when it comes to leveraging conventions, easy baked in feature set and a rich ecosystem. However, I think that Rails did and still does a lot of things pretty poorly.  By writing this post, I'm not trying to denigrate Rails, there are many other people out there already doing that. My hope is that by listing what I think didn't and still doesn't go well, we can learn from our mistakes and improve existing solutions or create better new ones.</p>
 
 <p><a href="http://merbist.com/2012/02/29/learning-from-rails-failures/train_fail/"><img src="http://merbist.com/wp-content/uploads/2012/02/train_fail-300x188.jpg" alt="" /></a></p>
@@ -84,9 +84,9 @@
   
   <entry>
     <title type="html"><![CDATA[Quick dive into Ruby ORM object initialization]]></title>
-    <link href="http://mattetti.github.com/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/"/>
+    <link href="http://matt.aimonetti.net/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/"/>
     <updated>2012-02-23T09:46:49+01:00</updated>
-    <id>http://mattetti.github.com/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization</id>
+    <id>http://matt.aimonetti.net/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization</id>
     <content type="html"><![CDATA[<p>Yesterday I did some quick digging into how ORM objects are initialized and the performance cost associated to that. In other words, I wanted to see what's going on when you initialize an ActiveRecord object.</p>
 
 <p>Before I show you the benchmark numbers and you jump to conclusions, it's important to realize that in the grand scheme of things, the performance cost we are talking is small enough that it is certainly not the main reason why your application is slow. Spoiler alert: ActiveRecord is slow but the cost of initialization isn't by far the worse part of ActiveRecord. Also, even though this article doesn't make activeRecord look good, and I'm not trying to diss it. It's a decent ORM that does a great job in most cases.</p>
@@ -172,9 +172,9 @@
   
   <entry>
     <title type="html"><![CDATA[Deploying a Rails 3.1 app - gotchas]]></title>
-    <link href="http://mattetti.github.com/posts/2011/08/30/deploying-a-rails-3-1-app-gotchas/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/08/30/deploying-a-rails-3-1-app-gotchas/"/>
     <updated>2011-08-30T17:20:34+02:00</updated>
-    <id>http://mattetti.github.com/posts/2011/08/30/deploying-a-rails-3-1-app-gotchas</id>
+    <id>http://matt.aimonetti.net/posts/2011/08/30/deploying-a-rails-3-1-app-gotchas</id>
     <content type="html"><![CDATA[<p>Recently I had to build a new app as part of my research &amp; development job at <a href="http://livingsocial.com">LivingSocial</a>. My goal was to get the app up and running in just a few weeks, solid application architecture and graphic design included.
 When you need to build an app quickly and you want it to have some solid foundations, Rails is quite useful.
 I used Rails 3.1RCx so if we would to keep my app and push it to production, the engineering team wouldn't have to update it and the transition should be seamless. I also quite like <a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a> and the app being quite heavy on JavaScript, the choice was easy. Furthermore, my coworker <a href="http://codefluency.com/">Bruce Williams</a> is a fan of <a href="http://sass-lang.com/">SCSS</a> and he's writing a <a href="http://pragprog.com/">PragProg</a> book called "The Rails View" with other LivingSocialist: <a href="http://www.boboroshi.com/">John Athayde</a>. So you got the point, I'm using Rails3.1, but this post is about the challenges I faced when it was time to deploy and the solutions I found.</p>
@@ -242,9 +242,9 @@ Also, be careful about the order of the file extensions, otherwise it won't work
   
   <entry>
     <title type="html"><![CDATA[Discussion with a Java switcher]]></title>
-    <link href="http://mattetti.github.com/posts/2010/08/22/discussion-with-a-java-switcher/"/>
+    <link href="http://matt.aimonetti.net/posts/2010/08/22/discussion-with-a-java-switcher/"/>
     <updated>2010-08-22T17:18:55+02:00</updated>
-    <id>http://mattetti.github.com/posts/2010/08/22/discussion-with-a-java-switcher</id>
+    <id>http://matt.aimonetti.net/posts/2010/08/22/discussion-with-a-java-switcher</id>
     <content type="html"><![CDATA[<p>For the past 6 months, I have had regular discussions with an experienced Java developers who switched to Ruby a couple years ago. Names have been changed to protect the guilty but to help you understand my friend 'Duke' better, you need to know that he has been a developer for 10 years and lead many complicated, high traffic projects. He recently released two Ruby on Rails projects and he has been fighting with performance issues and scalability challenges.</p>
 
 <p>Duke is a happy Ruby developer but he sometimes has a hard time understanding why things are done in a certain way in the Ruby community. Here are some extracts from our conversations. My answers are only based on my own experience and limited knowledge. They are probably not shared by the entire  community, feel free to use the comment section if you want to add more or share your own answers.</p>
@@ -301,9 +301,9 @@ Also, be careful about the order of the file extensions, otherwise it won't work
   
   <entry>
     <title type="html"><![CDATA[Ruby object allocation & why you should care]]></title>
-    <link href="http://mattetti.github.com/posts/2010/07/29/object-allocation-why-you-should-care/"/>
+    <link href="http://matt.aimonetti.net/posts/2010/07/29/object-allocation-why-you-should-care/"/>
     <updated>2010-07-29T23:47:50+02:00</updated>
-    <id>http://mattetti.github.com/posts/2010/07/29/object-allocation-why-you-should-care</id>
+    <id>http://matt.aimonetti.net/posts/2010/07/29/object-allocation-why-you-should-care</id>
     <content type="html"><![CDATA[<p>Recently I was tasked with finding how to optimize a web application with heavy traffic. The application (a Rails 2.3.x app) gets about 3 million requests per hour and most of these requests cannot really be easily cached so they go through the entire stack.</p>
 
 <p>This is probably not the case of most web apps out there. None the less, my findings my help you understand Ruby better and maybe think differently about memory management.</p>
@@ -386,9 +386,9 @@ Index   1</p>
   
   <entry>
     <title type="html"><![CDATA[Au Revoir Rails community]]></title>
-    <link href="http://mattetti.github.com/posts/2010/06/04/au-revoir-rails-community/"/>
+    <link href="http://matt.aimonetti.net/posts/2010/06/04/au-revoir-rails-community/"/>
     <updated>2010-06-04T17:45:20+02:00</updated>
-    <id>http://mattetti.github.com/posts/2010/06/04/au-revoir-rails-community</id>
+    <id>http://matt.aimonetti.net/posts/2010/06/04/au-revoir-rails-community</id>
     <content type="html"><![CDATA[<p>Time really flies!</p>
 
 <p>Back in December 2005, Ruby on Rails 1.0 was released to the masses. I remember that was when I first got interested in Rails. Six months later, I was doing Rails development full time.</p>
@@ -409,9 +409,9 @@ Index   1</p>
   
   <entry>
     <title type="html"><![CDATA[Speed up your Rails XML responses]]></title>
-    <link href="http://mattetti.github.com/posts/2010/02/22/speed-up-your-rails-xml-responses/"/>
+    <link href="http://matt.aimonetti.net/posts/2010/02/22/speed-up-your-rails-xml-responses/"/>
     <updated>2010-02-22T23:25:09+01:00</updated>
-    <id>http://mattetti.github.com/posts/2010/02/22/speed-up-your-rails-xml-responses</id>
+    <id>http://matt.aimonetti.net/posts/2010/02/22/speed-up-your-rails-xml-responses</id>
     <content type="html"><![CDATA[<p>At <a href="http://www.us.playstation.com/">work</a>, we have an XML API that gets quite a lot of traffic. Last week I looked into improving its performance since we are expecting more traffic soon and want to make sure our response time is optimized.</p>
 
 <p>My first thought was to make sure we had  an optimized <a href="http://api.rubyonrails.org/classes/ActiveSupport/XmlMini.html">ActiveSupport's xmlmini backend</a>. Rails 2.3.5 fixed some issues when using <a href="http://nokogiri.org/">Nokogiri</a> as a xmlmini so I switched to my favorite Ruby XML lib:</p>
@@ -657,9 +657,9 @@ Percentage of the requests served within a certain time (ms)
   
   <entry>
     <title type="html"><![CDATA[Ruby, Rack and CouchDB = lots of awesomeness]]></title>
-    <link href="http://mattetti.github.com/posts/2009/07/27/ruby-rack-and-couchdb-lots-of-awesomeness/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/07/27/ruby-rack-and-couchdb-lots-of-awesomeness/"/>
     <updated>2009-07-27T13:49:20+02:00</updated>
-    <id>http://mattetti.github.com/posts/2009/07/27/ruby-rack-and-couchdb-lots-of-awesomeness</id>
+    <id>http://matt.aimonetti.net/posts/2009/07/27/ruby-rack-and-couchdb-lots-of-awesomeness</id>
     <content type="html"><![CDATA[<p>Over the weekend, I spent some time working on a Ruby + Rack +CouchDB project. Three technologies that I know quite well but that I never put to work together at the same time, at least not directly.  Let's call this Part I.</p>
 
 <p>Before we get started, let me introduce each component:</p>
@@ -713,9 +713,9 @@ Finally, instead of printing out the logs, we are saving them to the database.</
   
   <entry>
     <title type="html"><![CDATA[RailsConf 2009]]></title>
-    <link href="http://mattetti.github.com/posts/2009/05/08/railsconf-2009/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/05/08/railsconf-2009/"/>
     <updated>2009-05-08T12:18:18+02:00</updated>
-    <id>http://mattetti.github.com/posts/2009/05/08/railsconf-2009</id>
+    <id>http://matt.aimonetti.net/posts/2009/05/08/railsconf-2009</id>
     <content type="html"><![CDATA[<p>RailsConf 2009 has now finished.  This time last year, no one would have ever guessed that the Merb and Rails teams would join forces and focus on what will hopefully be known as one of the best Web Frameworks.</p>
 
 <p>It was encouraging to see so many people excited about what's being ported over from Merb and the new options available to people who are currently limited by the existing stack. For those interested in pushing Rails further and doing stuff out of the norm, here are my slides. <a href="http://www.workingwithrails.com/person/5919-arthur-zapparoli">Arthur Zapparoli</a> from <a href="http://www.rubyonrails.pro.br/">Brazilian Rails squad</a> recorded most of the talk and told me he will upload the video ASAP. You can also read <a href="http://yehudakatz.com/2009/05/08/railsconf-wrapup/">Yehuda Katz' blog</a> which covers what he talked about.</p>
@@ -738,9 +738,9 @@ Finally, instead of printing out the logs, we are saving them to the database.</
   
   <entry>
     <title type="html"><![CDATA[Presenting the Rails Activists]]></title>
-    <link href="http://mattetti.github.com/posts/2009/01/05/presenting-the-rails-activists/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/01/05/presenting-the-rails-activists/"/>
     <updated>2009-01-05T10:15:44+01:00</updated>
-    <id>http://mattetti.github.com/posts/2009/01/05/presenting-the-rails-activists</id>
+    <id>http://matt.aimonetti.net/posts/2009/01/05/presenting-the-rails-activists</id>
     <content type="html"><![CDATA[<p>Today is Monday. I usually don't like Mondays.
 Being Monday goes with waking up early, going back to work, and lots of deadlines.</p>
 
@@ -811,9 +811,9 @@ We have other forums for more <a href="http://rails.uservoice.com/pages/general_
   
   <entry>
     <title type="html"><![CDATA[latest Merb and Rails 3.0 news]]></title>
-    <link href="http://mattetti.github.com/posts/2008/12/29/latest-merb-and-rails-30-news/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/12/29/latest-merb-and-rails-30-news/"/>
     <updated>2008-12-29T13:57:38+01:00</updated>
-    <id>http://mattetti.github.com/posts/2008/12/29/latest-merb-and-rails-30-news</id>
+    <id>http://matt.aimonetti.net/posts/2008/12/29/latest-merb-and-rails-30-news</id>
     <content type="html"><![CDATA[<p><a href="http://foysavas.com"><img src="http://merbist.com/wp-content/uploads/2008/12/foy-savas-1.png" alt="" /></a></p>
 
 <ul>
@@ -837,9 +837,9 @@ We have other forums for more <a href="http://rails.uservoice.com/pages/general_
   
   <entry>
     <title type="html"><![CDATA[Merb/Rails merge, or Why should merbists be happy?]]></title>
-    <link href="http://mattetti.github.com/posts/2008/12/25/merb-rails-merge-or-why-should-merbists-be-happy/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/12/25/merb-rails-merge-or-why-should-merbists-be-happy/"/>
     <updated>2008-12-25T20:11:02+01:00</updated>
-    <id>http://mattetti.github.com/posts/2008/12/25/merb-rails-merge-or-why-should-merbists-be-happy</id>
+    <id>http://matt.aimonetti.net/posts/2008/12/25/merb-rails-merge-or-why-should-merbists-be-happy</id>
     <content type="html"><![CDATA[<p><a href="http://flickr.com/photos/xrrr/2478140383/"><img src="http://farm4.static.flickr.com/3211/2478140383_8e2e4ab7a3_m.jpg" alt="" /></a>December 23, 2008, was an important day for the Ruby community. People who used to argue and not get along, have decided to sit down, talk and evaluate their differences. The end result is a strong collaboration of two teams who share the exact same goal.</p>
 
 <p>Overall, the news was very well received, just look at the tweets out there and the comments on <a href="http://yehudakatz.com/2008/12/23/rails-and-merb-merge/">Yehuda's</a> and <a href="http://weblog.rubyonrails.org/2008/12/23/merb-gets-merged-into-rails-3">Rails' blogs</a>.</p>

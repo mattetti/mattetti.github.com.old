@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Matt Aimonetti]]></title>
-  <link href="http://mattetti.github.com/atom.xml" rel="self"/>
-  <link href="http://mattetti.github.com/"/>
-  <updated>2012-04-18T00:53:22+02:00</updated>
-  <id>http://mattetti.github.com/</id>
+  <link href="http://matt.aimonetti.net/atom.xml" rel="self"/>
+  <link href="http://matt.aimonetti.net/"/>
+  <updated>2012-04-18T00:58:38+02:00</updated>
+  <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Building and implementing a Single Sign-On solution]]></title>
-    <link href="http://mattetti.github.com/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution/"/>
+    <link href="http://matt.aimonetti.net/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution/"/>
     <updated>2012-04-04T07:29:16+02:00</updated>
-    <id>http://mattetti.github.com/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution</id>
+    <id>http://matt.aimonetti.net/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution</id>
     <content type="html"><![CDATA[<p>Most modern web applications start as a monolithic code base and, as complexity increases, the once small app gets split apart into many &#8220;modules&#8221;. In other cases, engineers opt for a <a href="http://en.wikipedia.org/wiki/Service-oriented_architecture">SOA</a> design approach from the beginning. One way or another, we start running multiple separate applications that need to interact seamlessly. My goal will be to describe some of the high-level challenges and solutions found in implementing a Single-Sign-On service.</p>
 
 <h2>Authentication vs Authorization</h2>
@@ -185,9 +185,9 @@
   
   <entry>
     <title type="html"><![CDATA[Learning from Rails' failures]]></title>
-    <link href="http://mattetti.github.com/posts/2012/02/29/learning-from-rails-failures/"/>
+    <link href="http://matt.aimonetti.net/posts/2012/02/29/learning-from-rails-failures/"/>
     <updated>2012-02-29T07:48:08+01:00</updated>
-    <id>http://mattetti.github.com/posts/2012/02/29/learning-from-rails-failures</id>
+    <id>http://matt.aimonetti.net/posts/2012/02/29/learning-from-rails-failures</id>
     <content type="html"><![CDATA[<p>Ruby on Rails undisputedly changed the way web frameworks are designed. Rails became a reference when it comes to leveraging conventions, easy baked in feature set and a rich ecosystem. However, I think that Rails did and still does a lot of things pretty poorly.  By writing this post, I&#8217;m not trying to denigrate Rails, there are many other people out there already doing that. My hope is that by listing what I think didn&#8217;t and still doesn&#8217;t go well, we can learn from our mistakes and improve existing solutions or create better new ones.</p>
 
 <p><a href="http://merbist.com/2012/02/29/learning-from-rails-failures/train_fail/"><img src="http://merbist.com/wp-content/uploads/2012/02/train_fail-300x188.jpg" alt="" /></a></p>
@@ -254,9 +254,9 @@
   
   <entry>
     <title type="html"><![CDATA[Quick dive into Ruby ORM object initialization]]></title>
-    <link href="http://mattetti.github.com/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/"/>
+    <link href="http://matt.aimonetti.net/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/"/>
     <updated>2012-02-23T09:46:49+01:00</updated>
-    <id>http://mattetti.github.com/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization</id>
+    <id>http://matt.aimonetti.net/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization</id>
     <content type="html"><![CDATA[<p>Yesterday I did some quick digging into how ORM objects are initialized and the performance cost associated to that. In other words, I wanted to see what&#8217;s going on when you initialize an ActiveRecord object.</p>
 
 <p>Before I show you the benchmark numbers and you jump to conclusions, it&#8217;s important to realize that in the grand scheme of things, the performance cost we are talking is small enough that it is certainly not the main reason why your application is slow. Spoiler alert: ActiveRecord is slow but the cost of initialization isn&#8217;t by far the worse part of ActiveRecord. Also, even though this article doesn&#8217;t make activeRecord look good, and I&#8217;m not trying to diss it. It&#8217;s a decent ORM that does a great job in most cases.</p>
@@ -342,9 +342,9 @@
   
   <entry>
     <title type="html"><![CDATA[LA RubyConf 2012 - Ruby: time to move on]]></title>
-    <link href="http://mattetti.github.com/posts/2012/02/04/larubyconf-2012/"/>
+    <link href="http://matt.aimonetti.net/posts/2012/02/04/larubyconf-2012/"/>
     <updated>2012-02-04T15:09:00+01:00</updated>
-    <id>http://mattetti.github.com/posts/2012/02/04/larubyconf-2012</id>
+    <id>http://matt.aimonetti.net/posts/2012/02/04/larubyconf-2012</id>
     <content type="html"><![CDATA[<p>During <a href="http://larubyconf.org/">LA RubyConf 2012</a> in Los Angeles, CA Matt
 Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
 
@@ -352,11 +352,11 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
 
 <p>Let&#8217;s be honest, Ruby became mainstream a few years back and it isn&#8217;t the cool underground programming language it once was. It&#8217;s quite likely that your cousin&#8217;s boyfriend who&#8217;s &#8220;into computers&#8221; knows what Ruby on Rails is. There are hundreds of books, conferences, training and meetups for Rubyists. Recruiters fight to hire whoever knows how to generate a scaffolded Rails app. But now cool kids can&#8217;t stop talking about node.js, CoffeeScript, Clojure, Haskell and pushing code to the UI layer. What does it mean for the new, existing and prospecting Ruby developers? Is it time to jump ship and move on to something else?</p>
 
-<p><img src="http://mattetti.github.com/images/matt_aimonetti_timeToMoveOn.jpg" alt="Matt Aimonetti showing that the end result is what matters the most" /></p>
+<p><img src="http://matt.aimonetti.net/images/matt_aimonetti_timeToMoveOn.jpg" alt="Matt Aimonetti showing that the end result is what matters the most" /></p>
 
 <h2>Slides</h2>
 
-<p><a href="http://mattetti.github.com/slides/matt_aimonetti-ruby_time_to_move_on.pdf">The slides can be donwloaded here</a>.</p>
+<p><a href="http://matt.aimonetti.net/slides/matt_aimonetti-ruby_time_to_move_on.pdf">The slides can be donwloaded here</a>.</p>
 
 <h2>Video</h2>
 
@@ -366,9 +366,9 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
   
   <entry>
     <title type="html"><![CDATA[Books to read in 2012 - recommended to me by Twitter]]></title>
-    <link href="http://mattetti.github.com/posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter/"/>
     <updated>2011-12-30T15:28:13+01:00</updated>
-    <id>http://mattetti.github.com/posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter</id>
+    <id>http://matt.aimonetti.net/posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter</id>
     <content type="html"><![CDATA[<p>Today, I asked on Twitter what non-technical books I should read in 2012.</p>
 
 <p>I was nicely surprised to see so many of my followers send recommendations. Here is a list of 25 books that like-minded people suggested I read. Hopefully you will find a book or two to read too. Feel free to send more recommendations via the comments.</p>
@@ -529,9 +529,9 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
   
   <entry>
     <title type="html"><![CDATA[Developing a Curriculum]]></title>
-    <link href="http://mattetti.github.com/posts/2011/12/21/developing-a-curriculum/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/12/21/developing-a-curriculum/"/>
     <updated>2011-12-21T06:57:27+01:00</updated>
-    <id>http://mattetti.github.com/posts/2011/12/21/developing-a-curriculum</id>
+    <id>http://matt.aimonetti.net/posts/2011/12/21/developing-a-curriculum</id>
     <content type="html"><![CDATA[<p>Recently I asked a friend of mine to give me pointers on how to develop a curriculum (he used to teach an education PHD program), after discussing his response on Twitter, people asked me to put it somewhere, so here it is:</p>
 
 <p>Process to develop a curriculum:</p>
@@ -580,9 +580,9 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
   
   <entry>
     <title type="html"><![CDATA[RubyConf Argentina 2011]]></title>
-    <link href="http://mattetti.github.com/posts/2011/11/08/rubyconf-argentina-2011/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011/"/>
     <updated>2011-11-08T15:42:00+01:00</updated>
-    <id>http://mattetti.github.com/posts/2011/11/08/rubyconf-argentina-2011</id>
+    <id>http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011</id>
     <content type="html"><![CDATA[<p>During <a href="http://rubyconfargentina.org/en">RubyConf Argentina 2011</a> in Buenos Aires, Argentina Matt
 Aimonetti gave a talk entitled <em>Inside Ruby: concurrency &amp; garbage collection explained</em>.</p>
 
@@ -601,7 +601,7 @@ management works to get better performance out of your code.</p>
 
 <h2>Video</h2>
 
-<p><a href="http://vimeo.com/38531248"><img src="http://mattetti.github.com/images/matt_aimonetti_presentation_argentina.jpg" alt="Matt Aimonetti presentation at RubyConf Argentina" /></a></p>
+<p><a href="http://vimeo.com/38531248"><img src="http://matt.aimonetti.net/images/matt_aimonetti_presentation_argentina.jpg" alt="Matt Aimonetti presentation at RubyConf Argentina" /></a></p>
 
 <h2>Presentation website</h2>
 
@@ -610,9 +610,9 @@ management works to get better performance out of your code.</p>
 <h2>Matt&#8217;s articles related to this presentation</h2>
 
 <ul>
-<li><a href="http://mattetti.github.com/posts/2011/10/03/about-concurrency-and-the-gil/">About concurrency and the GIL</a></li>
-<li><a href="http://mattetti.github.com/posts/2011/10/18/data-safety-and-gil-removal/">Data safety and GIL removal</a></li>
-<li><a href="http://mattetti.github.com/posts/2011/02/22/concurrency-in-ruby-explained/">Concurrency in Ruby explained</a></li>
+<li><a href="http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil/">About concurrency and the GIL</a></li>
+<li><a href="http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal/">Data safety and GIL removal</a></li>
+<li><a href="http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained/">Concurrency in Ruby explained</a></li>
 </ul>
 
 ]]></content>
@@ -620,9 +620,9 @@ management works to get better performance out of your code.</p>
   
   <entry>
     <title type="html"><![CDATA[Data safety and GIL removal]]></title>
-    <link href="http://mattetti.github.com/posts/2011/10/18/data-safety-and-gil-removal/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal/"/>
     <updated>2011-10-18T15:19:17+02:00</updated>
-    <id>http://mattetti.github.com/posts/2011/10/18/data-safety-and-gil-removal</id>
+    <id>http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal</id>
     <content type="html"><![CDATA[<p>After my recent <a href="http://rubyconf11.merbist.com">RubyConf talk</a> and <a href="http://merbist.com/2011/10/03/about-concurrency-and-the-gil/">follow up post addressing the Ruby &amp; Python&#8217;s Global Interpreter Lock</a> (aka GVL/Global VM Lock). a lot of people asked me to explain what I meant by &#8220;data safety&#8221;. While my point isn&#8217;t to defend one approach or the other, I spent a lot of time explaining why C Ruby and C Python use a GIL and where it matters and where it matters less. As a reminder and as mentioned by Matz himself, the main reason why C Ruby still has a GIL is data safety. But if this point isn&#8217;t clear to you, you might be missing the main argument supporting the use of a GIL.</p>
 
 <p>Showing obvious concrete examples of data corruption due to unsafe threaded code isn&#8217;t actually as easy at it sounds. First of all, even with a GIL, developers can write unsafe threaded code. So we need to focus only on the safety problems raised by removing the GIL. To demonstrate what I mean, I will try to create some race conditions and show you the unexpected results you might get. Again, before you go crazy on the comments, remember that threaded code is indeterministic and the code below might potentially work on your machine and that&#8217;s exactly why it is hard to demonstrate. Race conditions depend on many things, but in this case I will focus on race conditions affecting basic data structures since it might be the most surprising.</p>
@@ -708,9 +708,9 @@ puts @array.size
   
   <entry>
     <title type="html"><![CDATA[About management]]></title>
-    <link href="http://mattetti.github.com/posts/2011/10/11/about-management/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/10/11/about-management/"/>
     <updated>2011-10-11T22:53:40+02:00</updated>
-    <id>http://mattetti.github.com/posts/2011/10/11/about-management</id>
+    <id>http://matt.aimonetti.net/posts/2011/10/11/about-management</id>
     <content type="html"><![CDATA[<p>I decided to save myself a session to the shrink and instead just write down my reflection on management. Who knows, some of you might help me and/or challenge my thought process.</p>
 
 <p>I recently read a great management book called the <a href="https://www.amazon.com/dp/B000UCUX0K/ref=as_li_ss_til?tag=merbist-20&amp;camp=213381&amp;creative=390973&amp;linkCode=as4&amp;creativeASIN=B000UCUX0K&amp;adid=0BP6N5GHZD0EW2N7QVZR&amp;">five dysfunctions of a team by Patrick Lencioni</a> . Instead of telling you what to do, the author highlights behavior patterns that are related to each other and when aggregated result in dysfunctional teams. I really liked the book because instead of a being a cookbook/playbook, this is more a fail book, in other words, it illustrates what you don&#8217;t want to do and explains why. It highlights very well the relation between various behaviors and nicely illustrates why teams of brilliant people can fail. The <a href="https://www.amazon.com/dp/B000UCUX0K/ref=as_li_ss_til?tag=merbist-20&amp;camp=213381&amp;creative=390973&amp;linkCode=as4&amp;creativeASIN=B000UCUX0K&amp;adid=0BP6N5GHZD0EW2N7QVZR&amp;">Kindle version is at less than $5, go get it</a> and read it on your iPhone/iPad/computer/browser…</p>
@@ -729,9 +729,9 @@ puts @array.size
   
   <entry>
     <title type="html"><![CDATA[About concurrency and the GIL]]></title>
-    <link href="http://mattetti.github.com/posts/2011/10/03/about-concurrency-and-the-gil/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil/"/>
     <updated>2011-10-03T21:23:54+02:00</updated>
-    <id>http://mattetti.github.com/posts/2011/10/03/about-concurrency-and-the-gil</id>
+    <id>http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil</id>
     <content type="html"><![CDATA[<p>During RubyConf 2011, concurrency was a really hot topic. This is not a new issue, and the JRuby team has been talking about true concurrency for quite a while . The Global Interpreter Lock has also been in a subject a<a href="http://wiki.python.org/moin/GlobalInterpreterLock"> lot of discussions in the Python community</a> and it&#8217;s not surprising that the Ruby community experiences the same debates since the evolution of their implementations are somewhat similar. (There might also be some tension between <a href="http://engineyard.com">EngineYard</a> hiring the JRuby and Rubinius teams and <a href="http://heroku.com">Heroku</a> which <a href="http://blog.heroku.com/archives/2011/7/12/matz_joins_heroku/">recently hired Matz</a> (Ruby&#8217;s creator) and <a href="https://github.com/nobu">Nobu</a>, the #1 C Ruby contributor)</p>
 
 <p>The GIL was probably even more of a hot topic now that <a href="http://rubini.us/">Rubinius</a> is about the join <a href="http://jruby.org">JRuby</a> and <a href="http://macruby.org">MacRuby</a> in the realm of GIL-less Ruby implementations.</p>
@@ -817,9 +817,9 @@ puts @array.size
   
   <entry>
     <title type="html"><![CDATA[RubyConf 2011 - Complex Ruby concepts simplified]]></title>
-    <link href="http://mattetti.github.com/posts/2011/10/01/rubyconf-2011/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/10/01/rubyconf-2011/"/>
     <updated>2011-10-01T15:09:00+02:00</updated>
-    <id>http://mattetti.github.com/posts/2011/10/01/rubyconf-2011</id>
+    <id>http://matt.aimonetti.net/posts/2011/10/01/rubyconf-2011</id>
     <content type="html"><![CDATA[<p>During <a href="http://rubyconf.org/">RubyConf 2011</a> in New Orleans, LA Matt
 Aimonetti gave a talk entitled <em>Complex Ruby concepts simplified</em>.</p>
 
@@ -846,9 +846,9 @@ for the talk is available <a href="http://confreaks.com/videos/714-rubyconf2011-
 <h2>Matt&#8217;s articles related to this presentation</h2>
 
 <ul>
-<li><a href="http://mattetti.github.com/posts/2011/10/03/about-concurrency-and-the-gil/">About concurrency and the GIL</a></li>
-<li><a href="http://mattetti.github.com/posts/2011/10/18/data-safety-and-gil-removal/">Data safety and GIL removal</a></li>
-<li><a href="http://mattetti.github.com/posts/2011/02/22/concurrency-in-ruby-explained/">Concurrency in Ruby explained</a></li>
+<li><a href="http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil/">About concurrency and the GIL</a></li>
+<li><a href="http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal/">Data safety and GIL removal</a></li>
+<li><a href="http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained/">Concurrency in Ruby explained</a></li>
 </ul>
 
 ]]></content>
@@ -856,9 +856,9 @@ for the talk is available <a href="http://confreaks.com/videos/714-rubyconf2011-
   
   <entry>
     <title type="html"><![CDATA[How to - cross domain ajax to a Ruby app]]></title>
-    <link href="http://mattetti.github.com/posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app/"/>
     <updated>2011-09-14T16:11:41+02:00</updated>
-    <id>http://mattetti.github.com/posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app</id>
+    <id>http://matt.aimonetti.net/posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app</id>
     <content type="html"><![CDATA[<p>In some cases, you might have a bunch of apps running on different domains/subdomains and/or ports and you would like to make ajax requests between these services. The problem is that browsers wouldn&#8217;t let you make such requests because of the Same Origin Policy which only allowed them to make request to resources within the same domain.</p>
 
 <p>However, most browsers (IE 8+, Firefox 3.5+, Safari 4+, Chrome) implement a simple way to allow cross domain requests as defined in this <a href="http://www.w3.org/TR/cors/">w3C document</a>.</p>
@@ -899,9 +899,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Ruby optimization example and explanation]]></title>
-    <link href="http://mattetti.github.com/posts/2011/09/05/ruby-optimization-example-and-explaination/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/09/05/ruby-optimization-example-and-explaination/"/>
     <updated>2011-09-05T14:58:21+02:00</updated>
-    <id>http://mattetti.github.com/posts/2011/09/05/ruby-optimization-example-and-explaination</id>
+    <id>http://matt.aimonetti.net/posts/2011/09/05/ruby-optimization-example-and-explaination</id>
     <content type="html"><![CDATA[<p>Recently I wrote a small DSL that allows the user to define some code that then gets executed later on and in different contexts. Imagine something like Sinatra where each route action is defined in a block and then executed in context of an incoming request.</p>
 
 <p>The challenge is that blocks come with their context and you can&#8217;t execute a block in the context of another one.</p>
@@ -993,9 +993,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Deploying a Rails 3.1 app - gotchas]]></title>
-    <link href="http://mattetti.github.com/posts/2011/08/30/deploying-a-rails-3-1-app-gotchas/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/08/30/deploying-a-rails-3-1-app-gotchas/"/>
     <updated>2011-08-30T17:20:34+02:00</updated>
-    <id>http://mattetti.github.com/posts/2011/08/30/deploying-a-rails-3-1-app-gotchas</id>
+    <id>http://matt.aimonetti.net/posts/2011/08/30/deploying-a-rails-3-1-app-gotchas</id>
     <content type="html"><![CDATA[<p>Recently I had to build a new app as part of my research &amp; development job at <a href="http://livingsocial.com">LivingSocial</a>. My goal was to get the app up and running in just a few weeks, solid application architecture and graphic design included.
 When you need to build an app quickly and you want it to have some solid foundations, Rails is quite useful.
 I used Rails 3.1RCx so if we would to keep my app and push it to production, the engineering team wouldn&#8217;t have to update it and the transition should be seamless. I also quite like <a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a> and the app being quite heavy on JavaScript, the choice was easy. Furthermore, my coworker <a href="http://codefluency.com/">Bruce Williams</a> is a fan of <a href="http://sass-lang.com/">SCSS</a> and he&#8217;s writing a <a href="http://pragprog.com/">PragProg</a> book called &#8220;The Rails View&#8221; with other LivingSocialist: <a href="http://www.boboroshi.com/">John Athayde</a>. So you got the point, I&#8217;m using Rails3.1, but this post is about the challenges I faced when it was time to deploy and the solutions I found.</p>
@@ -1063,9 +1063,9 @@ Also, be careful about the order of the file extensions, otherwise it won&#8217;
   
   <entry>
     <title type="html"><![CDATA[First step in scaling a web site: HTTP caching]]></title>
-    <link href="http://mattetti.github.com/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching/"/>
     <updated>2011-07-11T10:21:02+02:00</updated>
-    <id>http://mattetti.github.com/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching</id>
+    <id>http://matt.aimonetti.net/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching</id>
     <content type="html"><![CDATA[<p>Today my friend <a href="http://twitter.com/mokolabs">Patrick Crowley</a> and I were talking about scaling his website: <a href="http://cinematreasures.org/">http://cinematreasures.org</a> since an article covering his work will soon be published in a very popular newspaper. Patrick&#8217;s site is hosted on <a href="http://www.heroku.com/">Heroku</a> which comes by default with <a href="https://www.varnish-cache.org/">Varnish caching</a> enabled.</p>
 
 <p>The challenge is that a lot of people using the Rails framework are used to doing page caching instead of relying on HTTP caching, even though this feature was added a long time ago. The major problem with page caching is that it doesn&#8217;t scale that well as soon as you run more than one server. Indeed you would need to store the page content to a shared drive between your servers or use memcached and do some work to avoid hitting your app every single time. On the other hand, HTTP caching is extremely easy to handle at the application level and it will dramatically reduce the amount of requests hitting your app. Let me explain a little more about HTTP caching.</p>
@@ -1186,9 +1186,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Go's reflection example]]></title>
-    <link href="http://mattetti.github.com/posts/2011/06/27/golang-reflection-exampl/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/06/27/golang-reflection-exampl/"/>
     <updated>2011-06-27T12:12:32+02:00</updated>
-    <id>http://mattetti.github.com/posts/2011/06/27/golang-reflection-exampl</id>
+    <id>http://matt.aimonetti.net/posts/2011/06/27/golang-reflection-exampl</id>
     <content type="html"><![CDATA[<p>The <a href="http://golang.org/">Go Programming language</a> is really cool language by Google. According to the sales pitch, it&#8217;s a <strong><em>&#8220;fast, statically typed, compiled language that feels like a dynamically typed, interpreted language&#8221;</em></strong>. Well, if you are like me, you don&#8217;t trust sales pitches because you know that people writing them dont&#8217; care about you, they care about their product. However cynical you are, you still have to check the facts. So here is a quick demonstration showing how to use Go&#8217;s reflection feature.</p>
 
 <p>Installing Go is actually really straight forward on a Mac, and slightly harder on Linux, check <a href="http://golang.org/doc/install.html">this guide </a>to see how to build Go in a few minutes.</p>
@@ -1308,9 +1308,9 @@ The attributes function is defined a bit below and and it takes any type of obje
   
   <entry>
     <title type="html"><![CDATA[Sayonara Sony ]]></title>
-    <link href="http://mattetti.github.com/posts/2011/06/10/sayonara-sony/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/06/10/sayonara-sony/"/>
     <updated>2011-06-10T08:49:30+02:00</updated>
-    <id>http://mattetti.github.com/posts/2011/06/10/sayonara-sony</id>
+    <id>http://matt.aimonetti.net/posts/2011/06/10/sayonara-sony</id>
     <content type="html"><![CDATA[<p>It&#8217;s now official, I have resigned from Sony Computer Entertainment America.</p>
 
 <p><a href="http://merbist.com/wp-content/uploads/2011/06/playstation-logo.png"><img src="http://merbist.com/wp-content/uploads/2011/06/playstation-logo-150x150.png" alt="" /></a></p>
@@ -1390,9 +1390,9 @@ The attributes function is defined a bit below and and it takes any type of obje
   
   <entry>
     <title type="html"><![CDATA[Video game web framework design]]></title>
-    <link href="http://mattetti.github.com/posts/2011/04/14/video-game-web-framework-design/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/04/14/video-game-web-framework-design/"/>
     <updated>2011-04-14T10:28:39+02:00</updated>
-    <id>http://mattetti.github.com/posts/2011/04/14/video-game-web-framework-design</id>
+    <id>http://matt.aimonetti.net/posts/2011/04/14/video-game-web-framework-design</id>
     <content type="html"><![CDATA[<p>In this post I will do my best to explain why and how I reinvented the wheel and wrote a custom web framework for some of Sony&#8217;s <a href="http://www.gameproducer.net/2006/05/26/what-are-aaa-titles/">AAA console titles</a>. My goal is to reflect on my work by walking you through the design process and some of the implementation decisions. This is not about being right or being wrong, it&#8217;s about designing a technical solution to solve concrete business challenges.</p>
 
 <h2>Problem Domain</h2>
@@ -1495,9 +1495,9 @@ The attributes function is defined a bit below and and it takes any type of obje
   
   <entry>
     <title type="html"><![CDATA[Hey Apple, please be nice and share]]></title>
-    <link href="http://mattetti.github.com/posts/2011/03/07/hey-apple-please-be-nice-and-share/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/03/07/hey-apple-please-be-nice-and-share/"/>
     <updated>2011-03-07T09:00:56+01:00</updated>
-    <id>http://mattetti.github.com/posts/2011/03/07/hey-apple-please-be-nice-and-share</id>
+    <id>http://matt.aimonetti.net/posts/2011/03/07/hey-apple-please-be-nice-and-share</id>
     <content type="html"><![CDATA[<p>My name is Matt Aimonetti, and in my free time I work on Apple&#8217;s open source <a href="http://www.ruby-lang.org">Ruby</a> implementation named <a href="http://macruby.org">MacRuby</a>. I&#8217;m also the author of <a href="http://oreilly.com/catalog/0636920000723">O&#8217;Reilly&#8217;s MacRuby book</a>. As you can imagine, I&#8217;m very thankful that Apple initiated the MacRuby project a few years ago and have been an avid supporter. MacRuby is awesome to develop OS X native applications using the Ruby language and even allows you to compile down your apps to machine code. It&#8217;s a great alternative to Objective-C.</p>
 
 <p><a href="http://www.apple.com/macosx/lion/"><img src="https://img.skitch.com/20111012-kyiy9nhx5n9h9wafucyh8p3knx.jpg" alt="" /></a></p>
@@ -1512,9 +1512,9 @@ The attributes function is defined a bit below and and it takes any type of obje
   
   <entry>
     <title type="html"><![CDATA[Ruby concurrency explained]]></title>
-    <link href="http://mattetti.github.com/posts/2011/02/22/concurrency-in-ruby-explained/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained/"/>
     <updated>2011-02-22T22:34:30+01:00</updated>
-    <id>http://mattetti.github.com/posts/2011/02/22/concurrency-in-ruby-explained</id>
+    <id>http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained</id>
     <content type="html"><![CDATA[<p>Concurrency is certainly <a href="http://en.wikipedia.org/wiki/Petri_Net">not a new problem</a> but it&#8217;s getting more and more attention as machines start having more than 1 core, that web traffic increases drastically and that some new technologies show up saying that they are better because they handle concurrency better.
 If that helps, think of concurrency as multitasking. When people say that they want concurrency, they say that they want their code to do multiple different things at the same time. When you are on your computer, you don&#8217;t expect to have to choose between browsing the web and listening to some music. You more than likely want to run both concurrently. It&#8217;s the same thing with your code, if you are running a webserver, you probably don&#8217;t want it to only process one request at a time.
 The aim of this article is to explain as simply as possible the concept of concurrency in Ruby, the reason why it&#8217;s a complicated topic and finally the different solutions to achieve concurrency.</p>

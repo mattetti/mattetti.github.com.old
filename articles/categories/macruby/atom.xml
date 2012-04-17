@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: macruby | Matt Aimonetti]]></title>
-  <link href="http://mattetti.github.com/articles/categories/macruby/atom.xml" rel="self"/>
-  <link href="http://mattetti.github.com/"/>
-  <updated>2012-04-18T00:53:22+02:00</updated>
-  <id>http://mattetti.github.com/</id>
+  <link href="http://matt.aimonetti.net/articles/categories/macruby/atom.xml" rel="self"/>
+  <link href="http://matt.aimonetti.net/"/>
+  <updated>2012-04-18T00:58:38+02:00</updated>
+  <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Hey Apple, please be nice and share]]></title>
-    <link href="http://mattetti.github.com/posts/2011/03/07/hey-apple-please-be-nice-and-share/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/03/07/hey-apple-please-be-nice-and-share/"/>
     <updated>2011-03-07T09:00:56+01:00</updated>
-    <id>http://mattetti.github.com/posts/2011/03/07/hey-apple-please-be-nice-and-share</id>
+    <id>http://matt.aimonetti.net/posts/2011/03/07/hey-apple-please-be-nice-and-share</id>
     <content type="html"><![CDATA[<p>My name is Matt Aimonetti, and in my free time I work on Apple's open source <a href="http://www.ruby-lang.org">Ruby</a> implementation named <a href="http://macruby.org">MacRuby</a>. I'm also the author of <a href="http://oreilly.com/catalog/0636920000723">O'Reilly's MacRuby book</a>. As you can imagine, I'm very thankful that Apple initiated the MacRuby project a few years ago and have been an avid supporter. MacRuby is awesome to develop OS X native applications using the Ruby language and even allows you to compile down your apps to machine code. It's a great alternative to Objective-C.</p>
 
 <p><a href="http://www.apple.com/macosx/lion/"><img src="https://img.skitch.com/20111012-kyiy9nhx5n9h9wafucyh8p3knx.jpg" alt="" /></a></p>
@@ -32,9 +32,9 @@
   
   <entry>
     <title type="html"><![CDATA[Automatically generating BridgeSupport files]]></title>
-    <link href="http://mattetti.github.com/posts/2011/02/19/bridgesupport-build/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/02/19/bridgesupport-build/"/>
     <updated>2011-02-19T16:29:07+01:00</updated>
-    <id>http://mattetti.github.com/posts/2011/02/19/bridgesupport-build</id>
+    <id>http://matt.aimonetti.net/posts/2011/02/19/bridgesupport-build</id>
     <content type="html"><![CDATA[<p>Today I was helping someone write an Objective-C framework around <a href="http://cocos2d.org/">cocos2d</a>.</p>
 
 <p>C/Objective-C code can be called directly from MacRuby. However the Obj-C code you would like to use might be using some ANSI C symbols that are non-object-oriented items such as constants, enumerations, structures, and functions. To make these items available to our MacRuby code, you need to generate a <a href="http://ofps.oreilly.com/titles/9781449380373/ch03.html#_using_objective_c_or_c_code">BridgeSupport file as explained in this section of my book</a>.</p>
@@ -61,18 +61,18 @@ gen_bridge_metadata --64-bit -f $TARGET_BUILD_DIR/$PROJECT_NAME.framework/ -o $T
   
   <entry>
     <title type="html"><![CDATA[MacRuby book update]]></title>
-    <link href="http://mattetti.github.com/posts/2011/01/15/macruby-book-update/"/>
+    <link href="http://matt.aimonetti.net/posts/2011/01/15/macruby-book-update/"/>
     <updated>2011-01-15T11:48:05+01:00</updated>
-    <id>http://mattetti.github.com/posts/2011/01/15/macruby-book-update</id>
+    <id>http://matt.aimonetti.net/posts/2011/01/15/macruby-book-update</id>
     <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[MacRuby, WebKit and JS]]></title>
-    <link href="http://mattetti.github.com/posts/2010/10/19/macruby-webkit-and-js/"/>
+    <link href="http://matt.aimonetti.net/posts/2010/10/19/macruby-webkit-and-js/"/>
     <updated>2010-10-19T00:05:37+02:00</updated>
-    <id>http://mattetti.github.com/posts/2010/10/19/macruby-webkit-and-js</id>
+    <id>http://matt.aimonetti.net/posts/2010/10/19/macruby-webkit-and-js</id>
     <content type="html"><![CDATA[<p>I was working on a piece of code using MacRuby, Webkit and JavaScript. Calling JS from MacRuby is really straight forward but calling Ruby from JS is a but tricky. There is actually a known bug in MacRuby which was giving me a hard time. The bug should be fixed in 0.8 if everything goes according to plan. In the mean time here is a quick run down:</p>
 
 <p>The JS bridge only works when using WebKit so we need to create a tiny browser to test our code. What we are going to do is to make an object available via JS and also trigger some JS to test the bridge both ways. Here is the full code:</p>
@@ -91,9 +91,9 @@ gen_bridge_metadata --64-bit -f $TARGET_BUILD_DIR/$PROJECT_NAME.framework/ -o $T
   
   <entry>
     <title type="html"><![CDATA[Writing an open licensed book]]></title>
-    <link href="http://mattetti.github.com/posts/2010/05/09/writing-an-open-licensed-book/"/>
+    <link href="http://matt.aimonetti.net/posts/2010/05/09/writing-an-open-licensed-book/"/>
     <updated>2010-05-09T22:40:06+02:00</updated>
-    <id>http://mattetti.github.com/posts/2010/05/09/writing-an-open-licensed-book</id>
+    <id>http://matt.aimonetti.net/posts/2010/05/09/writing-an-open-licensed-book</id>
     <content type="html"><![CDATA[<p>To celebrate last week's release of <a href="http://www.macruby.org/blog/2010/04/30/macruby06.html">MacRuby 0.6</a>, O'Reilly and I started publishing the draft of my MacRuby book online: <a href="http://macruby.labs.oreilly.com/">http://macruby.labs.oreilly.com/</a></p>
 
 <p>I started thinking about working on "<a href="http://macruby.labs.oreilly.com/">MacRuby: The Definitive Guide</a>" last year when I realized that the project had a great future but there was a serious lack of documentation. With the support of the MacRuby team, I worked on a table of contents and a pitch. The next step was to decide what we wanted to do with the book.</p>
@@ -118,18 +118,18 @@ gen_bridge_metadata --64-bit -f $TARGET_BUILD_DIR/$PROJECT_NAME.framework/ -o $T
   
   <entry>
     <title type="html"><![CDATA[Undo/Redo in MacRuby]]></title>
-    <link href="http://mattetti.github.com/posts/2010/02/02/undoredo-in-macruby/"/>
+    <link href="http://matt.aimonetti.net/posts/2010/02/02/undoredo-in-macruby/"/>
     <updated>2010-02-02T02:19:44+01:00</updated>
-    <id>http://mattetti.github.com/posts/2010/02/02/undoredo-in-macruby</id>
+    <id>http://matt.aimonetti.net/posts/2010/02/02/undoredo-in-macruby</id>
     <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[MacRuby 0.5 final is out]]></title>
-    <link href="http://mattetti.github.com/posts/2010/01/31/macruby-0-5-final-is-out/"/>
+    <link href="http://matt.aimonetti.net/posts/2010/01/31/macruby-0-5-final-is-out/"/>
     <updated>2010-01-31T19:13:36+01:00</updated>
-    <id>http://mattetti.github.com/posts/2010/01/31/macruby-0-5-final-is-out</id>
+    <id>http://matt.aimonetti.net/posts/2010/01/31/macruby-0-5-final-is-out</id>
     <content type="html"><![CDATA[<p>After going through two betas, MacRuby 0.5 final is now released and can be downloaded by clicking on the icon below:</p>
 
 <p><a href="http://macruby.org/downloads.html"><img src="http://macruby.org/images/zip.png" alt="" />
@@ -158,9 +158,9 @@ MacRuby 0.5</a></p>
   
   <entry>
     <title type="html"><![CDATA[How to detect Cylons with MacRuby]]></title>
-    <link href="http://mattetti.github.com/posts/2010/01/18/how-to-detect-cylons-with-macruby/"/>
+    <link href="http://matt.aimonetti.net/posts/2010/01/18/how-to-detect-cylons-with-macruby/"/>
     <updated>2010-01-18T16:13:37+01:00</updated>
-    <id>http://mattetti.github.com/posts/2010/01/18/how-to-detect-cylons-with-macruby</id>
+    <id>http://matt.aimonetti.net/posts/2010/01/18/how-to-detect-cylons-with-macruby</id>
     <content type="html"><![CDATA[<p>Over the weekend, MacRuby's trunk became version 0.6 and the bug fixing is currently done in both the 0.5 branch and trunk. Based on MacRuby's usual release cycle I would expect a 0.5 beta3 or 0.5 final to be released soon so most of the work can be focused on trunk.</p>
 
 <p>I'll let you check on the <a href="http://svn.macosforge.org/repository/ruby/MacRuby/trunk/TODO">TODO list</a> to see what was done in 0.5 and what is in the plan for 0.6.</p>
@@ -270,9 +270,9 @@ Now that the breakpoint added, we can continue the program execution and just wa
   
   <entry>
     <title type="html"><![CDATA[Controlling iTunes with MacRuby]]></title>
-    <link href="http://mattetti.github.com/posts/2010/01/17/controlling-itunes-with-macruby/"/>
+    <link href="http://matt.aimonetti.net/posts/2010/01/17/controlling-itunes-with-macruby/"/>
     <updated>2010-01-17T19:54:19+01:00</updated>
-    <id>http://mattetti.github.com/posts/2010/01/17/controlling-itunes-with-macruby</id>
+    <id>http://matt.aimonetti.net/posts/2010/01/17/controlling-itunes-with-macruby</id>
     <content type="html"><![CDATA[<p>Since Mac OS X v10.5, Apple added a technology called Scripting Bridge which allows to control and communicate with scriptable applications such as Mail, iChat or iTunes.</p>
 
 <p>A few weeks back, <a href="http://merbist.com/2009/12/31/im-new-year-count-down-with-macruby/">I showed how to control iChat</a> with MacRuby. This time I'm going to show you how to control iTunes.</p>
@@ -813,9 +813,9 @@ Returned: SBElementArray
   
   <entry>
     <title type="html"><![CDATA[IM new year countdown with MacRuby]]></title>
-    <link href="http://mattetti.github.com/posts/2009/12/31/im-new-year-count-down-with-macruby/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/12/31/im-new-year-count-down-with-macruby/"/>
     <updated>2009-12-31T10:25:50+01:00</updated>
-    <id>http://mattetti.github.com/posts/2009/12/31/im-new-year-count-down-with-macruby</id>
+    <id>http://matt.aimonetti.net/posts/2009/12/31/im-new-year-count-down-with-macruby</id>
     <content type="html"><![CDATA[<p>Here is the geekiest way I found to wish Happy New Year to my IM contacts:</p>
 
 <p><img src="http://img.skitch.com/20091231-c9t2n9889rxiinux6qsfhqtxfq.jpg" alt="" /></p>
@@ -846,9 +846,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Fun with MacRuby]]></title>
-    <link href="http://mattetti.github.com/posts/2009/12/29/fun-with-macruby/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/12/29/fun-with-macruby/"/>
     <updated>2009-12-29T19:09:45+01:00</updated>
-    <id>http://mattetti.github.com/posts/2009/12/29/fun-with-macruby</id>
+    <id>http://matt.aimonetti.net/posts/2009/12/29/fun-with-macruby</id>
     <content type="html"><![CDATA[<p>To be ready for 2010, I'm taking some time off relaxing and spending time with my family in Florida.</p>
 
 <p>During my free time, I've been reading, catching up on movies and TV shows and worked on the MacRuby book that I am writing for O'Reilly.</p>
@@ -888,9 +888,9 @@ puts "明けましておめでとうございます。".language
   
   <entry>
     <title type="html"><![CDATA[MacRuby tips: browse for folder or file dialog]]></title>
-    <link href="http://mattetti.github.com/posts/2009/10/25/macruby-browse-for-folder-or-file-dialog/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/10/25/macruby-browse-for-folder-or-file-dialog/"/>
     <updated>2009-10-25T15:52:14+01:00</updated>
-    <id>http://mattetti.github.com/posts/2009/10/25/macruby-browse-for-folder-or-file-dialog</id>
+    <id>http://matt.aimonetti.net/posts/2009/10/25/macruby-browse-for-folder-or-file-dialog</id>
     <content type="html"><![CDATA[<p>This is yet another pretty simple tip.
 Use case: let say you want your applications users to choose one or multiple files or folder on their file system. A good example would be that you want the user to choose a file to process or a folder where to save some data.</p>
 
@@ -937,9 +937,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[MacRuby tips: capturing keyboard events]]></title>
-    <link href="http://mattetti.github.com/posts/2009/10/09/macruby-tips-capturing-keyboard-events/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/10/09/macruby-tips-capturing-keyboard-events/"/>
     <updated>2009-10-09T19:24:04+02:00</updated>
-    <id>http://mattetti.github.com/posts/2009/10/09/macruby-tips-capturing-keyboard-events</id>
+    <id>http://matt.aimonetti.net/posts/2009/10/09/macruby-tips-capturing-keyboard-events</id>
     <content type="html"><![CDATA[<p>If you are writing any type of games you might want your users to interact with your application using their keyboards.</p>
 
 <p>This is actually not that hard. The approach is simple and fast forward if you are used to Cocoa.</p>
@@ -1060,9 +1060,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[MacRuby 0.5 beta 1 and Textorize]]></title>
-    <link href="http://mattetti.github.com/posts/2009/10/07/macruby-0-5-beta-1-and-textorize/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/10/07/macruby-0-5-beta-1-and-textorize/"/>
     <updated>2009-10-07T20:45:02+02:00</updated>
-    <id>http://mattetti.github.com/posts/2009/10/07/macruby-0-5-beta-1-and-textorize</id>
+    <id>http://matt.aimonetti.net/posts/2009/10/07/macruby-0-5-beta-1-and-textorize</id>
     <content type="html"><![CDATA[<p>Good news everyone!</p>
 
 <p>MacRuby beta 1 has been released! <a href="http://www.macruby.org/blog/2009/10/07/macruby05b1.html">Official announcement here</a>.</p>
@@ -1101,9 +1101,9 @@ $ open output.png
   
   <entry>
     <title type="html"><![CDATA[MacRuby tips: how to play an audio file]]></title>
-    <link href="http://mattetti.github.com/posts/2009/10/06/macruby-tips-how-to-play-an-audio-file/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/10/06/macruby-tips-how-to-play-an-audio-file/"/>
     <updated>2009-10-06T19:00:08+02:00</updated>
-    <id>http://mattetti.github.com/posts/2009/10/06/macruby-tips-how-to-play-an-audio-file</id>
+    <id>http://matt.aimonetti.net/posts/2009/10/06/macruby-tips-how-to-play-an-audio-file</id>
     <content type="html"><![CDATA[<p>Let's say you would like to play an audio file in your MacRuby app/script, how would you do?
 It's actually pretty simple, you just need to use NSSound. If we wanted to use a system sound we could do:</p>
 
@@ -1194,9 +1194,9 @@ Once that done, we are starting out run loop.</p>
   
   <entry>
     <title type="html"><![CDATA[MacRuby tips: embed a custom font]]></title>
-    <link href="http://mattetti.github.com/posts/2009/10/06/macruby-tips-embed-a-custom-font/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/10/06/macruby-tips-embed-a-custom-font/"/>
     <updated>2009-10-06T09:23:44+02:00</updated>
-    <id>http://mattetti.github.com/posts/2009/10/06/macruby-tips-embed-a-custom-font</id>
+    <id>http://matt.aimonetti.net/posts/2009/10/06/macruby-tips-embed-a-custom-font</id>
     <content type="html"><![CDATA[<p>Let say you want to release your MacRuby app and use a custom embedded font?
 You probably don't want to force your users to install the font.
 Well, don't worry, just put the font file in your resources folder and use the following code:</p>
@@ -1218,9 +1218,9 @@ CTFontManagerRegisterFontsForURL(font_url, KCTFontManagerScopeProcess, nil)
   
   <entry>
     <title type="html"><![CDATA[MacRuby soon to reach a new milestone]]></title>
-    <link href="http://mattetti.github.com/posts/2009/10/05/macruby-soon-to-reach-a-new-milestone/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/10/05/macruby-soon-to-reach-a-new-milestone/"/>
     <updated>2009-10-05T23:58:53+02:00</updated>
-    <id>http://mattetti.github.com/posts/2009/10/05/macruby-soon-to-reach-a-new-milestone</id>
+    <id>http://matt.aimonetti.net/posts/2009/10/05/macruby-soon-to-reach-a-new-milestone</id>
     <content type="html"><![CDATA[<p>Laurent just posted a <a href="http://bit.ly/2YPwRT">MacRuby status update</a> on the mailing list and the first official beta of MacRuby 0.5 should be released pretty soon.</p>
 
 <p>Let's quickly look at Laurent's report:</p>
@@ -1258,9 +1258,9 @@ CTFontManagerRegisterFontsForURL(font_url, KCTFontManagerScopeProcess, nil)
   
   <entry>
     <title type="html"><![CDATA[Compiled hello world with MacRuby]]></title>
-    <link href="http://mattetti.github.com/posts/2009/07/12/compiled-hello-world-with-macruby/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/07/12/compiled-hello-world-with-macruby/"/>
     <updated>2009-07-12T11:53:53+02:00</updated>
-    <id>http://mattetti.github.com/posts/2009/07/12/compiled-hello-world-with-macruby</id>
+    <id>http://matt.aimonetti.net/posts/2009/07/12/compiled-hello-world-with-macruby</id>
     <content type="html"><![CDATA[<p>To celebrate the amazing <a href="http://lists.macosforge.org/pipermail/macruby-devel/2009-July/002062.html">work being done by Laurent Sansonetti on MacRuby</a> here is a hello world using the new <a href="http://en.wikipedia.org/wiki/LLVM">LLVM</a> based compiler.
 <code>
 $ echo "p ARGV.join(' ').upcase" &gt; hello_world.rb
@@ -1298,9 +1298,9 @@ The final binary looks like an Objective-C binary (except that it's larger)</p><
   
   <entry>
     <title type="html"><![CDATA[MacRuby, changing the Ruby ecosystem]]></title>
-    <link href="http://mattetti.github.com/posts/2009/05/27/macruby-changing-the-ruby-ecosystem/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/05/27/macruby-changing-the-ruby-ecosystem/"/>
     <updated>2009-05-27T12:32:05+02:00</updated>
-    <id>http://mattetti.github.com/posts/2009/05/27/macruby-changing-the-ruby-ecosystem</id>
+    <id>http://matt.aimonetti.net/posts/2009/05/27/macruby-changing-the-ruby-ecosystem</id>
     <content type="html"><![CDATA[<h3>What's MacRuby?</h3>
 
 <p><a href="http://www.macruby.org/">MacRuby</a> is an Apple-sponsored, open source, full Ruby implementation on top of <a href="http://en.wikipedia.org/wiki/Objective-C">Objective-C</a> runtime. In other words, whatever code runs on Ruby 1.9, should/will run on MacRuby. Yes, you read correctly, MacRuby can/will be able to run all your Ruby code. That means that eventually you will even be able to run your <a href="http://en.wikipedia.org/wiki/Ruby%20on%20Rails">Rails</a>/<a href="http://en.wikipedia.org/wiki/Sinatra%20%28software%29">Sinatra</a>/new-sexy-ruby-framework app on MacRuby.</p>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: News | Matt Aimonetti]]></title>
-  <link href="http://mattetti.github.com/articles/categories/news/atom.xml" rel="self"/>
-  <link href="http://mattetti.github.com/"/>
-  <updated>2012-04-18T00:53:22+02:00</updated>
-  <id>http://mattetti.github.com/</id>
+  <link href="http://matt.aimonetti.net/articles/categories/news/atom.xml" rel="self"/>
+  <link href="http://matt.aimonetti.net/"/>
+  <updated>2012-04-18T00:58:38+02:00</updated>
+  <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[How and why I joined the "suit people"]]></title>
-    <link href="http://mattetti.github.com/posts/2010/02/02/how-and-why-i-joined-the-suit-people/"/>
+    <link href="http://matt.aimonetti.net/posts/2010/02/02/how-and-why-i-joined-the-suit-people/"/>
     <updated>2010-02-02T11:19:26+01:00</updated>
-    <id>http://mattetti.github.com/posts/2010/02/02/how-and-why-i-joined-the-suit-people</id>
+    <id>http://matt.aimonetti.net/posts/2010/02/02/how-and-why-i-joined-the-suit-people</id>
     <content type="html"><![CDATA[<p>It is now official: I have traded my freedom &amp; home office for a job title, an Aeron chair in a cubicle and a 401K.</p>
 
 <p>I received my new employee package and, in less than a week, I will officially become a full-time employee at <a href="http://en.wikipedia.org/wiki/Sony_Computer_Entertainment_of_America"> SCEA</a> (Sony Computer Entertainment America).</p>
@@ -93,9 +93,9 @@ From time to time I will probably use other languages here and there, but that u
   
   <entry>
     <title type="html"><![CDATA[RailsConf 2009]]></title>
-    <link href="http://mattetti.github.com/posts/2009/05/08/railsconf-2009/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/05/08/railsconf-2009/"/>
     <updated>2009-05-08T12:18:18+02:00</updated>
-    <id>http://mattetti.github.com/posts/2009/05/08/railsconf-2009</id>
+    <id>http://matt.aimonetti.net/posts/2009/05/08/railsconf-2009</id>
     <content type="html"><![CDATA[<p>RailsConf 2009 has now finished.  This time last year, no one would have ever guessed that the Merb and Rails teams would join forces and focus on what will hopefully be known as one of the best Web Frameworks.</p>
 
 <p>It was encouraging to see so many people excited about what's being ported over from Merb and the new options available to people who are currently limited by the existing stack. For those interested in pushing Rails further and doing stuff out of the norm, here are my slides. <a href="http://www.workingwithrails.com/person/5919-arthur-zapparoli">Arthur Zapparoli</a> from <a href="http://www.rubyonrails.pro.br/">Brazilian Rails squad</a> recorded most of the talk and told me he will upload the video ASAP. You can also read <a href="http://yehudakatz.com/2009/05/08/railsconf-wrapup/">Yehuda Katz' blog</a> which covers what he talked about.</p>
@@ -118,9 +118,9 @@ From time to time I will probably use other languages here and there, but that u
   
   <entry>
     <title type="html"><![CDATA[Merb 1.0.11 (minor release)]]></title>
-    <link href="http://mattetti.github.com/posts/2009/03/31/merb-1011-minor-release/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/03/31/merb-1011-minor-release/"/>
     <updated>2009-03-31T22:10:57+02:00</updated>
-    <id>http://mattetti.github.com/posts/2009/03/31/merb-1011-minor-release</id>
+    <id>http://matt.aimonetti.net/posts/2009/03/31/merb-1011-minor-release</id>
     <content type="html"><![CDATA[<p>Following the DataMapper 0.9.11 release, we just pushed a new minor Merb release.</p>
 
 <p>This release is mainly targeting new developers and Windows users wanting to install the full Merb stack. Others can simply update their dependencies if they use the dependencies.rb file or install the new gems if nothing is bundled and no hard dependencies are set.</p>
@@ -145,9 +145,9 @@ From time to time I will probably use other languages here and there, but that u
   
   <entry>
     <title type="html"><![CDATA[Merb 1.0.10 (minor release)]]></title>
-    <link href="http://mattetti.github.com/posts/2009/03/18/merb-1010-minor-release/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/03/18/merb-1010-minor-release/"/>
     <updated>2009-03-18T17:11:35+01:00</updated>
-    <id>http://mattetti.github.com/posts/2009/03/18/merb-1010-minor-release</id>
+    <id>http://matt.aimonetti.net/posts/2009/03/18/merb-1010-minor-release</id>
     <content type="html"><![CDATA[<p>We just pushed a really tiny update because of a bug in 1.0.9 affecting people using: Merb::Config[:max_memory]</p>
 
 <p>Merb::Config[:max_memory] has been fixed and now polls for memory usage every 30s instead of 0.25s. (memory is set in KB)</p>
@@ -160,9 +160,9 @@ From time to time I will probably use other languages here and there, but that u
   
   <entry>
     <title type="html"><![CDATA[Merb 1.1 roadmap]]></title>
-    <link href="http://mattetti.github.com/posts/2009/03/02/merb-11-roadmap/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/03/02/merb-11-roadmap/"/>
     <updated>2009-03-02T11:20:34+01:00</updated>
-    <id>http://mattetti.github.com/posts/2009/03/02/merb-11-roadmap</id>
+    <id>http://matt.aimonetti.net/posts/2009/03/02/merb-11-roadmap</id>
     <content type="html"><![CDATA[<p>Yesterday, Carl Lerche, Yehuda Katz and myself had a meeting to discuss Merb 1.1's roadmap.</p>
 
 <p>Key items on the agenda were:</p>
@@ -198,9 +198,9 @@ From time to time I will probably use other languages here and there, but that u
   
   <entry>
     <title type="html"><![CDATA[merb progress]]></title>
-    <link href="http://mattetti.github.com/posts/2009/02/06/merb-progress/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/02/06/merb-progress/"/>
     <updated>2009-02-06T14:09:27+01:00</updated>
-    <id>http://mattetti.github.com/posts/2009/02/06/merb-progress</id>
+    <id>http://matt.aimonetti.net/posts/2009/02/06/merb-progress</id>
     <content type="html"><![CDATA[<p>As they say: fail early, fail often. Well, I've been failing to blog recently, but as always I have some good excuses ;)</p>
 
 <ul>
@@ -253,9 +253,9 @@ From time to time I will probably use other languages here and there, but that u
   
   <entry>
     <title type="html"><![CDATA[recent news Jan 13 2009]]></title>
-    <link href="http://mattetti.github.com/posts/2009/01/13/recent-news-jan-13-2009/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/01/13/recent-news-jan-13-2009/"/>
     <updated>2009-01-13T20:20:46+01:00</updated>
-    <id>http://mattetti.github.com/posts/2009/01/13/recent-news-jan-13-2009</id>
+    <id>http://matt.aimonetti.net/posts/2009/01/13/recent-news-jan-13-2009</id>
     <content type="html"><![CDATA[<p>Lately, I have been really busy with my <a href="http://ma-agile.com">business</a>, an <a href="http://merbclass.com">upcoming training</a> and some non rails-merb related experimentations. (I'm learning objective-c and playing with <a href="http://www.macruby.org/trac/wiki/MacRuby">macruby</a>)</p>
 
 <p>However, here are some of the latest news:</p>
@@ -277,9 +277,9 @@ From time to time I will probably use other languages here and there, but that u
   
   <entry>
     <title type="html"><![CDATA[Presenting the Rails Activists]]></title>
-    <link href="http://mattetti.github.com/posts/2009/01/05/presenting-the-rails-activists/"/>
+    <link href="http://matt.aimonetti.net/posts/2009/01/05/presenting-the-rails-activists/"/>
     <updated>2009-01-05T10:15:44+01:00</updated>
-    <id>http://mattetti.github.com/posts/2009/01/05/presenting-the-rails-activists</id>
+    <id>http://matt.aimonetti.net/posts/2009/01/05/presenting-the-rails-activists</id>
     <content type="html"><![CDATA[<p>Today is Monday. I usually don't like Mondays.
 Being Monday goes with waking up early, going back to work, and lots of deadlines.</p>
 
@@ -350,9 +350,9 @@ We have other forums for more <a href="http://rails.uservoice.com/pages/general_
   
   <entry>
     <title type="html"><![CDATA[latest Merb and Rails 3.0 news]]></title>
-    <link href="http://mattetti.github.com/posts/2008/12/29/latest-merb-and-rails-30-news/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/12/29/latest-merb-and-rails-30-news/"/>
     <updated>2008-12-29T13:57:38+01:00</updated>
-    <id>http://mattetti.github.com/posts/2008/12/29/latest-merb-and-rails-30-news</id>
+    <id>http://matt.aimonetti.net/posts/2008/12/29/latest-merb-and-rails-30-news</id>
     <content type="html"><![CDATA[<p><a href="http://foysavas.com"><img src="http://merbist.com/wp-content/uploads/2008/12/foy-savas-1.png" alt="" /></a></p>
 
 <ul>
@@ -376,9 +376,9 @@ We have other forums for more <a href="http://rails.uservoice.com/pages/general_
   
   <entry>
     <title type="html"><![CDATA[Rails and Merb core team working together on their next release]]></title>
-    <link href="http://mattetti.github.com/posts/2008/12/23/rails-and-merb-merge/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/12/23/rails-and-merb-merge/"/>
     <updated>2008-12-23T11:50:02+01:00</updated>
-    <id>http://mattetti.github.com/posts/2008/12/23/rails-and-merb-merge</id>
+    <id>http://matt.aimonetti.net/posts/2008/12/23/rails-and-merb-merge</id>
     <content type="html"><![CDATA[<h3>This is huge!</h3>
 
 <p>While people still try to find some drama in a hypothetical war between Rails and merb ...</p>
@@ -511,9 +511,9 @@ merb always valued its developers and we will continue to do so but on a bigger 
   
   <entry>
     <title type="html"><![CDATA[become better at Merb]]></title>
-    <link href="http://mattetti.github.com/posts/2008/12/11/become-better-at-merb/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/12/11/become-better-at-merb/"/>
     <updated>2008-12-11T12:35:42+01:00</updated>
-    <id>http://mattetti.github.com/posts/2008/12/11/become-better-at-merb</id>
+    <id>http://matt.aimonetti.net/posts/2008/12/11/become-better-at-merb</id>
     <content type="html"><![CDATA[<p><a href="http://merbclass.com"><img src="http://merbclass.com/badges/badge_phx_training_200.gif" alt="" /></a>I hear a lot of people asking for better Merb documentation as they are learning Merb. I remember struggling with the very same problem when I started using Rails a few years ago.</p>
 
 <p>The good news is that the core team is working hard on improving the state of documentation.</p>
@@ -541,9 +541,9 @@ Location:Â Â Â Â Â  Phoenix, AZ</p>
   
   <entry>
     <title type="html"><![CDATA[Merb news (Dec 8 2008)]]></title>
-    <link href="http://mattetti.github.com/posts/2008/12/08/merb-news/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/12/08/merb-news/"/>
     <updated>2008-12-08T00:13:13+01:00</updated>
-    <id>http://mattetti.github.com/posts/2008/12/08/merb-news</id>
+    <id>http://matt.aimonetti.net/posts/2008/12/08/merb-news</id>
     <content type="html"><![CDATA[<p>3 days ago, I announced the <a href="http://merbist.com/2008/12/04/annoucing-the-merb-open-source-book/">Merb Open Source Book project</a>. I expected that few people would be interested as we heard complaints about the lack of documentation.</p>
 
 <p>What I did not expect, was more than 60 emails and pull requests in 2 days, people committing pages of content, fixes and offering their services to translate the book. The <a href="http://groups.google.com/group/merb-book">mailing list</a> already has 60+ members and the <a href="http://github.com/mattetti/merb-book/tree/master">GitHub repository</a> is being watched by 150+ people and has 50+ forks.</p>
@@ -618,9 +618,9 @@ Location:Â Â Â Â Â  Phoenix, AZ</p>
   
   <entry>
     <title type="html"><![CDATA[Annoucing the Merb open source book]]></title>
-    <link href="http://mattetti.github.com/posts/2008/12/04/annoucing-the-merb-open-source-book/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/12/04/annoucing-the-merb-open-source-book/"/>
     <updated>2008-12-04T23:18:31+01:00</updated>
-    <id>http://mattetti.github.com/posts/2008/12/04/annoucing-the-merb-open-source-book</id>
+    <id>http://matt.aimonetti.net/posts/2008/12/04/annoucing-the-merb-open-source-book</id>
     <content type="html"><![CDATA[<p><img src="http://merbist.com/wp-content/uploads/2008/12/google-insights-worldwide-jul-dec-2008.jpg" alt="Matt Aimonetti compares the search growth between Rails and Merb" /></p>
 
 <p>Here is a graph representing the growth of of web searches related to the programming category. This is not a comparison of the amount of searches made.</p>
@@ -715,9 +715,9 @@ Location:Â Â Â Â Â  Phoenix, AZ</p>
   
   <entry>
     <title type="html"><![CDATA[latest news from Merbland (Nov 30)]]></title>
-    <link href="http://mattetti.github.com/posts/2008/11/30/latest-news-from-merbland-nov-30/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/11/30/latest-news-from-merbland-nov-30/"/>
     <updated>2008-11-30T15:23:12+01:00</updated>
-    <id>http://mattetti.github.com/posts/2008/11/30/latest-news-from-merbland-nov-30</id>
+    <id>http://matt.aimonetti.net/posts/2008/11/30/latest-news-from-merbland-nov-30</id>
     <content type="html"><![CDATA[<p>Wow, It's been two weeks since my <a href="http://merbist.com/2008/11/16/merb-news-nov-16-2008/">last post</a>. I'm really sorry about that but at the same time, I really enjoyed <a href="http://qconsf.com/sf2008/conference/">Qcon</a> and <a href="http://en.wikipedia.org/wiki/Thanksgiving">Thanksgiving</a> which did not give me much time to work on a blog post.</p>
 
 <p>[caption id="attachment_291" align="alignleft" width="200" caption="Mr Bean vs X-mas turkey"]<img src="http://merbist.com/wp-content/uploads/2008/11/mr-bean-turkey.jpg" alt="Mr Bean vs X-mas turkey" />[/caption]</p>
@@ -810,9 +810,9 @@ Merb makes everything easy for i18n/l10n plugin developers, <a href="http://gith
   
   <entry>
     <title type="html"><![CDATA[Merb news nov-16-2008]]></title>
-    <link href="http://mattetti.github.com/posts/2008/11/16/merb-news-nov-16-2008/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/11/16/merb-news-nov-16-2008/"/>
     <updated>2008-11-16T21:35:44+01:00</updated>
-    <id>http://mattetti.github.com/posts/2008/11/16/merb-news-nov-16-2008</id>
+    <id>http://matt.aimonetti.net/posts/2008/11/16/merb-news-nov-16-2008</id>
     <content type="html"><![CDATA[<p>I'll try to keep the community posted on the latest merb news. Feel free to email me if you want me to feature your app, plugin, tool or blog post.</p>
 
 <ul>
@@ -993,9 +993,9 @@ Automated testing</p>
   
   <entry>
     <title type="html"><![CDATA[merb 1.0 - tips part 1]]></title>
-    <link href="http://mattetti.github.com/posts/2008/11/14/merb-10-tips-part-1/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/11/14/merb-10-tips-part-1/"/>
     <updated>2008-11-14T00:39:27+01:00</updated>
-    <id>http://mattetti.github.com/posts/2008/11/14/merb-10-tips-part-1</id>
+    <id>http://matt.aimonetti.net/posts/2008/11/14/merb-10-tips-part-1</id>
     <content type="html"><![CDATA[<p>Â </p>
 
 <p>As you must know by now, last week,<a href="http://merbist.com/2008/11/09/merb-1-0-released"> Merb 1.0 got released</a>.</p>
@@ -1099,9 +1099,9 @@ endÂ </code></p>
   
   <entry>
     <title type="html"><![CDATA[Merb 1.0 released]]></title>
-    <link href="http://mattetti.github.com/posts/2008/11/09/merb-1-0-released/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/11/09/merb-1-0-released/"/>
     <updated>2008-11-09T22:47:25+01:00</updated>
-    <id>http://mattetti.github.com/posts/2008/11/09/merb-1-0-released</id>
+    <id>http://matt.aimonetti.net/posts/2008/11/09/merb-1-0-released</id>
     <content type="html"><![CDATA[<p><a href="http://flickr.com/photos/absolutely_loverly/120000855/"><img src="http://farm1.static.flickr.com/47/120000855_c7d39781f7_m.jpg" alt="" /></a></p>
 
 <p><a href="http://d.hatena.ne.jp/kwatch/20081112/1226448192"><img src="http://merbist.com/wp-content/uploads/2008/11/nihon-japan-48.png" alt="" /></a>
@@ -1174,9 +1174,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[Merb 1.0 RC5]]></title>
-    <link href="http://mattetti.github.com/posts/2008/11/03/merb-10-rc5/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/11/03/merb-10-rc5/"/>
     <updated>2008-11-03T18:50:21+01:00</updated>
-    <id>http://mattetti.github.com/posts/2008/11/03/merb-10-rc5</id>
+    <id>http://matt.aimonetti.net/posts/2008/11/03/merb-10-rc5</id>
     <content type="html"><![CDATA[<p>As you might have noticed, we've been pushing a lot of Release Candidates out the door. The reason is that we want to make sure 1.0 is really ready for showtime!</p>
 
 <p>We are also getting a lot of bug reports that help us focusing on the main issues. Today RC5 was pushed to a RubyForge mirror close to you and <a href="http://yehudakatz.com/2008/11/03/merb-rc5-final-rc/">here is a report from Yehuda Katz</a>, <a href="http://merbivore.com">Merb</a> lead developer.</p>
@@ -1201,9 +1201,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[Yet another RC release (Merb 1.0 RC4)]]></title>
-    <link href="http://mattetti.github.com/posts/2008/10/29/yet-another-rc-release-merb-10-rc3/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/10/29/yet-another-rc-release-merb-10-rc3/"/>
     <updated>2008-10-29T19:54:10+01:00</updated>
-    <id>http://mattetti.github.com/posts/2008/10/29/yet-another-rc-release-merb-10-rc3</id>
+    <id>http://matt.aimonetti.net/posts/2008/10/29/yet-another-rc-release-merb-10-rc3</id>
     <content type="html"><![CDATA[<p>Yesterday, <a href="http://yehudakatz.com/2008/10/29/merb-10-rc3-released/">Yehuda Katz annouced Merb 1.0 RC3 released</a> and today we re released the same version with a hotfix (some dependencies got broken).</p>
 
 <p>Here is a quick sum up:</p>
@@ -1227,9 +1227,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[will_paginate and Merb]]></title>
-    <link href="http://mattetti.github.com/posts/2008/10/27/will_paginate-and-merb/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/10/27/will_paginate-and-merb/"/>
     <updated>2008-10-27T00:06:41+01:00</updated>
-    <id>http://mattetti.github.com/posts/2008/10/27/will_paginate-and-merb</id>
+    <id>http://matt.aimonetti.net/posts/2008/10/27/will_paginate-and-merb</id>
     <content type="html"><![CDATA[<p><a href="http://github.com/mislav">Mislav</a> &amp; <a href="http://github.com/pjhyett">Pjhyett</a>'s <a href="http://github.com/mislav/will_paginate">will_paginate plugin</a> has been a reference in the Rails world for a little while now. The need for Pagination is arguable, but that's not the point of this post.</p>
 
 <p><a href="http://flickr.com/photos/jacqueline-w/56107224/"><img src="http://farm1.static.flickr.com/26/56107224_a4120dd201_m.jpg" alt="" /></a></p>
@@ -1244,9 +1244,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[Merb 1.0 RC2]]></title>
-    <link href="http://mattetti.github.com/posts/2008/10/21/merb-10-rc2/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/10/21/merb-10-rc2/"/>
     <updated>2008-10-21T19:09:54+02:00</updated>
-    <id>http://mattetti.github.com/posts/2008/10/21/merb-10-rc2</id>
+    <id>http://matt.aimonetti.net/posts/2008/10/21/merb-10-rc2</id>
     <content type="html"><![CDATA[<p>As I'm writing this post, Merb 1.0 RC2 (v0.9.10) is being propagated through all the <a href="http://rubyforge.org/">RubyForge</a> mirrors.</p>
 
 <p><code>$ sudo gem install merb</code> will install/update Merb Stack. Merb stack is a meta-gem/package installing all the gems you need to get started (including merb-core, merb-more, <a href="http://datamapper.org">datamapper</a> and sqlite3 driver)</p>
@@ -1287,9 +1287,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[Replying to some tweets]]></title>
-    <link href="http://mattetti.github.com/posts/2008/10/16/replying-to-some-tweets/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/10/16/replying-to-some-tweets/"/>
     <updated>2008-10-16T22:26:50+02:00</updated>
-    <id>http://mattetti.github.com/posts/2008/10/16/replying-to-some-tweets</id>
+    <id>http://matt.aimonetti.net/posts/2008/10/16/replying-to-some-tweets</id>
     <content type="html"><![CDATA[<p>I've been following what people say on <a href="http://twitter.com">twitter</a> about <a href="http://search.twitter.com/search?q=merb">Merb</a>.</p>
 
 <p>I simply used <a href="http://search.twitter.com/search?q=merb">twitter search engine</a>.</p>
@@ -1332,9 +1332,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[Preparing Merb 1.0 RC2]]></title>
-    <link href="http://mattetti.github.com/posts/2008/10/16/preparing-merb-10-rc2/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/10/16/preparing-merb-10-rc2/"/>
     <updated>2008-10-16T11:15:27+02:00</updated>
-    <id>http://mattetti.github.com/posts/2008/10/16/preparing-merb-10-rc2</id>
+    <id>http://matt.aimonetti.net/posts/2008/10/16/preparing-merb-10-rc2</id>
     <content type="html"><![CDATA[<p><a href="http://merbist.com/2008/10/13/merb-10-rc1/">1.0RC1 was released</a> less than a week ago and we are already planning to release RC2 next week or so.</p>
 
 <p>Thanks to all the contributors who reported RC1 bugs and submitted patches. RC2 should iron out most of the small bugs and annoyances encountered.</p>
@@ -1353,9 +1353,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[Merb 1.0 RC1]]></title>
-    <link href="http://mattetti.github.com/posts/2008/10/13/merb-10-rc1/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/10/13/merb-10-rc1/"/>
     <updated>2008-10-13T23:01:47+02:00</updated>
-    <id>http://mattetti.github.com/posts/2008/10/13/merb-10-rc1</id>
+    <id>http://matt.aimonetti.net/posts/2008/10/13/merb-10-rc1</id>
     <content type="html"><![CDATA[<p><a href="http://www.flickr.com/photos/81335564@N00/2934025410">
 </a><a href="http://www.flickr.com/photos/81335564@N00/2050355003"><img src="http://static.flickr.com/2359/2050355003_8b5db33ff0_t.jpg" alt="floor 1" /></a> <a href="http://www.flickr.com/photos/49968232@N00/85990435"><img src="http://static.flickr.com/6/85990435_4549262c9b_t.jpg" alt="full stop" /></a><a href="http://www.flickr.com/photos/49968232@N00/2114628079"><img src="http://static.flickr.com/2113/2114628079_b00a6ed156_t.jpg" alt="zero" /> </a></p>
 
@@ -1394,9 +1394,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[Merb 1.0 RC1 delayed (by few hours hopefully)]]></title>
-    <link href="http://mattetti.github.com/posts/2008/10/13/merb-10-rc1-delayed-by-few-hours-hopefully/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/10/13/merb-10-rc1-delayed-by-few-hours-hopefully/"/>
     <updated>2008-10-13T03:18:46+02:00</updated>
-    <id>http://mattetti.github.com/posts/2008/10/13/merb-10-rc1-delayed-by-few-hours-hopefully</id>
+    <id>http://matt.aimonetti.net/posts/2008/10/13/merb-10-rc1-delayed-by-few-hours-hopefully</id>
     <content type="html"><![CDATA[<p><a href="http://flickr.com/photos/aihibed/1410398234/"><img src="http://farm2.static.flickr.com/1235/1410398234_c341320704.jpg?v=0" alt="" /></a> Tonight, the core team members present during MerbCamp got together at my place to prepare and release 1.0 RC1.</p>
 
 <p>The problem is that we spent more time joking, laughing and arguing about the new git system that we didn't feel right about pushing a release at 4am :(</p>
@@ -1417,9 +1417,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[End of MerbCamp Day 1]]></title>
-    <link href="http://mattetti.github.com/posts/2008/10/11/end-of-merbcamp-day-1/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/10/11/end-of-merbcamp-day-1/"/>
     <updated>2008-10-11T22:50:20+02:00</updated>
-    <id>http://mattetti.github.com/posts/2008/10/11/end-of-merbcamp-day-1</id>
+    <id>http://matt.aimonetti.net/posts/2008/10/11/end-of-merbcamp-day-1</id>
     <content type="html"><![CDATA[<p>[caption id="" align="alignright" width="240" caption="MerbCamp registration by Andy Delcambre"]<a href="http://flickr.com/photos/adelcambre/2932032491/"><img src="http://farm4.static.flickr.com/3147/2932032491_ccdd7fba0e_m.jpg" alt="MerbCamp registration by Andy Delcambre" /></a>[/caption]</p>
 
 <p>Day 1 went very fast.</p>
@@ -1448,9 +1448,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[MerbCamp just started]]></title>
-    <link href="http://mattetti.github.com/posts/2008/10/11/merbcamp-just-started/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/10/11/merbcamp-just-started/"/>
     <updated>2008-10-11T09:45:53+02:00</updated>
-    <id>http://mattetti.github.com/posts/2008/10/11/merbcamp-just-started</id>
+    <id>http://matt.aimonetti.net/posts/2008/10/11/merbcamp-just-started</id>
     <content type="html"><![CDATA[<p>A real quick post to let people know that <a href="http://merbcamp.com">MerbCamp</a> just started. If you couldn't make it to San Diego, you can follow <a href="http://merbcamp.com/webcast">live</a>. (For FREE)</p>
 
 <p>[caption id="" align="alignright" width="160" caption="Ezra during his Keynote"]<a href="http://flickr.com/search/?q=merbcamp&amp;ss=2&amp;ct=6"><img src="http://farm4.static.flickr.com/3277/2932034431_48a54ab62d_m.jpg" alt="Ezra during his Keynote" /></a>[/caption]</p>
@@ -1469,9 +1469,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[Merb Sprint Day 2 Stand-up]]></title>
-    <link href="http://mattetti.github.com/posts/2008/10/09/merb-sprint-day-2-stand-up/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/10/09/merb-sprint-day-2-stand-up/"/>
     <updated>2008-10-09T09:37:52+02:00</updated>
-    <id>http://mattetti.github.com/posts/2008/10/09/merb-sprint-day-2-stand-up</id>
+    <id>http://matt.aimonetti.net/posts/2008/10/09/merb-sprint-day-2-stand-up</id>
     <content type="html"><![CDATA[<p>We just finished the first stand-up. A stand-up according to the scrum/xp practices is just an occastion to say what you did yesterday, what you are going to do today and any problems you encountered if any.</p>
 
 <p>The stand-up followed a sprint review &amp; retrospective we had last night.</p>
@@ -1482,9 +1482,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[Merb Pre Sprint Meeting]]></title>
-    <link href="http://mattetti.github.com/posts/2008/10/07/merb-pre-sprint-meeting/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/10/07/merb-pre-sprint-meeting/"/>
     <updated>2008-10-07T22:53:53+02:00</updated>
-    <id>http://mattetti.github.com/posts/2008/10/07/merb-pre-sprint-meeting</id>
+    <id>http://matt.aimonetti.net/posts/2008/10/07/merb-pre-sprint-meeting</id>
     <content type="html"><![CDATA[<p><img src="http://farm4.static.flickr.com/3171/2424765496_43008cbd29.jpg?v=0" alt="" />Some of Los SeÃ±ores del Merb, AKA the Merb "core team" met tonight in a secret location in San Diego, CA. Obviously, we had to meet in a Mexican restaurant and enjoy <a href="http://www.rubios.com/">Tuesday Fish Taco night special</a> ;)</p>
 
 <p>While not everybody could make the trip, Yehuda, Andy, Daniel, Carl and myself met to plan the very first Merb Sprint.</p>
@@ -1515,9 +1515,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[Merb Edge update (Oct 6th 2008)]]></title>
-    <link href="http://mattetti.github.com/posts/2008/10/06/merb-edge-update-oct-6th-2008/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/10/06/merb-edge-update-oct-6th-2008/"/>
     <updated>2008-10-06T20:50:15+02:00</updated>
-    <id>http://mattetti.github.com/posts/2008/10/06/merb-edge-update-oct-6th-2008</id>
+    <id>http://matt.aimonetti.net/posts/2008/10/06/merb-edge-update-oct-6th-2008</id>
     <content type="html"><![CDATA[<ul>
 <li><p>Mode changes to init.rb, user updating to a newer version or Merb will need to add</p>
 
@@ -1547,9 +1547,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[Few changes in Merb Edge]]></title>
-    <link href="http://mattetti.github.com/posts/2008/10/05/few-changes-in-merb-edge/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/10/05/few-changes-in-merb-edge/"/>
     <updated>2008-10-05T21:48:24+02:00</updated>
-    <id>http://mattetti.github.com/posts/2008/10/05/few-changes-in-merb-edge</id>
+    <id>http://matt.aimonetti.net/posts/2008/10/05/few-changes-in-merb-edge</id>
     <content type="html"><![CDATA[<p>I thought I should share few changes that my affect your apps if you want to upgrade to Edge.</p>
 
 <ul>
@@ -1572,9 +1572,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[Exception handling in Merb]]></title>
-    <link href="http://mattetti.github.com/posts/2008/10/01/exception-handling-in-merb/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/10/01/exception-handling-in-merb/"/>
     <updated>2008-10-01T09:56:02+02:00</updated>
-    <id>http://mattetti.github.com/posts/2008/10/01/exception-handling-in-merb</id>
+    <id>http://matt.aimonetti.net/posts/2008/10/01/exception-handling-in-merb</id>
     <content type="html"><![CDATA[<ul>
 <li></li>
 </ul>
@@ -1594,9 +1594,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[Write your own custom DataMapper adapter]]></title>
-    <link href="http://mattetti.github.com/posts/2008/09/29/write-your-own-custom-datamapper-adapter/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/09/29/write-your-own-custom-datamapper-adapter/"/>
     <updated>2008-09-29T00:38:46+02:00</updated>
-    <id>http://mattetti.github.com/posts/2008/09/29/write-your-own-custom-datamapper-adapter</id>
+    <id>http://matt.aimonetti.net/posts/2008/09/29/write-your-own-custom-datamapper-adapter</id>
     <content type="html"><![CDATA[<p>If you read this blog, you probably know that <a href="http://merbivore.com">Merb</a>'s best <a href="http://en.wikipedia.org/wiki/Object-relational_mapping">ORM</a> friend is <a href="http://datamapper.org/">DataMapper</a>.</p>
 
 <p>[caption id="" align="alignleft" width="240" caption="compounds in basil oil have potent antioxidant and is used for supplementary treatment of stress"]<a href="http://flickr.com/photos/darn/190457943/"><img src="http://farm1.static.flickr.com/55/190457943_8b93fda9e6_m.jpg" alt="compounds in basil oil have potent antioxidant and is used for supplementary treatment of stress" /></a>[/caption]</p>
@@ -1678,9 +1678,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[quick preview of the work done pre 1.0]]></title>
-    <link href="http://mattetti.github.com/posts/2008/09/26/quick-preview-of-the-work-done-pre-10/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/09/26/quick-preview-of-the-work-done-pre-10/"/>
     <updated>2008-09-26T10:59:00+02:00</updated>
-    <id>http://mattetti.github.com/posts/2008/09/26/quick-preview-of-the-work-done-pre-10</id>
+    <id>http://matt.aimonetti.net/posts/2008/09/26/quick-preview-of-the-work-done-pre-10</id>
     <content type="html"><![CDATA[<p>Yesterday I spyed on <a href="http://yehudakatz.com/">wycats aka Yehuda Katz</a> while he's working on cleaning things up for 1.0 which will be released during <a href="http://merbcamp.com">MerbCamp</a> Oct 11-12.</p>
 
 <p>Here is the screenshot of how you would see ugly backtraces originating from Merb's core:</p>
@@ -1701,9 +1701,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[merbist scrapbook (sept-25)]]></title>
-    <link href="http://mattetti.github.com/posts/2008/09/25/merbist-scrapbook-sept-25/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/09/25/merbist-scrapbook-sept-25/"/>
     <updated>2008-09-25T08:34:17+02:00</updated>
-    <id>http://mattetti.github.com/posts/2008/09/25/merbist-scrapbook-sept-25</id>
+    <id>http://matt.aimonetti.net/posts/2008/09/25/merbist-scrapbook-sept-25</id>
     <content type="html"><![CDATA[<p>[caption id="" align="alignright" width="182" caption="Fennel, one of the primary ingredients of absinthe helps developers' creativity."]<a href="http://www.flickr.com/photos/marty_2007/2818914854/"><img src="http://farm4.static.flickr.com/3220/2818914854_1a1f01b3a3_m.jpg" alt="Fennel, one of the primary ingredients of absinthe helps developers creativity." /></a>[/caption]</p>
 
 <ul>
@@ -1722,9 +1722,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[News from the front line - Sept 24 2008]]></title>
-    <link href="http://mattetti.github.com/posts/2008/09/24/news-from-the-front-line-sept-24-2008/"/>
+    <link href="http://matt.aimonetti.net/posts/2008/09/24/news-from-the-front-line-sept-24-2008/"/>
     <updated>2008-09-24T08:47:24+02:00</updated>
-    <id>http://mattetti.github.com/posts/2008/09/24/news-from-the-front-line-sept-24-2008</id>
+    <id>http://matt.aimonetti.net/posts/2008/09/24/news-from-the-front-line-sept-24-2008</id>
     <content type="html"><![CDATA[<p>Dear Merbivores/Merbists/Merbians,</p>
 
 <p>It's hard to believe that in <a href="http://merbcamp.com">less that 20 days</a>, Merb 1.0 will be released! We are all really happy to to be almost there but we have to be honest and admit that we are also under pressure.</p>
