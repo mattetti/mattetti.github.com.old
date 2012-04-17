@@ -12,7 +12,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 
     <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
-    <link rel="canonical" href="http://mattetti.github.com">
+    
+    <link rel="canonical" href="http://merbist.com/2011/08/30/deploying-a-rails-3-1-app-gotchas/">
+    
     <link href="/favicon.png" rel="shortcut icon">
     <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -32,7 +34,7 @@
   </script>
 
 
-</head>
+  </head>
 
 
 <body>
@@ -155,9 +157,17 @@ Also, be careful about the order of the file extensions, otherwise it won&#8217;
 
 <p>After making all these changes, I was able to redeploy my app and everything was working again. (you might want to tweak your apache/nginx config as explained in the <a href="http://guides.rubyonrails.org/asset_pipeline.html">Rails guide</a>)</p>
 
+<p> </p>
+
 <h3>Conclusion</h3>
 
 <p>Don&#8217;t be fooled like me and expect that because you have an app running locally, deployment will work right away. Make sure to read about the new features and what&#8217;s needed. Overall, I think that the asset pipeline is a nice addon to Rails and if you don&#8217;t feel like using it, just can put/leave all your files in the public folder and everything will work just like before. I do have to say that I was surprised to see that even in a brand new Rails 3.1 project, Rails isn&#8217;t running in threaded mode by default. But that&#8217;s a different (old) story and I guess people still get more excited about asset management than framework raw performance ;)</p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
 </div>
     <div class="meta">
         <div class="date updated">
@@ -177,7 +187,7 @@ Also, be careful about the order of the file extensions, otherwise it won&#8217;
 
 <div class="cat">
   
-    <a class='category' href='/articles/categories/rails/'>Rails</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>
+    <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/merbist-com/'>merbist.com</a>, <a class='category' href='/articles/categories/rails/'>rails</a>
   
 </div>
 

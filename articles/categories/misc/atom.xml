@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Misc | Matt Aimonetti]]></title>
   <link href="http://mattetti.github.com/articles/categories/misc/atom.xml" rel="self"/>
   <link href="http://mattetti.github.com/"/>
-  <updated>2012-04-17T12:22:46+02:00</updated>
+  <updated>2012-04-17T14:27:42+02:00</updated>
   <id>http://mattetti.github.com/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -14,6 +14,75 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Learning from Rails' failures]]></title>
+    <link href="http://mattetti.github.com/posts/2012/02/29/learning-from-rails-failures/"/>
+    <updated>2012-02-29T07:48:08+01:00</updated>
+    <id>http://mattetti.github.com/posts/2012/02/29/learning-from-rails-failures</id>
+    <content type="html"><![CDATA[<p>Ruby on Rails undisputedly changed the way web frameworks are designed. Rails became a reference when it comes to leveraging conventions, easy baked in feature set and a rich ecosystem. However, I think that Rails did and still does a lot of things pretty poorly.  By writing this post, I'm not trying to denigrate Rails, there are many other people out there already doing that. My hope is that by listing what I think didn't and still doesn't go well, we can learn from our mistakes and improve existing solutions or create better new ones.</p>
+
+<p><a href="http://merbist.com/2012/02/29/learning-from-rails-failures/train_fail/"><img src="http://merbist.com/wp-content/uploads/2012/02/train_fail-300x188.jpg" alt="" /></a></p>
+
+<h2>Migration/upgrades</h2>
+
+<p>Migrating a Rails App from a version to the other is very much like playing the lottery, you are almost sure you will lose. To be more correct, you know things will break, you just don't know what, when and how. The Rails team seems to think that everybody is always running on the cutting edge version and don't consider people who prefer to stay a few version behind for stability reasons. What's worse is that plugins/gems might or might not compatible with the version you are updating to, but you will only know that by trying yourself and letting others try and report potential issues.</p>
+
+<p>This is for me, by far, the biggest issue with Rails and something that should have been fixed a long time ago. If you're using the WordPress blog engine, you know how easy and safe it is to upgrade the engine or the plugins. Granted WordPress isn't a web dev framework, but it gives you an idea of what kind of experience we should be striving for.</p>
+
+<p> </p>
+
+<h2>Stability vs playground zone</h2>
+
+<p>New features are cool and they help make the platform more appealing to new comers. They also help shape the future of a framework. But from my perspective, that shouldn't come to the cost of stability. Rails 3's new asset pipeline is a good example of a half-baked solution shoved in a release at the last minute and creating a nightmare for a lot of us trying to upgrade. I know, I know, you can turn off the asset pipeline and it got better since it was first released. But shouldn't that be the other way around? Shouldn't fun new ideas risking the stability of an app or making migration harder, be off by default and turned on only by people wanting to experiment? When your framework is young, it's normal that you move fast and sometimes break, but once it matures, these things shouldn't happen.</p>
+
+<p> </p>
+
+<h2>Public/private/plugin APIs</h2>
+
+<p>This is more of a recommendation than anything else. When you write a framework in a very dynamic language like Ruby, people will "monkey patch" your code to inject features. Sometimes it is due to software design challenges, sometimes it's because people don't know better. However,  by not explicitly specifying what APIs are private (they can change at anytime, don't touch), what APIs are public (stable, will be slowly deprecated when they need to be changed) and which ones are for plugin devs only (APIs meant for instrumentation, extension etc..), you are making migration to newer versions much harder. You see, if you have a small, clean public API, then it's easy to see what could break, warn developers and avoid migration nightmares. However, you need to start doing that early on in your project, otherwise you will end up like Rails where all code can potentially change anytime.</p>
+
+<p> </p>
+
+<h2>Rails/Merb merge was a mistake</h2>
+
+<p>This is my personal opinion and well, feel free to disagree, nobody will ever be able to know to for sure. Without explaining what happened behind closed doors and the various personal motivations, looking at the end result, I agree with the group of people thinking that the merge didn't turn up to be a good thing. For me, Rails 3 isn't significantly better than Rails 2 and it took forever to be released. You still can't really run a mini Rails stack like promised. I did hear that Strobe (company who was hiring Carl Lerche, Yehuda Katz and contracted Jose Valim) used to have an ActionPack based, mini stack but it was never released and apparently only Rails core members really knew what was going on there. Performance in vanilla Rails 3 are only now getting close to what you had with Rails 2 (and therefore far from the perf you were getting with Merb). Thread-safety is still OFF by default meaning that by default your app uses a giant lock only allowing a process to handle 1 request at a time. For me, the flexibility and performance focus of Merb were mainly lost in the merge with Rails. (Granted, some important things such as ActiveModel, cleaner internals and others have made their way into Rails 3)</p>
+
+<p>But what's worse than everything listed so far is that the lack of competition and the internal rewrites made Rails lose its headstart.  Rails is very much HTML/view focused, its primarily strength is to make server side views trivial and it does an amazing job at that. But let's be honest, that's not the future for web dev. The future is more and more logic pushed to run on the client side (in JS) and the server side being used as an API serving data for the view layer. I'm sorry but adding support for CoffeeScript doesn't really do much to making Rails evolve ahead of what it currently is. Don't get me wrong, I'm a big fan of CoffeeScript, that said I still find that Rails is far from being optimized to developer web APIs in Rails. You can certainly do it, but you are basically using a tool that wasn't designed to write APIs and you pay the overhead for that. If there is one thing I wish Rails will get better at is to make writing pure web APIs better (thankfully there is Sinatra). But at the end of the day, I think that two projects with different philosophies and different approaches are really hard to merge, especially in the open source world. I wouldn't go as far as saying like others that Rails lost its sexiness to node.js because of the wasted time, but I do think that things would have been better for all if that didn't happen. However, I also have to admit that I'm not sure how much of a big deal that is. I prefer to leave the past behind, learn from my own mistake and move on.</p>
+
+<p> </p>
+
+<h2>Technical debts</h2>
+
+<p>Here I'd like to stop to give a huge props to Aaron "<a href="http://twitter.com/tenderlove">@tenderlove</a>" Patterson, the man who's actively working to reduce the <a href="http://en.wikipedia.org/wiki/Technical_debt">technical debts</a> in the Rails code base. This is a really hard job and definitely not a very glamorous one. He's been working on various parts of Rails including its router and its ORM (ActiveRecord). Technical debts are unfortunately normal in most project, but sometimes they are overwhelming to the point that nobody dares touching the code base to clean it up. This is a hard problem, especially when projects move fast like Rails did. But looking back, I think that you want to start tackling technical debts on the side as you move on so you avoid getting to the point that you need a hero to come up and clean the piled errors made in the past. But don't pause your entire project to clean things up otherwise you will lose market, momentum and excitement. I feel that this is also very much true for any legacy project you might pick up as a developer.</p>
+
+<p> </p>
+
+<h2>Keep the cost of entry level low</h2>
+
+<p>Getting started with Rails used to be easier. This can obviously argued since it's very subjective, but from my perspective I think we forgot where we come from and we involuntary expect new comers to come with unrealistic knowledge. Sure, Rails does much more than it used to do, but it's also much harder to get started. I'm not going to argue how harder  it is now or why we got there. Let's just keep in mind that it is a critical thing that should always be re-evaluated. Sure, it's harder when you have an open source project, but it's also up to the leadership to show that they care and to encourage and mentor volunteers to  focus on this important part of a project.</p>
+
+<p> </p>
+
+<h2>Documentation</h2>
+
+<p>Rails documentation isn't bad, but it's far from being great. Documentation certainly isn't one of the Ruby's community strength, especially compared with the Python community, but what saddens me is to see the state of <a href="http://guides.rubyonrails.org/">the official documentation</a> which, should, in theory be the reference. Note that the Rails guides are usually well written and provide value, but they too often seem too light and not useful when you try to do something not totally basic (for instance use an ActiveModel compliant object). That's probably why most people don't refer to them or don't spend too much time there. I'm not trying to blame anyone there. I think that the people who contributed theses guides did an amazing job, but if you want to build a strong and easy to access community, great documentation is key. Look at the <a href="https://docs.djangoproject.com/en/1.3/">Django</a> documentation as a good example. That said, I also need to acknowledge the amazing job done by many community members such as <a href="http://railscasts.com/">Ryan Bates</a> and <a href="http://ruby.railstutorial.org/">Michael Hartl</a> consistently providing high value external documentation via the <a href="http://railscasts.com/">railscasts</a> and the intro to <a href="http://ruby.railstutorial.org/">Rails tutorial</a> available for free.</p>
+
+<p> </p>
+
+<p>In conclusion, I think that there is a lot to learn from Rails, lots of great things as well as lots of things you would want to avoid. We can certainly argue on Hacker News or via comments about whether or not I'm right about Rails failures, my point will still be that the mentioned issues should be avoided in any projects, Rails here is just an example. Many of these issues are currently being addressed by the Rails team but wouldn't it be great if new projects learn from older ones and avoid making the same mistakes? So what other mistakes do you think I forgot to mention and that one should be very careful of avoiding?</p>
+
+<p> </p>
+
+<h3>Updates:</h3>
+
+<ol>
+<li><p>Rails 4 had an API centric app generator but it <a href="https://github.com/rails/rails/commit/6db930cb5bbff9ad824590b5844e04768de240b1">was quickly reverted</a> and will live as gem until it's mature enough.</p></li>
+<li><p>Rails 4 improved the ActiveModel API to be simpler to get started with. See <a href="http://blog.plataformatec.com.br/2012/03/barebone-models-to-use-with-actionpack-in-rails-4-0/">this blog</a> post for more info.</p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Books to read in 2012 - recommended to me by Twitter]]></title>
     <link href="http://mattetti.github.com/posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter/"/>
     <updated>2011-12-30T15:28:13+01:00</updated>
@@ -21,6 +90,8 @@
     <content type="html"><![CDATA[<p>Today, I asked on Twitter what non-technical books I should read in 2012.</p>
 
 <p>I was nicely surprised to see so many of my followers send recommendations. Here is a list of 25 books that like-minded people suggested I read. Hopefully you will find a book or two to read too. Feel free to send more recommendations via the comments.</p>
+
+<p> </p>
 
 <p><a href="http://www.amazon.com/gp/product/0307593312/ref=as_li_ss_il?ie=UTF8&amp;tag=merbist-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0307593312"><img src="http://ws.assoc-amazon.com/widgets/q?_encoding=UTF8&amp;Format=_SL110_&amp;ASIN=0307593312&amp;MarketPlace=US&amp;ID=AsinImage&amp;WS=1&amp;tag=merbist-20&amp;ServiceVersion=20070822" alt="" /></a><img src="http://www.assoc-amazon.com/e/ir?t=merbist-20&amp;l=as2&amp;o=1&amp;a=0307593312" alt="" /></p>
 
@@ -219,6 +290,8 @@
 
 <p><strong>Plans</strong>. <em>Make your plans based on the practices you've determined you've needed.</em></p>
 
+<p> </p>
+
 <p>On a related topic, Chad Fowler posted an interesting <a href="http://chadfowler.com/2011/12/21/re-thinking-software-development-education">blog post about what LivingSocial is doing to change the software development education</a>.</p>
 ]]></content>
   </entry>
@@ -277,21 +350,37 @@ puts @array.size
 
 <p>In other words, if not manually synchronized, shared data can easily be corrupted. You might have two threads modifying the value of the same variable and one of the two threads will step on top of the other leaving you with a race condition. You only need 2 threads accessing the same instance variable at the same time to get a race condition. My example uses more threads and more mutations to make the problem more obvious. Note that TDD wouldn't catch such an issue and even extensive testing will provide very little guarantee that your code is thread safe.</p>
 
+<p> </p>
+
 <h2>So what? Thread safety isn't a new problem.</h2>
 
 <p>That's absolutely correct, ask any decent Java developer out there, he/she will tell how locks are used to "easily" synchronize objects to make your code thread safe. They might also mention the deadlocks and other issues related to that, but that's a different story. One might also argue that when you write web apps, there is very little shared data and the chances of corrupting data across concurrent requests is very small since most of the data is kept in a shared data store outside of the process.</p>
 
 <p>All these arguments are absolutely valid, the challenge is that you have a large community and a large amount of code out there that expects a certain behavior. And removing the GIL does change this behavior. It might not be a big deal for you because you know how to deal with thread safety, but it might be a big deal for others and C Ruby is by far the most used Ruby implementation. It's basically like saying that automatic cars shouldn't be made and sold, and everybody has to switch to stick shifts. They have better gas mileage, I personally enjoy driving then and they are cheaper to build. Removing the GIL is a bit like that. There is a cost associated with this decision and while this cost isn't insane, the people in charge prefer to not pay it.</p>
 
+<p> </p>
+
 <h2>Screw that, I'll switch to Node.js</h2>
 
 <p>I heard a lot of people telling me they were looking into using Node.js because it has a better design and no GIL. While I like Node.js and if I were to implement a chat room or an app keeping connections for a long time, I would certainly compare it closely to EventMachine, I also think that this argument related to the GIL is absurd. First, you have other Ruby implementations which don't have a GIL and are really stable (i.e: JRuby) but then Node basically works the same as Ruby with a GIL. Yes, Node is evented and single threaded but when you think about it, it behaves the same as Ruby 1.9 with its GIL. Many requests come in and they are handled one after the other and because IO requests are non-blocking, multiple requests can be processed concurrently but not in parallel. Well folks, that's exactly how C Ruby works too, and unlike popular believe, most if not all the popular libraries making IO requests are non blocking (when using 1.9). So, next time you try to justify you wanting to toy with Node, please don't use the GIL argument.</p>
+
+<p> </p>
 
 <h2>What should I do?</h2>
 
 <p>As always, evaluate your needs and see what makes sense for your project. Start by making sure you are using Ruby 1.9 and your code makes good use of threading. Then look at your app and how it behaves, is it CPU-bound or IO-bound. Most web apps out there are IO-bound (waiting for the DB, redis or API calls), and when doing an IO call, Ruby's GIL is released allowing another thread to do its work. In that case, not having a GIL in your Ruby implementation won't help you. However, if your app is CPU-bound, then switching to JRuby or Rubinius might be beneficial. However, don't assume anything until you proved it and remember that making such a change will more than likely require some architectural redesign, especially if using JRuby.  But, hey, it might totally be worth it as many proved it in the past.</p>
 
+<p> </p>
+
 <p>I hope I was able to clarify things a bit further. If you wish to dig further, I would highly recommend you read the many discussions the Python community had in the last few years.</p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
 ]]></content>
   </entry>
   
@@ -326,6 +415,8 @@ puts @array.size
 <p>However, most browsers (IE 8+, Firefox 3.5+, Safari 4+, Chrome) implement a simple way to allow cross domain requests as defined in this <a href="http://www.w3.org/TR/cors/">w3C document</a>.</p>
 
 <p>Of course, if your users have an old version of their browser, you  might have to look into jsonp or something else such as cheating by using iframes &amp; setting document.domain. Let's pretend for a minute that 100% of your users are on Chrome. The only thing you need to do is set a response header listing the accepted domains or "*" for all. A simple Rack middleware to do that would look like that.</p>
+
+<p> </p>
 
 <pre><code>class XOriginEnabler
   ORIGIN_HEADER = "Access-Control-Allow-Origin"
@@ -432,7 +523,10 @@ SolutionTwo.new(40){ @origin + 2}.dispatch
 
 <p>Now every time we call #dispatch, a real method is dispatched which is much faster than doing an eval and no objects are allocated. Running the profiler and the benchmarks script used earlier, we can confirm that the GC doesn't run a single time and that the optimized code runs 2X faster!</p>
 
-<p>Once again, it's yet another example showing that you <a href="http://merbist.com/2010/07/29/object-allocation-why-you-should-care/">should care about object allocation</a> when dealing with code in the critical path. It also shows how to work around the block bindings. Now, it doesn't mean that you have to obsess about object allocation and performance, even if my last implementation is 2X faster than the previous, we are only talking about a few microseconds per dispatch. That said microseconds do add up and creating too many objects will slow down even your faster code since the GC will stop-the-world as its cleaning up your memory. In real life, you probably don't have to worry too much about low level details like that, unless you are working on a framework or sharing your code with others. But at least you can learn and understand why one approach is faster than the other, it might not be useful to you right away, but if you take programming as a craft, it's good to understand how things work under the hood so you can make educated decisions.</p>
+<p> </p>
+
+<p>Once again, it's yet another example showing that you <a href="http://merbist.com/2010/07/29/object-allocation-why-you-should-care/">should care about object allocation</a> when dealing with code in the critical path. It also shows how to work around the block bindings. Now, it doesn't mean that you have to obsess about object allocation and performance, even if my last implementation is 2X faster than the previous, we are only talking about a few microseconds per dispatch. That said microseconds do add up and creating too many objects will slow down even your faster code since the GC will stop-the-world as its cleaning up your memory. In real life, you probably don't have to worry too much about low level details like that, unless you are working on a framework or sharing your code with others. But at least you can learn and understand why one approach is faster than the other, it might not be useful to you right away, but if you take programming as a craft, it's good to understand how things work under the hood so you can make educated decisions.
+ </p>
 
 <h3>Update:</h3>
 
@@ -545,6 +639,8 @@ end
 
 <p>And then add a function called when the DOM is ready which loads the message and injects it in the DOM. Once the cookie read, delete it so the message isn't displayed again.</p>
 
+<p> </p>
+
 <p>So there you have it, if you follow these few steps, you should be able to handle easily 10x more traffic without increasing hardware or making any type of crazy code change. Before you start looking into memcached, redis, cdns or whatever, consider HTTP caching and async DOM manipulation. Finally, note that if you can't use Varnish or Squid, you can very easily setup <a href="http://rtomayko.github.com/rack-cache/">Rack-Cache</a> locally and share the cache via memcached. It's also a great way to test locally.</p>
 
 <hr />
@@ -552,6 +648,8 @@ end
 <p><strong>Update:</strong> CinemaTreasures was updated to use HTTP caching as described above. The hosting cost is now half of what it used to be and the throughput is actually higher which offers a better protection against peak traffic.</p>
 
 <hr />
+
+<p> </p>
 
 <p>External resources:</p>
 
@@ -684,6 +782,8 @@ Here is a quick rundown of the code:</p>
 The attributes function is defined a bit below and and it takes any type of objects (empty interface) and returns a map, which is like a Hash or a Dictionary. The map has keys of String type and values of "Type" type. The "Type" type is defined in the reflect package. Inside the function, 23 then use the previously mentioned reflect package to check on the type and the name of each attribute and assign it to a map object. (note that I'm explicitly returning the map, but I could have done it in a more implicit way)</p>
 
 <p>So there you go, that's how you use reflection in Go. Pretty nifty and simple.</p>
+
+<p> </p>
 ]]></content>
   </entry>
   
@@ -709,6 +809,8 @@ The attributes function is defined a bit below and and it takes any type of obje
 </ul>
 
 
+<p> </p>
+
 <p>The challenge is that when you work for a big corporation, you rarely see these factors applied. The amount of red tape, management overhead, lack of recognition and accountability result in a low drive by most employees. I think it was the first time in my entire career that I was told by a <a href="http://nateware.com">manager</a> to care less about the quality and end result of our products.</p>
 
 <p>The second important concept that I think is critical when looking at your career is passion. This topic is very well covered in <a href="http://chadfowler.com/">Chad Fowler</a>'s book: <a href="http://pragprog.com/titles/cfcar2/the-passionate-programmer">The Passionate Programmer</a>.</p>
@@ -717,7 +819,11 @@ The attributes function is defined a bit below and and it takes any type of obje
 
 <blockquote><p>Fulfillment and happiness don’t (often) come by chance. They require thought, intention, action, and a willingness to change course when you’ve made mistakes. [...] It might be a technology or business domain that gets you excited. Or, on the other hand, it might be a specific technology or business domain that drags you down. Or a type of organization. Maybe you’re meant for small teams or big teams. Or rigid processes. Or agile processes. Whatever the mix, take some time to find yours. You can fake it for a while, but a lack of passion will catch up with you and your work.</p></blockquote>
 
+<p> </p>
+
 <p>It's hard to summarize Chad's book into just a few sentences, but what I got from his book is that if, for whatever reason, you lose your passion for your job, you should move on to another place where you can be passionate and excel. In my case, I'm still very much passionate about video game development but I find my passion seriously affected by an unhealthy work environment, bad communication and a lack of desire to change things in concrete ways. As the saying goes, <a href="http://www.google.com/search?q=people+don't+leave+jobs">"People don't leave jobs..."</a></p>
+
+<p> </p>
 
 <h3>What's next for me?</h3>
 
@@ -743,6 +849,8 @@ The attributes function is defined a bit below and and it takes any type of obje
 </ul>
 
 
+<p> </p>
+
 <p>Writing this list helped me realize that I was definitely not in the right place and helped me create a list of criteria to define what kind of job I should be doing instead. As I was thinking about all that, I was reminded of this quote:</p>
 
 <blockquote><p>"One should not pursue goals that are easily achieved. One must develop an instinct for what one can just barely achieve through one's greatest efforts." —Albert Einstein</p></blockquote>
@@ -756,6 +864,8 @@ The attributes function is defined a bit below and and it takes any type of obje
 <p><a href="http://merbist.com/2011/06/10/sayonara-sony/livingsocial-2/"><img src="http://merbist.com/wp-content/uploads/2011/06/livingsocial1.png" alt="" /></a></p>
 
 <p>That might be a shocker at first glance. Going from working on video games to working for a daily-deal startup? It doesn't seem like a very smart career move. To be honest, that was my first reaction. But LivingSocial's VP of engineering is <a href="http://twitter.com/#!/chadfowler">Chad Fowler</a> (the author of The Passionate Programmer, mentioned earlier) and its VP of R&amp;D is <a href="http://en.wikipedia.org/wiki/Richard_Kilmer_(programmer">Rich Kilmer</a>), InfoEther's cofounder and recognized mad-scientist-coder. I've known Chad and Rich for many years, meeting at tech conferences that they organized or were invited to give talks to, and even getting to hack on some projects with Rich. So when they approached me to join them at LivingSocial, I wanted to know more about their own motivations, why I would be a good fit and how the company/job would rate against my list of criteria. We had long and honest discussions and the result is that I am excited to soon be working with one of the best teams I know of. More concretely, I will be working with <a href="http://twitter.com/#!/rich_kilmer">Rich</a>, <a href="http://twitter.com/#!/wbruce">Bruce</a> and <a href="http://twitter.com/#!/go">Michael</a> in helping LivingSocial revolutionize the local market. LivingSocial is a fast growing and successful company with a strong focus on creating a great experience for both customers and merchants. The company's vision is well defined and the desire to change the world the way we know it is palpable. Most of the founders have a technical background, they value good engineering practices and have created a nice, positive company culture. Chad has some really awesome, passionate and talented engineers on his team (too many to mention), for whom I have a lot of respect and with whom I look forward to working with.  I also value the fact that LivingSocial trusts and values me enough to let me work remotely. This is very important for me because it shows that my new employer really wants to work with me, trusts me but also is willing to embrace the challenges of having a remote team if that's what's needed to create the "right team". After looking more deeply at what I need and what LivingSocial is, I believe that I can assist LivingSocial in making a very positive change to the way small businesses around the world are run. And I am looking forward to this.</p>
+
+<p> </p>
 ]]></content>
   </entry>
   
@@ -807,6 +917,19 @@ Since last new a lot of things happened, here is a quick summary:</p>
 
 
 <p>Basically, MacRuby is now mature and it's time for hackers and people trying to get exposure to give it a try.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Ruby movement - art & programming]]></title>
+    <link href="http://mattetti.github.com/posts/2010/09/27/the-ruby-movement-art-programming/"/>
+    <updated>2010-09-27T19:12:51+02:00</updated>
+    <id>http://mattetti.github.com/posts/2010/09/27/the-ruby-movement-art-programming</id>
+    <content type="html"><![CDATA[<p>I wrote a guest blog post for <a href="http://rubylearning.com/blog/about/">Satish Talim</a> over at <a href="http://rubylearning.com/blog/">RubyLearning.org</a></p>
+
+<p>You can read it <a href="http://rubylearning.com/blog/2010/09/28/the-ruby-movement/">there</a>.</p>
+
+<p><a href="http://rubylearning.com/blog/2010/09/28/the-ruby-movement/"><img src="http://img.skitch.com/20100928-xk8n9kxyd5knaaja31pfpxkk86.png" alt="" /></a></p>
 ]]></content>
   </entry>
   
@@ -1446,6 +1569,35 @@ The final binary looks like an Objective-C binary (except that it's larger)</p><
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[On Engendering Strong Reactions]]></title>
+    <link href="http://mattetti.github.com/posts/2009/04/28/on-engendering-strong-reactions/"/>
+    <updated>2009-04-28T17:16:03+02:00</updated>
+    <id>http://mattetti.github.com/posts/2009/04/28/on-engendering-strong-reactions</id>
+    <content type="html"><![CDATA[<p>To start with, I would like to make it clear to everyone that I do sincerely care about the larger gender issues that my presentation touched off.  I have also replied and otherwise corresponded with everyone who has contacted me about my presentation, just as I have tried to reply to all of the blog posts that have been brought to my attention.  At this point, however, it is clear that this issue has grown too large to be resolved through one-on-one contact, hence this public statement.</p>
+
+<p>I have made a specific point of exchanging emails with most of the bloggers who addressed the gender issue, and I did so because I care about minority involvement in our community.  I cared about this issue well before GoGaRuCo or this particular presentation, despite what anyone might think to the contrary, running the presentation past my wife/business partner and other colleagues well before I gave my talk.  They, at least, understood the goals of my presentation, which were to leaven an otherwise dry topic with humor.  It genuinely was not my intention to cause offense.  People may be driven by personal choice or cultural background to take offense at any number of things, of course, but I think there is always a clear difference between trying to offend people vs people choosing to take offense.</p>
+
+<p>My view is that offending someone is walking up to them and saying: "You suck, your code sucks and your partner's code sucks!".
+That is not what I did in my talk.  In the case of my talk, people knew what to expect, they <em>picked</em> the talk, and were warned by the organizers before I started that I would be using imagery potentially offensive to some.  The topic of my talk was obvious, and I would have hoped that people who were likely to be offended would have simply chosen not to attend my talk or read my slides on the internet.  It's like complaining that television has too much material unsuitable for children, yet not taking steps to limit their viewing of it.  You can't have it both ways.</p>
+
+<p>Now that I have explained my view point as clearly as I can, I would also like to express my sincere regret that this situation has brought bad publicity to Rails and the loss of one of the Activism team members.  I understand how people who are concerned about gender equality could have taken my presentation badly and misjudge my intentions, if they did not know me.</p>
+
+<p>In the same way, people have been rather quick to judge the entire Ruby/Rails community based on my presentation and the comments of a few people. I have noticed, for example, a lot of comments making sweeping generalizations about Americans, Republicans, women, Ruby, Rails, men etc.. leading to an exchange of insults, things getting personal, and everybody feeling the need to fuel the flames by sharing their own opinion in public.  While there is nothing wrong with sharing your approval or disapproval, I think it has also contributed to blowing this entire thing completely out of proportion.  I would like to ask people to step back and reflect upon whether we are contributing anything useful to the discussion.</p>
+
+<p>We can argue forever about morals, professionalism, ethics, respect, etc., though this is all a distraction from the real problem that was raised by Sarah, namely that we have very few minorities in the Ruby community, especially women.  Minorities do need to be more represented!</p>
+
+<p>So, instead of continuing an increasingly pointless debate about my slides, I would like to encourage the community to look further and see how we can change things.
+Education, outreach, and self-censorship are certainly some of the options available.   Please read <a href="http://www.quirkey.com/blog/2009/04/27/the-ghetto-of-the-mind/">Aaron's blog post</a> and see how you might make a difference.</p>
+
+<p>For those who still want to talk with me, I will be at the <a href="http://en.oreilly.com/rails2009/public/schedule/detail/8772">RailsConf devchix's discussion panel</a> and more importantly, if you care about Rails Activism and you want to see things evolve, be sure to come to our <a href="http://en.oreilly.com/rails2009/public/schedule/detail/9047">Birds of Feather discussion of Rails Activism</a>.</p>
+
+<p><strong>Update:</strong> Some people thought I wasn't clear enough about my position and I therefore tweeted the following: <a href="http://twitter.com/merbist/status/1661486850">"I obviously made a mistake. I didn't mean to offend anyone but since I did, I failed."</a></p>
+
+<p><strong>Update 2:</strong> Kirrily Robert wrote a <a href="http://infotrope.net/blog/2009/08/05/action-and-reaction-on-avoiding-offense/">very insightful article</a>. Borrowing her words, I'd like to reiterate that "It genuinely was not my intention to marginalize or exclude anyone from my talk or from the Ruby community, nor to make them feel uncomfortable."</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Merb 1.1 delayed]]></title>
     <link href="http://mattetti.github.com/posts/2009/04/14/merb-11-delayed/"/>
     <updated>2009-04-14T09:02:45+02:00</updated>
@@ -1544,13 +1696,19 @@ It also goes quite a bit further and attempts to make reusing rack applications 
 
 <p>I'm personally looking forward to seeing Hampton's work migrated to Rails 3 in a few months.</p>
 
+<p> </p>
+
 <p><strong>Matt Aimonetti</strong>: Hi Hampton, could you please introduce yourself and tell us what you do for a living.</p>
 
 <p><strong>Hampton Catlin: </strong>I'm Hampton Catlin. I'm "The Haml Guy" as I'm apparently termed all the time when introduced. I'm an early Rails hacker who has done a lot more than Haml, but whatever. These days, I'm doing a ton of iPhone development and am currently heading Wikimedia's efforts for a new mobile platform... based on Merb!</p>
 
+<p> </p>
+
 <p><strong>Matt Aimonetti</strong>: How did you get started with Ruby, what's your background?</p>
 
 <p><strong>Hampton Catlin</strong>: Well, everyone is welcome to laugh. But Slashdot introduced me to Ruby. I got into it about two months before Rails because the hotness (it was an obscure project at the time) and I grabbed a copy of the Pickaxe and never looked back. Prior to that I was working a crappy job getting people coffee at a bank. And then prior to that I was doing research for Nasa at my university with Java beuwolf clusters. It sounds fancier than it was.</p>
+
+<p> </p>
 
 <p><strong>Matt Aimonetti:</strong> You chose to learn and use Merb, could you please let us know why and how that happened?</p>
 
@@ -1558,14 +1716,20 @@ It also goes quite a bit further and attempts to make reusing rack applications 
 
 <p>Also, at some point I got really upset by the use of global variables in both of the frameworks, so I did some major patching to Merb to change over to module based constants. Aka, Merb.root instead of MERB_ROOT. I was ranting about it enough that I decided to do something about it. Also, I did some patches that messed up Merb with some weird documentation stuff. Sorry, Ezra.</p>
 
+<p> </p>
+
 <p><strong>Matt Aimonetti</strong>: Do you have some Merb projects available online we can look at? what was your experience so far?</p>
 
 <p><strong>Hampton Catlin</strong>: My most successful iPhone app (which was recently purchased by Wikimedia) was an app to browse Wikipedia. I chose Merb because I knew that I wanted something a little more bare bones than Rails, and it turned out to be a really good choice. And now, I'm getting a chance to extend that work into an entire platform for Wikimedia mobile. I am still looking for help with it....<a href="http://github.com/hcatlin/wikimedia-mobile/tree/master">http://github.com/hcatlin/wikimedia-mobile/tree/master</a>
 Its not live yet with wikipedia, but that's the code that you can help with! :)</p>
 
+<p> </p>
+
 <p><strong>Matt Aimonetti</strong> What is your favorite aspect of the Merb framework?</p>
 
 <p><strong>Hampton Catlin: </strong>Its modular design. Its as complex or as simple as you would like it to be. Also, its easy to run Haml, and the more people that use Haml, the harder my nipples get.</p>
+
+<p> </p>
 
 <p><strong>Matt Aimonetti</strong> Could you please mention an aspect of Merb you hope to see being improved in the near future?</p>
 
@@ -1573,9 +1737,13 @@ Its not live yet with wikipedia, but that's the code that you can help with! :)<
 
 <p>Also, resource handling. I wrote make_resourceful for Rails and I keep needing to do something similar for Merb. m_r is not very popular because I haven't really put much time into spreading the word. Mostly, I just use it. However, there are about 60 other Rails developers in the world that use it extensively. So, its a small, close-knit group of developers using the tool. And, I think something like it could be much more elegantly mixed into Merb. Obviously its a plug-in, but I think its a low hanging fruit. "current_object" as a method should ALWAYS be around when its logical.</p>
 
+<p> </p>
+
 <p><strong>Matt Aimonetti</strong> Thank you for your time. Anything else you would like to add?</p>
 
 <p><strong>Hampton Catlin</strong>: Buy my book. Buy my book. Buy my book. Buy my book. Buy my book. Buy my book. Buy my book. Buy my book. Buy my book. Buy my book. Ok, not really. My book isn't very good. But, I just wanted to make a "The Critic" reference.</p>
+
+<p> </p>
 ]]></content>
   </entry>
   

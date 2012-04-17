@@ -12,7 +12,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 
     <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
-    <link rel="canonical" href="http://mattetti.github.com">
+    
+    <link rel="canonical" href="http://merbist.com/2012/04/04/building-and-implementing-a-single-sign-on-solution/">
+    
     <link href="/favicon.png" rel="shortcut icon">
     <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -32,7 +34,7 @@
   </script>
 
 
-</head>
+  </head>
 
 
 <body>
@@ -184,6 +186,8 @@
 
 <p>Finally, we need to set a filter in your application. This auto-login filter will check the presence of an auth cookie on the top level domain and the absence of local session. If that&#8217;s the case, a session is automatically created using the user id from the cookie value after the cookie integrity is verified. We could also share the session between all our apps, but in most cases, the data stored by each app is very specific and it&#8217;s safer/cleaner to keep the sessions isolated. The integration with an app running on a different service will also be easier if the sessions are isolated.</p>
 
+<p> </p>
+
 <h2>Registration</h2>
 
 <p>For registration, as for login, we can take one of two approaches: point the user&#8217;s browser to the auth API or make S2S (server to server) calls from within our apps to the Authentication app. POSTing a form directly to the API is a great way to reduce duplicated logic and traffic on each client app so I&#8217;ll demonstrate this approach.</p>
@@ -204,17 +208,23 @@
 
 <p><a href="http://merbist.com/wp-content/uploads/2012/04/SSO-differentdomains-1.png"><img src="http://merbist.com/wp-content/uploads/2012/04/SSO-differentdomains-1.png" alt="" /></a></p>
 
+<p> </p>
+
 <p>The trick consists, when a local session isn&#8217;t present, of using an iframe in the application using the different domain. The iframe loads a page from the authentication/accounts app which verifies that a valid cookie was set on the main top domain. If that is the case, we can tell the application that the user is already globally logged in and we can tell the iframe host to redirect to an application end point passing an auth token the same way we did during the authentication. The app would then create a session and redirect the user back to where (s)he started. The next requests will see the local session and this process will be ignored.</p>
 
 <p>If the authentication application doesn&#8217;t find a signed cookie, the iframe can display a login form or redirect the iframe host to a login form depending on the required behavior.</p>
 
 <p>Something to keep in mind when using multiple apps and domains is that you need to keep the shared cookies/sessions in sync, meaning that if you log out from an app, you need to also delete the auth cookie to ensure that users are globally logged out. (It also means that you might always want to use an iframe to check the login status and auto-logoff users).</p>
 
+<p> </p>
+
 <h2>Mobile clients</h2>
 
 <p>Another part of implementing a SSO solution is to handle mobile clients. Mobile clients need to be able to register/login and update accounts. However, unlike S2S service clients, mobile clients should only allow calls to modify data on the behalf of a given user. To do that, I recommend providing opaque mobile tokens during the login process. This token can then be sent with each request in a X-header so the service can authenticate the user making the request. Again, SSL is strongly recommended.</p>
 
 <p>In this approach, we don&#8217;t use a cookie and we actually don&#8217;t need a SSO solution, but an unified authentication system.</p>
+
+<p> </p>
 
 <h2>Writing web services</h2>
 
@@ -277,7 +287,7 @@
 
 <div class="cat">
   
-    <a class='category' href='/articles/categories/software-design/'>Software Design</a>, <a class='category' href='/articles/categories/tutorial/'>Tutorial</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>
+    <a class='category' href='/articles/categories/software-design/'>Software Design</a>, <a class='category' href='/articles/categories/tutorial/'>Tutorial</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/merbist-com/'>merbist.com</a>
   
 </div>
 

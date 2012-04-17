@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tutorial | Matt Aimonetti]]></title>
   <link href="http://mattetti.github.com/articles/categories/tutorial/atom.xml" rel="self"/>
   <link href="http://mattetti.github.com/"/>
-  <updated>2012-04-17T12:22:46+02:00</updated>
+  <updated>2012-04-17T14:27:42+02:00</updated>
   <id>http://mattetti.github.com/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -98,6 +98,8 @@
 
 <p>Finally, we need to set a filter in your application. This auto-login filter will check the presence of an auth cookie on the top level domain and the absence of local session. If that's the case, a session is automatically created using the user id from the cookie value after the cookie integrity is verified. We could also share the session between all our apps, but in most cases, the data stored by each app is very specific and it's safer/cleaner to keep the sessions isolated. The integration with an app running on a different service will also be easier if the sessions are isolated.</p>
 
+<p> </p>
+
 <h2>Registration</h2>
 
 <p>For registration, as for login, we can take one of two approaches: point the user's browser to the auth API or make S2S (server to server) calls from within our apps to the Authentication app. POSTing a form directly to the API is a great way to reduce duplicated logic and traffic on each client app so I'll demonstrate this approach.</p>
@@ -118,17 +120,23 @@
 
 <p><a href="http://merbist.com/wp-content/uploads/2012/04/SSO-differentdomains-1.png"><img src="http://merbist.com/wp-content/uploads/2012/04/SSO-differentdomains-1.png" alt="" /></a></p>
 
+<p> </p>
+
 <p>The trick consists, when a local session isn't present, of using an iframe in the application using the different domain. The iframe loads a page from the authentication/accounts app which verifies that a valid cookie was set on the main top domain. If that is the case, we can tell the application that the user is already globally logged in and we can tell the iframe host to redirect to an application end point passing an auth token the same way we did during the authentication. The app would then create a session and redirect the user back to where (s)he started. The next requests will see the local session and this process will be ignored.</p>
 
 <p>If the authentication application doesn't find a signed cookie, the iframe can display a login form or redirect the iframe host to a login form depending on the required behavior.</p>
 
 <p>Something to keep in mind when using multiple apps and domains is that you need to keep the shared cookies/sessions in sync, meaning that if you log out from an app, you need to also delete the auth cookie to ensure that users are globally logged out. (It also means that you might always want to use an iframe to check the login status and auto-logoff users).</p>
 
+<p> </p>
+
 <h2>Mobile clients</h2>
 
 <p>Another part of implementing a SSO solution is to handle mobile clients. Mobile clients need to be able to register/login and update accounts. However, unlike S2S service clients, mobile clients should only allow calls to modify data on the behalf of a given user. To do that, I recommend providing opaque mobile tokens during the login process. This token can then be sent with each request in a X-header so the service can authenticate the user making the request. Again, SSL is strongly recommended.</p>
 
 <p>In this approach, we don't use a cookie and we actually don't need a SSO solution, but an unified authentication system.</p>
+
+<p> </p>
 
 <h2>Writing web services</h2>
 
@@ -186,11 +194,15 @@
 
 <p>Let's get started by the benchmarks number to give us an idea of the damage (using Ruby 1.9.3 p125):</p>
 
+<p> </p>
+
 <pre><code>                                                             | Class | Hash  | AR 3.2.1 | AR no protection | Datamapper | Sequel |
 --------------------------------------------------------------------------------------------------------------------------------------
 .new() x100000                                               | 0.037 | 0.049 | 1.557    | 1.536            | 0.027      | 0.209  |
 .new({:id=&gt;1, :title=&gt;"Foo", :text=&gt;"Bar"}) x100000          | 0.327 | 0.038 | 6.784    | 5.972            | 4.226      | 1.986  |
 </code></pre>
+
+<p> </p>
 
 <p>You can see that I am comparing the allocation of a Class instance, a Hash and some ORM models. The benchmark suite tests the allocation of an empty object and one with passed attributes. The benchmark in question is available <a href="https://github.com/mattetti/benchmarks/blob/master/init_objects.rb">here</a>.</p>
 
@@ -200,14 +212,22 @@
 
 <p>Here is what Ruby does (and spends its time) when you initialize a new Model instance (click to download the PDF version):</p>
 
+<p> </p>
+
 <p><a href="http://github.com/mattetti/benchmarks/blob/master/ar_init_profile.pdf?raw=true"><img src="http://merbist.com/wp-content/uploads/2012/02/AR-model-instantation-by-Matt-Aimonetti.jpg" alt="Profiler diagram of AR model instantiation by Matt Aimonetti" /></a></p>
+
+<p> </p>
 
 <p>This is quite a scary graph but it shows nicely the features you are getting and their cost associated. For instance, the option of having the before and after initialization callback cost you 14% of your CPU time per instantiation, even though you probably almost never use these callbacks. I'm reading that by interpreting the node called ActiveSupport::Callback#run_callbacks, 3rd level from the top. So 14.1% of the CPU time is spent trying to run callbacks. As a quick note, note that 90.1% of the CPU time is spent initializing objects, the rest is spent in the loop and in the garbage collection (because the profiler runs many loops). You can then follow the code and see how the code works, creating a dynamic class callback method on the fly (the one with the long name) and then recreating the name of this callback to call it each time the object is allocated. It sounds like that's a good place for some micro optimizations which could yield up to 14% performance increase in some cases.</p>
 
 <p>Another major part of the CPU time is spent in ActiveModel's sanitization. This is the piece of code that allows you to block some model attributes to be mass assigned. This is useful when you don't want to sanitize your incoming params but want to create or update a model instance by using all the passed user params. To avoid malicious users to modify some specific params that might be in your model but not in your form, you can protect these attributes. A good example would be an admin flag on a User object. That said, if you manually initialize an instance, you don't need this extra protection, that's why in the benchmark above, I tested and without the protection. As you can see, it makes quite a big difference. The profiler graph of the same initialization without the mass assignment protection logically ends up looking quite different:</p>
 
+<p> </p>
+
 <p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_init_no_protection.pdf?raw=true">
 </a><a href="https://github.com/mattetti/benchmarks/blob/master/ar_init_no_protection.pdf?raw=true"><img src="http://merbist.com/wp-content/uploads/2012/02/AR-model-instantiation-without-mass-assignment-by-Matt-Aimonetti.jpg" alt="Matt Aimonetti shows the stack trace generated by the instantiation of an Active Record model" /></a></p>
+
+<p> </p>
 
 <p><strong>Update:</strong> My colleague <a href="https://twitter.com/#!/glv">Glenn Vanderburg</a> pointed out that some people might assuming that the shown code path is called for each record loaded from the database. This isn't correct, the graph represents instances allocated by calling #new. See the addition at the bottom of the post for more details about what's going on when you fetch data from the DB.</p>
 
@@ -217,9 +237,15 @@
 
 <p><a href="https://github.com/mattetti/benchmarks/blob/master/dm_init_profile.pdf?raw=true"><img src="http://img.skitch.com/20120223-txs4wa7b5rdpg45aj6354xg1wt.jpg" alt="" /></a></p>
 
+<p> </p>
+
 <p>and <a href="http://sequel.rubyforge.org/">Sequel</a></p>
 
 <p><a href="https://github.com/mattetti/benchmarks/blob/master/sequel_init_profile.pdf?raw=true"><img src="http://img.skitch.com/20120223-p2jx6ypk35ucsgtx7p1tcabpes.jpg" alt="" /></a></p>
+
+<p> </p>
+
+<p> </p>
 
 <p>While I didn't give you much insight in ORM code, I hope that this post will motivate you to sometimes take a look under the cover and profile your code to see what's going on and why it might be slow. <strong>Never assume, always measure</strong>. Tools such as perftools are a great way to get a visual feedback and get a better understanding of how the Ruby interpreter is handling your code.</p>
 
@@ -229,11 +255,17 @@
 
 <p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_first_profile.pdf?raw=true"><img src="http://img.skitch.com/20120224-f23s8xctghi8mj6ax3cdw9aq25.jpg" alt="" /></a></p>
 
+<p> </p>
+
 <p>Model.all</p>
 
 <p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_all_profile.pdf?raw=true"><img src="https://img.skitch.com/20120224-q29q4n7bj3i96erk1enxdqxb5e.jpg" alt="" /></a></p>
 
+<p> </p>
+
 <p>And finally this is the code graph for a call to Model.instantiate which is called after a record was retrieved from the database to convert into an Object. (You can see the #instantiate call referenced in the graph above).</p>
+
+<p> </p>
 
 <p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_instantiate_profile.pdf?raw=true"><img src="http://img.skitch.com/20120224-8scmun9n1c9ufdnxa8rq2961bq.jpg" alt="" /></a></p>
 ]]></content>
@@ -375,6 +407,8 @@ Here is a quick rundown of the code:</p>
 The attributes function is defined a bit below and and it takes any type of objects (empty interface) and returns a map, which is like a Hash or a Dictionary. The map has keys of String type and values of "Type" type. The "Type" type is defined in the reflect package. Inside the function, 23 then use the previously mentioned reflect package to check on the type and the name of each attribute and assign it to a map object. (note that I'm explicitly returning the map, but I could have done it in a more implicit way)</p>
 
 <p>So there you go, that's how you use reflection in Go. Pretty nifty and simple.</p>
+
+<p> </p>
 ]]></content>
   </entry>
   

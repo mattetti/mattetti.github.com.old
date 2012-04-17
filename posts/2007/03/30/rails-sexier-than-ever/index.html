@@ -1,0 +1,231 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Rails, sexier than ever. - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Rails, Sexier Than Ever. 3 days ago, Edge was patched to add a nicer syntax to our dear migrations. Instead of doing: create_table :people do |t| t. &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2007/03/30/rails-sexier-than-ever/">
+    
+    <link href="/favicon.png" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  </head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/">About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Rails, Sexier Than Ever.</h1>
+    <div class="entry"><p>3 days ago, <a href="http://dev.rubyonrails.org/ticket/7932">Edge was patched</a> to add a nicer syntax to our dear migrations.</p>
+
+<p>Instead of doing:</p>
+
+<pre><code>create_table :people do |t|
+  t.column :name, :string
+  t.column :age,  :integer
+end
+</code></pre>
+
+<p>You can now do:</p>
+
+<pre><code>create_table :people do |t|
+  t.name :string
+  t.age  :integer
+end
+</code></pre>
+
+<p>While this is great, I found out that <a href="http://err.lighthouseapp.com/projects/466-plugins">someone</a> came up with an even nicer way of creating your migration, actually, a sexier way of doing migrations, and we all like sexy, don’t we? Otherwise we would not use Rails, would we?</p>
+
+<p>Anyway thanks to this new plugin, your old Migration:</p>
+
+<pre><code>&lt;code&gt;class UpdateYourFamily &lt; ActiveRecord::Migration
+  create_table :updates do |t|
+    t.column :user_id,  :integer
+    t.column :group_id, :integer
+    t.column :body,     :text
+    t.column :type,     :string
+
+    t.column :created_at, :datetime
+    t.column :updated_at, :datetime
+  end
+
+  def self.down
+    drop_table :updates
+  end
+end
+&lt;/code&gt;
+</code></pre>
+
+<p>can look sexier than ever:</p>
+
+<pre><code>class UpdateYourFamily &lt; ActiveRecord::Migration
+  create_table :updates do
+    foreign_key :user
+    foreign_key :group
+
+
+
+
+
+&lt;code&gt;    text   :body
+    string :type
+
+    timestamps!
+  end
+
+  def self.down
+    drop_table :updates
+  end
+end
+&lt;/code&gt;
+</code></pre>
+
+<p>Note that I didn’t test the code above and the self.up method seems to be missing, for more information, check the <a href="http://errtheblog.com/post/2381">official post</a> to give it a try:</p>
+
+<pre><code>./script/plugin install svn://errtheblog.com/svn/plugins/sexy_migrations
+</code></pre>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-03-30T15:43:00+02:00" pubdate data-updated="true">Mar 30<span>th</span>, 2007</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

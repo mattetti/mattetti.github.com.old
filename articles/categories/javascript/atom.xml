@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | Matt Aimonetti]]></title>
   <link href="http://mattetti.github.com/articles/categories/javascript/atom.xml" rel="self"/>
   <link href="http://mattetti.github.com/"/>
-  <updated>2012-04-17T12:22:46+02:00</updated>
+  <updated>2012-04-17T14:27:42+02:00</updated>
   <id>http://mattetti.github.com/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -110,6 +110,8 @@ end
 
 <p>And then add a function called when the DOM is ready which loads the message and injects it in the DOM. Once the cookie read, delete it so the message isn't displayed again.</p>
 
+<p> </p>
+
 <p>So there you have it, if you follow these few steps, you should be able to handle easily 10x more traffic without increasing hardware or making any type of crazy code change. Before you start looking into memcached, redis, cdns or whatever, consider HTTP caching and async DOM manipulation. Finally, note that if you can't use Varnish or Squid, you can very easily setup <a href="http://rtomayko.github.com/rack-cache/">Rack-Cache</a> locally and share the cache via memcached. It's also a great way to test locally.</p>
 
 <hr />
@@ -117,6 +119,8 @@ end
 <p><strong>Update:</strong> CinemaTreasures was updated to use HTTP caching as described above. The hosting cost is now half of what it used to be and the throughput is actually higher which offers a better protection against peak traffic.</p>
 
 <hr />
+
+<p> </p>
 
 <p>External resources:</p>
 

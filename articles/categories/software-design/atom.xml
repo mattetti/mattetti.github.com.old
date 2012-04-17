@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Software Design | Matt Aimonetti]]></title>
   <link href="http://mattetti.github.com/articles/categories/software-design/atom.xml" rel="self"/>
   <link href="http://mattetti.github.com/"/>
-  <updated>2012-04-17T12:22:46+02:00</updated>
+  <updated>2012-04-17T14:27:42+02:00</updated>
   <id>http://mattetti.github.com/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -98,6 +98,8 @@
 
 <p>Finally, we need to set a filter in your application. This auto-login filter will check the presence of an auth cookie on the top level domain and the absence of local session. If that's the case, a session is automatically created using the user id from the cookie value after the cookie integrity is verified. We could also share the session between all our apps, but in most cases, the data stored by each app is very specific and it's safer/cleaner to keep the sessions isolated. The integration with an app running on a different service will also be easier if the sessions are isolated.</p>
 
+<p> </p>
+
 <h2>Registration</h2>
 
 <p>For registration, as for login, we can take one of two approaches: point the user's browser to the auth API or make S2S (server to server) calls from within our apps to the Authentication app. POSTing a form directly to the API is a great way to reduce duplicated logic and traffic on each client app so I'll demonstrate this approach.</p>
@@ -118,17 +120,23 @@
 
 <p><a href="http://merbist.com/wp-content/uploads/2012/04/SSO-differentdomains-1.png"><img src="http://merbist.com/wp-content/uploads/2012/04/SSO-differentdomains-1.png" alt="" /></a></p>
 
+<p> </p>
+
 <p>The trick consists, when a local session isn't present, of using an iframe in the application using the different domain. The iframe loads a page from the authentication/accounts app which verifies that a valid cookie was set on the main top domain. If that is the case, we can tell the application that the user is already globally logged in and we can tell the iframe host to redirect to an application end point passing an auth token the same way we did during the authentication. The app would then create a session and redirect the user back to where (s)he started. The next requests will see the local session and this process will be ignored.</p>
 
 <p>If the authentication application doesn't find a signed cookie, the iframe can display a login form or redirect the iframe host to a login form depending on the required behavior.</p>
 
 <p>Something to keep in mind when using multiple apps and domains is that you need to keep the shared cookies/sessions in sync, meaning that if you log out from an app, you need to also delete the auth cookie to ensure that users are globally logged out. (It also means that you might always want to use an iframe to check the login status and auto-logoff users).</p>
 
+<p> </p>
+
 <h2>Mobile clients</h2>
 
 <p>Another part of implementing a SSO solution is to handle mobile clients. Mobile clients need to be able to register/login and update accounts. However, unlike S2S service clients, mobile clients should only allow calls to modify data on the behalf of a given user. To do that, I recommend providing opaque mobile tokens during the login process. This token can then be sent with each request in a X-header so the service can authenticate the user making the request. Again, SSL is strongly recommended.</p>
 
 <p>In this approach, we don't use a cookie and we actually don't need a SSO solution, but an unified authentication system.</p>
+
+<p> </p>
 
 <h2>Writing web services</h2>
 
@@ -190,13 +198,19 @@
 
 <p>This is for me, by far, the biggest issue with Rails and something that should have been fixed a long time ago. If you're using the WordPress blog engine, you know how easy and safe it is to upgrade the engine or the plugins. Granted WordPress isn't a web dev framework, but it gives you an idea of what kind of experience we should be striving for.</p>
 
+<p> </p>
+
 <h2>Stability vs playground zone</h2>
 
 <p>New features are cool and they help make the platform more appealing to new comers. They also help shape the future of a framework. But from my perspective, that shouldn't come to the cost of stability. Rails 3's new asset pipeline is a good example of a half-baked solution shoved in a release at the last minute and creating a nightmare for a lot of us trying to upgrade. I know, I know, you can turn off the asset pipeline and it got better since it was first released. But shouldn't that be the other way around? Shouldn't fun new ideas risking the stability of an app or making migration harder, be off by default and turned on only by people wanting to experiment? When your framework is young, it's normal that you move fast and sometimes break, but once it matures, these things shouldn't happen.</p>
 
+<p> </p>
+
 <h2>Public/private/plugin APIs</h2>
 
 <p>This is more of a recommendation than anything else. When you write a framework in a very dynamic language like Ruby, people will "monkey patch" your code to inject features. Sometimes it is due to software design challenges, sometimes it's because people don't know better. However,  by not explicitly specifying what APIs are private (they can change at anytime, don't touch), what APIs are public (stable, will be slowly deprecated when they need to be changed) and which ones are for plugin devs only (APIs meant for instrumentation, extension etc..), you are making migration to newer versions much harder. You see, if you have a small, clean public API, then it's easy to see what could break, warn developers and avoid migration nightmares. However, you need to start doing that early on in your project, otherwise you will end up like Rails where all code can potentially change anytime.</p>
+
+<p> </p>
 
 <h2>Rails/Merb merge was a mistake</h2>
 
@@ -204,19 +218,29 @@
 
 <p>But what's worse than everything listed so far is that the lack of competition and the internal rewrites made Rails lose its headstart.  Rails is very much HTML/view focused, its primarily strength is to make server side views trivial and it does an amazing job at that. But let's be honest, that's not the future for web dev. The future is more and more logic pushed to run on the client side (in JS) and the server side being used as an API serving data for the view layer. I'm sorry but adding support for CoffeeScript doesn't really do much to making Rails evolve ahead of what it currently is. Don't get me wrong, I'm a big fan of CoffeeScript, that said I still find that Rails is far from being optimized to developer web APIs in Rails. You can certainly do it, but you are basically using a tool that wasn't designed to write APIs and you pay the overhead for that. If there is one thing I wish Rails will get better at is to make writing pure web APIs better (thankfully there is Sinatra). But at the end of the day, I think that two projects with different philosophies and different approaches are really hard to merge, especially in the open source world. I wouldn't go as far as saying like others that Rails lost its sexiness to node.js because of the wasted time, but I do think that things would have been better for all if that didn't happen. However, I also have to admit that I'm not sure how much of a big deal that is. I prefer to leave the past behind, learn from my own mistake and move on.</p>
 
+<p> </p>
+
 <h2>Technical debts</h2>
 
 <p>Here I'd like to stop to give a huge props to Aaron "<a href="http://twitter.com/tenderlove">@tenderlove</a>" Patterson, the man who's actively working to reduce the <a href="http://en.wikipedia.org/wiki/Technical_debt">technical debts</a> in the Rails code base. This is a really hard job and definitely not a very glamorous one. He's been working on various parts of Rails including its router and its ORM (ActiveRecord). Technical debts are unfortunately normal in most project, but sometimes they are overwhelming to the point that nobody dares touching the code base to clean it up. This is a hard problem, especially when projects move fast like Rails did. But looking back, I think that you want to start tackling technical debts on the side as you move on so you avoid getting to the point that you need a hero to come up and clean the piled errors made in the past. But don't pause your entire project to clean things up otherwise you will lose market, momentum and excitement. I feel that this is also very much true for any legacy project you might pick up as a developer.</p>
+
+<p> </p>
 
 <h2>Keep the cost of entry level low</h2>
 
 <p>Getting started with Rails used to be easier. This can obviously argued since it's very subjective, but from my perspective I think we forgot where we come from and we involuntary expect new comers to come with unrealistic knowledge. Sure, Rails does much more than it used to do, but it's also much harder to get started. I'm not going to argue how harder  it is now or why we got there. Let's just keep in mind that it is a critical thing that should always be re-evaluated. Sure, it's harder when you have an open source project, but it's also up to the leadership to show that they care and to encourage and mentor volunteers to  focus on this important part of a project.</p>
 
+<p> </p>
+
 <h2>Documentation</h2>
 
 <p>Rails documentation isn't bad, but it's far from being great. Documentation certainly isn't one of the Ruby's community strength, especially compared with the Python community, but what saddens me is to see the state of <a href="http://guides.rubyonrails.org/">the official documentation</a> which, should, in theory be the reference. Note that the Rails guides are usually well written and provide value, but they too often seem too light and not useful when you try to do something not totally basic (for instance use an ActiveModel compliant object). That's probably why most people don't refer to them or don't spend too much time there. I'm not trying to blame anyone there. I think that the people who contributed theses guides did an amazing job, but if you want to build a strong and easy to access community, great documentation is key. Look at the <a href="https://docs.djangoproject.com/en/1.3/">Django</a> documentation as a good example. That said, I also need to acknowledge the amazing job done by many community members such as <a href="http://railscasts.com/">Ryan Bates</a> and <a href="http://ruby.railstutorial.org/">Michael Hartl</a> consistently providing high value external documentation via the <a href="http://railscasts.com/">railscasts</a> and the intro to <a href="http://ruby.railstutorial.org/">Rails tutorial</a> available for free.</p>
 
+<p> </p>
+
 <p>In conclusion, I think that there is a lot to learn from Rails, lots of great things as well as lots of things you would want to avoid. We can certainly argue on Hacker News or via comments about whether or not I'm right about Rails failures, my point will still be that the mentioned issues should be avoided in any projects, Rails here is just an example. Many of these issues are currently being addressed by the Rails team but wouldn't it be great if new projects learn from older ones and avoid making the same mistakes? So what other mistakes do you think I forgot to mention and that one should be very careful of avoiding?</p>
+
+<p> </p>
 
 <h3>Updates:</h3>
 
@@ -239,11 +263,15 @@
 
 <p>Let's get started by the benchmarks number to give us an idea of the damage (using Ruby 1.9.3 p125):</p>
 
+<p> </p>
+
 <pre><code>                                                             | Class | Hash  | AR 3.2.1 | AR no protection | Datamapper | Sequel |
 --------------------------------------------------------------------------------------------------------------------------------------
 .new() x100000                                               | 0.037 | 0.049 | 1.557    | 1.536            | 0.027      | 0.209  |
 .new({:id=&gt;1, :title=&gt;"Foo", :text=&gt;"Bar"}) x100000          | 0.327 | 0.038 | 6.784    | 5.972            | 4.226      | 1.986  |
 </code></pre>
+
+<p> </p>
 
 <p>You can see that I am comparing the allocation of a Class instance, a Hash and some ORM models. The benchmark suite tests the allocation of an empty object and one with passed attributes. The benchmark in question is available <a href="https://github.com/mattetti/benchmarks/blob/master/init_objects.rb">here</a>.</p>
 
@@ -253,14 +281,22 @@
 
 <p>Here is what Ruby does (and spends its time) when you initialize a new Model instance (click to download the PDF version):</p>
 
+<p> </p>
+
 <p><a href="http://github.com/mattetti/benchmarks/blob/master/ar_init_profile.pdf?raw=true"><img src="http://merbist.com/wp-content/uploads/2012/02/AR-model-instantation-by-Matt-Aimonetti.jpg" alt="Profiler diagram of AR model instantiation by Matt Aimonetti" /></a></p>
+
+<p> </p>
 
 <p>This is quite a scary graph but it shows nicely the features you are getting and their cost associated. For instance, the option of having the before and after initialization callback cost you 14% of your CPU time per instantiation, even though you probably almost never use these callbacks. I'm reading that by interpreting the node called ActiveSupport::Callback#run_callbacks, 3rd level from the top. So 14.1% of the CPU time is spent trying to run callbacks. As a quick note, note that 90.1% of the CPU time is spent initializing objects, the rest is spent in the loop and in the garbage collection (because the profiler runs many loops). You can then follow the code and see how the code works, creating a dynamic class callback method on the fly (the one with the long name) and then recreating the name of this callback to call it each time the object is allocated. It sounds like that's a good place for some micro optimizations which could yield up to 14% performance increase in some cases.</p>
 
 <p>Another major part of the CPU time is spent in ActiveModel's sanitization. This is the piece of code that allows you to block some model attributes to be mass assigned. This is useful when you don't want to sanitize your incoming params but want to create or update a model instance by using all the passed user params. To avoid malicious users to modify some specific params that might be in your model but not in your form, you can protect these attributes. A good example would be an admin flag on a User object. That said, if you manually initialize an instance, you don't need this extra protection, that's why in the benchmark above, I tested and without the protection. As you can see, it makes quite a big difference. The profiler graph of the same initialization without the mass assignment protection logically ends up looking quite different:</p>
 
+<p> </p>
+
 <p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_init_no_protection.pdf?raw=true">
 </a><a href="https://github.com/mattetti/benchmarks/blob/master/ar_init_no_protection.pdf?raw=true"><img src="http://merbist.com/wp-content/uploads/2012/02/AR-model-instantiation-without-mass-assignment-by-Matt-Aimonetti.jpg" alt="Matt Aimonetti shows the stack trace generated by the instantiation of an Active Record model" /></a></p>
+
+<p> </p>
 
 <p><strong>Update:</strong> My colleague <a href="https://twitter.com/#!/glv">Glenn Vanderburg</a> pointed out that some people might assuming that the shown code path is called for each record loaded from the database. This isn't correct, the graph represents instances allocated by calling #new. See the addition at the bottom of the post for more details about what's going on when you fetch data from the DB.</p>
 
@@ -270,9 +306,15 @@
 
 <p><a href="https://github.com/mattetti/benchmarks/blob/master/dm_init_profile.pdf?raw=true"><img src="http://img.skitch.com/20120223-txs4wa7b5rdpg45aj6354xg1wt.jpg" alt="" /></a></p>
 
+<p> </p>
+
 <p>and <a href="http://sequel.rubyforge.org/">Sequel</a></p>
 
 <p><a href="https://github.com/mattetti/benchmarks/blob/master/sequel_init_profile.pdf?raw=true"><img src="http://img.skitch.com/20120223-p2jx6ypk35ucsgtx7p1tcabpes.jpg" alt="" /></a></p>
+
+<p> </p>
+
+<p> </p>
 
 <p>While I didn't give you much insight in ORM code, I hope that this post will motivate you to sometimes take a look under the cover and profile your code to see what's going on and why it might be slow. <strong>Never assume, always measure</strong>. Tools such as perftools are a great way to get a visual feedback and get a better understanding of how the Ruby interpreter is handling your code.</p>
 
@@ -282,11 +324,17 @@
 
 <p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_first_profile.pdf?raw=true"><img src="http://img.skitch.com/20120224-f23s8xctghi8mj6ax3cdw9aq25.jpg" alt="" /></a></p>
 
+<p> </p>
+
 <p>Model.all</p>
 
 <p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_all_profile.pdf?raw=true"><img src="https://img.skitch.com/20120224-q29q4n7bj3i96erk1enxdqxb5e.jpg" alt="" /></a></p>
 
+<p> </p>
+
 <p>And finally this is the code graph for a call to Model.instantiate which is called after a record was retrieved from the database to convert into an Object. (You can see the #instantiate call referenced in the graph above).</p>
+
+<p> </p>
 
 <p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_instantiate_profile.pdf?raw=true"><img src="http://img.skitch.com/20120224-8scmun9n1c9ufdnxa8rq2961bq.jpg" alt="" /></a></p>
 ]]></content>
@@ -389,6 +437,8 @@ end
 
 <p>And then add a function called when the DOM is ready which loads the message and injects it in the DOM. Once the cookie read, delete it so the message isn't displayed again.</p>
 
+<p> </p>
+
 <p>So there you have it, if you follow these few steps, you should be able to handle easily 10x more traffic without increasing hardware or making any type of crazy code change. Before you start looking into memcached, redis, cdns or whatever, consider HTTP caching and async DOM manipulation. Finally, note that if you can't use Varnish or Squid, you can very easily setup <a href="http://rtomayko.github.com/rack-cache/">Rack-Cache</a> locally and share the cache via memcached. It's also a great way to test locally.</p>
 
 <hr />
@@ -396,6 +446,8 @@ end
 <p><strong>Update:</strong> CinemaTreasures was updated to use HTTP caching as described above. The hosting cost is now half of what it used to be and the throughput is actually higher which offers a better protection against peak traffic.</p>
 
 <hr />
+
+<p> </p>
 
 <p>External resources:</p>
 
@@ -432,6 +484,8 @@ end
 </ul>
 
 
+<p> </p>
+
 <h2>Communication</h2>
 
 <p>As in most situations, communication is one of the biggest challenges. Communication is even harder in the video game industry since you have so many teams and experts involved. Each team speaks its own jargon, has its own expertise and its own deadlines. But all focus on the same goal: releasing the best game ever. The team I'm part of has implementing online features as its goal. That's the way we bring business value to our titles. Concretely, that means that we provide the game client developers with a C++ SDK which connects to custom web APIs written in Ruby. The API implementations rely on various data stores (<a href="http://www.mysql.com/">MySQL</a>, <a href="http://redis.io/">Redis</a>, <a href="http://memcached.org/">Memcached</a>, memory) to store and retrieve all sorts of game data.</p>
@@ -440,19 +494,27 @@ end
 
 <p>From this perspective, the API is the most important deliverable for our team and it should communicate the design goal while being very explicit about how it works, why it works the way it does, and how to implement it client side. This is a very good place where we can improve communication by making sure that we focus on making clear, well designed, well documented, flexible APIs.</p>
 
+<p> </p>
+
 <h2>Scalability, performance</h2>
 
 <p>On the server side, the APIs need to perform and scale to handles tends of thousands of concurrent requests. Web developers often rely on aggressive <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html">HTTP caching</a> but in our case, the web client (our SDK) has a limited amount of memory available and 90% of the requests are user specific (can't use full page HTTP cache) and a lot of these are POST/DELETE requests (can't be cached). That means that, to scale, we have to focus on what most developers don't often have to worry too much about: all the small details which, put together with a high load, end up drastically affecting your performance.</p>
 
 <p>While Ruby is a great language, a lot of the libraries and frameworks are not optimized for performance, at least not the type of performance needed for our use case. However, the good news is that this is easily fixable and many alternatives exist (lots of async, non-blocking drivers for i.e). When obsessed with performance, you quickly learn to properly load test, profile, and monitor your code to find the bottlenecks and the places where you should focus your attention. The big, unique challenge though, is that a console game will more than likely see its peak traffic in the first few weeks, not really giving the chance to the online team to iteratively handle the prod issues. The only solution is to do everything possible before going live to ensure that the system will perform as expected. Of course if we were to write the same services in a more performant language, we would need to spend less time optimizing. But we are gaining so much flexibility by using a higher level programming language that, in my mind, the trade off is totally worth it (plus you still need to spend a lot of time optimizing your code path, even if your code is written in a very fast language).</p>
 
+<p> </p>
+
 <h2>Deadlines, requirement changes</h2>
 
 <p>That's just part of the way the industry works. Unless you work for <a href="http://blizzard.com">Blizzard</a> and you can afford to spend a crazy amount of time and money on the development of a title; you will have to deal with sliding deadlines, requirement changes, scope changes etc... The only way I know how to protect myself from such things is to plan for the worst. Being a non-idealistic (read pessimistic) person helps a lot. When you design your software, make sure your design is sound but flexible enough to handle any major change that you know could happen at any time. Pick your battles and make sure your assumptions are properly thought through, communicated and documented so others understand and accept them. In a nutshell, this is a problem we can't avoid, so you need to embrace it.</p>
 
+<p> </p>
+
 <h2>Limited reusability</h2>
 
 <p>This topic has a lot to do with the previous paragraph. Because scopes can change often and because the deadlines are often crazy, a lot of the time, engineers don't take the time to think about reusability. They slap some code together, pray to the <a href="http://en.wikipedia.org/wiki/Lords_of_Kobol">lords of Kobol</a> and hope that they won't have to look at their code ever again (I'm guilty of having done that too). The result is a lot of throw away code. This is actually quite frequent and normal in our industry. But it doesn't mean that it the right thing to do! The assumption/myth is that each game is different and therefore two games can't be using the same tech solution. My take on that is that it's partly true. But some components are the same for 80% of the games I work on. So why not design them well and reuse the common parts? (A lot of games share the same engines, such as <a href="http://www.unrealengine.com/">Unreal</a> for example, and there is no reason why we can't build a core online engine extended for each title)</p>
+
+<p> </p>
 
 <h2>My approach</h2>
 
@@ -495,6 +557,8 @@ end
 <p>Even though we designed the core extensions the best we could, there are cases where some titles will need to extend these extensions. To do that, we added a bunch of hooks that could be implemented on the title side if needed (Ruby makes that super easy and clean to do!). A good example of that is the login sequence or the player data.</p>
 
 <p><em>Lessons learned:</em> The challenge with modularity is to keep things simple and highly performing yet flexible. A key element to manage that is to stay as consistent as possible. Don't implement hooks three different ways, try to keep method signatures consistent, keep it simple and organized.</p>
+
+<p> </p>
 
 <h2>Conclusion</h2>
 

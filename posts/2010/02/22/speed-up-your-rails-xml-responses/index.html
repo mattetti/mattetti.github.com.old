@@ -1,0 +1,403 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Speed up your Rails XML responses - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Speed Up Your Rails XML Responses At work, we have an XML API that gets quite a lot of traffic. Last week I looked into improving its performance &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2010/02/22/speed-up-your-rails-xml-responses/">
+    
+    <link href="/favicon.png" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  </head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/">About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Speed Up Your Rails XML Responses</h1>
+    <div class="entry"><p>At <a href="http://www.us.playstation.com/">work</a>, we have an XML API that gets quite a lot of traffic. Last week I looked into improving its performance since we are expecting more traffic soon and want to make sure our response time is optimized.</p>
+
+<p>My first thought was to make sure we had  an optimized <a href="http://api.rubyonrails.org/classes/ActiveSupport/XmlMini.html">ActiveSupport&#8217;s xmlmini backend</a>. Rails 2.3.5 fixed some issues when using <a href="http://nokogiri.org/">Nokogiri</a> as a xmlmini so I switched to my favorite Ruby XML lib:</p>
+
+<pre><code>ActiveSupport::XmlMini.backend = 'Nokogiri'
+</code></pre>
+
+<p>I run some benchmarks using ab, httperf and jmeter but the results were not that great. I was so sure that switching from <a href="http://ruby-doc.org/stdlib/libdoc/rexml/rdoc/index.html">rexml</a> to <a href="http://nokogiri.org/">nokogiri</a> would give me awesome results that I was very disappointed.</p>
+
+<p>I was about to call <a href="http://tenderlovemaking.com/">Aaron Patterson</a> (Nokogiri&#8217;s author) to insult him, blame him for _why&#8217;s disappearance and tell him that all his pro bono efforts were useless since my own app was not running much faster when switched to his library. As I was about to dial his number on my iPhone I had a crazy thought&#8230; maybe it was not Aaron&#8217;s fault, maybe it was mine.</p>
+
+<p>So I took a break went to play some fuzzball and as I was being ridiculed by Italian coworker, Emanuele, I realized that most of our API calls were just simple HTTP requests with no XML payload, just some query params. However, we were generating a lot of XML to send back to the client and AS::XmlMini only takes care of the XML parsing, not the rendering.</p>
+
+<p>The XML rendering is done by <a href="http://onestepback.org/">Jim Weirich</a>&#8217;s pure Ruby <a href="http://builder.rubyforge.org/">builder library</a> which is vendored in Rails. Builder does a good job, but I thought that maybe a C based library might improve the speed. A coworker of mine (James Bunch) recommended to look into <a href="http://github.com/codahale/faster-builder">faster-builder</a>, a drop-in Builder replacement based on libxml. Unfortunately, the project doesn&#8217;t seem to be maintained and I decided to look into using <a href="http://nokogiri.org/">Nokogiri</a> XML builder instead. (Also, faster-builder&#8217;s author doesn&#8217;t like me very much while Aaron knows he&#8217;s one of my Ruby heroes so asking for help could be easier)</p>
+
+<p>Some people reported having tried using <a href="http://nokogiri.org/">Nokogiri</a> as a XML builder but didn&#8217;t see much speed improvement. Because of the amount of magic required to render a rxml template, I was not really surprised but I decided to contact Aaron and ask him if he tried using his lib instead of builder in a Rails app. <a href="http://www.flickr.com/photos/aaronp/57241193/">Aaron</a> told me he gave it a try a while back and he helped me get my Rails app setup to render xml templates using <a href="http://nokogiri.org/">Nokogiri</a>.</p>
+
+<p>The next step was simple, create a <a href="http://github.com/mattetti/noko-vs-builder-benchmark">benchmark app</a> and benchmark Builder vs Nokogiri using various templates. Here are the results I got using Ruby 1.9.1 (the Ruby version we use in production) and two sets of templates:</p>
+
+<p><strong>Builder</strong> small template, <strong>time per request: 15.507 [ms]</strong> (mean)</p>
+
+<pre><code>$ ab -c 1 -n 200 http://127.0.0.1:3000/benchmarks/builder_small
+This is ApacheBench, Version 2.3 &lt;$Revision: 655654 $&gt;
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 100 requests
+Completed 200 requests
+Finished 200 requests
+
+Server Software:        nginx/0.7.65
+Server Hostname:        127.0.0.1
+Server Port:            3000
+
+Document Path:          /benchmarks/builder_small
+Document Length:        216 bytes
+
+Concurrency Level:      1
+Time taken for tests:   3.101 seconds
+Complete requests:      200
+Failed requests:        0
+Write errors:           0
+Total transferred:      114326 bytes
+HTML transferred:       43200 bytes
+Requests per second:    64.49 [#/sec] (mean)
+Time per request:       15.507 [ms] (mean)
+Time per request:       15.507 [ms] (mean, across all concurrent requests)
+Transfer rate:          36.00 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:    11   15   8.8     12      47
+Waiting:        3   15   8.9     12      47
+Total:         11   15   8.8     12      47
+
+Percentage of the requests served within a certain time (ms)
+  50%     12
+  66%     12
+  75%     13
+  80%     13
+  90%     35
+  95%     36
+  98%     38
+  99%     41
+ 100%     47 (longest request)
+</code></pre>
+
+<p><strong>Nokogiri</strong> small template, <strong>time per request: 15.354 [ms] (mean)</strong></p>
+
+<pre><code>$ ab -c 1 -n 200 http://127.0.0.1:3000/benchmarks/noko_small
+This is ApacheBench, Version 2.3 &lt;$Revision: 655654 $&gt;
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 100 requests
+Completed 200 requests
+Finished 200 requests
+
+Server Software:        nginx/0.7.65
+Server Hostname:        127.0.0.1
+Server Port:            3000
+
+Document Path:          /benchmarks/noko_small
+Document Length:        238 bytes
+
+Concurrency Level:      1
+Time taken for tests:   3.071 seconds
+Complete requests:      200
+Failed requests:        0
+Write errors:           0
+Total transferred:      118717 bytes
+HTML transferred:       47600 bytes
+Requests per second:    65.13 [#/sec] (mean)
+Time per request:       15.354 [ms] (mean)
+Time per request:       15.354 [ms] (mean, across all concurrent requests)
+Transfer rate:          37.75 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:    11   15   8.6     12      39
+Waiting:       11   15   8.6     12      39
+Total:         11   15   8.6     12      39
+
+Percentage of the requests served within a certain time (ms)
+  50%     12
+  66%     12
+  75%     12
+  80%     13
+  90%     35
+  95%     36
+  98%     37
+  99%     38
+ 100%     39 (longest request)
+</code></pre>
+
+<p>Running the benchmarks many times showed that Nokogiri and Builder were taking more or less the same amount of time to builder a small template.</p>
+
+<p>I then decided to try a bigger template, closer to what we have in production, here are the results:</p>
+
+<p><strong>Nokogiri</strong> longer template, <strong>time per request: 31.252 [ms] (mean)</strong></p>
+
+<pre><code>$ ab -c 1 -n 200 http://127.0.0.1:3000/benchmarks/noko
+This is ApacheBench, Version 2.3 &lt;$Revision: 655654 $&gt;
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 100 requests
+Completed 200 requests
+Finished 200 requests
+
+Server Software:        nginx/0.7.65
+Server Hostname:        127.0.0.1
+Server Port:            3000
+
+Document Path:          /benchmarks/noko
+Document Length:        54398 bytes
+
+Concurrency Level:      1
+Time taken for tests:   6.250 seconds
+Complete requests:      200
+Failed requests:        0
+Write errors:           0
+Total transferred:      10951200 bytes
+HTML transferred:       10879600 bytes
+Requests per second:    32.00 [#/sec] (mean)
+Time per request:       31.252 [ms] (mean)
+Time per request:       31.252 [ms] (mean, across all concurrent requests)
+Transfer rate:          1711.00 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:    24   31  11.3     26      62
+Waiting:       23   30  11.3     24      61
+Total:         24   31  11.3     26      62
+
+Percentage of the requests served within a certain time (ms)
+  50%     26
+  66%     27
+  75%     27
+  80%     29
+  90%     54
+  95%     55
+  98%     58
+  99%     59
+ 100%     62 (longest request)
+</code></pre>
+
+<p><strong>Builder</strong>, longer template, <strong>Time per request: 140.725 [ms] (mean)</strong></p>
+
+<pre><code>$ ab -c 1 -n 200 http://127.0.0.1:3000/benchmarks/builder
+This is ApacheBench, Version 2.3 &lt;$Revision: 655654 $&gt;
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 100 requests
+Completed 200 requests
+Finished 200 requests
+
+Server Software:        nginx/0.7.65
+Server Hostname:        127.0.0.1
+Server Port:            3000
+
+Document Path:          /benchmarks/builder
+Document Length:        54376 bytes
+
+Concurrency Level:      1
+Time taken for tests:   28.145 seconds
+Complete requests:      200
+Failed requests:        0
+Write errors:           0
+Total transferred:      10947000 bytes
+HTML transferred:       10875200 bytes
+Requests per second:    7.11 [#/sec] (mean)
+Time per request:       140.725 [ms] (mean)
+Time per request:       140.725 [ms] (mean, across all concurrent requests)
+Transfer rate:          379.83 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.1      0       1
+Processing:   127  141  24.6    132     331
+Waiting:      126  139  23.6    130     328
+Total:        127  141  24.6    132     331
+
+Percentage of the requests served within a certain time (ms)
+  50%    132
+  66%    138
+  75%    147
+  80%    149
+  90%    156
+  95%    169
+  98%    193
+  99%    311
+ 100%    331 (longest request)
+</code></pre>
+
+<p>Wow, <a href="http://twitter.com/tenderlove">@tenderlove</a>&#8217;s Nokogori just brought us a<strong> 4.5X speed improvement for this specific template</strong>.  100ms per request is probably not a big deal for most people and I have to say that Jim did a great job with Builder. However in my specific case, 100ms on a request being called thousands of times per hour is quite important.</p>
+
+<p>(The <a href="http://github.com/mattetti/noko-vs-builder-benchmark">benchmark app is available on github</a>, feel free to fork it and benchmark your own templates)</p>
+
+<p>Who would have thought that a man like this could save the day?!</p>
+
+<p>[caption id=&#8221;attachment_1737&#8221; align=&#8221;alignleft&#8221; width=&#8221;150&#8221; caption=&#8221;Aaron &#8216;Tenderlove&#8217; Patterson&#8221;]<a href="http://railsontherun.com/wp-content/uploads/2010/02/aaron.jpg"><img src="http://railsontherun.com/wp-content/uploads/2010/02/aaron-150x150.jpg" alt="" /></a>[/caption]</p>
+
+<p><a href="http://www.flickr.com/photos/aaronp/3824959062/"><img src="http://farm3.static.flickr.com/2470/3824959062_fb0755e665_m_d.jpg" alt="" /></a></p>
+
+<p><a href="http://www.flickr.com/photos/aaronp/57241193/"><img src="http://farm1.static.flickr.com/29/57241193_8137f2a4af_m_d.jpg" alt="" /></a></p>
+
+<p><a href="http://www.flickr.com/photos/aaronp/3132124227/"><img src="http://farm4.static.flickr.com/3289/3132124227_3ace4ec7ae_m_d.jpg" alt="" /></a></p>
+
+<p><strong><em>The moral of the story is that adding a bit of tenderlove to your Ruby code can make it perform much much better!</em></strong></p>
+
+<p><strong>Thank you Aaron &#8216;Tenderlove&#8217; Patterson!</strong></p>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-22T23:25:09+01:00" pubdate data-updated="true">Feb 22<span>nd</span>, 2010</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/rails/'>rails</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

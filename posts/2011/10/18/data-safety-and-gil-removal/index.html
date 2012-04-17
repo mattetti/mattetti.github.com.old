@@ -12,7 +12,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 
     <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
-    <link rel="canonical" href="http://mattetti.github.com">
+    
+    <link rel="canonical" href="http://merbist.com/2011/10/18/data-safety-and-gil-removal/">
+    
     <link href="/favicon.png" rel="shortcut icon">
     <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -32,7 +34,7 @@
   </script>
 
 
-</head>
+  </head>
 
 
 <body>
@@ -153,21 +155,37 @@ puts @array.size
 
 <p>In other words, if not manually synchronized, shared data can easily be corrupted. You might have two threads modifying the value of the same variable and one of the two threads will step on top of the other leaving you with a race condition. You only need 2 threads accessing the same instance variable at the same time to get a race condition. My example uses more threads and more mutations to make the problem more obvious. Note that TDD wouldn&#8217;t catch such an issue and even extensive testing will provide very little guarantee that your code is thread safe.</p>
 
+<p> </p>
+
 <h2>So what? Thread safety isn&#8217;t a new problem.</h2>
 
 <p>That&#8217;s absolutely correct, ask any decent Java developer out there, he/she will tell how locks are used to &#8220;easily&#8221; synchronize objects to make your code thread safe. They might also mention the deadlocks and other issues related to that, but that&#8217;s a different story. One might also argue that when you write web apps, there is very little shared data and the chances of corrupting data across concurrent requests is very small since most of the data is kept in a shared data store outside of the process.</p>
 
 <p>All these arguments are absolutely valid, the challenge is that you have a large community and a large amount of code out there that expects a certain behavior. And removing the GIL does change this behavior. It might not be a big deal for you because you know how to deal with thread safety, but it might be a big deal for others and C Ruby is by far the most used Ruby implementation. It&#8217;s basically like saying that automatic cars shouldn&#8217;t be made and sold, and everybody has to switch to stick shifts. They have better gas mileage, I personally enjoy driving then and they are cheaper to build. Removing the GIL is a bit like that. There is a cost associated with this decision and while this cost isn&#8217;t insane, the people in charge prefer to not pay it.</p>
 
+<p> </p>
+
 <h2>Screw that, I&#8217;ll switch to Node.js</h2>
 
 <p>I heard a lot of people telling me they were looking into using Node.js because it has a better design and no GIL. While I like Node.js and if I were to implement a chat room or an app keeping connections for a long time, I would certainly compare it closely to EventMachine, I also think that this argument related to the GIL is absurd. First, you have other Ruby implementations which don&#8217;t have a GIL and are really stable (i.e: JRuby) but then Node basically works the same as Ruby with a GIL. Yes, Node is evented and single threaded but when you think about it, it behaves the same as Ruby 1.9 with its GIL. Many requests come in and they are handled one after the other and because IO requests are non-blocking, multiple requests can be processed concurrently but not in parallel. Well folks, that&#8217;s exactly how C Ruby works too, and unlike popular believe, most if not all the popular libraries making IO requests are non blocking (when using 1.9). So, next time you try to justify you wanting to toy with Node, please don&#8217;t use the GIL argument.</p>
+
+<p> </p>
 
 <h2>What should I do?</h2>
 
 <p>As always, evaluate your needs and see what makes sense for your project. Start by making sure you are using Ruby 1.9 and your code makes good use of threading. Then look at your app and how it behaves, is it CPU-bound or IO-bound. Most web apps out there are IO-bound (waiting for the DB, redis or API calls), and when doing an IO call, Ruby&#8217;s GIL is released allowing another thread to do its work. In that case, not having a GIL in your Ruby implementation won&#8217;t help you. However, if your app is CPU-bound, then switching to JRuby or Rubinius might be beneficial. However, don&#8217;t assume anything until you proved it and remember that making such a change will more than likely require some architectural redesign, especially if using JRuby.  But, hey, it might totally be worth it as many proved it in the past.</p>
 
+<p> </p>
+
 <p>I hope I was able to clarify things a bit further. If you wish to dig further, I would highly recommend you read the many discussions the Python community had in the last few years.</p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
 </div>
     <div class="meta">
         <div class="date updated">
@@ -187,7 +205,7 @@ puts @array.size
 
 <div class="cat">
   
-    <a class='category' href='/articles/categories/misc/'>Misc</a>, <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>
+    <a class='category' href='/articles/categories/misc/'>Misc</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/merbist-com/'>merbist.com</a>, <a class='category' href='/articles/categories/ruby/'>ruby</a>
   
 </div>
 

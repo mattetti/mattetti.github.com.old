@@ -12,7 +12,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 
     <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
-    <link rel="canonical" href="http://mattetti.github.com">
+    
+    <link rel="canonical" href="http://merbist.com/2011/04/14/video-game-web-framework-design/">
+    
     <link href="/favicon.png" rel="shortcut icon">
     <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -32,7 +34,7 @@
   </script>
 
 
-</head>
+  </head>
 
 
 <body>
@@ -120,6 +122,8 @@
 </ul>
 
 
+<p> </p>
+
 <h2>Communication</h2>
 
 <p>As in most situations, communication is one of the biggest challenges. Communication is even harder in the video game industry since you have so many teams and experts involved. Each team speaks its own jargon, has its own expertise and its own deadlines. But all focus on the same goal: releasing the best game ever. The team I&#8217;m part of has implementing online features as its goal. That&#8217;s the way we bring business value to our titles. Concretely, that means that we provide the game client developers with a C++ SDK which connects to custom web APIs written in Ruby. The API implementations rely on various data stores (<a href="http://www.mysql.com/">MySQL</a>, <a href="http://redis.io/">Redis</a>, <a href="http://memcached.org/">Memcached</a>, memory) to store and retrieve all sorts of game data.</p>
@@ -128,19 +132,27 @@
 
 <p>From this perspective, the API is the most important deliverable for our team and it should communicate the design goal while being very explicit about how it works, why it works the way it does, and how to implement it client side. This is a very good place where we can improve communication by making sure that we focus on making clear, well designed, well documented, flexible APIs.</p>
 
+<p> </p>
+
 <h2>Scalability, performance</h2>
 
 <p>On the server side, the APIs need to perform and scale to handles tends of thousands of concurrent requests. Web developers often rely on aggressive <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html">HTTP caching</a> but in our case, the web client (our SDK) has a limited amount of memory available and 90% of the requests are user specific (can&#8217;t use full page HTTP cache) and a lot of these are POST/DELETE requests (can&#8217;t be cached). That means that, to scale, we have to focus on what most developers don&#8217;t often have to worry too much about: all the small details which, put together with a high load, end up drastically affecting your performance.</p>
 
 <p>While Ruby is a great language, a lot of the libraries and frameworks are not optimized for performance, at least not the type of performance needed for our use case. However, the good news is that this is easily fixable and many alternatives exist (lots of async, non-blocking drivers for i.e). When obsessed with performance, you quickly learn to properly load test, profile, and monitor your code to find the bottlenecks and the places where you should focus your attention. The big, unique challenge though, is that a console game will more than likely see its peak traffic in the first few weeks, not really giving the chance to the online team to iteratively handle the prod issues. The only solution is to do everything possible before going live to ensure that the system will perform as expected. Of course if we were to write the same services in a more performant language, we would need to spend less time optimizing. But we are gaining so much flexibility by using a higher level programming language that, in my mind, the trade off is totally worth it (plus you still need to spend a lot of time optimizing your code path, even if your code is written in a very fast language).</p>
 
+<p> </p>
+
 <h2>Deadlines, requirement changes</h2>
 
 <p>That&#8217;s just part of the way the industry works. Unless you work for <a href="http://blizzard.com">Blizzard</a> and you can afford to spend a crazy amount of time and money on the development of a title; you will have to deal with sliding deadlines, requirement changes, scope changes etc&#8230; The only way I know how to protect myself from such things is to plan for the worst. Being a non-idealistic (read pessimistic) person helps a lot. When you design your software, make sure your design is sound but flexible enough to handle any major change that you know could happen at any time. Pick your battles and make sure your assumptions are properly thought through, communicated and documented so others understand and accept them. In a nutshell, this is a problem we can&#8217;t avoid, so you need to embrace it.</p>
 
+<p> </p>
+
 <h2>Limited reusability</h2>
 
 <p>This topic has a lot to do with the previous paragraph. Because scopes can change often and because the deadlines are often crazy, a lot of the time, engineers don&#8217;t take the time to think about reusability. They slap some code together, pray to the <a href="http://en.wikipedia.org/wiki/Lords_of_Kobol">lords of Kobol</a> and hope that they won&#8217;t have to look at their code ever again (I&#8217;m guilty of having done that too). The result is a lot of throw away code. This is actually quite frequent and normal in our industry. But it doesn&#8217;t mean that it the right thing to do! The assumption/myth is that each game is different and therefore two games can&#8217;t be using the same tech solution. My take on that is that it&#8217;s partly true. But some components are the same for 80% of the games I work on. So why not design them well and reuse the common parts? (A lot of games share the same engines, such as <a href="http://www.unrealengine.com/">Unreal</a> for example, and there is no reason why we can&#8217;t build a core online engine extended for each title)</p>
+
+<p> </p>
 
 <h2>My approach</h2>
 
@@ -184,6 +196,8 @@
 
 <p><em>Lessons learned:</em> The challenge with modularity is to keep things simple and highly performing yet flexible. A key element to manage that is to stay as consistent as possible. Don&#8217;t implement hooks three different ways, try to keep method signatures consistent, keep it simple and organized.</p>
 
+<p> </p>
+
 <h2>Conclusion</h2>
 
 <p>It&#8217;s a bit early to say if this rewrite is a success or not and there are still lots of optimizations and technology improvements we are looking forward to doing. Only time will give us enough retrospect to evaluate our work. But because we defined the business value (mission statement) and the technical objectives, it is safe to say that the new framework meets the expectations quite well. On an early benchmark we noted a 10X speed improvement and that&#8217;s before drilling into the performance optimizations such as making all the calls non-blocking, using better connection pools, cache write through layer&#8230; However, there is still one thing that we will have to monitor: how much business value will this framework generate. And I guess that&#8217;s where we failed to define an agreed upon evaluation grid. I presume that if our developers spend more time designing and implementing APIs and less time debugging that could be considered business value. If we spend less time maintaining or fighting with the game engine, that would also be a win. Finally, if the player experience is improved we will be able to definitely say that we made the right choice.</p>
@@ -208,7 +222,7 @@
 
 <div class="cat">
   
-    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/software-design/'>Software Design</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>
+    <a class='category' href='/articles/categories/software-design/'>Software Design</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/merbist-com/'>merbist.com</a>, <a class='category' href='/articles/categories/ruby/'>ruby</a>
   
 </div>
 

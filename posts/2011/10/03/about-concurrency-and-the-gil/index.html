@@ -12,7 +12,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 
     <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
-    <link rel="canonical" href="http://mattetti.github.com">
+    
+    <link rel="canonical" href="http://merbist.com/2011/10/03/about-concurrency-and-the-gil/">
+    
     <link href="/favicon.png" rel="shortcut icon">
     <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -32,7 +34,7 @@
   </script>
 
 
-</head>
+  </head>
 
 
 <body>
@@ -122,6 +124,8 @@
 
 <p>Such a scheduling isn&#8217;t a problem at all when you only have 1 cpu, since a cpu can only execute a piece of code at a time and context switching happens all the time to allow the machine to run multiple processes/threads in parallel. The problem is when you have more than 1 CPU because in that case, if you were to only run 1 Ruby process, then you would most of the time only use 1 cpu at a time. If you are running on a 8 cpu box, that&#8217;s not cool at all! A lot of people stop at this explanation and imagine that their server can only handle one request at a time and they they rush to sign Greenpeace petitions asking Matz to make Ruby greener by optimizing Ruby and saving CPU cycles. Well, the reality is slightly different, I&#8217;ll get back to that in a minute. Before I explain &#8220;ways to achieve true concurrency with CRuby, let me explain why C Ruby uses a GIL and why each implementation has to make an important choice and in this case both CPython and C Ruby chose to keep their GIL.</p>
 
+<p> </p>
+
 <h3>Why a GIL in the first place?</h3>
 
 <ul>
@@ -134,6 +138,8 @@
 
 
 <p>As you can see the arguments can be organized in two main categories: data safety and C extensions/implementation. An implementation which doesn&#8217;t rely too much on C extensions (because they run a bit slow, or because code written in a different language is preferred) is only faced with one argument: data safety.</p>
+
+<p> </p>
 
 <h3></h3>
 
@@ -154,6 +160,8 @@
 
 <p>Don&#8217;t count the amount of pros/cons to jump to the conclusion that removing the GIL is a bad idea. A lot of the arguments for removing the GIL are related. At the end of the day it boils down to data safety. During the Q&amp;A section of my RubyConf talk, Matz came up on stage and said data safety was the main reason why C Ruby still has a GIL. Again, this is a topic which was discussed at length in the Python community and I&#8217;d encourage you to read arguments from the <a href="http://www.jython.org/">Jython</a> (the equivalent of JRuby for Python) developers, <a href="http://codespeak.net/pypy/dist/pypy/doc/faq.html#does-pypy-have-a-gil-why">the PyPy</a> (the equivalent of Rubinius in the Python community) and CPython developers. (a good collection of arguments are actually available in the comments related to the <a href="https://plus.google.com/107994348420168435683/posts/993U42yVbfk">rubber boots post mentioned earlier</a>)</p>
 
+<p> </p>
+
 <h3>How can true concurrency be achieved using CRuby?</h3>
 
 <ul>
@@ -172,6 +180,8 @@
 <p>This is a simplified diagram but you can see that a good chunk of the request life cycle in a Ruby app doesn&#8217;t require the Ruby thread to be active (CPU Idle blocks) and therefore these 2 requests would be processed almost concurrently.</p>
 
 <p>To boil it down to something simplified, when it comes to the GIL, an implementor has to chose between data safety and memory usage. But it is important to note that context switching between threads is faster than context switching between processes and data safety can and is often achieved in environments without a GIL, but it requires more knowledge and work on the developer side.</p>
+
+<p> </p>
 
 <h3>Conclusion</h3>
 
@@ -195,7 +205,7 @@
 
 <div class="cat">
   
-    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>
+    <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/merbist-com/'>merbist.com</a>, <a class='category' href='/articles/categories/ruby/'>ruby</a>
   
 </div>
 

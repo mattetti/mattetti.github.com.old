@@ -12,7 +12,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 
     <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
-    <link rel="canonical" href="http://mattetti.github.com">
+    
+    <link rel="canonical" href="http://merbist.com/2012/02/29/learning-from-rails-failures/">
+    
     <link href="/favicon.png" rel="shortcut icon">
     <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -32,7 +34,7 @@
   </script>
 
 
-</head>
+  </head>
 
 
 <body>
@@ -114,13 +116,19 @@
 
 <p>This is for me, by far, the biggest issue with Rails and something that should have been fixed a long time ago. If you&#8217;re using the WordPress blog engine, you know how easy and safe it is to upgrade the engine or the plugins. Granted WordPress isn&#8217;t a web dev framework, but it gives you an idea of what kind of experience we should be striving for.</p>
 
+<p> </p>
+
 <h2>Stability vs playground zone</h2>
 
 <p>New features are cool and they help make the platform more appealing to new comers. They also help shape the future of a framework. But from my perspective, that shouldn&#8217;t come to the cost of stability. Rails 3&#8217;s new asset pipeline is a good example of a half-baked solution shoved in a release at the last minute and creating a nightmare for a lot of us trying to upgrade. I know, I know, you can turn off the asset pipeline and it got better since it was first released. But shouldn&#8217;t that be the other way around? Shouldn&#8217;t fun new ideas risking the stability of an app or making migration harder, be off by default and turned on only by people wanting to experiment? When your framework is young, it&#8217;s normal that you move fast and sometimes break, but once it matures, these things shouldn&#8217;t happen.</p>
 
+<p> </p>
+
 <h2>Public/private/plugin APIs</h2>
 
 <p>This is more of a recommendation than anything else. When you write a framework in a very dynamic language like Ruby, people will &#8220;monkey patch&#8221; your code to inject features. Sometimes it is due to software design challenges, sometimes it&#8217;s because people don&#8217;t know better. However,  by not explicitly specifying what APIs are private (they can change at anytime, don&#8217;t touch), what APIs are public (stable, will be slowly deprecated when they need to be changed) and which ones are for plugin devs only (APIs meant for instrumentation, extension etc..), you are making migration to newer versions much harder. You see, if you have a small, clean public API, then it&#8217;s easy to see what could break, warn developers and avoid migration nightmares. However, you need to start doing that early on in your project, otherwise you will end up like Rails where all code can potentially change anytime.</p>
+
+<p> </p>
 
 <h2>Rails/Merb merge was a mistake</h2>
 
@@ -128,19 +136,29 @@
 
 <p>But what&#8217;s worse than everything listed so far is that the lack of competition and the internal rewrites made Rails lose its headstart.  Rails is very much HTML/view focused, its primarily strength is to make server side views trivial and it does an amazing job at that. But let&#8217;s be honest, that&#8217;s not the future for web dev. The future is more and more logic pushed to run on the client side (in JS) and the server side being used as an API serving data for the view layer. I&#8217;m sorry but adding support for CoffeeScript doesn&#8217;t really do much to making Rails evolve ahead of what it currently is. Don&#8217;t get me wrong, I&#8217;m a big fan of CoffeeScript, that said I still find that Rails is far from being optimized to developer web APIs in Rails. You can certainly do it, but you are basically using a tool that wasn&#8217;t designed to write APIs and you pay the overhead for that. If there is one thing I wish Rails will get better at is to make writing pure web APIs better (thankfully there is Sinatra). But at the end of the day, I think that two projects with different philosophies and different approaches are really hard to merge, especially in the open source world. I wouldn&#8217;t go as far as saying like others that Rails lost its sexiness to node.js because of the wasted time, but I do think that things would have been better for all if that didn&#8217;t happen. However, I also have to admit that I&#8217;m not sure how much of a big deal that is. I prefer to leave the past behind, learn from my own mistake and move on.</p>
 
+<p> </p>
+
 <h2>Technical debts</h2>
 
 <p>Here I&#8217;d like to stop to give a huge props to Aaron &#8221;<a href="http://twitter.com/tenderlove">@tenderlove</a>&#8221; Patterson, the man who&#8217;s actively working to reduce the <a href="http://en.wikipedia.org/wiki/Technical_debt">technical debts</a> in the Rails code base. This is a really hard job and definitely not a very glamorous one. He&#8217;s been working on various parts of Rails including its router and its ORM (ActiveRecord). Technical debts are unfortunately normal in most project, but sometimes they are overwhelming to the point that nobody dares touching the code base to clean it up. This is a hard problem, especially when projects move fast like Rails did. But looking back, I think that you want to start tackling technical debts on the side as you move on so you avoid getting to the point that you need a hero to come up and clean the piled errors made in the past. But don&#8217;t pause your entire project to clean things up otherwise you will lose market, momentum and excitement. I feel that this is also very much true for any legacy project you might pick up as a developer.</p>
+
+<p> </p>
 
 <h2>Keep the cost of entry level low</h2>
 
 <p>Getting started with Rails used to be easier. This can obviously argued since it&#8217;s very subjective, but from my perspective I think we forgot where we come from and we involuntary expect new comers to come with unrealistic knowledge. Sure, Rails does much more than it used to do, but it&#8217;s also much harder to get started. I&#8217;m not going to argue how harder  it is now or why we got there. Let&#8217;s just keep in mind that it is a critical thing that should always be re-evaluated. Sure, it&#8217;s harder when you have an open source project, but it&#8217;s also up to the leadership to show that they care and to encourage and mentor volunteers to  focus on this important part of a project.</p>
 
+<p> </p>
+
 <h2>Documentation</h2>
 
 <p>Rails documentation isn&#8217;t bad, but it&#8217;s far from being great. Documentation certainly isn&#8217;t one of the Ruby&#8217;s community strength, especially compared with the Python community, but what saddens me is to see the state of <a href="http://guides.rubyonrails.org/">the official documentation</a> which, should, in theory be the reference. Note that the Rails guides are usually well written and provide value, but they too often seem too light and not useful when you try to do something not totally basic (for instance use an ActiveModel compliant object). That&#8217;s probably why most people don&#8217;t refer to them or don&#8217;t spend too much time there. I&#8217;m not trying to blame anyone there. I think that the people who contributed theses guides did an amazing job, but if you want to build a strong and easy to access community, great documentation is key. Look at the <a href="https://docs.djangoproject.com/en/1.3/">Django</a> documentation as a good example. That said, I also need to acknowledge the amazing job done by many community members such as <a href="http://railscasts.com/">Ryan Bates</a> and <a href="http://ruby.railstutorial.org/">Michael Hartl</a> consistently providing high value external documentation via the <a href="http://railscasts.com/">railscasts</a> and the intro to <a href="http://ruby.railstutorial.org/">Rails tutorial</a> available for free.</p>
 
+<p> </p>
+
 <p>In conclusion, I think that there is a lot to learn from Rails, lots of great things as well as lots of things you would want to avoid. We can certainly argue on Hacker News or via comments about whether or not I&#8217;m right about Rails failures, my point will still be that the mentioned issues should be avoided in any projects, Rails here is just an example. Many of these issues are currently being addressed by the Rails team but wouldn&#8217;t it be great if new projects learn from older ones and avoid making the same mistakes? So what other mistakes do you think I forgot to mention and that one should be very careful of avoiding?</p>
+
+<p> </p>
 
 <h3>Updates:</h3>
 
@@ -168,7 +186,7 @@
 
 <div class="cat">
   
-    <a class='category' href='/articles/categories/rails/'>Rails</a>, <a class='category' href='/articles/categories/software-design/'>Software Design</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>
+    <a class='category' href='/articles/categories/misc/'>Misc</a>, <a class='category' href='/articles/categories/software-design/'>Software Design</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/merbist-com/'>merbist.com</a>, <a class='category' href='/articles/categories/rails/'>rails</a>
   
 </div>
 
