@@ -1,0 +1,237 @@
+---
+date: '2008-11-16 21:35:44'
+layout: post
+slug: merb-news-nov-16-2008
+status: publish
+title: Merb news nov-16-2008
+wordpress_id: '270'
+categories:
+- News
+tags:
+- books
+- dhh
+- documentation
+- infoq
+- merb
+- railsconf
+---
+
+I'll try to keep the community posted on the latest merb news. Feel free to email me if you want me to feature your app, plugin, tool or blog post.
+
+
+
+	
+  * Quality time with Yukihiro Matsumoto (ã¾ã¤ã‚‚ã¨ã‚†ãã²ã‚) aka Matz, [Ruby](http://ruby-lang.org) author
+
+	
+  * Hack time with [Aaron Paterson](http://github.com/tenderlove) ([Nokogiri](http://tenderlovemaking.com/2008/10/30/nokogiri-is-released/)) and [Bryan Helmkamp](http://flickr.com/photos/obie/3036045613/) ([Webrat](http://github.com/brynary/webrat/tree/master))
+
+	
+  * Merb presentation at [ORUG](http://orug.org)
+
+	
+  * [RailsCamp](http://railscamp08.org) Australia
+
+	
+  * [Rails podcast](http://podcast.rubyonrails.org/programs/1/episodes/rubyconf-2008)
+
+
+	
+  * [Rails vs Merb drama](http://merbist.com/2008/11/15/rails-vs-merb-drama/)
+
+	
+  * Documentation
+
+	
+  * Merb 1.0.1
+
+	
+  * [Qcon](http://qconsf.com/sf2008/tracks/show_track.jsp?trackOID=172)
+
+
+
+
+
+## Quality time with Matz
+
+
+The day after Ruby Conf, [Yehuda Katz](http://yehudakatz.com) and myself (Matt Aimonetti) were hanging out in the lobby of the hotel. [Obie](http://obiefernandez.com/), [Rein](http://flickr.com/photos/obie/3036221023/), [Desi](http://flickr.com/photos/obie/3036211957/), and others were hacking away/chilling. Matz was also there networking before taking off for the airport.
+
+[caption id="attachment_273" align="alignleft" width="300" caption="wycats, matz, mattetti"]![wycats, matz, mattetti](http://merbist.com/wp-content/uploads/2008/11/katz_matz_mattetti-300x149.jpg)[/caption]
+
+Matz and I started talking about the fact that unlike what most people believe, Ruby for the web is fast, way faster than any PHP solution. We looked at different benchmarks, discussed the philosophical differences between Merb and Rails, his own view of web development and how Ruby was perceived in Japan. Yehuda joined us and we started talking about Ruby 1.9.
+
+Koichi had a great presentation abou[![](http://farm4.static.flickr.com/3046/3037535342_d35680909d_m.jpg)](http://www.flickr.com/photos/notheory/3037535342/in/photostream)t YARV few days before and we spent few hours chatting with the JRuby guys and Laurent Sansonetti from MacRuby. We had some concerns about Ruby 1.9, Matz also asked us about Ruby 1.8.7. It was great to get a direct feedback about what's going on in the Ruby team, their schedule, process etc... We also realized that we (the Merb team) need to communicate better with the Ruby team when we need something added the language. It was also very interesting to hear Matz' opinion on Ruby Enterprise Edition.Â  As everybody knows Matz is a nice guy and that's why Ruby people should be nice :)Â  I have to agree, Matz is a very kind and patient person.
+
+
+## Hack time with Aaron Patterson and Bryan Helmkamp
+
+
+[caption id="" align="alignleft" width="240" caption="Yehuda (Merb), Charles (JRuby) and Laurent (MacRuby)"][![Yehuda (Merb), Charles(JRuby) and Laurent(MacRuby)](http://farm4.static.flickr.com/3051/3037534604_fe74986020_m.jpg)](http://www.flickr.com/photos/notheory/3037534604/in/photostream/)[/caption]
+
+One of the reasons why RubyConf was awesome is that every other guy was the author/maintainer of a major Ruby library. As you know Merb plays well with a lot of various libraries and having some time to seat down with the maintenairs of these libraries make things way easier.
+
+[Nokogiri](http://tenderlovemaking.com/2008/10/30/nokogiri-is-released/) As already mentioned, we switched to nokogiri before 1.0. Nokogiri is based on libxml2 which is a fast and reliable XML parser. I won't get into the hpricot vs nokogiri argument, but let's just say that nokogiri was fitting our needs better. (Nokogiri is only used in the specs, and therefore is not needed to run Merb)
+
+[caption id="" align="alignright" width="240" caption="David Chelimsky (RSpec), Matt Aimonetti (Merb)"][![David Chelimsky(RSpec), Matt Aimonetti(Merb)](http://farm4.static.flickr.com/3053/3036694117_13b53141d7_m.jpg)](http://www.flickr.com/photos/notheory/3036694117/)[/caption]
+
+[Webrat](http://github.com/brynary/webrat/tree/master) is an awesome library that let you test your app by using a virtual browser or by integrating with [Selenium](http://selenium.seleniumhq.org/). Webrat also switched to Nokogiri and we moved some of our matchers directly to webrat since webrat became a Merb development dependency. Thanks to webrat you can write tests that will fill up forms, follow links, select options... basically act as a user. What's even better is that you can run these test directly in your browser thanks to Selenium!Â  Because we think Webrat is totally awesome, we decided to offer framework support so people wanting to use webrat functionalities could do it without struggling, it there out of the box.
+
+I have to say that both Bryan and Aaron are great guys, even though they both had their girlfriends with them, they spent time with us working out some details and discussion options. Thanks a lot guys!
+
+(p.s: both projects also work great with Rails)
+
+
+## Merb presentation at ORUG
+
+
+[Orlando Ruby Group](http://orug.org) meets once a month and this month I was invited to talk about Merb. Just before me, Thomas Meeks gave a great talk on Nanite. It was really nice to meet a lot of the local Merbists. Most of them went to RubyConf, but I didn't get to meet everyone, so it was great to a sescond chance to network.
+
+[My slides are available on slideshare.net](http://www.slideshare.net/mattetti/merb-presentation-at-orug-presentation) You might be interested in looking at the different Merb app formats (very_flat, flat, core and stack) examples starting slide 45.
+
+
+[Merb presentation at ORUG](http://www.slideshare.net/mattetti/merb-presentation-at-orug-presentation?type=powerpoint)
+
+
+
+
+## RailsCamp Australia
+
+
+[caption id="attachment_275" align="alignright" width="150" caption="Daniel giving a talk on Merb"]![Daniel giving a talk on Merb](http://merbist.com/wp-content/uploads/2008/11/hassox-railscamp1-150x150.jpg)[/caption]
+
+[RailsCamp](http://railscamp08.org) Australia took place in Adelaide this year. Of course our Australian core team member couldn't miss the event. Daniel Neighman aka hassox, the man being merb-auth made it to the event and talked about Merb. (RailsCamp is more of a RubyCamp than a Rails conf so nobody really complained, hassox got a lot of good feedbacks)
+
+
+## Rails Podcast
+
+
+[Geoffrey Grosenbach](http://nubyonrails.com/), one of the first merbists and very well known figure of the Ruby/Rails community [recorded a podcast](http://podcast.rubyonrails.org/programs/1/episodes/rubyconf-2008) during RubyConf. Geoffrey interviewed me about Merb 1.0 as well as Blake from [Sinatra](http://sinatra.rubyforge.org/) and josh Peek from [Rails](http://rubyonrails.org/).
+
+
+## Rails vs Merb drama
+
+
+I already explained the whole story in [a previous post](http://merbist.com/2008/11/15/rails-vs-merb-drama/). It seems that Yehuda and David agree on something: [Ruby is awesome](http://yehudakatz.com/2008/11/16/mythbusting-we-agree-ruby-is-awesome/). [David](http://www.loudthinking.com/) is still ignoring Merb, but is answering indirectly via an interesting series of [Rails Myths](http://www.loudthinking.com/posts/29-the-rails-myths). Over on Twitter, [adzap suggests](http://twitter.com/adzap/statuses/1007999209) that Yehuda was just following DHH advise, and was trying to create a conflict because, [according to 37signals conflict is good for business](http://www.37signals.com/svn/archives2/conflict_is_good_for_business.php). I don't think that's what Yehuda had in mind when he replied to Jeremy, but that would explain why DHH ignores _(Â¿on purprose?)_ the Merb community.
+
+
+## Documentation
+
+
+Since 1.0 is out, our main focus has been documentation. However we can't write all the documentation ourselves. So we focused on helping people on IRC/Mailing list so they can help us with the documentation. The Japanese merbists started their own wiki, the Chinese, French and Japanese merbists started their own mailing list. [Here is an example](http://jijixi.azito.com/cgi-bin/diary/index.rb?date=20081112) of Japanese thread covering some of Merb basics.
+
+The [wiki](http://wiki.merbivore.com) is also growing, I personally added a glossary to the "[Rails to Merb guide](http://wiki.merbivore.com/faq_converting_a_rails_app_to_merb)". Showing you the Merb equivalent of some of Rails idioms. I also posted a [merb example app](http://wiki.merbivore.com/example_apps/simple_app) with sources available on [github](http://github.com/mattetti/simple_merb_example_app/tree/master).Â  While this is not a full app, the example covers:
+
+
+
+	
+  * 
+
+
+generating an application
+
+
+	
+  * 
+
+
+generating a resource
+
+
+	
+  * 
+
+
+specing/testing a model
+
+
+	
+  * 
+
+
+adding model validation
+
+
+	
+  * 
+
+
+specing/testing requests
+
+
+	
+  * 
+
+
+modifying views and layouts
+
+
+	
+  * 
+
+
+passing flash messages (messages passed from one action to another)
+
+
+	
+  * 
+
+
+adding authenticated routes
+
+
+	
+  * 
+
+
+testing authenticated requests
+
+
+
+Feel free to fork the project, add more branches (one step per branch please, so people can look at the diffs) etc...
+
+My goal in writing this example was to show people the basics to get started and especilly how to test a merb app. Note that this is NOT the only way, but I feel strong about TDD and by providing you with simple examples you might also give it a try ;)
+
+My next victim will be a Merb slice, I'll show you how to easily write and test a Merb slice to use, reuse and abuse your code.
+
+[![](http://peepcode.com/images/logo/peepcode.png)](http://peepcode.com)
+
+Peepcode released [an updated PDF covering Merb 1.0](http://peepcode.com/products/meet-merb-pdf-draft)
+
+I saw the draft of the upcoming Merb screencast, and once again, Geoffrey does an awesome job teaching you what you need to know.
+
+(p.s: this blog is not sponsored by peepcode ;) )
+
+[![](http://www.manning.com/ivey/ivey_cover150.jpg)](http://www.manning.com/ivey/)[Yehuda's beta book on Merb](http://www.manning.com/ivey/) also got updated to cover Merb 1.0.
+
+The first chapter is available [for free](http://www.manning.com/ivey/katz_meapch1.pdf), the 3 other available chapters cover:
+
+Getting started With Merb
+Using Merb with a database
+Automated testing
+
+Since it's a beta book, you receive update/new chapters automatically.
+
+(print version available later on)
+
+[![](http://merbist.com/wp-content/uploads/2008/11/merb_way_cover-150x150.jpg)](http://blog.obiefernandez.com/content/2008/08/announcing-the-merb-way-by-foy-savas.html)
+
+Merb contributor,[ Foy Savas](http://foysavas.com) told me he made a lot of progress on his book and he hopes to have a PDF version out before the end of the year.
+
+You can meet Foy in person in Boston on November 17-20 at the Addison-Wesley [Voices that Matter: Professional Ruby Conference](http://www.voicesthatmatter.com/ruby2008/).
+
+(I can't remember who is writing the third book on Merb, please contact me so I can update this section)
+
+I also noticed a bunch of guys on IRC writing plugins and slices, I hope to see even more tutorials very soon.
+
+
+## Merb 1.0.1
+
+
+Merb 1.0.1 is in the work and should be released in the next few days. It's just a maintenance release, so nothing new but we expect to ship with the new upcoming version of DataMapper, optimized generator (you will be able to use spaces in between arguments if you follow the unix standard) and some bug fixes.
+
+
+## Qcon
+
+
+[![](http://www.infoq.com/styles/i/logo.gif)Gregg Pollack](http://qconsf.com/sf2008/speaker/Gregg+Pollack) from the [RailsEnvy hall of fame](http://www.railsenvy.com/), is organizing a Ruby track during [Qcon](http://qconsf.com/sf2008/tracks/show_track.jsp?trackOID=172), the [infoQ](http://www.infoq.com/) conference taking place in SanFrancisco this week. Both Yehuda and I are scheduled to talk. My talk is on Merb for the Enterprise and Yehuda's is on testing. If you are around, come say hi.

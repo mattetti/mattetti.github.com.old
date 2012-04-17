@@ -1,0 +1,49 @@
+---
+date: '2008-11-03 18:50:21'
+layout: post
+slug: merb-10-rc5
+status: publish
+title: Merb 1.0 RC5
+wordpress_id: '201'
+categories:
+- Misc
+- News
+tags:
+- jruby
+- merb
+- rc
+- ruby
+- rubyconf
+- webrat
+---
+
+As you might have noticed, we've been pushing a lot of Release Candidates out the door. The reason is that we want to make sure 1.0 is really ready for showtime!
+
+We are also getting a lot of bug reports that help us focusing on the main issues. Today RC5 was pushed to a RubyForge mirror close to you and [here is a report from Yehuda Katz](http://yehudakatz.com/2008/11/03/merb-rc5-final-rc/), [Merb](http://merbivore.com) lead developer.
+
+This is the final RC before we ship 1.0 final at [RubyConf](http://rubyconf.org/). Here is a really quick rundown of the bugfixes and improvement added to this release:
+
+
+
+	
+  * [Webrat](http://github.com/brynary/webrat/tree/master) integration out of the box. ([see example](http://github.com/wycats/merb/tree/master/merb-core/spec/public/webrat/webrat_spec.rb))
+
+	
+  * Improved Merb bundling
+
+	
+  * spec view helpers now use [nokogiri](http://tenderlovemaking.com/2008/10/30/nokogiri-is-released/) (with rexml as fallback )
+
+	
+  * new [have_selector](http://github.com/wycats/merb/tree/master/merb-core/spec/public/test/view_matchers_spec.rb#L16-36) spec helper using CSS3 compatible selector.
+
+	
+  * The entire Merb spec suite now runs correctly on JRuby & Windows.
+
+	
+  * Once again improved jRuby support.
+
+
+In other news, we setup a nightly gem server so people who want to be on Edge don't have to deal with git and we call also test gem releases before pushing to RubyForge. More about that coming up during RubyConf.
+
+Talking about [RubyConf](http://rubyconf.org/),Â  [Yehuda](http://yehudakatz.com) and [I](http://merbist.com/about/) will be in Orlando enjoying a good Ruby meetup. Come and chat with us if you are interested in starting using Merb, or if you have been using Merb. Also, please come and see us if you hate Merb and care tell us why. We're looking forward to meet you all.

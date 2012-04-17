@@ -1,0 +1,36 @@
+---
+date: '2009-01-13 20:20:46'
+layout: post
+slug: recent-news-jan-13-2009
+status: publish
+title: recent news Jan 13 2009
+wordpress_id: '436'
+categories:
+- News
+---
+
+Lately, I have been really busy with my [business](http://ma-agile.com), an [upcoming training](http://merbclass.com) and some non rails-merb related experimentations. (I'm learning objective-c and playing with [macruby](http://www.macruby.org/trac/wiki/MacRuby))
+
+However, here are some of the latest news:
+
+
+
+	
+  * Merb 1.0.8 should be released soon with some bug fixes and some improvements
+
+	
+  * The Merb book got 2 new sections, Sequel and Active Record. I'll be spending quite a lot of time on the book in the next weeks.
+
+	
+  * Ted Han is working on reorganizing the [Merb wiki](http://wiki.merbivore.com)
+
+	
+  * We started a new mailing list for people wanting to help with the [Rails wiki](http://groups.google.com/group/rubyonrails-wiki)
+
+	
+  * We also started a mailing list for people wanting to help with the [activism effort](http://groups.google.com/group/rails-activism)
+
+
+For those in the Phoenix area, next week, [Yehuda](http://yehuda) and I will be at [integrum](http://integrumtech.com/)/[gangplank](http://gangplankhq.com/)'s for the [Phoenix Rails User Group](http://phxrails.com/).
+
+We are looking to meeting you all.

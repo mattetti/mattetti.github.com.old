@@ -1,3 +1,18 @@
+div#home{
+  padding-top: 40px;
+  width: 770px;
+  margin: auto;
+  p#bio{
+    padding-bottom: 30px;
+  }
+  ul.posts{
+    list-style-type: none;
+    li{
+      border-bottom: 1px solid #DDD;
+      padding: 3px 0 2px 0;
+    }
+  }
+}
 #pagenavi{
 	padding: 20px 0;
 	height: 20px;

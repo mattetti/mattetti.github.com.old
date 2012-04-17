@@ -1,0 +1,137 @@
+---
+date: '2008-12-08 00:13:13'
+layout: post
+slug: merb-news
+status: publish
+title: Merb news (Dec 8 2008)
+wordpress_id: '325'
+categories:
+- merb
+- News
+tags:
+- documentation
+- merb
+- merb book
+- News
+- translations
+---
+
+3 days ago, I announced the [Merb Open Source Book project](http://merbist.com/2008/12/04/annoucing-the-merb-open-source-book/). I expected that few people would be interested as we heard complaints about the lack of documentation.
+
+What I did not expect, was more than 60 emails and pull requests in 2 days, people committing pages of content, fixes and offering their services to translate the book. The [mailing list](http://groups.google.com/group/merb-book) already has 60+ members and the [GitHub repository](http://github.com/mattetti/merb-book/tree/master) is being watched by 150+ people and has 50+ forks.
+
+While this could be almost overwhelming, I think this is very encouraging. I have to say that since 1.0 got released we heard a lot of praises and and lot of complaints. The Merb team has been trying to prioritize and address reported challenges one after the other. We recently announced that user documentation was our top priority and we decided to work on two projects:
+
+
+
+	
+  * better access to the code documentation
+
+	
+  * Open Source book
+
+
+
+
+## Code browsing:
+
+
+Good news, we have an early beta of the new code browser: [http://docsbeta.merbivore.com/](http://docsbeta.merbivore.com/)
+
+This is still an early beta and only works properly on FireFox and Safari. You'll notice that currently, only merb-core's public methods are available. merb-more addition is coming soon.
+
+So what's special about this code browser?
+
+Contextual search and API filtering. In lay terms, you can see what public methods are available to you based on what you are doing. (are you in a controller, model, the console?)
+
+
+## Open Source Book
+
+
+I put an early beta online: [http://book.merbist.com
+](http://book.merbist.com)
+
+This is not a static version yet meaning that the markdown files get converted for every single request. I'm waiting for Geoffrey Grosenbach to finish his [merb_static plugin](http://github.com/topfunky/merb_static/tree/master). Once he will be done with the spidering, his plugin will automatically export the site as static HTML. The PDF version will be exported using a gem called UFO written by wycats. UFO is a JRuby bridge to Flying Saucer, an awesome Java library which can convert HTML to PDF.
+
+As you can see if you browse the book, we don't have a lot of content yet. However, you need to realize that we just started 3 days ago! That is what's so amazing. People didn't sit back and wait for some core team members to write the content. To the contrary, they have been submitting content and have already started the book translation into 10 languages:
+
+
+
+	
+  * English
+
+	
+  * French
+
+	
+  * Japanese
+
+	
+  * Portuguese
+
+	
+  * German
+
+	
+  * Chinese
+
+	
+  * Spanish
+
+	
+  * Russian
+
+	
+  * Bosnian
+
+	
+  * Dutch
+
+
+I expect to receive the first Italian translations early next week and I was promised some Indian languages too.
+
+**Props to the entire community for putting its money where its mouth is!**
+
+
+## What's next?
+
+
+[Yehuda Katz](http://yehudakatz.com) was in Atlanta at [MerbDay](http://merbday.com/) and had a great keynote about the future of Merb:
+
+
+[Merb Day Keynote](http://www.slideshare.net/wycats/merb-day-keynote-presentation?type=powerpoint)
+
+
+
+
+However, in the short term, we'll still focus on documentation, bug fixes and [recently added as a top priority](http://twitter.com/wycats/status/1044577046): Merb and gem dependencies issues (Rubygems)
+
+
+
+
+## DataMapper news
+
+
+
+
+Our good friends from the DM team [announced](http://twitter.com/datamapper/status/1044706717) DataMapper 0.9.8 and Extlib 0.9.9. What's new?
+
+
+
+
+
+
+
+
+	
+  * update_attributes regression fixed
+
+
+	
+  * JRuby fixes
+
+	
+  * perf boost
+
+
+Congrats guys!

@@ -1,0 +1,68 @@
+---
+date: '2008-10-21 19:09:54'
+layout: post
+slug: merb-10-rc2
+status: publish
+title: Merb 1.0 RC2
+wordpress_id: '181'
+categories:
+- News
+tags:
+- merb
+- release
+---
+
+As I'm writing this post, Merb 1.0 RC2 (v0.9.10) is being propagated through all the [RubyForge](http://rubyforge.org/) mirrors.
+
+`$ sudo gem install merb` will install/update Merb Stack. Merb stack is a meta-gem/package installing all the gems you need to get started (including merb-core, merb-more, [datamapper](http://datamapper.org) and sqlite3 driver)
+
+[![](http://merbist.com/wp-content/uploads/2008/10/windows_logo-300x218.jpg)](http://merbist.com/wp-content/uploads/2008/10/windows_logo.jpg)The main focus for this release was to fix bugs and make the stack Windows compatible. We didn't get any major bugs in RC1 but fixed a lot of small annoyances and problems with generated resources. We also made sure Merb itself would work properly with Windows (not using incompatible signals etc..) and we spent some time getting the Data Object sqlite3 drivers compiled on Windows.
+
+You don't need to use [DataMapper](http://datamapper.org) with Merb, ActiveRecord works fine. However since we are packaging DM with the Merb Stack, we wanted to make sure Windows people would be able to get started easily.
+
+
+
+A quick note, for [Windows](http://en.wikipedia.org/wiki/Purgatory) users, like for [Rails](http://rubyonrails.org/), you need to have [sqlite3](http://www.sqlite.org) installed. Simply dump the [sqlite3 dll](http://www.sqlite.org/sqlitedll-3_6_4.zip) in your system32 folder or your ruby bin folder to get started.
+
+Unfortunately DataMapper isn't running on [JRuby](http://jruby.codehaus.org/) yet. We hope to be able to use the DM guys to get their drivers ported over before 1.0 final but can't promise anything yet.
+
+
+## What's next?
+
+
+Merb 1.0 final by the end of the Month if everything goes as scheduled.
+
+
+## Thanks
+
+
+![](http://farm1.static.flickr.com/38/81989263_34a2583c75_m.jpg)A big thank to all the contributors who added valuable information to [Merb wiki](http://wiki.merbivore.com/). [Jack Dempsey](http://jackndempsey.blogspot.com) also wrote a [nice blog post](http://jackndempsey.blogspot.com/2008/10/creating-new-merb-stack-with-templater.html) about creating your own stack, you might want to check it out if you are not into DataMapper or want something different.
+
+Finally, Merb got a lot of press coverage lately:
+
+
+
+	
+  * [SDtimes.com](http://rubyurl.com/SYmw)
+
+	
+  * [internetnews.com](http://www.internetnews.com/dev-news/article.php/3778386/Do+Ruby+on+Rails+Developers+Need+Merb.htm)
+
+	
+  * [smarteguru.com](http://tinyurl.com/5w3pb9)
+
+	
+  * [RailsEnvy.com](http://railsenvy.com)
+
+	
+  * [InfoQ.com](http://www.infoq.com/news/2008/10/merb-1-0)
+
+	
+  * [gartner.com](http://rubyurl.com/EGfQ)
+
+
+and many much more.Â  Follow [@merbivore](http://twitter.com/merbivore) to get daily news.
+
+To finish this post, here is a video of [Ezra Zygmuntowicz](http://brainspl.at/) who recently presented Merb at Google.
+
+

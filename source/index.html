@@ -2,17 +2,20 @@
 layout: default
 ---
 
+<div id='home'>
+  <p id='bio'>Matt Aimonetti is a web engineer, technical writer and active open-source contributor. 
+  Based in San Diego California, he is currently working as a software architect for LivingSocial.
+  Prior to joining LivingSocial, Matt worked on video game development at Sony PlayStation.</p>
+<h2>Recent Posts</h2>
+<ul class='posts'>
 {% assign index = true %}
 {% for post in paginator.posts %}
 {% assign content = post.content %}
-    <article class="post">{% include article.html %}</article>
+{% include home_page_article.html %}
 {% endfor %}
+</ul>
+
 <nav id="pagenavi">
-    {% if paginator.previous_page %}
-        <a href="{{paginator.previous_page}}" class="prev">Prev</a>
-    {% endif %}
-    {% if paginator.next_page %}
-        <a href="{{paginator.next_page}}" class="next">Next</a>
-    {% endif %}
-    <a href="{{ root_url }}/articles/archives" class="center">Archives</a>
+  <a href="{{ root_url }}/articles/archives" class="center">Archives</a>
 </nav>
+</div>

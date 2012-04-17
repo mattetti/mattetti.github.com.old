@@ -12,6 +12,10 @@
 		font-size: $meta-size;
 		color: $gray02;
 		width: 170px;
+    .author{
+      padding-left: 32px;
+      color: #CCC;
+    }
 		@media screen and (max-width: 800px){
 			margin-top: 15px;
 			position: static;

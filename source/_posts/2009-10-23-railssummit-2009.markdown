@@ -1,0 +1,41 @@
+---
+date: '2009-10-23 10:17:45'
+layout: post
+slug: railssummit-2009
+status: publish
+title: RailsSummit - an amazing adventure
+wordpress_id: '613'
+categories:
+- blog-post
+- Misc
+- Presentation
+tags:
+- brazil
+- rails
+- railssummit
+- ruby
+---
+
+I have had the opportunity to go to and speak at many conferences but this year was the first time I had the chance to go to [RailsSummit](http://railssummit.com.br) in São Paulo, Brazil.
+
+I was really looking forward to this trip and I have to say it went beyond my expectations. I had really good feedback from people like the [Phusion guys](http://www.phusion.nl/) (Ninh & Hongli), Gregg Pollack and others.
+
+For those who don't know, RailsSummit is one of the biggest, if not the biggest, Ruby event in Latin America. It's organized yearly by [Locaweb](http://www.locaweb.com.br/), the #1 hosting company in Brazil (props to Akita & Cristiane for their work).
+
+![](http://farm3.static.flickr.com/2761/4027342992_789777fd03_m_d.jpg)  
+
+
+As part of my involvement in the Ruby community I have met a lot of Brazilians always willing to help and especially giving time to translate content. (A good example would be the [Portuguese version of the Rails wiki](http://wiki.rubyonrails.org/pt/start) or [José Valim](http://blog.plataformatec.com.br/) GSOC contribution) However, I did not realize how fast Rails was growing over here.
+
+To come back to the conference, I have to say it was one of the best conference I have gone to. Chad Fowler, who gave the opening keynote, later told me that it reminded him of the first Ruby conferences in the US . For me, what made a huge difference was the fact that it was a very positive conference. People were happy to be here, eager to share and you could feel the passion. Unfortunately, I missed the first few Ruby conferences, but I can totally imagine how must have been. Passionate people, not trying to push their products but instead, share the cool stuff they've been working on. This is exactly the feeling I had during this conference.  
+
+
+Maybe it's because I don't understand Portuguese well enough or maybe it's just a cultural thing, but the people at the conference were just super friendly and always willing to help. I was really glad to meet those who have been using some of my work, some new people to Ruby and people who don't do Ruby but were just interested in knowing what was going on in the Ruby world.
+
+![](http://farm3.static.flickr.com/2719/4027357802_1082f38090.jpg)
+
+The schedule was pretty packed and the discussions very interesting, you could certainly feel the excitement in the air. Ruby seems to catching up quickly over there. Brazilian Rubyists seem to be very pragmatic and a good illustration of that was certainly made by [Vinicus Teles](http://improveit.com.br/en), Brazil Agile XPert, who shared tips on how to release a successful product.
+
+I stayed a few days after the conference and went to visit the Rubyists in Rio. Rio is a great city. It has some of the best soccer players in the world and some seriously talented software developers. Ruby & Rails are not just the new trendy startup secret to success, companies like globo.com, currently the largest TV network in [Latin America](http://en.wikipedia.org/wiki/Latin_America) and the fourth largest in the world, also started using Ruby and Rails. I had the opportunity to visit their office and meet their teams. It's very exciting to see how they use Agile/XP and Ruby and how they seem to be so successful. But I will keep that for another post.
+
+Overall, even though the actual traveling to/from Brazil was a bit long, RailsSummit was a blast. I really hope to be able to come back next year, and by then, hopefully my Portuguese will have improved.

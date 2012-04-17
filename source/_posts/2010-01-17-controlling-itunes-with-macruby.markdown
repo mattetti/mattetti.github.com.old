@@ -1,0 +1,568 @@
+---
+date: '2010-01-17 19:54:19'
+layout: post
+slug: controlling-itunes-with-macruby
+status: publish
+title: Controlling iTunes with MacRuby
+wordpress_id: '684'
+categories:
+- blog-post
+- macruby
+tags:
+- itunes
+- macruby
+- scriptingbridge
+---
+
+Since Mac OS X v10.5, Apple added a technology called Scripting Bridge which allows to control and communicate with scriptable applications such as Mail, iChat or iTunes.
+
+A few weeks back, [I showed how to control iChat](http://merbist.com/2009/12/31/im-new-year-count-down-with-macruby/) with MacRuby. This time I'm going to show you how to control iTunes.
+
+Here is a small script that I wrote to wake me up in music every morning.
+
+    
+    #!/usr/local/bin/macruby
+    framework 'Foundation'
+    framework 'ScriptingBridge'
+    
+    itunes = SBApplication.applicationWithBundleIdentifier("com.apple.itunes")
+    load_bridge_support_file 'iTunes.bridgesupport'
+    itunes.run
+    
+    class SBElementArray
+      def [](value)
+        self.objectWithName(value)
+      end
+    end
+    
+    itunes.stop
+    playlist = itunes.sources["Library"].userPlaylists["morning"]
+    playlist.playOnce(false) if playlist
+    
+
+
+The idea is that I have a Mac Mini streaming music through speakers connected to an AirportExpress in my bedroom.
+
+Let's go through the script quickly.
+
+We start by loading two frameworks, Foundation and ScriptingBridge.
+Now that we have ScriptingBridge loaded, we can control iTunes. To do that, we use:
+SBApplication.applicationWithBundleIdentifier("com.apple.itunes")
+We then load a bridgesupport file that contains the enumerated constants from the iTunes scriptable dictionary.
+
+We make sure iTunes is running by calling #run on the application object.
+
+Before using iTune scriptable interface, we are making the API a bit nicer, it's totally unnecessary but it makes our code look better.
+
+itunes.sources returns an instance of [SBElementArray](http://developer.apple.com/mac/library/documentation/cocoa/Reference/SBElementArray_Class/SBElementArray/SBElementArray.html ) which is not really an array nor a hash.
+
+The rest of the code is pretty simple, we find the library, find the playlist called 'morning' and play it if found.
+
+So you might wonder two things:
+
+
+
+	
+  * What is the iTunes.bridgesupport file?
+
+	
+  * How do you know what methods are available to control iTunes?
+
+
+
+
+#### bridgesupport file
+
+
+The bridgesupport file is important since it defines the required constants.
+Apple provides a metadata generator called gen_bridge_metadata which generates a bridgesupport file.
+
+Here is what the documentation says:
+
+    
+    $ man gen_bridge_metadata
+
+
+
+    
+    NAME
+    gen_bridge_metadata -- Objective-C Bridges Metadata Generator
+    
+    SYNOPSIS
+    gen_bridge_metadata [options...] headers...
+    
+    DESCRIPTION
+    gen_bridge_metadata is a tool that generates bridging metadata information for a given framework or set of head-
+    ers. The Objective-C bridges supported in Mac OS X, such as RubyCocoa (Ruby) and PyObjC (Python), read this
+    information at runtime.
+    
+    Metadata files describe the parts of an Objective-C framework that the bridges cannot automatically handle. These
+    are primarily the ANSI C elements of the framework -- functions, constants, enumerations, and so on -- but also
+    include special cases such as functions or methods that accept pointer-like arguments. These special cases must
+    be manually specified in separate files called exceptions. The gen_bridge_metadata tool can then read in the
+    exceptions file when it generates the framework metadata.
+    
+    The file extension used for metadata files should be .bridgesupport.
+    
+    Certain elements, such as inline functions, cannot be described in the metadata files. It is therefore required
+    to generate a dynamic library in order to make the bridges use them. The gen_bridge_metadata tool can take care
+    of that for you.
+    
+    The file extension for the dynamic libraries should be .dylib.
+    
+    You should install metadata files in one of three filesystem locations. For example, for a framework named
+    MyFramework that is installed as /Library/Frameworks/MyFramework.framework, you can install the
+    MyFramework.bridgesupport and MyFramework.dylib files in one of the following possible locations, in order of
+    priority:
+    
+    o   /Library/Frameworks/MyFramework/Resources/BridgeSupport
+    
+    o   /Library/BridgeSupport
+    
+    o   ~/Library/BridgeSupport
+    
+
+
+The problem is that we don't have a framework or header file to generate a bridgesupport file for.
+So, what we need a header file for iTunes, turns out we have a tool to do that:
+
+    
+    $ sdef /Applications/iTunes.app | sdp -fh --basename iTunes
+
+
+I won't go in the details of what sdef and sdp do, just check their manual page.
+Running the command above will create a iTunes.h which we can use to create a bridgesupport file.
+Here is the generated header file: http://gist.github.com/279657
+
+Now, let's create a bidgesupport file:
+
+    
+    $ gen_bridge_metadata -c '-I.' iTunes.h > iTunes.bridgesupport
+
+
+An that's how we get the bridgesupport file. (see file: [http://gist.github.com/279698](http://gist.github.com/279698))
+
+
+#### iTunes Documentation
+
+
+The easiest way to understand what's available to you is to open iTunes' dictionary in the AppleScript Editor.
+
+
+![iTunes API by Matt Aimonetti](http://img.skitch.com/20100118-fe5c3224jd8xfhciwqxpy4hptc.jpg)
+
+
+Otherwise you can study the iTunes.h file.
+
+I wrote a very dumb parser to give you an idea of the methods and properties available when controlling iTunes via ScriptingBridge, here is the  output:
+
+    
+    Class: iTunesPrintSettings
+    Properties:
+    copies (the number of copies of a document to be printed)
+    collating (Should printed copies be collated?)
+    startingPage (the first page of the document to be printed)
+    endingPage (the last page of the document to be printed)
+    pagesAcross (number of logical pages laid across a physical page)
+    pagesDown (number of logical pages laid out down a physical page)
+    errorHandling (how errors are handled)
+    requestedPrintTime (the time at which the desktop printer should print the document)
+    printerFeatures (printer specific options)
+    faxNumber (for fax number)
+    targetPrinter (for target printer)
+    
+    Method: printPrintDialog:(BOOL)printDialog withProperties:(iTunesPrintSettings *)withProperties kind:(iTunesEKnd)kind theme:(NSString *)theme
+    Returned: void
+    Print the specified object(s)
+    ----
+    Method: close
+    Returned: void
+    Close an object
+    ----
+    Method: delete
+    Returned: void
+    Delete an element from an object
+    ----
+    Method: duplicateTo:(SBObject *)to
+    Returned: SBObject
+    Duplicate one or more object(s)
+    ----
+    Method: exists
+    Returned: BOOL
+    Verify if an object exists
+    ----
+    Method: open
+    Returned: void
+    open the specified object(s)
+    ----
+    Method: playOnce:(BOOL)once
+    Returned: void
+    play the current track or the specified track or file.
+    ----
+    
+    Class: iTunesApplication
+    Properties:
+    currentEncoder (the currently selected encoder (MP3, AIFF, WAV, etc.))
+    currentEQPreset (the currently selected equalizer preset)
+    currentPlaylist (the playlist containing the currently targeted track)
+    currentStreamTitle (the name of the current song in the playing stream (provided by streaming server))
+    currentStreamURL (the URL of the playing stream or streaming web site (provided by streaming server))
+    currentTrack (the current targeted track)
+    currentVisual (the currently selected visual plug-in)
+    EQEnabled (is the equalizer enabled?)
+    fixedIndexing (true if all AppleScript track indices should be independent of the play order of the owning playlist.)
+    frontmost (is iTunes the frontmost application?)
+    fullScreen (are visuals displayed using the entire screen?)
+    name (the name of the application)
+    mute (has the sound output been muted?)
+    playerPosition (the player’s position within the currently playing track in seconds.)
+    playerState (is iTunes stopped, paused, or playing?)
+    selection (the selection visible to the user)
+    soundVolume (the sound output volume (0 = minimum, 100 = maximum))
+    version (the version of iTunes)
+    visualsEnabled (are visuals currently being displayed?)
+    visualSize (the size of the displayed visual)
+    
+    Method: browserWindows
+    Returned: SBElementArray
+    ----
+    Method: encoders
+    Returned: SBElementArray
+    ----
+    Method: EQPresets
+    Returned: SBElementArray
+    ----
+    Method: EQWindows
+    Returned: SBElementArray
+    ----
+    Method: playlistWindows
+    Returned: SBElementArray
+    ----
+    Method: sources
+    Returned: SBElementArray
+    ----
+    Method: visuals
+    Returned: SBElementArray
+    ----
+    Method: windows
+    Returned: SBElementArray
+    ----
+    Method: printPrintDialog:(BOOL)printDialog withProperties:(iTunesPrintSettings *)withProperties kind:(iTunesEKnd)kind theme:(NSString *)theme
+    Returned: void
+    Print the specified object(s)
+    ----
+    Method: run
+    Returned: void
+    run iTunes
+    ----
+    Method: quit
+    Returned: void
+    quit iTunes
+    ----
+    Method: add:(NSArray *)x to:(SBObject *)to
+    Returned: iTunesTrack
+    add one or more files to a playlist
+    ----
+    Method: backTrack
+    Returned: void
+    reposition to beginning of current track or go to previous track if already at start of current track
+    ----
+    Method: convert:(NSArray *)x
+    Returned: iTunesTrack
+    convert one or more files or tracks
+    ----
+    Method: fastForward
+    Returned: void
+    skip forward in a playing track
+    ----
+    Method: nextTrack
+    Returned: void
+    advance to the next track in the current playlist
+    ----
+    Method: pause
+    Returned: void
+    pause playback
+    ----
+    Method: playOnce:(BOOL)once
+    Returned: void
+    play the current track or the specified track or file.
+    ----
+    Method: playpause
+    Returned: void
+    toggle the playing/paused state of the current track
+    ----
+    Method: previousTrack
+    Returned: void
+    return to the previous track in the current playlist
+    ----
+    Method: resume
+    Returned: void
+    disable fast forward/rewind and resume playback, if playing.
+    ----
+    Method: rewind
+    Returned: void
+    skip backwards in a playing track
+    ----
+    Method: stop
+    Returned: void
+    stop playback
+    ----
+    Method: update
+    Returned: void
+    update the specified iPod
+    ----
+    Method: eject
+    Returned: void
+    eject the specified iPod
+    ----
+    Method: subscribe:(NSString *)x
+    Returned: void
+    subscribe to a podcast feed
+    ----
+    Method: updateAllPodcasts
+    Returned: void
+    update all subscribed podcast feeds
+    ----
+    Method: updatePodcast
+    Returned: void
+    update podcast feed
+    ----
+    Method: openLocation:(NSString *)x
+    Returned: void
+    Opens a Music Store or audio stream URL
+    ----
+    
+    Class: iTunesItem
+    Properties:
+    container (the container of the item)
+    index (The index of the item in internal application order.)
+    name (the name of the item)
+    persistentID (the id of the item as a hexidecimal string. This id does not change over time.)
+    
+    Method: id
+    Returned: NSInteger
+    the id of the item
+    ----
+    Method: printPrintDialog:(BOOL)printDialog withProperties:(iTunesPrintSettings *)withProperties kind:(iTunesEKnd)kind theme:(NSString *)theme
+    Returned: void
+    Print the specified object(s)
+    ----
+    Method: close
+    Returned: void
+    Close an object
+    ----
+    Method: delete
+    Returned: void
+    Delete an element from an object
+    ----
+    Method: duplicateTo:(SBObject *)to
+    Returned: SBObject
+    Duplicate one or more object(s)
+    ----
+    Method: exists
+    Returned: BOOL
+    Verify if an object exists
+    ----
+    Method: open
+    Returned: void
+    open the specified object(s)
+    ----
+    Method: playOnce:(BOOL)once
+    Returned: void
+    play the current track or the specified track or file.
+    ----
+    Method: reveal
+    Returned: void
+    reveal and select a track or playlist
+    ----
+    
+    Class: iTunesPlaylist
+    Properties:
+    duration (the total length of all songs (in seconds))
+    name (the name of the playlist)
+    parent (folder which contains this playlist (if any))
+    shuffle (play the songs in this playlist in random order?)
+    size (the total size of all songs (in bytes))
+    songRepeat (playback repeat mode)
+    specialKind (special playlist kind)
+    time (the length of all songs in MM:SS format)
+    visible (is this playlist visible in the Source list?)
+    
+    Method: tracks
+    Returned: SBElementArray
+    ----
+    Method: moveTo:(SBObject *)to
+    Returned: void
+    Move playlist(s) to a new location
+    ----
+    Method: searchFor:(NSString *)for_ only:(iTunesESrA)only
+    Returned: iTunesTrack
+    search a playlist for tracks matching the search string. Identical to entering search text in the Search field in iTunes.
+    ----
+    
+    Class: iTunesAudioCDPlaylist
+    Properties:
+    artist (the artist of the CD)
+    compilation (is this CD a compilation album?)
+    composer (the composer of the CD)
+    discCount (the total number of discs in this CD’s album)
+    discNumber (the index of this CD disc in the source album)
+    genre (the genre of the CD)
+    year (the year the album was recorded/released)
+    
+    Method: audioCDTracks
+    Returned: SBElementArray
+    ----
+    
+    Class: iTunesDevicePlaylist
+    Method: deviceTracks
+    Returned: SBElementArray
+    ----
+    
+    Class: iTunesLibraryPlaylist
+    Method: fileTracks
+    Returned: SBElementArray
+    ----
+    Method: URLTracks
+    Returned: SBElementArray
+    ----
+    Method: sharedTracks
+    Returned: SBElementArray
+    ----
+    
+    Class: iTunesRadioTunerPlaylist
+    Method: URLTracks
+    Returned: SBElementArray
+    ----
+    
+    Class: iTunesSource
+    Properties:
+    capacity (the total size of the source if it has a fixed size)
+    freeSpace (the free space on the source if it has a fixed size)
+    kind ()
+    
+    Method: audioCDPlaylists
+    Returned: SBElementArray
+    ----
+    Method: devicePlaylists
+    Returned: SBElementArray
+    ----
+    Method: libraryPlaylists
+    Returned: SBElementArray
+    ----
+    Method: playlists
+    Returned: SBElementArray
+    ----
+    Method: radioTunerPlaylists
+    Returned: SBElementArray
+    ----
+    Method: userPlaylists
+    Returned: SBElementArray
+    ----
+    Method: update
+    Returned: void
+    update the specified iPod
+    ----
+    Method: eject
+    Returned: void
+    eject the specified iPod
+    ----
+    
+    Class: iTunesTrack
+    Properties:
+    album (the album name of the track)
+    albumArtist (the album artist of the track)
+    albumRating (the rating of the album for this track (0 to 100))
+    albumRatingKind (the rating kind of the album rating for this track)
+    artist (the artist/source of the track)
+    bitRate (the bit rate of the track (in kbps))
+    bookmark (the bookmark time of the track in seconds)
+    bookmarkable (is the playback position for this track remembered?)
+    bpm (the tempo of this track in beats per minute)
+    category (the category of the track)
+    comment (freeform notes about the track)
+    compilation (is this track from a compilation album?)
+    composer (the composer of the track)
+    databaseID (the common, unique ID for this track. If two tracks in different playlists have the same database ID, they are sharing the same data.)
+    dateAdded (the date the track was added to the playlist)
+    objectDescription (the description of the track)
+    discCount (the total number of discs in the source album)
+    discNumber (the index of the disc containing this track on the source album)
+    duration (the length of the track in seconds)
+    enabled (is this track checked for playback?)
+    episodeID (the episode ID of the track)
+    episodeNumber (the episode number of the track)
+    EQ (the name of the EQ preset of the track)
+    finish (the stop time of the track in seconds)
+    gapless (is this track from a gapless album?)
+    genre (the music/audio genre (category) of the track)
+    grouping (the grouping (piece) of the track. Generally used to denote movements within a classical work.)
+    kind (a text description of the track)
+    longDescription ()
+    lyrics (the lyrics of the track)
+    modificationDate (the modification date of the content of this track)
+    playedCount (number of times this track has been played)
+    playedDate (the date and time this track was last played)
+    podcast (is this track a podcast episode?)
+    rating (the rating of this track (0 to 100))
+    ratingKind (the rating kind of this track)
+    releaseDate (the release date of this track)
+    sampleRate (the sample rate of the track (in Hz))
+    seasonNumber (the season number of the track)
+    shufflable (is this track included when shuffling?)
+    skippedCount (number of times this track has been skipped)
+    skippedDate (the date and time this track was last skipped)
+    show (the show name of the track)
+    sortAlbum (override string to use for the track when sorting by album)
+    sortArtist (override string to use for the track when sorting by artist)
+    sortAlbumArtist (override string to use for the track when sorting by album artist)
+    sortName (override string to use for the track when sorting by name)
+    sortComposer (override string to use for the track when sorting by composer)
+    sortShow (override string to use for the track when sorting by show name)
+    size (the size of the track (in bytes))
+    start (the start time of the track in seconds)
+    time (the length of the track in MM:SS format)
+    trackCount (the total number of tracks on the source album)
+    trackNumber (the index of the track on the source album)
+    unplayed (is this track unplayed?)
+    videoKind (kind of video track)
+    volumeAdjustment (relative volume adjustment of the track (-100% to 100%))
+    year (the year the track was recorded/released)
+    
+    Method: artworks
+    Returned: SBElementArray
+    ----
+    
+    Class: iTunesFileTrack
+    Properties:
+    location (the location of the file represented by this track)
+    
+    Method: refresh
+    Returned: void
+    update file track information from the current information in the track’s file
+    ----
+    
+    Class: iTunesURLTrack
+    Properties:
+    address (the URL for this track)
+    
+    Method: download
+    Returned: void
+    download podcast episode
+    ----
+    
+    Class: iTunesUserPlaylist
+    Properties:
+    shared (is this playlist shared?)
+    smart (is this a Smart Playlist?)
+    
+    Method: fileTracks
+    Returned: SBElementArray
+    ----
+    Method: URLTracks
+    Returned: SBElementArray
+    ----
+    Method: sharedTracks
+    Returned: SBElementArray
+    ----
+    

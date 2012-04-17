@@ -1,0 +1,63 @@
+---
+date: '2008-10-13 23:01:47'
+layout: post
+slug: merb-10-rc1
+status: publish
+title: Merb 1.0 RC1
+wordpress_id: '165'
+categories:
+- News
+tags:
+- frameworks
+- merb
+- php
+- release
+- ruby
+- testing
+---
+
+[
+](http://www.flickr.com/photos/81335564@N00/2934025410)[![floor 1](http://static.flickr.com/2359/2050355003_8b5db33ff0_t.jpg)](http://www.flickr.com/photos/81335564@N00/2050355003) [![full stop](http://static.flickr.com/6/85990435_4549262c9b_t.jpg)](http://www.flickr.com/photos/49968232@N00/85990435)[![zero](http://static.flickr.com/2113/2114628079_b00a6ed156_t.jpg) ](http://www.flickr.com/photos/49968232@N00/2114628079)
+
+[![R](http://static.flickr.com/3122/2777560349_49ea878a74_t.jpg)](http://www.flickr.com/photos/92745470@N00/2777560349) [![C is for church](http://static.flickr.com/3151/2351343799_8c399edc55_t.jpg)](http://www.flickr.com/photos/92709190@N00/2351343799) [![1](http://static.flickr.com/2267/2115385302_b021bebee7_t.jpg)](http://www.flickr.com/photos/49968232@N00/2115385302)
+
+Few hours ago we finally pushed Merb 1.0 RC1 to [rubyforge](http://rubyforge.org/projects/merb).
+
+RC stands for [Release Candidate](http://en.wikipedia.org/wiki/Software_release_life_cycle#Release_candidate). And we will need your help to make a rock solid 1.0 final.
+
+For the occasion, we switched to our [new wiki](http://wiki.merbivore.com/).
+
+Installing Merb stack is now dead easy:
+`$ sudo gem install merb`
+
+[Here is a tutorial](http://wiki.merbivore.com/howto/gettingstarted/firstapp) to get you started with Merb in few minutes.
+
+
+
+Unfortunately we already found few bugs related to the generated resources.
+
+Known bugs are documented [here](http://wiki.merbivore.com/merb_1.0_rc1_known_bugs) with fixes. We'll keep track of the RC1 known bugs until we release RC2. Fortunately, so far we didn't find any major bugs but hey... try to prove us wrong as hard as you can. As mentioned earlier we want a rock solid 1.0.
+
+As you have probably we are trying to be as transparent as possible and we know that we aren't perfect and we make mistakes. Our goal is honestly not to build an ego but to provide you with awesome tools.
+
+Talking about awesome talks, as we are waiting for the videos from [MerbCamp](http://merbcamp.com), I'd encourage you to check on Yehuda Kats' keynote's slides and get an idea of Merb's future.
+
+
+[Merb Camp Keynote](http://www.slideshare.net/wycats/merb-camp-keynote-presentation?type=powerpoint)
+
+
+Other MerbCamp talks: [merbcamp slides](http://slideshare.net/tag/merbcamp))
+
+
+
+
+
+
+
+
+
+What I learned from this keynote that you should always double check what people tell you. All the Ruby frameworks tested including Rails are way faster than PHP frameworks such as [CakePHP](http://cakephp.org/), [Symfony](http://www.symfony-project.org/), [Code Igniter](http://codeigniter.com/).
+
+Fibonacci type benchmarks seem to only test a certain aspect of a language, turns out that if you are interested in a fast and flexible web framwork, ruby and especially Merb are seriously the way to go.
+
+UPDATE: looks like someone posted a [bootleg version of the keynote ](http://blip.tv/file/1354733);)

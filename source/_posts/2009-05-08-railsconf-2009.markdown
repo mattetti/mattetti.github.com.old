@@ -1,0 +1,43 @@
+---
+date: '2009-05-08 12:18:18'
+layout: post
+slug: railsconf-2009
+status: publish
+title: RailsConf 2009
+wordpress_id: '487'
+categories:
+- merb
+- News
+- rails
+- Presentation
+tags:
+- enterprise
+- merb
+- rails3
+- railsconf
+- vegas
+---
+
+RailsConf 2009 has now finished.  This time last year, no one would have ever guessed that the Merb and Rails teams would join forces and focus on what will hopefully be known as one of the best Web Frameworks.
+
+It was encouraging to see so many people excited about what's being ported over from Merb and the new options available to people who are currently limited by the existing stack. For those interested in pushing Rails further and doing stuff out of the norm, here are my slides. [Arthur Zapparoli](http://www.workingwithrails.com/person/5919-arthur-zapparoli) from [Brazilian Rails squad](http://www.rubyonrails.pro.br/) recorded most of the talk and told me he will upload the video ASAP. You can also read [Yehuda Katz' blog](http://yehudakatz.com/2009/05/08/railsconf-wrapup/) which covers what he talked about.
+
+
+[Rails3: Stepping off of the golden path](http://www.slideshare.net/mattetti/rails3-stepping-off-of-the-golden-path?type=presentation)
+
+
+View more [presentations](http://www.slideshare.net/) from [Matt Aimonetti](http://www.slideshare.net/mattetti).
+
+
+
+
+
+It was really great to meet a lot of new people as well as people I only knew via IRC/IM/twitter.
+
+It was a great honor to finally meet [Dan Kubb](http://twitter.com/dkubb) (DataMapper), [Ninh Hernandez-Búi](http://twitter.com/ninh) & [Hongli McLovin Lai (Phusion)](http://twitter.com/phusion_nl), [Peter Cooper](http://twitter.com/peterc) ([RubyInside](http://www.rubyinside.com/)), [Raimonds Simanovskis](http://twitter.com/rsim) (Oracle adapter for AR), [Arun Gupta](http://weblogs.java.net/blog/arungupta/) (Sun/Glassfish),  [Jeremy Hinegardner](http://twitter.com/copiousfreetime) (crate), [Michael Maxilien](http://maximilien.org) (IBM), Dana Jones ([railsbridge](http://railsbridge.org/)), Zach Zolton & Geoff Buesing (CouchRest) and of course the Brazilian crew (lots of awesome .br guys came this year, I'm looking forward to RailsSummit) and last but not least, the French speaking crew (I'm glad to see Ruby is picking up back home). (I know I'm forgetting people... sorry about that)
+
+It was also really nice to talk with some experts like Dave Astels, Aslak Hellesøy, Rich Kilmer, David Chelimsky, Ryan Brown, Derek Neighbors etc.. to get their feedback on various projects I'm working on.
+
+Leaving Vegas, I feel like the Rails community is expanding quickly (it was the first RailsConf for 1/4 to 1/5 of the attendees) and that the community is organizing itself to welcome a new audience (better documentation, great initiatives like [railsbridge.org](http://railsbridge.org/), willingness to help), as well as trying to be more available to the 'Enterprise' world.
+
+These feelings were enforced during our Rails Activism BOF and after talking with 3rd party developers and sponsors really trying to solve problems that newcomers to Rails are now facing. This is an exciting time.
