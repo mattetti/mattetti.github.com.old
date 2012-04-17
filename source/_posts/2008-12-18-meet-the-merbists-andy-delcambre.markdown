@@ -19,7 +19,7 @@ tags:
 
 
 
-[caption id="attachment_379" align="alignleft" width="224" caption="Andy Delcambre"][![Andy Delcambre](http://merbist.com/wp-content/uploads/2008/12/andy_cafe-224x300.jpg)](http://andy.delcambre.com)[/caption]
+[![Andy Delcambre](http://merbist.com/wp-content/uploads/2008/12/andy_cafe-224x300.jpg)](http://andy.delcambre.com)
 
 Today, [Andy Delcambre](http://andy.delcambre.com) is our featured merbist.
 

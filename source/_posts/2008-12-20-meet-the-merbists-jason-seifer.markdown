@@ -21,7 +21,7 @@ tags:
 
 
 
-[caption id="attachment_373" align="alignleft" width="300" caption="Jason Seifer"]![Jason Seifer](http://merbist.com/wp-content/uploads/2008/12/jason-seifer-300x225.jpg)[/caption]
+![Jason Seifer](http://merbist.com/wp-content/uploads/2008/12/jason-seifer-300x225.jpg)
 
 Today I'm interviewing [Jason Seifer](http://jasonseifer.com/) known for the funny [envyads](http://www.youtube.com/user/envyads) and the weekly [RailsEnvy podcast](http://railsenvy.com/).
 

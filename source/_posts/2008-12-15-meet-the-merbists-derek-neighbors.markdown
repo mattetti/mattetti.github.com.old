@@ -18,7 +18,7 @@ tags:
 - merbist
 ---
 
-[caption id="attachment_348" align="alignleft" width="300" caption="Derek Neighbors"][![Derek Neighbors](http://merbist.com/wp-content/uploads/2008/12/derek_pr2-300x199.jpg)](http://derekneighbors.com/)[/caption]
+[![Derek Neighbors](http://merbist.com/wp-content/uploads/2008/12/derek_pr2-300x199.jpg)](http://derekneighbors.com/)
 
 Today, I'm starting a new series called **meet the the merbists**. My goal is to feature various people from our community and ask them a few questions about Ruby, Merb and their projects.
 

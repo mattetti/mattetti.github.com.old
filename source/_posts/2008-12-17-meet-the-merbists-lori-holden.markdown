@@ -19,7 +19,7 @@ tags:
 
 
 
-[caption id="attachment_361" align="alignleft" width="201" caption="Lori Holden"][![Lori Holden](http://merbist.com/wp-content/uploads/2008/12/lori_at_desk-201x300.png)](http://loriholden.com/)[/caption]
+![Lori Holden](http://merbist.com/wp-content/uploads/2008/12/lori_at_desk-201x300.png)](http://loriholden.com/)
 
 Today, I'm interviewing [Lori Holden](http://loriholden.com/) from [YellowPages.com](http://www.yellowpages.com/)/[AT&T Interactive](http://www.research.att.com/projects.cfm).
 
