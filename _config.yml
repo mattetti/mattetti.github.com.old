@@ -2,7 +2,7 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://mattetti.github.com/Matt-Aimonetti
+url: http://mattetti.github.com
 title: Matt Aimonetti
 subtitle: List of projects, articles and talks by Matt
 author: Matt Aimonetti
@@ -26,7 +26,7 @@ email:
 # ----------------------- #
 
 # If publishing to a subdirectory as in http://site.com/project set 'root: /project'
-root: /Matt-Aimonetti
+root: /mattetti
 permalink: /posts/:year/:month/:day/:title/
 source: source
 destination: public/Matt-Aimonetti
