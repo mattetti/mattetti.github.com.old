@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Misc | Matt Aimonetti]]></title>
-  <link href="http://mattetti.github.com//articles/categories/misc/atom.xml" rel="self"/>
-  <link href="http://mattetti.github.com//"/>
-  <updated>2012-04-17T12:12:48+02:00</updated>
-  <id>http://mattetti.github.com//</id>
+  <link href="http://mattetti.github.com/articles/categories/misc/atom.xml" rel="self"/>
+  <link href="http://mattetti.github.com/"/>
+  <updated>2012-04-17T12:22:46+02:00</updated>
+  <id>http://mattetti.github.com/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Books to read in 2012 - recommended to me by Twitter]]></title>
-    <link href="http://mattetti.github.com//posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter/"/>
+    <link href="http://mattetti.github.com/posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter/"/>
     <updated>2011-12-30T15:28:13+01:00</updated>
-    <id>http://mattetti.github.com//posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter</id>
+    <id>http://mattetti.github.com/posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter</id>
     <content type="html"><![CDATA[<p>Today, I asked on Twitter what non-technical books I should read in 2012.</p>
 
 <p>I was nicely surprised to see so many of my followers send recommendations. Here is a list of 25 books that like-minded people suggested I read. Hopefully you will find a book or two to read too. Feel free to send more recommendations via the comments.</p>
@@ -176,9 +176,9 @@
   
   <entry>
     <title type="html"><![CDATA[Developing a Curriculum]]></title>
-    <link href="http://mattetti.github.com//posts/2011/12/21/developing-a-curriculum/"/>
+    <link href="http://mattetti.github.com/posts/2011/12/21/developing-a-curriculum/"/>
     <updated>2011-12-21T06:57:27+01:00</updated>
-    <id>http://mattetti.github.com//posts/2011/12/21/developing-a-curriculum</id>
+    <id>http://mattetti.github.com/posts/2011/12/21/developing-a-curriculum</id>
     <content type="html"><![CDATA[<p>Recently I asked a friend of mine to give me pointers on how to develop a curriculum (he used to teach an education PHD program), after discussing his response on Twitter, people asked me to put it somewhere, so here it is:</p>
 
 <p>Process to develop a curriculum:</p>
@@ -225,9 +225,9 @@
   
   <entry>
     <title type="html"><![CDATA[Data safety and GIL removal]]></title>
-    <link href="http://mattetti.github.com//posts/2011/10/18/data-safety-and-gil-removal/"/>
+    <link href="http://mattetti.github.com/posts/2011/10/18/data-safety-and-gil-removal/"/>
     <updated>2011-10-18T15:19:17+02:00</updated>
-    <id>http://mattetti.github.com//posts/2011/10/18/data-safety-and-gil-removal</id>
+    <id>http://mattetti.github.com/posts/2011/10/18/data-safety-and-gil-removal</id>
     <content type="html"><![CDATA[<p>After my recent <a href="http://rubyconf11.merbist.com">RubyConf talk</a> and <a href="http://merbist.com/2011/10/03/about-concurrency-and-the-gil/">follow up post addressing the Ruby &amp; Python's Global Interpreter Lock</a> (aka GVL/Global VM Lock). a lot of people asked me to explain what I meant by "data safety". While my point isn't to defend one approach or the other, I spent a lot of time explaining why C Ruby and C Python use a GIL and where it matters and where it matters less. As a reminder and as mentioned by Matz himself, the main reason why C Ruby still has a GIL is data safety. But if this point isn't clear to you, you might be missing the main argument supporting the use of a GIL.</p>
 
 <p>Showing obvious concrete examples of data corruption due to unsafe threaded code isn't actually as easy at it sounds. First of all, even with a GIL, developers can write unsafe threaded code. So we need to focus only on the safety problems raised by removing the GIL. To demonstrate what I mean, I will try to create some race conditions and show you the unexpected results you might get. Again, before you go crazy on the comments, remember that threaded code is indeterministic and the code below might potentially work on your machine and that's exactly why it is hard to demonstrate. Race conditions depend on many things, but in this case I will focus on race conditions affecting basic data structures since it might be the most surprising.</p>
@@ -297,9 +297,9 @@ puts @array.size
   
   <entry>
     <title type="html"><![CDATA[About management]]></title>
-    <link href="http://mattetti.github.com//posts/2011/10/11/about-management/"/>
+    <link href="http://mattetti.github.com/posts/2011/10/11/about-management/"/>
     <updated>2011-10-11T22:53:40+02:00</updated>
-    <id>http://mattetti.github.com//posts/2011/10/11/about-management</id>
+    <id>http://mattetti.github.com/posts/2011/10/11/about-management</id>
     <content type="html"><![CDATA[<p>I decided to save myself a session to the shrink and instead just write down my reflection on management. Who knows, some of you might help me and/or challenge my thought process.</p>
 
 <p>I recently read a great management book called the <a href="https://www.amazon.com/dp/B000UCUX0K/ref=as_li_ss_til?tag=merbist-20&amp;camp=213381&amp;creative=390973&amp;linkCode=as4&amp;creativeASIN=B000UCUX0K&amp;adid=0BP6N5GHZD0EW2N7QVZR&amp;">five dysfunctions of a team by Patrick Lencioni</a> . Instead of telling you what to do, the author highlights behavior patterns that are related to each other and when aggregated result in dysfunctional teams. I really liked the book because instead of a being a cookbook/playbook, this is more a fail book, in other words, it illustrates what you don't want to do and explains why. It highlights very well the relation between various behaviors and nicely illustrates why teams of brilliant people can fail. The <a href="https://www.amazon.com/dp/B000UCUX0K/ref=as_li_ss_til?tag=merbist-20&amp;camp=213381&amp;creative=390973&amp;linkCode=as4&amp;creativeASIN=B000UCUX0K&amp;adid=0BP6N5GHZD0EW2N7QVZR&amp;">Kindle version is at less than $5, go get it</a> and read it on your iPhone/iPad/computer/browser…</p>
@@ -318,9 +318,9 @@ puts @array.size
   
   <entry>
     <title type="html"><![CDATA[How to - cross domain ajax to a Ruby app]]></title>
-    <link href="http://mattetti.github.com//posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app/"/>
+    <link href="http://mattetti.github.com/posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app/"/>
     <updated>2011-09-14T16:11:41+02:00</updated>
-    <id>http://mattetti.github.com//posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app</id>
+    <id>http://mattetti.github.com/posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app</id>
     <content type="html"><![CDATA[<p>In some cases, you might have a bunch of apps running on different domains/subdomains and/or ports and you would like to make ajax requests between these services. The problem is that browsers wouldn't let you make such requests because of the Same Origin Policy which only allowed them to make request to resources within the same domain.</p>
 
 <p>However, most browsers (IE 8+, Firefox 3.5+, Safari 4+, Chrome) implement a simple way to allow cross domain requests as defined in this <a href="http://www.w3.org/TR/cors/">w3C document</a>.</p>
@@ -359,9 +359,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Ruby optimization example and explanation]]></title>
-    <link href="http://mattetti.github.com//posts/2011/09/05/ruby-optimization-example-and-explaination/"/>
+    <link href="http://mattetti.github.com/posts/2011/09/05/ruby-optimization-example-and-explaination/"/>
     <updated>2011-09-05T14:58:21+02:00</updated>
-    <id>http://mattetti.github.com//posts/2011/09/05/ruby-optimization-example-and-explaination</id>
+    <id>http://mattetti.github.com/posts/2011/09/05/ruby-optimization-example-and-explaination</id>
     <content type="html"><![CDATA[<p>Recently I wrote a small DSL that allows the user to define some code that then gets executed later on and in different contexts. Imagine something like Sinatra where each route action is defined in a block and then executed in context of an incoming request.</p>
 
 <p>The challenge is that blocks come with their context and you can't execute a block in the context of another one.</p>
@@ -450,9 +450,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[First step in scaling a web site: HTTP caching]]></title>
-    <link href="http://mattetti.github.com//posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching/"/>
+    <link href="http://mattetti.github.com/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching/"/>
     <updated>2011-07-11T10:21:02+02:00</updated>
-    <id>http://mattetti.github.com//posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching</id>
+    <id>http://mattetti.github.com/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching</id>
     <content type="html"><![CDATA[<p>Today my friend <a href="http://twitter.com/mokolabs">Patrick Crowley</a> and I were talking about scaling his website: <a href="http://cinematreasures.org/">http://cinematreasures.org</a> since an article covering his work will soon be published in a very popular newspaper. Patrick's site is hosted on <a href="http://www.heroku.com/">Heroku</a> which comes by default with <a href="https://www.varnish-cache.org/">Varnish caching</a> enabled.</p>
 
 <p>The challenge is that a lot of people using the Rails framework are used to doing page caching instead of relying on HTTP caching, even though this feature was added a long time ago. The major problem with page caching is that it doesn't scale that well as soon as you run more than one server. Indeed you would need to store the page content to a shared drive between your servers or use memcached and do some work to avoid hitting your app every single time. On the other hand, HTTP caching is extremely easy to handle at the application level and it will dramatically reduce the amount of requests hitting your app. Let me explain a little more about HTTP caching.</p>
@@ -569,9 +569,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Go's reflection example]]></title>
-    <link href="http://mattetti.github.com//posts/2011/06/27/golang-reflection-exampl/"/>
+    <link href="http://mattetti.github.com/posts/2011/06/27/golang-reflection-exampl/"/>
     <updated>2011-06-27T12:12:32+02:00</updated>
-    <id>http://mattetti.github.com//posts/2011/06/27/golang-reflection-exampl</id>
+    <id>http://mattetti.github.com/posts/2011/06/27/golang-reflection-exampl</id>
     <content type="html"><![CDATA[<p>The <a href="http://golang.org/">Go Programming language</a> is really cool language by Google. According to the sales pitch, it's a <strong><em>"fast, statically typed, compiled language that feels like a dynamically typed, interpreted language"</em></strong>. Well, if you are like me, you don't trust sales pitches because you know that people writing them dont' care about you, they care about their product. However cynical you are, you still have to check the facts. So here is a quick demonstration showing how to use Go's reflection feature.</p>
 
 <p>Installing Go is actually really straight forward on a Mac, and slightly harder on Linux, check <a href="http://golang.org/doc/install.html">this guide </a>to see how to build Go in a few minutes.</p>
@@ -689,9 +689,9 @@ The attributes function is defined a bit below and and it takes any type of obje
   
   <entry>
     <title type="html"><![CDATA[Sayonara Sony ]]></title>
-    <link href="http://mattetti.github.com//posts/2011/06/10/sayonara-sony/"/>
+    <link href="http://mattetti.github.com/posts/2011/06/10/sayonara-sony/"/>
     <updated>2011-06-10T08:49:30+02:00</updated>
-    <id>http://mattetti.github.com//posts/2011/06/10/sayonara-sony</id>
+    <id>http://mattetti.github.com/posts/2011/06/10/sayonara-sony</id>
     <content type="html"><![CDATA[<p>It's now official, I have resigned from Sony Computer Entertainment America.</p>
 
 <p><a href="http://merbist.com/wp-content/uploads/2011/06/playstation-logo.png"><img src="http://merbist.com/wp-content/uploads/2011/06/playstation-logo-150x150.png" alt="" /></a></p>
@@ -761,9 +761,9 @@ The attributes function is defined a bit below and and it takes any type of obje
   
   <entry>
     <title type="html"><![CDATA[RubyConf 2010 - MacRuby talk]]></title>
-    <link href="http://mattetti.github.com//posts/2010/11/12/rubyconf-2010-macruby-talk/"/>
+    <link href="http://mattetti.github.com/posts/2010/11/12/rubyconf-2010-macruby-talk/"/>
     <updated>2010-11-12T16:00:51+01:00</updated>
-    <id>http://mattetti.github.com//posts/2010/11/12/rubyconf-2010-macruby-talk</id>
+    <id>http://mattetti.github.com/posts/2010/11/12/rubyconf-2010-macruby-talk</id>
     <content type="html"><![CDATA[<p>This year I gave the traditional Apple's MacRuby talk at RubyConf.
 My presentation focused on 2 axis:</p>
 
@@ -812,9 +812,9 @@ Since last new a lot of things happened, here is a quick summary:</p>
   
   <entry>
     <title type="html"><![CDATA[Discussion with a Java switcher]]></title>
-    <link href="http://mattetti.github.com//posts/2010/08/22/discussion-with-a-java-switcher/"/>
+    <link href="http://mattetti.github.com/posts/2010/08/22/discussion-with-a-java-switcher/"/>
     <updated>2010-08-22T17:18:55+02:00</updated>
-    <id>http://mattetti.github.com//posts/2010/08/22/discussion-with-a-java-switcher</id>
+    <id>http://mattetti.github.com/posts/2010/08/22/discussion-with-a-java-switcher</id>
     <content type="html"><![CDATA[<p>For the past 6 months, I have had regular discussions with an experienced Java developers who switched to Ruby a couple years ago. Names have been changed to protect the guilty but to help you understand my friend 'Duke' better, you need to know that he has been a developer for 10 years and lead many complicated, high traffic projects. He recently released two Ruby on Rails projects and he has been fighting with performance issues and scalability challenges.</p>
 
 <p>Duke is a happy Ruby developer but he sometimes has a hard time understanding why things are done in a certain way in the Ruby community. Here are some extracts from our conversations. My answers are only based on my own experience and limited knowledge. They are probably not shared by the entire  community, feel free to use the comment section if you want to add more or share your own answers.</p>
@@ -871,9 +871,9 @@ Since last new a lot of things happened, here is a quick summary:</p>
   
   <entry>
     <title type="html"><![CDATA[Ruby object allocation & why you should care]]></title>
-    <link href="http://mattetti.github.com//posts/2010/07/29/object-allocation-why-you-should-care/"/>
+    <link href="http://mattetti.github.com/posts/2010/07/29/object-allocation-why-you-should-care/"/>
     <updated>2010-07-29T23:47:50+02:00</updated>
-    <id>http://mattetti.github.com//posts/2010/07/29/object-allocation-why-you-should-care</id>
+    <id>http://mattetti.github.com/posts/2010/07/29/object-allocation-why-you-should-care</id>
     <content type="html"><![CDATA[<p>Recently I was tasked with finding how to optimize a web application with heavy traffic. The application (a Rails 2.3.x app) gets about 3 million requests per hour and most of these requests cannot really be easily cached so they go through the entire stack.</p>
 
 <p>This is probably not the case of most web apps out there. None the less, my findings my help you understand Ruby better and maybe think differently about memory management.</p>
@@ -956,9 +956,9 @@ Index   1</p>
   
   <entry>
     <title type="html"><![CDATA[Au Revoir Rails community]]></title>
-    <link href="http://mattetti.github.com//posts/2010/06/04/au-revoir-rails-community/"/>
+    <link href="http://mattetti.github.com/posts/2010/06/04/au-revoir-rails-community/"/>
     <updated>2010-06-04T17:45:20+02:00</updated>
-    <id>http://mattetti.github.com//posts/2010/06/04/au-revoir-rails-community</id>
+    <id>http://mattetti.github.com/posts/2010/06/04/au-revoir-rails-community</id>
     <content type="html"><![CDATA[<p>Time really flies!</p>
 
 <p>Back in December 2005, Ruby on Rails 1.0 was released to the masses. I remember that was when I first got interested in Rails. Six months later, I was doing Rails development full time.</p>
@@ -979,9 +979,9 @@ Index   1</p>
   
   <entry>
     <title type="html"><![CDATA[Writing an open licensed book]]></title>
-    <link href="http://mattetti.github.com//posts/2010/05/09/writing-an-open-licensed-book/"/>
+    <link href="http://mattetti.github.com/posts/2010/05/09/writing-an-open-licensed-book/"/>
     <updated>2010-05-09T22:40:06+02:00</updated>
-    <id>http://mattetti.github.com//posts/2010/05/09/writing-an-open-licensed-book</id>
+    <id>http://mattetti.github.com/posts/2010/05/09/writing-an-open-licensed-book</id>
     <content type="html"><![CDATA[<p>To celebrate last week's release of <a href="http://www.macruby.org/blog/2010/04/30/macruby06.html">MacRuby 0.6</a>, O'Reilly and I started publishing the draft of my MacRuby book online: <a href="http://macruby.labs.oreilly.com/">http://macruby.labs.oreilly.com/</a></p>
 
 <p>I started thinking about working on "<a href="http://macruby.labs.oreilly.com/">MacRuby: The Definitive Guide</a>" last year when I realized that the project had a great future but there was a serious lack of documentation. With the support of the MacRuby team, I worked on a table of contents and a pitch. The next step was to decide what we wanted to do with the book.</p>
@@ -1006,9 +1006,9 @@ Index   1</p>
   
   <entry>
     <title type="html"><![CDATA[I did it wrong]]></title>
-    <link href="http://mattetti.github.com//posts/2010/03/15/i-did-it-wrong/"/>
+    <link href="http://mattetti.github.com/posts/2010/03/15/i-did-it-wrong/"/>
     <updated>2010-03-15T23:50:49+01:00</updated>
-    <id>http://mattetti.github.com//posts/2010/03/15/i-did-it-wrong</id>
+    <id>http://mattetti.github.com/posts/2010/03/15/i-did-it-wrong</id>
     <content type="html"><![CDATA[<p>The Ruby community is a well known for at least two things: <strong>being </strong><a href="http://pragprog.com/press_releases/the-passionate-programmer">passionate</a><strong> and being </strong><a href="http://www.bruisin-ales.com/beerblog/wp-content/uploads/2008/09/stoneintro.gif">arrogant</a> .
 Two characteristics that often go together but I am not going to defend or justify anything in this post, instead I will try to reflect on my own experience and will share with you my own view point.</p>
 
@@ -1036,9 +1036,9 @@ Two characteristics that often go together but I am not going to defend or justi
   
   <entry>
     <title type="html"><![CDATA[How and why I joined the "suit people"]]></title>
-    <link href="http://mattetti.github.com//posts/2010/02/02/how-and-why-i-joined-the-suit-people/"/>
+    <link href="http://mattetti.github.com/posts/2010/02/02/how-and-why-i-joined-the-suit-people/"/>
     <updated>2010-02-02T11:19:26+01:00</updated>
-    <id>http://mattetti.github.com//posts/2010/02/02/how-and-why-i-joined-the-suit-people</id>
+    <id>http://mattetti.github.com/posts/2010/02/02/how-and-why-i-joined-the-suit-people</id>
     <content type="html"><![CDATA[<p>It is now official: I have traded my freedom &amp; home office for a job title, an Aeron chair in a cubicle and a 401K.</p>
 
 <p>I received my new employee package and, in less than a week, I will officially become a full-time employee at <a href="http://en.wikipedia.org/wiki/Sony_Computer_Entertainment_of_America"> SCEA</a> (Sony Computer Entertainment America).</p>
@@ -1114,9 +1114,9 @@ From time to time I will probably use other languages here and there, but that u
   
   <entry>
     <title type="html"><![CDATA[Amazon Kindle 2]]></title>
-    <link href="http://mattetti.github.com//posts/2010/01/05/amazon-kindle-2/"/>
+    <link href="http://mattetti.github.com/posts/2010/01/05/amazon-kindle-2/"/>
     <updated>2010-01-05T17:36:12+01:00</updated>
-    <id>http://mattetti.github.com//posts/2010/01/05/amazon-kindle-2</id>
+    <id>http://mattetti.github.com/posts/2010/01/05/amazon-kindle-2</id>
     <content type="html"><![CDATA[<p>For Noël, my wife got me a new toy: <a href="http://www.amazon.com/gp/product/B0015T963C?ie=UTF8&amp;tag=merbist-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B0015T963C">the Amazon Kindle 2</a>.</p>
 
 <p><a href="http://www.amazon.com/gp/product/B0015T963C?tag=merbist-20"><img src="http://placeholder.apture.com/ph/360x280_AmazonProduct/" alt="" /></a></p>
@@ -1172,9 +1172,9 @@ From time to time I will probably use other languages here and there, but that u
   
   <entry>
     <title type="html"><![CDATA[The Ruby Revolution, take II]]></title>
-    <link href="http://mattetti.github.com//posts/2009/11/16/the-ruby-revolution-take-ii/"/>
+    <link href="http://mattetti.github.com/posts/2009/11/16/the-ruby-revolution-take-ii/"/>
     <updated>2009-11-16T08:05:55+01:00</updated>
-    <id>http://mattetti.github.com//posts/2009/11/16/the-ruby-revolution-take-ii</id>
+    <id>http://mattetti.github.com/posts/2009/11/16/the-ruby-revolution-take-ii</id>
     <content type="html"><![CDATA[<p>[caption id="attachment_638" align="alignright" width="300" caption="Mohandas Karamchand Gandhi"]<img src="http://merbist.com/wp-content/uploads/2009/11/GANDHI.jpg" alt="Mohandas Karamchand Gandhi" />[/caption]</p>
 
 <p>My recent '<a href="http://merbist.com/2009/11/09/the-ruby-revolution-is-over">Ruby revolution being over</a>' blog post generated quite a <a href="http://merbist.com/2009/11/09/the-ruby-revolution-is-over/#comments">lot of comments</a>.
@@ -1229,9 +1229,9 @@ So, again, do not focus on the adoption but instead look at the influence of the
   
   <entry>
     <title type="html"><![CDATA[The Ruby revolution is over]]></title>
-    <link href="http://mattetti.github.com//posts/2009/11/09/the-ruby-revolution-is-over/"/>
+    <link href="http://mattetti.github.com/posts/2009/11/09/the-ruby-revolution-is-over/"/>
     <updated>2009-11-09T00:10:16+01:00</updated>
-    <id>http://mattetti.github.com//posts/2009/11/09/the-ruby-revolution-is-over</id>
+    <id>http://mattetti.github.com/posts/2009/11/09/the-ruby-revolution-is-over</id>
     <content type="html"><![CDATA[<p><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Eug%C3%A8ne_Delacroix_-_La_libert%C3%A9_guidant_le_peuple.jpg/300px-Eug%C3%A8ne_Delacroix_-_La_libert%C3%A9_guidant_le_peuple.jpg" alt="Liberté guidant le peuple - Eugene Delacroix posted by Matt Aimonetti" /></p>
 
 <p>According to wikipedia, a <strong>revolution</strong> (from the latin <em>revolutio</em>, "a turn around") is a fundamental change in power or organizational structures that takes place in a relatively short period of time.</p>
@@ -1278,9 +1278,9 @@ So, again, do not focus on the adoption but instead look at the influence of the
   
   <entry>
     <title type="html"><![CDATA[RailsSummit - an amazing adventure]]></title>
-    <link href="http://mattetti.github.com//posts/2009/10/23/railssummit-2009/"/>
+    <link href="http://mattetti.github.com/posts/2009/10/23/railssummit-2009/"/>
     <updated>2009-10-23T10:17:45+02:00</updated>
-    <id>http://mattetti.github.com//posts/2009/10/23/railssummit-2009</id>
+    <id>http://mattetti.github.com/posts/2009/10/23/railssummit-2009</id>
     <content type="html"><![CDATA[<p>I have had the opportunity to go to and speak at many conferences but this year was the first time I had the chance to go to <a href="http://railssummit.com.br">RailsSummit</a> in São Paulo, Brazil.</p>
 
 <p>I was really looking forward to this trip and I have to say it went beyond my expectations. I had really good feedback from people like the <a href="http://www.phusion.nl/">Phusion guys</a> (Ninh &amp; Hongli), Gregg Pollack and others.</p>
@@ -1307,9 +1307,9 @@ So, again, do not focus on the adoption but instead look at the influence of the
   
   <entry>
     <title type="html"><![CDATA[Blog status]]></title>
-    <link href="http://mattetti.github.com//posts/2009/08/30/blog-status/"/>
+    <link href="http://mattetti.github.com/posts/2009/08/30/blog-status/"/>
     <updated>2009-08-30T16:35:01+02:00</updated>
-    <id>http://mattetti.github.com//posts/2009/08/30/blog-status</id>
+    <id>http://mattetti.github.com/posts/2009/08/30/blog-status</id>
     <content type="html"><![CDATA[<p>I had people asking me how come I was not blogging as much lately. Well, on top of being really busy, I have been blogging on other blogs such as the <a href="http://weblog.rubyonrails.org/">official Rails blog</a>.</p>
 
 <p>There aren't a lot of Merb news, we are waiting for Carl and Yehuda to sign out on the 1.1 release and will hopefully soon start the migration work to Rails3. If you want more news about Rails3, check <a href="http://yehudakatz.com/">Yehuda's blog</a> and the <a href="http://weblog.rubyonrails.com/">official Rails blog</a>. Lots of exciting things are coming up.</p>
@@ -1320,9 +1320,9 @@ So, again, do not focus on the adoption but instead look at the influence of the
   
   <entry>
     <title type="html"><![CDATA[Ruby, Rack and CouchDB = lots of awesomeness]]></title>
-    <link href="http://mattetti.github.com//posts/2009/07/27/ruby-rack-and-couchdb-lots-of-awesomeness/"/>
+    <link href="http://mattetti.github.com/posts/2009/07/27/ruby-rack-and-couchdb-lots-of-awesomeness/"/>
     <updated>2009-07-27T13:49:20+02:00</updated>
-    <id>http://mattetti.github.com//posts/2009/07/27/ruby-rack-and-couchdb-lots-of-awesomeness</id>
+    <id>http://mattetti.github.com/posts/2009/07/27/ruby-rack-and-couchdb-lots-of-awesomeness</id>
     <content type="html"><![CDATA[<p>Over the weekend, I spent some time working on a Ruby + Rack +CouchDB project. Three technologies that I know quite well but that I never put to work together at the same time, at least not directly.  Let's call this Part I.</p>
 
 <p>Before we get started, let me introduce each component:</p>
@@ -1376,9 +1376,9 @@ Finally, instead of printing out the logs, we are saving them to the database.</
   
   <entry>
     <title type="html"><![CDATA[Ruby authentication of CouchDB requests]]></title>
-    <link href="http://mattetti.github.com//posts/2009/07/13/ruby-authentication-of-couchdb-requests/"/>
+    <link href="http://mattetti.github.com/posts/2009/07/13/ruby-authentication-of-couchdb-requests/"/>
     <updated>2009-07-13T13:00:13+02:00</updated>
-    <id>http://mattetti.github.com//posts/2009/07/13/ruby-authentication-of-couchdb-requests</id>
+    <id>http://mattetti.github.com/posts/2009/07/13/ruby-authentication-of-couchdb-requests</id>
     <content type="html"><![CDATA[<p><a href="http://couchdb.apache.org/">CouchDB</a> is an awesome technology. I'm lucky enough to work on quite a big project where we decided to switch from MySQL to Couch for various reasons.</p>
 
 <p>One of the many things I like with Couch is that it handles attachments and can replicate them as well as serve them for you using the <a href="http://en.wikipedia.org/wiki/Erlang%20%28programming%20language%29">Erlang</a> based builtin webserver. (you can load balance your dbs and do some other really cool stuff)</p>
@@ -1407,9 +1407,9 @@ Finally, instead of printing out the logs, we are saving them to the database.</
   
   <entry>
     <title type="html"><![CDATA[Compiled hello world with MacRuby]]></title>
-    <link href="http://mattetti.github.com//posts/2009/07/12/compiled-hello-world-with-macruby/"/>
+    <link href="http://mattetti.github.com/posts/2009/07/12/compiled-hello-world-with-macruby/"/>
     <updated>2009-07-12T11:53:53+02:00</updated>
-    <id>http://mattetti.github.com//posts/2009/07/12/compiled-hello-world-with-macruby</id>
+    <id>http://mattetti.github.com/posts/2009/07/12/compiled-hello-world-with-macruby</id>
     <content type="html"><![CDATA[<p>To celebrate the amazing <a href="http://lists.macosforge.org/pipermail/macruby-devel/2009-July/002062.html">work being done by Laurent Sansonetti on MacRuby</a> here is a hello world using the new <a href="http://en.wikipedia.org/wiki/LLVM">LLVM</a> based compiler.
 <code>
 $ echo "p ARGV.join(' ').upcase" &gt; hello_world.rb
@@ -1447,9 +1447,9 @@ The final binary looks like an Objective-C binary (except that it's larger)</p><
   
   <entry>
     <title type="html"><![CDATA[Merb 1.1 delayed]]></title>
-    <link href="http://mattetti.github.com//posts/2009/04/14/merb-11-delayed/"/>
+    <link href="http://mattetti.github.com/posts/2009/04/14/merb-11-delayed/"/>
     <updated>2009-04-14T09:02:45+02:00</updated>
-    <id>http://mattetti.github.com//posts/2009/04/14/merb-11-delayed</id>
+    <id>http://mattetti.github.com/posts/2009/04/14/merb-11-delayed</id>
     <content type="html"><![CDATA[<p>We made the decision to slightly delay the release of Merb 1.1 as we ended up changing the scope of what we wanted to make available in the 1.1 release. If you have been following our releases, you know that this is not something we usually do, but we strongly believe that this is actually something that will save us time for the next release.</p>
 
 <p>The big themes for 1.1 are full Ruby 1.9 support and Rails3 compatibilty: action-orm(previously called active-orm) and the new router.</p>
@@ -1480,9 +1480,9 @@ It also goes quite a bit further and attempts to make reusing rack applications 
   
   <entry>
     <title type="html"><![CDATA[merb progress]]></title>
-    <link href="http://mattetti.github.com//posts/2009/02/06/merb-progress/"/>
+    <link href="http://mattetti.github.com/posts/2009/02/06/merb-progress/"/>
     <updated>2009-02-06T14:09:27+01:00</updated>
-    <id>http://mattetti.github.com//posts/2009/02/06/merb-progress</id>
+    <id>http://mattetti.github.com/posts/2009/02/06/merb-progress</id>
     <content type="html"><![CDATA[<p>As they say: fail early, fail often. Well, I've been failing to blog recently, but as always I have some good excuses ;)</p>
 
 <ul>
@@ -1535,9 +1535,9 @@ It also goes quite a bit further and attempts to make reusing rack applications 
   
   <entry>
     <title type="html"><![CDATA[Meet the merbists: Hampton Catlin]]></title>
-    <link href="http://mattetti.github.com//posts/2009/01/06/meet-the-merbists-hampton-catlin/"/>
+    <link href="http://mattetti.github.com/posts/2009/01/06/meet-the-merbists-hampton-catlin/"/>
     <updated>2009-01-06T12:13:37+01:00</updated>
-    <id>http://mattetti.github.com//posts/2009/01/06/meet-the-merbists-hampton-catlin</id>
+    <id>http://mattetti.github.com/posts/2009/01/06/meet-the-merbists-hampton-catlin</id>
     <content type="html"><![CDATA[<p><img src="http://farm1.static.flickr.com/156/379744976_8f241811fe_m.jpg" alt="Matt Aimonetti interviewing Hampton Catlin" /></p>
 
 <p>Meet today's merbist: <a href="http://hamptoncatlin.com/">Hampton Catlin</a></p>
@@ -1581,9 +1581,9 @@ Its not live yet with wikipedia, but that's the code that you can help with! :)<
   
   <entry>
     <title type="html"><![CDATA[Rails vs Merb Â¿drama?]]></title>
-    <link href="http://mattetti.github.com//posts/2008/11/15/rails-vs-merb-drama/"/>
+    <link href="http://mattetti.github.com/posts/2008/11/15/rails-vs-merb-drama/"/>
     <updated>2008-11-15T19:07:46+01:00</updated>
-    <id>http://mattetti.github.com//posts/2008/11/15/rails-vs-merb-drama</id>
+    <id>http://mattetti.github.com/posts/2008/11/15/rails-vs-merb-drama</id>
     <content type="html"><![CDATA[<p>That's official, according to Twitter the fight has started.</p>
 
 <p>In this corner, weighing in at XXX LOC, from 37signals in the white trunks: <strong>Rails</strong> and in this other corner,Â  weighing in at YYY LOC from Engine Yard: <strong>Merb</strong>!</p>
@@ -1683,9 +1683,9 @@ Marketers (and all human beings) are well trained to follow the leader. The natu
   
   <entry>
     <title type="html"><![CDATA[merb 1.0 - tips part 1]]></title>
-    <link href="http://mattetti.github.com//posts/2008/11/14/merb-10-tips-part-1/"/>
+    <link href="http://mattetti.github.com/posts/2008/11/14/merb-10-tips-part-1/"/>
     <updated>2008-11-14T00:39:27+01:00</updated>
-    <id>http://mattetti.github.com//posts/2008/11/14/merb-10-tips-part-1</id>
+    <id>http://mattetti.github.com/posts/2008/11/14/merb-10-tips-part-1</id>
     <content type="html"><![CDATA[<p>Â </p>
 
 <p>As you must know by now, last week,<a href="http://merbist.com/2008/11/09/merb-1-0-released"> Merb 1.0 got released</a>.</p>
@@ -1789,9 +1789,9 @@ endÂ </code></p>
   
   <entry>
     <title type="html"><![CDATA[Merb 1.0 released]]></title>
-    <link href="http://mattetti.github.com//posts/2008/11/09/merb-1-0-released/"/>
+    <link href="http://mattetti.github.com/posts/2008/11/09/merb-1-0-released/"/>
     <updated>2008-11-09T22:47:25+01:00</updated>
-    <id>http://mattetti.github.com//posts/2008/11/09/merb-1-0-released</id>
+    <id>http://mattetti.github.com/posts/2008/11/09/merb-1-0-released</id>
     <content type="html"><![CDATA[<p><a href="http://flickr.com/photos/absolutely_loverly/120000855/"><img src="http://farm1.static.flickr.com/47/120000855_c7d39781f7_m.jpg" alt="" /></a></p>
 
 <p><a href="http://d.hatena.ne.jp/kwatch/20081112/1226448192"><img src="http://merbist.com/wp-content/uploads/2008/11/nihon-japan-48.png" alt="" /></a>
@@ -1864,9 +1864,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[Merb 1.0 RC5]]></title>
-    <link href="http://mattetti.github.com//posts/2008/11/03/merb-10-rc5/"/>
+    <link href="http://mattetti.github.com/posts/2008/11/03/merb-10-rc5/"/>
     <updated>2008-11-03T18:50:21+01:00</updated>
-    <id>http://mattetti.github.com//posts/2008/11/03/merb-10-rc5</id>
+    <id>http://mattetti.github.com/posts/2008/11/03/merb-10-rc5</id>
     <content type="html"><![CDATA[<p>As you might have noticed, we've been pushing a lot of Release Candidates out the door. The reason is that we want to make sure 1.0 is really ready for showtime!</p>
 
 <p>We are also getting a lot of bug reports that help us focusing on the main issues. Today RC5 was pushed to a RubyForge mirror close to you and <a href="http://yehudakatz.com/2008/11/03/merb-rc5-final-rc/">here is a report from Yehuda Katz</a>, <a href="http://merbivore.com">Merb</a> lead developer.</p>
@@ -1891,9 +1891,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[Merb Pre Sprint Meeting]]></title>
-    <link href="http://mattetti.github.com//posts/2008/10/07/merb-pre-sprint-meeting/"/>
+    <link href="http://mattetti.github.com/posts/2008/10/07/merb-pre-sprint-meeting/"/>
     <updated>2008-10-07T22:53:53+02:00</updated>
-    <id>http://mattetti.github.com//posts/2008/10/07/merb-pre-sprint-meeting</id>
+    <id>http://mattetti.github.com/posts/2008/10/07/merb-pre-sprint-meeting</id>
     <content type="html"><![CDATA[<p><img src="http://farm4.static.flickr.com/3171/2424765496_43008cbd29.jpg?v=0" alt="" />Some of Los SeÃ±ores del Merb, AKA the Merb "core team" met tonight in a secret location in San Diego, CA. Obviously, we had to meet in a Mexican restaurant and enjoy <a href="http://www.rubios.com/">Tuesday Fish Taco night special</a> ;)</p>
 
 <p>While not everybody could make the trip, Yehuda, Andy, Daniel, Carl and myself met to plan the very first Merb Sprint.</p>
@@ -1924,9 +1924,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[Merb Edge update (Oct 6th 2008)]]></title>
-    <link href="http://mattetti.github.com//posts/2008/10/06/merb-edge-update-oct-6th-2008/"/>
+    <link href="http://mattetti.github.com/posts/2008/10/06/merb-edge-update-oct-6th-2008/"/>
     <updated>2008-10-06T20:50:15+02:00</updated>
-    <id>http://mattetti.github.com//posts/2008/10/06/merb-edge-update-oct-6th-2008</id>
+    <id>http://mattetti.github.com/posts/2008/10/06/merb-edge-update-oct-6th-2008</id>
     <content type="html"><![CDATA[<ul>
 <li><p>Mode changes to init.rb, user updating to a newer version or Merb will need to add</p>
 
@@ -1956,9 +1956,9 @@ $ merb-gen app my-awesome-merb-app
   
   <entry>
     <title type="html"><![CDATA[problems with urls in Merb HEAD?]]></title>
-    <link href="http://mattetti.github.com//posts/2008/09/30/problems-with-urls-in-merb-head/"/>
+    <link href="http://mattetti.github.com/posts/2008/09/30/problems-with-urls-in-merb-head/"/>
     <updated>2008-09-30T22:24:29+02:00</updated>
-    <id>http://mattetti.github.com//posts/2008/09/30/problems-with-urls-in-merb-head</id>
+    <id>http://mattetti.github.com/posts/2008/09/30/problems-with-urls-in-merb-head</id>
     <content type="html"><![CDATA[<p>I actually run into a small problem when updated an older Merb app. Here was how my router looked like:</p>
 
 <pre><code>Merb::Router.prepare do |r|

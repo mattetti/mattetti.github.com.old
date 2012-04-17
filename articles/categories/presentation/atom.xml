@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Presentation | Matt Aimonetti]]></title>
-  <link href="http://mattetti.github.com//articles/categories/presentation/atom.xml" rel="self"/>
-  <link href="http://mattetti.github.com//"/>
-  <updated>2012-04-17T12:12:48+02:00</updated>
-  <id>http://mattetti.github.com//</id>
+  <link href="http://mattetti.github.com/articles/categories/presentation/atom.xml" rel="self"/>
+  <link href="http://mattetti.github.com/"/>
+  <updated>2012-04-17T12:22:46+02:00</updated>
+  <id>http://mattetti.github.com/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[My RubyConf 2011 talk is online]]></title>
-    <link href="http://mattetti.github.com//posts/2011/12/09/my-rubyconf-2011-talk-is-online/"/>
+    <link href="http://mattetti.github.com/posts/2011/12/09/my-rubyconf-2011-talk-is-online/"/>
     <updated>2011-12-09T06:47:59+01:00</updated>
-    <id>http://mattetti.github.com//posts/2011/12/09/my-rubyconf-2011-talk-is-online</id>
+    <id>http://mattetti.github.com/posts/2011/12/09/my-rubyconf-2011-talk-is-online</id>
     <content type="html"><![CDATA[<p>I realize I forgot to mention that my RubyConf talk is now online on the <a href="http://confreaks.net/videos/714-rubyconf2011-complex-ruby-concepts-dummified">confreaks site</a> (wait until the end, Matz actually answers a question from the audience).</p>
 
 <p><img src="https://img.skitch.com/20111209-pdfksgd2sufg8ywrpnjd4dnru4.jpg" alt="Photo of Matt Aimonetti giving a talk at RubyConf 2011 with one of his slides showing how thread scheduling works" /></p>
@@ -34,9 +34,9 @@
   
   <entry>
     <title type="html"><![CDATA[RubyConf 2010 - MacRuby talk]]></title>
-    <link href="http://mattetti.github.com//posts/2010/11/12/rubyconf-2010-macruby-talk/"/>
+    <link href="http://mattetti.github.com/posts/2010/11/12/rubyconf-2010-macruby-talk/"/>
     <updated>2010-11-12T16:00:51+01:00</updated>
-    <id>http://mattetti.github.com//posts/2010/11/12/rubyconf-2010-macruby-talk</id>
+    <id>http://mattetti.github.com/posts/2010/11/12/rubyconf-2010-macruby-talk</id>
     <content type="html"><![CDATA[<p>This year I gave the traditional Apple's MacRuby talk at RubyConf.
 My presentation focused on 2 axis:</p>
 
@@ -85,9 +85,9 @@ Since last new a lot of things happened, here is a quick summary:</p>
   
   <entry>
     <title type="html"><![CDATA[RailsSummit - an amazing adventure]]></title>
-    <link href="http://mattetti.github.com//posts/2009/10/23/railssummit-2009/"/>
+    <link href="http://mattetti.github.com/posts/2009/10/23/railssummit-2009/"/>
     <updated>2009-10-23T10:17:45+02:00</updated>
-    <id>http://mattetti.github.com//posts/2009/10/23/railssummit-2009</id>
+    <id>http://mattetti.github.com/posts/2009/10/23/railssummit-2009</id>
     <content type="html"><![CDATA[<p>I have had the opportunity to go to and speak at many conferences but this year was the first time I had the chance to go to <a href="http://railssummit.com.br">RailsSummit</a> in São Paulo, Brazil.</p>
 
 <p>I was really looking forward to this trip and I have to say it went beyond my expectations. I had really good feedback from people like the <a href="http://www.phusion.nl/">Phusion guys</a> (Ninh &amp; Hongli), Gregg Pollack and others.</p>
@@ -114,9 +114,9 @@ Since last new a lot of things happened, here is a quick summary:</p>
   
   <entry>
     <title type="html"><![CDATA[RailsConf 2009]]></title>
-    <link href="http://mattetti.github.com//posts/2009/05/08/railsconf-2009/"/>
+    <link href="http://mattetti.github.com/posts/2009/05/08/railsconf-2009/"/>
     <updated>2009-05-08T12:18:18+02:00</updated>
-    <id>http://mattetti.github.com//posts/2009/05/08/railsconf-2009</id>
+    <id>http://mattetti.github.com/posts/2009/05/08/railsconf-2009</id>
     <content type="html"><![CDATA[<p>RailsConf 2009 has now finished.  This time last year, no one would have ever guessed that the Merb and Rails teams would join forces and focus on what will hopefully be known as one of the best Web Frameworks.</p>
 
 <p>It was encouraging to see so many people excited about what's being ported over from Merb and the new options available to people who are currently limited by the existing stack. For those interested in pushing Rails further and doing stuff out of the norm, here are my slides. <a href="http://www.workingwithrails.com/person/5919-arthur-zapparoli">Arthur Zapparoli</a> from <a href="http://www.rubyonrails.pro.br/">Brazilian Rails squad</a> recorded most of the talk and told me he will upload the video ASAP. You can also read <a href="http://yehudakatz.com/2009/05/08/railsconf-wrapup/">Yehuda Katz' blog</a> which covers what he talked about.</p>
