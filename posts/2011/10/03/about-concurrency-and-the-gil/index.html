@@ -1,0 +1,233 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>About concurrency and the GIL - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="About Concurrency and the GIL During RubyConf 2011, concurrency was a really hot topic. This is not a new issue, and the JRuby team has been talking &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/Matt-Aimonetti/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    <link rel="canonical" href="http://mattetti.github.com/">
+    <link href="/mattetti/favicon.png" rel="shortcut icon">
+    <link href="/mattetti/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/mattetti/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/mattetti/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com/">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/Matt-Aimonetti/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/mattetti/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/mattetti/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/mattetti/">About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/mattetti/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">About Concurrency and the GIL</h1>
+    <div class="entry"><p>During RubyConf 2011, concurrency was a really hot topic. This is not a new issue, and the JRuby team has been talking about true concurrency for quite a while . The Global Interpreter Lock has also been in a subject a<a href="http://wiki.python.org/moin/GlobalInterpreterLock"> lot of discussions in the Python community</a> and it&#8217;s not surprising that the Ruby community experiences the same debates since the evolution of their implementations are somewhat similar. (There might also be some tension between <a href="http://engineyard.com">EngineYard</a> hiring the JRuby and Rubinius teams and <a href="http://heroku.com">Heroku</a> which <a href="http://blog.heroku.com/archives/2011/7/12/matz_joins_heroku/">recently hired Matz</a> (Ruby&#8217;s creator) and <a href="https://github.com/nobu">Nobu</a>, the #1 C Ruby contributor)</p>
+
+<p>The GIL was probably even more of a hot topic now that <a href="http://rubini.us/">Rubinius</a> is about the join <a href="http://jruby.org">JRuby</a> and <a href="http://macruby.org">MacRuby</a> in the realm of GIL-less Ruby implementations.</p>
+
+<p>During my RubyConf talk (<a href="http://rubyconf11.merbist.com/">slides here</a>), I tried to explain how C Ruby works and why some decisions like having a GIL were made and why the Ruby core team isn&#8217;t planning on removing this GIL anytime soon. The GIL is something a lot of Rubyists love to hate, but a lot of people don&#8217;t seem to question why it&#8217;s here and why Matz doesn&#8217;t want to remove it. Defending the C Ruby decision isn&#8217;t quite easy for me since I spend my free time working on an alternative Ruby implementation which doesn&#8217;t use a GIL (MacRuby). However, I think it&#8217;s important that people understand why the MRI team (C Ruby team) and some Pythonistas feels so strongly about the GIL.</p>
+
+<p><strong>What is the GIL?</strong></p>
+
+<p>Here is a quote from the <a href="http://wiki.python.org/moin/GlobalInterpreterLock">Python wiki</a>:</p>
+
+<blockquote><p>In CPython, the <strong>global interpreter lock</strong>, or <strong>GIL</strong>, is a mutex that prevents multiple native threads from executing Python bytecodes at once. This lock is necessary mainly because CPython&#8217;s memory management is not thread-safe. (However, since the GIL exists, other features have grown to depend on the guarantees that it enforces.) [&#8230;] The GIL is controversial because it prevents multithreaded CPython programs from taking full advantage of multiprocessor systems in certain situations. Note that potentially blocking or long-running operations, such as I/O, image processing, and <a href="http://wiki.python.org/moin/NumPy">NumPy</a> number crunching, happen <em>outside</em> the GIL. Therefore it is only in multithreaded programs that spend a lot of time inside the GIL, interpreting CPython bytecode, that the GIL becomes a bottleneck.</p></blockquote>
+
+<p>The same basically applies to C Ruby. To illustrate the quote above, here is a diagram representing two threads being executed by C Ruby:</p>
+
+<p><a href="http://rubyconf11.merbist.com/#44"><img src="http://rubyconf11.merbist.com/images/thread_scheduling.023.jpg" alt="Fair thread scheduling in Ruby by Matt Aimonetti" /></a></p>
+
+<p>Such a scheduling isn&#8217;t a problem at all when you only have 1 cpu, since a cpu can only execute a piece of code at a time and context switching happens all the time to allow the machine to run multiple processes/threads in parallel. The problem is when you have more than 1 CPU because in that case, if you were to only run 1 Ruby process, then you would most of the time only use 1 cpu at a time. If you are running on a 8 cpu box, that&#8217;s not cool at all! A lot of people stop at this explanation and imagine that their server can only handle one request at a time and they they rush to sign Greenpeace petitions asking Matz to make Ruby greener by optimizing Ruby and saving CPU cycles. Well, the reality is slightly different, I&#8217;ll get back to that in a minute. Before I explain &#8220;ways to achieve true concurrency with CRuby, let me explain why C Ruby uses a GIL and why each implementation has to make an important choice and in this case both CPython and C Ruby chose to keep their GIL.</p>
+
+<h3>Why a GIL in the first place?</h3>
+
+<ul>
+<li><p>It makes developer&#8217;s lives easier (it&#8217;s harder to corrupt data)</p></li>
+<li><p>It avoids race conditions within C extensions</p></li>
+<li><p>It makes C extensions development easier (no write barriers..)</p></li>
+<li><p>Most of the C libraries which are wrapped are not thread safe</p></li>
+<li><p>Parts of Ruby&#8217;s implementation aren&#8217;t threadsafe (Hash for instance)</p></li>
+</ul>
+
+
+<p>As you can see the arguments can be organized in two main categories: data safety and C extensions/implementation. An implementation which doesn&#8217;t rely too much on C extensions (because they run a bit slow, or because code written in a different language is preferred) is only faced with one argument: data safety.</p>
+
+<h3></h3>
+
+<h3>Should C Ruby remove its GIL?</h3>
+
+<ul>
+<li><p>No: it potentially makes Ruby code unsafe(r)</p></li>
+<li><p>No: it would break existing C extensions</p></li>
+<li><p>No: it would make writing C extensions harder</p></li>
+<li><p>No: it&#8217;s a lot of work to change make C Ruby threadsafe</p></li>
+<li><p>No: Ruby is fast enough in most cases</p></li>
+<li><p>No: Memory optimization and GC is more important to tackle first</p></li>
+<li><p>No: C Ruby code would run slower</p></li>
+<li><p>Yes: we really need better/real concurrency</p></li>
+<li><p>Yes: <a href="https://plus.google.com/107994348420168435683/posts/993U42yVbfk">Rubber boots analogy (Gustavo Niemeyer)</a></p></li>
+</ul>
+
+
+<p>Don&#8217;t count the amount of pros/cons to jump to the conclusion that removing the GIL is a bad idea. A lot of the arguments for removing the GIL are related. At the end of the day it boils down to data safety. During the Q&amp;A section of my RubyConf talk, Matz came up on stage and said data safety was the main reason why C Ruby still has a GIL. Again, this is a topic which was discussed at length in the Python community and I&#8217;d encourage you to read arguments from the <a href="http://www.jython.org/">Jython</a> (the equivalent of JRuby for Python) developers, <a href="http://codespeak.net/pypy/dist/pypy/doc/faq.html#does-pypy-have-a-gil-why">the PyPy</a> (the equivalent of Rubinius in the Python community) and CPython developers. (a good collection of arguments are actually available in the comments related to the <a href="https://plus.google.com/107994348420168435683/posts/993U42yVbfk">rubber boots post mentioned earlier</a>)</p>
+
+<h3>How can true concurrency be achieved using CRuby?</h3>
+
+<ul>
+<li><p>Run multiple processes (which you probably do if you use Thin, Unicorn or Passenger)</p></li>
+<li><p>Use event-driven programming with a process per CPU</p></li>
+<li><p>MultiVMs in a process. Koichi presented his plan to run multiple VMs within a process.  Each VM would have its own GIL and inter VM communication would be faster than inter process. This approach would solve most of the concurrency issues but at the cost of memory.</p></li>
+</ul>
+
+
+<p>Note:  forking a process only saves memory when using REE since it implements a GC patch that makes the forking process Copy on Write friendly. The Ruby core team worked on a patch for Ruby 1.9 to achieve the same result. <a href="http://twitter.com/#!/nari_en">Nari</a> &amp; <a href="http://twitter.com/#!/yukihiro_matz">Matz</a> are currently working on improving the implementation to make sure overall performance isn&#8217;t affected.</p>
+
+<p>Finally, when developing web applications, each thread spend quite a lot of time in IOs which, as mentioned above won&#8217;t block the thread scheduler. So if you receive two quasi-concurrent requests you might not even be affected by the GIL as illustrated in <a href="http://yehudakatz.com/2010/08/14/threads-in-ruby-enough-already/">this diagram from Yehuda Katz</a>:</p>
+
+<p><img src="http://yehudakatz.com/wp-content/uploads/2010/08/Untitled.002.png" alt="" /></p>
+
+<p>This is a simplified diagram but you can see that a good chunk of the request life cycle in a Ruby app doesn&#8217;t require the Ruby thread to be active (CPU Idle blocks) and therefore these 2 requests would be processed almost concurrently.</p>
+
+<p>To boil it down to something simplified, when it comes to the GIL, an implementor has to chose between data safety and memory usage. But it is important to note that context switching between threads is faster than context switching between processes and data safety can and is often achieved in environments without a GIL, but it requires more knowledge and work on the developer side.</p>
+
+<h3>Conclusion</h3>
+
+<p>The decision to keep or remove the GIL is a bit less simple that it is often described. I respect Matz&#8217; decision to keep the GIL even though, I would personally prefer to push the data safety responsibility to the developers. However, I do know that many Ruby developers would end up shooting themselves in the foot and I understand that Matz prefers to avoid that and work on other ways to achieve true concurrency without removing the GIL. What is great with our ecosystem is that we have some diversity, and if you think that a GIL less model is what you need, we have some great alternative implementations that will let you make this choice. I hope that this article will help some Ruby developers understand and appreciate C Ruby&#8217;s decision and what this decision means to them on a daily basis.</p>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-10-03T21:23:54+02:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2011</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/mattetti/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/mattetti/articles/categories/blog-post/'>blog-post</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/mattetti/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/mattetti/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

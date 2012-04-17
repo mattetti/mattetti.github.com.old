@@ -3,11 +3,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Matt Aimonetti</title>
+    <title>Compiled hello world with MacRuby - Matt Aimonetti</title>
     <meta name="author" content="Matt Aimonetti">
 
     
-    <meta name="description" content="Matt Aimonetti is a web engineer, technical writer and active open-source contributor. Based in San Diego California, he is currently working as a &hellip;">
+    <meta name="description" content="Compiled Hello World With MacRuby To celebrate the amazing work being done by Laurent Sansonetti on MacRuby here is a hello world using the new LLVM &hellip;">
     
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 
@@ -101,210 +101,85 @@
 -->
 
 
-	<div id="content" class="inner"><div id='home'>
-  <p id='bio'>Matt Aimonetti is a web engineer, technical writer and active open-source contributor. 
-  Based in San Diego California, he is currently working as a software architect for LivingSocial.
-  Prior to joining LivingSocial, Matt worked on video game development at Sony PlayStation.</p>
-<h2>Recent Posts</h2>
-<ul class='posts'>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution/">Building and implementing a Single Sign-On solution</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
+	<div id="content" class="inner"><article class="post hentry">
   
-
-
-<time datetime="2012-04-04T07:29:16+02:00" pubdate data-updated="true">Apr 4<span>th</span>, 2012</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2012/02/29/learning-from-rails-failures/">Learning from Rails&#8217; failures</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-29T07:48:08+01:00" pubdate data-updated="true">Feb 29<span>th</span>, 2012</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/">Quick dive into Ruby ORM object initialization</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-23T09:46:49+01:00" pubdate data-updated="true">Feb 23<span>rd</span>, 2012</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter/">Books to read in 2012 - recommended to me by Twitter</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-30T15:28:13+01:00" pubdate data-updated="true">Dec 30<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/12/21/developing-a-curriculum/">Developing a Curriculum</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-21T06:57:27+01:00" pubdate data-updated="true">Dec 21<span>st</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/12/09/my-rubyconf-2011-talk-is-online/">My RubyConf 2011 talk is online</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-09T06:47:59+01:00" pubdate data-updated="true">Dec 9<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/10/18/data-safety-and-gil-removal/">Data safety and GIL removal</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-18T15:19:17+02:00" pubdate data-updated="true">Oct 18<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/10/11/about-management/">About management</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-11T22:53:40+02:00" pubdate data-updated="true">Oct 11<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/10/03/about-concurrency-and-the-gil/">About concurrency and the GIL</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-03T21:23:54+02:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app/">How to - cross domain ajax to a Ruby app</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-14T16:11:41+02:00" pubdate data-updated="true">Sep 14<span>th</span>, 2011</time></div>
-</li>
-
-
+    <h1 class="title entry-title">Compiled Hello World With MacRuby</h1>
+    <div class="entry"><p>To celebrate the amazing <a href="http://lists.macosforge.org/pipermail/macruby-devel/2009-July/002062.html">work being done by Laurent Sansonetti on MacRuby</a> here is a hello world using the new <a href="http://en.wikipedia.org/wiki/LLVM">LLVM</a> based compiler.
+<code>
+$ echo "p ARGV.join(' ').upcase" &gt; hello_world.rb
+$ macrubyc hello_world.rb -o macruby_says
+$ ./macruby_says hello world
+"HELLO WORLD"
+</code></p>
+
+<p>Note that to achieve this result, you need to be using the experimental branch of MacRuby and have LLVM installed. (check the <a href="http://svn.macosforge.org/repository/ruby/MacRuby/branches/experimental/README.rdoc">readme</a> available in MacRuby&#8217;s repo).</p>
+
+<p>Let&#8217;s quickly look at what we just did.
+We created a single line ruby script that takes the passed arguments, joins them and print them uppercase.
+Then, we compiled our script into a <a href="http://en.wikipedia.org/wiki/Mach-O">Mach-O</a> object file and produce an executable.</p>
+
+<p>Here is an extract from Laurent&#8217;s latest status report:</p>
+
+<blockquote><p>Produced executables embed all the compiled Ruby code as well as MacRuby, statically.
+It can be distributed as is and does not depend on anything MacRuby or LLVM at runtime.
+The Ruby source code is compiled into native machine code (same process as we do at runtime with the JIT compiler), so it&#8217;s also a good way to obfuscate the source code.
+The final binary looks like an Objective-C binary (except that it&#8217;s larger)</p></blockquote>
+
+<p>Don&#8217;t expect to compile Rails just yet, it&#8217;s still in a preliminary stage.</p>
+
+<p>The final release you should let you pick one of the 2 compilation modes:</p>
+
+<ul>
+<li><strong>normal mode</strong>: full ruby specs, compile down to machine code and use LLVM at runtime. (recommended for desktop/server apps)</li>
+<li><strong>full mode</strong>: no full ruby spec support, no runtime code generation, no LLVM. (&#8220;very light application and/or if the environment does not support runtime code generation&#8221; (<em>hint-hint)</em>)</li>
 </ul>
 
-<nav id="pagenavi">
-  <a href="/mattetti/articles/archives" class="center">Archives</a>
-</nav>
+
+<p>As you can see, <a href="http://macruby.org">MacRuby</a> is moving forward and the experimental branch should soon move to trunk.</p>
 </div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-07-12T11:53:53+02:00" pubdate data-updated="true">Jul 12<span>th</span>, 2009</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/mattetti/articles/categories/misc/'>Misc</a>, <a class='category' href='/mattetti/articles/categories/macruby/'>macruby</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
 </div>
 	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
 </footer>

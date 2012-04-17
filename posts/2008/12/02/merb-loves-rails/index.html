@@ -1,0 +1,209 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Merb  - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Merb [caption id=&#8221;&#8221; align=&#8221;alignright&#8221; width=&#8221;240&#8221; caption=&#8221;Love is in the air&#8221;][/caption] Yes, it &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/Matt-Aimonetti/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    <link rel="canonical" href="http://mattetti.github.com/">
+    <link href="/mattetti/favicon.png" rel="shortcut icon">
+    <link href="/mattetti/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/mattetti/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/mattetti/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com/">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/Matt-Aimonetti/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/mattetti/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/mattetti/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/mattetti/">About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/mattetti/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Merb</h1>
+    <div class="entry"><p>[caption id=&#8221;&#8221; align=&#8221;alignright&#8221; width=&#8221;240&#8221; caption=&#8221;Love is in the air&#8221;]<a href="http://flickr.com/photos/swamibu/2264617197/"><img src="http://farm3.static.flickr.com/2018/2264617197_df9bf2ee53_m.jpg" alt="Love is in the air" /></a>[/caption]</p>
+
+<p>Yes, it is true and no, I am not being <a href="http://en.wikipedia.org/wiki/Passive-aggressive_behavior">passive aggressive</a> or cynical.</p>
+
+<p>As you might have heard there has been some tension between the Rails team and the Merb team in the last few weeks. Sometimes caused by us, sometimes caused by them. I already addressed this issue in <a href="http://merbist.com/2008/11/15/rails-vs-merb-drama/">this blog post</a>, so let&#8217;s move on.</p>
+
+<p><a href="http://merbist.com/wp-content/uploads/2008/12/mac_pc.png"><img src="http://merbist.com/wp-content/uploads/2008/12/mac_pc-267x300.png" alt="Mac vs PC - Matt Aimonetti" /></a>Let me first explain the reason for this blog post.<strong> I believe we have a great community but I also believe we like bashing</strong>.</p>
+
+<p>Like most Rubyists, I use a mac and I often smile when I watch their ads. Then I see Microsoft&#8217;s response ad and I think &#8230; they don&#8217;t get it, I&#8217;m not a Mac, the dude on TV represents the Mac computer. I&#8217;m a human.</p>
+
+<p>Thinking back to our community, I felt that it quickly became: &#8216;Hi, I&#8217;m a Rails developer&#8217; and &#8216;Hi I&#8217;m a Merb developer&#8217;.</p>
+
+<p><strong>What started as a simple comparison to explain what the difference was between Merb and Rails quickly escalated into arguments about what framework is best and which one people should use.</strong></p>
+
+<p>I hear people in the Ruby community talking trash about Rails and criticize the Rails core team. I even saw people insulting DHH on IRC while he was not even on the channel.</p>
+
+<p>I, myself, have to admit that I have been guilty of crossing the line a few times and have made some comments which can be considered as &#8220;bashing&#8221;.</p>
+
+<p><strong>I think now is a good time to apologize and to say that this kind of behavior is not appropriate.</strong></p>
+
+<p>After all, if we wanted to define ourselves as being &#8220;something&#8221; we probably should say: &#8220;Hi, I&#8217;m a Ruby developer&#8221;. Rails is not perfect, nor is Merb. I might disagree with some of the decisions made by the Rails core team but I still think Rails is a great framework and the Rails team has done an awesome job and deserves a lot of respect for its efforts. We are all part of the Ruby community and I think it&#8217;s time we all (starting by myself) act as a unified community.</p>
+
+<p>Without further ado, here is my &#8230;</p>
+
+<h3>Top 10 reasons why we &lt;3 Rails:</h3>
+
+<ul>
+<li><p>Without Rails, the Ruby language would not be <a href="http://www.tiobe.com/tiobe_index/index.htm">one of the top 10 programming languages</a></p></li>
+<li><p>Without Rails, we would still be writing <a href="http://www.skywayradio.com/tech/iSeries/wps/admxmsmp.html">thousand-line configuration files in XML</a> to start your small app</p></li>
+<li><p>Without Rails, most developers would not know what <a href="http://en.wikipedia.org/wiki/Model-view-controller">MVC</a> stands for</p></li>
+<li><p>Without Rails, I would not be a Ruby web developer</p></li>
+<li><p>Without Rails, we would not have <a href="http://merbivore.com">Merb</a></p></li>
+<li><p>Without Rails, we would not have all the other cool Ruby frameworks</p></li>
+<li><p>Without Rails, <a href="http://rspec.info">testing</a> would be something only the elite would do</p></li>
+<li><p>Without Rails, serving Ruby web apps would be a pain in the neck</p></li>
+<li><p>Without Rails, <a href="http://www.zedshaw.com/">Zed Shaw</a> would not be famous</p></li>
+</ul>
+
+
+<p>Bonus items:</p>
+
+<ul>
+<li><p>Without Matz, there would be no Ruby</p></li>
+<li><p>Without Ruby, there would be no Rails</p></li>
+</ul>
+
+
+<p>Next time you think, I&#8217;m a Merb or I&#8217;m a Rails, think twice :)</p>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-12-02T22:31:50+01:00" pubdate data-updated="true">Dec 2<span>nd</span>, 2008</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/mattetti/articles/categories/merb/'>merb</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/mattetti/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/mattetti/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

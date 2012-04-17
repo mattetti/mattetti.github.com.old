@@ -1,0 +1,851 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Tutorial | Matt Aimonetti]]></title>
+  <link href="http://mattetti.github.com//articles/categories/tutorial/atom.xml" rel="self"/>
+  <link href="http://mattetti.github.com//"/>
+  <updated>2012-04-17T12:12:48+02:00</updated>
+  <id>http://mattetti.github.com//</id>
+  <author>
+    <name><![CDATA[Matt Aimonetti]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Building and implementing a Single Sign-On solution]]></title>
+    <link href="http://mattetti.github.com//posts/2012/04/04/building-and-implementing-a-single-sign-on-solution/"/>
+    <updated>2012-04-04T07:29:16+02:00</updated>
+    <id>http://mattetti.github.com//posts/2012/04/04/building-and-implementing-a-single-sign-on-solution</id>
+    <content type="html"><![CDATA[<p>Most modern web applications start as a monolithic code base and, as complexity increases, the once small app gets split apart into many "modules". In other cases, engineers opt for a <a href="http://en.wikipedia.org/wiki/Service-oriented_architecture">SOA</a> design approach from the beginning. One way or another, we start running multiple separate applications that need to interact seamlessly. My goal will be to describe some of the high-level challenges and solutions found in implementing a Single-Sign-On service.</p>
+
+<h2>Authentication vs Authorization</h2>
+
+<p>I wish these two words didn't share the same root because it surely confuses a lot of people. My most frequently-discussed example is <a href="http://en.wikipedia.org/wiki/OAuth">OAuth</a>. Every time I start talking about implementing a centralized/unified authentication system, someone jumps in and suggests that we use <a href="http://en.wikipedia.org/wiki/OAuth">OAuth</a>. The challenge is that <a href="http://en.wikipedia.org/wiki/OAuth">OAuth</a> is an authorization system, not an authentication system.</p>
+
+<p>It's tricky, because you might actually be "authenticating" yourself to website X using OAuth. What you are really doing is allowing website X to use your information stored by the OAuth provider. It is true that OAuth offers a pseudo-authentication approach via its provider but that is not the main goal of <a href="http://en.wikipedia.org/wiki/OAuth">OAuth</a>: the Auth in OAuth stands for Authorization, not Authentication.</p>
+
+<p>Here is how we could briefly describe each role:</p>
+
+<ul>
+<li><p><strong>Authentication</strong>: recognizes who you are.</p></li>
+<li><p><strong>Authorization</strong>: know what you are allowed to do, or what you allow others to do.</p></li>
+</ul>
+
+
+<p>If you are feel stuck in your design and something seems wrong, ask yourself if you might be confused by the 2 auth words. This article will only focus on <strong>authentication</strong>.</p>
+
+<h2>A Common Scenario</h2>
+
+<p><a href="http://merbist.com/wp-content/uploads/2012/04/SSO-simplescenario.png"><img src="http://merbist.com/wp-content/uploads/2012/04/SSO-simplescenario.png" alt="SSO diagram with 3 top applications connecting to an authorization service." /></a></p>
+
+<p>This is probably the most common structure, though I made it slightly more complex by drawing the three main apps in different programming languages. We have three web applications running on different subdomains and sharing account data via a centralized authentication service.</p>
+
+<p><strong>Goals:</strong></p>
+
+<ul>
+<li><p>Keep authentication and basic account data isolated.</p></li>
+<li><p>Allow users to stay logged in while browsing different apps.</p></li>
+</ul>
+
+
+<p>Implementing such a system should be easy. That said, if you migrate an existing app to an architecture like that, you will spend 80% of your time decoupling your legacy code from authentication and wondering what data should be centralized and what should be distributed. Unfortunately, I can't tell you what to do there since this is very domain specific. Instead, let's see how to do the "easy part."</p>
+
+<h2>Centralizing and Isolating Shared Account Data</h2>
+
+<p>At this point, you more than likely have each of your apps talk directly to shared database tables that contain user account data. The first step is to migrate away from doing that. We need a single interface that is the only entry point to create or update shared account data. Some of the data we have in the database might be app specific and therefore should stay within each app, anything that is shared across apps should be moved behind the new interface.</p>
+
+<p>Often your centralized authentication system will store the following information:</p>
+
+<ul>
+<li><p>ID</p></li>
+<li><p>first name</p></li>
+<li><p>last name</p></li>
+<li><p>login/nickname</p></li>
+<li><p>email</p></li>
+<li><p>hashed password</p></li>
+<li><p>salt</p></li>
+<li><p>creation timestamp</p></li>
+<li><p>update timestamp</p></li>
+<li><p>account state (verified, disabled ...)</p></li>
+</ul>
+
+
+<p>Do not duplicate this data in each app, instead have each app rely on the account ID to query data that is specific to a given account in the app. Technically that means that instead of using SQL joins, you will query your database using the ID as part of the condition.</p>
+
+<p>My suggestion is to do things slowly but surely. Migrate your database schema piece by piece assuring that everything works fine. Once the other pieces will be in place, you can migrate one code API a time until your entire code base is moved over. You might want to change your DB credentials to only have read access, then no access at all.</p>
+
+<h2>Login workflow</h2>
+
+<p>Each of our apps already has a way for users to login. We don't want to change the user experience, instead we want to make a transparent modification so the authentication check is done in a centralized way instead of a local way. To do that, the easiest way is to keep your current login forms but instead of POSTing them to your local apps, we'll POST them to a centralized authentication API. (SSL is strongly recommended)</p>
+
+<p><a href="http://merbist.com/wp-content/uploads/2012/04/SSO-login.png"><img src="http://merbist.com/wp-content/uploads/2012/04/SSO-login.png" alt="diagram showing the login workflow" /></a></p>
+
+<p>As shown above, the login form now submits to an endpoint in the authentication application. The form will more than likely include a login or email and a clear text password as well as a hidden callback/redirect url so that the authentication API can redirect the user's browser to the original app. For security reasons, you might want to white list the domains you allow your authentication app to redirect to.</p>
+
+<p>Internally, the Authentication app will validate the identifier (email or login) using a hashed version of the clear password against the matching record in the account data. If the verification is successful, a token will be generated containing some user data (for instance: id, first name, last name, email, created date, authentication timestamp). If the verification failed, the token isn't generated. Finally the user's browser is redirected to the callback/redirect URL provided in the request with the token being passed.</p>
+
+<p>You might want to safely encrypt the data in a way that allows the clients to verify and trust that the token comes from a trusted source. A great solution for that would be to use <a href="http://en.wikipedia.org/wiki/RSA_(algorithm">RSA encryption</a>) with the public key available in all your client apps but the private key only available on the auth server(s). Other strong encryption solutions would also work. For instance, another appropriate approach would be to add a signature to the params sent back. This way the clients could check the authenticity of the params. <a href="http://en.wikipedia.org/wiki/HMAC">HMAC</a> or <a href="http://en.wikipedia.org/wiki/Digital_Signature_Algorithm">DSA</a> signature are great for that but in some cases, you don't want people to see the content of the data you send back. That's especially true if you are sending back a 'mobile' token for instance. But that's a different story. What's important to consider is that we need a way to ensure that the data sent back to the client can't be tampered with. You might also make sure you prevent replay attacks.</p>
+
+<p>On the other side, the application receives a GET request with a token param. If the token is empty or can't be decrypted, authentication failed. At that point, we need to show the user the login page again and let him/her try again. If on the other hand, the token can be decrypted, the content should be saved in the session so future requests can reuse the data.</p>
+
+<p>We described the authentication workflow, but if a user logins in application X, (s)he won't be logged-in in application Y or Z. The trick here, is to set a top level domain cookie that can be seen by all applications running on subdomains. Certainly, this solution only works for apps being on the same domain, but we'll see later how to handle apps on different domains.</p>
+
+<p><a href="http://merbist.com/wp-content/uploads/2012/04/SSO-login-cookie.png"><img src="http://merbist.com/wp-content/uploads/2012/04/SSO-login-cookie.png" alt="" /></a></p>
+
+<p>The cookie doesn't need to contain a lot of data, its value can contain the account id, a timestamp (to know when authentication happened and a trusted signature) and a signature. The signature is critical here since this cookie will allow users to be automatically logged in other sites. I'd recommend the  <a href="http://en.wikipedia.org/wiki/HMAC">HMAC</a> or <a href="http://en.wikipedia.org/wiki/Digital_Signature_Algorithm">DSA</a> encryptions to generate the signature. The DSA encryption, very much like the RSA encryption is an asymmetrical encryption relying on a public/private key. This approach offers more security than having something based a shared secret like HMAC does. But that's really up to you.</p>
+
+<p>Finally, we need to set a filter in your application. This auto-login filter will check the presence of an auth cookie on the top level domain and the absence of local session. If that's the case, a session is automatically created using the user id from the cookie value after the cookie integrity is verified. We could also share the session between all our apps, but in most cases, the data stored by each app is very specific and it's safer/cleaner to keep the sessions isolated. The integration with an app running on a different service will also be easier if the sessions are isolated.</p>
+
+<h2>Registration</h2>
+
+<p>For registration, as for login, we can take one of two approaches: point the user's browser to the auth API or make S2S (server to server) calls from within our apps to the Authentication app. POSTing a form directly to the API is a great way to reduce duplicated logic and traffic on each client app so I'll demonstrate this approach.</p>
+
+<p><a href="http://merbist.com/wp-content/uploads/2012/04/CopyofSSO-register.png"><img src="http://merbist.com/wp-content/uploads/2012/04/CopyofSSO-register.png" alt="" /></a></p>
+
+<p>As you can see, the approach is the same we used to login. The difference is that instead of returning a token, we just return some params (id, email and potential errors). The redirect/callback url will also obviously be different than for login. You could decide to encrypt the data you send back, but in this scenario, what I would do is set an auth cookie at the .domain.com level when the account is created so the "client" application can auto-login the user. The information sent back in the redirect is used to re-display the register form with the error information and the email entered by the user.</p>
+
+<p>At this point, our implementation is almost complete. We can create an account and login using the defined credentials. Users can switch from one app to another without having to re login because we are using a shared signed cookie that can only be created by the authentication app and can be verified by all "client" apps. Our code is simple, safe and efficient.</p>
+
+<h2>Updating or deleting an account</h2>
+
+<p>The next thing we will need is to update or delete an account. In this case, this is something that needs to be done between a "client" app and the authentication/accounts app. We'll make S2S (server to server) calls. To ensure the security of our apps and to offer a nice way to log requests, API tokens/keys will be used by each client to communicate with the authentication/accounts app. The API key can be passed using a <a href="http://en.wikipedia.org/wiki/List_of_HTTP_header_fields">X-header</a> so this concern stays out of the request params and our code can process separately the authentication via X-header and the actual service implementation. S2S services should have a filter verifying and logging the API requests based on the key sent with the request. The rest is straight forward.</p>
+
+<h2>Using different domains</h2>
+
+<p>Until now, we assumed all our apps were on the same top domain. In reality, you will often find yourself with apps on different domains. This means that you can't use the shared signed cookie approach anymore. However, there is a simple trick that will allow you to avoid requiring your users to re-login as they switch apps.</p>
+
+<p><a href="http://merbist.com/wp-content/uploads/2012/04/SSO-differentdomains-1.png"><img src="http://merbist.com/wp-content/uploads/2012/04/SSO-differentdomains-1.png" alt="" /></a></p>
+
+<p>The trick consists, when a local session isn't present, of using an iframe in the application using the different domain. The iframe loads a page from the authentication/accounts app which verifies that a valid cookie was set on the main top domain. If that is the case, we can tell the application that the user is already globally logged in and we can tell the iframe host to redirect to an application end point passing an auth token the same way we did during the authentication. The app would then create a session and redirect the user back to where (s)he started. The next requests will see the local session and this process will be ignored.</p>
+
+<p>If the authentication application doesn't find a signed cookie, the iframe can display a login form or redirect the iframe host to a login form depending on the required behavior.</p>
+
+<p>Something to keep in mind when using multiple apps and domains is that you need to keep the shared cookies/sessions in sync, meaning that if you log out from an app, you need to also delete the auth cookie to ensure that users are globally logged out. (It also means that you might always want to use an iframe to check the login status and auto-logoff users).</p>
+
+<h2>Mobile clients</h2>
+
+<p>Another part of implementing a SSO solution is to handle mobile clients. Mobile clients need to be able to register/login and update accounts. However, unlike S2S service clients, mobile clients should only allow calls to modify data on the behalf of a given user. To do that, I recommend providing opaque mobile tokens during the login process. This token can then be sent with each request in a X-header so the service can authenticate the user making the request. Again, SSL is strongly recommended.</p>
+
+<p>In this approach, we don't use a cookie and we actually don't need a SSO solution, but an unified authentication system.</p>
+
+<h2>Writing web services</h2>
+
+<p>Our Authentication/Accounts application turns out to be a pure web API app.</p>
+
+<p>We also have 3 sets of APIs:</p>
+
+<ul>
+<li><p>Public APIs: can be accessed from anywhere, no authentication required</p></li>
+<li><p>S2S APIs: authenticated via API keys and only available to trusted clients</p></li>
+<li><p>Mobile APIs: authenticated via a mobile token and limited in scope.</p></li>
+</ul>
+
+
+<p>We don't need dynamic HTML views, just simple web service related code. While this is a little bit off topic, I'd like to take a minute to show you how I personally like writing web service applications.</p>
+
+<p>Something that I care a lot about when I implement web APIs is to validate incoming params. This is an opinionated approach that I picked up while at Sony and that I think should be used every time you implement a web API. As a matter of fact, I wrote a Ruby <a href="https://github.com/mattetti/Weasel-Diesel">DSL library (Weasel Diesel)</a> allowing you <a href="https://github.com/mattetti/sinatra-web-api-example/blob/master/api/hello_world.rb">describe a given service</a>, its <a href="https://github.com/mattetti/sinatra-web-api-example/blob/master/api/hello_world.rb#L7">incoming params</a>, and the <a href="https://github.com/mattetti/sinatra-web-api-example/blob/master/api/hello_world.rb#L10-15">expected output</a>. This DSL is hooked into a web backend so you can implement services using a web engine such as <a href="http://www.sinatrarb.com/">Sinatra</a> or maybe Rails3. Based on the DSL usage, incoming parameters are be verified before being processed. The other advantage is that you can generate documentation based on the API description as well as automated tests.</p>
+
+<p>You might be familiar with <a href="https://github.com/intridea/grape">Grape</a>, another DSL for web services. Besides the obvious style difference <a href="https://github.com/mattetti/Weasel-Diesel">Weasel Diesel </a>offers the following advantages:</p>
+
+<ul>
+<li><p>input validation/sanitization</p></li>
+<li><p>service isolation</p></li>
+<li><p>generated documentation</p></li>
+<li><p>contract based design</p></li>
+</ul>
+
+
+<p>Here is a hello world webservice being implemented using Weasel Diesel and Sinatra:</p>
+
+<p>[gist]https://gist.github.com/2300131[/gist]</p>
+
+<p>Basis test validating the contract defined in the DSL and the actual output when the service is called:</p>
+
+<p>[gist]https://gist.github.com/2300440[/gist]</p>
+
+<p>Generated documentation:</p>
+
+<p><img src="https://img.skitch.com/20120404-t1j93b73tef5pmd5idfqqa61td.jpg" alt="" /></p>
+
+<p>If the DSL and its features seem appealing to you and you are interested in digging more into it, the easiest way is to fork <a href="https://github.com/mattetti/sinatra-web-api-example/">this demo repo</a> and start writing your own services.</p>
+
+<p>The DSL has been used in production for more than a year, but there certainly are tweaks and small changes that can make the user experience even better. Feel free to fork the <a href="https://github.com/mattetti/Weasel-Diesel">DSL repo</a> and send me Pull Requests.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quick dive into Ruby ORM object initialization]]></title>
+    <link href="http://mattetti.github.com//posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/"/>
+    <updated>2012-02-23T09:46:49+01:00</updated>
+    <id>http://mattetti.github.com//posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization</id>
+    <content type="html"><![CDATA[<p>Yesterday I did some quick digging into how ORM objects are initialized and the performance cost associated to that. In other words, I wanted to see what's going on when you initialize an ActiveRecord object.</p>
+
+<p>Before I show you the benchmark numbers and you jump to conclusions, it's important to realize that in the grand scheme of things, the performance cost we are talking is small enough that it is certainly not the main reason why your application is slow. Spoiler alert: ActiveRecord is slow but the cost of initialization isn't by far the worse part of ActiveRecord. Also, even though this article doesn't make activeRecord look good, and I'm not trying to diss it. It's a decent ORM that does a great job in most cases.</p>
+
+<p>Let's get started by the benchmarks number to give us an idea of the damage (using Ruby 1.9.3 p125):</p>
+
+<pre><code>                                                             | Class | Hash  | AR 3.2.1 | AR no protection | Datamapper | Sequel |
+--------------------------------------------------------------------------------------------------------------------------------------
+.new() x100000                                               | 0.037 | 0.049 | 1.557    | 1.536            | 0.027      | 0.209  |
+.new({:id=&gt;1, :title=&gt;"Foo", :text=&gt;"Bar"}) x100000          | 0.327 | 0.038 | 6.784    | 5.972            | 4.226      | 1.986  |
+</code></pre>
+
+<p>You can see that I am comparing the allocation of a Class instance, a Hash and some ORM models. The benchmark suite tests the allocation of an empty object and one with passed attributes. The benchmark in question is available <a href="https://github.com/mattetti/benchmarks/blob/master/init_objects.rb">here</a>.</p>
+
+<p>As you can see there seems to be a huge performance difference between allocating a basic class and an ORM class. Instantiating an ActiveRecord class is 20x slower than instantiating a normal class, while ActiveRecord offers some extra features, why is it so much slower, especially at initialization time?</p>
+
+<p>The best way to figure it out is to profile the initialization. For that, I used <a href="https://github.com/tmm1/perftools.rb">perftools.rb</a> and I generated a graph of the call stack.</p>
+
+<p>Here is what Ruby does (and spends its time) when you initialize a new Model instance (click to download the PDF version):</p>
+
+<p><a href="http://github.com/mattetti/benchmarks/blob/master/ar_init_profile.pdf?raw=true"><img src="http://merbist.com/wp-content/uploads/2012/02/AR-model-instantation-by-Matt-Aimonetti.jpg" alt="Profiler diagram of AR model instantiation by Matt Aimonetti" /></a></p>
+
+<p>This is quite a scary graph but it shows nicely the features you are getting and their cost associated. For instance, the option of having the before and after initialization callback cost you 14% of your CPU time per instantiation, even though you probably almost never use these callbacks. I'm reading that by interpreting the node called ActiveSupport::Callback#run_callbacks, 3rd level from the top. So 14.1% of the CPU time is spent trying to run callbacks. As a quick note, note that 90.1% of the CPU time is spent initializing objects, the rest is spent in the loop and in the garbage collection (because the profiler runs many loops). You can then follow the code and see how the code works, creating a dynamic class callback method on the fly (the one with the long name) and then recreating the name of this callback to call it each time the object is allocated. It sounds like that's a good place for some micro optimizations which could yield up to 14% performance increase in some cases.</p>
+
+<p>Another major part of the CPU time is spent in ActiveModel's sanitization. This is the piece of code that allows you to block some model attributes to be mass assigned. This is useful when you don't want to sanitize your incoming params but want to create or update a model instance by using all the passed user params. To avoid malicious users to modify some specific params that might be in your model but not in your form, you can protect these attributes. A good example would be an admin flag on a User object. That said, if you manually initialize an instance, you don't need this extra protection, that's why in the benchmark above, I tested and without the protection. As you can see, it makes quite a big difference. The profiler graph of the same initialization without the mass assignment protection logically ends up looking quite different:</p>
+
+<p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_init_no_protection.pdf?raw=true">
+</a><a href="https://github.com/mattetti/benchmarks/blob/master/ar_init_no_protection.pdf?raw=true"><img src="http://merbist.com/wp-content/uploads/2012/02/AR-model-instantiation-without-mass-assignment-by-Matt-Aimonetti.jpg" alt="Matt Aimonetti shows the stack trace generated by the instantiation of an Active Record model" /></a></p>
+
+<p><strong>Update:</strong> My colleague <a href="https://twitter.com/#!/glv">Glenn Vanderburg</a> pointed out that some people might assuming that the shown code path is called for each record loaded from the database. This isn't correct, the graph represents instances allocated by calling #new. See the addition at the bottom of the post for more details about what's going on when you fetch data from the DB.</p>
+
+<p>I then decided to look at the graphs for the two other popular Ruby ORMs:</p>
+
+<p><a href="http://datamapper.org/">Datamapper</a></p>
+
+<p><a href="https://github.com/mattetti/benchmarks/blob/master/dm_init_profile.pdf?raw=true"><img src="http://img.skitch.com/20120223-txs4wa7b5rdpg45aj6354xg1wt.jpg" alt="" /></a></p>
+
+<p>and <a href="http://sequel.rubyforge.org/">Sequel</a></p>
+
+<p><a href="https://github.com/mattetti/benchmarks/blob/master/sequel_init_profile.pdf?raw=true"><img src="http://img.skitch.com/20120223-p2jx6ypk35ucsgtx7p1tcabpes.jpg" alt="" /></a></p>
+
+<p>While I didn't give you much insight in ORM code, I hope that this post will motivate you to sometimes take a look under the cover and profile your code to see what's going on and why it might be slow. <strong>Never assume, always measure</strong>. Tools such as perftools are a great way to get a visual feedback and get a better understanding of how the Ruby interpreter is handling your code.</p>
+
+<h2>UPDATE:</h2>
+
+<p>I heard you liked graphs so I added some more, here is what's going on when you do Model.first:</p>
+
+<p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_first_profile.pdf?raw=true"><img src="http://img.skitch.com/20120224-f23s8xctghi8mj6ax3cdw9aq25.jpg" alt="" /></a></p>
+
+<p>Model.all</p>
+
+<p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_all_profile.pdf?raw=true"><img src="https://img.skitch.com/20120224-q29q4n7bj3i96erk1enxdqxb5e.jpg" alt="" /></a></p>
+
+<p>And finally this is the code graph for a call to Model.instantiate which is called after a record was retrieved from the database to convert into an Object. (You can see the #instantiate call referenced in the graph above).</p>
+
+<p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_instantiate_profile.pdf?raw=true"><img src="http://img.skitch.com/20120224-8scmun9n1c9ufdnxa8rq2961bq.jpg" alt="" /></a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[My RubyConf 2011 talk is online]]></title>
+    <link href="http://mattetti.github.com//posts/2011/12/09/my-rubyconf-2011-talk-is-online/"/>
+    <updated>2011-12-09T06:47:59+01:00</updated>
+    <id>http://mattetti.github.com//posts/2011/12/09/my-rubyconf-2011-talk-is-online</id>
+    <content type="html"><![CDATA[<p>I realize I forgot to mention that my RubyConf talk is now online on the <a href="http://confreaks.net/videos/714-rubyconf2011-complex-ruby-concepts-dummified">confreaks site</a> (wait until the end, Matz actually answers a question from the audience).</p>
+
+<p><img src="https://img.skitch.com/20111209-pdfksgd2sufg8ywrpnjd4dnru4.jpg" alt="Photo of Matt Aimonetti giving a talk at RubyConf 2011 with one of his slides showing how thread scheduling works" /></p>
+
+<p>I wrote a couple follow up posts you might also be interested in:</p>
+
+<ul>
+<li><p><a href="http://merbist.com/2011/10/03/about-concurrency-and-the-gil/">About concurrency and the GIL</a></p></li>
+<li><p><a href="http://merbist.com/2011/10/18/data-safety-and-gil-removal/">Data safety and GIL removal</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Go's reflection example]]></title>
+    <link href="http://mattetti.github.com//posts/2011/06/27/golang-reflection-exampl/"/>
+    <updated>2011-06-27T12:12:32+02:00</updated>
+    <id>http://mattetti.github.com//posts/2011/06/27/golang-reflection-exampl</id>
+    <content type="html"><![CDATA[<p>The <a href="http://golang.org/">Go Programming language</a> is really cool language by Google. According to the sales pitch, it's a <strong><em>"fast, statically typed, compiled language that feels like a dynamically typed, interpreted language"</em></strong>. Well, if you are like me, you don't trust sales pitches because you know that people writing them dont' care about you, they care about their product. However cynical you are, you still have to check the facts. So here is a quick demonstration showing how to use Go's reflection feature.</p>
+
+<p>Installing Go is actually really straight forward on a Mac, and slightly harder on Linux, check <a href="http://golang.org/doc/install.html">this guide </a>to see how to build Go in a few minutes.</p>
+
+<p>Once all setup, you might want to read the documentation to see how to code in Go. Go is actually a kind of nice version of C with a<a href="http://golang.org/doc/go_spec.html"> simplified syntax</a>, no header files, really fast compilation time, a garbage collector and a <a href="http://golang.org/doc/effective_go.html?#interfaces_and_types">simple way to approach object inheritance</a> without turning in the complicated mess C++ is. The language is designed around the concept of <a href="http://golang.org/doc/effective_go.html?h=goroutines#concurrency">goroutines, a very nice way to handle concurrency</a>. It also has some features that Rubyists, Pythonistas and Javascripters wouldn't want to live without such as closures and some they probably wish they had such as <a href="http://golang.org/doc/effective_go.html?#defer">defer</a>. But of the things we are used to with dynamic languages is the concept of reflection. In a nutshell, at runtime, your code can reflect on the type of a given object and let the developer act accordingly. Depending on your programming background that might be obvious or you might not see the value. To be honest, that's not the question here. What I'm interested in showing you is how it works.</p>
+
+<p>For the sake of this demo, let's pretend we want to have a "Dish" data model, each instance of the "Dish" type will have a few attributes, an id, a name, an origin and a custom query which really is a function that we store as an attribute. Here is how we would represent that model in Go:</p>
+
+<pre><code>// Data Model
+type Dish struct {
+  Id  int
+  Name string
+  Origin string
+  Query func()
+}
+</code></pre>
+
+<p>This is more or less the equivalent of the following Ruby code:</p>
+
+<pre><code>class Dish
+  attr_accessor :id, :name, :origin, :query
+end
+</code></pre>
+
+<p>Ruby works slightly differently in the sense that defining attribute accessors create getters and setter methods but doesn't technically create instance variables until they are used. Here is what I mean:</p>
+
+<pre><code>shabushabu = Dish.new
+shabushabu.instance_variables # =&gt; []
+shabushabu.name = "Shabu-Shabu"
+shabushabu.instance_variables # =&gt; ["@name"]
+shabushabu.origin = "Japan"
+shabushabu.instance_variables # =&gt; ["@name", "@origin"]
+</code></pre>
+
+<p>Another way of checking on the accessors is to check the methods defined on the object:</p>
+
+<pre><code>shabushabu.methods - Object.new.methods
+=&gt; ["name", "name=", "origin", "origin=", "id=", "query", "query="]
+</code></pre>
+
+<p>But anyway, this post isn't about Ruby, it's about Go and what we would like is to reflect on an object of "Dish" type and see its attributes. The good news is that the Go language ships with a <a href="http://golang.org/pkg/reflect/">package to do just that</a>. Here is the full implementation:</p>
+
+<pre><code>package main
+
+import(
+  "fmt"
+  "reflect"
+)
+
+func main(){
+  // iterate through the attributes of a Data Model instance
+  for name, mtype := range attributes(&amp;Dish;{}) {
+    fmt.Printf("Name: %s, Type %s\n", name, mtype.Name())
+  }
+}
+
+// Data Model
+type Dish struct {
+  Id  int
+  Name string
+  Origin string
+  Query func()
+}
+
+// Example of how to use Go's reflection
+// Print the attributes of a Data Model
+func attributes(m interface{}) (map[string]reflect.Type) {
+  typ := reflect.TypeOf(m)
+  // if a pointer to a struct is passed, get the type of the dereferenced object
+  if typ.Kind() == reflect.Ptr{
+    typ = typ.Elem()
+  }
+
+  // create an attribute data structure as a map of types keyed by a string.
+  attrs := make(map[string]reflect.Type)
+  // Only structs are supported so return an empty result if the passed object
+  // isn't a struct
+  if typ.Kind() != reflect.Struct {
+    fmt.Printf("%v type can't have attributes inspected\n", typ.Kind())
+    return attrs
+  }
+
+  // loop through the struct's fields and set the map
+  for i := 0; i &lt; typ.NumField(); i++ {
+    p := typ.Field(i)
+      if !p.Anonymous {
+        attrs[p.Name] = p.Type
+      }
+     }
+
+  return attrs
+}
+</code></pre>
+
+<p>Unfortunately, my code highlighter doesn't support the Go syntax, but GitHub does, so here is a <a href="https://gist.github.com/1009629">pretty version</a>.</p>
+
+<p>There are ways of running Go source code like Ruby or Python scripts but in this case, we'll use the compiler &amp; linker provided with Go. I named my source file "example.go", and here is how I compiled, linked and run it:</p>
+
+<pre><code>$ 6g example.go &amp;&amp; 6l example.6 &amp;&amp; ./6.out
+Name: Origin, Type string
+Name: Id, Type int
+Name: Query, Type 
+Name: Name, Type string
+</code></pre>
+
+<p>As you can see each attribute is printed out with its name and type. The code might seem a bit odd if you never looked at Go before.
+Here is a quick rundown of the code:</p>
+
+<p>In our main function, we create a new instance of type Dish on which we call attributes on. The call returns a map on which we iterate through and print the attribute name (key) and type (value).
+The attributes function is defined a bit below and and it takes any type of objects (empty interface) and returns a map, which is like a Hash or a Dictionary. The map has keys of String type and values of "Type" type. The "Type" type is defined in the reflect package. Inside the function, 23 then use the previously mentioned reflect package to check on the type and the name of each attribute and assign it to a map object. (note that I'm explicitly returning the map, but I could have done it in a more implicit way)</p>
+
+<p>So there you go, that's how you use reflection in Go. Pretty nifty and simple.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MacRuby tips: browse for folder or file dialog]]></title>
+    <link href="http://mattetti.github.com//posts/2009/10/25/macruby-browse-for-folder-or-file-dialog/"/>
+    <updated>2009-10-25T15:52:14+01:00</updated>
+    <id>http://mattetti.github.com//posts/2009/10/25/macruby-browse-for-folder-or-file-dialog</id>
+    <content type="html"><![CDATA[<p>This is yet another pretty simple tip.
+Use case: let say you want your applications users to choose one or multiple files or folder on their file system. A good example would be that you want the user to choose a file to process or a folder where to save some data.</p>
+
+<p><img src="http://img.skitch.com/20091025-nc89xd2ywqutqqddnwm2met3x4.jpg" alt="" /></p>
+
+<p>In the example above, I added a browse button and a text field.</p>
+
+<p>I would like my users to click on the browse button, locate a folder and display it in the text field.</p>
+
+<p>In your MacRuby controller, use a simple action method as well as an accessor to the text field:</p>
+
+<pre><code>attr_accessor :destination_path
+
+def browse(sender)
+end
+</code></pre>
+
+<p>Now, in Interface builder bind the destination_path outlet to the text field you want to use to display the path and bind the button to the browse action.</p>
+
+<p>Let's go back to our action method and let's create a dialog panel, set some options and handle the user selection:</p>
+
+<pre><code>def browse(sender)
+  # Create the File Open Dialog class.
+  dialog = NSOpenPanel.openPanel
+  # Disable the selection of files in the dialog.
+  dialog.canChooseFiles = false
+  # Enable the selection of directories in the dialog.
+  dialog.canChooseDirectories = true
+  # Disable the selection of multiple items in the dialog.
+  dialog.allowsMultipleSelection = false
+
+  # Display the dialog and process the selected folder
+  if dialog.runModalForDirectory(nil, file:nil) == NSOKButton
+  # if we had a allowed for the selection of multiple items
+  # we would have want to loop through the selection
+    destination_path.stringValue = dialog.filenames.first
+  end
+end
+</code></pre>
+
+<p>That's it, your user can now browse for a folder and the selection will be displayed in the text field. Look at the <a href="http://developer.apple.com/mac/library/documentation/Cocoa/Reference/ApplicationKit/Classes/NSOpenPanel_Class/Reference/Reference.html">NSOpenPanel documentation</a> for more details on the Cocoa API.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MacRuby tips: capturing keyboard events]]></title>
+    <link href="http://mattetti.github.com//posts/2009/10/09/macruby-tips-capturing-keyboard-events/"/>
+    <updated>2009-10-09T19:24:04+02:00</updated>
+    <id>http://mattetti.github.com//posts/2009/10/09/macruby-tips-capturing-keyboard-events</id>
+    <content type="html"><![CDATA[<p>If you are writing any type of games you might want your users to interact with your application using their keyboards.</p>
+
+<p>This is actually not that hard. The approach is simple and fast forward if you are used to Cocoa.</p>
+
+<p>Everything starts in Interface Builder, add a custom view instance to your window.</p>
+
+<p><img src="http://img.skitch.com/20091010-8tf834wf9se6y81h2jf7a7e5he.jpg" alt="" /></p>
+
+<p>Now switch to your project and a new file with a class called KeyboardControlView and make in inherit from NSView. We are creating a subview of NSView so we will be able to make our top view "layer" use this subclass.</p>
+
+<pre><code>class KeyboardControlView &lt; NSView
+  attr_accessor :game_controller
+
+  def acceptsFirstResponder
+    true
+  end
+
+end
+</code></pre>
+
+<p>As you can see in the example above, I added an attribute accessor. attr_accessor class method creates getters and setters. It's basically the same as writing:</p>
+
+<pre><code> def game_controller=(value)
+  @game_controller = value
+end
+
+def game_controller
+  @game_controller
+end
+</code></pre>
+
+<p>MacRuby is keeping an eye on these accessors and let bind outlets to them.
+But let's not get ahead of ourselves, we'll keep that for another time.</p>
+
+<p>Let's go back to our newly created class. Notice, we also added a method called <code>
+[acceptsFirstResponder](http://developer.apple.com/mac/library/documentation/Cocoa/Reference/ApplicationKit/Classes/NSResponder_Class/Reference/Reference.html#//apple_ref/occ/instm/NSResponder/acceptsFirstResponder)</code> and returns true. <a href="http://developer.apple.com/mac/library/documentation/Cocoa/Reference/ApplicationKit/Classes/NSResponder_Class/Reference/Reference.html#//apple_ref/occ/instm/NSResponder/acceptsFirstResponder">acceptsFirstResponder</a> returns false by default.
+But in this case we want it to return true so our new class instance can be first in the responder chain.</p>
+
+<p>Now that our class is ready, let's go back to Interface Builder, select our new custom view and click on the inspector button.</p>
+
+<p><img src="http://img.skitch.com/20091010-1trkxhw2r2paaik3ipa4gtytgg.jpg" alt="" />
+Click on the (i) icon and in the Class field choose our new KeyboardControlView.
+Yep, our new class just shows up by magic, it's also called the lrz effect, just don't ask ;)
+So now when our application starts, a new instance of our NSView class is created and Cocoa will call different methods based on events triggered.</p>
+
+<p>The two methods we are interested in reimplementing are keyDown and keyUp. They get called when a key gets pressed or released.</p>
+
+<pre><code>def keyDown(event)
+  characters = event.characters
+  if characters.length == 1 &amp;&amp; !event.isARepeat
+    character = characters.characterAtIndex(0)
+    if character == NSLeftArrowFunctionKey
+      puts "LEFT pressed"
+    elsif character == NSRightArrowFunctionKey
+      puts "RIGHT pressed"
+    elsif character == NSUpArrowFunctionKey
+      puts "UP pressed"
+    elsif character == NSDownArrowFunctionKey
+      puts "DOWN pressed"
+    end
+  end
+ super
+end
+</code></pre>
+
+<p>I don't think the code above needs much explanation. The only things that you might not understand are 'event.isARepeat'. This method returns true if the user left his/her finger on the key. The other thing is the use of the 'super' call at the end of the method. Basically, we reopened a method that was already defined and we don't want to just overwrite it, we just want to inject out code within the existing method, so once we are done handling the event, we just pass it back to original method.</p>
+
+<p>Final result:</p>
+
+<pre><code>class KeyboardControlView &lt; NSView
+  attr_accessor :game_controller
+
+  def acceptsFirstResponder
+    true
+  end
+
+  def keyDown(event)
+    characters = event.characters
+    if characters.length == 1 &amp;&amp; !event.isARepeat
+      character = characters.characterAtIndex(0)
+      if character == NSLeftArrowFunctionKey
+        puts "LEFT pressed"
+      elsif character == NSRightArrowFunctionKey
+        puts "RIGHT pressed"
+      elsif character == NSUpArrowFunctionKey
+        puts "UP pressed"
+      elsif character == NSDownArrowFunctionKey
+    puts "DOWN pressed"
+      end
+    end
+    super
+  end
+
+  # Deals with keyboard keys being released
+  def keyUp(event)
+    characters = event.characters
+    if characters.length == 1
+      character = characters.characterAtIndex(0)
+      if character == NSLeftArrowFunctionKey
+       puts "LEFT released"
+      elsif character == NSRightArrowFunctionKey
+        puts "RIGHT released"
+      elsif character == NSUpArrowFunctionKey
+       puts "UP released"
+      elsif character == NSDownArrowFunctionKey
+        puts "DOWN released"
+      end
+    end
+    super
+  end
+
+end
+</code></pre>
+
+<p>Now it's up to you to handle the other keystrokes and do whatever you want. That's it for this tip, I hope it helps.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby, Rack and CouchDB = lots of awesomeness]]></title>
+    <link href="http://mattetti.github.com//posts/2009/07/27/ruby-rack-and-couchdb-lots-of-awesomeness/"/>
+    <updated>2009-07-27T13:49:20+02:00</updated>
+    <id>http://mattetti.github.com//posts/2009/07/27/ruby-rack-and-couchdb-lots-of-awesomeness</id>
+    <content type="html"><![CDATA[<p>Over the weekend, I spent some time working on a Ruby + Rack +CouchDB project. Three technologies that I know quite well but that I never put to work together at the same time, at least not directly.  Let's call this Part I.</p>
+
+<p>Before we get started, let me introduce each component:</p>
+
+<ul>
+<li><p><a href="http://en.wikipedia.org/wiki/Ruby%20%28programming%20language%29">Ruby</a> : if you are reading this blog, you more than likely know at least a little bit about, what I consider, one of the most enjoyable programming language out there. It's also a very flexible language that lets us do some interesting things. I could have chosen Python to do the same project but that's a whole different topic. For this project we will do something Ruby excels at: reopening existing classes and injecting more code.</p></li>
+<li><p><a href="http://rack.rubyforge.org/">Rack</a>: a webserver interface written in Ruby and inspired by <a href="http://www.wsgi.org/wsgi/">Python's WSGI</a>. Basically, it's a defined API to interact between webservers and web frameworks. It's used by most common Ruby web frameworks, from Sinatra to Rails (btw, Rails3 is going to be even more Rack-focused than it already is). So, very simply put, the webserver receives a request, passes it to Rack, that converts it, passes it to your web framework and the web framework sends a response in the expected format (more on Rack later).</p></li>
+<li><p><a href="http://couchdb.apache.org/">CouchDB</a>: Apache's document-oriented database. RESTful API, schema-less, written in Erlang with built-in support for map/reduce. For this project, I'm using <a href="http://github.com/mattetti/couchrest">CouchRest</a>, a Ruby wrapper for Couch.</p></li>
+</ul>
+
+
+<h2>Goal: Log Couch requests and analyze data</h2>
+
+<p>Let's say we have a Rails, Sinatra or Merb application and we are using CouchRest (maybe we are using CouchRest and ActiveRecord, but let's ignore that for now).</p>
+
+<p>Everything works fine but we would like to profile our app a little and maybe optimize the DB usage. The default framework loggers don't support Couch. The easy way would be to tail the Couch logs or look at the logs in <a href="http://janl.github.com/couchdbx/">CouchDBX</a>. Now, while that works, we can't really see what DB calls are made per action, so it makes any optimization work a bit tedious. (Note that Rails3 will have some better conventions for logging, making things even easier)</p>
+
+<p>So, let's see how to fix that. Let's start by looking at Rack.</p>
+
+<h2>Rack Middleware</h2>
+
+<p>Instead of hacking a web framework specific solution, let's use Rack. Rack is dead simple, you just need to write a class that has a <em>call</em> method.
+In our case, we don't care about modifying the response, we just want to instrument our app. We just want our middleware to be transparent and let our webserver deal with it normally.</p>
+
+<p>Here we go ... that wasn't hard, was it? We keep the application reference in the @app variable when a new instance of the middleware is created. Then when the middleware is called, we just call the rest of the chain and pretend nothing happened.</p>
+
+<p>As you can see, we just added some logging info around the request. Let's do one better and save the logs in CouchDB:</p>
+
+<p>Again, nothing complicated. In our rackup file we defined which Couch database to use and we passed it to our middleware (we change our initialize method signature to take the DB).
+Finally, instead of printing out the logs, we are saving them to the database.</p>
+
+<p>W00t! At this point all our requests have been saved in the DB with all the data there, ready to be manipulated by some map/reduce views we will write. For the record, you might want to use the bulk_save approach in CouchDB which will wait for X amount of records to save them in the DB all at once. Couch also let's you send new documents, but only save it to the DB every X documents or X seconds.</p>
+
+<p><img src="http://img.skitch.com/20090726-ebmpgjtrc6x8239ia69kmri1rt.jpg" alt="" /></p>
+
+<p>As you can see, our document contains the timestamps and the full environment as a hash.</p>
+
+<p>All of that is nice, but even though we get a lot of information, we could not actually see any of the DB calls made in each request. Let's fix that and inject our logger in CouchRest (you could apply the same approach to any adapter).</p>
+
+<p>Let's reopen the HTTP Abstraction layer class used by CouchRest and inject some instrumentation:</p>
+
+<p>Again, nothing fancy, we are just opening the module, reopening the methods and wrapping our code around the <em>super</em> call (for those who don't know, <em>super</em> calls the original method).</p>
+
+<p>This is all for Part I. In Part II, we'll see how to process the logs and make all that data useful.</p>
+
+<p>By the way, if you make it to <a href="http://www.railssummit.com.br/">RailsSummit</a>, I will be giving a talk on Rails3 and the new exciting stuff you will be able to do including Rack based stuff, CouchDB, MongoDB, new DataMapper etc..</p>
+
+<p><a href="http://railssummit.com.br/"><img src="http://railssummit.com.br/images/banners/en_souPalestrante_210x60.jpg" alt="" /></a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Get on Merb Edge pre 1.0]]></title>
+    <link href="http://mattetti.github.com//posts/2008/10/04/get-on-merb-edge-pre-10/"/>
+    <updated>2008-10-04T13:00:01+02:00</updated>
+    <id>http://mattetti.github.com//posts/2008/10/04/get-on-merb-edge-pre-10</id>
+    <content type="html"><![CDATA[<p>Merb 1.0 is almost ready to be pushed out and you might be impatient to start playing with some of the goodies not yet available in the latest stable release. Before getting started, you should know that not everything has been ironed out yet so don't expect to have a fully stable Edge.</p>
+
+<p>The easiest way to get started requires that you have <a href="http://git.or.cz/">git</a> installed as well as a gem called <a href="http://github.com/wycats/thor/tree/master">thor</a>.</p>
+
+<p>I let you take care of installing git on your machine, Ruby dev without git became quite challenging since <a href="http://github.com">GitHub</a> started ruling the Ruby OSS world.</p>
+
+<pre><code>&lt;code class="shell"&gt;sudo gem install wycats-thor -s http://gems.github.com&lt;/code&gt;
+</code></pre>
+
+<p>[caption id="" align="alignright" width="240" caption="Hops, used primarily as a flavoring and stability agent in beer, and also in other beverages and in herbal medicine."]<a href="http://flickr.com/photos/fturmog/1438235253/"><img src="http://farm2.static.flickr.com/1418/1438235253_5b10c24732_m.jpg" alt="Hops, used primarily as a flavoring and stability agent in beer, and also in other beverages and in herbal medicine." /></a>[/caption]</p>
+
+<p><a href="http://yehudakatz.com/2008/05/12/by-thors-hammer/">Thor</a> is a sort if mix between rake, <a href="http://errtheblog.com/posts/60-sake-bomb">sake</a> with a better argument parser and based on Ruby classes.</p>
+
+<p>Thor on its own won't be very helpful, we need some thor tasks.</p>
+
+<p>Create a folder where you want to store Merb's source code and cd in it.</p>
+
+<p>Once there download the latest merb thor tasks:</p>
+
+<pre><code>&lt;code class="shell"&gt;curl -L http://merbivore.com/merb.thor &gt; merb.thor
+&lt;/code&gt;
+</code></pre>
+
+<p>You can now look at the available task by doing</p>
+
+<pre><code>&lt;code class="shell"&gt;thor -T&lt;/code&gt;
+</code></pre>
+
+<p>At this point you be overwhelmed by the multitude of options, we are working on making things a be nicer for 1.0. But anyways, let's get started:</p>
+
+<pre><code>&lt;code class="shell"&gt;sudo thor merb:edge --install&lt;/code&gt;
+</code></pre>
+
+<p>The command above will install extlib, merb-core and merb-more from git HEAD. You now have the latest version of Merb's libs installed locally as gems.</p>
+
+<p>You might also want to install Merb extra plugins, if that's the case do:</p>
+
+<pre><code>&lt;code class="shell"&gt; sudo thor merb:edge:plugins --install&lt;/code&gt;
+</code></pre>
+
+<p>If you decided to use DataMapper instead of ActiveRecord or Sequel, you will also need to install the gems you might need:</p>
+
+<p>Install data_objects and an adapter: (replace mysql by the adapter you want to install)</p>
+
+<pre><code>&lt;code class="shell"&gt; sudo thor merb:edge:do mysql --install&lt;/code&gt;
+</code></pre>
+
+<p>Install DataMapper core from Git HEAD</p>
+
+<pre><code>&lt;code class="shell"&gt; sudo thor merb:edge:dm_core --install&lt;/code&gt;
+</code></pre>
+
+<p>Install DataMapper more from Git HEAD</p>
+
+<pre><code>&lt;code class="shell"&gt; sudo thor merb:edge:dm_more --install&lt;/code&gt;
+</code></pre>
+
+<p>You should be all setup by now.</p>
+
+<p><strong>
+Next time you want to update, just come back to the same folder and do the same thing. Hopefully by then we will have a 1 task solution and will offer a merb-stack version of our gems to let you install everything at once with all setup done.</strong></p>
+
+<p>p.s: this post is dedicated <a href="http://derekneighbors.com/">Derek Neighbors</a> ;)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[problems with urls in Merb HEAD?]]></title>
+    <link href="http://mattetti.github.com//posts/2008/09/30/problems-with-urls-in-merb-head/"/>
+    <updated>2008-09-30T22:24:29+02:00</updated>
+    <id>http://mattetti.github.com//posts/2008/09/30/problems-with-urls-in-merb-head</id>
+    <content type="html"><![CDATA[<p>I actually run into a small problem when updated an older Merb app. Here was how my router looked like:</p>
+
+<pre><code>Merb::Router.prepare do |r|
+  r.resources :channels do |channels|
+    channels.resources :shows do |shows|
+      shows.resources :episodes
+    end
+  end
+end
+</code></pre>
+
+<p>But after updating to the latest version of Merb, I got links looking like:</p>
+
+<pre><code>http://localhost:4000/channels/#&lt;Channel:0x27b7300&gt;/shows
+</code></pre>
+
+<p>The first thing to do is to read <a href="http://github.com/carllerche/merb-core-enterprise-edition/wikis/whats-new-with-the-router">Carl's wiki about the latest Router changes</a>.</p>
+
+<p>Carl explains that things got cleaned up in the router code and my routes should now look like:</p>
+
+<pre><code>Merb::Router.prepare do |r|
+  r.resources :channels do
+    resources :shows do |shows|
+      resources :episodes
+    end
+  end
+end
+</code></pre>
+
+<p>However that won't be enough..  You see my url used to look like that:</p>
+
+<pre><code>url(:channel_shows, :channel_id =&gt; channel)
+</code></pre>
+
+<p>Now I can simplify it to:</p>
+
+<pre><code>url(:channel_shows, channel)
+</code></pre>
+
+<p>That still won't fix the problem, since the real problem comes from the fact that I was on Merb HEAD but not DataMapper HEAD. Updating DM clears things up. That's the price to pay to be on HEAD ;)</p>
+
+<p>FYI the problem comes from the fact that DM doesn't add a to_params method to its objects. Rails users might recognize that method used to convert an object into a string to create a route, something not really ORM agnostic and frowned upon by the DM/Merb teams.</p>
+
+<p>Merb lets you specify the param to use for your routes using the identify method. Read <a href="http://github.com/carllerche/merb-core-enterprise-edition/wikis/whats-new-with-the-router">Carl's wiki page </a>for more cool stuff and see how to create some cool stuff like url slugs etc..</p>
+
+<p>Note that even if you are using ActiveRecord, you'll need to update merb_activerecord as the new identify rules were updated in the ORM plugins.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Write your own custom DataMapper adapter]]></title>
+    <link href="http://mattetti.github.com//posts/2008/09/29/write-your-own-custom-datamapper-adapter/"/>
+    <updated>2008-09-29T00:38:46+02:00</updated>
+    <id>http://mattetti.github.com//posts/2008/09/29/write-your-own-custom-datamapper-adapter</id>
+    <content type="html"><![CDATA[<p>If you read this blog, you probably know that <a href="http://merbivore.com">Merb</a>'s best <a href="http://en.wikipedia.org/wiki/Object-relational_mapping">ORM</a> friend is <a href="http://datamapper.org/">DataMapper</a>.</p>
+
+<p>[caption id="" align="alignleft" width="240" caption="compounds in basil oil have potent antioxidant and is used for supplementary treatment of stress"]<a href="http://flickr.com/photos/darn/190457943/"><img src="http://farm1.static.flickr.com/55/190457943_8b93fda9e6_m.jpg" alt="compounds in basil oil have potent antioxidant and is used for supplementary treatment of stress" /></a>[/caption]</p>
+
+<p>Merb works very well with ActiveRecord and Sequel but most of the Merbivores get excited about <a href="http://datamapper.org/">DataMapper</a>.</p>
+
+<p>DataMapper has a lot of cool stuff going for it. I'm planning on writingi few articles about what I particularily like with DM and some of the misconceptions.</p>
+
+<p>I'm going to give a talk about DataMapper during <a href="http://merbcamp.com">MerbCamp</a> and something I want to cover is the fact that you can write DM adapters for virtually anything. From an adapter for couchdb (available in dm-more) to an <a href="http://github.com/wycats/dm-adapters/tree/master/salesforce">adapter for SalesForce API</a>. That's the kind of stuff that gets me excited, a bit like what <a href="http://ambition.rubyforge.org/">Ambition</a> does but built-in in DM.</p>
+
+<p>So, I decided to take some advise from <a href="http://yehudakatz.com/">Yehuda</a> and dkubb and wrote my own adapter for <a href="http://video.google.com">Google Video</a>. I had just finished a <a href="http://github.com/mattetti/gvideo">gem to retrieve google videos</a> for a given google user and thought it would be a perfect exercise to mix a <a href="http://en.wikipedia.org/wiki/Screen_scraping">http-scraper</a> with a DM adapter.</p>
+
+<p>Based on the advise I received, I started by defining the API I want to use:</p>
+
+<p>I matched the API calls to the underlying methods I would need to make. I then modified my original gem to support conditional calls.</p>
+
+<p>Once that was done I implemented the required methods for my models to support the Model.first and Model.all calls with conditions.</p>
+
+<p>A custom adapter inherits from <a href="http://github.com/sam/dm-core/tree/master/lib/dm-core/adapters/abstract_adapter.rb">AbstractAdapter</a> and can define the default adapter methods:</p>
+
+<pre><code>&lt;div id="LC9" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;resources&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC10" class="line"&gt;Â Â Â Â Â Â Â Â &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="no"&gt;NotImplementedError&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC11" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;end&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC13" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;read_many&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC14" class="line"&gt;Â Â Â Â Â Â Â Â &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="no"&gt;NotImplementedError&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC15" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;end&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC17" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;read_one&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC18" class="line"&gt;Â Â Â Â Â Â Â Â &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="no"&gt;NotImplementedError&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC19" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;end&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC21" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;attributes&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC22" class="line"&gt;Â Â Â Â Â Â Â Â &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="no"&gt;NotImplementedError&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC23" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;end&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC25" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;delete&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC26" class="line"&gt;Â Â Â Â Â Â Â Â &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="no"&gt;NotImplementedError&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC27" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;end
+&lt;/span&gt;&lt;/div&gt;
+</code></pre>
+
+<p>Since my adapter only needs to read data, I just had to implement #read_one and #read_many. I implemented a #read private method accessed by #read_one and #read_many as you can see <a href="http://github.com/mattetti/dm-gvideo-adapter/tree/master/lib/dm-gvideo-adapter.rb#L29-60">here</a>.</p>
+
+<p>Because DM offers a clean and consistent API, things were pretty easy and you can check the <a href="http://github.com/mattetti/dm-gvideo-adapter/tree/master/spec/dm-gvideo-adapter_spec.rb">specs</a> to have a better understanding of how things are expected to work.</p>
+
+<p>As you can see with less than 80LOC, I implemented an adapter that I can use and reuse cleanly in my apps. And on top of that, the adapter uses a standard API known by everyone using DM.</p>
+
+<p><strong>Even though, this adapter has a very limited scope, I hope this example will inspire you and at your turn, will write some more cool adapters to share with the rest of us.</strong></p>
+
+<h2>UPDATE:</h2>
+
+<p>Sam Smoot, also known as Mr DataMapper made a very good comment. I should explain a bit more how you create a collection of objects to return when a user does a .all or .first call.</p>
+
+<p>The whole collection creation is a bit strange at first.</p>
+
+<p>In my read method, "set" is a DataMapper::Collection instance that is passed by the #read_one or #read_many method.</p>
+
+<p>The collection needs to be loaded with an array of ordered params.</p>
+
+<p>For instance in this case, to create a Video collection I need to load the collection with an ordered array of params like docid, title etc..Â  However, some params might be lazy loaded and in some instance, the query might be in the form of Video.all(:fields => :title)</p>
+
+<p>To figure out what fields/params we need, I used:</p>
+
+<pre><code>&lt;span class="n"&gt;properties&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fields
+&lt;/span&gt;
+</code></pre>
+
+<p>Which retrieves the required fields. Once you have the fields you need to return the structured data and that's when I used the #result_values method which basically loop through the fields and retrieves the data by sending the param as a method to the result:</p>
+
+<pre><code>&lt;span class="n"&gt;properties&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;map&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nb"&gt;p&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;p&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;field&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;repository_name&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+</code></pre>
+
+<p>The values once retrieved get loaded, but here is a trick I took from wycat's saleforce API:</p>
+
+<pre><code>&lt;span class="n"&gt;arr&lt;/span&gt; &lt;span class="p"&gt;?&lt;/span&gt; &lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;break&lt;/span&gt; &lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;))
+&lt;/span&gt;
+</code></pre>
+
+<p>This snippet is quite simple if we set arr as true, that means we want to return an array so we will keep on looping (used by read_more when we want to return an array of objects). Otherwise we use the break operator which will stop the loop but also return a value. (yes, Ruby is awesome). By returning a single object we do exactly what's expected and don't have to call #first on a returned array. Pretty slick</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Deploying a bundled merb app (merb 0.9.7+)]]></title>
+    <link href="http://mattetti.github.com//posts/2008/09/23/deploying-a-bundled-merb-app-merb-097/"/>
+    <updated>2008-09-23T15:32:41+02:00</updated>
+    <id>http://mattetti.github.com//posts/2008/09/23/deploying-a-bundled-merb-app-merb-097</id>
+    <content type="html"><![CDATA[<p>Since Merb 0.9.7 the Merb team decided to change the way you can bundle an app. Until 0.9.7 you would use the merb-freezer plugin which was supporting git submodules and gems. The only problem was that you still had to install merb-freezer on your server and it had to stay in sync with your app... kinda lame :(</p>
+
+<p>[caption id="" align="alignleft" width="240" caption="Ginger roots, great for deployment issues"]<a href="http://flickr.com/photos/vieuxbandit/1987820964/"><img src="http://farm3.static.flickr.com/2373/1987820964_bc54df0d81_m.jpg" alt="Ginger" /></a>[/caption]</p>
+
+<p>Instead, after a lot of discussions, we decided to add this feature to merb-core and let you bundle all your dependencies in a bundled gem folder. No more support for git submodules as they are hard to keep track of and don't handle dependencies very well (not at all).</p>
+
+<p>The new freezing strategy is very well described in <a href="http://merbunity.com/tutorials/18">this merbunity article</a>. However it doesn't really explain how to deploy a bundled app.</p>
+
+<p>So let's imagine for a second that we bundle our app, generated the scripts needed to start merb/rake etc...</p>
+
+<p>The key thing to do is to have a decent deployment recipe. Let's look at my cap recipe:</p>
+
+<p>As you can see there are few key elements:</p>
+
+<ul>
+<li><p>recompile native gems for the web server</p></li>
+<li><p>call bin/merb and not merb directly</p></li>
+</ul>
+
+
+<p>One thing you need to be aware of is that your bundled gems need to be up to date and play well alone. When you test your bundled app locally, you might endup loading system wide gems available which you don't have on your deployment server.</p>
+
+<p>If when you deploy your app everything seems fine but you can't access your app, check that you are recompiling native gems during your deployment and make sure you have bundled all the deps you need and that they work well alone.</p>
+
+<p>One more advise, if you can't figure out what's going, try ssh'ing to your server, go to your current folder and try bin/merb -iÂ  to see what's going on.</p>
+]]></content>
+  </entry>
+  
+</feed>

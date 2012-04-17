@@ -3,11 +3,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Matt Aimonetti</title>
+    <title>Merb 1.1 delayed - Matt Aimonetti</title>
     <meta name="author" content="Matt Aimonetti">
 
     
-    <meta name="description" content="Matt Aimonetti is a web engineer, technical writer and active open-source contributor. Based in San Diego California, he is currently working as a &hellip;">
+    <meta name="description" content="Merb 1.1 Delayed We made the decision to slightly delay the release of Merb 1.1 as we ended up changing the scope of what we wanted to make &hellip;">
     
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 
@@ -101,210 +101,78 @@
 -->
 
 
-	<div id="content" class="inner"><div id='home'>
-  <p id='bio'>Matt Aimonetti is a web engineer, technical writer and active open-source contributor. 
-  Based in San Diego California, he is currently working as a software architect for LivingSocial.
-  Prior to joining LivingSocial, Matt worked on video game development at Sony PlayStation.</p>
-<h2>Recent Posts</h2>
-<ul class='posts'>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution/">Building and implementing a Single Sign-On solution</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
+	<div id="content" class="inner"><article class="post hentry">
   
+    <h1 class="title entry-title">Merb 1.1 Delayed</h1>
+    <div class="entry"><p>We made the decision to slightly delay the release of Merb 1.1 as we ended up changing the scope of what we wanted to make available in the 1.1 release. If you have been following our releases, you know that this is not something we usually do, but we strongly believe that this is actually something that will save us time for the next release.</p>
 
+<p>The big themes for 1.1 are full Ruby 1.9 support and Rails3 compatibilty: action-orm(previously called active-orm) and the new router.</p>
 
-<time datetime="2012-04-04T07:29:16+02:00" pubdate data-updated="true">Apr 4<span>th</span>, 2012</time></div>
-</li>
+<p>While on one hand, Ruby 1.9 work is 99% done (we still have a couple of failing specs with action-args) and action-orm just needs to be merged in, on the other hand, the new router currently does more than what we initially planned for. It actually covers stuff we scheduled for 1.2.</p>
 
+<p>Here is a quick preview of what Carl has been working on:</p>
 
+<p>Merb&#8217;s router is now extracted into a rack middleware library and a bunch of features to try to get &#8220;mountable apps&#8221; working in Merb 1.1 have been added.</p>
 
-<li class="title entry-title">
-  <a href="/mattetti/posts/2012/02/29/learning-from-rails-failures/">Learning from Rails&#8217; failures</a>
-  <div class="date updated right">
+<p>The proof of concept has been submitted to the Rack development mailing list and the draft is available at:
+<a href="http://github.com/carllerche/rack-router/tree/master">http://github.com/carllerche/rack-router</a></p>
 
+<p>Merb, CloudKit, Sinatra and more than likely Rails3 should be using this new rack based router. This is a huge step for the Ruby community!</p>
 
+<p>Here is the abstract explained by carl:</p>
 
+<blockquote><p>Conceptually, rack-router allows you to create a two way map between HTTP requests and Rack applications. It is built as a piece of middleware that takes in a set of routes.
+When a request comes in, the router will compare that request against the set of routes until it finds one that matches. It then calls the associated rack app.
+It can also generate URL&#8217;s that you can use to link to other mountable apps.
+It also goes quite a bit further and attempts to make reusing rack applications completely painless (what we are tentatively calling &#8220;mountable apps&#8221;).</p></blockquote>
 
+<p>For more information, check the <a href="http://groups.google.com/group/rack-devel/browse_thread/thread/41334bce83cb173f">mailing list thread</a>.</p>
 
-
-
-
-  
-
-
-<time datetime="2012-02-29T07:48:08+01:00" pubdate data-updated="true">Feb 29<span>th</span>, 2012</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/">Quick dive into Ruby ORM object initialization</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-23T09:46:49+01:00" pubdate data-updated="true">Feb 23<span>rd</span>, 2012</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter/">Books to read in 2012 - recommended to me by Twitter</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-30T15:28:13+01:00" pubdate data-updated="true">Dec 30<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/12/21/developing-a-curriculum/">Developing a Curriculum</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-21T06:57:27+01:00" pubdate data-updated="true">Dec 21<span>st</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/12/09/my-rubyconf-2011-talk-is-online/">My RubyConf 2011 talk is online</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-09T06:47:59+01:00" pubdate data-updated="true">Dec 9<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/10/18/data-safety-and-gil-removal/">Data safety and GIL removal</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-18T15:19:17+02:00" pubdate data-updated="true">Oct 18<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/10/11/about-management/">About management</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-11T22:53:40+02:00" pubdate data-updated="true">Oct 11<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/10/03/about-concurrency-and-the-gil/">About concurrency and the GIL</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-03T21:23:54+02:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app/">How to - cross domain ajax to a Ruby app</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-14T16:11:41+02:00" pubdate data-updated="true">Sep 14<span>th</span>, 2011</time></div>
-</li>
-
-
-</ul>
-
-<nav id="pagenavi">
-  <a href="/mattetti/articles/archives" class="center">Archives</a>
-</nav>
+<p>Now that the proof of concept has been accepted, the new implementation needs to be optimized to match the speed of the previous router. Currently the new router is pretty slow compared to 1.x router.</p>
 </div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-14T09:02:45+02:00" pubdate data-updated="true">Apr 14<span>th</span>, 2009</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/mattetti/articles/categories/misc/'>Misc</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
 </div>
 	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
 </footer>

@@ -3,11 +3,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Matt Aimonetti</title>
+    <title>How to - cross domain ajax to a Ruby app - Matt Aimonetti</title>
     <meta name="author" content="Matt Aimonetti">
 
     
-    <meta name="description" content="Matt Aimonetti is a web engineer, technical writer and active open-source contributor. Based in San Diego California, he is currently working as a &hellip;">
+    <meta name="description" content="How to - Cross Domain Ajax to a Ruby App In some cases, you might have a bunch of apps running on different domains/subdomains and/or ports and you &hellip;">
     
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 
@@ -101,189 +101,45 @@
 -->
 
 
-	<div id="content" class="inner"><div id='home'>
-  <p id='bio'>Matt Aimonetti is a web engineer, technical writer and active open-source contributor. 
-  Based in San Diego California, he is currently working as a software architect for LivingSocial.
-  Prior to joining LivingSocial, Matt worked on video game development at Sony PlayStation.</p>
-<h2>Recent Posts</h2>
-<ul class='posts'>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution/">Building and implementing a Single Sign-On solution</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
+	<div id="content" class="inner"><article class="post hentry">
   
+    <h1 class="title entry-title">How to - Cross Domain Ajax to a Ruby App</h1>
+    <div class="entry"><p>In some cases, you might have a bunch of apps running on different domains/subdomains and/or ports and you would like to make ajax requests between these services. The problem is that browsers wouldn&#8217;t let you make such requests because of the Same Origin Policy which only allowed them to make request to resources within the same domain.</p>
 
+<p>However, most browsers (IE 8+, Firefox 3.5+, Safari 4+, Chrome) implement a simple way to allow cross domain requests as defined in this <a href="http://www.w3.org/TR/cors/">w3C document</a>.</p>
 
-<time datetime="2012-04-04T07:29:16+02:00" pubdate data-updated="true">Apr 4<span>th</span>, 2012</time></div>
-</li>
+<p>Of course, if your users have an old version of their browser, you  might have to look into jsonp or something else such as cheating by using iframes &amp; setting document.domain. Let&#8217;s pretend for a minute that 100% of your users are on Chrome. The only thing you need to do is set a response header listing the accepted domains or &#8220;*&#8221; for all. A simple Rack middleware to do that would look like that.</p>
 
+<pre><code>class XOriginEnabler
+  ORIGIN_HEADER = "Access-Control-Allow-Origin"
 
+  def initialize(app, accepted_domain="*")
+    @app = app
+    @accepted_domain = accepted_domain
+  end
 
-<li class="title entry-title">
-  <a href="/mattetti/posts/2012/02/29/learning-from-rails-failures/">Learning from Rails&#8217; failures</a>
-  <div class="date updated right">
+  def call(env)
+    status, header, body = @app.call(env)
+    header[ORIGIN_HEADER] = @accepted_domain
+    [status, header, body]
+  end
+end
+</code></pre>
 
+<p>And to use the middleware you would need to set it for use:</p>
 
+<pre><code>use XOriginEnabler
+</code></pre>
 
+<p>To enable all requests from whatever origin, or pass the white listed domain(s) as shown below.</p>
 
+<pre><code>use XOriginEnabler, "demo.mysite.com demo.mysite.fr demo.techcrunch.com"
+</code></pre>
 
-
-
-
-  
-
-
-<time datetime="2012-02-29T07:48:08+01:00" pubdate data-updated="true">Feb 29<span>th</span>, 2012</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/">Quick dive into Ruby ORM object initialization</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-23T09:46:49+01:00" pubdate data-updated="true">Feb 23<span>rd</span>, 2012</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter/">Books to read in 2012 - recommended to me by Twitter</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-30T15:28:13+01:00" pubdate data-updated="true">Dec 30<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/12/21/developing-a-curriculum/">Developing a Curriculum</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-21T06:57:27+01:00" pubdate data-updated="true">Dec 21<span>st</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/12/09/my-rubyconf-2011-talk-is-online/">My RubyConf 2011 talk is online</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-09T06:47:59+01:00" pubdate data-updated="true">Dec 9<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/10/18/data-safety-and-gil-removal/">Data safety and GIL removal</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-18T15:19:17+02:00" pubdate data-updated="true">Oct 18<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/10/11/about-management/">About management</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-11T22:53:40+02:00" pubdate data-updated="true">Oct 11<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/10/03/about-concurrency-and-the-gil/">About concurrency and the GIL</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-03T21:23:54+02:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app/">How to - cross domain ajax to a Ruby app</a>
-  <div class="date updated right">
+<p>For a full featured middleware, see <a href="https://github.com/cyu/rack-cors">this project</a>.</p>
+</div>
+    <div class="meta">
+        <div class="date updated">
 
 
 
@@ -296,15 +152,35 @@
 
 
 <time datetime="2011-09-14T16:11:41+02:00" pubdate data-updated="true">Sep 14<span>th</span>, 2011</time></div>
-</li>
+        <div class="tags">
 
-
-</ul>
-
-<nav id="pagenavi">
-  <a href="/mattetti/articles/archives" class="center">Archives</a>
-</nav>
+<div class="cat">
+  
+    <a class='category' href='/mattetti/articles/categories/misc/'>Misc</a>, <a class='category' href='/mattetti/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/mattetti/articles/categories/blog-post/'>blog-post</a>
+  
 </div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
 </div>
 	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
 </footer>

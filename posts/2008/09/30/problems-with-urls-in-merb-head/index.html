@@ -3,11 +3,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Matt Aimonetti</title>
+    <title>problems with urls in Merb HEAD? - Matt Aimonetti</title>
     <meta name="author" content="Matt Aimonetti">
 
     
-    <meta name="description" content="Matt Aimonetti is a web engineer, technical writer and active open-source contributor. Based in San Diego California, he is currently working as a &hellip;">
+    <meta name="description" content="Problems With Urls in Merb HEAD? I actually run into a small problem when updated an older Merb app. Here was how my router looked like: Merb:: &hellip;">
     
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 
@@ -101,210 +101,99 @@
 -->
 
 
-	<div id="content" class="inner"><div id='home'>
-  <p id='bio'>Matt Aimonetti is a web engineer, technical writer and active open-source contributor. 
-  Based in San Diego California, he is currently working as a software architect for LivingSocial.
-  Prior to joining LivingSocial, Matt worked on video game development at Sony PlayStation.</p>
-<h2>Recent Posts</h2>
-<ul class='posts'>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution/">Building and implementing a Single Sign-On solution</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
+	<div id="content" class="inner"><article class="post hentry">
   
+    <h1 class="title entry-title">Problems With Urls in Merb HEAD?</h1>
+    <div class="entry"><p>I actually run into a small problem when updated an older Merb app. Here was how my router looked like:</p>
 
+<pre><code>Merb::Router.prepare do |r|
+  r.resources :channels do |channels|
+    channels.resources :shows do |shows|
+      shows.resources :episodes
+    end
+  end
+end
+</code></pre>
 
-<time datetime="2012-04-04T07:29:16+02:00" pubdate data-updated="true">Apr 4<span>th</span>, 2012</time></div>
-</li>
+<p>But after updating to the latest version of Merb, I got links looking like:</p>
 
+<pre><code>http://localhost:4000/channels/#&lt;Channel:0x27b7300&gt;/shows
+</code></pre>
 
+<p>The first thing to do is to read <a href="http://github.com/carllerche/merb-core-enterprise-edition/wikis/whats-new-with-the-router">Carl&#8217;s wiki about the latest Router changes</a>.</p>
 
-<li class="title entry-title">
-  <a href="/mattetti/posts/2012/02/29/learning-from-rails-failures/">Learning from Rails&#8217; failures</a>
-  <div class="date updated right">
+<p>Carl explains that things got cleaned up in the router code and my routes should now look like:</p>
 
+<pre><code>Merb::Router.prepare do |r|
+  r.resources :channels do
+    resources :shows do |shows|
+      resources :episodes
+    end
+  end
+end
+</code></pre>
 
+<p>However that won&#8217;t be enough..  You see my url used to look like that:</p>
 
+<pre><code>url(:channel_shows, :channel_id =&gt; channel)
+</code></pre>
 
+<p>Now I can simplify it to:</p>
 
+<pre><code>url(:channel_shows, channel)
+</code></pre>
 
+<p>That still won&#8217;t fix the problem, since the real problem comes from the fact that I was on Merb HEAD but not DataMapper HEAD. Updating DM clears things up. That&#8217;s the price to pay to be on HEAD ;)</p>
 
+<p>FYI the problem comes from the fact that DM doesn&#8217;t add a to_params method to its objects. Rails users might recognize that method used to convert an object into a string to create a route, something not really ORM agnostic and frowned upon by the DM/Merb teams.</p>
 
-  
+<p>Merb lets you specify the param to use for your routes using the identify method. Read <a href="http://github.com/carllerche/merb-core-enterprise-edition/wikis/whats-new-with-the-router">Carl&#8217;s wiki page </a>for more cool stuff and see how to create some cool stuff like url slugs etc..</p>
 
-
-<time datetime="2012-02-29T07:48:08+01:00" pubdate data-updated="true">Feb 29<span>th</span>, 2012</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/">Quick dive into Ruby ORM object initialization</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-23T09:46:49+01:00" pubdate data-updated="true">Feb 23<span>rd</span>, 2012</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter/">Books to read in 2012 - recommended to me by Twitter</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-30T15:28:13+01:00" pubdate data-updated="true">Dec 30<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/12/21/developing-a-curriculum/">Developing a Curriculum</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-21T06:57:27+01:00" pubdate data-updated="true">Dec 21<span>st</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/12/09/my-rubyconf-2011-talk-is-online/">My RubyConf 2011 talk is online</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-09T06:47:59+01:00" pubdate data-updated="true">Dec 9<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/10/18/data-safety-and-gil-removal/">Data safety and GIL removal</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-18T15:19:17+02:00" pubdate data-updated="true">Oct 18<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/10/11/about-management/">About management</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-11T22:53:40+02:00" pubdate data-updated="true">Oct 11<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/10/03/about-concurrency-and-the-gil/">About concurrency and the GIL</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-03T21:23:54+02:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app/">How to - cross domain ajax to a Ruby app</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-14T16:11:41+02:00" pubdate data-updated="true">Sep 14<span>th</span>, 2011</time></div>
-</li>
-
-
-</ul>
-
-<nav id="pagenavi">
-  <a href="/mattetti/articles/archives" class="center">Archives</a>
-</nav>
+<p>Note that even if you are using ActiveRecord, you&#8217;ll need to update merb_activerecord as the new identify rules were updated in the ORM plugins.</p>
 </div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-09-30T22:24:29+02:00" pubdate data-updated="true">Sep 30<span>th</span>, 2008</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/mattetti/articles/categories/misc/'>Misc</a>, <a class='category' href='/mattetti/articles/categories/tutorial/'>Tutorial</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
 </div>
 	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
 </footer>

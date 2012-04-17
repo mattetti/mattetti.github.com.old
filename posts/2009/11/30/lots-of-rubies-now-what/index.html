@@ -1,0 +1,236 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Lots of rubies, now what? - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Lots of Rubies, Now What? If you were at RubyConf 2009 or looked at the schedule, you saw that the big thing happening in the Ruby scene is the &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/Matt-Aimonetti/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    <link rel="canonical" href="http://mattetti.github.com/">
+    <link href="/mattetti/favicon.png" rel="shortcut icon">
+    <link href="/mattetti/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/mattetti/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/mattetti/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com/">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/Matt-Aimonetti/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/mattetti/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/mattetti/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/mattetti/">About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/mattetti/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Lots of Rubies, Now What?</h1>
+    <div class="entry"><p>If you were at RubyConf 2009 or looked at the schedule, you saw that the big thing happening in the Ruby scene is the maturation of a many of the Ruby implementations:
+BlueRuby, HotRuby, IronRuby, JRuby, MacRuby, Maglev, MRI, REE, Rubinius, SmallRuby&#8230;
+Ruby developers really have plenty of choice when it comes to choosing an alternative Ruby implementation.</p>
+
+<p>Is that a bad thing?</p>
+
+<p>Turns out, Matz , Ruby author mentioned one ore time during RubyConf that it was actually a good thing for the Ruby ecosystem.</p>
+
+<p>But maybe we should take a step back and look at the big picture. So here are some of my thoughts on the topic. <em>(disclaimer: being part of the MacRuby team, I&#8217;m certainly biased)</em></p>
+
+<p><strong>Stop comparing alternative Ruby implementations against Ruby 1.8.x.</strong></p>
+
+<p>Even though a lot of people are still using Ruby 1.8.x, it&#8217;s totally unfair to compare against such an old version of Matz&#8217;s Ruby.
+Ruby 1.9 is what people should compare against and believe me, Ruby 1.9.2 is going to change the game (much faster, cleaned up version).
+Hopefully, all the Ruby alternative implementations will quickly become 1.9 compatible.</p>
+
+<p>(On a site note, <a href="http://weblog.rubyonrails.org/2009/11/30/ruby-on-rails-2-3-5-released">Rails 2.3.5 was released</a> a few days ago which fixes some of the last few remaining Ruby 1.9 bugs)</p>
+
+<p><strong>Don&#8217;t trust the benchmarks</strong></p>
+
+<p>As we all know, <a href="http://en.wikipedia.org/wiki/Lies,_damned_lies,_and_statistics">there are lies, damn lies and statistics</a>. Evan Phoenix explained that very clearly with lots of examples during his <a href="http://rubyconf2009.confreaks.com/">RubyConf talk</a> and I totally agree with him.
+Micro benchmarks only help implementers know where they are standing and find performance issue.
+Let&#8217;s take a very simple example: <a href="http://jruby.org/">JRuby</a>.
+What you might not know is that most JRuby benchmarks are usually &#8216;warmed up&#8217;.  Basically, to get the results you see in most reported benchmarks, you need to run the benchmark in a loop X amount of times and then run the benchmark. The reason for that is that JRuby uses HotSpot which needs to process the code to optimize the JITting and finally get your code to run faster.
+The problem is that it is not a fair comparison. I was benchmarking Rails3 for instance and JRuby starts way slower than Ruby 1.8.6 and takes a little while to get as fast/faster than 1.9.1.
+This is something you need to take in consideration since each deployment will slow down your app and you probably shouldn&#8217;t use JRuby if you are not using long running processes.
+Another example would be MacRuby, even though the MacRuby project never released any benchmarks, it&#8217;s known to be a <em>fast</em> implementation.
+Currently, the allocation of objects in MacRuby is actually still a bit costly and if you benchmark that, you can <em>show</em> that MacRuby is slow. Other operations are super optimized and both Rubinius and MacRuby will be way faster than anyone else. (check Phoenix&#8217;s talk at Ruby conf for more examples)
+So, before choosing an implementation for performance reasons, benchmark against the code you are going to use.</p>
+
+<p><strong>There is only one real original Ruby</strong></p>
+
+<p>I think nobody will disagree with the fact that there is only one Ruby reference and that&#8217;s Matz.
+Therefore is only one &#8220;real&#8221; Ruby and that is Matz&#8217;s. (Matz actually disagreed with me when I said that, since all the other implementations are also &#8220;real&#8221; but you get the point)
+There is nothing wrong with Ruby&#8217;s alternatives but they stay alternatives to the original
+MRI might not be the best option for every single case out there but it is and will stay the reference.</p>
+
+<p>During RubyConf, I was joking with Matz and Koichi that maybe they should claim a Ruby tax to the Ruby implementations.
+The reality is that Ruby is maintained by 5 to 10 contributors, most of them doing that on the side of their full time job.
+Most of the other implementations have full time staff working hard on their implementations. That&#8217;s exciting but sad at the same time.</p>
+
+<p>During the different talks given by the Ruby core team, it was clear that they really want to bridge the West/East gap and asked for help. It&#8217;s very honorable on their part and I hope we will see more contributions coming from outside Japan.</p>
+
+<p>Finally, I think that even if people work hard to write the best Ruby implementation ever, let&#8217;s not forget to respect Matz&#8217;s project, team and achievements. People spent hours/weeks/months creating the Ruby language we love and even though there are some aspects that could be and are being improved, let&#8217;s not forget that when criticizing/comparing their work.</p>
+
+<p><strong>There is not only one way to do things</strong></p>
+
+<p>I don&#8217;t know where that&#8217;s coming from, but some people in our community seem to believe that there is only one way to do things and if you don&#8217;t do it their way, you do it wrong.
+I personally have a hard time believing that and I even think it goes against what Ruby was designed for. (However, I must admit that sometimes I did/do think that some approaches were totally wrong :p)
+It reminds me of people trying to convince you that God exists, other people trying to convince you that their religion is the only true one, or finally the other people trying to convince believers that they are wrong.
+Maybe it is just that as humans we have a hard time dealing with people coming to a different conclusion than us and therefore we have to convince them that we are right and they are wrong.</p>
+
+<p>The way I see it, for any new Ruby project, you should start be using with Ruby1.9. If it doesn&#8217;t fit your needs, then, consider an alternative. Here is how I look at the other alternatives (feel free to disagree):</p>
+
+<ul>
+<li><p><a href="https://wiki.sdn.sap.com/wiki/display/Research/BlueRuby">BlueRuby</a> - use if you are writing a SAP app</p></li>
+<li><p><a href="http://hotruby.yukoba.jp/">HotRuby</a> - use if you want to use Ruby to write a Flash app</p></li>
+<li><p><a href="http://ironruby.net/">IronRuby</a> - use it if you want to integrate with .NET and/or write a silverlight app</p></li>
+<li><p><a href="http://jruby.org/">JRuby</a> - use if you want to integrate with the Java world</p></li>
+<li><p><a href="http://macruby.org">MacRuby</a> - use it if you want to integrate with Cocoa/want a native OSX application</p></li>
+<li><p><a href="http://maglev.gemstone.com/">Maglev</a> - use if you want to use an object persistence layer and a distributed shared cache</p></li>
+<li><p><a href="http://www.rubyenterpriseedition.com/">REE</a> - use if you have a ruby 1.8 web app that uses too much memory</p></li>
+<li><p><a href="http://rubini.us">Rubinius</a> - use if you want to know what&#8217;s going on in your code</p></li>
+<li><p><a href="http://smalltalk.felk.cvut.cz/projects/smallruby">SmallRuby</a> - don&#8217;t use it yet, but keep an eye on it</p></li>
+</ul>
+
+
+<p>This is the way I see the various existing implementations and I think this is where they shine and why they were created in the first place. They are all complimentary and help bring the Ruby language further. The goal is always the same.</p>
+
+<p><strong>The future is exciting</strong></p>
+
+<p>Ruby is getting everywhere or almost. Matz&#8217;s Ruby is going to get multiVM support, various other improvements and get even faster and faster.
+Alternative implementations are getting more and more mature and they grow the community by bringing people from different communities (.NET, java, obj-c/cocoa)</p>
+
+<p>At the end of the day, we are all beneficiaries of the work done by all the implementers, thank you guys and keep up the good work!</p>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-30T13:38:53+01:00" pubdate data-updated="true">Nov 30<span>th</span>, 2009</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/mattetti/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/mattetti/articles/categories/ruby/'>ruby</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/mattetti/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/mattetti/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

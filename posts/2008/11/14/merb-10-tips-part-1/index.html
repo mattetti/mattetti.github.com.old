@@ -1,0 +1,259 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>merb 1.0 - tips part 1 - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Merb 1.0 - Tips Part 1 Â  As you must know by now, last week, Merb 1.0 got released. Because we wanted to assure the release was fine, we asked &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/Matt-Aimonetti/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    <link rel="canonical" href="http://mattetti.github.com/">
+    <link href="/mattetti/favicon.png" rel="shortcut icon">
+    <link href="/mattetti/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/mattetti/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/mattetti/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com/">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/Matt-Aimonetti/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/mattetti/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/mattetti/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/mattetti/">About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/mattetti/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Merb 1.0 - Tips Part 1</h1>
+    <div class="entry"><p>Â </p>
+
+<p>As you must know by now, last week,<a href="http://merbist.com/2008/11/09/merb-1-0-released"> Merb 1.0 got released</a>.</p>
+
+<p><a href="http://merbist.com/wp-content/uploads/2008/11/nsa_logo.gif"><img src="http://merbist.com/wp-content/uploads/2008/11/nsa_logo.gif" alt="" /></a></p>
+
+<p>Because we wanted to assure the release was fine, we asked <a href="http://engineyard.com">Engine Yard</a>, <a href="http://apple.com">Apple</a> and <a href="http://yellowpages.com">YellowPages.com</a> to help us by hiring the NSA to monitor Merb users. After all, we need to know what people complain about so we can fix it ASAP.</p>
+
+<p>Turns out all the <a href="http://en.wikipedia.org/wiki/ECHELON">echelon monitoring sites</a> were already busy. So we had to go back to good old IRC and <a href="http://search.twitter.com/search?q=merb">twitter search</a> ;)</p>
+
+<p>The release looks pretty solid, thanks to all the people reported bugs during the release candidate cycle. Thanks guys!</p>
+
+<p>However there are still few points of confusion I&#8217;d like to address.</p>
+
+<h2>How do I require/request/load a plugin?</h2>
+
+<p>I saw this question few times on IRC and someone after my <a href="http://orug.org">ORUG</a> merb presentation tonight asked me exactly the same thing. I promised <a href="http://peepcode.com/">Geoffrey Grosenbach</a> that I would update the RDoc but in the meantime here is quick explanation.</p>
+
+<p>You should almost never use the require method to load a gem. Rubygems has a method called gem that takes a version as an argument:</p>
+
+<p><code>require "rubygems"
+gem "merb-core", "~&gt; 1.0"
+</code></p>
+
+<p>Using gem you can specify a version of the gem you want to load. Therefore you avoid loading an unexpected version of a gem. A few tricks to know (for regular Ruby code; keep reading for the Merb technique):</p>
+
+<p>You can use &#8220;=1.0&#8221; to limit to version 1.0, or &#8220;>= 1.0&#8221; to load 1.0 and anything newer. My favorite trick is to use &#8220;~> 1.0&#8221; which means load latest version between 1.0 and 2.0</p>
+
+<p>However when using Merb you don&#8217;t want to load gems just whenever. Merb&#8217;s bootup process starts by setting up the directory structure, and you typically want to load plugins after this point. To make this transparent to you, we have the #dependency method. The dependency method uses the gem method internally to load specific versions at the right time. Additionally, we may use it in the future to improve Merb&#8217;s built-in bundling or dependency resolution. As a result, you should always use the dependency method, and not try to use require directly for Merb plugins.</p>
+
+<p>It also comes with two tricks you should know about. Let&#8217;s say you want to require a gem from github:</p>
+
+<p><code>dependency "mattetti-awesomeâ€, "~&gt;1.0", :require_as =&gt; â€œawesomeâ€
+</code></p>
+
+<p>The example above is the same as:
+<code>
+gem "mattetti-awesome", "~1.0"
+require "awesome"
+</code>
+Apart that it gets loaded when it&#8217;s appropriate.</p>
+
+<p>You can also pass a block after your dependency call:</p>
+
+<p><code>dependency('jchris-couchrest', "&gt;= 0.5", :require_as =&gt; "couchrest") do
+Â Â require "lib/custom_hack.rb"
+endÂ </code></p>
+
+<p>The block will be executed after the gem is loaded and required. Use a block if you want to perform some action after the dependency is loaded.</p>
+
+<p>Finally the last trick lets you load a gem right when you declare the dependency:</p>
+
+<p><code>dependency "nokogiriâ€, "~&gt;0.5", :immediate =&gt; true</code></p>
+
+<h2>I have issues with merb -i and can&#8217;t run the specs</h2>
+
+<p>Few things here, first off, Merb forces you to use rubygems 1.3 because 1.2 is very buggy and the Rubygems maintainer suggested we do so. Rubygems let you define development-only dependencies, dependencies you don&#8217;t need to have to run your library in production. These dependencies were designed to be used when developing a library, but in the case of Merb, they are used to define dependencies that you only need at development-time, but not in production.</p>
+
+<p>In our case we defined webrat as a development dependency. That means you need Webrat to run your specs, but won&#8217;t need it in production. Now here is something you should know, whenever you install a gem to develop it, you should use:</p>
+
+<p><code>gem install "merb-core" --development
+</code></p>
+
+<p>The &#8211;development flag will install all the dev dependencies declared by the gem.  Now merb -i loads the code needed to make the request object available in the console, the problem is that this code also loads some test helpers which require webrat. We have a ticket open for that and will get to that soon.</p>
+
+<p>In the mean time, make sure you have webrat and nokogiri installed. (Nokogiri requires you have a somehow recent version of libxml2, which comes with OSX, but not all Linux distributions).</p>
+
+<p>People reported some issues updating rubygems, Robby Colvin wrote a <a href="http://robbycolvin.com/archives/merbrubygems-upgrade-errors/">nice article</a> explaining how to get pass this issue.</p>
+
+<h2>Issues with action-args not loading</h2>
+
+<p>Some people reported issues with loading action-args. Turns out it&#8217;s some sort of weird issue with hoe (the library) and a some of action-args deps. If that happens to you, update hoe:<code>
+</code></p>
+
+<p><code>$ sudo gem install hoe
+</code></p>
+
+<h2>I generated an app and it doesn&#8217;t work with JRuby</h2>
+
+<p>If you generate a merb using merb-gen app my-app-name it generates a merb stack app. It&#8217;s an opinionated bundle with everything you might need including jQuery, DataMapper and a bunch of plugins. The problem is that DataMapper doesn&#8217;t run on JRuby yet so it won&#8217;t work.</p>
+
+<p>Instead you should generate a core application:</p>
+
+<p><code>merb-gen core app-name</code></p>
+
+<p>This way you create a blank app with no dependencies. Then add what you need. <a href="http://wiki.merbivore.com/faqs/merb_components">Here is a list of dependencies</a> for a merb stack app and what they do.</p>
+
+<h2>Thanks</h2>
+
+<p>Finally I would like to thank the Ruby community from Japan. First because many people came to RubyConf all the way from Japan. I&#8217;m personally sorry I couldn&#8217;t meet you all. Thankfully some people started a new chat channel on lingr: <a href="http://www.lingr.com/room/merb.jp">merb.jp</a> and I could meet more Japanese Merbists. Because the Merb team thinks is important that Merb is being used outside of the English speaking world and because we need feedback from other countries, I decided to make the trip to RubyKaigi 2009. Hopefully we will be able to have some talks about Merb :)Â  I would also want to thank Erubis author, Makoto Kuwata for translating the<a href="http://merbist.com/2008/11/09/merb-1-0-released"> Merb 1.0 annoucement post</a> in Japanese.</p>
+
+<h2>Finally</h2>
+
+<p>Here are the slides from my talk at <a href="http://orug.org">Orug</a>, a quick presentation of Merb. I&#8217;ll be at <a href="http://qconsf.com/sf2008/conference/">QCon</a> next week to talk about <a href="http://qconsf.com/sf2008/tracks/show_track.jsp?trackOID=172">Ruby for the Enterprise</a>. Thanks <a href="http://railsenvy.com/">Gregg</a> for thinking of me!</p>
+
+<p><a href="http://www.slideshare.net/mattetti/merb-presentation-at-orug-presentation?type=powerpoint">Merb presentation at ORUG</a>Â </p>
+
+<p>View SlideShare <a href="http://www.slideshare.net/mattetti/merb-presentation-at-orug-presentation?type=powerpoint">presentation</a></p>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-14T00:39:27+01:00" pubdate data-updated="true">Nov 14<span>th</span>, 2008</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/mattetti/articles/categories/misc/'>Misc</a>, <a class='category' href='/mattetti/articles/categories/news/'>News</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/mattetti/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/mattetti/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

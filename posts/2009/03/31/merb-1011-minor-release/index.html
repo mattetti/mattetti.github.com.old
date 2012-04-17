@@ -3,11 +3,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Matt Aimonetti</title>
+    <title>Merb 1.0.11 (minor release) - Matt Aimonetti</title>
     <meta name="author" content="Matt Aimonetti">
 
     
-    <meta name="description" content="Matt Aimonetti is a web engineer, technical writer and active open-source contributor. Based in San Diego California, he is currently working as a &hellip;">
+    <meta name="description" content="Merb 1.0.11 (Minor Release) Following the DataMapper 0.9.11 release, we just pushed a new minor Merb release. This release is mainly targeting new &hellip;">
     
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 
@@ -101,210 +101,72 @@
 -->
 
 
-	<div id="content" class="inner"><div id='home'>
-  <p id='bio'>Matt Aimonetti is a web engineer, technical writer and active open-source contributor. 
-  Based in San Diego California, he is currently working as a software architect for LivingSocial.
-  Prior to joining LivingSocial, Matt worked on video game development at Sony PlayStation.</p>
-<h2>Recent Posts</h2>
-<ul class='posts'>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution/">Building and implementing a Single Sign-On solution</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
+	<div id="content" class="inner"><article class="post hentry">
   
+    <h1 class="title entry-title">Merb 1.0.11 (Minor Release)</h1>
+    <div class="entry"><p>Following the DataMapper 0.9.11 release, we just pushed a new minor Merb release.</p>
 
+<p>This release is mainly targeting new developers and Windows users wanting to install the full Merb stack. Others can simply update their dependencies if they use the dependencies.rb file or install the new gems if nothing is bundled and no hard dependencies are set.</p>
 
-<time datetime="2012-04-04T07:29:16+02:00" pubdate data-updated="true">Apr 4<span>th</span>, 2012</time></div>
-</li>
+<p>Merb is a metagem which installs a bunch of other gems (merb-core, DataMapper and a lot of small gems). The problem was that Merb was trying to install DM and dm-types, unfortunately, dm-types had a dependency on a gem which couldn&#8217;t be installed on Windows. All of that is now fixed and Windows users can install Merb 1.0.11 without having to manually pick the gems they need.</p>
 
+<p>This release also includes a fix for people using CouchRest, a CouchDB Document Mapping DSL.</p>
 
+<p>Merb 1.1 is still planned to be released in April. A majority of the work has been done, but since Yehuda and myself are going to be traveling, the release will be slightly delayed.</p>
 
-<li class="title entry-title">
-  <a href="/mattetti/posts/2012/02/29/learning-from-rails-failures/">Learning from Rails&#8217; failures</a>
-  <div class="date updated right">
+<p>The great news regarding Merb 1.1 is that, on top of being fully Ruby 1.9 compatible, and using action-orm, and being closer to Rack, Yehuda and Carl have been working on the router to make it awesomer and ready for mountable apps :)</p>
 
+<p>Stay tuned for more news.</p>
 
+<p>update: People using CouchRest or another CouchDB ORM/DSL make sure you define your resources route with an identifier:</p>
 
+<p>resources :articles,        :identify => :id</p>
 
-
-
-
-
-  
-
-
-<time datetime="2012-02-29T07:48:08+01:00" pubdate data-updated="true">Feb 29<span>th</span>, 2012</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/">Quick dive into Ruby ORM object initialization</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-23T09:46:49+01:00" pubdate data-updated="true">Feb 23<span>rd</span>, 2012</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter/">Books to read in 2012 - recommended to me by Twitter</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-30T15:28:13+01:00" pubdate data-updated="true">Dec 30<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/12/21/developing-a-curriculum/">Developing a Curriculum</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-21T06:57:27+01:00" pubdate data-updated="true">Dec 21<span>st</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/12/09/my-rubyconf-2011-talk-is-online/">My RubyConf 2011 talk is online</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-09T06:47:59+01:00" pubdate data-updated="true">Dec 9<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/10/18/data-safety-and-gil-removal/">Data safety and GIL removal</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-18T15:19:17+02:00" pubdate data-updated="true">Oct 18<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/10/11/about-management/">About management</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-11T22:53:40+02:00" pubdate data-updated="true">Oct 11<span>th</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/10/03/about-concurrency-and-the-gil/">About concurrency and the GIL</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-03T21:23:54+02:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2011</time></div>
-</li>
-
-
-
-<li class="title entry-title">
-  <a href="/mattetti/posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app/">How to - cross domain ajax to a Ruby app</a>
-  <div class="date updated right">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-14T16:11:41+02:00" pubdate data-updated="true">Sep 14<span>th</span>, 2011</time></div>
-</li>
-
-
-</ul>
-
-<nav id="pagenavi">
-  <a href="/mattetti/articles/archives" class="center">Archives</a>
-</nav>
+<p>Otherwise, resource(@article) won&#8217;t work. (This is usually done by the merb orm plugin and I might add it to CouchRest in the future)</p>
 </div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-31T22:10:57+02:00" pubdate data-updated="true">Mar 31<span>st</span>, 2009</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/mattetti/articles/categories/news/'>News</a>, <a class='category' href='/mattetti/articles/categories/merb/'>merb</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
 </div>
 	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
 </footer>

@@ -1,0 +1,184 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>I did it wrong - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="I Did It Wrong The Ruby community is a well known for at least two things: being passionate and being arrogant .
+Two characteristics that often go &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/Matt-Aimonetti/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    <link rel="canonical" href="http://mattetti.github.com/">
+    <link href="/mattetti/favicon.png" rel="shortcut icon">
+    <link href="/mattetti/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/mattetti/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/mattetti/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com/">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/Matt-Aimonetti/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/mattetti/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/mattetti/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/mattetti/">About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/mattetti/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">I Did It Wrong</h1>
+    <div class="entry"><p>The Ruby community is a well known for at least two things: <strong>being </strong><a href="http://pragprog.com/press_releases/the-passionate-programmer">passionate</a><strong> and being </strong><a href="http://www.bruisin-ales.com/beerblog/wp-content/uploads/2008/09/stoneintro.gif">arrogant</a> .
+Two characteristics that often go together but I am not going to defend or justify anything in this post, instead I will try to reflect on my own experience and will share with you my own view point.</p>
+
+<p><a href="http://merbist.com/wp-content/uploads/2010/03/doing_wrong_coaster_2.jpg"><img src="http://merbist.com/wp-content/uploads/2010/03/doing_wrong_coaster_2-225x300.jpg" alt="" /></a></p>
+
+<p>Very much like the Ruby community, I am also quite passionate and can be arrogant at times. A few months back I was in Brazil for <a href="http://www.railssummit.com.br/en/pages/home">RailsSummit</a> and I was chatting with <a href="http://twitter.com/dchelimsky">David Chelimsky</a> after a nice evening with the <a href="http://www.railssummit.com.br/en/pages/home">RailsSummit</a> attendees. I was thinking about how cool it was to have people from various non-Ruby communities to come to a Ruby community and share their experience and knowledge while observing the ways we do things with Ruby.</p>
+
+<p>David and I got to talk about technical evangelism, how <a href="http://rspec.info/">RSpec</a> became very popular, the whole <a href="http://en.wikipedia.org/wiki/Merb">Merb</a> vs <a href="http://rubyonrails.org/">Rails</a> situation which turned into Rails3, as well as <a href="http://www.macruby.org/">MacRuby</a> and <a href="http://www.apple.com/">Apple</a>. I was interested by the fact that I couldn&#8217;t remember David ever saying something bad about test/unit or trying to tell others they were doing it wrong. Instead, he has always tried showing why people might be potentially interested by <a href="http://en.wikipedia.org/wiki/RSpec">RSpec</a>.</p>
+
+<p>As an early RSpec adopter, I often thought that people were wrong not to use the solution that <em><strong>I</strong></em> thought was the best. As part of the Merb &#8216;propaganda&#8217;, we spent a lot of time comparing Merb with Rails and showing why Merb might be better for you and why you were doing it wrong if you would fit in Merb&#8217;s target and still use Rails.</p>
+
+<p>Even before that, I remember thinking that if you were not using Ruby, you were doing it wrong. PHP &amp; Java developers were, for me, just developers who did not know any better (and I thought that Python-ers were just too lazy to learn a &#8220;better&#8221; language that takes OOP seriously ;)).</p>
+
+<p><a href="http://merbist.com/wp-content/uploads/2010/03/doing_it_wrong_coaster.jpg"><img src="http://merbist.com/wp-content/uploads/2010/03/doing_it_wrong_coaster-300x218.jpg" alt="" /></a></p>
+
+<p>Since then, things have changed. I have gotten involved with other projects, met different people and maybe, just maybe, matured a little bit. Going back to the discussion I had with David, he pointed out to me how often people talk about a piece of technology or an idea to just quickly conclude: <strong>&#8220;it sucks&#8221;</strong> and it has got even worse lately with the &#8217;<a href="http://www.doingitwrong.com/">you&#8217;re doing it wrong</a> &#8217; meme.</p>
+
+<p>Basically, we judge people&#8217;s actions without knowing them or even having a clue about the problem they are facing and we just tell them that if they don&#8217;t do like us, they are wrong. If they are not using this plugin or this gem, they are doing it wrong, and if they are using this other one that sucks, they are also doing it wrong. Also, be careful, something that&#8217;s hot today will probably turn out to be &#8216;the suck&#8217; soon enough, keep up with what the cool kids tweet about ;)</p>
+
+<p>But of course, this is something human and much bigger than the Ruby community. Look at the whole SQL/NoSQL <a href="http://news.ycombinator.com/item?id=1163039">pseudo fight</a> and you will notice the same attitude. Look at the editors war, look at the OS war or even look at the TV with shows like &#8217;<a href="http://en.wikipedia.org/wiki/The%20Marriage%20Ref">Marriage Ref</a>&#8217; making money off of people wanting to prove their partner that he/she is doing it wrong. But that&#8217;s also the root problem of most religion wars and even the motivation for some people to go &#8216;invade/colonize&#8217; other countries to eventually force their world vision upon them.</p>
+
+<p>I realize the irony of writing of blog post to tell my readers that telling others that they are doing it wrong is, in itself, fundamental wrong, but maybe next time you think something sucks or is totally wrong, you might want to try to understand the motivation behind why some people decided to go this way. I know I will personally try harder.</p>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-15T23:50:49+01:00" pubdate data-updated="true">Mar 15<span>th</span>, 2010</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/mattetti/articles/categories/misc/'>Misc</a>, <a class='category' href='/mattetti/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/mattetti/articles/categories/ruby/'>ruby</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/mattetti/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/mattetti/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

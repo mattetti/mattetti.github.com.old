@@ -1,0 +1,265 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>How to detect Cylons with MacRuby - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="How to Detect Cylons With MacRuby Over the weekend, MacRuby&#8217;s trunk became version 0.6 and the bug fixing is currently done in both the 0.5 &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/Matt-Aimonetti/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    <link rel="canonical" href="http://mattetti.github.com/">
+    <link href="/mattetti/favicon.png" rel="shortcut icon">
+    <link href="/mattetti/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/mattetti/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/mattetti/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com/">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/Matt-Aimonetti/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/mattetti/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/mattetti/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/mattetti/">About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/mattetti/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">How to Detect Cylons With MacRuby</h1>
+    <div class="entry"><p>Over the weekend, MacRuby&#8217;s trunk became version 0.6 and the bug fixing is currently done in both the 0.5 branch and trunk. Based on MacRuby&#8217;s usual release cycle I would expect a 0.5 beta3 or 0.5 final to be released soon so most of the work can be focused on trunk.</p>
+
+<p>I&#8217;ll let you check on the <a href="http://svn.macosforge.org/repository/ruby/MacRuby/trunk/TODO">TODO list</a> to see what was done in 0.5 and what is in the plan for 0.6.</p>
+
+<p>However, there is one feature in 0.6 that I know lots of you will just love! The good news is that Laurent already committed a very early version of his work so I figured, I should share the good news with you:</p>
+
+<h3>Introducing MacRuby&#8217;s debugger!</h3>
+
+<p>If you were expecting to read: &#8220;a Cylon detector!&#8221;, keep on reading.</p>
+
+<p>Again, this feature is in really early development since it&#8217;s scheduled for 0.6 and 0.5 final is not out yet. But if you install MacRuby using the <a href="http://macruby.icoretech.org/">nightly builds</a> or build from trunk, you can already play with the debugger.</p>
+
+<p>Let me give you a really quick tour of the debugger.</p>
+
+<p><img src="http://img.skitch.com/20100118-qn7yuq9h2ce61yxt6kwag9pnbt.jpg" alt="BSG75Logo posted by Matt Aimonetti" /></p>
+
+<p>Let&#8217;s imagine that we were given the task to debug the cylon detector written by Gaius Baltar which looks like that:</p>
+
+<pre><code>characters = %w{Adama Apollo Baltar Roslin StarBuck Six}
+
+def cylon?(character)
+  false
+end
+
+characters.each do |character|
+  if cylon?(character)
+    puts "#{character} is a Cylon!"
+  else
+    puts "#{character} is not a cylon."
+  end
+end
+</code></pre>
+
+<p>Here is what happens when I execute the script:</p>
+
+<pre><code>$ macruby cylon_detector.rb 
+Adama is not a cylon.
+Apollo is not a cylon.
+Baltar is not a cylon.
+Roslin is not a cylon.
+StarBuck is not a cylon.
+Six is not a cylon.
+</code></pre>
+
+<p>The only problem is that we all know that Six is a Cylon, the detector isn&#8217;t working right so let&#8217;s debug it:</p>
+
+<pre><code>$ macrubyd cylon_detector.rb
+Starting program.
+cylon_detector.rb:1&gt; b cylon_detector.rb:8 if character == 'Six'
+Added breakpoint 1.
+cylon_detector.rb:1&gt; c
+Adama is not a cylon.
+Apollo is not a cylon.
+Baltar is not a cylon.
+Roslin is not a cylon.
+StarBuck is not a cylon.
+cylon_detector.rb:8&gt; p cylon?(character)
+=&gt; false
+cylon_detector.rb:8&gt; p "This detector is broken!"
+=&gt; "This detector is broken!"
+cylon_detector.rb:8&gt; p def cylon?(character); character == 'Six'; end
+=&gt; nil
+cylon_detector.rb:8&gt; p cylon?(character)
+=&gt; true
+cylon_detector.rb:8&gt; p cylon?('Matt')
+=&gt; false
+cylon_detector.rb:8&gt; c
+Six is a Cylon!
+Program exited.
+</code></pre>
+
+<p>The first thing we do is to add a conditional breakpoint:</p>
+
+<pre><code>b cylon_detector.rb:8 if character == 'Six'
+</code></pre>
+
+<p>Basically, the debugger will add a breakpoint at line 8 which will only be active when the value of &#8216;character&#8217; is equal to &#8216;Six&#8217;.
+Now that the breakpoint added, we can continue the program execution and just wait until we reach the defined condition.</p>
+
+<pre><code>cylon_detector.rb:1&gt; c
+</code></pre>
+
+<p>Once we reach the breakpoint, we evaluate the result of &#8220;cylon?(character)&#8221; by using the p command. We see that the result is &#8220;false&#8221; when we know for sure that it should be true since the value of the character variable is &#8216;Six&#8217; and she is a cylon. At this point, you might have guessed that somewhat acted as a cylon agent and I pretended to fix the problem by overwriting the &#8220;cylon?&#8221; method:</p>
+
+<pre><code>cylon_detector.rb:8&gt; p def cylon?(character); character == 'Six'; end
+</code></pre>
+
+<p>Now that the method is overwritten, I can check that Six is recognized as being a cylon:</p>
+
+<pre><code>cylon_detector.rb:8&gt; p cylon?(character)
+=&gt; true
+</code></pre>
+
+<p>and also check that I am not detected a cylon:</p>
+
+<pre><code>cylon_detector.rb:8&gt; p cylon?('Matt')
+=&gt; false
+</code></pre>
+
+<p>I can now continue the execution of the program and see that Six is detected as a Cylon!</p>
+
+<p>Of course this is just a very early version of the debugger and we will see lots of improvement in the next few weeks. Who knows someone might even create a GUI for the debugger and/or a Xcode integration.</p>
+
+<p>Anyway, the point being that MacRuby developers should expect a lot of awesome stuff coming up their way soon. (also be careful about the skin jobs around you, cylon detectors can&#8217;t be trusted!)</p>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-01-18T16:13:37+01:00" pubdate data-updated="true">Jan 18<span>th</span>, 2010</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/mattetti/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/mattetti/articles/categories/macruby/'>macruby</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/mattetti/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/mattetti/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

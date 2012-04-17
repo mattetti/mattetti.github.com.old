@@ -1,0 +1,809 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ruby | Matt Aimonetti]]></title>
+  <link href="http://mattetti.github.com//articles/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://mattetti.github.com//"/>
+  <updated>2012-04-17T12:12:48+02:00</updated>
+  <id>http://mattetti.github.com//</id>
+  <author>
+    <name><![CDATA[Matt Aimonetti]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Quick dive into Ruby ORM object initialization]]></title>
+    <link href="http://mattetti.github.com//posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/"/>
+    <updated>2012-02-23T09:46:49+01:00</updated>
+    <id>http://mattetti.github.com//posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization</id>
+    <content type="html"><![CDATA[<p>Yesterday I did some quick digging into how ORM objects are initialized and the performance cost associated to that. In other words, I wanted to see what's going on when you initialize an ActiveRecord object.</p>
+
+<p>Before I show you the benchmark numbers and you jump to conclusions, it's important to realize that in the grand scheme of things, the performance cost we are talking is small enough that it is certainly not the main reason why your application is slow. Spoiler alert: ActiveRecord is slow but the cost of initialization isn't by far the worse part of ActiveRecord. Also, even though this article doesn't make activeRecord look good, and I'm not trying to diss it. It's a decent ORM that does a great job in most cases.</p>
+
+<p>Let's get started by the benchmarks number to give us an idea of the damage (using Ruby 1.9.3 p125):</p>
+
+<pre><code>                                                             | Class | Hash  | AR 3.2.1 | AR no protection | Datamapper | Sequel |
+--------------------------------------------------------------------------------------------------------------------------------------
+.new() x100000                                               | 0.037 | 0.049 | 1.557    | 1.536            | 0.027      | 0.209  |
+.new({:id=&gt;1, :title=&gt;"Foo", :text=&gt;"Bar"}) x100000          | 0.327 | 0.038 | 6.784    | 5.972            | 4.226      | 1.986  |
+</code></pre>
+
+<p>You can see that I am comparing the allocation of a Class instance, a Hash and some ORM models. The benchmark suite tests the allocation of an empty object and one with passed attributes. The benchmark in question is available <a href="https://github.com/mattetti/benchmarks/blob/master/init_objects.rb">here</a>.</p>
+
+<p>As you can see there seems to be a huge performance difference between allocating a basic class and an ORM class. Instantiating an ActiveRecord class is 20x slower than instantiating a normal class, while ActiveRecord offers some extra features, why is it so much slower, especially at initialization time?</p>
+
+<p>The best way to figure it out is to profile the initialization. For that, I used <a href="https://github.com/tmm1/perftools.rb">perftools.rb</a> and I generated a graph of the call stack.</p>
+
+<p>Here is what Ruby does (and spends its time) when you initialize a new Model instance (click to download the PDF version):</p>
+
+<p><a href="http://github.com/mattetti/benchmarks/blob/master/ar_init_profile.pdf?raw=true"><img src="http://merbist.com/wp-content/uploads/2012/02/AR-model-instantation-by-Matt-Aimonetti.jpg" alt="Profiler diagram of AR model instantiation by Matt Aimonetti" /></a></p>
+
+<p>This is quite a scary graph but it shows nicely the features you are getting and their cost associated. For instance, the option of having the before and after initialization callback cost you 14% of your CPU time per instantiation, even though you probably almost never use these callbacks. I'm reading that by interpreting the node called ActiveSupport::Callback#run_callbacks, 3rd level from the top. So 14.1% of the CPU time is spent trying to run callbacks. As a quick note, note that 90.1% of the CPU time is spent initializing objects, the rest is spent in the loop and in the garbage collection (because the profiler runs many loops). You can then follow the code and see how the code works, creating a dynamic class callback method on the fly (the one with the long name) and then recreating the name of this callback to call it each time the object is allocated. It sounds like that's a good place for some micro optimizations which could yield up to 14% performance increase in some cases.</p>
+
+<p>Another major part of the CPU time is spent in ActiveModel's sanitization. This is the piece of code that allows you to block some model attributes to be mass assigned. This is useful when you don't want to sanitize your incoming params but want to create or update a model instance by using all the passed user params. To avoid malicious users to modify some specific params that might be in your model but not in your form, you can protect these attributes. A good example would be an admin flag on a User object. That said, if you manually initialize an instance, you don't need this extra protection, that's why in the benchmark above, I tested and without the protection. As you can see, it makes quite a big difference. The profiler graph of the same initialization without the mass assignment protection logically ends up looking quite different:</p>
+
+<p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_init_no_protection.pdf?raw=true">
+</a><a href="https://github.com/mattetti/benchmarks/blob/master/ar_init_no_protection.pdf?raw=true"><img src="http://merbist.com/wp-content/uploads/2012/02/AR-model-instantiation-without-mass-assignment-by-Matt-Aimonetti.jpg" alt="Matt Aimonetti shows the stack trace generated by the instantiation of an Active Record model" /></a></p>
+
+<p><strong>Update:</strong> My colleague <a href="https://twitter.com/#!/glv">Glenn Vanderburg</a> pointed out that some people might assuming that the shown code path is called for each record loaded from the database. This isn't correct, the graph represents instances allocated by calling #new. See the addition at the bottom of the post for more details about what's going on when you fetch data from the DB.</p>
+
+<p>I then decided to look at the graphs for the two other popular Ruby ORMs:</p>
+
+<p><a href="http://datamapper.org/">Datamapper</a></p>
+
+<p><a href="https://github.com/mattetti/benchmarks/blob/master/dm_init_profile.pdf?raw=true"><img src="http://img.skitch.com/20120223-txs4wa7b5rdpg45aj6354xg1wt.jpg" alt="" /></a></p>
+
+<p>and <a href="http://sequel.rubyforge.org/">Sequel</a></p>
+
+<p><a href="https://github.com/mattetti/benchmarks/blob/master/sequel_init_profile.pdf?raw=true"><img src="http://img.skitch.com/20120223-p2jx6ypk35ucsgtx7p1tcabpes.jpg" alt="" /></a></p>
+
+<p>While I didn't give you much insight in ORM code, I hope that this post will motivate you to sometimes take a look under the cover and profile your code to see what's going on and why it might be slow. <strong>Never assume, always measure</strong>. Tools such as perftools are a great way to get a visual feedback and get a better understanding of how the Ruby interpreter is handling your code.</p>
+
+<h2>UPDATE:</h2>
+
+<p>I heard you liked graphs so I added some more, here is what's going on when you do Model.first:</p>
+
+<p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_first_profile.pdf?raw=true"><img src="http://img.skitch.com/20120224-f23s8xctghi8mj6ax3cdw9aq25.jpg" alt="" /></a></p>
+
+<p>Model.all</p>
+
+<p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_all_profile.pdf?raw=true"><img src="https://img.skitch.com/20120224-q29q4n7bj3i96erk1enxdqxb5e.jpg" alt="" /></a></p>
+
+<p>And finally this is the code graph for a call to Model.instantiate which is called after a record was retrieved from the database to convert into an Object. (You can see the #instantiate call referenced in the graph above).</p>
+
+<p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_instantiate_profile.pdf?raw=true"><img src="http://img.skitch.com/20120224-8scmun9n1c9ufdnxa8rq2961bq.jpg" alt="" /></a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[My RubyConf 2011 talk is online]]></title>
+    <link href="http://mattetti.github.com//posts/2011/12/09/my-rubyconf-2011-talk-is-online/"/>
+    <updated>2011-12-09T06:47:59+01:00</updated>
+    <id>http://mattetti.github.com//posts/2011/12/09/my-rubyconf-2011-talk-is-online</id>
+    <content type="html"><![CDATA[<p>I realize I forgot to mention that my RubyConf talk is now online on the <a href="http://confreaks.net/videos/714-rubyconf2011-complex-ruby-concepts-dummified">confreaks site</a> (wait until the end, Matz actually answers a question from the audience).</p>
+
+<p><img src="https://img.skitch.com/20111209-pdfksgd2sufg8ywrpnjd4dnru4.jpg" alt="Photo of Matt Aimonetti giving a talk at RubyConf 2011 with one of his slides showing how thread scheduling works" /></p>
+
+<p>I wrote a couple follow up posts you might also be interested in:</p>
+
+<ul>
+<li><p><a href="http://merbist.com/2011/10/03/about-concurrency-and-the-gil/">About concurrency and the GIL</a></p></li>
+<li><p><a href="http://merbist.com/2011/10/18/data-safety-and-gil-removal/">Data safety and GIL removal</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Data safety and GIL removal]]></title>
+    <link href="http://mattetti.github.com//posts/2011/10/18/data-safety-and-gil-removal/"/>
+    <updated>2011-10-18T15:19:17+02:00</updated>
+    <id>http://mattetti.github.com//posts/2011/10/18/data-safety-and-gil-removal</id>
+    <content type="html"><![CDATA[<p>After my recent <a href="http://rubyconf11.merbist.com">RubyConf talk</a> and <a href="http://merbist.com/2011/10/03/about-concurrency-and-the-gil/">follow up post addressing the Ruby &amp; Python's Global Interpreter Lock</a> (aka GVL/Global VM Lock). a lot of people asked me to explain what I meant by "data safety". While my point isn't to defend one approach or the other, I spent a lot of time explaining why C Ruby and C Python use a GIL and where it matters and where it matters less. As a reminder and as mentioned by Matz himself, the main reason why C Ruby still has a GIL is data safety. But if this point isn't clear to you, you might be missing the main argument supporting the use of a GIL.</p>
+
+<p>Showing obvious concrete examples of data corruption due to unsafe threaded code isn't actually as easy at it sounds. First of all, even with a GIL, developers can write unsafe threaded code. So we need to focus only on the safety problems raised by removing the GIL. To demonstrate what I mean, I will try to create some race conditions and show you the unexpected results you might get. Again, before you go crazy on the comments, remember that threaded code is indeterministic and the code below might potentially work on your machine and that's exactly why it is hard to demonstrate. Race conditions depend on many things, but in this case I will focus on race conditions affecting basic data structures since it might be the most surprising.</p>
+
+<h2>Example:</h2>
+
+<pre><code>@array, threads = [], []
+4.times do
+  threads &lt;&lt; Thread.new { (1..100_000).each {|n| @array &lt;&lt; n} }
+end
+threads.each{|t| t.join }
+puts @array.size
+</code></pre>
+
+<p>In the above example, I'm creating an instance variable of Array type and I start 4 threads. Each of these threads adds 100,000 items to the array. We then wait for all the threads to be done and check the size of the array.</p>
+
+<p>If you run this code in C Ruby the end result will be as expected:</p>
+
+<pre><code>400000
+</code></pre>
+
+<p>Now if you switch to JRuby you might be surprised by the output. If you are lucky you will see the following:</p>
+
+<pre><code>ConcurrencyError: Detected invalid array contents due to unsynchronized modifications with concurrent users
+        &lt;&lt; at org/jruby/RubyArray.java:1147
+  __file__ at demo.rb:3
+      each at org/jruby/RubyRange.java:407
+  __file__ at demo.rb:3
+      call at org/jruby/RubyProc.java:274
+      call at org/jruby/RubyProc.java:233
+</code></pre>
+
+<p>This is actually a good thing. JRuby detects that you are unsafely modifying an instance variable across threads and that data corruption will occur. However, the exception doesn't always get raised and you will potentially see results such as:</p>
+
+<pre><code>335467
+342397
+341080
+</code></pre>
+
+<p>This is a sign that the data was corrupted but that JRuby didn't catch the unsynchronized modification. On the other hand MacRuby and Rubinius 2 (dev) won't raise any exceptions and will just corrupt the data, outputting something like:</p>
+
+<pre><code>294278
+285755
+280704
+279865
+</code></pre>
+
+<p>In other words, if not manually synchronized, shared data can easily be corrupted. You might have two threads modifying the value of the same variable and one of the two threads will step on top of the other leaving you with a race condition. You only need 2 threads accessing the same instance variable at the same time to get a race condition. My example uses more threads and more mutations to make the problem more obvious. Note that TDD wouldn't catch such an issue and even extensive testing will provide very little guarantee that your code is thread safe.</p>
+
+<h2>So what? Thread safety isn't a new problem.</h2>
+
+<p>That's absolutely correct, ask any decent Java developer out there, he/she will tell how locks are used to "easily" synchronize objects to make your code thread safe. They might also mention the deadlocks and other issues related to that, but that's a different story. One might also argue that when you write web apps, there is very little shared data and the chances of corrupting data across concurrent requests is very small since most of the data is kept in a shared data store outside of the process.</p>
+
+<p>All these arguments are absolutely valid, the challenge is that you have a large community and a large amount of code out there that expects a certain behavior. And removing the GIL does change this behavior. It might not be a big deal for you because you know how to deal with thread safety, but it might be a big deal for others and C Ruby is by far the most used Ruby implementation. It's basically like saying that automatic cars shouldn't be made and sold, and everybody has to switch to stick shifts. They have better gas mileage, I personally enjoy driving then and they are cheaper to build. Removing the GIL is a bit like that. There is a cost associated with this decision and while this cost isn't insane, the people in charge prefer to not pay it.</p>
+
+<h2>Screw that, I'll switch to Node.js</h2>
+
+<p>I heard a lot of people telling me they were looking into using Node.js because it has a better design and no GIL. While I like Node.js and if I were to implement a chat room or an app keeping connections for a long time, I would certainly compare it closely to EventMachine, I also think that this argument related to the GIL is absurd. First, you have other Ruby implementations which don't have a GIL and are really stable (i.e: JRuby) but then Node basically works the same as Ruby with a GIL. Yes, Node is evented and single threaded but when you think about it, it behaves the same as Ruby 1.9 with its GIL. Many requests come in and they are handled one after the other and because IO requests are non-blocking, multiple requests can be processed concurrently but not in parallel. Well folks, that's exactly how C Ruby works too, and unlike popular believe, most if not all the popular libraries making IO requests are non blocking (when using 1.9). So, next time you try to justify you wanting to toy with Node, please don't use the GIL argument.</p>
+
+<h2>What should I do?</h2>
+
+<p>As always, evaluate your needs and see what makes sense for your project. Start by making sure you are using Ruby 1.9 and your code makes good use of threading. Then look at your app and how it behaves, is it CPU-bound or IO-bound. Most web apps out there are IO-bound (waiting for the DB, redis or API calls), and when doing an IO call, Ruby's GIL is released allowing another thread to do its work. In that case, not having a GIL in your Ruby implementation won't help you. However, if your app is CPU-bound, then switching to JRuby or Rubinius might be beneficial. However, don't assume anything until you proved it and remember that making such a change will more than likely require some architectural redesign, especially if using JRuby.  But, hey, it might totally be worth it as many proved it in the past.</p>
+
+<p>I hope I was able to clarify things a bit further. If you wish to dig further, I would highly recommend you read the many discussions the Python community had in the last few years.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[About concurrency and the GIL]]></title>
+    <link href="http://mattetti.github.com//posts/2011/10/03/about-concurrency-and-the-gil/"/>
+    <updated>2011-10-03T21:23:54+02:00</updated>
+    <id>http://mattetti.github.com//posts/2011/10/03/about-concurrency-and-the-gil</id>
+    <content type="html"><![CDATA[<p>During RubyConf 2011, concurrency was a really hot topic. This is not a new issue, and the JRuby team has been talking about true concurrency for quite a while . The Global Interpreter Lock has also been in a subject a<a href="http://wiki.python.org/moin/GlobalInterpreterLock"> lot of discussions in the Python community</a> and it's not surprising that the Ruby community experiences the same debates since the evolution of their implementations are somewhat similar. (There might also be some tension between <a href="http://engineyard.com">EngineYard</a> hiring the JRuby and Rubinius teams and <a href="http://heroku.com">Heroku</a> which <a href="http://blog.heroku.com/archives/2011/7/12/matz_joins_heroku/">recently hired Matz</a> (Ruby's creator) and <a href="https://github.com/nobu">Nobu</a>, the #1 C Ruby contributor)</p>
+
+<p>The GIL was probably even more of a hot topic now that <a href="http://rubini.us/">Rubinius</a> is about the join <a href="http://jruby.org">JRuby</a> and <a href="http://macruby.org">MacRuby</a> in the realm of GIL-less Ruby implementations.</p>
+
+<p>During my RubyConf talk (<a href="http://rubyconf11.merbist.com/">slides here</a>), I tried to explain how C Ruby works and why some decisions like having a GIL were made and why the Ruby core team isn't planning on removing this GIL anytime soon. The GIL is something a lot of Rubyists love to hate, but a lot of people don't seem to question why it's here and why Matz doesn't want to remove it. Defending the C Ruby decision isn't quite easy for me since I spend my free time working on an alternative Ruby implementation which doesn't use a GIL (MacRuby). However, I think it's important that people understand why the MRI team (C Ruby team) and some Pythonistas feels so strongly about the GIL.</p>
+
+<p><strong>What is the GIL?</strong></p>
+
+<p>Here is a quote from the <a href="http://wiki.python.org/moin/GlobalInterpreterLock">Python wiki</a>:</p>
+
+<blockquote><p>In CPython, the <strong>global interpreter lock</strong>, or <strong>GIL</strong>, is a mutex that prevents multiple native threads from executing Python bytecodes at once. This lock is necessary mainly because CPython's memory management is not thread-safe. (However, since the GIL exists, other features have grown to depend on the guarantees that it enforces.) [...] The GIL is controversial because it prevents multithreaded CPython programs from taking full advantage of multiprocessor systems in certain situations. Note that potentially blocking or long-running operations, such as I/O, image processing, and <a href="http://wiki.python.org/moin/NumPy">NumPy</a> number crunching, happen <em>outside</em> the GIL. Therefore it is only in multithreaded programs that spend a lot of time inside the GIL, interpreting CPython bytecode, that the GIL becomes a bottleneck.</p></blockquote>
+
+<p>The same basically applies to C Ruby. To illustrate the quote above, here is a diagram representing two threads being executed by C Ruby:</p>
+
+<p><a href="http://rubyconf11.merbist.com/#44"><img src="http://rubyconf11.merbist.com/images/thread_scheduling.023.jpg" alt="Fair thread scheduling in Ruby by Matt Aimonetti" /></a></p>
+
+<p>Such a scheduling isn't a problem at all when you only have 1 cpu, since a cpu can only execute a piece of code at a time and context switching happens all the time to allow the machine to run multiple processes/threads in parallel. The problem is when you have more than 1 CPU because in that case, if you were to only run 1 Ruby process, then you would most of the time only use 1 cpu at a time. If you are running on a 8 cpu box, that's not cool at all! A lot of people stop at this explanation and imagine that their server can only handle one request at a time and they they rush to sign Greenpeace petitions asking Matz to make Ruby greener by optimizing Ruby and saving CPU cycles. Well, the reality is slightly different, I'll get back to that in a minute. Before I explain "ways to achieve true concurrency with CRuby, let me explain why C Ruby uses a GIL and why each implementation has to make an important choice and in this case both CPython and C Ruby chose to keep their GIL.</p>
+
+<h3>Why a GIL in the first place?</h3>
+
+<ul>
+<li><p>It makes developer's lives easier (it's harder to corrupt data)</p></li>
+<li><p>It avoids race conditions within C extensions</p></li>
+<li><p>It makes C extensions development easier (no write barriers..)</p></li>
+<li><p>Most of the C libraries which are wrapped are not thread safe</p></li>
+<li><p>Parts of Ruby's implementation aren't threadsafe (Hash for instance)</p></li>
+</ul>
+
+
+<p>As you can see the arguments can be organized in two main categories: data safety and C extensions/implementation. An implementation which doesn't rely too much on C extensions (because they run a bit slow, or because code written in a different language is preferred) is only faced with one argument: data safety.</p>
+
+<h3></h3>
+
+<h3>Should C Ruby remove its GIL?</h3>
+
+<ul>
+<li><p>No: it potentially makes Ruby code unsafe(r)</p></li>
+<li><p>No: it would break existing C extensions</p></li>
+<li><p>No: it would make writing C extensions harder</p></li>
+<li><p>No: it's a lot of work to change make C Ruby threadsafe</p></li>
+<li><p>No: Ruby is fast enough in most cases</p></li>
+<li><p>No: Memory optimization and GC is more important to tackle first</p></li>
+<li><p>No: C Ruby code would run slower</p></li>
+<li><p>Yes: we really need better/real concurrency</p></li>
+<li><p>Yes: <a href="https://plus.google.com/107994348420168435683/posts/993U42yVbfk">Rubber boots analogy (Gustavo Niemeyer)</a></p></li>
+</ul>
+
+
+<p>Don't count the amount of pros/cons to jump to the conclusion that removing the GIL is a bad idea. A lot of the arguments for removing the GIL are related. At the end of the day it boils down to data safety. During the Q&amp;A section of my RubyConf talk, Matz came up on stage and said data safety was the main reason why C Ruby still has a GIL. Again, this is a topic which was discussed at length in the Python community and I'd encourage you to read arguments from the <a href="http://www.jython.org/">Jython</a> (the equivalent of JRuby for Python) developers, <a href="http://codespeak.net/pypy/dist/pypy/doc/faq.html#does-pypy-have-a-gil-why">the PyPy</a> (the equivalent of Rubinius in the Python community) and CPython developers. (a good collection of arguments are actually available in the comments related to the <a href="https://plus.google.com/107994348420168435683/posts/993U42yVbfk">rubber boots post mentioned earlier</a>)</p>
+
+<h3>How can true concurrency be achieved using CRuby?</h3>
+
+<ul>
+<li><p>Run multiple processes (which you probably do if you use Thin, Unicorn or Passenger)</p></li>
+<li><p>Use event-driven programming with a process per CPU</p></li>
+<li><p>MultiVMs in a process. Koichi presented his plan to run multiple VMs within a process.  Each VM would have its own GIL and inter VM communication would be faster than inter process. This approach would solve most of the concurrency issues but at the cost of memory.</p></li>
+</ul>
+
+
+<p>Note:  forking a process only saves memory when using REE since it implements a GC patch that makes the forking process Copy on Write friendly. The Ruby core team worked on a patch for Ruby 1.9 to achieve the same result. <a href="http://twitter.com/#!/nari_en">Nari</a> &amp; <a href="http://twitter.com/#!/yukihiro_matz">Matz</a> are currently working on improving the implementation to make sure overall performance isn't affected.</p>
+
+<p>Finally, when developing web applications, each thread spend quite a lot of time in IOs which, as mentioned above won't block the thread scheduler. So if you receive two quasi-concurrent requests you might not even be affected by the GIL as illustrated in <a href="http://yehudakatz.com/2010/08/14/threads-in-ruby-enough-already/">this diagram from Yehuda Katz</a>:</p>
+
+<p><img src="http://yehudakatz.com/wp-content/uploads/2010/08/Untitled.002.png" alt="" /></p>
+
+<p>This is a simplified diagram but you can see that a good chunk of the request life cycle in a Ruby app doesn't require the Ruby thread to be active (CPU Idle blocks) and therefore these 2 requests would be processed almost concurrently.</p>
+
+<p>To boil it down to something simplified, when it comes to the GIL, an implementor has to chose between data safety and memory usage. But it is important to note that context switching between threads is faster than context switching between processes and data safety can and is often achieved in environments without a GIL, but it requires more knowledge and work on the developer side.</p>
+
+<h3>Conclusion</h3>
+
+<p>The decision to keep or remove the GIL is a bit less simple that it is often described. I respect Matz' decision to keep the GIL even though, I would personally prefer to push the data safety responsibility to the developers. However, I do know that many Ruby developers would end up shooting themselves in the foot and I understand that Matz prefers to avoid that and work on other ways to achieve true concurrency without removing the GIL. What is great with our ecosystem is that we have some diversity, and if you think that a GIL less model is what you need, we have some great alternative implementations that will let you make this choice. I hope that this article will help some Ruby developers understand and appreciate C Ruby's decision and what this decision means to them on a daily basis.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to - cross domain ajax to a Ruby app]]></title>
+    <link href="http://mattetti.github.com//posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app/"/>
+    <updated>2011-09-14T16:11:41+02:00</updated>
+    <id>http://mattetti.github.com//posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app</id>
+    <content type="html"><![CDATA[<p>In some cases, you might have a bunch of apps running on different domains/subdomains and/or ports and you would like to make ajax requests between these services. The problem is that browsers wouldn't let you make such requests because of the Same Origin Policy which only allowed them to make request to resources within the same domain.</p>
+
+<p>However, most browsers (IE 8+, Firefox 3.5+, Safari 4+, Chrome) implement a simple way to allow cross domain requests as defined in this <a href="http://www.w3.org/TR/cors/">w3C document</a>.</p>
+
+<p>Of course, if your users have an old version of their browser, you  might have to look into jsonp or something else such as cheating by using iframes &amp; setting document.domain. Let's pretend for a minute that 100% of your users are on Chrome. The only thing you need to do is set a response header listing the accepted domains or "*" for all. A simple Rack middleware to do that would look like that.</p>
+
+<pre><code>class XOriginEnabler
+  ORIGIN_HEADER = "Access-Control-Allow-Origin"
+
+  def initialize(app, accepted_domain="*")
+    @app = app
+    @accepted_domain = accepted_domain
+  end
+
+  def call(env)
+    status, header, body = @app.call(env)
+    header[ORIGIN_HEADER] = @accepted_domain
+    [status, header, body]
+  end
+end
+</code></pre>
+
+<p>And to use the middleware you would need to set it for use:</p>
+
+<pre><code>use XOriginEnabler
+</code></pre>
+
+<p>To enable all requests from whatever origin, or pass the white listed domain(s) as shown below.</p>
+
+<pre><code>use XOriginEnabler, "demo.mysite.com demo.mysite.fr demo.techcrunch.com"
+</code></pre>
+
+<p>For a full featured middleware, see <a href="https://github.com/cyu/rack-cors">this project</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby optimization example and explanation]]></title>
+    <link href="http://mattetti.github.com//posts/2011/09/05/ruby-optimization-example-and-explaination/"/>
+    <updated>2011-09-05T14:58:21+02:00</updated>
+    <id>http://mattetti.github.com//posts/2011/09/05/ruby-optimization-example-and-explaination</id>
+    <content type="html"><![CDATA[<p>Recently I wrote a small DSL that allows the user to define some code that then gets executed later on and in different contexts. Imagine something like Sinatra where each route action is defined in a block and then executed in context of an incoming request.</p>
+
+<p>The challenge is that blocks come with their context and you can't execute a block in the context of another one.</p>
+
+<p>Here is a reduction of the challenge I was trying to solve:</p>
+
+<pre><code>class SolutionZero
+  def initialize(origin, &amp;block;)
+    @origin = origin
+    @block = block
+  end
+
+  def dispatch
+    @block.call
+  end
+end
+
+SolutionZero.new(42){ @origin + 1 }.dispatch
+# undefined method `+' for nil:NilClass (NoMethodError)
+</code></pre>
+
+<p>The problem is that the block refers to the @origin instance variable which is not available in its context.
+My first workaround was to use instance_eval:</p>
+
+<pre><code>class SolutionOne
+  def initialize(origin, &amp;block;)
+    @origin = origin
+    @block = block
+  end
+
+  def dispatch
+    self.instance_eval &amp;@block
+  end
+end
+
+SolutionOne.new(40){ @origin + 2}.dispatch
+# 42
+</code></pre>
+
+<p>My workaround worked fine, since the block was evaluated in the context of the instance and therefore the @origin ivar is made available to block context. Technically, I was good to go, but I wasn't really pleased with this solution. First using instance_eval often an indication that you are trying to take a shortcut. Then having to convert my block stored as a block back into a proc every single dispatch makes me sad. Finally, I think that this code is probably not performing as well as it could, mainly due to unnecessary object allocations and code evaluation.
+I did some benchmarks replacing <a href="https://github.com/ruby/ruby/blob/trunk/vm_eval.c#L1323">instance_eval</a> by <a href="https://github.com/ruby/ruby/blob/trunk/vm_eval.c#L1355">instance_exec</a> since looking at the C code, instance_exec should be slightly faster. Turns out, it is not so I probably missed something when reading the implementation code.</p>
+
+<p>I wrote some more benchmarks and profiled a loop of 2 million dispatches (only the #disptach method call on the same object). The GC profiler report showed that the GC was invoked 287 times and each invocation was blocking the execution for about 0.15ms.
+Using Ruby's <a href="http://ruby-doc.org/core/classes/ObjectSpace.html#M001526">ObjectSpace</a> and <a href="http://ruby-doc.org/core/classes/GC.html#M001373">disabling the GC</a> during the benchmark, I could see that each loop allocates an object of type T_NODE which is more than likely our @block ivar converted back into a block. This is quite a waste. Furthermore, having to evaluate our block in a different context every single call surely isn't good for performance.</p>
+
+<p>So instead of doing the work at run time, why not doing it at load time? By that I mean that we can optimize the #dispatch method if we could "precompile" the method body instead of "proxying" the dispatch to an instance_eval call. Here is the code:</p>
+
+<pre><code>class SolutionTwo
+  def initialize(origin, &amp;block;)
+    @origin = origin
+    implementation(block)
+  end
+
+  private
+
+  def implementation(block)
+    mod = Module.new
+    mod.send(:define_method, :dispatch, block)
+    self.extend mod
+  end
+end
+
+SolutionTwo.new(40){ @origin + 2}.dispatch
+# 42
+</code></pre>
+
+<p>This optimization is based on the fact that the benchmark (and the real life usage) creates the instance once and then calls #dispatch many times. So by making the initialization of our instance a bit slower, we can drastically improve the performance of the method call. We also still need to execute our block in the right context. And finally, each instance might have a different way to dispatch since it is defined dynamically at initialization. To work around all these issues, we create a new module on which we define a new method called dispatch and the body of this method is the passed block. Then we simply our instance using our new module.</p>
+
+<p>Now every time we call #dispatch, a real method is dispatched which is much faster than doing an eval and no objects are allocated. Running the profiler and the benchmarks script used earlier, we can confirm that the GC doesn't run a single time and that the optimized code runs 2X faster!</p>
+
+<p>Once again, it's yet another example showing that you <a href="http://merbist.com/2010/07/29/object-allocation-why-you-should-care/">should care about object allocation</a> when dealing with code in the critical path. It also shows how to work around the block bindings. Now, it doesn't mean that you have to obsess about object allocation and performance, even if my last implementation is 2X faster than the previous, we are only talking about a few microseconds per dispatch. That said microseconds do add up and creating too many objects will slow down even your faster code since the GC will stop-the-world as its cleaning up your memory. In real life, you probably don't have to worry too much about low level details like that, unless you are working on a framework or sharing your code with others. But at least you can learn and understand why one approach is faster than the other, it might not be useful to you right away, but if you take programming as a craft, it's good to understand how things work under the hood so you can make educated decisions.</p>
+
+<h3>Update:</h3>
+
+<p>@apeiros in the comments suggested a solution that works &amp; performs the same as my solution, but is much cleaner:</p>
+
+<pre><code>class SolutionTwo
+  def initialize(origin, &amp;block;)
+    @origin = origin
+    define_singleton_method(:dispatch, block) if block_given?
+  end
+end
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Video game web framework design]]></title>
+    <link href="http://mattetti.github.com//posts/2011/04/14/video-game-web-framework-design/"/>
+    <updated>2011-04-14T10:28:39+02:00</updated>
+    <id>http://mattetti.github.com//posts/2011/04/14/video-game-web-framework-design</id>
+    <content type="html"><![CDATA[<p>In this post I will do my best to explain why and how I reinvented the wheel and wrote a custom web framework for some of Sony's <a href="http://www.gameproducer.net/2006/05/26/what-are-aaa-titles/">AAA console titles</a>. My goal is to reflect on my work by walking you through the design process and some of the implementation decisions. This is not about being right or being wrong, it's about designing a technical solution to solve concrete business challenges.</p>
+
+<h2>Problem Domain</h2>
+
+<p>The video game industry is quite special, to say the least. It shares a lot of similarities with the movie industry. The big difference is that  the movie industry hasn't evolved as quickly as the video game  industry has. But the concept is the same, someone comes up with a great  idea, finds a team/studio to develop the game and finds a publisher. The  development length and budget depends on the type of game, but for a AAA  console game, it usually takes a least a <a href="http://www.joystiq.com/2010/03/09/god-of-war-3-has-44-million-dollar-budget/">few million</a> and a minimum of a year of work once the project has received the green light. The creation of such a game involves various teams, designers, artists, animators, audio teams, developers, producers, QA, marketing, management/overhead etc.. Once the game gets released, players purchase the whole game for a one time fee and the studio moves  on to their next game. Of course things are not that simple, with the latest platforms, we now have the option to patch games, add <a href="http://en.wikipedia.org/wiki/Downloadable_content">DLC</a> etc.. But historically, a console game is considered done when it ships, exactly like a movie, and very little work is scheduled post release.</p>
+
+<p>Concretely such an approach exposes a few challenges when trying to implement online features for a <a href="http://www.gameproducer.net/2006/05/26/what-are-aaa-titles/">AAA console title</a>:</p>
+
+<ul>
+<li><p>Communication with the game client network team</p></li>
+<li><p>Scalability, performance</p></li>
+<li><p>Insane deadlines, unstable design (constant change of requirements)</p></li>
+<li><p>Can't afford to keep on working on the system once released (time delimited projects)</p></li>
+</ul>
+
+
+<h2>Communication</h2>
+
+<p>As in most situations, communication is one of the biggest challenges. Communication is even harder in the video game industry since you have so many teams and experts involved. Each team speaks its own jargon, has its own expertise and its own deadlines. But all focus on the same goal: releasing the best game ever. The team I'm part of has implementing online features as its goal. That's the way we bring business value to our titles. Concretely, that means that we provide the game client developers with a C++ SDK which connects to custom web APIs written in Ruby. The API implementations rely on various data stores (<a href="http://www.mysql.com/">MySQL</a>, <a href="http://redis.io/">Redis</a>, <a href="http://memcached.org/">Memcached</a>, memory) to store and retrieve all sorts of game data.</p>
+
+<p>Nobody but our team should care about the implementation details, after all, the whole point of providing an API is to provide a simple interface so others can do their part of the job in the easiest way possible. This is exactly where communication becomes a problem. The design of these APIs should be the result of the work of two teams with two different domains of expertise and different concerns. One team focuses on client performance, memory optimization and making the online resources available to the game engine without affecting the game play. The other, focuses on server performance, latency, scalability, data storage and system contention under load. Both groups have to come together to find a compromise making each other's job doable. Unfortunately, things are not that simple and game designers (who are usually not technical people) have a hard time <em>not</em> changing their designs and requirements every other week (usually for good reasons) making API design challenging and creating tension between the teams.</p>
+
+<p>From this perspective, the API is the most important deliverable for our team and it should communicate the design goal while being very explicit about how it works, why it works the way it does, and how to implement it client side. This is a very good place where we can improve communication by making sure that we focus on making clear, well designed, well documented, flexible APIs.</p>
+
+<h2>Scalability, performance</h2>
+
+<p>On the server side, the APIs need to perform and scale to handles tends of thousands of concurrent requests. Web developers often rely on aggressive <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html">HTTP caching</a> but in our case, the web client (our SDK) has a limited amount of memory available and 90% of the requests are user specific (can't use full page HTTP cache) and a lot of these are POST/DELETE requests (can't be cached). That means that, to scale, we have to focus on what most developers don't often have to worry too much about: all the small details which, put together with a high load, end up drastically affecting your performance.</p>
+
+<p>While Ruby is a great language, a lot of the libraries and frameworks are not optimized for performance, at least not the type of performance needed for our use case. However, the good news is that this is easily fixable and many alternatives exist (lots of async, non-blocking drivers for i.e). When obsessed with performance, you quickly learn to properly load test, profile, and monitor your code to find the bottlenecks and the places where you should focus your attention. The big, unique challenge though, is that a console game will more than likely see its peak traffic in the first few weeks, not really giving the chance to the online team to iteratively handle the prod issues. The only solution is to do everything possible before going live to ensure that the system will perform as expected. Of course if we were to write the same services in a more performant language, we would need to spend less time optimizing. But we are gaining so much flexibility by using a higher level programming language that, in my mind, the trade off is totally worth it (plus you still need to spend a lot of time optimizing your code path, even if your code is written in a very fast language).</p>
+
+<h2>Deadlines, requirement changes</h2>
+
+<p>That's just part of the way the industry works. Unless you work for <a href="http://blizzard.com">Blizzard</a> and you can afford to spend a crazy amount of time and money on the development of a title; you will have to deal with sliding deadlines, requirement changes, scope changes etc... The only way I know how to protect myself from such things is to plan for the worst. Being a non-idealistic (read pessimistic) person helps a lot. When you design your software, make sure your design is sound but flexible enough to handle any major change that you know could happen at any time. Pick your battles and make sure your assumptions are properly thought through, communicated and documented so others understand and accept them. In a nutshell, this is a problem we can't avoid, so you need to embrace it.</p>
+
+<h2>Limited reusability</h2>
+
+<p>This topic has a lot to do with the previous paragraph. Because scopes can change often and because the deadlines are often crazy, a lot of the time, engineers don't take the time to think about reusability. They slap some code together, pray to the <a href="http://en.wikipedia.org/wiki/Lords_of_Kobol">lords of Kobol</a> and hope that they won't have to look at their code ever again (I'm guilty of having done that too). The result is a lot of throw away code. This is actually quite frequent and normal in our industry. But it doesn't mean that it the right thing to do! The assumption/myth is that each game is different and therefore two games can't be using the same tech solution. My take on that is that it's partly true. But some components are the same for 80% of the games I work on. So why not design them well and reuse the common parts? (A lot of games share the same engines, such as <a href="http://www.unrealengine.com/">Unreal</a> for example, and there is no reason why we can't build a core online engine extended for each title)</p>
+
+<h2>My approach</h2>
+
+<p>When I joined Sony, I had limited experience with the console video game industry and my experience was not even related to online gaming. So even though I had (strong) opinions (and was often quite (perhaps even too) vocal about them), I did my best to improve existing components and work with the existing system. During that time, the team shipped 4 AAA titles on the existing system. As we were going through the game cycles, I did my best to understand the problem domain, the reasons behind some of the design decisions and finally I looked at what could be done differently to improve our business value. After releasing a title with some serious technical difficulties, I spent some time analyzing and listing the problems we had and their root causes. I asked our senior director for a mission statement and we got the team together to define the desiderata/objectives of our base technology. Here is what we came up with:</p>
+
+<ol>
+<li><p>Stability</p></li>
+<li><p>Performance / Scalability</p></li>
+<li><p>Encapsulation / Modularity</p></li>
+<li><p>Documentation</p></li>
+<li><p>Conventions</p></li>
+<li><p>Reusability / Maintainability</p></li>
+</ol>
+
+
+<p>These objectives are meant to help us objectively evaluate two options. The legacy solution was based on Rails, or more accurately: Rails was used in the legacy solution. Rails had been hacked in so many different ways that it was really hard to update anything without breaking random parts of the framework. The way to do basic things kept being changed, there was no consistent design, no entry points, no conventions and each new game would duplicate the source code of the previously released game and make the game specific changes. Patches were hard to back port and older titles were often not patched up. The performance was atrocious under load, mainly due to hacked-up Rails not performing well. (Rails was allocating so many objects per request that the GC was taking a huge amount of the request cycles, the default XML builder also created a ton load of objects etc...) This was your typical <a href="http://en.wikipedia.org/wiki/Broken_windows_theory">broken windows scenario</a>. Engineers were getting frustrated, motivation was fainting, bugs were piling up and nobody felt ownership over the tech.</p>
+
+<p>Now, to be fair, it is important to explain that the legacy system was hacked up together due to lack of time, lack of resources and a lot of pressure to release something ASAP. So, while the end result sounds bad, the context is very important to note. This is quite common in software engineering and when you get there, the goal is not to point fingers but to identify the good and the bad parts of the original solution. You then use this info to decide what to do: fix the existing system or rewrite, porting the good parts.</p>
+
+<p>Our report also came up with a plan. A plan to redesign our technology stack to match the desiderata previously mentioned. To put it simply, the plan was to write a new custom web framework focusing on stability, performance, modularity and documentation. Now, there are frameworks out there which already do that or value these principles. But none of them focus on web APIs and none of them are specific to game development. Finally, the other issue was that we had invested a lot of time on game specific code and we couldn't throw away all that work, so the new framework had to support a good chunk of legacy code but had to make it run much faster.</p>
+
+<h2>Design choices</h2>
+
+<p><strong>Low conversion cost</strong></p>
+
+<p>Using <a href="http://nodejs.org/">node.js</a> &amp; <a href="http://jashkenas.github.com/coffee-script/">coffee script</a>/<a href="http://www.scala-lang.org/">Scala</a>/<a href="http://weblocks.viridian-project.de/">whatever</a> <a href="http://code.google.com/p/v8cgi/">new</a> <a href="https://github.com/tenderlove/phuby">fancy tech</a> was not really an option. We have a bunch of games out there which are running on the old system and some of these games will have a sequel or a game close enough that we could reuse part of the work. We don't want to have to rewrite the existing code. I therefore made sure that we could reuse 90% of the business logic by adding an abstraction layer doing the heavy lifting at boot time and therefore not affecting the runtime performance. Simple conversion scripts were also written to import the core of the existing code over.</p>
+
+<p><em>Lessons learned:</em> It is very tempting to just redo everything and start from scratch. However, the business logic implementation wasn't the main cause of our problems. Even though I wish we could have redesigned that piece of the puzzle, it didn't make sense from a business perspective. A lot of thought had to be put into how to obtain the expected performance level while keeping the optional model/controller/view combos. By having full control of the "web engine", we managed to isolate things properly without breaking the old paradigms. We also got rid of a lot of assumptions allowing us to design new titles a bit differently while being backward compatible and have our code run dramatically faster.</p>
+
+<p><strong>Web API centric</strong></p>
+
+<p>This is probably the most important design element. If I had to summarize what our system does in just a few words, I would say: a game web API. Of course, it's much more than that. We have admin interfaces, producer dashboards, community websites, lobbies, p2p, BI reports, async processing jobs etc... But at the end of the day, the only one piece you can't remove is the game web API. So I really wanted the design to focus on that aspect. When a developer starts implementing a new online game feature, I want him/her to think about the API. But I also want this API to be extremely well documented so the developer working client-side understands the purpose of the API, how to use it, and what the expected response is right away. I also wanted to be able to automatically test our APIs at a very basic level so we could validate that there are discrepancies between what the client expects and what the server provides. To do that, I created a standalone API DSL with everything needed to describe your API but without any implementation details whatsoever. The API DSL lets the developer define a route (url), the HTTP verb expected, if the request should be authenticated or not, SSL or not, the param rules, default values and finally a response description (which was quite a controversial choice). All of these settings can be documented by the developer. This standalone DSL can then be consumed by different tools. For instance we have a tool extracting all the info into nicely formatted HTML doc for the game client developers. This tool doesn't need to load the framework to just render the documentation. We also use this description at boot time to compile the validation rules and routes, allowing for a much faster request dispatch. And we also use these API description to generate some low level data for the client. Finally, we used the service description DSL to help create mocked service responses allowing the client team to test service designs without having to wait for the implementation streamlining the process.</p>
+
+<p><em>Lessons learned:</em> We had a lot of internal discussions about the need to define the response within the service description. Some argued that it's a duplication since we already had a view and we could parse that to get most of what we needed (which is what the old system was doing). We ended up going with the response description DSL for a few critical reasons: testing and implementation simplicity. <em>Testing:</em> we need to have an API expectation reference and to keep this reference sane so we can see if something is changed. If we were to magically parse the response, we couldn't test the view part of the code against a frame of reference. <em>Implementation simplicity</em>: magically parsing a view template is more tricky that it sounds, you would need to render the template with the right data to make it work properly. Furthermore, you can't document a response easily in the view, and if you do, you arguably break the separation of concern between the description and the implementation. Finally, generated documentation isn't enough and that's why we decided to write English documentation, some being close to the code and some being just good old documentation explaining things outside of the code context.</p>
+
+<p><strong>Modularity</strong></p>
+
+<p>In order to make our code reusable we had to isolate each component and limit the dependencies. We wrote a very simple extension layer allowing each extension to registers itself once detected. The extension interface exposes the path of the extension, its type, models, services, controllers, migrations, seed data, dependencies etc.. Each extension is contained in a folder. (The extension location doesn't matter much but as part of the framework boot sequence, we check a few default places.) The second step of the process is to check a manifest/config file that is specific to each title. The manifest file lists the extensions that should be activated for the title. The framework then activates the marked extensions and has access to libs, models, views, migrations, seed data and of course to load services (DSL mentioned earlier) etc...</p>
+
+<p>Even though we designed the core extensions the best we could, there are cases where some titles will need to extend these extensions. To do that, we added a bunch of hooks that could be implemented on the title side if needed (Ruby makes that super easy and clean to do!). A good example of that is the login sequence or the player data.</p>
+
+<p><em>Lessons learned:</em> The challenge with modularity is to keep things simple and highly performing yet flexible. A key element to manage that is to stay as consistent as possible. Don't implement hooks three different ways, try to keep method signatures consistent, keep it simple and organized.</p>
+
+<h2>Conclusion</h2>
+
+<p>It's a bit early to say if this rewrite is a success or not and there are still lots of optimizations and technology improvements we are looking forward to doing. Only time will give us enough retrospect to evaluate our work. But because we defined the business value (mission statement) and the technical objectives, it is safe to say that the new framework meets the expectations quite well. On an early benchmark we noted a 10X speed improvement and that's before drilling into the performance optimizations such as making all the calls non-blocking, using better connection pools, cache write through layer... However, there is still one thing that we will have to monitor: how much business value will this framework generate. And I guess that's where we failed to define an agreed upon evaluation grid. I presume that if our developers spend more time designing and implementing APIs and less time debugging that could be considered business value. If we spend less time maintaining or fighting with the game engine, that would also be a win. Finally, if the player experience is improved we will be able to definitely say that we made the right choice.</p>
+
+<p>To conclude, I'd like to highlight my main short coming: I failed to define metrics that would help us evaluate the real business value added to our products. What I consider a technical success might not be a business success. How do you, in your own domain, find ways to define clear and objective metrics?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby concurrency explained]]></title>
+    <link href="http://mattetti.github.com//posts/2011/02/22/concurrency-in-ruby-explained/"/>
+    <updated>2011-02-22T22:34:30+01:00</updated>
+    <id>http://mattetti.github.com//posts/2011/02/22/concurrency-in-ruby-explained</id>
+    <content type="html"><![CDATA[<p>Concurrency is certainly <a href="http://en.wikipedia.org/wiki/Petri_Net">not a new problem</a> but it's getting more and more attention as machines start having more than 1 core, that web traffic increases drastically and that some new technologies show up saying that they are better because they handle concurrency better.
+If that helps, think of concurrency as multitasking. When people say that they want concurrency, they say that they want their code to do multiple different things at the same time. When you are on your computer, you don't expect to have to choose between browsing the web and listening to some music. You more than likely want to run both concurrently. It's the same thing with your code, if you are running a webserver, you probably don't want it to only process one request at a time.
+The aim of this article is to explain as simply as possible the concept of concurrency in Ruby, the reason why it's a complicated topic and finally the different solutions to achieve concurrency.</p>
+
+<p>First off, if you are not really familiar with concurrency, take a minute to <a href="http://en.wikipedia.org/wiki/Concurrency_%28computer_science%29">read the wikipedia article on the topic</a> which is a great recap on the subject. But now, you should have noticed that my above example was more about parallel programming than concurrency, but we'll come back to that in a minute.</p>
+
+<blockquote><p><strong>The real question at the heart of the quest for concurrency is: "how to increase code throughput".</strong></p></blockquote>
+
+<p>We want our code to perform better, and we want it to do more in less time. Let's take two simple and concrete examples to illustrate concurrency. First, let's pretend you are writing a twitter client, you probably want to let the user scroll his/her tweets while the latest updates are  being fetched. In other words, you don't want to block the main loop and interrupt the user interaction while your code is waiting for a response from the Twitter API. To do that, a common solution is to use multiple <strong>threads</strong>. Threads are basically processes that run in the same memory context. We would be using one thread for the main event loop and another thread to process the remote API request. Both threads share the same memory context so once the Twitter API thread is done fetching the data it can update the display. Thankfully, this is usually transparently handled by asynchronous APIs (provided by the OS or the programming language std lib) which avoid blocking the main thread.</p>
+
+<p>The second example is a webserver. Let's say you want to run a Rails application. Because you are awesome, you expect to see a lot of traffic. Probably more than 1 QPS (query/request per second). You benchmarked your application and you know that the average response time is approximately 100ms. Your Rails app can therefore handle 10QPS using a single process (you can do 10 queries at 100ms in a second).</p>
+
+<p>But what happens if your application gets more than 10 requests per second? Well, it's simple, the requests will be backed up and will take longer until some start timing out. This is why you want to improve your concurrency. There are different ways to do that, a lot of people feel really strong about these different solutions but they often forget to explain why they dislike one solution or prefer one over the other. You might have heard people conclusions which are often one of these: <a href="http://canrailsscale.com/">Rails can't scale</a>, you only get concurrency with <a href="http://jruby.org/">JRuby</a>, <a href="http://adam.heroku.com/past/2009/8/13/threads_suck/">threads suck</a>, the only way to concurrency is via threads, we should switch to <a href="http://www.erlang.org/">Erlang</a>/<a href="http://nodejs.org/">Node.js</a>/<a href="http://www.scala-lang.org/">Scala</a>, use<a href="http://www.rubyinside.com/fibers-eventmachine-rack-performance-gains-3395.html"> fibers</a> and you will be fine, add more machines, <a href="http://tomayko.com/writings/unicorn-is-unix">forking > threading</a>.  Depending on who said what and how often you heard it on twitter, conferences, blog posts, you might start believing what others are saying. But do you really understand why people are saying that and are you sure they are right?</p>
+
+<p>The truth is that this is a complicated matter. The good news is that it's not <em>THAT</em> complicated!</p>
+
+<p>The thing to keep in mind is that the concurrency models are often defined by the programming language you use. In the case of Java, <a href="http://download.oracle.com/javase/tutorial/essential/concurrency/index.html">threading is the usual solution</a>, if you want your Java app to be more concurrent, just run every single request in its own thread and you will be fine (kinda). In PHP, you simply don't have threads, instead you will start a new process per request. Both have pros and cons, the advantage of the Java threaded approach is that the memory is shared between the threads so you are saving in memory (and startup time), each thread can easily talk to each other via the shared memory. The advantage of PHP is that you don't have to worry about locks, deadlocks, threadsafe code and all that mess hidden behind threads. Described like that it looks pretty simple, but you might wonder why PHP doesn't have threads and why Java developers don't prefer starting multiple processes. The answer is probably related to the language design decisions. PHP is a language designed for the web and for short lived processes. PHP code should be fast to load and not use too much memory. Java code is slower to boot and to warm up, it usually uses quite a lot of memory. Finally, Java is a general purpose programming language not designed primarily for the internet. Others programming languages like <a href="http://www.erlang.org/">Erlang</a> and <a href="http://www.scala-lang.org/">Scala</a> use a third approach: <a href="http://en.wikipedia.org/wiki/Actor_model">the actor model</a>. The actor model is somewhat a bit of a mix of both solutions, the difference is that actors are a like threads which don't share the same memory context. Communication between actors is done via exchanged messages ensuring that each actor handles its own state and therefore avoiding corrupt data (two threads can modify the same data at the same time, but an actor can't receive two messages at the exact same time). We'll talk about that design pattern later on, so don't worry if you are confused.</p>
+
+<p>What about Ruby? Should Ruby developers use threads, multiple processes, actors, something else? The answer is: <strong>yes</strong>!</p>
+
+<h2>Threads</h2>
+
+<p>Since version 1.9, Ruby has native threads (before that <a href="http://en.wikipedia.org/wiki/Green_threads">green threads</a> were used). So in theory, if we would like to, we should be able to use threads everywhere like most Java developers do. Well, that's almost true, the problem is that Ruby, like Python uses a <a href="http://en.wikipedia.org/wiki/Global_Interpreter_Lock">Global Interpreter Lock</a> (aka GIL). This GIL is a locking mechanism that is meant to protect your data integrity. The GIL only allows data to be modified by one thread at time and therefore doesn't let threads corrupt data but also it doesn't allow them to truly run concurrently. That is why some people say that Ruby and Python are not capable of (true) concurrency.</p>
+
+<p><img src="https://img.skitch.com/20110223-kk58iq5yjdpmyswf7nuya4c4kp.jpg" alt="Global Interpreter Lock by Matt Aimonetti" /></p>
+
+<p>However these people often don't mention that the GIL makes single threaded programs faster, that multi-threaded programs are much easier to develop since the data structures are safe and finally that a lot of C extensions are not thread safe and without the GIL, these C extensions don't behave properly. These arguments don't convince everyone and that's why you will hear some people say you should look at another Ruby implementation without a GIL, such as <a href="http://jruby.org/">JRuby</a>, <a href="http://rubini.us/">Rubinius</a> (hydra branch) or <a href="http://macruby.org">MacRuby</a> (Rubinius &amp; MacRuby also offer other concurrency approaches). If you are using an implementation without a GIL, then using threads in Ruby has exactly the same pros/cons than doing so in Java. However, it means that now you have to deal with the nightmare of threads: making sure your data is safe, doesn't deadlock, check that your code, your libs, plugins and gems are thread safe. Also, running too many threads might affect the performance because your OS doesn't have enough resources to allocate and it ends up spending its time context switching. It's up to you to see if it's worth it for your project.</p>
+
+<h2>Multiple processes &amp; forking</h2>
+
+<p>That's the most commonly used solution to gain concurrency when using Ruby and Python. Because the default language implementation isn't capable of true concurrency or because you want to avoid the challenges of thread programming, you might want to just start more processes. That's really easy as long as you don't want to share states between running processes. If you wanted to do so, you would need to use <a href="http://segment7.net/projects/ruby/drb/introduction.html">DRb</a>, a message bus like <a href="http://www.rabbitmq.com/">RabbitMQ</a>, or a shared data store like memcached or a DB. The caveat is that you now need to use a LOT more memory. If want to run 5 Rails processes and your app uses 100Mb you will now need 500Mb, ouch that's a lot of memory! That is exactly what happens when you use a Rails webserver like Mongrel. Now some other servers like <a href="http://www.modrails.com/">Passenger</a> and <a href="http://unicorn.bogomips.org/">Unicorn</a> found a workaround, they rely on <a href="http://en.wikipedia.org/wiki/Fork_%28operating_system%29">unix forking</a>. The advantage of forking in an unix environment implementing the copy-on-write semantics is that we create a new copy of the main process but they both "share" the same physical memory. However, each process can modify its own memory without affecting the other processes. So now, Passenger can load your 100Mb Rails app in a process, then fork this process 5 times and the total footprint will be just a bit more than 100Mb and you can now handle 5X more concurrent requests. Note that if you are allocating memory in your request processing code (read controller/view) your overall memory will grow but you can still run many more processes before running out of memory. This approach is appealing because really easy and pretty safe. If a forked process acts up or leaks memory, just destroy it and create a new fork from the master process. Note that this approach is also used in <a href="https://github.com/defunkt/resque">Resque</a>, the async job processing solution by <a href="http://github.com">GitHub</a>.</p>
+
+<p>This solution works well if you want to duplicate a full process like a webserver, however it gets less interesting when you just want to execute some code "in the background". Resque took this approach because by nature async jobs can yield weird results, leak memory or hang. Dealing with forks allows for an external control of the processes and the cost of the fork isn't a big deal since we are already in an async processing approach.</p>
+
+<p><img src="http://s3.amazonaws.com/cogit8-org/img/hardcore-forking-action.png" alt="" /></p>
+
+<h2>Actors/Fibers</h2>
+
+<p>Earlier we talked a bit about the <a href="http://en.wikipedia.org/wiki/Actor_model">actor model</a>. Since Ruby 1.9, developers now have access to a new type of "lightweight" threads called <a href="http://www.ruby-doc.org/core-1.9/classes/Fiber.html">Fibers</a>. Fibers are not actors and Ruby doesn't have a native Actor model implementation but some people wrote <a href="http://doc.revactor.org/files/README.html">some actor libs</a> on top of fibers. A fiber is like a simplified thread which isn't scheduled by the VM but by the programmer. Fibers are like blocks which can be paused and resumed from the outside of from within themselves. Fibers are faster and use less memory than threads as demonstrated in <a href="http://oldmoe.blogspot.com/2008/08/ruby-fibers-vs-ruby-threads.html">this blog post</a>. However, because of the GIL, you still cannot truly run more than one concurrent fiber by thread and if you want to use multiple CPU cores, you will need to run fibers within more than one thread. So how do fibers help with concurrency? The answer is that they are part of a bigger solution. Fiber allow developers to manually control the scheduling of "concurrent" code but also to have the code within the fiber to auto schedule itself. That's pretty big because now you can wrap an incoming web request in its own fiber and tell it to send a response back when it's done doing its things. In the meantime, you can move on the to next incoming request. Whenever a request within a fiber is done, it will automatically resume itself and be returned. Sounds great right? Well, the only problem is that if you are doing any type of blocking IO in a fiber, the entire thread is blocked and the other fibers aren't running. Blocking operations are operations like database/memcached queries, http requests... basically things you are probably triggering from your controllers. The good news is that the "only" problem to fix now is to avoid blocking IOs. Let's see how to do that.</p>
+
+<p><img src="https://img.skitch.com/20110223-8wkfs2g12p15ku18rm7aq9negf.jpg" alt="fiber" /></p>
+
+<h2>Non blocking IOs/Reactor pattern.</h2>
+
+<p>The reactor pattern is quite simple to understand really. The heavy work of making blocking IO calls is delegated to an external service (reactor) which can receive concurrent requests. The service handler (reactor) is given callback methods to trigger asynchronously based on the type of response received. Let me take a limited analogy to hopefully explain the design better. It's a bit like if you were asking someone a hard question, the person will take a while to reply but his/her reply will make you decide if you raise a flag or not. You have two options, or you choose to wait for the response and decide to raise the flag based on the response, or your flag logic is already defined and you tell the person what to do based on their answer and move on without having to worry about waiting for the answer. The second approach is exactly what the reactor pattern is. It's obviously slightly more complicated but the key concept is that it allows your code to define methods/blocks to be called based on the response which will come later on.</p>
+
+<p><img src="https://img.skitch.com/20110223-xkit6utnty1sdt84n15w7dgtnh.jpg" alt="Reactor from Matt Aimonetti's blog" /></p>
+
+<p>In the case of a single threaded webserver that's quite important. When a request comes in and your code makes a DB query, you are blocking any other requests from being processed. To avoid that, we could wrap our request in a fiber, trigger an async DB call and pause the fiber so another request can get processed as we are waiting for the DB. Once the DB query comes back, it wakes up the fiber it was trigger from, which then sends the response back to the client. Technically, the server can still only send one response at a time, but now fibers can run in parallel and don't block the main tread by doing blocking IOs (since it's done by the reactor).</p>
+
+<p>This is the approach used by <a href="http://twistedmatrix.com/trac/">Twisted</a>, <a href="http://eventmachine.rubyforge.org/EventMachine/Deferrable.html">EventMachine</a> and <a href="http://nodejs.org/">Node.js</a>. Ruby developers can use EventMachine or an EventMachine based webserver like <a href="http://code.macournoyer.com/thin/">Thin</a> as well as <a href="https://github.com/igrigorik/em-synchrony">EM clients/drivers</a> to make non blocking async calls. Mix that with some Fiber love and you get Ruby concurrency. Be careful though, using Thin, non blocking drivers and Rails in threadsafe mode doesn't mean you are doing concurrent requests. Thin/EM only use one thread and you need to let it know that it's ok to handle the next request as we are waiting. This is done by <a href="http://eventmachine.rubyforge.org/EventMachine/Deferrable.html">deferring the response</a> and let the reactor know about it.</p>
+
+<p>The obvious problem with this approach is that it forces you to change the way you write code. You now need to set a bunch of callbacks, understand the Fiber syntax, and use deferrable responses, I have to admit that this is kind of a pain. If you look at some Node.js code, you will see that it's not always an <a href="http://howtonode.org/control-flow-part-ii/file-write.js">elegant approach</a>. The good news tho, is that this process can be wrapped and your code can be written as it if was processed synchronously while being handled asynchronously under the covers. This is a bit more complex to explain without showing code, so this will be the topic of a future post. But I do believe that things will get much easier soon enough.</p>
+
+<h2>Conclusion</h2>
+
+<p>High concurrency with Ruby is doable and done by many. However, it could made easier. Ruby 1.9 gave us fibers which allow for a more granular control over the concurrency scheduling, combined with non-blocking IO, high concurrency can be achieved. There is also the easy solution of forking a running process to multiply the processing power. However the real question behind this heated debate is what is the future of the Global Interpreter Lock in Ruby, should we remove it to improve concurrency at the cost of dealing with some new major threading issues, unsafe C extensions, etc..? Alternative Ruby implementers seem to believe so, but at the same time Rails still ships with a default mutex lock only allowing requests to be processed one at a time, the reason given being that a lot of people using Rails don't write thread safe code and a lot of plugins are not threadsafe. Is the future of concurrency something more like <a href="http://libdispatch.macosforge.org/">libdispatch</a>/<a href="http://www.macruby.org/documentation/gcd.html">GCD</a> where the threads are handled by the kernel and the developer only deals with a simpler/safer API?</p>
+
+<p>Further reading:</p>
+
+<ul>
+<li><p><a href="http://www.igvita.com/2008/11/13/concurrency-is-a-myth-in-ruby/">Concurrency is a myth in Ruby</a></p></li>
+<li><p><a href="http://oldmoe.blogspot.com/2008/08/ruby-fibers-vs-ruby-threads.html">Ruby fibers vs Ruby threads</a></p></li>
+<li><p><a href="http://www.igvita.com/2010/08/18/multi-core-threads-message-passing/">Multi-core, threads, passing messages</a></p></li>
+<li><p><a href="http://adam.heroku.com/past/2009/8/13/threads_suck/">Threads suck</a></p></li>
+<li><p><a href="http://www.igvita.com/2010/04/15/non-blocking-activerecord-rails/">Non blocking Active Record and Rails</a></p></li>
+<li><p><a href="http://www.mikeperham.com/2010/01/27/scalable-ruby-processing-with-eventmachine/">Scalable Ruby processing with EventMachine</a></p></li>
+<li><p><a href="http://on-ruby.blogspot.com/2008/01/ruby-concurrency-with-actors.html">Ruby concurrency with actors</a></p></li>
+<li><p><a href="http://www.engineyard.com/blog/2010/concurrency-real-and-imagined-in-mri-threads/">Concurrency in MRI; threads</a></p></li>
+<li><p><a href="http://www.infoq.com/news/2007/08/ruby-1-9-fibers">Ruby 1.9 adds fibers for lightweight concurrency</a></p></li>
+<li><p><a href="http://yehudakatz.com/2010/08/14/threads-in-ruby-enough-already/">Threads in Ruby, enough already</a></p></li>
+<li><p><a href="http://www.igvita.com/2010/03/22/untangling-evented-code-with-ruby-fibers">Untangling Evented Code with Ruby Fibers</a></p></li>
+<li><p><a href="http://www.slideshare.net/ehuard/concurrency-5615029">Elise Huard's RubyConf Concurrency talk slides</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Discussion with a Java switcher]]></title>
+    <link href="http://mattetti.github.com//posts/2010/08/22/discussion-with-a-java-switcher/"/>
+    <updated>2010-08-22T17:18:55+02:00</updated>
+    <id>http://mattetti.github.com//posts/2010/08/22/discussion-with-a-java-switcher</id>
+    <content type="html"><![CDATA[<p>For the past 6 months, I have had regular discussions with an experienced Java developers who switched to Ruby a couple years ago. Names have been changed to protect the guilty but to help you understand my friend 'Duke' better, you need to know that he has been a developer for 10 years and lead many complicated, high traffic projects. He recently released two Ruby on Rails projects and he has been fighting with performance issues and scalability challenges.</p>
+
+<p>Duke is a happy Ruby developer but he sometimes has a hard time understanding why things are done in a certain way in the Ruby community. Here are some extracts from our conversations. My answers are only based on my own experience and limited knowledge. They are probably not shared by the entire  community, feel free to use the comment section if you want to add more or share your own answers.</p>
+
+<h2>Threads / Concurrency</h2>
+
+<p><strong>Duke:</strong> Why does the Ruby community hate threads so much. It seems to be a taboo discussion and the only answer I hear is that threads are hard to deal with and that Ruby does not have a good threading implementation. What's the deal there? If you want concurrent processing, threads are important!</p>
+
+<p><strong>Me:</strong> This is a very good question and I think there are two main reasons why threads and thread safety are not hot topics in the Ruby world. First, look at Ruby's main implementation itself. If you are using an old version of Ruby (pre Ruby 1.9) you don't use native threads but green threads mapping to only 1 native thread. Ilya has a great (yet a bit old) <a href="http://www.igvita.com/2008/11/13/concurrency-is-a-myth-in-ruby/">blog post explaining the difference</a>, why it matters and also the role and effect of the Global Interpreter Lock (GIL). Also, even though Rubyists like to say that they live in the edge, most of them still use Ruby 1.8 and therefore don't really see the improvements in Ruby 1.9 nor yet understand the potential of <a href="http://ruby-doc.org/core-1.9/classes/Fiber.html">fibers</a>.</p>
+
+<p>The other part of the explanation is that the Rails community never really cared until recently. Yehuda Katz recently wrote a <a href="http://yehudakatz.com/2010/08/14/threads-in-ruby-enough-already/">good article on thread safety</a> in Ruby and if you read his post and <a href="http://dpaste.de/5xyG/raw/">Zed Shaw's comment</a> you will understand a bit better the historical background. As a matter of fact, the current version of Rails is not multi-threaded by default and developers interested in handling concurrent requests in one process should <a href="http://api.rubyonrails.org/classes/Rails/Configuration.html#M002069">turn on this option</a>. Thread safety appeared for the first time in Rails 2.2 but from what I saw, most people still don't enable this option. There are many reasons for that. First, enabling thread safety disables some Rails features like automatic dependency loading after boot and code reloading. A lot of Rails developers take these two features for granted and don't understand that they are technically "hacks" to make their lives easier. I do believe a lot of Rails developers don't understand how threads, thread safety, concurrency, blocking IO and dependencies work. They care about getting their app done and meet their deadlines. They usually use and know Rails without paying too much attention to how Rails extends Ruby. Imagine what would happen if their code wasn't thread safe and Rails wasn't not using a global lock by default. Now you see why things are not exactly as you expect and also why some Rubyists are getting excited about new projects like <a href="http://nodejs.org/">node.js</a> which takes a different approach.</p>
+
+<p>The other thing to keep in mind is that at least 90 to 95% of the Rails apps out there don't get more than a dozen requests/second (a million requests/day). You can scale that kind of load pretty easily using simple approaches like caching,  optimize your DB queries, load balancing to a couple servers. As a matter of fact, compared to the amount of people using Rails on a daily basis, only a very little amount of people are struggling with performance and scalability like you do. This is not an excuse but that explains why these people don't care about the things you care about.</p>
+
+<h2>Rails is slow</h2>
+
+<p><strong>Duke:</strong> I don't understand why Rails developers are not more concerned about the speed/performance penalty induced by Rails.</p>
+
+<p><strong>Me:</strong> Again, Rails is fast enough for the large majority of developers out there. As you know, as a developer you have to always make compromises. The Rails team always said that development time is more expensive than servers and therefore the focus is on making development easier, faster and more enjoyable. However to get there, they have to somewhat sacrifice some performance. What can be totally unacceptable for you is totally fine for others and your contribution is always welcome. This is probably the root cause of the things you don't like in Rails. Rails was built for startups, by startup developers and you don't fall in this category. People contributing new features and fixes are the people using Rails for what it is designed to do. There is no real 'Enterprise' support behind Rails and that might be why you feel the way you feel. Since you find yourself questioning some key Rails conventions and you are struggling with missing features, it looks  to me that you chose the wrong tool for the job since you don't even use 70% of the Rails features and are dreaming of things such 3 tier architecture. <a href="http://sinatrarb.com">Sinatra</a> might be a better fit for you if you want lower level control, less conventions and less built-in features.</p>
+
+<h2>Object allocation / Garbage Collection</h2>
+
+<p><strong>Duke:</strong> I recently read that Twitter was spending <a href="http://blog.evanweaver.com/articles/2009/10/21/object-allocations-on-the-web/">20% of its request cycles in the GC</a>, am I the only finding that concerning?</p>
+
+<p><strong>Me:</strong> Most people don't realize how the GC works and what it means to allocate objects since Ruby does that automatically. But at the same time, most of these people don't really see the affect of the Garbage Collection since they don't have that much traffic or they scale in ways that just skips their Ruby stack entirely. (Or they just blame Ruby for being slow)</p>
+
+<p>If you are app deals with mainly reads/GET requests, using HTTP caching (Rails has that built-in) and something like Varnish/<a href="http://rtomayko.github.com/rack-cache/">Rack-cache</a> will dramatically reduce the load on your server apps. Others don't investigate their issues and just add more servers. As mentioned in a <a href="http://merbist.com/2010/07/29/object-allocation-why-you-should-care/">previous post</a>, some libraries like Builder are allocating LOTS more objects than others (Nokogiri), use the existing debugging tools to see where your object allocations occur and try to fix/workaround these. In other words, Ruby's GC isn't great but by ignoring its limitations, we made things even worse. My guess is that the GC is going to improve (other implementations already have better GCs) and that people will realize that Ruby is not magic and critical elements need to be improved.</p>
+
+<h2>Tools</h2>
+
+<p><strong>Duke:</strong> I really have a hard time finding good tools to help scale my apps better and understand where I should optimize my code.</p>
+
+<p><strong>Me: </strong>It is true that we area lacking tools but things are changing. On top of the built-in tools like <a href="http://ruby-doc.org/core-1.9/classes/ObjectSpace.html">ObjectSpace</a>, <a href="http://ruby-doc.org/core-1.9/classes/GC/Profiler.html">GC::Profiler</a>, people interested in performance/debugging are working to provide the Ruby community with their expertise, look at <a href="http://memprof.com/">memprof</a> and <a href="http://rubyforge.org/projects/ruby-debug/">ruby-debug</a> for instance. Of course you can also use tools such as <a href="http://ruby-prof.rubyforge.org/">Ruby-prof</a>, <a href="http://kcachegrind.sourceforge.net/html/Home.html">Kcachegrind</a>, <a href="http://valgrind.org/">Valgrind</a> and <a href="http://www.gnu.org/software/gdb/">GDB</a>. (1.9.2 was <a href="http://github.com/yugui/ruby/tree/feature/dtrace">scheduled to have DTrace support</a> but I did not check yet). Maybe you should be more explicit about what tools you miss and how we could solve the gap.</p>
+
+<h2>ActiveRecord</h2>
+
+<p><strong>Duke:</strong> ActiveRecord doesn't do what I need. How come there is no native support for master/slave DBs, sharding, DB view support is buggy,  suggested indexes on queries is not built-in and errors are not handled properly (server is gone, out of sync etc..)?</p>
+
+<p><strong>Me:</strong> You don't have to use ActiveRecord, you could use any ORM such as <a href="http://sequel.rubyforge.org/">Sequel</a>, <a href="http://datamapper.org/">DataMapper</a> or your own. But to answer your question, I think that AR doesn't do everything you want because nobody contributed these features to the project and the people maintaining ActiveRecord don't have the need for these features.</p>
+
+<h2>What can we do?</h2>
+
+<p>We, as a community, need to realize that we have to learn from other communities and other programming languages, this kind of humorous graph is unfortunately not too far from reality.</p>
+
+<p><img src="http://i.imgur.com/G7WyP.gif" alt="" /></p>
+
+<p>Bringing your expertise and knowledge to the Ruby community is important. Looking further than just our own little will push us to improve and fulfill the gaps. Let the community know what tools you are missing, the good practices you think we should be following etc...</p>
+
+<p>Take for instance <a href="http://nodejs.org/">Node.js</a>, it's a port of <a href="http://wiki.github.com/eventmachine/eventmachine/">Ruby's EventMachine</a> / <a href="http://twistedmatrix.com/trac/">Python's twisted</a>. There is no reasons why the Ruby or Python versions could not do what the Javascript version does. However people are getting excited and are jumping ship. What do we do about that? One way would be to identify what makes node more attractive than EventMachine and what needs to be done so we can offer what people are looking for. I asked this question a few weeks ago and the response was that a lot of the Ruby libraries are blocking and having to check is too bothersome. Maybe that's something that the community should be addressing. Node doesn't have that many libraries and people will have to write them, in the mean time we can make our libs non-blocking. Also, let's not forget that this is not a competition and people should choose the best tool for their projects.</p>
+
+<p>Finally, things don't change overnight, as more people encounter the issues you are facing, as we learn from others, part of the community will focus on the problems you are seeing and things will get better. Hopefully, <strong>you</strong> will also be able to contribute and influence the community to build an even better Ruby world.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby object allocation & why you should care]]></title>
+    <link href="http://mattetti.github.com//posts/2010/07/29/object-allocation-why-you-should-care/"/>
+    <updated>2010-07-29T23:47:50+02:00</updated>
+    <id>http://mattetti.github.com//posts/2010/07/29/object-allocation-why-you-should-care</id>
+    <content type="html"><![CDATA[<p>Recently I was tasked with finding how to optimize a web application with heavy traffic. The application (a Rails 2.3.x app) gets about 3 million requests per hour and most of these requests cannot really be easily cached so they go through the entire stack.</p>
+
+<p>This is probably not the case of most web apps out there. None the less, my findings my help you understand Ruby better and maybe think differently about memory management.</p>
+
+<p>This is certainly not an advanced GC blog post, I will try to keep it as simple as possible. My goal is to show you how Ruby memory allocation works and why it can affect your app performance and finally, how can you avoid to allocate to many objects.</p>
+
+<h2>Ruby memory management.</h2>
+
+<p>Rubyists are quite lucky since they don't have to manage the memory themselves. Because developers are lazy and Matz developed his language for people and not machine, memory is managed "magically". Programming should be fun and managing memory isn't really considered fun (ask video game developers or iOS programmers ;)).</p>
+
+<p>So in Ruby, the magical memory management is done by a Garbage Collector. The GC's job is to run and free objects that were previously allocated but not used anymore. Without a GC we would saturate the memory available on the host running the program or would have to deallocate the memory manually. Ruby's GC uses a conservative, stop the world, mark-and-sweep collection mechanism.  More simply, the garbage collection runs when the allocated memory for the process is maxed out. The GC runs and blocks all code from being executed and will free unused objects so new objects can be allocated.</p>
+
+<p>Joe Damato did a great talk on that matter during last RailsConf</p>
+
+<p><a href="http://www.scribd.com/doc/32718051/Garbage-Collection-and-the-Ruby-Heap">Garbage Collection and the Ruby Heap</a></p>
+
+<p>The problem is that Ruby's GC was not designed to support hundred thousand objects allocation per second. Unfortunately, that's exactly what frameworks like Ruby on Rails do, and you might contribute to the problem too without even knowing it.</p>
+
+<h2>Does it really matter?</h2>
+
+<p>I believe it does. In my case improving the object allocation means much better response time, less servers, less support and less headaches. You might think that servers are cheaper than developers. But more servers mean more developer time spent fixing bugs and more IT support. That's why I think, memory management is something Ruby developers should be aware of and should take in consideration, especially the ones writing frameworks, libraries or shared code.</p>
+
+<p>I am using Ruby 1.9 so I could not profile my Rails 2.x app using <a href="http://memprof.com/">memprof</a>, instead I wrote a <a href="http://github.com/mattetti/GC-stats-middleware">simple and basic middleware</a> that keeps track of the memory allocation/deallocation and GC cycles during a web request (Ruby1.9 only). One of my simple Rails2 actions (1 DB call, simple view) is allocating 170,000 objects per requests. Yes, you read right: 170k objects every single request. At 3 million requests/hour, you can imagine that we are spending a LOT of time waiting for the GC. This is obviously not 100% Rails fault as I am sure our code is contributing to the problem. I heard from the memprof guys that Rails was allocating 40k objects. I decided to check Rails3.</p>
+
+<p>After warming up, a basic Rails3 'hello world' app clocks at about <strong>8,500 objects allocated per request</strong>, forcing the GC to run more or less every 6 requests. On my machine (mac pro) the GC takes about 20ms to free the objects. A Rack 'hello world' app clocks at <strong>7 objects</strong> per request and a Sinatra app at <strong>181 objects</strong>. Of course you can't really compare these different libraries/frameworks but that gives you an idea of the price you pay to get more features.</p>
+
+<p>One thing to remember is that the more objects you allocate, the more time you "lose" at code execution. For more developers, it probably doesn't matter much, but if you should still understand that concept especially if you decide to contribute to the OSS community and offer patches, libraries, plugins etc...</p>
+
+<h1>What can I do?</h1>
+
+<p>Be aware that you are allocating  objects, for instance something as simple as 100.times{ 'foo' } allocates 100 string objects (strings are mutable and therefore each version requires its own memory allocation).</p>
+
+<p>Make sure to evaluate the libraries you use, for instance switching a Sinatra XML rendering action from Builder to Nokogiri XML Builder saved us about 12k object allocations (Thanks Aaron Patterson). Make sure that <strong>if </strong>you are using a library allocating a LOT of objects, that other alternatives are not available and your choice is worth paying the GC cost. (you might not have a lot of requests/s or might not care for a few dozen ms per requests). You can use memprof or one of the many existing tools to check on the GC cycles using load tests or in dev mode. Also, be careful to analyze the data properly and to not only look at the first request. <a href="http://twitter.com/akeem">Someone</a> sent me <a href="http://memprof.com/dump/4c52503c7fdeb62cff000001">this memory dump</a> from a Rails3 'hello world' with Ruby 1.8.7 and it shows that Rails is using <a href="http://memprof.com/dump/4c52503c7fdeb62cff000001/detail?where=%7B%7D">331973 objects</a>.  While this is totally true, it doesn't mean that 330k objects are created per request. Instead that means that 330k objects are currently in memory. Rubygems loading already allocate a lot of objects, Rails even more but these objects won't be GC'd and don't matter as much as the ones allocated every single request. The total amount of memory used by a Ruby process isn't that important, however the fluctuation forcing the GC to run often is. This is why my middleware only cares about the allocation change during a request. (The GC should still traverse the entire memory so, smaller is better)</p>
+
+<p>The more object allocation you do at runtime/per request, the more the GC will need to run, the slower your code will be. So this is not a question of memory space, but more of performance. If your framework/ORM/library/plugin allocates too many objects per request maybe you should start by reporting the problem and if you can, offer some patches.</p>
+
+<p>Here are some hints about memory allocation:</p>
+
+<p>Creating a hash object really allocates more than an object, for instance {'joe' => 'male', 'jane' => 'female'} doesn't allocate 1 object but 7. (one hash, 4 strings + 2 key strings) If you can use symbol keys as they won't be garbage collected. However because they won't be GC'd you want to make sure to not use totally dynamic keys like converting the username to a symbol, otherwise you will 'leak' memory.</p>
+
+<p>Looking at a GC cycle in the Rails3 hello world example shows what objects get deallocated:</p>
+
+<blockquote><p>GC run, previous cycle was 6 requests ago.</p></blockquote>
+
+<p>GC 203 invokes. (amount of cycles since the program was started)
+Index   1</p>
+
+<p>Invoke Time(sec)   25.268</p>
+
+<p>Use Size(byte)   4702440</p>
+
+<p>Total Size(byte)   7307264</p>
+
+<p>Total Object   182414</p>
+
+<p>GC Time(ms) 22.35600000000204090611</p>
+
+<h2>56322 freed objects.</h2>
+
+<p><strong>[78%] 44334 freed strings.</strong>
+<strong>[7%] 4325 freed arrays.</strong>
+[0%] 504 freed bignums.
+[1%] 613 freed hashes.
+[0%] 289 freed objects.
+<strong>[5%] 3030 freed parser nodes (eval usage).</strong></p>
+
+<p>I did not list all the object types but it's pretty obvious that the main issue in the case of Rails is string allocation. To a certain extend the allocated arrays and the runtime use of eval are not helping either. (what is being eval'd at runtime anyway?)</p>
+
+<p>If you use the same string in various place of you code, you can "cache" them using a local var, instance variable, class variable or constant. Sometimes you can just replaced them by a symbol and save a few allocations/deallocations per request. Whatever you do tho, make sure there is a real need for it. My rule of thumb is that if some code gets exercised by 80% of the requests, it should be really optimized and avoid extra allocations so the GC won't slow us down.</p>
+
+<h2>What about a better GC?</h2>
+
+<p>That's the easy answer. When I mentioned this problem with Rails, a lot of people told me that I should use JRuby or Rubinius because their GC were much better. Unfortunately, that's not that simple and choosing an alternative implementation requires much further research and tests.</p>
+
+<p>But what annoys me with this solution is that using it is not solving the issue, it's just working around it. Yes, Ruby's GC isn't that great but that's the not the key issue, <strong>the key issue is that some libraries/frameworks allocate way too many objects</strong> and that nobody seems to care (or to even know it). I know that the Ruby Core Team is working on some optimizations and I am sure Ruby will eventually get an improved GC. In the meantime, it's easy to blame Matz, Koichi and the rest of the core team but again, it's ignoring that the root cause, totally uncontrolled memory allocation.</p>
+
+<p><strong>Maybe it's time for us, Rubyists, to think a bit more about our memory usage.</strong></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Ruby Revolution, take II]]></title>
+    <link href="http://mattetti.github.com//posts/2009/11/16/the-ruby-revolution-take-ii/"/>
+    <updated>2009-11-16T08:05:55+01:00</updated>
+    <id>http://mattetti.github.com//posts/2009/11/16/the-ruby-revolution-take-ii</id>
+    <content type="html"><![CDATA[<p>[caption id="attachment_638" align="alignright" width="300" caption="Mohandas Karamchand Gandhi"]<img src="http://merbist.com/wp-content/uploads/2009/11/GANDHI.jpg" alt="Mohandas Karamchand Gandhi" />[/caption]</p>
+
+<p>My recent '<a href="http://merbist.com/2009/11/09/the-ruby-revolution-is-over">Ruby revolution being over</a>' blog post generated quite a <a href="http://merbist.com/2009/11/09/the-ruby-revolution-is-over/#comments">lot of comments</a>.
+Let's be honest, I did not expect less from the readers.</p>
+
+<p>However, I noticed three types of reactions I would like to address:</p>
+
+<ul>
+<li><p>It was not a Ruby revolution, it was a Rails revolution</p></li>
+<li><p>The revolution has stalled due to no major enterprise backing</p></li>
+<li><p>The revolution will only be over when we will reach a greater adoption</p></li>
+</ul>
+
+
+<p>First of all, as <a href="http://merbist.com/2009/11/09/the-ruby-revolution-is-over/#comment-817">Joe correctly mentioned</a>, for me, the revolution is not about specifics or individuals. It's really about the big picture.</p>
+
+<p>The influence Ruby had and still has on the IT world seems to be undermined by some.
+Ruby is a dynamic, truly Object Oriented programming scripting language <strong>designed for humans first</strong>.
+The real paradigm shift is in the fact that Ruby was designed to make programming fast, enjoyable and easy instead of being optimized for the machines running it.
+This is for me the essence of the revolution and it is meant to transcend the scope of the Ruby language.</p>
+
+<p>The way I see it, Yukihiro Matsumoto (Matz) is more of an artist than a technician. He had a vision for software development. <strong>Programming languages cannot be optimized/designed for both machines and humans, the language designer has to choose which one he wants to privilege.</strong></p>
+
+<p>Most programming languages believe that it's up to the programmer to make an extra effort since he is smarter and easier to optimize than a machine. Matz questioned this approached and decided to turn things around. The result is one of the reasons why developers seem to just fall in love with Ruby.</p>
+
+<h3>It was not a Ruby revolution, it was a Rails revolution.</h3>
+
+<p>I am not denying that there <strong><em>also</em></strong> was a Rails revolution.
+But if you look at it, Rails and its revolution are a direct effect from Ruby's revolution.
+One might argue that it is actually an extension of Ruby's philosophy. But what is Rails if not a web framework designed to make web development fast, easy and enjoyable?
+Without Ruby there would not have been Rails and that was my point, the underlying revolution comes from the language itself.</p>
+
+<h3>The revolution has stalled due to no major enterprise backing.</h3>
+
+<p>That's an interesting comment. It is true that .NET and Java are still dominating the enterprise world. But let's be clear, Ruby was not designed to please "suit people".
+And to this day, there is still a strong feeling, from some individuals against the enterprise.
+In the past, DHH openly said that he did not care nor wanted to hear about the enterprise, more recently, Obie Fernandez, during one of his talks said: <a href="http://blip.tv/file/2733212">"Fuck the enterprise"</a> (49:39).
+<strong>But the truth is that Ruby and the so called enterprise, both, are changing.</strong>
+The smart people in the enterprise world saw potential in Ruby and decided to give it a chance. An easy way to include Ruby's philosophy without breaking the fragile enterprise equilibrium was to inject Ruby in the midst of well known and respected technologies such as Java and .NET. The enterprise can now use "re-branded Ruby versions" with "new taste or 'improved' flavor" like JRuby, Scala, groovy, IronRuby.
+I work for some enterprise clients and I can tell you that they 'also' use Ruby. Mainly because developers love the language.
+Microsoft, Apple and SAP investing in their own implementation of the language is yet another example that the enterprise recognizes the value of Matz's work.
+Nobody can blame them to try to make Ruby fit more their requirements.
+So, at the end of the day, Ruby is not the #1 enterprise language and Rails isn't used by the large majority of enterprise web apps, but that is NOT the point. Ruby has influenced the enterprise and we will see its effects for many years.</p>
+
+<h3>The revolution will only be over when we will reach a greater adoption</h3>
+
+<p>Saying that is missing the point entirely. A revolution is a step towards a situation change. Things don't change right away after a revolution. It takes a long time for mentalities to evolve and for people to change their habits.
+The consequences of a revolution are to be studied over the decades following the event. Take smalltalk for instance. Smalltalk adoption was not that great, however it brought a paradigm shift that directly influenced languages such as Ruby, Python and Objective-C.
+So, again, do not focus on the adoption but instead look at the influence of the Ruby revolution and the ripple effect around it.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Ruby revolution is over]]></title>
+    <link href="http://mattetti.github.com//posts/2009/11/09/the-ruby-revolution-is-over/"/>
+    <updated>2009-11-09T00:10:16+01:00</updated>
+    <id>http://mattetti.github.com//posts/2009/11/09/the-ruby-revolution-is-over</id>
+    <content type="html"><![CDATA[<p><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Eug%C3%A8ne_Delacroix_-_La_libert%C3%A9_guidant_le_peuple.jpg/300px-Eug%C3%A8ne_Delacroix_-_La_libert%C3%A9_guidant_le_peuple.jpg" alt="Liberté guidant le peuple - Eugene Delacroix posted by Matt Aimonetti" /></p>
+
+<p>According to wikipedia, a <strong>revolution</strong> (from the latin <em>revolutio</em>, "a turn around") is a fundamental change in power or organizational structures that takes place in a relatively short period of time.</p>
+
+<p>Somehow, I believe this is exactly what Ruby has done in the programming world, especially with the help of Rails. Over the last few years, Ruby lead a mini revolution in the midst of software development. Thanks to Ruby, developers now look at software development differently. One thing for sure, it pushed DHH to write Rails and then convinced thousands of people to develop Ruby based applications on a daily basis.</p>
+
+<h3>How did it happen?</h3>
+
+<p>Let's take a look at history of revolutions. Some people get frustrated their situation, they try to find workarounds until it's just too much and the revolution kicks in.</p>
+
+<p>Ruby came up with a new holistic perspective on things. Unlike most other programming languages, one of the main key value of Ruby is that writing code should feel right for the developer. You feel good about it because the language was written for humans and not machines. Basically, the language was designed to make you productive because it's designed to please you.</p>
+
+<p>As people were discovering web 2.0, Ruby also came with an opinionated framework, pushing for productivity, testing, simplicity and elegance. People started to see a new way of doing things and it quickly became the new, cool technology. Rails became a buzz word, developers were hired to work on cool projects, and books were selling by the thousands.</p>
+
+<h3>What did it change?</h3>
+
+<p>If you ask my mom, she would probably say: nothing, except that now my son works from his home office and he seems to really enjoy what he does for living.</p>
+
+<p>Relatively speaking, Ruby did not change the way we work or live. However, I believe that it has influenced many software developers around the globe. Why else do you think that companies like Microsoft, Apple or SAP are working on their own implementation of the Ruby language?</p>
+
+<p>When I first discovered Ruby, I was amazed at how "right" it felt, at how much fun it was to write code using its syntax and idioms. Now, if I don't get that feeling when testing a programming language, I think there is something wrong.</p>
+
+<p>The Ruby community also revived the Agile/XP world. Testing being a strong value of the community, we spent a lot of time discussing TDD, BDD, integration test as well as other practices such as pair programming, code review, sprints etc..</p>
+
+<p>A few years ago, when people were asking me what programming language I would write their app in, I would reply Ruby and had to explain what it was, why it is great and would have to answer a lot of questions from potential clients. Nowadays, people don't even argue, sites like hulu.com, twitter.com, yellowpages.com and many others are written in Ruby and it's just part of the tools known to work very well.</p>
+
+<h3>The revolution is over!</h3>
+
+<p>Yes, Ruby made it's revolution and the world "has changed". But a real movement doesn't die after its revolution, that's actually when it has to be strong and defend its values.</p>
+
+<p>This doesn't mean that Ruby is dead or that Rails is "passé". To the contrary, Ruby imposed itself as a new valued and respected player, a new standard if you will.</p>
+
+<p>Ruby is certainly not the "new kid in the block"anymore nor the "popular kid", however lots of older kids seem to want to have her on their team. (.NET, Java, Objective-C can all use Ruby)</p>
+
+<p>The TDD + Ruby combo doesn't surprise anyone anymore and the Enterprise is slowly but surely adopting Ruby. Ruby is now just getting better, tools and libraries are improving and the amount of users is growing.</p>
+
+<p>Certainly the Ruby community is still small compared to other software developer communities, but the fundamental change was done and we are now working on improvement and keeping things running smoothly, growing and getting new ideas inspired by our experience and other communities.</p>
+
+<p>Long live Ruby!</p>
+
+<p><a href="http://merbist.com/2009/11/16/the-ruby-revolution-take-ii/">See my follow up.</a></p>
+]]></content>
+  </entry>
+  
+</feed>

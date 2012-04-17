@@ -1,0 +1,214 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>MacRuby, changing the Ruby ecosystem - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="MacRuby, Changing the Ruby Ecosystem What&#8217;s MacRuby? MacRuby is an Apple-sponsored, open source, full Ruby implementation on top of Objective- &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/Matt-Aimonetti/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    <link rel="canonical" href="http://mattetti.github.com/">
+    <link href="/mattetti/favicon.png" rel="shortcut icon">
+    <link href="/mattetti/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/mattetti/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/mattetti/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com/">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/Matt-Aimonetti/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/mattetti/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/mattetti/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/mattetti/">About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/mattetti/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">MacRuby, Changing the Ruby Ecosystem</h1>
+    <div class="entry"><h3>What&#8217;s MacRuby?</h3>
+
+<p><a href="http://www.macruby.org/">MacRuby</a> is an Apple-sponsored, open source, full Ruby implementation on top of <a href="http://en.wikipedia.org/wiki/Objective-C">Objective-C</a> runtime. In other words, whatever code runs on Ruby 1.9, should/will run on MacRuby. Yes, you read correctly, MacRuby can/will be able to run all your Ruby code. That means that eventually you will even be able to run your <a href="http://en.wikipedia.org/wiki/Ruby%20on%20Rails">Rails</a>/<a href="http://en.wikipedia.org/wiki/Sinatra%20%28software%29">Sinatra</a>/new-sexy-ruby-framework app on MacRuby.</p>
+
+<p>Unlike <a href="http://en.wikipedia.org/wiki/RubyCocoa">RubyCocoa</a>, MacRuby is not a bridge, it is a full implementation of the Ruby language on top of Apple&#8217;s Objective-C runtime. Taking a huge shortcut, MacRuby implements the Ruby syntax by aliasing it to the Obj-C language counterpart. A Ruby string instance is really in fact, an instance of <a href="http://developer.apple.com/documentation/Cocoa/Reference/Foundation/Classes/NSMutableString_Class/Reference/Reference.html">NSMutableString</a>. This is obviously transparent for you as a developer since you have the same Ruby API, but it also means that MacRuby can make use of the various Objective-C&#8217;s goodies such as native threads, <a href="http://en.wikipedia.org/wiki/Objective-c#Garbage_collection"> garbage collector</a> in the background as well as the runtime performance.</p>
+
+<p>On top of that, you have full access to the Obj-C API from your Ruby code. (tip: in macirb, try &#8220;my string&#8221;.methods(true, true).sort to see the available Ruby + Objective-C methods on your String instance)  The reason why having access to Objective-C is important is because it gives you the possibility to write native <a href="http://en.wikipedia.org/wiki/Cocoa%20%28API%29">Cocoa</a>apps using Ruby. For those who don&#8217;t know Cocoa, is a set of APIs for MacOSX development.</p>
+
+<p>However, note that even though, the Cocoa support is almost complete and stable, MacRuby is still in development, especially on the Ruby side of things.</p>
+
+<h3>What is it not?</h3>
+
+<ul>
+<li><p><a href="http://www.macruby.org/">MacRuby</a> is not a fork of Ruby. Full <a href="http://rubyspec.org/">rubyspec</a> compliance is expected! It&#8217;s true that MacRuby supports smalltalk/Obj-C method selectors so it might be considered a language superset.</p></li>
+<li><p>MacRuby is not limited to the OSX platform. All its dependencies are open source and could possibly be compiled for other POSIX-based systems such as Linux.. (not done yet)</p></li>
+<li><p>Even if MacRuby&#8217;s primary goal is to allow you to write efficient Cocoa apps, it does not mean that MacRuby is limited to that.</p></li>
+<li><p>MacRuby doesn&#8217;t require you to learn Objective-C in order to develop Cocoa apps. (you just need to understand Obj-C selectors)</p></li>
+</ul>
+
+
+<h3>What&#8217;s coming up?</h3>
+
+<p>The current version of MacRuby (today being the 27th of May 2009) is version 0.4. You might have heard of things about MacRuby crazy performance, <a href="http://en.wikipedia.org/wiki/Low%20Level%20Virtual%20Machine">LLVM</a>, <a href="http://en.wikipedia.org/wiki/AOT%20compiler">AOT compilation</a><a href="http://en.wikipedia.org/wiki/AOT%20compiler">AOT compilation</a> etc&#8230; This is all happening in the &#8216;experimental&#8217; branch.</p>
+
+<p>What&#8217;s going on is that up to MacRuby 0.5, MR was  using YARV (Ruby 1.9 interpreter) on top of Obj-C and which obviously limited MacRuby&#8217;s  to YARV&#8217;s performance. After RubyConf 2008, Laurent Sansonetti, MacRuby&#8217;s lead developer, decided to try removing YARV to only keep its <a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree">AST</a> and experiment with using <a href="http://en.wikipedia.org/wiki/Llvm">LLVM</a> instead of the 1.9 interpreter.</p>
+
+<p>This switch turned out to be very promising and was noticed right away by influential people such as <a href="http://antoniocangiano.com/2009/03/29/why-macruby-matters/">IBM&#8217;s Antonio Cangiano</a>. Since then, performance and compatibility have increased. Laurent even started working on an Ahead Of Time (AOT) compiler: <a href="http://pastie.org/485095">http://pastie.org/485095</a> What&#8217;s really impressive is that in this specific example (Fibonacci sequence), <strong>MacRuby&#8217;s compiled code is faster than Objective-C!</strong> But let&#8217;s not jump the gun. First this is a very very early prototype and most of your apps won&#8217;t be using Fib. sequences ;) In this case, MacRuby&#8217;s recursive method dispatch is faster but again, this is just a proof of concept and even though MacRuby is getting close to Obj-C speed, it&#8217;s still far from matching Obj-C&#8217;s impressive performance.</p>
+
+<p>What this basically means is that you will be able to compile your Ruby code down to binary code. Imagine, taking your Rails app and compiling it down to a binary file that you can just push to your server :) But really, what&#8217;s almost more important is that Ruby will get closer to Objective-C&#8217;s speed.</p>
+
+<h3>Why will MacRuby change the Ruby ecosystem?</h3>
+
+<p>As a web developer, getting better performance is great. But Ruby is already fast enough. Rails is faster than any PHP framework out there and when doing Merb&#8217;s benchmarks we proved that Ruby for the web can definitely be fast.</p>
+
+<p>Now if MacRuby ends up running 3-7X faster than Ruby 1.9 (no one can tell for sure), existing Ruby developers will certainly be really pleased but it will probably affect more people outside of our community than within. Let&#8217;s face it, our community isn&#8217;t that big but it&#8217;s growing fast and people are mainly coming to Ruby for its web frameworks. But Ruby has much more than that to offer. Desktop applications, <a href="http://www.railsenvy.com/2009/5/11/rubystein-ruby-meets-wolfenstein">video games</a>, scientific computation and even embedded apps. Apple is betting on Ruby probably because of the fact that they see the potential in the language itself.</p>
+
+<p>Would people still use Java if Ruby is as fast/faster than Java? Probably! Would they think about using Ruby for their next project? I would certainly hope so!</p>
+
+<p>Ruby is viral, it&#8217;s such a great language, people who have started using it are having a hard time going back to what they used before. But to spread the &#8216;love&#8217;, we need to give people the opportunity to discover why Ruby is so great and to do that, we need to make sure Ruby is relevant to them. By making Ruby a realistic option to write desktop/mobile applications, we are targeting a new audience. An experienced audience which will be able to bring a new perspective to our ecosystem and help it grow.</p>
+
+<p>Of course, MacRuby isn&#8217;t the only implementation out there trying to do that. JRuby and IronRuby are also very interesting projects. My take on it, is that MacRuby will be able to change things because of its new approach and potential community. It will more than likely be the first Ruby implementation compiling down to binary code, it will more than likely be the fastest implementation and it will more than likely draw a different type of developer.</p>
+
+<p>Does it mean that <a href="http://jruby.codehaus.org/">JRuby</a>, <a href="http://www.ironruby.net/">IronRuby</a>, <a href="http://www.infoq.com/news/2009/04/ruby-on-sap">BlueRuby</a> will be useless? Absolutely not! Matz is the first one to encourage diversity and I agree that this is a great way to move forward. These projects solve different problems and all have pros and cons, but they also all share a similar goal: making Ruby a better and more popular language outside of its original community. JRuby, IronRuby and MacRuby bring Ruby to the respective Java, .net and Cocoa communities, and indirectly bring fresh developers to Ruby. These implementations are critical in the way they actually bridge existing communities and in the end, all Rubyists will benefit from it. Also, even though MacRuby and IronRuby are in active development, JRuby is the only mature alternative to MRI/YARV at this point and it proved that Ruby can coexist in a different community as well as contribute a lot of interesting things back to the Ruby community.</p>
+
+<p>To summarize, I see tremendous potential in MacRuby. There is the obvious technical aspect of the implementation, but also the indirect affect MacRuby could have on our community. I believe that MacRuby is an agent of change and will help bringing more diversity to our community. It will change mentalities and push Ruby to places where it&#8217;s being struggling to make a mark. I can see the so-called &#8220;Enterprise&#8221; people looking at Ruby differently. I also think that MacRuby has the potential to be at the origin of a new type of hybrid application, mixing desktop/mobile/distributed applications with centralized web applications. Why not dream of p2p applications/games using a subset of Rails to communicate between each other and with a central server?</p>
+
+<p><a href="http://macruby.org"><img src="http://merbist.com/wp-content/uploads/2009/05/macruby-site.jpg" alt="macruby-site" /></a></p>
+
+<p>If you are interested in learning more about MacRuby, check the list of <a href="http://www.macruby.org/documentation.html">resources available on the MacRuby site</a>.</p>
+
+<p>Rich Kilmer and I are also working on a documentation application for Cocoa and <a href="http://www.macruby.org/hotcocoa.html">HotCocoa</a> as well as a MVC framework for writing Cocoa apps using HotCocoa (HotCocoa is a thin, idiomatic Ruby layer that sits above Cocoa and other frameworks).</p>
+
+<p>Make sure to keep an eye on <a href="http://twitter.com/macruby">@macruby</a> and the <a href="http://macruby.org">MacRuby website</a> if you want to keep track of the latest news.</p>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-27T12:32:05+02:00" pubdate data-updated="true">May 27<span>th</span>, 2009</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/mattetti/articles/categories/macruby/'>macruby</a>, <a class='category' href='/mattetti/articles/categories/ruby/'>ruby</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/mattetti/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/mattetti/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

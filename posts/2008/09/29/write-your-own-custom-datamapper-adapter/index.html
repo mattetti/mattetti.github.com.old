@@ -1,0 +1,237 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Write your own custom DataMapper adapter - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Write Your Own Custom DataMapper Adapter If you read this blog, you probably know that Merb&#8217;s best ORM friend is DataMapper. [caption id=&# &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/Matt-Aimonetti/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    <link rel="canonical" href="http://mattetti.github.com/">
+    <link href="/mattetti/favicon.png" rel="shortcut icon">
+    <link href="/mattetti/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/mattetti/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/mattetti/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com/">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/Matt-Aimonetti/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/mattetti/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/mattetti/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/mattetti/">About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/mattetti/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Write Your Own Custom DataMapper Adapter</h1>
+    <div class="entry"><p>If you read this blog, you probably know that <a href="http://merbivore.com">Merb</a>&#8217;s best <a href="http://en.wikipedia.org/wiki/Object-relational_mapping">ORM</a> friend is <a href="http://datamapper.org/">DataMapper</a>.</p>
+
+<p>[caption id=&#8221;&#8221; align=&#8221;alignleft&#8221; width=&#8221;240&#8221; caption=&#8221;compounds in basil oil have potent antioxidant and is used for supplementary treatment of stress&#8221;]<a href="http://flickr.com/photos/darn/190457943/"><img src="http://farm1.static.flickr.com/55/190457943_8b93fda9e6_m.jpg" alt="compounds in basil oil have potent antioxidant and is used for supplementary treatment of stress" /></a>[/caption]</p>
+
+<p>Merb works very well with ActiveRecord and Sequel but most of the Merbivores get excited about <a href="http://datamapper.org/">DataMapper</a>.</p>
+
+<p>DataMapper has a lot of cool stuff going for it. I&#8217;m planning on writingi few articles about what I particularily like with DM and some of the misconceptions.</p>
+
+<p>I&#8217;m going to give a talk about DataMapper during <a href="http://merbcamp.com">MerbCamp</a> and something I want to cover is the fact that you can write DM adapters for virtually anything. From an adapter for couchdb (available in dm-more) to an <a href="http://github.com/wycats/dm-adapters/tree/master/salesforce">adapter for SalesForce API</a>. That&#8217;s the kind of stuff that gets me excited, a bit like what <a href="http://ambition.rubyforge.org/">Ambition</a> does but built-in in DM.</p>
+
+<p>So, I decided to take some advise from <a href="http://yehudakatz.com/">Yehuda</a> and dkubb and wrote my own adapter for <a href="http://video.google.com">Google Video</a>. I had just finished a <a href="http://github.com/mattetti/gvideo">gem to retrieve google videos</a> for a given google user and thought it would be a perfect exercise to mix a <a href="http://en.wikipedia.org/wiki/Screen_scraping">http-scraper</a> with a DM adapter.</p>
+
+<p>Based on the advise I received, I started by defining the API I want to use:</p>
+
+<p>I matched the API calls to the underlying methods I would need to make. I then modified my original gem to support conditional calls.</p>
+
+<p>Once that was done I implemented the required methods for my models to support the Model.first and Model.all calls with conditions.</p>
+
+<p>A custom adapter inherits from <a href="http://github.com/sam/dm-core/tree/master/lib/dm-core/adapters/abstract_adapter.rb">AbstractAdapter</a> and can define the default adapter methods:</p>
+
+<pre><code>&lt;div id="LC9" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;resources&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC10" class="line"&gt;Â Â Â Â Â Â Â Â &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="no"&gt;NotImplementedError&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC11" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;end&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC13" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;read_many&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC14" class="line"&gt;Â Â Â Â Â Â Â Â &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="no"&gt;NotImplementedError&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC15" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;end&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC17" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;read_one&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC18" class="line"&gt;Â Â Â Â Â Â Â Â &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="no"&gt;NotImplementedError&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC19" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;end&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC21" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;attributes&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC22" class="line"&gt;Â Â Â Â Â Â Â Â &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="no"&gt;NotImplementedError&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC23" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;end&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC25" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;delete&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC26" class="line"&gt;Â Â Â Â Â Â Â Â &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="no"&gt;NotImplementedError&lt;/span&gt;&lt;/div&gt;
+&lt;div id="LC27" class="line"&gt;Â Â Â Â Â Â &lt;span class="k"&gt;end
+&lt;/span&gt;&lt;/div&gt;
+</code></pre>
+
+<p>Since my adapter only needs to read data, I just had to implement #read_one and #read_many. I implemented a #read private method accessed by #read_one and #read_many as you can see <a href="http://github.com/mattetti/dm-gvideo-adapter/tree/master/lib/dm-gvideo-adapter.rb#L29-60">here</a>.</p>
+
+<p>Because DM offers a clean and consistent API, things were pretty easy and you can check the <a href="http://github.com/mattetti/dm-gvideo-adapter/tree/master/spec/dm-gvideo-adapter_spec.rb">specs</a> to have a better understanding of how things are expected to work.</p>
+
+<p>As you can see with less than 80LOC, I implemented an adapter that I can use and reuse cleanly in my apps. And on top of that, the adapter uses a standard API known by everyone using DM.</p>
+
+<p><strong>Even though, this adapter has a very limited scope, I hope this example will inspire you and at your turn, will write some more cool adapters to share with the rest of us.</strong></p>
+
+<h2>UPDATE:</h2>
+
+<p>Sam Smoot, also known as Mr DataMapper made a very good comment. I should explain a bit more how you create a collection of objects to return when a user does a .all or .first call.</p>
+
+<p>The whole collection creation is a bit strange at first.</p>
+
+<p>In my read method, &#8220;set&#8221; is a DataMapper::Collection instance that is passed by the #read_one or #read_many method.</p>
+
+<p>The collection needs to be loaded with an array of ordered params.</p>
+
+<p>For instance in this case, to create a Video collection I need to load the collection with an ordered array of params like docid, title etc..Â  However, some params might be lazy loaded and in some instance, the query might be in the form of Video.all(:fields => :title)</p>
+
+<p>To figure out what fields/params we need, I used:</p>
+
+<pre><code>&lt;span class="n"&gt;properties&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fields
+&lt;/span&gt;
+</code></pre>
+
+<p>Which retrieves the required fields. Once you have the fields you need to return the structured data and that&#8217;s when I used the #result_values method which basically loop through the fields and retrieves the data by sending the param as a method to the result:</p>
+
+<pre><code>&lt;span class="n"&gt;properties&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;map&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nb"&gt;p&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;p&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;field&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;repository_name&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+</code></pre>
+
+<p>The values once retrieved get loaded, but here is a trick I took from wycat&#8217;s saleforce API:</p>
+
+<pre><code>&lt;span class="n"&gt;arr&lt;/span&gt; &lt;span class="p"&gt;?&lt;/span&gt; &lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;break&lt;/span&gt; &lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;))
+&lt;/span&gt;
+</code></pre>
+
+<p>This snippet is quite simple if we set arr as true, that means we want to return an array so we will keep on looping (used by read_more when we want to return an array of objects). Otherwise we use the break operator which will stop the loop but also return a value. (yes, Ruby is awesome). By returning a single object we do exactly what&#8217;s expected and don&#8217;t have to call #first on a returned array. Pretty slick</p>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-09-29T00:38:46+02:00" pubdate data-updated="true">Sep 29<span>th</span>, 2008</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/mattetti/articles/categories/news/'>News</a>, <a class='category' href='/mattetti/articles/categories/tutorial/'>Tutorial</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/mattetti/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/mattetti/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

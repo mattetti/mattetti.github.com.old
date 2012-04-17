@@ -1,0 +1,273 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Go's reflection example - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Go's Reflection Example The Go Programming language is really cool language by Google. According to the sales pitch, it&#8217;s a &#8220;fast, &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/Matt-Aimonetti/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    <link rel="canonical" href="http://mattetti.github.com/">
+    <link href="/mattetti/favicon.png" rel="shortcut icon">
+    <link href="/mattetti/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/mattetti/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/mattetti/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com/">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/Matt-Aimonetti/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/mattetti/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/mattetti/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/mattetti/">About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/mattetti/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Go's Reflection Example</h1>
+    <div class="entry"><p>The <a href="http://golang.org/">Go Programming language</a> is really cool language by Google. According to the sales pitch, it&#8217;s a <strong><em>&#8220;fast, statically typed, compiled language that feels like a dynamically typed, interpreted language&#8221;</em></strong>. Well, if you are like me, you don&#8217;t trust sales pitches because you know that people writing them dont&#8217; care about you, they care about their product. However cynical you are, you still have to check the facts. So here is a quick demonstration showing how to use Go&#8217;s reflection feature.</p>
+
+<p>Installing Go is actually really straight forward on a Mac, and slightly harder on Linux, check <a href="http://golang.org/doc/install.html">this guide </a>to see how to build Go in a few minutes.</p>
+
+<p>Once all setup, you might want to read the documentation to see how to code in Go. Go is actually a kind of nice version of C with a<a href="http://golang.org/doc/go_spec.html"> simplified syntax</a>, no header files, really fast compilation time, a garbage collector and a <a href="http://golang.org/doc/effective_go.html?#interfaces_and_types">simple way to approach object inheritance</a> without turning in the complicated mess C++ is. The language is designed around the concept of <a href="http://golang.org/doc/effective_go.html?h=goroutines#concurrency">goroutines, a very nice way to handle concurrency</a>. It also has some features that Rubyists, Pythonistas and Javascripters wouldn&#8217;t want to live without such as closures and some they probably wish they had such as <a href="http://golang.org/doc/effective_go.html?#defer">defer</a>. But of the things we are used to with dynamic languages is the concept of reflection. In a nutshell, at runtime, your code can reflect on the type of a given object and let the developer act accordingly. Depending on your programming background that might be obvious or you might not see the value. To be honest, that&#8217;s not the question here. What I&#8217;m interested in showing you is how it works.</p>
+
+<p>For the sake of this demo, let&#8217;s pretend we want to have a &#8220;Dish&#8221; data model, each instance of the &#8220;Dish&#8221; type will have a few attributes, an id, a name, an origin and a custom query which really is a function that we store as an attribute. Here is how we would represent that model in Go:</p>
+
+<pre><code>// Data Model
+type Dish struct {
+  Id  int
+  Name string
+  Origin string
+  Query func()
+}
+</code></pre>
+
+<p>This is more or less the equivalent of the following Ruby code:</p>
+
+<pre><code>class Dish
+  attr_accessor :id, :name, :origin, :query
+end
+</code></pre>
+
+<p>Ruby works slightly differently in the sense that defining attribute accessors create getters and setter methods but doesn&#8217;t technically create instance variables until they are used. Here is what I mean:</p>
+
+<pre><code>shabushabu = Dish.new
+shabushabu.instance_variables # =&gt; []
+shabushabu.name = "Shabu-Shabu"
+shabushabu.instance_variables # =&gt; ["@name"]
+shabushabu.origin = "Japan"
+shabushabu.instance_variables # =&gt; ["@name", "@origin"]
+</code></pre>
+
+<p>Another way of checking on the accessors is to check the methods defined on the object:</p>
+
+<pre><code>shabushabu.methods - Object.new.methods
+=&gt; ["name", "name=", "origin", "origin=", "id=", "query", "query="]
+</code></pre>
+
+<p>But anyway, this post isn&#8217;t about Ruby, it&#8217;s about Go and what we would like is to reflect on an object of &#8220;Dish&#8221; type and see its attributes. The good news is that the Go language ships with a <a href="http://golang.org/pkg/reflect/">package to do just that</a>. Here is the full implementation:</p>
+
+<pre><code>package main
+
+import(
+  "fmt"
+  "reflect"
+)
+
+func main(){
+  // iterate through the attributes of a Data Model instance
+  for name, mtype := range attributes(&amp;Dish;{}) {
+    fmt.Printf("Name: %s, Type %s\n", name, mtype.Name())
+  }
+}
+
+// Data Model
+type Dish struct {
+  Id  int
+  Name string
+  Origin string
+  Query func()
+}
+
+// Example of how to use Go's reflection
+// Print the attributes of a Data Model
+func attributes(m interface{}) (map[string]reflect.Type) {
+  typ := reflect.TypeOf(m)
+  // if a pointer to a struct is passed, get the type of the dereferenced object
+  if typ.Kind() == reflect.Ptr{
+    typ = typ.Elem()
+  }
+
+  // create an attribute data structure as a map of types keyed by a string.
+  attrs := make(map[string]reflect.Type)
+  // Only structs are supported so return an empty result if the passed object
+  // isn't a struct
+  if typ.Kind() != reflect.Struct {
+    fmt.Printf("%v type can't have attributes inspected\n", typ.Kind())
+    return attrs
+  }
+
+  // loop through the struct's fields and set the map
+  for i := 0; i &lt; typ.NumField(); i++ {
+    p := typ.Field(i)
+      if !p.Anonymous {
+        attrs[p.Name] = p.Type
+      }
+     }
+
+  return attrs
+}
+</code></pre>
+
+<p>Unfortunately, my code highlighter doesn&#8217;t support the Go syntax, but GitHub does, so here is a <a href="https://gist.github.com/1009629">pretty version</a>.</p>
+
+<p>There are ways of running Go source code like Ruby or Python scripts but in this case, we&#8217;ll use the compiler &amp; linker provided with Go. I named my source file &#8220;example.go&#8221;, and here is how I compiled, linked and run it:</p>
+
+<pre><code>$ 6g example.go &amp;&amp; 6l example.6 &amp;&amp; ./6.out
+Name: Origin, Type string
+Name: Id, Type int
+Name: Query, Type 
+Name: Name, Type string
+</code></pre>
+
+<p>As you can see each attribute is printed out with its name and type. The code might seem a bit odd if you never looked at Go before.
+Here is a quick rundown of the code:</p>
+
+<p>In our main function, we create a new instance of type Dish on which we call attributes on. The call returns a map on which we iterate through and print the attribute name (key) and type (value).
+The attributes function is defined a bit below and and it takes any type of objects (empty interface) and returns a map, which is like a Hash or a Dictionary. The map has keys of String type and values of &#8220;Type&#8221; type. The &#8220;Type&#8221; type is defined in the reflect package. Inside the function, 23 then use the previously mentioned reflect package to check on the type and the name of each attribute and assign it to a map object. (note that I&#8217;m explicitly returning the map, but I could have done it in a more implicit way)</p>
+
+<p>So there you go, that&#8217;s how you use reflection in Go. Pretty nifty and simple.</p>
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-27T12:12:32+02:00" pubdate data-updated="true">Jun 27<span>th</span>, 2011</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/mattetti/articles/categories/misc/'>Misc</a>, <a class='category' href='/mattetti/articles/categories/tutorial/'>Tutorial</a>, <a class='category' href='/mattetti/articles/categories/blog-post/'>blog-post</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/mattetti/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/mattetti/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>

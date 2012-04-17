@@ -1,0 +1,236 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ruby concurrency explained - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Ruby Concurrency Explained Concurrency is certainly not a new problem but it&#8217;s getting more and more attention as machines start having more &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/Matt-Aimonetti/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    <link rel="canonical" href="http://mattetti.github.com/">
+    <link href="/mattetti/favicon.png" rel="shortcut icon">
+    <link href="/mattetti/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <img class="photo left" src="/mattetti/images/matt_aimonetti.jpg" />
+    <h1 class="left"><a itemprop="name" href="/mattetti/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architecture</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/articles/archives">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <form class="search right" action="http://google.com/search" method="get">
+        <input class="left" type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:mattetti.github.com/">
+      </form>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/Matt-Aimonetti/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/mattetti/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/mattetti/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/mattetti/">About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+<!--
+<div id="banner" class="inner">
+	<div class="container">
+		<ul class="feed"></ul>
+	</div>
+	<small><a href="http://twitter.com/merbist">merbist</a> @ <a href="http://twitter.com">Twitter</a></small>
+	<div class="loading">Loading...</div>
+</div>
+<script src="/mattetti/javascripts/twitter.js"></script>
+<script type="text/javascript">
+	(function($){
+		$('#banner').getTwitterFeed('merbist', 0, false);
+	})(jQuery);
+</script>
+-->
+
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Ruby Concurrency Explained</h1>
+    <div class="entry"><p>Concurrency is certainly <a href="http://en.wikipedia.org/wiki/Petri_Net">not a new problem</a> but it&#8217;s getting more and more attention as machines start having more than 1 core, that web traffic increases drastically and that some new technologies show up saying that they are better because they handle concurrency better.
+If that helps, think of concurrency as multitasking. When people say that they want concurrency, they say that they want their code to do multiple different things at the same time. When you are on your computer, you don&#8217;t expect to have to choose between browsing the web and listening to some music. You more than likely want to run both concurrently. It&#8217;s the same thing with your code, if you are running a webserver, you probably don&#8217;t want it to only process one request at a time.
+The aim of this article is to explain as simply as possible the concept of concurrency in Ruby, the reason why it&#8217;s a complicated topic and finally the different solutions to achieve concurrency.</p>
+
+<p>First off, if you are not really familiar with concurrency, take a minute to <a href="http://en.wikipedia.org/wiki/Concurrency_%28computer_science%29">read the wikipedia article on the topic</a> which is a great recap on the subject. But now, you should have noticed that my above example was more about parallel programming than concurrency, but we&#8217;ll come back to that in a minute.</p>
+
+<blockquote><p><strong>The real question at the heart of the quest for concurrency is: &#8220;how to increase code throughput&#8221;.</strong></p></blockquote>
+
+<p>We want our code to perform better, and we want it to do more in less time. Let&#8217;s take two simple and concrete examples to illustrate concurrency. First, let&#8217;s pretend you are writing a twitter client, you probably want to let the user scroll his/her tweets while the latest updates are  being fetched. In other words, you don&#8217;t want to block the main loop and interrupt the user interaction while your code is waiting for a response from the Twitter API. To do that, a common solution is to use multiple <strong>threads</strong>. Threads are basically processes that run in the same memory context. We would be using one thread for the main event loop and another thread to process the remote API request. Both threads share the same memory context so once the Twitter API thread is done fetching the data it can update the display. Thankfully, this is usually transparently handled by asynchronous APIs (provided by the OS or the programming language std lib) which avoid blocking the main thread.</p>
+
+<p>The second example is a webserver. Let&#8217;s say you want to run a Rails application. Because you are awesome, you expect to see a lot of traffic. Probably more than 1 QPS (query/request per second). You benchmarked your application and you know that the average response time is approximately 100ms. Your Rails app can therefore handle 10QPS using a single process (you can do 10 queries at 100ms in a second).</p>
+
+<p>But what happens if your application gets more than 10 requests per second? Well, it&#8217;s simple, the requests will be backed up and will take longer until some start timing out. This is why you want to improve your concurrency. There are different ways to do that, a lot of people feel really strong about these different solutions but they often forget to explain why they dislike one solution or prefer one over the other. You might have heard people conclusions which are often one of these: <a href="http://canrailsscale.com/">Rails can&#8217;t scale</a>, you only get concurrency with <a href="http://jruby.org/">JRuby</a>, <a href="http://adam.heroku.com/past/2009/8/13/threads_suck/">threads suck</a>, the only way to concurrency is via threads, we should switch to <a href="http://www.erlang.org/">Erlang</a>/<a href="http://nodejs.org/">Node.js</a>/<a href="http://www.scala-lang.org/">Scala</a>, use<a href="http://www.rubyinside.com/fibers-eventmachine-rack-performance-gains-3395.html"> fibers</a> and you will be fine, add more machines, <a href="http://tomayko.com/writings/unicorn-is-unix">forking > threading</a>.  Depending on who said what and how often you heard it on twitter, conferences, blog posts, you might start believing what others are saying. But do you really understand why people are saying that and are you sure they are right?</p>
+
+<p>The truth is that this is a complicated matter. The good news is that it&#8217;s not <em>THAT</em> complicated!</p>
+
+<p>The thing to keep in mind is that the concurrency models are often defined by the programming language you use. In the case of Java, <a href="http://download.oracle.com/javase/tutorial/essential/concurrency/index.html">threading is the usual solution</a>, if you want your Java app to be more concurrent, just run every single request in its own thread and you will be fine (kinda). In PHP, you simply don&#8217;t have threads, instead you will start a new process per request. Both have pros and cons, the advantage of the Java threaded approach is that the memory is shared between the threads so you are saving in memory (and startup time), each thread can easily talk to each other via the shared memory. The advantage of PHP is that you don&#8217;t have to worry about locks, deadlocks, threadsafe code and all that mess hidden behind threads. Described like that it looks pretty simple, but you might wonder why PHP doesn&#8217;t have threads and why Java developers don&#8217;t prefer starting multiple processes. The answer is probably related to the language design decisions. PHP is a language designed for the web and for short lived processes. PHP code should be fast to load and not use too much memory. Java code is slower to boot and to warm up, it usually uses quite a lot of memory. Finally, Java is a general purpose programming language not designed primarily for the internet. Others programming languages like <a href="http://www.erlang.org/">Erlang</a> and <a href="http://www.scala-lang.org/">Scala</a> use a third approach: <a href="http://en.wikipedia.org/wiki/Actor_model">the actor model</a>. The actor model is somewhat a bit of a mix of both solutions, the difference is that actors are a like threads which don&#8217;t share the same memory context. Communication between actors is done via exchanged messages ensuring that each actor handles its own state and therefore avoiding corrupt data (two threads can modify the same data at the same time, but an actor can&#8217;t receive two messages at the exact same time). We&#8217;ll talk about that design pattern later on, so don&#8217;t worry if you are confused.</p>
+
+<p>What about Ruby? Should Ruby developers use threads, multiple processes, actors, something else? The answer is: <strong>yes</strong>!</p>
+
+<h2>Threads</h2>
+
+<p>Since version 1.9, Ruby has native threads (before that <a href="http://en.wikipedia.org/wiki/Green_threads">green threads</a> were used). So in theory, if we would like to, we should be able to use threads everywhere like most Java developers do. Well, that&#8217;s almost true, the problem is that Ruby, like Python uses a <a href="http://en.wikipedia.org/wiki/Global_Interpreter_Lock">Global Interpreter Lock</a> (aka GIL). This GIL is a locking mechanism that is meant to protect your data integrity. The GIL only allows data to be modified by one thread at time and therefore doesn&#8217;t let threads corrupt data but also it doesn&#8217;t allow them to truly run concurrently. That is why some people say that Ruby and Python are not capable of (true) concurrency.</p>
+
+<p><img src="https://img.skitch.com/20110223-kk58iq5yjdpmyswf7nuya4c4kp.jpg" alt="Global Interpreter Lock by Matt Aimonetti" /></p>
+
+<p>However these people often don&#8217;t mention that the GIL makes single threaded programs faster, that multi-threaded programs are much easier to develop since the data structures are safe and finally that a lot of C extensions are not thread safe and without the GIL, these C extensions don&#8217;t behave properly. These arguments don&#8217;t convince everyone and that&#8217;s why you will hear some people say you should look at another Ruby implementation without a GIL, such as <a href="http://jruby.org/">JRuby</a>, <a href="http://rubini.us/">Rubinius</a> (hydra branch) or <a href="http://macruby.org">MacRuby</a> (Rubinius &amp; MacRuby also offer other concurrency approaches). If you are using an implementation without a GIL, then using threads in Ruby has exactly the same pros/cons than doing so in Java. However, it means that now you have to deal with the nightmare of threads: making sure your data is safe, doesn&#8217;t deadlock, check that your code, your libs, plugins and gems are thread safe. Also, running too many threads might affect the performance because your OS doesn&#8217;t have enough resources to allocate and it ends up spending its time context switching. It&#8217;s up to you to see if it&#8217;s worth it for your project.</p>
+
+<h2>Multiple processes &amp; forking</h2>
+
+<p>That&#8217;s the most commonly used solution to gain concurrency when using Ruby and Python. Because the default language implementation isn&#8217;t capable of true concurrency or because you want to avoid the challenges of thread programming, you might want to just start more processes. That&#8217;s really easy as long as you don&#8217;t want to share states between running processes. If you wanted to do so, you would need to use <a href="http://segment7.net/projects/ruby/drb/introduction.html">DRb</a>, a message bus like <a href="http://www.rabbitmq.com/">RabbitMQ</a>, or a shared data store like memcached or a DB. The caveat is that you now need to use a LOT more memory. If want to run 5 Rails processes and your app uses 100Mb you will now need 500Mb, ouch that&#8217;s a lot of memory! That is exactly what happens when you use a Rails webserver like Mongrel. Now some other servers like <a href="http://www.modrails.com/">Passenger</a> and <a href="http://unicorn.bogomips.org/">Unicorn</a> found a workaround, they rely on <a href="http://en.wikipedia.org/wiki/Fork_%28operating_system%29">unix forking</a>. The advantage of forking in an unix environment implementing the copy-on-write semantics is that we create a new copy of the main process but they both &#8220;share&#8221; the same physical memory. However, each process can modify its own memory without affecting the other processes. So now, Passenger can load your 100Mb Rails app in a process, then fork this process 5 times and the total footprint will be just a bit more than 100Mb and you can now handle 5X more concurrent requests. Note that if you are allocating memory in your request processing code (read controller/view) your overall memory will grow but you can still run many more processes before running out of memory. This approach is appealing because really easy and pretty safe. If a forked process acts up or leaks memory, just destroy it and create a new fork from the master process. Note that this approach is also used in <a href="https://github.com/defunkt/resque">Resque</a>, the async job processing solution by <a href="http://github.com">GitHub</a>.</p>
+
+<p>This solution works well if you want to duplicate a full process like a webserver, however it gets less interesting when you just want to execute some code &#8220;in the background&#8221;. Resque took this approach because by nature async jobs can yield weird results, leak memory or hang. Dealing with forks allows for an external control of the processes and the cost of the fork isn&#8217;t a big deal since we are already in an async processing approach.</p>
+
+<p><img src="http://s3.amazonaws.com/cogit8-org/img/hardcore-forking-action.png" alt="" /></p>
+
+<h2>Actors/Fibers</h2>
+
+<p>Earlier we talked a bit about the <a href="http://en.wikipedia.org/wiki/Actor_model">actor model</a>. Since Ruby 1.9, developers now have access to a new type of &#8220;lightweight&#8221; threads called <a href="http://www.ruby-doc.org/core-1.9/classes/Fiber.html">Fibers</a>. Fibers are not actors and Ruby doesn&#8217;t have a native Actor model implementation but some people wrote <a href="http://doc.revactor.org/files/README.html">some actor libs</a> on top of fibers. A fiber is like a simplified thread which isn&#8217;t scheduled by the VM but by the programmer. Fibers are like blocks which can be paused and resumed from the outside of from within themselves. Fibers are faster and use less memory than threads as demonstrated in <a href="http://oldmoe.blogspot.com/2008/08/ruby-fibers-vs-ruby-threads.html">this blog post</a>. However, because of the GIL, you still cannot truly run more than one concurrent fiber by thread and if you want to use multiple CPU cores, you will need to run fibers within more than one thread. So how do fibers help with concurrency? The answer is that they are part of a bigger solution. Fiber allow developers to manually control the scheduling of &#8220;concurrent&#8221; code but also to have the code within the fiber to auto schedule itself. That&#8217;s pretty big because now you can wrap an incoming web request in its own fiber and tell it to send a response back when it&#8217;s done doing its things. In the meantime, you can move on the to next incoming request. Whenever a request within a fiber is done, it will automatically resume itself and be returned. Sounds great right? Well, the only problem is that if you are doing any type of blocking IO in a fiber, the entire thread is blocked and the other fibers aren&#8217;t running. Blocking operations are operations like database/memcached queries, http requests&#8230; basically things you are probably triggering from your controllers. The good news is that the &#8220;only&#8221; problem to fix now is to avoid blocking IOs. Let&#8217;s see how to do that.</p>
+
+<p><img src="https://img.skitch.com/20110223-8wkfs2g12p15ku18rm7aq9negf.jpg" alt="fiber" /></p>
+
+<h2>Non blocking IOs/Reactor pattern.</h2>
+
+<p>The reactor pattern is quite simple to understand really. The heavy work of making blocking IO calls is delegated to an external service (reactor) which can receive concurrent requests. The service handler (reactor) is given callback methods to trigger asynchronously based on the type of response received. Let me take a limited analogy to hopefully explain the design better. It&#8217;s a bit like if you were asking someone a hard question, the person will take a while to reply but his/her reply will make you decide if you raise a flag or not. You have two options, or you choose to wait for the response and decide to raise the flag based on the response, or your flag logic is already defined and you tell the person what to do based on their answer and move on without having to worry about waiting for the answer. The second approach is exactly what the reactor pattern is. It&#8217;s obviously slightly more complicated but the key concept is that it allows your code to define methods/blocks to be called based on the response which will come later on.</p>
+
+<p><img src="https://img.skitch.com/20110223-xkit6utnty1sdt84n15w7dgtnh.jpg" alt="Reactor from Matt Aimonetti's blog" /></p>
+
+<p>In the case of a single threaded webserver that&#8217;s quite important. When a request comes in and your code makes a DB query, you are blocking any other requests from being processed. To avoid that, we could wrap our request in a fiber, trigger an async DB call and pause the fiber so another request can get processed as we are waiting for the DB. Once the DB query comes back, it wakes up the fiber it was trigger from, which then sends the response back to the client. Technically, the server can still only send one response at a time, but now fibers can run in parallel and don&#8217;t block the main tread by doing blocking IOs (since it&#8217;s done by the reactor).</p>
+
+<p>This is the approach used by <a href="http://twistedmatrix.com/trac/">Twisted</a>, <a href="http://eventmachine.rubyforge.org/EventMachine/Deferrable.html">EventMachine</a> and <a href="http://nodejs.org/">Node.js</a>. Ruby developers can use EventMachine or an EventMachine based webserver like <a href="http://code.macournoyer.com/thin/">Thin</a> as well as <a href="https://github.com/igrigorik/em-synchrony">EM clients/drivers</a> to make non blocking async calls. Mix that with some Fiber love and you get Ruby concurrency. Be careful though, using Thin, non blocking drivers and Rails in threadsafe mode doesn&#8217;t mean you are doing concurrent requests. Thin/EM only use one thread and you need to let it know that it&#8217;s ok to handle the next request as we are waiting. This is done by <a href="http://eventmachine.rubyforge.org/EventMachine/Deferrable.html">deferring the response</a> and let the reactor know about it.</p>
+
+<p>The obvious problem with this approach is that it forces you to change the way you write code. You now need to set a bunch of callbacks, understand the Fiber syntax, and use deferrable responses, I have to admit that this is kind of a pain. If you look at some Node.js code, you will see that it&#8217;s not always an <a href="http://howtonode.org/control-flow-part-ii/file-write.js">elegant approach</a>. The good news tho, is that this process can be wrapped and your code can be written as it if was processed synchronously while being handled asynchronously under the covers. This is a bit more complex to explain without showing code, so this will be the topic of a future post. But I do believe that things will get much easier soon enough.</p>
+
+<h2>Conclusion</h2>
+
+<p>High concurrency with Ruby is doable and done by many. However, it could made easier. Ruby 1.9 gave us fibers which allow for a more granular control over the concurrency scheduling, combined with non-blocking IO, high concurrency can be achieved. There is also the easy solution of forking a running process to multiply the processing power. However the real question behind this heated debate is what is the future of the Global Interpreter Lock in Ruby, should we remove it to improve concurrency at the cost of dealing with some new major threading issues, unsafe C extensions, etc..? Alternative Ruby implementers seem to believe so, but at the same time Rails still ships with a default mutex lock only allowing requests to be processed one at a time, the reason given being that a lot of people using Rails don&#8217;t write thread safe code and a lot of plugins are not threadsafe. Is the future of concurrency something more like <a href="http://libdispatch.macosforge.org/">libdispatch</a>/<a href="http://www.macruby.org/documentation/gcd.html">GCD</a> where the threads are handled by the kernel and the developer only deals with a simpler/safer API?</p>
+
+<p>Further reading:</p>
+
+<ul>
+<li><p><a href="http://www.igvita.com/2008/11/13/concurrency-is-a-myth-in-ruby/">Concurrency is a myth in Ruby</a></p></li>
+<li><p><a href="http://oldmoe.blogspot.com/2008/08/ruby-fibers-vs-ruby-threads.html">Ruby fibers vs Ruby threads</a></p></li>
+<li><p><a href="http://www.igvita.com/2010/08/18/multi-core-threads-message-passing/">Multi-core, threads, passing messages</a></p></li>
+<li><p><a href="http://adam.heroku.com/past/2009/8/13/threads_suck/">Threads suck</a></p></li>
+<li><p><a href="http://www.igvita.com/2010/04/15/non-blocking-activerecord-rails/">Non blocking Active Record and Rails</a></p></li>
+<li><p><a href="http://www.mikeperham.com/2010/01/27/scalable-ruby-processing-with-eventmachine/">Scalable Ruby processing with EventMachine</a></p></li>
+<li><p><a href="http://on-ruby.blogspot.com/2008/01/ruby-concurrency-with-actors.html">Ruby concurrency with actors</a></p></li>
+<li><p><a href="http://www.engineyard.com/blog/2010/concurrency-real-and-imagined-in-mri-threads/">Concurrency in MRI; threads</a></p></li>
+<li><p><a href="http://www.infoq.com/news/2007/08/ruby-1-9-fibers">Ruby 1.9 adds fibers for lightweight concurrency</a></p></li>
+<li><p><a href="http://yehudakatz.com/2010/08/14/threads-in-ruby-enough-already/">Threads in Ruby, enough already</a></p></li>
+<li><p><a href="http://www.igvita.com/2010/03/22/untangling-evented-code-with-ruby-fibers">Untangling Evented Code with Ruby Fibers</a></p></li>
+<li><p><a href="http://www.slideshare.net/ehuard/concurrency-5615029">Elise Huard&#8217;s RubyConf Concurrency talk slides</a></p></li>
+</ul>
+
+</div>
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-22T22:34:30+01:00" pubdate data-updated="true">Feb 22<span>nd</span>, 2011</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/mattetti/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/mattetti/articles/categories/software-design/'>Software Design</a>, <a class='category' href='/mattetti/articles/categories/blog-post/'>blog-post</a>
+  
+</div>
+
+</div>
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        
+    </div>
+
+
+</article>
+<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/mattetti/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/mattetti/javascripts/slash.js"></script>
+
+
+
+
+</body>
+</html>
