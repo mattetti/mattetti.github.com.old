@@ -8,6 +8,7 @@ status: publish
 title: RubyConf 2010 - MacRuby talk
 wordpress_id: '832'
 categories:
+- Presentation
 - Misc
 - merbist.com
 - blog-post

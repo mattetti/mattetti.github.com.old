@@ -8,6 +8,7 @@ status: publish
 title: RailsSummit - an amazing adventure
 wordpress_id: '613'
 categories:
+- Presentation
 - Misc
 - merbist.com
 - blog-post

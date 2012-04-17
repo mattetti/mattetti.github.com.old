@@ -8,6 +8,7 @@ status: publish
 title: RailsConf 2009
 wordpress_id: '487'
 categories:
+- Presentation
 - merb
 - News
 - rails

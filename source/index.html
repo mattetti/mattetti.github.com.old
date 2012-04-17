@@ -16,6 +16,29 @@ layout: default
 </ul>
 
 <nav id="pagenavi">
-  <a href="{{ root_url }}/articles/archives" class="center">Archives</a>
+  <a href="{{ root_url }}/posts/archives" class="center">View older articles</a>
 </nav>
+
+<section id='presentations'>
+  <h2>Presentations</h2>
+  <ul>
+    {% for post in site.posts %}
+      {% if post.categories contains 'Presentation' %}
+        <li class="title entry-title">
+          <a href="{{ root_url }}{{ post.url }}">{{ post.title }}</a>
+          <div class="date updated right">{% include post/date.html %}{{ time }}</div>
+          <span class='slides right'>
+            {% if post.slides %}
+              <a href="{{ root_url }}{{ post.slides }}">Slides</a>
+            {% else %}
+              Slides
+            {% endif %}
+          </span>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</section>
+
 </div>
+

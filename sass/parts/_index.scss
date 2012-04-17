@@ -5,20 +5,28 @@ div#home{
   p#bio{
     padding-bottom: 30px;
   }
-  ul.posts{
+  ul{
     list-style-type: none;
     li{
       border-bottom: 1px solid #DDD;
-      padding: 3px 0 2px 0;
+      padding: 4px 0 2px 0;
     }
   }
+}
+.date{ width: 100px; text-align: right }
+.slides{
+  background: $gray03;
+  border-radius: 5px;
+  padding: 0px 1em;
+  margin-right: 1em;
+  font-size: 90%;
 }
 #pagenavi{
 	padding: 20px 0;
 	height: 20px;
 	line-height: 20px;
 	position: relative;
-	@include border-shadow();
+	// @include border-shadow();
 	a{
 		&:hover{
 			text-decoration: underline;

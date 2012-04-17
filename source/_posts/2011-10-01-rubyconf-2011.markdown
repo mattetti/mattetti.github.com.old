@@ -1,0 +1,43 @@
+---
+layout: post
+title: "RubyConf 2011 - Complex Ruby concepts simplified"
+date: 2011-10-01 15:09
+comments: false
+categories: 
+- Presentation
+- RubyConf
+- Ruby
+- Python
+slides: http://rubyconf11.merbist.com/
+video_page: http://confreaks.com/videos/714-rubyconf2011-complex-ruby-concepts-dummified
+video_file: http://cdn.confreaks.com/system/assets/datas/2666/original/714-rubyconf2011-complex-ruby-concepts-dummified-small.mp4
+video_screenshot: http://confreaks.com/system/videos/images/714/preview/714-rubyconf2011-complex-ruby-concepts-dummified-thumb_0001.png
+---
+
+During [RubyConf 2011](http://rubyconf.org/) in New Orleans, LA Matt
+Aimonetti gave a talk entitled *Complex Ruby concepts simplified*.
+
+##Description of the talk:
+
+Programming languages, such as Ruby, are natural and elegant. But to achieve this elegance, things have to happen under the hood. Garbage Collection, concurrency, Global Interpreter Lock, metaprogramming, C extensions are just some of the things happening with or without our knowledge. Trying to understand these concepts, their implementations and their implications in daily coding might seem daunting. However, having a good understanding of these topics will make you a better developer. No CS degree or PhD required to attend this talk.
+
+At the end of the talk, Matz (Ruby's creator) came on stage to answer
+some questions related to what was explained.
+
+##Slides
+[The HTML5 slides can be seen online]({{ page.slides}}) online.
+
+##Video
+
+{% video http://cdn.confreaks.com/system/assets/datas/2666/original/714-rubyconf2011-complex-ruby-concepts-dummified-small.mp4 640 360 /images/matt_aimonetti_presentation_ruby.jpg %}
+
+##Presentation website
+
+Matt's presentation was filmed by [confreaks](http://confreaks.com/) and the dedicated page
+for the talk is available [here]({{ page.video_page }}).
+
+##Matt's articles related to this presentation
+
+* [About concurrency and the GIL](/posts/2011/10/03/about-concurrency-and-the-gil/)
+* [Data safety and GIL removal](/posts/2011/10/18/data-safety-and-gil-removal/)
+* [Concurrency in Ruby explained](/posts/2011/02/22/concurrency-in-ruby-explained/)
