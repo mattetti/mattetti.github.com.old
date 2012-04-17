@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tutorial | Matt Aimonetti]]></title>
   <link href="http://mattetti.github.com/articles/categories/tutorial/atom.xml" rel="self"/>
   <link href="http://mattetti.github.com/"/>
-  <updated>2012-04-17T15:07:59+02:00</updated>
+  <updated>2012-04-17T16:39:32+02:00</updated>
   <id>http://mattetti.github.com/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -268,25 +268,6 @@
 <p> </p>
 
 <p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_instantiate_profile.pdf?raw=true"><img src="http://img.skitch.com/20120224-8scmun9n1c9ufdnxa8rq2961bq.jpg" alt="" /></a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[My RubyConf 2011 talk is online]]></title>
-    <link href="http://mattetti.github.com/posts/2011/12/09/my-rubyconf-2011-talk-is-online/"/>
-    <updated>2011-12-09T06:47:59+01:00</updated>
-    <id>http://mattetti.github.com/posts/2011/12/09/my-rubyconf-2011-talk-is-online</id>
-    <content type="html"><![CDATA[<p>I realize I forgot to mention that my RubyConf talk is now online on the <a href="http://confreaks.net/videos/714-rubyconf2011-complex-ruby-concepts-dummified">confreaks site</a> (wait until the end, Matz actually answers a question from the audience).</p>
-
-<p><img src="https://img.skitch.com/20111209-pdfksgd2sufg8ywrpnjd4dnru4.jpg" alt="Photo of Matt Aimonetti giving a talk at RubyConf 2011 with one of his slides showing how thread scheduling works" /></p>
-
-<p>I wrote a couple follow up posts you might also be interested in:</p>
-
-<ul>
-<li><p><a href="http://merbist.com/2011/10/03/about-concurrency-and-the-gil/">About concurrency and the GIL</a></p></li>
-<li><p><a href="http://merbist.com/2011/10/18/data-safety-and-gil-removal/">Data safety and GIL removal</a></p></li>
-</ul>
-
 ]]></content>
   </entry>
   

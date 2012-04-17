@@ -4,7 +4,7 @@
   <title><![CDATA[Category: blog-post | Matt Aimonetti]]></title>
   <link href="http://mattetti.github.com/articles/categories/blog-post/atom.xml" rel="self"/>
   <link href="http://mattetti.github.com/"/>
-  <updated>2012-04-17T15:07:59+02:00</updated>
+  <updated>2012-04-17T16:39:32+02:00</updated>
   <id>http://mattetti.github.com/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -551,25 +551,6 @@
 <p> </p>
 
 <p>On a related topic, Chad Fowler posted an interesting <a href="http://chadfowler.com/2011/12/21/re-thinking-software-development-education">blog post about what LivingSocial is doing to change the software development education</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[My RubyConf 2011 talk is online]]></title>
-    <link href="http://mattetti.github.com/posts/2011/12/09/my-rubyconf-2011-talk-is-online/"/>
-    <updated>2011-12-09T06:47:59+01:00</updated>
-    <id>http://mattetti.github.com/posts/2011/12/09/my-rubyconf-2011-talk-is-online</id>
-    <content type="html"><![CDATA[<p>I realize I forgot to mention that my RubyConf talk is now online on the <a href="http://confreaks.net/videos/714-rubyconf2011-complex-ruby-concepts-dummified">confreaks site</a> (wait until the end, Matz actually answers a question from the audience).</p>
-
-<p><img src="https://img.skitch.com/20111209-pdfksgd2sufg8ywrpnjd4dnru4.jpg" alt="Photo of Matt Aimonetti giving a talk at RubyConf 2011 with one of his slides showing how thread scheduling works" /></p>
-
-<p>I wrote a couple follow up posts you might also be interested in:</p>
-
-<ul>
-<li><p><a href="http://merbist.com/2011/10/03/about-concurrency-and-the-gil/">About concurrency and the GIL</a></p></li>
-<li><p><a href="http://merbist.com/2011/10/18/data-safety-and-gil-removal/">Data safety and GIL removal</a></p></li>
-</ul>
-
 ]]></content>
   </entry>
   
@@ -3873,6 +3854,46 @@ CTFontManagerRegisterFontsForURL(font_url, KCTFontManagerScopeProcess, nil)
 </code></pre>
 
 <p>The only tricky things here were to know the Cocoa API call and to know that even if the Cocoa API references the constant to use as kCTFontManagerScopeProcess, because in Ruby, constants start by an uppercase, you need to convert it to: KCTFontManagerScopeProcess.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MacRuby soon to reach a new milestone]]></title>
+    <link href="http://mattetti.github.com/posts/2009/10/05/macruby-soon-to-reach-a-new-milestone/"/>
+    <updated>2009-10-05T23:58:53+02:00</updated>
+    <id>http://mattetti.github.com/posts/2009/10/05/macruby-soon-to-reach-a-new-milestone</id>
+    <content type="html"><![CDATA[<p>Laurent just posted a <a href="http://bit.ly/2YPwRT">MacRuby status update</a> on the mailing list and the first official beta of MacRuby 0.5 should be released pretty soon.</p>
+
+<p>Let's quickly look at Laurent's report:</p>
+
+<ul>
+<li><p>Early backtracing support.</p></li>
+<li><p>Much better AOT compilation. Parts of the standard library are now pre-compiled for testing.</p></li>
+<li><p>Migrated to LLVM top of tree.</p></li>
+<li><p>Dispatcher performance is now back to normal (we lost about 30% due to gcc not inlining code).</p></li>
+<li><p>Many bug fixes.</p></li>
+</ul>
+
+
+<p>In lay terms, backtracing is what you see when your app crashes or has a problem, it's the list of methods called before the exception was raised and the line where the error happened. Currently the backtrace is similar to what you would have with Ruby 1.9, however objective-c exceptions are not supported and there is still some work to do.</p>
+
+<p>AOT compilation or Ahead Of Time compilation is the process of compiling a script into machine code. I already covered that <a href="http://merbist.com/2009/07/12/compiled-hello-world-with-macruby/">feature earlier</a>. Progress has been made and now some Ruby standard libraries are now pre-compiled in MacRuby. The two main advantages of doing AOT compilation are startup speed and obfuscation. Two important features for desktop applications or for when you want to license your server app.</p>
+
+<p>Updating LLVM doesn't mean much for end users. With the support of the MacRuby team, <a href="http://www.icoretech.org/">Claudio</a> setup a nightly build bot <a href="http://macruby.icoretech.org/">http://macruby.icoretech.org/</a> allowing you to download nightly builds for SnowLeopard. The app is a <a href="http://sinatrarb.com">Sinatra app</a> that could can checkout on github:  <a href="http://github.com/masterkain/macruby-nightlies-web">http://github.com/masterkain/macruby-nightlies-web</a> What's interesting is that Apple is sponsoring both LLVM and MacRuby which will hopefully bring some synergy and help both projects.</p>
+
+<p>Fixed dispatcher, this is a just a perf bug fix only affecting people on trunk.</p>
+
+<p>I personally used MacRuby quite a lot recently. I have been writing a 2D video game for my <a href="http://rubyconf.org/talks/153-writing-2-d-games-for-the-osx-platform-in-ruby">RubyConf talk</a>.</p>
+
+<p><img src="http://img.skitch.com/20091006-kj64ix4up5q8dh4yin38hjrjcp.jpg" alt="" />It's a simple game only using Ruby and Cocoa. It's not a fancy game and, no, it doesn't run on the iPhone yet ;)</p>
+
+<p>I never wrote a game in Cocoa and I decided not to use an existing framework like Gosu or cocos2d, instead I decided to write everything from scratch. Using CoreAnimation instead of OpenGL, the task wasn't that hard at all. in less than 1,000 LOC (before refactoring), I have a fully working game.</p>
+
+<p>I will be previewing the game at <a href="http://www.railssummit.com.br/">RailsSummit</a> and will show the code and explain how to get there at <a href="http://rubyconf.org/talks/153-writing-2-d-games-for-the-osx-platform-in-ruby">RubyConf</a>.</p>
+
+<p>When I started getting involved with MacRuby, I really did not think I would write a video game in Ruby and actually enjoy it. At the end of the day, I will more than likely use MacRuby for desktop/mobile/server apps more than games, but it's awesome to be able to use your favorite language to do other things than what you are usually paid to do.</p>
+
+<p>MacRuby is coming along very nicely, and I'm really excited about the multitude of new options offered to Ruby developers on OSX and can't wait for 0.5 final and see what people will do with it.</p>
 ]]></content>
   </entry>
   

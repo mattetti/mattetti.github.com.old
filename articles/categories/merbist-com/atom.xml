@@ -4,7 +4,7 @@
   <title><![CDATA[Category: merbist.com | Matt Aimonetti]]></title>
   <link href="http://mattetti.github.com/articles/categories/merbist-com/atom.xml" rel="self"/>
   <link href="http://mattetti.github.com/"/>
-  <updated>2012-04-17T15:07:59+02:00</updated>
+  <updated>2012-04-17T16:39:32+02:00</updated>
   <id>http://mattetti.github.com/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -551,25 +551,6 @@
 <p> </p>
 
 <p>On a related topic, Chad Fowler posted an interesting <a href="http://chadfowler.com/2011/12/21/re-thinking-software-development-education">blog post about what LivingSocial is doing to change the software development education</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[My RubyConf 2011 talk is online]]></title>
-    <link href="http://mattetti.github.com/posts/2011/12/09/my-rubyconf-2011-talk-is-online/"/>
-    <updated>2011-12-09T06:47:59+01:00</updated>
-    <id>http://mattetti.github.com/posts/2011/12/09/my-rubyconf-2011-talk-is-online</id>
-    <content type="html"><![CDATA[<p>I realize I forgot to mention that my RubyConf talk is now online on the <a href="http://confreaks.net/videos/714-rubyconf2011-complex-ruby-concepts-dummified">confreaks site</a> (wait until the end, Matz actually answers a question from the audience).</p>
-
-<p><img src="https://img.skitch.com/20111209-pdfksgd2sufg8ywrpnjd4dnru4.jpg" alt="Photo of Matt Aimonetti giving a talk at RubyConf 2011 with one of his slides showing how thread scheduling works" /></p>
-
-<p>I wrote a couple follow up posts you might also be interested in:</p>
-
-<ul>
-<li><p><a href="http://merbist.com/2011/10/03/about-concurrency-and-the-gil/">About concurrency and the GIL</a></p></li>
-<li><p><a href="http://merbist.com/2011/10/18/data-safety-and-gil-removal/">Data safety and GIL removal</a></p></li>
-</ul>
-
 ]]></content>
   </entry>
   
@@ -3692,6 +3673,37 @@ Finally, instead of printing out the logs, we are saving them to the database.</
 <p>By the way, if you make it to <a href="http://www.railssummit.com.br/">RailsSummit</a>, I will be giving a talk on Rails3 and the new exciting stuff you will be able to do including Rack based stuff, CouchDB, MongoDB, new DataMapper etc..</p>
 
 <p><a href="http://railssummit.com.br/"><img src="http://railssummit.com.br/images/banners/en_souPalestrante_210x60.jpg" alt="" /></a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby authentication of CouchDB requests]]></title>
+    <link href="http://mattetti.github.com/posts/2009/07/13/ruby-authentication-of-couchdb-requests/"/>
+    <updated>2009-07-13T13:00:13+02:00</updated>
+    <id>http://mattetti.github.com/posts/2009/07/13/ruby-authentication-of-couchdb-requests</id>
+    <content type="html"><![CDATA[<p><a href="http://couchdb.apache.org/">CouchDB</a> is an awesome technology. I'm lucky enough to work on quite a big project where we decided to switch from MySQL to Couch for various reasons.</p>
+
+<p>One of the many things I like with Couch is that it handles attachments and can replicate them as well as serve them for you using the <a href="http://en.wikipedia.org/wiki/Erlang%20%28programming%20language%29">Erlang</a> based builtin webserver. (you can load balance your dbs and do some other really cool stuff)</p>
+
+<p>Let's take a use case. Let's imagine that you have a web app with logged in users. Every user can have their own avatar.</p>
+
+<p>No big deal, you get the user to upload his/her avatar to your app and add it to the user document in the database. To serve it from the database, you just need to create a proxy in nginx/apache and redirect the virtual avatar url to the protected DB making sure the request is a GET request.</p>
+
+<p>Add to that a caching solution like <a href="http://varnish.projects.linpro.no/">varnish</a> or <a href="http://www.igvita.com/2008/02/11/nginx-and-memcached-a-400-boost/">memcached module for nginx</a> and all your db goodies get cached and served by the cache (server/client) until they get modified.</p>
+
+<p>Now, the problem is when you want to serve authorized attachments. Let's imagine that we want to let our users upload private files, files that should be accessible only by the owner or users designated by the owner.</p>
+
+<p>In this case, a simple <a href="http://en.wikipedia.org/wiki/Nginx">nginx</a> rewrite wouldn't work. We need to authorize attachment requests. Here is a cool way of doing that using nginx and merb's router. (Expect Rails3 router to do the same).</p>
+
+<p>Let's start by setting up nginx and create a proxy for couchdb:</p>
+
+<p>Now that this is done, we are going to use Merb's awesome router to handle the incoming requests. The cool part of this is that we won't be dispatching requests so, going through the router is almost free. (check on the Merb router benchmarks for more info).  Let's edit our router and set a special route for our assets.</p>
+
+<p>We are using a deferred route which gets executed instead of dispatching the request.</p>
+
+<p>If the attachment route is being matched then we are checking what environment we are currently running in. If we are in production or staging environment then we are sending back a rack response to the webserver. The response is just a forward to the proper couchdb document behind the proxy. Of course, before allowing that to happen, we could authenticate the logged in user, log the request and do a couple of other things. You have full access to your models from the router, so authenticating a session isn't a big deal. You could even create temporarily urls like AWS s3 does.</p>
+
+<p>If we are not in production or staging mode, then just redirect the request to couch since we assume you have access to the local db. This way, your asset urls will be working in production and dev. In real life, you'll want to apply the authorization before choosing how to deliver the document/attachment tho as you want it work the same way in development and production.</p>
 ]]></content>
   </entry>
   

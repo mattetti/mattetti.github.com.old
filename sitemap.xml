@@ -805,6 +805,10 @@
         <lastmod>2012-04-17T14:10:01+02:00</lastmod>
     </url>
     <url>
+        <loc>http://mattetti.github.com/posts/2011/10/01/rubyconf-2011/</loc>
+        <lastmod>2012-04-17T15:43:54+02:00</lastmod>
+    </url>
+    <url>
         <loc>http://mattetti.github.com/posts/2011/10/03/about-concurrency-and-the-gil/</loc>
         <lastmod>2012-04-17T14:10:01+02:00</lastmod>
     </url>
@@ -817,8 +821,8 @@
         <lastmod>2012-04-17T14:10:01+02:00</lastmod>
     </url>
     <url>
-        <loc>http://mattetti.github.com/posts/2011/12/09/my-rubyconf-2011-talk-is-online/</loc>
-        <lastmod>2012-04-17T14:50:31+02:00</lastmod>
+        <loc>http://mattetti.github.com/posts/2011/11/08/rubyconf-argentina-2011/</loc>
+        <lastmod>2012-04-17T16:00:55+02:00</lastmod>
     </url>
     <url>
         <loc>http://mattetti.github.com/posts/2011/12/21/developing-a-curriculum/</loc>
@@ -829,6 +833,10 @@
             http://mattetti.github.com/posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter/
         </loc>
         <lastmod>2012-04-17T14:10:01+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://mattetti.github.com/posts/2012/02/04/larubyconf-2012/</loc>
+        <lastmod>2012-04-17T16:29:37+02:00</lastmod>
     </url>
     <url>
         <loc>
@@ -848,10 +856,10 @@
     </url>
     <url>
         <loc>http://mattetti.github.com/</loc>
-        <lastmod>2012-04-17T14:51:27+02:00</lastmod>
+        <lastmod>2012-04-17T16:29:37+02:00</lastmod>
     </url>
     <url>
         <loc>http://mattetti.github.com/posts/archives/</loc>
-        <lastmod>2012-04-17T14:51:27+02:00</lastmod>
+        <lastmod>2012-04-17T16:29:37+02:00</lastmod>
     </url>
 </urlset>
