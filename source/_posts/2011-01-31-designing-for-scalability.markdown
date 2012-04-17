@@ -1,13 +1,16 @@
 ---
 date: '2011-01-31 13:30:55'
 layout: post
+legacy_url: http://merbist.com/2011/01/31/designing-for-scalability/
 slug: designing-for-scalability
+source: merbist.com
 status: publish
 title: Designing for scalability
 wordpress_id: '912'
 categories:
-- blog-post
 - Software Design
+- merbist.com
+- blog-post
 tags:
 - architecture
 - design

@@ -1,12 +1,16 @@
 ---
 date: '2009-01-13 20:20:46'
 layout: post
+legacy_url: http://merbist.com/2009/01/13/recent-news-jan-13-2009/
 slug: recent-news-jan-13-2009
+source: merbist.com
 status: publish
 title: recent news Jan 13 2009
 wordpress_id: '436'
 categories:
 - News
+- merbist.com
+- blog-post
 ---
 
 Lately, I have been really busy with my [business](http://ma-agile.com), an [upcoming training](http://merbclass.com) and some non rails-merb related experimentations. (I'm learning objective-c and playing with [macruby](http://www.macruby.org/trac/wiki/MacRuby))

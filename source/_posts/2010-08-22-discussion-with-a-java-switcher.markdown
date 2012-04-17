@@ -1,15 +1,18 @@
 ---
 date: '2010-08-22 17:18:55'
 layout: post
+legacy_url: http://merbist.com/2010/08/22/discussion-with-a-java-switcher/
 slug: discussion-with-a-java-switcher
+source: merbist.com
 status: publish
 title: Discussion with a Java switcher
 wordpress_id: '796'
 categories:
-- blog-post
 - Misc
-- Rails
-- Ruby
+- rails
+- ruby
+- merbist.com
+- blog-post
 tags:
 - rails
 - ruby

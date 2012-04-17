@@ -1,13 +1,17 @@
 ---
 date: '2008-12-25 20:11:02'
 layout: post
+legacy_url: http://merbist.com/2008/12/25/merb-rails-merge-or-why-should-merbists-be-happy/
 slug: merb-rails-merge-or-why-should-merbists-be-happy
+source: merbist.com
 status: publish
 title: Merb/Rails merge, or Why should merbists be happy?
 wordpress_id: '398'
 categories:
 - merb
 - rails
+- merbist.com
+- blog-post
 tags:
 - merb
 - merge

@@ -1,12 +1,16 @@
 ---
 date: '2009-07-13 13:00:13'
 layout: post
+legacy_url: http://merbist.com/2009/07/13/ruby-authentication-of-couchdb-requests/
 slug: ruby-authentication-of-couchdb-requests
+source: merbist.com
 status: publish
 title: Ruby authentication of CouchDB requests
 wordpress_id: '526'
 categories:
 - Misc
+- merbist.com
+- blog-post
 tags:
 - couchdb
 - merb

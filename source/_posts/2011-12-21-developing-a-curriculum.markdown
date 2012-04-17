@@ -1,13 +1,16 @@
 ---
 date: '2011-12-21 06:57:27'
 layout: post
+legacy_url: http://merbist.com/2011/12/21/developing-a-curriculum/
 slug: developing-a-curriculum
+source: merbist.com
 status: publish
 title: Developing a Curriculum
 wordpress_id: '1207'
 categories:
-- blog-post
 - Misc
+- merbist.com
+- blog-post
 tags:
 - education
 ---
@@ -71,6 +74,6 @@ Process to develop a curriculum:
 
 **Plans**. _Make your plans based on the practices you've determined you've needed._
 
-
+ 
 
 On a related topic, Chad Fowler posted an interesting [blog post about what LivingSocial is doing to change the software development education](http://chadfowler.com/2011/12/21/re-thinking-software-development-education).

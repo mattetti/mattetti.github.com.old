@@ -1,13 +1,17 @@
 ---
 date: '2009-07-12 11:53:53'
 layout: post
+legacy_url: http://merbist.com/2009/07/12/compiled-hello-world-with-macruby/
 slug: compiled-hello-world-with-macruby
+source: merbist.com
 status: publish
 title: Compiled hello world with MacRuby
 wordpress_id: '519'
 categories:
 - macruby
 - Misc
+- merbist.com
+- blog-post
 tags:
 - compiler
 - experimental

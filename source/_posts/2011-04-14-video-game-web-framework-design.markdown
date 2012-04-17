@@ -1,14 +1,17 @@
 ---
 date: '2011-04-14 10:28:39'
 layout: post
+legacy_url: http://merbist.com/2011/04/14/video-game-web-framework-design/
 slug: video-game-web-framework-design
+source: merbist.com
 status: publish
 title: Video game web framework design
 wordpress_id: '1010'
 categories:
-- blog-post
-- Ruby
+- ruby
 - Software Design
+- merbist.com
+- blog-post
 tags:
 - design
 - frameworks
@@ -40,7 +43,7 @@ Concretely such an approach exposes a few challenges when trying to implement on
   * Can't afford to keep on working on the system once released (time delimited projects)
 
 
-
+ 
 
 
 ## Communication
@@ -52,7 +55,7 @@ Nobody but our team should care about the implementation details, after all, the
 
 From this perspective, the API is the most important deliverable for our team and it should communicate the design goal while being very explicit about how it works, why it works the way it does, and how to implement it client side. This is a very good place where we can improve communication by making sure that we focus on making clear, well designed, well documented, flexible APIs.
 
-
+ 
 
 
 ## Scalability, performance
@@ -62,7 +65,7 @@ On the server side, the APIs need to perform and scale to handles tends of thous
 
 While Ruby is a great language, a lot of the libraries and frameworks are not optimized for performance, at least not the type of performance needed for our use case. However, the good news is that this is easily fixable and many alternatives exist (lots of async, non-blocking drivers for i.e). When obsessed with performance, you quickly learn to properly load test, profile, and monitor your code to find the bottlenecks and the places where you should focus your attention. The big, unique challenge though, is that a console game will more than likely see its peak traffic in the first few weeks, not really giving the chance to the online team to iteratively handle the prod issues. The only solution is to do everything possible before going live to ensure that the system will perform as expected. Of course if we were to write the same services in a more performant language, we would need to spend less time optimizing. But we are gaining so much flexibility by using a higher level programming language that, in my mind, the trade off is totally worth it (plus you still need to spend a lot of time optimizing your code path, even if your code is written in a very fast language).
 
-
+ 
 
 
 ## Deadlines, requirement changes
@@ -70,7 +73,7 @@ While Ruby is a great language, a lot of the libraries and frameworks are not op
 
 That's just part of the way the industry works. Unless you work for [Blizzard](http://blizzard.com) and you can afford to spend a crazy amount of time and money on the development of a title; you will have to deal with sliding deadlines, requirement changes, scope changes etc... The only way I know how to protect myself from such things is to plan for the worst. Being a non-idealistic (read pessimistic) person helps a lot. When you design your software, make sure your design is sound but flexible enough to handle any major change that you know could happen at any time. Pick your battles and make sure your assumptions are properly thought through, communicated and documented so others understand and accept them. In a nutshell, this is a problem we can't avoid, so you need to embrace it.
 
-
+ 
 
 
 ## Limited reusability
@@ -78,7 +81,7 @@ That's just part of the way the industry works. Unless you work for [Blizzard](h
 
 This topic has a lot to do with the previous paragraph. Because scopes can change often and because the deadlines are often crazy, a lot of the time, engineers don't take the time to think about reusability. They slap some code together, pray to the [lords of Kobol](http://en.wikipedia.org/wiki/Lords_of_Kobol) and hope that they won't have to look at their code ever again (I'm guilty of having done that too). The result is a lot of throw away code. This is actually quite frequent and normal in our industry. But it doesn't mean that it the right thing to do! The assumption/myth is that each game is different and therefore two games can't be using the same tech solution. My take on that is that it's partly true. But some components are the same for 80% of the games I work on. So why not design them well and reuse the common parts? (A lot of games share the same engines, such as [Unreal](http://www.unrealengine.com/) for example, and there is no reason why we can't build a core online engine extended for each title)
 
-
+ 
 
 
 ## My approach
@@ -137,7 +140,7 @@ Even though we designed the core extensions the best we could, there are cases w
 
 _Lessons learned:_ The challenge with modularity is to keep things simple and highly performing yet flexible. A key element to manage that is to stay as consistent as possible. Don't implement hooks three different ways, try to keep method signatures consistent, keep it simple and organized.
 
-
+ 
 
 
 ## Conclusion

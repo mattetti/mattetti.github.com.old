@@ -1,12 +1,16 @@
 ---
 date: '2008-10-16 22:26:50'
 layout: post
+legacy_url: http://merbist.com/2008/10/16/replying-to-some-tweets/
 slug: replying-to-some-tweets
+source: merbist.com
 status: publish
 title: Replying to some tweets
 wordpress_id: '178'
 categories:
 - News
+- merbist.com
+- blog-post
 tags:
 - merb
 ---

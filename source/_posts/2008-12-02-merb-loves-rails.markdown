@@ -1,12 +1,16 @@
 ---
 date: '2008-12-02 22:31:50'
 layout: post
+legacy_url: http://merbist.com/2008/12/02/merb-loves-rails/
 slug: merb-loves-rails
+source: merbist.com
 status: publish
 title: 'Merb '
 wordpress_id: '299'
 categories:
 - merb
+- merbist.com
+- blog-post
 tags:
 - apple
 - merb

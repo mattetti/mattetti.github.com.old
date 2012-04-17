@@ -1,13 +1,16 @@
 ---
 date: '2011-02-19 16:29:07'
 layout: post
+legacy_url: http://merbist.com/2011/02/19/bridgesupport-build/
 slug: bridgesupport-build
+source: merbist.com
 status: publish
 title: Automatically generating BridgeSupport files
 wordpress_id: '974'
 categories:
-- blog-post
 - macruby
+- merbist.com
+- blog-post
 tags:
 - BridgeSupport
 - macruby

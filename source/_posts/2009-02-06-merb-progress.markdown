@@ -1,7 +1,9 @@
 ---
 date: '2009-02-06 14:09:27'
 layout: post
+legacy_url: http://merbist.com/2009/02/06/merb-progress/
 slug: merb-progress
+source: merbist.com
 status: publish
 title: merb progress
 wordpress_id: '439'
@@ -9,6 +11,8 @@ categories:
 - merb
 - Misc
 - News
+- merbist.com
+- blog-post
 ---
 
 As they say: fail early, fail often. Well, I've been failing to blog recently, but as always I have some good excuses ;)

@@ -1,14 +1,16 @@
 ---
 date: '2010-11-12 16:00:51'
 layout: post
+legacy_url: http://merbist.com/2010/11/12/rubyconf-2010-macruby-talk/
 slug: rubyconf-2010-macruby-talk
+source: merbist.com
 status: publish
 title: RubyConf 2010 - MacRuby talk
 wordpress_id: '832'
 categories:
-- blog-post
 - Misc
-- Presentation
+- merbist.com
+- blog-post
 ---
 
 This year I gave the traditional Apple's MacRuby talk at RubyConf.

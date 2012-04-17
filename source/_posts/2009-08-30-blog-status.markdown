@@ -1,12 +1,16 @@
 ---
 date: '2009-08-30 16:35:01'
 layout: post
+legacy_url: http://merbist.com/2009/08/30/blog-status/
 slug: blog-status
+source: merbist.com
 status: publish
 title: Blog status
 wordpress_id: '549'
 categories:
 - Misc
+- merbist.com
+- blog-post
 ---
 
 I had people asking me how come I was not blogging as much lately. Well, on top of being really busy, I have been blogging on other blogs such as the [official Rails blog](http://weblog.rubyonrails.org/).

@@ -1,20 +1,23 @@
 ---
 date: '2011-12-30 15:28:13'
 layout: post
+legacy_url: http://merbist.com/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter/
 slug: books-to-read-in-2012-recommended-to-me-by-twitter
+source: merbist.com
 status: publish
 title: Books to read in 2012 - recommended to me by Twitter
 wordpress_id: '1215'
 categories:
-- blog-post
 - Misc
+- merbist.com
+- blog-post
 ---
 
 Today, I asked on Twitter what non-technical books I should read in 2012.
 
 I was nicely surprised to see so many of my followers send recommendations. Here is a list of 25 books that like-minded people suggested I read. Hopefully you will find a book or two to read too. Feel free to send more recommendations via the comments.
 
-
+ 
 
 
 

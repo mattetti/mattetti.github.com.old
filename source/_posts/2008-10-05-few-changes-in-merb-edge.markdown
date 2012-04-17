@@ -1,12 +1,16 @@
 ---
 date: '2008-10-05 21:48:24'
 layout: post
+legacy_url: http://merbist.com/2008/10/05/few-changes-in-merb-edge/
 slug: few-changes-in-merb-edge
+source: merbist.com
 status: publish
 title: Few changes in Merb Edge
 wordpress_id: '124'
 categories:
 - News
+- merbist.com
+- blog-post
 tags:
 - config
 - edge

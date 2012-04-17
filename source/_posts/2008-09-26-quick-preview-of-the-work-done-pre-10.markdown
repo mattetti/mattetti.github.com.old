@@ -1,12 +1,16 @@
 ---
 date: '2008-09-26 10:59:00'
 layout: post
+legacy_url: http://merbist.com/2008/09/26/quick-preview-of-the-work-done-pre-10/
 slug: quick-preview-of-the-work-done-pre-10
+source: merbist.com
 status: publish
 title: quick preview of the work done pre 1.0
 wordpress_id: '82'
 categories:
 - News
+- merbist.com
+- blog-post
 tags:
 - backtraces
 - merb

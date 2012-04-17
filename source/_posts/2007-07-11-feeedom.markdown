@@ -1,0 +1,57 @@
+---
+date: '2007-07-11 06:26:00'
+layout: post
+legacy_url: http://railsontherun.com/2007/07/11/feeedom/
+slug: feeedom
+source: railsontherun.com
+status: publish
+title: Feeedom
+wordpress_id: '48'
+categories:
+- Ruby
+- railsontherun.com
+- blog-post
+tags:
+- business
+- consulting
+- contractor
+- freedom
+---
+
+For many Americans, the 4th of July reminds them of their freedom. 
+
+
+
+
+
+Since I didn't grow up in the US, for the 4th of July was a great occasion for a BBQ with friends and enjoying  fireworks.
+
+
+
+
+
+However, things changed this year when I decided to leave my full time job as Rails developer to become a consultant and work with my own clients.
+
+
+
+
+
+![freedom](http://farm1.static.flickr.com/151/364297547_70050418cd_m.jpg)
+
+
+
+
+
+Just after July the 4th, I started working full time as a contractor and I really like it. I've been working on some projects as a consultant in the past but I found myself often frustrated by the fact that I couldn't spend enough time on a project a once. 
+
+
+
+
+
+I seriously enjoy working with different people, different needs, different approaches. Learning from all these people is very valuable to me. 
+
+
+
+
+
+Working from home comes at a price though, I need to deal with taxes, health coverage and the rest of the paperwork....  but come on, being able to work from your deck and have flexible hours is priceless ;)

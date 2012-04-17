@@ -1,13 +1,17 @@
 ---
 date: '2008-11-15 19:07:46'
 layout: post
+legacy_url: http://merbist.com/2008/11/15/rails-vs-merb-drama/
 slug: rails-vs-merb-drama
+source: merbist.com
 status: publish
 title: Rails vs Merb Â¿drama?
 wordpress_id: '245'
 categories:
 - merb
 - Misc
+- merbist.com
+- blog-post
 tags:
 - drama
 - merb

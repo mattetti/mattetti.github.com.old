@@ -1,15 +1,18 @@
 ---
 date: '2010-07-29 23:47:50'
 layout: post
+legacy_url: http://merbist.com/2010/07/29/object-allocation-why-you-should-care/
 slug: object-allocation-why-you-should-care
+source: merbist.com
 status: publish
 title: Ruby object allocation & why you should care
 wordpress_id: '785'
 categories:
-- blog-post
 - Misc
-- Rails
-- Ruby
+- rails
+- ruby
+- merbist.com
+- blog-post
 ---
 
 Recently I was tasked with finding how to optimize a web application with heavy traffic. The application (a Rails 2.3.x app) gets about 3 million requests per hour and most of these requests cannot really be easily cached so they go through the entire stack.

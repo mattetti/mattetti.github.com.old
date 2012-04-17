@@ -1,14 +1,17 @@
 ---
 date: '2011-09-05 14:58:21'
 layout: post
+legacy_url: http://merbist.com/2011/09/05/ruby-optimization-example-and-explaination/
 slug: ruby-optimization-example-and-explaination
+source: merbist.com
 status: publish
 title: Ruby optimization example and explanation
 wordpress_id: '1124'
 categories:
-- blog-post
 - Misc
-- Ruby
+- ruby
+- merbist.com
+- blog-post
 tags:
 - performance
 - ruby
@@ -89,10 +92,10 @@ This optimization is based on the fact that the benchmark (and the real life usa
 
 Now every time we call #dispatch, a real method is dispatched which is much faster than doing an eval and no objects are allocated. Running the profiler and the benchmarks script used earlier, we can confirm that the GC doesn't run a single time and that the optimized code runs 2X faster!
 
-
+ 
 
 Once again, it's yet another example showing that you [should care about object allocation](http://merbist.com/2010/07/29/object-allocation-why-you-should-care/) when dealing with code in the critical path. It also shows how to work around the block bindings. Now, it doesn't mean that you have to obsess about object allocation and performance, even if my last implementation is 2X faster than the previous, we are only talking about a few microseconds per dispatch. That said microseconds do add up and creating too many objects will slow down even your faster code since the GC will stop-the-world as its cleaning up your memory. In real life, you probably don't have to worry too much about low level details like that, unless you are working on a framework or sharing your code with others. But at least you can learn and understand why one approach is faster than the other, it might not be useful to you right away, but if you take programming as a craft, it's good to understand how things work under the hood so you can make educated decisions.
-
+ 
 
 
 

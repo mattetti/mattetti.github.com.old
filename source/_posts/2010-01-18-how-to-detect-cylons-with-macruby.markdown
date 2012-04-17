@@ -1,13 +1,16 @@
 ---
 date: '2010-01-18 16:13:37'
 layout: post
+legacy_url: http://merbist.com/2010/01/18/how-to-detect-cylons-with-macruby/
 slug: how-to-detect-cylons-with-macruby
+source: merbist.com
 status: publish
 title: How to detect Cylons with MacRuby
 wordpress_id: '696'
 categories:
-- blog-post
 - macruby
+- merbist.com
+- blog-post
 tags:
 - cylon technology
 - debugger

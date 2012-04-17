@@ -1,13 +1,16 @@
 ---
 date: '2009-11-30 13:38:53'
 layout: post
+legacy_url: http://merbist.com/2009/11/30/lots-of-rubies-now-what/
 slug: lots-of-rubies-now-what
+source: merbist.com
 status: publish
 title: Lots of rubies, now what?
 wordpress_id: '648'
 categories:
-- blog-post
 - ruby
+- merbist.com
+- blog-post
 ---
 
 If you were at RubyConf 2009 or looked at the schedule, you saw that the big thing happening in the Ruby scene is the maturation of a many of the Ruby implementations:

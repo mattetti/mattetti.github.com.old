@@ -1,14 +1,17 @@
 ---
 date: '2009-10-25 15:52:14'
 layout: post
+legacy_url: http://merbist.com/2009/10/25/macruby-browse-for-folder-or-file-dialog/
 slug: macruby-browse-for-folder-or-file-dialog
+source: merbist.com
 status: publish
 title: 'MacRuby tips: browse for folder or file dialog'
 wordpress_id: '624'
 categories:
-- blog-post
 - macruby
 - Tutorial
+- merbist.com
+- blog-post
 tags:
 - cocoa
 - macruby

@@ -1,12 +1,16 @@
 ---
 date: '2008-10-16 11:15:27'
 layout: post
+legacy_url: http://merbist.com/2008/10/16/preparing-merb-10-rc2/
 slug: preparing-merb-10-rc2
+source: merbist.com
 status: publish
 title: Preparing Merb 1.0 RC2
 wordpress_id: '172'
 categories:
 - News
+- merbist.com
+- blog-post
 tags:
 - merb
 - rc

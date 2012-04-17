@@ -1,13 +1,17 @@
 ---
 date: '2008-11-14 00:39:27'
 layout: post
+legacy_url: http://merbist.com/2008/11/14/merb-10-tips-part-1/
 slug: merb-10-tips-part-1
+source: merbist.com
 status: publish
 title: merb 1.0 - tips part 1
 wordpress_id: '228'
 categories:
 - Misc
 - News
+- merbist.com
+- blog-post
 tags:
 - faq
 - merb

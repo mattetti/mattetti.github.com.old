@@ -1,14 +1,17 @@
 ---
 date: '2010-05-09 22:40:06'
 layout: post
+legacy_url: http://merbist.com/2010/05/09/writing-an-open-licensed-book/
 slug: writing-an-open-licensed-book
+source: merbist.com
 status: publish
 title: Writing an open licensed book
 wordpress_id: '767'
 categories:
-- blog-post
 - macruby
 - Misc
+- merbist.com
+- blog-post
 tags:
 - book
 - macruby

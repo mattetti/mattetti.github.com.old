@@ -1,14 +1,17 @@
 ---
 date: '2011-09-14 16:11:41'
 layout: post
+legacy_url: http://merbist.com/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app/
 slug: how-to-cross-domain-ajax-in-a-ruby-app
+source: merbist.com
 status: publish
 title: How to - cross domain ajax to a Ruby app
 wordpress_id: '1133'
 categories:
-- blog-post
 - Misc
-- Ruby
+- ruby
+- merbist.com
+- blog-post
 tags:
 - html5
 ---
@@ -19,7 +22,7 @@ However, most browsers (IE 8+, Firefox 3.5+, Safari 4+, Chrome) implement a simp
 
 Of course, if your users have an old version of their browser, you  might have to look into jsonp or something else such as cheating by using iframes & setting document.domain. Let's pretend for a minute that 100% of your users are on Chrome. The only thing you need to do is set a response header listing the accepted domains or "*" for all. A simple Rack middleware to do that would look like that.
 
-
+ 
 
     
     class XOriginEnabler

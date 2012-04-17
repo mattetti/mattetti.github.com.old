@@ -1,14 +1,17 @@
 ---
 date: '2010-03-15 23:50:49'
 layout: post
+legacy_url: http://merbist.com/2010/03/15/i-did-it-wrong/
 slug: i-did-it-wrong
+source: merbist.com
 status: publish
 title: I did it wrong
 wordpress_id: '741'
 categories:
-- blog-post
 - Misc
 - ruby
+- merbist.com
+- blog-post
 ---
 
 The Ruby community is a well known for at least two things: **being **[passionate](http://pragprog.com/press_releases/the-passionate-programmer)** and being **[arrogant](http://www.bruisin-ales.com/beerblog/wp-content/uploads/2008/09/stoneintro.gif) .

@@ -1,13 +1,16 @@
 ---
 date: '2011-03-07 09:00:56'
 layout: post
+legacy_url: http://merbist.com/2011/03/07/hey-apple-please-be-nice-and-share/
 slug: hey-apple-please-be-nice-and-share
+source: merbist.com
 status: publish
 title: Hey Apple, please be nice and share
 wordpress_id: '996'
 categories:
-- blog-post
 - macruby
+- merbist.com
+- blog-post
 tags:
 - macruby
 ---

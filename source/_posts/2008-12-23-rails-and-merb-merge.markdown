@@ -1,13 +1,17 @@
 ---
 date: '2008-12-23 11:50:02'
 layout: post
+legacy_url: http://merbist.com/2008/12/23/rails-and-merb-merge/
 slug: rails-and-merb-merge
+source: merbist.com
 status: publish
 title: Rails and Merb core team working together on their next release
 wordpress_id: '382'
 categories:
 - merb
 - News
+- merbist.com
+- blog-post
 tags:
 - merb
 - merge

@@ -1,12 +1,16 @@
 ---
 date: '2008-10-27 00:06:41'
 layout: post
+legacy_url: http://merbist.com/2008/10/27/will_paginate-and-merb/
 slug: will_paginate-and-merb
+source: merbist.com
 status: publish
 title: will_paginate and Merb
 wordpress_id: '193'
 categories:
 - News
+- merbist.com
+- blog-post
 tags:
 - merb
 - pagination

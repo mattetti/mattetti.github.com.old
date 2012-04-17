@@ -1,13 +1,17 @@
 ---
 date: '2008-12-04 23:18:31'
 layout: post
+legacy_url: http://merbist.com/2008/12/04/annoucing-the-merb-open-source-book/
 slug: annoucing-the-merb-open-source-book
+source: merbist.com
 status: publish
 title: Annoucing the Merb open source book
 wordpress_id: '315'
 categories:
 - merb
 - News
+- merbist.com
+- blog-post
 tags:
 - book
 - django

@@ -1,13 +1,16 @@
 ---
 date: '2011-01-18 08:00:42'
 layout: post
+legacy_url: http://merbist.com/2011/01/18/causality-of-scalability/
 slug: causality-of-scalability
+source: merbist.com
 status: publish
 title: Causality of scalability
 wordpress_id: '852'
 categories:
-- blog-post
 - Software Design
+- merbist.com
+- blog-post
 tags:
 - architecture
 - cloud

@@ -1,14 +1,17 @@
 ---
 date: '2010-02-02 11:19:26'
 layout: post
+legacy_url: http://merbist.com/2010/02/02/how-and-why-i-joined-the-suit-people/
 slug: how-and-why-i-joined-the-suit-people
+source: merbist.com
 status: publish
 title: How and why I joined the "suit people"
 wordpress_id: '712'
 categories:
-- blog-post
 - Misc
 - News
+- merbist.com
+- blog-post
 tags:
 - enterprise
 - PlayStation

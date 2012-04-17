@@ -1,12 +1,16 @@
 ---
 date: '2009-10-05 23:58:53'
 layout: post
+legacy_url: http://merbist.com/2009/10/05/macruby-soon-to-reach-a-new-milestone/
 slug: macruby-soon-to-reach-a-new-milestone
+source: merbist.com
 status: publish
 title: MacRuby soon to reach a new milestone
 wordpress_id: '556'
 categories:
 - macruby
+- merbist.com
+- blog-post
 ---
 
 Laurent just posted a [MacRuby status update](http://bit.ly/2YPwRT) on the mailing list and the first official beta of MacRuby 0.5 should be released pretty soon.

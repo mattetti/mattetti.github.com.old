@@ -1,14 +1,17 @@
 ---
 date: '2010-06-04 17:45:20'
 layout: post
+legacy_url: http://merbist.com/2010/06/04/au-revoir-rails-community/
 slug: au-revoir-rails-community
+source: merbist.com
 status: publish
 title: Au Revoir Rails community
 wordpress_id: '776'
 categories:
 - Misc
+- rails
+- merbist.com
 - blog-post
-- Rails
 tags:
 - rails
 ---

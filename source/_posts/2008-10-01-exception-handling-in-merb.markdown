@@ -1,12 +1,16 @@
 ---
 date: '2008-10-01 09:56:02'
 layout: post
+legacy_url: http://merbist.com/2008/10/01/exception-handling-in-merb/
 slug: exception-handling-in-merb
+source: merbist.com
 status: publish
 title: Exception handling in Merb
 wordpress_id: '108'
 categories:
 - News
+- merbist.com
+- blog-post
 tags:
 - exceptions
 - merb

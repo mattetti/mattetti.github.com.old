@@ -1,12 +1,16 @@
 ---
 date: '2009-04-14 09:02:45'
 layout: post
+legacy_url: http://merbist.com/2009/04/14/merb-11-delayed/
 slug: merb-11-delayed
+source: merbist.com
 status: publish
 title: Merb 1.1 delayed
 wordpress_id: '472'
 categories:
 - Misc
+- merbist.com
+- blog-post
 ---
 
 We made the decision to slightly delay the release of Merb 1.1 as we ended up changing the scope of what we wanted to make available in the 1.1 release. If you have been following our releases, you know that this is not something we usually do, but we strongly believe that this is actually something that will save us time for the next release.

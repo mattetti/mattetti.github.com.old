@@ -1,12 +1,16 @@
 ---
 date: '2008-10-11 22:50:20'
 layout: post
+legacy_url: http://merbist.com/2008/10/11/end-of-merbcamp-day-1/
 slug: end-of-merbcamp-day-1
+source: merbist.com
 status: publish
 title: End of MerbCamp Day 1
 wordpress_id: '155'
 categories:
 - News
+- merbist.com
+- blog-post
 tags:
 - merbcamp
 ---

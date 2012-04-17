@@ -1,12 +1,16 @@
 ---
 date: '2008-10-29 19:54:10'
 layout: post
+legacy_url: http://merbist.com/2008/10/29/yet-another-rc-release-merb-10-rc3/
 slug: yet-another-rc-release-merb-10-rc3
+source: merbist.com
 status: publish
 title: Yet another RC release (Merb 1.0 RC4)
 wordpress_id: '197'
 categories:
 - News
+- merbist.com
+- blog-post
 tags:
 - merb
 - merbcamp

@@ -1,12 +1,16 @@
 ---
 date: '2008-10-11 09:45:53'
 layout: post
+legacy_url: http://merbist.com/2008/10/11/merbcamp-just-started/
 slug: merbcamp-just-started
+source: merbist.com
 status: publish
 title: MerbCamp just started
 wordpress_id: '148'
 categories:
 - News
+- merbist.com
+- blog-post
 tags:
 - merb
 - merbcamp

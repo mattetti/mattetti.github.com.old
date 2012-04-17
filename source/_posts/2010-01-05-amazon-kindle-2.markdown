@@ -1,13 +1,16 @@
 ---
 date: '2010-01-05 17:36:12'
 layout: post
+legacy_url: http://merbist.com/2010/01/05/amazon-kindle-2/
 slug: amazon-kindle-2
+source: merbist.com
 status: publish
 title: Amazon Kindle 2
 wordpress_id: '669'
 categories:
-- blog-post
 - Misc
+- merbist.com
+- blog-post
 ---
 
 For Noël, my wife got me a new toy: [the Amazon Kindle 2](http://www.amazon.com/gp/product/B0015T963C?ie=UTF8&tag=merbist-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=B0015T963C).

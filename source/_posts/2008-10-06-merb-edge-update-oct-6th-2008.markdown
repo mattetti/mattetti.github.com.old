@@ -1,13 +1,17 @@
 ---
 date: '2008-10-06 20:50:15'
 layout: post
+legacy_url: http://merbist.com/2008/10/06/merb-edge-update-oct-6th-2008/
 slug: merb-edge-update-oct-6th-2008
+source: merbist.com
 status: publish
 title: Merb Edge update (Oct 6th 2008)
 wordpress_id: '134'
 categories:
 - Misc
 - News
+- merbist.com
+- blog-post
 tags:
 - edge
 - full stack

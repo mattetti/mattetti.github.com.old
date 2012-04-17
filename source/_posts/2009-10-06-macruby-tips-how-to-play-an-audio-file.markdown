@@ -1,12 +1,16 @@
 ---
 date: '2009-10-06 19:00:08'
 layout: post
+legacy_url: http://merbist.com/2009/10/06/macruby-tips-how-to-play-an-audio-file/
 slug: macruby-tips-how-to-play-an-audio-file
+source: merbist.com
 status: publish
 title: 'MacRuby tips: how to play an audio file'
 wordpress_id: '570'
 categories:
 - macruby
+- merbist.com
+- blog-post
 tags:
 - audio
 - cocoa

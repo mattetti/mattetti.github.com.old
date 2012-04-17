@@ -1,12 +1,16 @@
 ---
 date: '2008-12-18 04:22:09'
 layout: post
+legacy_url: http://merbist.com/2008/12/18/meet-the-merbists-andy-delcambre/
 slug: meet-the-merbists-andy-delcambre
+source: merbist.com
 status: publish
 title: 'meet the merbists: Andy Delcambre'
 wordpress_id: '378'
 categories:
 - merb
+- merbist.com
+- blog-post
 tags:
 - Andy Delcambre
 - Meet the merbists

@@ -1,12 +1,16 @@
 ---
 date: '2008-10-13 23:01:47'
 layout: post
+legacy_url: http://merbist.com/2008/10/13/merb-10-rc1/
 slug: merb-10-rc1
+source: merbist.com
 status: publish
 title: Merb 1.0 RC1
 wordpress_id: '165'
 categories:
 - News
+- merbist.com
+- blog-post
 tags:
 - frameworks
 - merb

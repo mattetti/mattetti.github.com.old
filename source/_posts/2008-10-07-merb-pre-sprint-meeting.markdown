@@ -1,13 +1,17 @@
 ---
 date: '2008-10-07 22:53:53'
 layout: post
+legacy_url: http://merbist.com/2008/10/07/merb-pre-sprint-meeting/
 slug: merb-pre-sprint-meeting
+source: merbist.com
 status: publish
 title: Merb Pre Sprint Meeting
 wordpress_id: '142'
 categories:
 - Misc
 - News
+- merbist.com
+- blog-post
 tags:
 - documentation
 - merb

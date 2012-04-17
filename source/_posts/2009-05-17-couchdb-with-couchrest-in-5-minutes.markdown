@@ -1,12 +1,16 @@
 ---
 date: '2009-05-17 21:31:14'
 layout: post
+legacy_url: http://merbist.com/2009/05/17/couchdb-with-couchrest-in-5-minutes/
 slug: couchdb-with-couchrest-in-5-minutes
+source: merbist.com
 status: publish
 title: CouchDB with CouchRest in 5 minutes
 wordpress_id: '492'
 categories:
 - ruby
+- merbist.com
+- blog-post
 tags:
 - couchdb
 - couchrest

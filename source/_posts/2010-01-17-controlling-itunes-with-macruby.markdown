@@ -1,13 +1,16 @@
 ---
 date: '2010-01-17 19:54:19'
 layout: post
+legacy_url: http://merbist.com/2010/01/17/controlling-itunes-with-macruby/
 slug: controlling-itunes-with-macruby
+source: merbist.com
 status: publish
 title: Controlling iTunes with MacRuby
 wordpress_id: '684'
 categories:
-- blog-post
 - macruby
+- merbist.com
+- blog-post
 tags:
 - itunes
 - macruby

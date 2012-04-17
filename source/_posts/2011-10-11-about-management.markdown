@@ -1,13 +1,16 @@
 ---
 date: '2011-10-11 22:53:40'
 layout: post
+legacy_url: http://merbist.com/2011/10/11/about-management/
 slug: about-management
+source: merbist.com
 status: publish
 title: About management
 wordpress_id: '1173'
 categories:
-- blog-post
 - Misc
+- merbist.com
+- blog-post
 ---
 
 I decided to save myself a session to the shrink and instead just write down my reflection on management. Who knows, some of you might help me and/or challenge my thought process.

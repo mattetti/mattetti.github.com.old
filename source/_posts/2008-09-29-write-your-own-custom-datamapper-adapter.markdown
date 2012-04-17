@@ -1,13 +1,17 @@
 ---
 date: '2008-09-29 00:38:46'
 layout: post
+legacy_url: http://merbist.com/2008/09/29/write-your-own-custom-datamapper-adapter/
 slug: write-your-own-custom-datamapper-adapter
+source: merbist.com
 status: publish
 title: Write your own custom DataMapper adapter
 wordpress_id: '91'
 categories:
 - News
 - Tutorial
+- merbist.com
+- blog-post
 tags:
 - adapter
 - datamapper

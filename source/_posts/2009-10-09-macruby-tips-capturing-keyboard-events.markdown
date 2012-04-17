@@ -1,14 +1,17 @@
 ---
 date: '2009-10-09 19:24:04'
 layout: post
+legacy_url: http://merbist.com/2009/10/09/macruby-tips-capturing-keyboard-events/
 slug: macruby-tips-capturing-keyboard-events
+source: merbist.com
 status: publish
 title: 'MacRuby tips: capturing keyboard events'
 wordpress_id: '602'
 categories:
-- blog-post
 - macruby
 - Tutorial
+- merbist.com
+- blog-post
 ---
 
 If you are writing any type of games you might want your users to interact with your application using their keyboards.

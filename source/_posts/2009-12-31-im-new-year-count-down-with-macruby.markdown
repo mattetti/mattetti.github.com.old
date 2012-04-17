@@ -1,13 +1,16 @@
 ---
 date: '2009-12-31 10:25:50'
 layout: post
+legacy_url: http://merbist.com/2009/12/31/im-new-year-count-down-with-macruby/
 slug: im-new-year-count-down-with-macruby
+source: merbist.com
 status: publish
 title: IM new year countdown with MacRuby
 wordpress_id: '662'
 categories:
-- blog-post
 - macruby
+- merbist.com
+- blog-post
 tags:
 - ichat
 - macruby

@@ -1,0 +1,145 @@
+---
+date: '2008-04-05 05:59:00'
+layout: post
+legacy_url: http://railsontherun.com/2008/04/05/merb-tips-1/
+slug: merb-tips-1
+source: railsontherun.com
+status: publish
+title: Merb tips I
+wordpress_id: '851'
+categories:
+- Ruby
+- railsontherun.com
+- blog-post
+tags:
+- logger
+- merb
+- tricks
+---
+
+_* this content is now outdated and only applied to Merb 0.9_*
+
+
+
+
+
+I'm working on a post reporting a recent benchmark I did comparing Rails vs Merb performances for a client's app.
+
+
+
+
+
+In the meantime, here are few tricks you might need when using Merb 0.9x
+
+
+
+
+
+
+
+  1. In the init.rb file, uncomment and rename _c[:session_id_key]_  (in the Merb::Config.use block)
+
+
+
+  2. In the same block, add _c[:log_level] = :debug_  to set a log level
+
+
+
+  3. By default, Merb logs to STDOUT, to log to a file, in the config block add _c[:log_file] = Merb.log_path + '/development.log'_  (note that you need to create the file yourself, Merb won't do that)
+
+
+
+  4. to save your gems locally, do: _sudo gem install gem_name -i gems_
+
+
+
+  5. need basic HTTP auth? [it's now available in core](http://github.com/wycats/merb-core/tree/e690bb81bb550e58dad519712de050141b8552d8/lib/merb-core/controller/mixins/authentication.rb#L15-46)
+
+
+
+  6. don't forget to require any plugins, extra gems you need (such as _merb_helpers_ or _merb-assets_)
+
+
+
+  7. don't forget to select your ORM before using the generator( so your generated goodies will be adapted to your ORM)
+
+
+
+  8. routes are easy to use. In the console (merb -i) type _merb.show_routes_ to see all your named routes
+
+
+
+  9. if you want to use link_to, install [merb_assets](http://github.com/wycats/merb-plugins/tree/master/merb_assets)
+
+
+
+  10. nested routes example:
+
+
+
+
+
+
+
+  
+    
+    1<tt>
+    </tt>2<tt>
+    </tt>3<tt>
+    </tt>4<tt>
+    </tt><strong>5</strong><tt>
+    </tt>6<tt>
+    </tt>
+
+
+  
+    
+    <tt>
+    </tt>  r.resources <span class="sy">:channels</span> <span class="r">do</span> |channels|<tt>
+    </tt>    channels.resources <span class="sy">:shows</span> <span class="r">do</span> |shows|<tt>
+    </tt>     shows.resources <span class="sy">:episodes</span><tt>
+    </tt>    <span class="r">end</span><tt>
+    </tt>   <span class="r">end</span><tt>
+    </tt>
+
+
+
+
+
+
+usage: 
+
+
+
+
+
+
+  
+    
+    1<tt>
+    </tt>2<tt>
+    </tt>3<tt>
+    </tt>4<tt>
+    </tt>
+
+
+  
+    
+    <tt>
+    </tt>  url(<span class="sy">:channel_shows</span>, <span class="sy">:channel_id</span> => channel)<tt>
+    </tt><tt>
+    </tt>  link_to h(channel.description), url(<span class="sy">:channel</span>, <span class="sy">:id</span> => channel)<tt>
+    </tt>
+
+
+
+
+
+
+That's it for today :)
+
+
+
+
+
+In the meantime, check this [Merb presentation by Ezra](http://mwrc2008.confreaks.com/02zygmuntowicz.html) and [this DataMapper presentation by Wycats](http://mwrc2008.confreaks.com/04katz.html)

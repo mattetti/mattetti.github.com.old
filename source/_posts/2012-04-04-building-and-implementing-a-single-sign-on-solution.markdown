@@ -1,14 +1,17 @@
 ---
 date: '2012-04-04 07:29:16'
 layout: post
+legacy_url: http://merbist.com/2012/04/04/building-and-implementing-a-single-sign-on-solution/
 slug: building-and-implementing-a-single-sign-on-solution
+source: merbist.com
 status: publish
 title: Building and implementing a Single Sign-On solution
 wordpress_id: '1301'
 categories:
-- blog-post
 - Software Design
 - Tutorial
+- merbist.com
+- blog-post
 tags:
 - architecture
 - crypto
@@ -135,7 +138,7 @@ The cookie doesn't need to contain a lot of data, its value can contain the acco
 
 Finally, we need to set a filter in your application. This auto-login filter will check the presence of an auth cookie on the top level domain and the absence of local session. If that's the case, a session is automatically created using the user id from the cookie value after the cookie integrity is verified. We could also share the session between all our apps, but in most cases, the data stored by each app is very specific and it's safer/cleaner to keep the sessions isolated. The integration with an app running on a different service will also be easier if the sessions are isolated.
 
-
+ 
 
 
 ## Registration
@@ -167,7 +170,7 @@ Until now, we assumed all our apps were on the same top domain. In reality, you 
 [![](http://merbist.com/wp-content/uploads/2012/04/SSO-differentdomains-1.png)](http://merbist.com/wp-content/uploads/2012/04/SSO-differentdomains-1.png)
 
 
-
+ 
 
 The trick consists, when a local session isn't present, of using an iframe in the application using the different domain. The iframe loads a page from the authentication/accounts app which verifies that a valid cookie was set on the main top domain. If that is the case, we can tell the application that the user is already globally logged in and we can tell the iframe host to redirect to an application end point passing an auth token the same way we did during the authentication. The app would then create a session and redirect the user back to where (s)he started. The next requests will see the local session and this process will be ignored.
 
@@ -175,7 +178,7 @@ If the authentication application doesn't find a signed cookie, the iframe can d
 
 Something to keep in mind when using multiple apps and domains is that you need to keep the shared cookies/sessions in sync, meaning that if you log out from an app, you need to also delete the auth cookie to ensure that users are globally logged out. (It also means that you might always want to use an iframe to check the login status and auto-logoff users).
 
-
+ 
 
 
 ## Mobile clients
@@ -185,7 +188,7 @@ Another part of implementing a SSO solution is to handle mobile clients. Mobile 
 
 In this approach, we don't use a cookie and we actually don't need a SSO solution, but an unified authentication system.
 
-
+ 
 
 
 ## Writing web services

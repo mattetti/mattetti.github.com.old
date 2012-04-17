@@ -1,13 +1,16 @@
 ---
 date: '2009-12-29 19:09:45'
 layout: post
+legacy_url: http://merbist.com/2009/12/29/fun-with-macruby/
 slug: fun-with-macruby
+source: merbist.com
 status: publish
 title: Fun with MacRuby
 wordpress_id: '653'
 categories:
-- blog-post
 - macruby
+- merbist.com
+- blog-post
 tags:
 - foundation
 - macruby

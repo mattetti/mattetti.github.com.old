@@ -1,12 +1,16 @@
 ---
 date: '2008-12-15 10:46:27'
 layout: post
+legacy_url: http://merbist.com/2008/12/15/meet-the-merbists-derek-neighbors/
 slug: meet-the-merbists-derek-neighbors
+source: merbist.com
 status: publish
 title: 'Meet the merbists: Derek Neighbors'
 wordpress_id: '345'
 categories:
 - merb
+- merbist.com
+- blog-post
 tags:
 - community
 - Derek Neighbors

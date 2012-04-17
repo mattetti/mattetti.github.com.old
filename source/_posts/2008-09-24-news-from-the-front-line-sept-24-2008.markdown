@@ -1,12 +1,16 @@
 ---
 date: '2008-09-24 08:47:24'
 layout: post
+legacy_url: http://merbist.com/2008/09/24/news-from-the-front-line-sept-24-2008/
 slug: news-from-the-front-line-sept-24-2008
+source: merbist.com
 status: publish
 title: News from the front line - Sept 24 2008
 wordpress_id: '36'
 categories:
 - News
+- merbist.com
+- blog-post
 tags:
 - authentication
 - bundling

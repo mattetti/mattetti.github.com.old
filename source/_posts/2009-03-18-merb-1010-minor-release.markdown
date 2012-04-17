@@ -1,13 +1,17 @@
 ---
 date: '2009-03-18 17:11:35'
 layout: post
+legacy_url: http://merbist.com/2009/03/18/merb-1010-minor-release/
 slug: merb-1010-minor-release
+source: merbist.com
 status: publish
 title: Merb 1.0.10 (minor release)
 wordpress_id: '456'
 categories:
 - merb
 - News
+- merbist.com
+- blog-post
 tags:
 - merb
 - release

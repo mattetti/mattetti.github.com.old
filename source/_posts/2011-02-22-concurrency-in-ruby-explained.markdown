@@ -1,14 +1,17 @@
 ---
 date: '2011-02-22 22:34:30'
 layout: post
+legacy_url: http://merbist.com/2011/02/22/concurrency-in-ruby-explained/
 slug: concurrency-in-ruby-explained
+source: merbist.com
 status: publish
 title: Ruby concurrency explained
 wordpress_id: '978'
 categories:
-- blog-post
-- Ruby
+- ruby
 - Software Design
+- merbist.com
+- blog-post
 tags:
 - async
 - concurrency

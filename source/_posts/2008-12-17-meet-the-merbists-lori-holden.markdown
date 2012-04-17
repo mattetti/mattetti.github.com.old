@@ -1,12 +1,16 @@
 ---
 date: '2008-12-17 06:00:27'
 layout: post
+legacy_url: http://merbist.com/2008/12/17/meet-the-merbists-lori-holden/
 slug: meet-the-merbists-lori-holden
+source: merbist.com
 status: publish
 title: 'Meet the merbists: Lori Holden'
 wordpress_id: '359'
 categories:
 - merb
+- merbist.com
+- blog-post
 tags:
 - Lori Holden
 - merb

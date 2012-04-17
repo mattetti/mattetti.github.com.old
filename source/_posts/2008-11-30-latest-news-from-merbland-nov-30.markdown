@@ -1,13 +1,17 @@
 ---
 date: '2008-11-30 15:23:12'
 layout: post
+legacy_url: http://merbist.com/2008/11/30/latest-news-from-merbland-nov-30/
 slug: latest-news-from-merbland-nov-30
+source: merbist.com
 status: publish
 title: latest news from Merbland (Nov 30)
 wordpress_id: '290'
 categories:
 - merb
 - News
+- merbist.com
+- blog-post
 tags:
 - merb
 - News

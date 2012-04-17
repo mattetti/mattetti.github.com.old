@@ -1,15 +1,18 @@
 ---
 date: '2011-07-11 10:21:02'
 layout: post
+legacy_url: http://merbist.com/2011/07/11/first-step-in-scaling-a-web-site-http-caching/
 slug: first-step-in-scaling-a-web-site-http-caching
+source: merbist.com
 status: publish
 title: 'First step in scaling a web site: HTTP caching'
 wordpress_id: '1094'
 categories:
-- blog-post
 - JavaScript
 - Misc
 - Software Design
+- merbist.com
+- blog-post
 tags:
 - caching
 - http cache
@@ -116,7 +119,7 @@ The problem is that the message is part of the rendered page and now for 60 seco
 
 And then add a function called when the DOM is ready which loads the message and injects it in the DOM. Once the cookie read, delete it so the message isn't displayed again.
 
-
+ 
 
 So there you have it, if you follow these few steps, you should be able to handle easily 10x more traffic without increasing hardware or making any type of crazy code change. Before you start looking into memcached, redis, cdns or whatever, consider HTTP caching and async DOM manipulation. Finally, note that if you can't use Varnish or Squid, you can very easily setup [Rack-Cache](http://rtomayko.github.com/rack-cache/) locally and share the cache via memcached. It's also a great way to test locally.
 
@@ -132,7 +135,7 @@ So there you have it, if you follow these few steps, you should be able to handl
 
 
 
-
+ 
 
 External resources:
 

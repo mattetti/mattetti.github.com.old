@@ -1,13 +1,16 @@
 ---
 date: '2010-10-19 00:05:37'
 layout: post
+legacy_url: http://merbist.com/2010/10/19/macruby-webkit-and-js/
 slug: macruby-webkit-and-js
+source: merbist.com
 status: publish
 title: MacRuby, WebKit and JS
 wordpress_id: '824'
 categories:
-- blog-post
 - macruby
+- merbist.com
+- blog-post
 ---
 
 I was working on a piece of code using MacRuby, Webkit and JavaScript. Calling JS from MacRuby is really straight forward but calling Ruby from JS is a but tricky. There is actually a known bug in MacRuby which was giving me a hard time. The bug should be fixed in 0.8 if everything goes according to plan. In the mean time here is a quick run down:

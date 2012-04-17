@@ -1,12 +1,16 @@
 ---
 date: '2008-10-04 13:00:01'
 layout: post
+legacy_url: http://merbist.com/2008/10/04/get-on-merb-edge-pre-10/
 slug: get-on-merb-edge-pre-10
+source: merbist.com
 status: publish
 title: Get on Merb Edge pre 1.0
 wordpress_id: '114'
 categories:
 - Tutorial
+- merbist.com
+- blog-post
 tags:
 - datamapper
 - edge

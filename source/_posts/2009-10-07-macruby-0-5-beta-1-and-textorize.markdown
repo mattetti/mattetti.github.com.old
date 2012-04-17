@@ -1,13 +1,16 @@
 ---
 date: '2009-10-07 20:45:02'
 layout: post
+legacy_url: http://merbist.com/2009/10/07/macruby-0-5-beta-1-and-textorize/
 slug: macruby-0-5-beta-1-and-textorize
+source: merbist.com
 status: publish
 title: MacRuby 0.5 beta 1 and Textorize
 wordpress_id: '592'
 categories:
-- blog-post
 - macruby
+- merbist.com
+- blog-post
 tags:
 - macgem
 - macruby

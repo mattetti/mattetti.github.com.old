@@ -1,14 +1,17 @@
 ---
 date: '2009-11-09 00:10:16'
 layout: post
+legacy_url: http://merbist.com/2009/11/09/the-ruby-revolution-is-over/
 slug: the-ruby-revolution-is-over
+source: merbist.com
 status: publish
 title: The Ruby revolution is over
 wordpress_id: '619'
 categories:
-- blog-post
 - Misc
-- Ruby
+- ruby
+- merbist.com
+- blog-post
 tags:
 - revolution
 - ruby

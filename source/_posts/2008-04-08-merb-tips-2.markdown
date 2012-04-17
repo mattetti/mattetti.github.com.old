@@ -1,0 +1,249 @@
+---
+date: '2008-04-08 02:11:00'
+layout: post
+legacy_url: http://railsontherun.com/2008/04/08/merb-tips-2/
+slug: merb-tips-2
+source: railsontherun.com
+status: publish
+title: Merb tips II
+wordpress_id: '865'
+categories:
+- Ruby
+- railsontherun.com
+- blog-post
+tags:
+- logger
+- merb
+- routes
+- tips
+- tricks
+---
+
+_* this content is now outdated and only applied to Merb 0.9_*
+
+
+
+
+
+I the [previous post](http://railsontherun.com/2008/4/5/merb-tips-1) I covered few useful tips for Merb 0.9. The good news is that Merb should get its wiki setup over the week end!
+
+
+
+
+
+Here is another batch of hopefully useful tips:
+
+
+
+
+
+
+
+  * In init.rb, you can define a dependency and specify a version number: _dependency "merb_fu", ">= 1.0"_
+
+
+
+  * If you want to run your application from a subdirectory, once again, in your init.rb file, add: _c[:path_prefix] = "/your_prefix"_ _(note, that you can also do that in a specific environment file.)_
+
+
+
+  * You feel like limiting a route to a specific request such as a DELETE? In your router.rb file add the following:
+
+
+
+
+
+
+
+  
+    
+    1<tt>
+    </tt>2<tt>
+    </tt>
+
+
+  
+    
+    <tt>
+    </tt>  r.match(<span class="s"><span class="dl">"</span><span class="k">/:bucket_id</span><span class="dl">"</span></span>, <span class="sy">:method</span> => <span class="sy">:delete</span>).to(<span class="sy">:controller</span> => <span class="s"><span class="dl">"</span><span class="k">buckets</span><span class="dl">"</span></span>, <span class="sy">:action</span> => <span class="s"><span class="dl">"</span><span class="k">destroy</span><span class="dl">"</span></span>)<tt>
+    </tt>
+
+
+
+
+
+
+
+
+  * Since we are talking about routes, what about an iPhone only route?
+
+
+
+
+
+
+  
+    
+    1<tt>
+    </tt>2<tt>
+    </tt>
+
+
+  
+    
+    <tt>
+    </tt>  r.match(<span class="rx"><span class="dl">%r[</span><span class="k">^/(.+)</span><span class="dl">]</span></span>, <span class="sy">:user_agent</span> => <span class="rx"><span class="dl">/</span><span class="k">iPhone</span><span class="dl">/</span></span>).to(<span class="sy">:controller</span> => <span class="s"><span class="dl">"</span><span class="k">mobile</span><span class="dl">"</span></span>, <span class="sy">:title</span> => <span class="s"><span class="dl">"</span><span class="k">Welcome Apple FanBoy</span><span class="dl">"</span></span>, <span class="sy">:action</span> => <span class="s"><span class="dl">"</span><span class="k">show</span><span class="dl">"</span></span>)<tt>
+    </tt>
+
+
+
+
+
+
+
+
+  * what about an admin section for my blogposts?
+
+
+
+
+
+
+  
+    
+    1<tt>
+    </tt>2<tt>
+    </tt>3<tt>
+    </tt>4<tt>
+    </tt>
+
+
+  
+    
+    <tt>
+    </tt>  r.match(<span class="s"><span class="dl">'</span><span class="k">/admin</span><span class="dl">'</span></span>) <span class="r">do</span> |admin|<tt>
+    </tt>    admin.resources <span class="sy">:blogposts</span><tt>
+    </tt>  <span class="r">end</span><tt>
+    </tt>
+
+
+
+
+
+
+
+
+  * To finish with the routes, look at the [following merb-core spec](http://github.com/wycats/merb-core/tree/master/spec/public/router/special_spec.rb#L39-46)
+
+
+
+
+
+
+  
+    
+    1<tt>
+    </tt>2<tt>
+    </tt>3<tt>
+    </tt>4<tt>
+    </tt><strong>5</strong><tt>
+    </tt>6<tt>
+    </tt>7<tt>
+    </tt>8<tt>
+    </tt>9<tt>
+    </tt>
+
+
+  
+    
+    <tt>
+    </tt>  it <span class="s"><span class="dl">"</span><span class="k">should allow you to restrict routes based on protocol</span><span class="dl">"</span></span> <span class="r">do</span><tt>
+    </tt>    <span class="co">Merb</span>::<span class="co">Router</span>.prepare <span class="r">do</span> |r|<tt>
+    </tt>      r.match(<span class="sy">:protocol</span> => <span class="s"><span class="dl">"</span><span class="k">http://</span><span class="dl">"</span></span>).to(<span class="sy">:controller</span> => <span class="s"><span class="dl">"</span><span class="k">foo</span><span class="dl">"</span></span>, <span class="sy">:action</span> => <span class="s"><span class="dl">"</span><span class="k">bar</span><span class="dl">"</span></span>)<tt>
+    </tt>      r.default_routes<tt>
+    </tt>    <span class="r">end</span><tt>
+    </tt>    route_to(<span class="s"><span class="dl">"</span><span class="k">/foo/bar</span><span class="dl">"</span></span>).should have_route(<span class="sy">:controller</span> => <span class="s"><span class="dl">"</span><span class="k">foo</span><span class="dl">"</span></span>, <span class="sy">:action</span> => <span class="s"><span class="dl">"</span><span class="k">bar</span><span class="dl">"</span></span>)<tt>
+    </tt>    route_to(<span class="s"><span class="dl">"</span><span class="k">/boo/hoo</span><span class="dl">"</span></span>, <span class="sy">:protocol</span> => <span class="s"><span class="dl">"</span><span class="k">https://</span><span class="dl">"</span></span>).should have_route(<span class="sy">:controller</span> => <span class="s"><span class="dl">"</span><span class="k">boo</span><span class="dl">"</span></span>, <span class="sy">:action</span> => <span class="s"><span class="dl">"</span><span class="k">hoo</span><span class="dl">"</span></span>)<tt>
+    </tt>  <span class="r">end</span><tt>
+    </tt>
+
+
+
+
+
+
+You can set custom routes to only work when connected via SSL, that's just really nice!
+
+
+
+
+
+
+
+  * Other quick tip. [Last time](http://railsontherun.com/2008/4/5/merb-tips-1) we saw how to install locally all the required gems. Well, you can also freeze merb by doing:
+
+
+
+
+
+
+  
+    
+    1<tt>
+    </tt>2<tt>
+    </tt>
+
+
+  
+    
+    <tt>
+    </tt>  merb-gen frozen-merb<tt>
+    </tt>
+
+
+
+
+
+
+
+
+  * Another common IRC question, how do I use Merb's logger. It's really easy:
+
+
+
+
+
+
+  
+    
+    1<tt>
+    </tt>2<tt>
+    </tt>
+
+
+  
+    
+    <tt>
+    </tt>  <span class="co">Merb</span>.logger.info(<span class="s"><span class="dl">'</span><span class="k">our stuff</span><span class="dl">'</span></span>)<tt>
+    </tt>
+
+
+
+
+
+
+Where info is the debugging level you want to send your message to.
+
+
+
+
+
+
+
+  * Finally, today in IRC a Rails user asked how reset a session in Merb. Rails has a _reset_session_ method that resets the session by clearing out all the objects stored within and initializing a new session object. Merb simply uses a hash to store sessions, so _session.clear_ will do it ;)
+
+
+
+
+
+Feel free to add a comment with your Merb tips or leave a question regarding something you can't seem to be able to do with Merb.

@@ -1,14 +1,17 @@
 ---
 date: '2011-10-18 15:19:17'
 layout: post
+legacy_url: http://merbist.com/2011/10/18/data-safety-and-gil-removal/
 slug: data-safety-and-gil-removal
+source: merbist.com
 status: publish
 title: Data safety and GIL removal
 wordpress_id: '1188'
 categories:
-- blog-post
 - Misc
-- Ruby
+- ruby
+- merbist.com
+- blog-post
 tags:
 - concurrency
 - gil
@@ -74,7 +77,7 @@ This is a sign that the data was corrupted but that JRuby didn't catch the unsyn
 
 In other words, if not manually synchronized, shared data can easily be corrupted. You might have two threads modifying the value of the same variable and one of the two threads will step on top of the other leaving you with a race condition. You only need 2 threads accessing the same instance variable at the same time to get a race condition. My example uses more threads and more mutations to make the problem more obvious. Note that TDD wouldn't catch such an issue and even extensive testing will provide very little guarantee that your code is thread safe.
 
-
+ 
 
 
 ## So what? Thread safety isn't a new problem.
@@ -84,7 +87,7 @@ That's absolutely correct, ask any decent Java developer out there, he/she will 
 
 All these arguments are absolutely valid, the challenge is that you have a large community and a large amount of code out there that expects a certain behavior. And removing the GIL does change this behavior. It might not be a big deal for you because you know how to deal with thread safety, but it might be a big deal for others and C Ruby is by far the most used Ruby implementation. It's basically like saying that automatic cars shouldn't be made and sold, and everybody has to switch to stick shifts. They have better gas mileage, I personally enjoy driving then and they are cheaper to build. Removing the GIL is a bit like that. There is a cost associated with this decision and while this cost isn't insane, the people in charge prefer to not pay it.
 
-
+ 
 
 
 ## Screw that, I'll switch to Node.js
@@ -92,7 +95,7 @@ All these arguments are absolutely valid, the challenge is that you have a large
 
 I heard a lot of people telling me they were looking into using Node.js because it has a better design and no GIL. While I like Node.js and if I were to implement a chat room or an app keeping connections for a long time, I would certainly compare it closely to EventMachine, I also think that this argument related to the GIL is absurd. First, you have other Ruby implementations which don't have a GIL and are really stable (i.e: JRuby) but then Node basically works the same as Ruby with a GIL. Yes, Node is evented and single threaded but when you think about it, it behaves the same as Ruby 1.9 with its GIL. Many requests come in and they are handled one after the other and because IO requests are non-blocking, multiple requests can be processed concurrently but not in parallel. Well folks, that's exactly how C Ruby works too, and unlike popular believe, most if not all the popular libraries making IO requests are non blocking (when using 1.9). So, next time you try to justify you wanting to toy with Node, please don't use the GIL argument.
 
-
+ 
 
 
 ## What should I do?
@@ -100,14 +103,14 @@ I heard a lot of people telling me they were looking into using Node.js because 
 
 As always, evaluate your needs and see what makes sense for your project. Start by making sure you are using Ruby 1.9 and your code makes good use of threading. Then look at your app and how it behaves, is it CPU-bound or IO-bound. Most web apps out there are IO-bound (waiting for the DB, redis or API calls), and when doing an IO call, Ruby's GIL is released allowing another thread to do its work. In that case, not having a GIL in your Ruby implementation won't help you. However, if your app is CPU-bound, then switching to JRuby or Rubinius might be beneficial. However, don't assume anything until you proved it and remember that making such a change will more than likely require some architectural redesign, especially if using JRuby.  But, hey, it might totally be worth it as many proved it in the past.
 
-
+ 
 
 I hope I was able to clarify things a bit further. If you wish to dig further, I would highly recommend you read the many discussions the Python community had in the last few years.
 
+ 
 
+ 
 
+ 
 
-
-
-
-
+ 

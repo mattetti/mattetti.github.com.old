@@ -1,14 +1,17 @@
 ---
 date: '2011-06-27 12:12:32'
 layout: post
+legacy_url: http://merbist.com/2011/06/27/golang-reflection-exampl/
 slug: golang-reflection-exampl
+source: merbist.com
 status: publish
 title: Go's reflection example
 wordpress_id: '1084'
 categories:
 - Misc
-- blog-post
 - Tutorial
+- merbist.com
+- blog-post
 ---
 
 The [Go Programming language](http://golang.org/) is really cool language by Google. According to the sales pitch, it's a **_"fast, statically typed, compiled language that feels like a dynamically typed, interpreted language"_**. Well, if you are like me, you don't trust sales pitches because you know that people writing them dont' care about you, they care about their product. However cynical you are, you still have to check the facts. So here is a quick demonstration showing how to use Go's reflection feature.
@@ -137,4 +140,4 @@ The attributes function is defined a bit below and and it takes any type of obje
 
 So there you go, that's how you use reflection in Go. Pretty nifty and simple.
 
-
+ 

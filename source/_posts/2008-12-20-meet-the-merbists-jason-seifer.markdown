@@ -1,12 +1,16 @@
 ---
 date: '2008-12-20 04:02:47'
 layout: post
+legacy_url: http://merbist.com/2008/12/20/meet-the-merbists-jason-seifer/
 slug: meet-the-merbists-jason-seifer
+source: merbist.com
 status: publish
 title: 'Meet the merbists: Jason Seifer'
 wordpress_id: '372'
 categories:
 - merb
+- merbist.com
+- blog-post
 tags:
 - jason seifer
 - jruby

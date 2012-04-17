@@ -1,14 +1,16 @@
 ---
 date: '2009-10-23 10:17:45'
 layout: post
+legacy_url: http://merbist.com/2009/10/23/railssummit-2009/
 slug: railssummit-2009
+source: merbist.com
 status: publish
 title: RailsSummit - an amazing adventure
 wordpress_id: '613'
 categories:
-- blog-post
 - Misc
-- Presentation
+- merbist.com
+- blog-post
 tags:
 - brazil
 - rails

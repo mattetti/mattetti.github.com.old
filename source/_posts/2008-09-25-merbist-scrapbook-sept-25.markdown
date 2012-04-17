@@ -1,12 +1,16 @@
 ---
 date: '2008-09-25 08:34:17'
 layout: post
+legacy_url: http://merbist.com/2008/09/25/merbist-scrapbook-sept-25/
 slug: merbist-scrapbook-sept-25
+source: merbist.com
 status: publish
 title: merbist scrapbook (sept-25)
 wordpress_id: '50'
 categories:
 - News
+- merbist.com
+- blog-post
 tags:
 - caching
 - datamapper

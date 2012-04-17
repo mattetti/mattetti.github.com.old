@@ -1,0 +1,40 @@
+---
+date: '2007-06-22 06:21:00'
+layout: post
+legacy_url: http://railsontherun.com/2007/06/22/hackfest/
+slug: hackfest
+source: railsontherun.com
+status: publish
+title: Hackfest
+wordpress_id: '40'
+categories:
+- Ruby
+- railsontherun.com
+- blog-post
+tags:
+- community
+- contest
+- contribution
+- hackfest
+- team
+---
+
+What a pleasant surprise to see that I made it to the top 10 of [workingwithrails.com hackfest](http://www.workingwithrails.com/hackfest/)
+
+
+
+
+
+![Hackfest: June top 10](http://www.railsontherun.com/assets/2007/6/22/hackfest-topmonth_2.png)
+
+
+
+
+
+I know it’s not fair that my patch got merged in while other people ([Josh Knowles](http://joshknowles.com) for instance) have outstanding patches waiting to be merged in so he could get in front of me :)
+
+
+
+
+
+Hopefully my [other patch](http://dev.rubyonrails.org/ticket/8701) will be merged in before the end of June and I’ll be able to stay in the top ten. But for some reason I doubt that would happen and that’s why I took a screenshot ;)

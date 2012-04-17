@@ -1,14 +1,17 @@
 ---
 date: '2009-11-16 08:05:55'
 layout: post
+legacy_url: http://merbist.com/2009/11/16/the-ruby-revolution-take-ii/
 slug: the-ruby-revolution-take-ii
+source: merbist.com
 status: publish
 title: The Ruby Revolution, take II
 wordpress_id: '636'
 categories:
-- blog-post
 - Misc
-- Ruby
+- ruby
+- merbist.com
+- blog-post
 tags:
 - revolution
 - ruby

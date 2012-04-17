@@ -1,7 +1,9 @@
 ---
 date: '2009-07-27 13:49:20'
 layout: post
+legacy_url: http://merbist.com/2009/07/27/ruby-rack-and-couchdb-lots-of-awesomeness/
 slug: ruby-rack-and-couchdb-lots-of-awesomeness
+source: merbist.com
 status: publish
 title: Ruby, Rack and CouchDB = lots of awesomeness
 wordpress_id: '536'
@@ -11,6 +13,8 @@ categories:
 - rails
 - ruby
 - Tutorial
+- merbist.com
+- blog-post
 tags:
 - couchdb
 - logging

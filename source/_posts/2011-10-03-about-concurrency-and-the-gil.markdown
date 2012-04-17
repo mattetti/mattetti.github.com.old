@@ -1,13 +1,16 @@
 ---
 date: '2011-10-03 21:23:54'
 layout: post
+legacy_url: http://merbist.com/2011/10/03/about-concurrency-and-the-gil/
 slug: about-concurrency-and-the-gil
+source: merbist.com
 status: publish
 title: About concurrency and the GIL
 wordpress_id: '1146'
 categories:
+- ruby
+- merbist.com
 - blog-post
-- Ruby
 tags:
 - concurrency
 - fibers
@@ -43,7 +46,7 @@ The same basically applies to C Ruby. To illustrate the quote above, here is a d
 
 Such a scheduling isn't a problem at all when you only have 1 cpu, since a cpu can only execute a piece of code at a time and context switching happens all the time to allow the machine to run multiple processes/threads in parallel. The problem is when you have more than 1 CPU because in that case, if you were to only run 1 Ruby process, then you would most of the time only use 1 cpu at a time. If you are running on a 8 cpu box, that's not cool at all! A lot of people stop at this explanation and imagine that their server can only handle one request at a time and they they rush to sign Greenpeace petitions asking Matz to make Ruby greener by optimizing Ruby and saving CPU cycles. Well, the reality is slightly different, I'll get back to that in a minute. Before I explain "ways to achieve true concurrency with CRuby, let me explain why C Ruby uses a GIL and why each implementation has to make an important choice and in this case both CPython and C Ruby chose to keep their GIL.
 
-
+ 
 
 
 ### Why a GIL in the first place?
@@ -73,7 +76,7 @@ Such a scheduling isn't a problem at all when you only have 1 cpu, since a cpu c
 As you can see the arguments can be organized in two main categories: data safety and C extensions/implementation. An implementation which doesn't rely too much on C extensions (because they run a bit slow, or because code written in a different language is preferred) is only faced with one argument: data safety.
 
 
-
+ 
 
 
 ### 
@@ -120,7 +123,7 @@ As you can see the arguments can be organized in two main categories: data safet
 Don't count the amount of pros/cons to jump to the conclusion that removing the GIL is a bad idea. A lot of the arguments for removing the GIL are related. At the end of the day it boils down to data safety. During the Q&A section of my RubyConf talk, Matz came up on stage and said data safety was the main reason why C Ruby still has a GIL. Again, this is a topic which was discussed at length in the Python community and I'd encourage you to read arguments from the [Jython](http://www.jython.org/) (the equivalent of JRuby for Python) developers, [the PyPy](http://codespeak.net/pypy/dist/pypy/doc/faq.html#does-pypy-have-a-gil-why) (the equivalent of Rubinius in the Python community) and CPython developers. (a good collection of arguments are actually available in the comments related to the [rubber boots post mentioned earlier](https://plus.google.com/107994348420168435683/posts/993U42yVbfk))
 
 
-
+ 
 
 
 ### How can true concurrency be achieved using CRuby?
@@ -161,7 +164,7 @@ This is a simplified diagram but you can see that a good chunk of the request li
 
 To boil it down to something simplified, when it comes to the GIL, an implementor has to chose between data safety and memory usage. But it is important to note that context switching between threads is faster than context switching between processes and data safety can and is often achieved in environments without a GIL, but it requires more knowledge and work on the developer side.
 
-
+ 
 
 
 ### Conclusion

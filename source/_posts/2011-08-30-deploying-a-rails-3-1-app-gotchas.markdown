@@ -1,13 +1,16 @@
 ---
 date: '2011-08-30 17:20:34'
 layout: post
+legacy_url: http://merbist.com/2011/08/30/deploying-a-rails-3-1-app-gotchas/
 slug: deploying-a-rails-3-1-app-gotchas
+source: merbist.com
 status: publish
 title: Deploying a Rails 3.1 app - gotchas
 wordpress_id: '1115'
 categories:
+- rails
+- merbist.com
 - blog-post
-- Rails
 tags:
 - rails
 ---
@@ -76,7 +79,7 @@ My css looked good, the precompiling task had run fine but I was missing some js
 
 After making all these changes, I was able to redeploy my app and everything was working again. (you might want to tweak your apache/nginx config as explained in the [Rails guide](http://guides.rubyonrails.org/asset_pipeline.html))
 
-
+ 
 
 
 ### Conclusion
@@ -84,8 +87,8 @@ After making all these changes, I was able to redeploy my app and everything was
 
 Don't be fooled like me and expect that because you have an app running locally, deployment will work right away. Make sure to read about the new features and what's needed. Overall, I think that the asset pipeline is a nice addon to Rails and if you don't feel like using it, just can put/leave all your files in the public folder and everything will work just like before. I do have to say that I was surprised to see that even in a brand new Rails 3.1 project, Rails isn't running in threaded mode by default. But that's a different (old) story and I guess people still get more excited about asset management than framework raw performance ;)
 
+ 
 
+ 
 
-
-
-
+ 

@@ -1,13 +1,17 @@
 ---
 date: '2009-01-05 10:15:44'
 layout: post
+legacy_url: http://merbist.com/2009/01/05/presenting-the-rails-activists/
 slug: presenting-the-rails-activists
+source: merbist.com
 status: publish
 title: Presenting the Rails Activists
 wordpress_id: '422'
 categories:
 - News
 - rails
+- merbist.com
+- blog-post
 tags:
 - activists
 - evangelism

@@ -1,12 +1,16 @@
 ---
 date: '2009-10-06 09:23:44'
 layout: post
+legacy_url: http://merbist.com/2009/10/06/macruby-tips-embed-a-custom-font/
 slug: macruby-tips-embed-a-custom-font
+source: merbist.com
 status: publish
 title: 'MacRuby tips: embed a custom font'
 wordpress_id: '561'
 categories:
 - macruby
+- merbist.com
+- blog-post
 tags:
 - cocoa
 - CTFontManager

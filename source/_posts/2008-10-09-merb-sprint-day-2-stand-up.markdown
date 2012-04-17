@@ -1,12 +1,16 @@
 ---
 date: '2008-10-09 09:37:52'
 layout: post
+legacy_url: http://merbist.com/2008/10/09/merb-sprint-day-2-stand-up/
 slug: merb-sprint-day-2-stand-up
+source: merbist.com
 status: publish
 title: Merb Sprint Day 2 Stand-up
 wordpress_id: '145'
 categories:
 - News
+- merbist.com
+- blog-post
 tags:
 - merb
 - sprint

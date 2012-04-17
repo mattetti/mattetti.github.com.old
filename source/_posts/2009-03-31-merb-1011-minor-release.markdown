@@ -1,13 +1,17 @@
 ---
 date: '2009-03-31 22:10:57'
 layout: post
+legacy_url: http://merbist.com/2009/03/31/merb-1011-minor-release/
 slug: merb-1011-minor-release
+source: merbist.com
 status: publish
 title: Merb 1.0.11 (minor release)
 wordpress_id: '462'
 categories:
 - merb
 - News
+- merbist.com
+- blog-post
 ---
 
 Following the DataMapper 0.9.11 release, we just pushed a new minor Merb release.

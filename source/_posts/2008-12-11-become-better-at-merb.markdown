@@ -1,13 +1,17 @@
 ---
 date: '2008-12-11 12:35:42'
 layout: post
+legacy_url: http://merbist.com/2008/12/11/become-better-at-merb/
 slug: become-better-at-merb
+source: merbist.com
 status: publish
 title: become better at Merb
 wordpress_id: '334'
 categories:
 - merb
 - News
+- merbist.com
+- blog-post
 tags:
 - documentation
 - merb

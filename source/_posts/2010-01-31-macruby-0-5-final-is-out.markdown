@@ -1,13 +1,16 @@
 ---
 date: '2010-01-31 19:13:36'
 layout: post
+legacy_url: http://merbist.com/2010/01/31/macruby-0-5-final-is-out/
 slug: macruby-0-5-final-is-out
+source: merbist.com
 status: publish
 title: MacRuby 0.5 final is out
 wordpress_id: '709'
 categories:
-- blog-post
 - macruby
+- merbist.com
+- blog-post
 ---
 
 After going through two betas, MacRuby 0.5 final is now released and can be downloaded by clicking on the icon below:

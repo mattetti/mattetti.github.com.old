@@ -1,13 +1,17 @@
 ---
 date: '2009-05-27 12:32:05'
 layout: post
+legacy_url: http://merbist.com/2009/05/27/macruby-changing-the-ruby-ecosystem/
 slug: macruby-changing-the-ruby-ecosystem
+source: merbist.com
 status: publish
 title: MacRuby, changing the Ruby ecosystem
 wordpress_id: '497'
 categories:
 - macruby
 - ruby
+- merbist.com
+- blog-post
 tags:
 - apple
 - cocoa

@@ -1,7 +1,9 @@
 ---
 date: '2008-11-09 22:47:25'
 layout: post
+legacy_url: http://merbist.com/2008/11/09/merb-1-0-released/
 slug: merb-1-0-released
+source: merbist.com
 status: publish
 title: Merb 1.0 released
 wordpress_id: '204'
@@ -9,6 +11,8 @@ categories:
 - merb
 - Misc
 - News
+- merbist.com
+- blog-post
 tags:
 - matz
 - merb

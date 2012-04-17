@@ -1,15 +1,17 @@
 ---
 date: '2011-12-09 06:47:59'
 layout: post
+legacy_url: http://merbist.com/2011/12/09/my-rubyconf-2011-talk-is-online/
 slug: my-rubyconf-2011-talk-is-online
+source: merbist.com
 status: publish
 title: My RubyConf 2011 talk is online
 wordpress_id: '1203'
 categories:
-- blog-post
-- Ruby
+- ruby
 - Tutorial
-- Presentation
+- merbist.com
+- blog-post
 tags:
 - concurrency
 - garbage collector

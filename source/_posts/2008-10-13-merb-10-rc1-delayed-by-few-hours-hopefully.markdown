@@ -1,12 +1,16 @@
 ---
 date: '2008-10-13 03:18:46'
 layout: post
+legacy_url: http://merbist.com/2008/10/13/merb-10-rc1-delayed-by-few-hours-hopefully/
 slug: merb-10-rc1-delayed-by-few-hours-hopefully
+source: merbist.com
 status: publish
 title: Merb 1.0 RC1 delayed (by few hours hopefully)
 wordpress_id: '162'
 categories:
 - News
+- merbist.com
+- blog-post
 tags:
 - merb
 - release

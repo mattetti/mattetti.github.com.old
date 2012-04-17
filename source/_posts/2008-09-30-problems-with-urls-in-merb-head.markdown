@@ -1,13 +1,17 @@
 ---
 date: '2008-09-30 22:24:29'
 layout: post
+legacy_url: http://merbist.com/2008/09/30/problems-with-urls-in-merb-head/
 slug: problems-with-urls-in-merb-head
+source: merbist.com
 status: publish
 title: problems with urls in Merb HEAD?
 wordpress_id: '101'
 categories:
 - Misc
 - Tutorial
+- merbist.com
+- blog-post
 tags:
 - merb
 - merb-assets

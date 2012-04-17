@@ -1,13 +1,17 @@
 ---
 date: '2009-03-02 11:20:34'
 layout: post
+legacy_url: http://merbist.com/2009/03/02/merb-11-roadmap/
 slug: merb-11-roadmap
+source: merbist.com
 status: publish
 title: Merb 1.1 roadmap
 wordpress_id: '448'
 categories:
 - merb
 - News
+- merbist.com
+- blog-post
 tags:
 - merb
 - release

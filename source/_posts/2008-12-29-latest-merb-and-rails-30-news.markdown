@@ -1,7 +1,9 @@
 ---
 date: '2008-12-29 13:57:38'
 layout: post
+legacy_url: http://merbist.com/2008/12/29/latest-merb-and-rails-30-news/
 slug: latest-merb-and-rails-30-news
+source: merbist.com
 status: publish
 title: latest Merb and Rails 3.0 news
 wordpress_id: '412'
@@ -9,6 +11,8 @@ categories:
 - merb
 - News
 - rails
+- merbist.com
+- blog-post
 tags:
 - merb
 - rails 3.0

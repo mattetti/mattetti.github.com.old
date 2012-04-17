@@ -1,13 +1,16 @@
 ---
 date: '2008-09-23 15:32:41'
 layout: post
+legacy_url: http://merbist.com/2008/09/23/deploying-a-bundled-merb-app-merb-097/
 slug: deploying-a-bundled-merb-app-merb-097
+source: merbist.com
 status: publish
 title: Deploying a bundled merb app (merb 0.9.7+)
 wordpress_id: '23'
 categories:
-- blog-post
 - Tutorial
+- merbist.com
+- blog-post
 tags:
 - bundle
 - capistrano
