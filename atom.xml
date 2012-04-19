@@ -4,7 +4,7 @@
   <title><![CDATA[Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-18T01:05:15+02:00</updated>
+  <updated>2012-04-19T12:34:27+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -579,7 +579,7 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[RubyConf Argentina 2011]]></title>
+    <title type="html"><![CDATA[RubyConf Argentina 2011 - Inside Ruby]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011/"/>
     <updated>2011-11-08T15:42:00+01:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011</id>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: merbist.com | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/merbist-com/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-18T01:05:15+02:00</updated>
+  <updated>2012-04-19T12:34:27+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -1805,22 +1805,32 @@ Please people! This is 2011, stop using print statement as a means of debugging!
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[RubyConf 2010 - MacRuby talk]]></title>
+    <title type="html"><![CDATA[RubyConf 2010 - MacRuby: Why and How]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/11/12/rubyconf-2010-macruby-talk/"/>
     <updated>2010-11-12T16:00:51+01:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/11/12/rubyconf-2010-macruby-talk</id>
-    <content type="html"><![CDATA[<p>This year I gave the traditional Apple's MacRuby talk at RubyConf.
+    <content type="html"><![CDATA[<h2>Description of the talk:</h2>
+
+<p>This year I gave the traditional Apple's MacRuby talk at RubyConf.
 My presentation focused on 2 axis:</p>
 
 <ul>
-<li><p>What's new since last RubyConf</p></li>
-<li><p>Show some examples of how fun it is to hack with MacRuby</p></li>
+<li>What's new since last RubyConf</li>
+<li>Show some examples of how fun it is to hack with MacRuby</li>
 </ul>
 
 
-<p><strong><a href="http://www.slideshare.net/mattetti/macruby-rubyconf-presentation-2010">Macruby - RubyConf Presentation 2010</a></strong></p>
+<h2>Video</h2>
 
-<p>View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/mattetti">Matt Aimonetti</a>.</p>
+<p><video width='640' height='360' preload='none' controls poster=' /images/matt_aimonetti_rubyconf2010.jpeg'><source src='http://cdn.confreaks.com/system/assets/datas/768/original/448-rubyconf2010-macruby-why-and-how-small.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/></video></p>
+
+<p>Other video formats are available <a href="http://www.confreaks.com/videos/448-rubyconf2010-macruby-why-and-how">here</a></p>
+
+<h2>Slides</h2>
+
+<p><strong><a href="http://www.slideshare.net/mattetti/macruby-rubyconf-presentation-2010">Macruby - RubyConf Presentation slides</a></strong></p>
+
+<h2>Details of the talk content</h2>
 
 <p>MacRuby is currently at version 0.7.1 and version 0.8 is in preparation.
 Since last new a lot of things happened, here is a quick summary:</p>
@@ -1852,6 +1862,10 @@ Since last new a lot of things happened, here is a quick summary:</p>
 
 
 <p>Basically, MacRuby is now mature and it's time for hackers and people trying to get exposure to give it a try.</p>
+
+<h2>Presentation's website</h2>
+
+<p>A page was setup on the confreaks website and available <a href="http://www.confreaks.com/videos/448-rubyconf2010-macruby-why-and-how">here</a>.</p>
 ]]></content>
   </entry>
   
@@ -1885,7 +1899,7 @@ Since last new a lot of things happened, here is a quick summary:</p>
 
 <p>You can read it <a href="http://rubylearning.com/blog/2010/09/28/the-ruby-movement/">there</a>.</p>
 
-<p><a href="http://rubylearning.com/blog/2010/09/28/the-ruby-movement/"><img src="http://img.skitch.com/20100928-xk8n9kxyd5knaaja31pfpxkk86.png" alt="" /></a></p>
+<p><a href="http://rubylearning.com/blog/2010/09/28/the-ruby-movement/"><img src="/images/posts/the-ruby-movement.jpg" title="The Ruby Movement by Matt Aimonetti" alt="The Ruby Movement by Matt Aimonetti" /></a></p>
 ]]></content>
   </entry>
   

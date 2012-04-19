@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Confoo.ca | Matt Aimonetti]]></title>
+  <link href="http://matt.aimonetti.net/articles/categories/confoo-ca/atom.xml" rel="self"/>
+  <link href="http://matt.aimonetti.net/"/>
+  <updated>2012-04-19T12:34:27+02:00</updated>
+  <id>http://matt.aimonetti.net/</id>
+  <author>
+    <name><![CDATA[Matt Aimonetti]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ConFoo.ca - Rails for non Ruby developers]]></title>
+    <link href="http://matt.aimonetti.net/posts/2010/04/11/confoo-dot-ca-rails-for-non-ruby-developers/"/>
+    <updated>2010-04-11T09:51:00+02:00</updated>
+    <id>http://matt.aimonetti.net/posts/2010/04/11/confoo-dot-ca-rails-for-non-ruby-developers</id>
+    <content type="html"><![CDATA[<p>During <a href="http://confoo.ca/">ConFoo Canada 2010</a> in Montreal, Canada Matt
+Aimonetti gave a talk entitled <em>Rails for the non Ruby developers</em>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>Unless you have been living on a different planet for the last few years, you have more than likely heard of Ruby on Rails.
+You have probably heard good and bad things about it, and might even have watched some of the famous screencasts.
+The thing is, you don't really know that much about Ruby and are not sure that it is worth learning yet another programming language and a new framework.
+With companies like Apple, Microsoft and Sun investing in Ruby, you might be surprised by how easy the transition can be.</p>
+
+<p>Matt will show you the pros and cons of using Rails. He'll go through some of the myths around the framework and explain why it might be a better fit than you would expect.</p>
+
+<h2>Slides</h2>
+
+<p>Slides are not currently available.</p>
+
+<h2>Presentation's website</h2>
+
+<p><a href="http://confoo.ca/en/2010/session/rails-for-non-ruby-developers">Presentation's website</a> contains limited information about the talk.
+An interview with other developers was filmed during the conference and
+is available <a href="http://www.youtube.com/watch?v=SKB4Re12fII">there</a>. Note
+that the interviewed group speaks in French.
+The talk itself wasn't recorded.</p>
+]]></content>
+  </entry>
+  
+</feed>
