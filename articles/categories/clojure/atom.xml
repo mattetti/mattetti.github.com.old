@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/clojure/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-19T12:34:27+02:00</updated>
+  <updated>2012-04-19T22:12:48+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -29,7 +29,10 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
 
 <h2>Slides</h2>
 
-<p><a href="">The slides can be donwloaded here</a>.</p>
+<script async class="speakerdeck-embed" data-id="4f904c27a542080022020653" data-ratio="1.299492385786802" src="http://speakerdeck.com/assets/embed.js"></script>
+
+
+<p>The slides are available on <a href="http://speakerdeck.com/u/matt_aimonetti/p/ruby-time-to-move-on">Matt's SpeakerDeck</a> and can be <a href="">downloaded here</a>.</p>
 
 <h2>Video</h2>
 

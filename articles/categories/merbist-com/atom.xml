@@ -4,7 +4,7 @@
   <title><![CDATA[Category: merbist.com | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/merbist-com/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-19T12:34:27+02:00</updated>
+  <updated>2012-04-19T22:12:48+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -1828,7 +1828,10 @@ My presentation focused on 2 axis:</p>
 
 <h2>Slides</h2>
 
-<p><strong><a href="http://www.slideshare.net/mattetti/macruby-rubyconf-presentation-2010">Macruby - RubyConf Presentation slides</a></strong></p>
+<script async class="speakerdeck-embed" data-id="4f90697149bc25001f023143" data-ratio="1.299492385786802" src="http://speakerdeck.com/assets/embed.js"></script>
+
+
+<p><strong><a href="http://speakerdeck.com/u/matt_aimonetti/p/rubyconf-2010-macruby-why-and-how">Presentation slides available on Speakerdeck</a></strong></p>
 
 <h2>Details of the talk content</h2>
 

@@ -740,7 +740,7 @@
     </url>
     <url>
         <loc>http://matt.aimonetti.net/posts/2010/11/12/rubyconf-2010-macruby-talk/</loc>
-        <lastmod>2012-04-19T12:34:27+02:00</lastmod>
+        <lastmod>2012-04-19T22:12:34+02:00</lastmod>
     </url>
     <url>
         <loc>http://matt.aimonetti.net/posts/2011/01/15/macruby-book-update/</loc>
@@ -832,7 +832,7 @@
     </url>
     <url>
         <loc>http://matt.aimonetti.net/posts/2012/02/04/larubyconf-2012/</loc>
-        <lastmod>2012-04-17T16:29:37+02:00</lastmod>
+        <lastmod>2012-04-19T21:53:12+02:00</lastmod>
     </url>
     <url>
         <loc>
@@ -856,10 +856,14 @@
     </url>
     <url>
         <loc>http://matt.aimonetti.net/</loc>
-        <lastmod>2012-04-19T12:34:27+02:00</lastmod>
+        <lastmod>2012-04-19T22:12:34+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://matt.aimonetti.net/matt_aimonetti/</loc>
+        <lastmod>2012-04-19T22:12:34+02:00</lastmod>
     </url>
     <url>
         <loc>http://matt.aimonetti.net/posts/archives/</loc>
-        <lastmod>2012-04-19T12:34:27+02:00</lastmod>
+        <lastmod>2012-04-19T22:12:34+02:00</lastmod>
     </url>
 </urlset>
