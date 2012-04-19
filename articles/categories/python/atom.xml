@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/python/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-19T22:38:13+02:00</updated>
+  <updated>2012-04-20T01:31:57+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -64,7 +64,12 @@ management works to get better performance out of your code.</p>
 
 <h2>Video</h2>
 
-<p><a href="http://vimeo.com/38531248"><img src="/images/matt_aimonetti_presentation_argentina.jpg" alt="Matt Aimonetti presentation at RubyConf Argentina" /></a></p>
+<div class="video-container">
+<iframe src="http://player.vimeo.com/video/38531248?title=0&amp;byline=0&amp;portrait=0" width="600" height="500" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe><p><a href="http://vimeo.com/38531248">Matt Aimonetti - Inside Ruby: concurrency & garbage collection explained</a> from <a href="http://vimeo.com/rubyargentina">Ruby Argentina</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
+</div>
+
+
+<p><a href="">Vimeo page of the presentation</a></p>
 
 <h2>Presentation website</h2>
 
