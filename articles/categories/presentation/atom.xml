@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Presentation | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/presentation/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-20T01:31:57+02:00</updated>
+  <updated>2012-04-20T10:50:08+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -249,6 +249,78 @@ An interview with other developers was filmed during the conference and
 is available <a href="http://www.youtube.com/watch?v=SKB4Re12fII">there</a>. Note
 that the interviewed group speaks in French.
 The talk itself wasn't recorded.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RubyConf 2009 - 2D games for OS X]]></title>
+    <link href="http://matt.aimonetti.net/posts/2009/11/21/rubyconf-2009-2d-games-for-os-x/"/>
+    <updated>2009-11-21T10:25:00+01:00</updated>
+    <id>http://matt.aimonetti.net/posts/2009/11/21/rubyconf-2009-2d-games-for-os-x</id>
+    <content type="html"><![CDATA[<p>During <a href="http://rubyconf.org/">RubyConf 2009</a> in San Francisco, CA Matt
+Aimonetti gave a talk entitled <em>Writing 2D games for the OSX platform in Ruby</em>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>Are you a developer who would love to get into video games but get scared when he hears "OpenGL" or "rendering engines"? Or Maybe, you never considered writing a video game because you have heard Ruby was slow and you are not ready to give up on your favorite programming language. This talk is for you then. Together, we will build a very simple game using Ruby and the development tools offered by Apple. At the end of the presentation you will be ready to get started on your own project.</p>
+
+<p><a href="http://speakerdeck.com/u/matt_aimonetti/p/rubyconf-2009-writing-2d-games-for-the-osx-platform-in-ruby"><img src="/images/matt_aimonetti_2d_video_games.jpg" alt="Matt Aimonetti demonstrating a simple game workflow" /></a></p>
+
+<h2>Slides</h2>
+
+<script async class="speakerdeck-embed" data-id="4f911cf25edf72002200cf4e" data-ratio="1.299492385786802" src="http://speakerdeck.com/assets/embed.js"></script>
+
+
+<p>The slides are available on <a href="http://speakerdeck.com/u/matt_aimonetti/p/rubyconf-2009-writing-2d-games-for-the-osx-platform-in-ruby">Matt's SpeakerDeck</a> and can be <a href="">downloaded here</a>.</p>
+
+<h2>Video</h2>
+
+<p><video width='640' height='360' preload='none' controls poster=' http://www.confreaks.com/system/videos/images/192/preview/21-nov-2009-10-25-writing-d-games-for-the-osx-platform-in-ruby-matt-aimonetti-preview.png'><source src='http://cdn.confreaks.com/system/assets/datas/420/original/21-nov-2009-10-25-writing-d-games-for-the-osx-platform-in-ruby-matt-aimonetti-small.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/></video></p>
+
+<h2>Presentation website</h2>
+
+<p>Matt's presentation was filmed by <a href="http://confreaks.com/">confreaks</a> and the dedicated page for the talk is available <a href="http://www.confreaks.com/videos/192-rubyconf2009-writing-2d-games-for-the-osx-platform-in-ruby">here</a></p>
+
+<h2>Source Code</h2>
+
+<p>The code and game demonstrated in this talk is available on Matt
+<a href="https://github.com/mattetti/phileas_frog">Aimonetti's GitHub repository</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RubyConf 2009 - 2D games for OS X]]></title>
+    <link href="http://matt.aimonetti.net/posts/2009/11/21/rubyconf-2009-2d-games-for-os-x/"/>
+    <updated>2009-11-21T10:25:00+01:00</updated>
+    <id>http://matt.aimonetti.net/posts/2009/11/21/rubyconf-2009-2d-games-for-os-x</id>
+    <content type="html"><![CDATA[<p>During <a href="http://rubyconf.org/">RubyConf 2009</a> in San Francisco, CA Matt
+Aimonetti gave a talk entitled <em>Writing 2D games for the OSX platform in Ruby</em>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>Are you a developer who would love to get into video games but get scared when he hears "OpenGL" or "rendering engines"? Or Maybe, you never considered writing a video game because you have heard Ruby was slow and you are not ready to give up on your favorite programming language. This talk is for you then. Together, we will build a very simple game using Ruby and the development tools offered by Apple. At the end of the presentation you will be ready to get started on your own project.</p>
+
+<p><img src="/images/matt_aimonetti_2d_video_games.jpg" alt="Matt Aimonetti demonstrating a simple game workflow" /></p>
+
+<h2>Slides</h2>
+
+<script async class="speakerdeck-embed" data-id="4f911cf25edf72002200cf4e" data-ratio="1.299492385786802" src="http://speakerdeck.com/assets/embed.js"></script>
+
+
+<p>The slides are available on <a href="http://speakerdeck.com/u/matt_aimonetti/p/rubyconf-2009-writing-2d-games-for-the-osx-platform-in-ruby">Matt's SpeakerDeck</a> and can be <a href="">downloaded here</a>.</p>
+
+<h2>Video</h2>
+
+<p><video width='640' height='360' preload='none' controls poster=' http://www.confreaks.com/system/videos/images/192/preview/21-nov-2009-10-25-writing-d-games-for-the-osx-platform-in-ruby-matt-aimonetti-preview.png'><source src='http://cdn.confreaks.com/system/assets/datas/420/original/21-nov-2009-10-25-writing-d-games-for-the-osx-platform-in-ruby-matt-aimonetti-small.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/></video></p>
+
+<h2>Presentation website</h2>
+
+<p>Matt's presentation was filmed by <a href="http://confreaks.com/">confreaks</a> and the dedicated page for the talk is available <a href="http://www.confreaks.com/videos/192-rubyconf2009-writing-2d-games-for-the-osx-platform-in-ruby">here</a></p>
+
+<h2>Source Code</h2>
+
+<p>The code and game demonstrated in this talk is available on Matt
+<a href="https://github.com/mattetti/phileas_frog">Aimonetti's GitHub repository</a>.</p>
 ]]></content>
   </entry>
   
