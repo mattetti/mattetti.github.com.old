@@ -5,7 +5,7 @@ legacy_url: http://merbist.com/2009/10/23/railssummit-2009/
 slug: railssummit-2009
 source: merbist.com
 status: publish
-title: RailsSummit - an amazing adventure
+title: "RailsSummit - The future of Ruby and Rails"
 wordpress_id: '613'
 categories:
 - Presentation
@@ -17,11 +17,29 @@ tags:
 - rails
 - railssummit
 - ruby
+slides: /slides/matt_aimonetti_future-of-ruby-and-rails.pdf
 ---
+
+During [Rails Summit2009](http://www.flickr.com/photos/danicuki/sets/72157622452350763/) in São Paulo, Brazil Matt
+Aimonetti gave a talk entitled *The future of Ruby and Rails*.
+
+##Description of the talk:
+
+Plans for Rails 3 and tour of the various Ruby implementations. 
+
+##Slides
+
+<script async class="speakerdeck-embed" data-id="4f90acc391b203001f002180" data-ratio="1.3333333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+##Video
+
+The video of this talk is available [here](http://blip.tv/agaelebe/ruby-rails-future-matt-aimonetti-rails-summit-2009-2748035).
+
+##Blog post
 
 I have had the opportunity to go to and speak at many conferences but this year was the first time I had the chance to go to [RailsSummit](http://railssummit.com.br) in São Paulo, Brazil.
 
-I was really looking forward to this trip and I have to say it went beyond my expectations. I had really good feedback from people like the [Phusion guys](http://www.phusion.nl/) (Ninh & Hongli), Gregg Pollack and others.
+I was really looking forward to this trip and I have to say it went beyond my expectations. I had heard really good things from people such as the [Phusion guys](http://www.phusion.nl/) (Ninh & Hongli), Gregg Pollack and others.
 
 For those who don't know, RailsSummit is one of the biggest, if not the biggest, Ruby event in Latin America. It's organized yearly by [Locaweb](http://www.locaweb.com.br/), the #1 hosting company in Brazil (props to Akita & Cristiane for their work).
 

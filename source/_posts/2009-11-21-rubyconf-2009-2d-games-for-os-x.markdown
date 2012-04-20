@@ -19,7 +19,7 @@ Aimonetti gave a talk entitled *Writing 2D games for the OSX platform in Ruby*.
 Are you a developer who would love to get into video games but get scared when he hears "OpenGL" or "rendering engines"? Or Maybe, you never considered writing a video game because you have heard Ruby was slow and you are not ready to give up on your favorite programming language. This talk is for you then. Together, we will build a very simple game using Ruby and the development tools offered by Apple. At the end of the presentation you will be ready to get started on your own project.
 
 
-![Matt Aimonetti demonstrating a simple game workflow](/images/matt_aimonetti_2d_video_games.jpg)
+[![Matt Aimonetti demonstrating a simple game workflow](/images/matt_aimonetti_2d_video_games.jpg)](http://speakerdeck.com/u/matt_aimonetti/p/rubyconf-2009-writing-2d-games-for-the-osx-platform-in-ruby)
 
 ##Slides
 
@@ -39,3 +39,4 @@ Matt's presentation was filmed by [confreaks](http://confreaks.com/) and the ded
 
 The code and game demonstrated in this talk is available on Matt
 [Aimonetti's GitHub repository](https://github.com/mattetti/phileas_frog).
+

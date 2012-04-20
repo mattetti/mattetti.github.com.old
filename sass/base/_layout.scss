@@ -10,15 +10,15 @@ body{
 	font-size: 14px;
 	background: white;
 	color: $gray01;
-	@media screen and (max-width: 1040px){
-		margin: 0 20px;
-  }
+	// @media screen and (min-width: 1040px){
+	//   margin: 0 20px;
+  // }
 	// @media screen and (max-width: 600px){
 	//   font-size: 13px;
 	// }
-  // @media screen and (min-device-width : 320px) {
-  //   margin: 0px;
-  // }
+  @media screen and (max-width : 480px) {
+    margin: 0px;
+  }
 }
 h1{
 	font-size: 1.8em;
@@ -46,14 +46,14 @@ a{
 .inner{
 	width: $max-width;
 	margin: 0 auto;
-	@media screen and (max-width: 1040px){
+	@media screen and (max-width: 1024px){
 		width: 100%;
 	}
 }
 div.inner{
-  //   @media screen and (min-device-width : 320px) {
-  //   height: 150px;
-  // }
+  @media screen and (max-width : 480px) {
+    margin-left: 10px;
+    width: 95%  }
 }
 #content{
   @media screen and (min-device-width : 320px) {
