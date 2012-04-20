@@ -4,7 +4,7 @@
   <title><![CDATA[Category: blog-post | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/blog-post/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-20T15:02:34+02:00</updated>
+  <updated>2012-04-20T17:11:09+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -3553,13 +3553,31 @@ end
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[RailsSummit - an amazing adventure]]></title>
+    <title type="html"><![CDATA[RailsSummit - The future of Ruby and Rails]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/10/23/railssummit-2009/"/>
     <updated>2009-10-23T10:17:45+02:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/10/23/railssummit-2009</id>
-    <content type="html"><![CDATA[<p>I have had the opportunity to go to and speak at many conferences but this year was the first time I had the chance to go to <a href="http://railssummit.com.br">RailsSummit</a> in São Paulo, Brazil.</p>
+    <content type="html"><![CDATA[<p>During <a href="http://www.flickr.com/photos/danicuki/sets/72157622452350763/">Rails Summit2009</a> in São Paulo, Brazil Matt
+Aimonetti gave a talk entitled <em>The future of Ruby and Rails</em>.</p>
 
-<p>I was really looking forward to this trip and I have to say it went beyond my expectations. I had really good feedback from people like the <a href="http://www.phusion.nl/">Phusion guys</a> (Ninh &amp; Hongli), Gregg Pollack and others.</p>
+<h2>Description of the talk:</h2>
+
+<p>Plans for Rails 3 and tour of the various Ruby implementations.</p>
+
+<h2>Slides</h2>
+
+<script async class="speakerdeck-embed" data-id="4f90acc391b203001f002180" data-ratio="1.3333333333333333" src="http://matt.aimonetti.net//speakerdeck.com/assets/embed.js"></script>
+
+
+<h2>Video</h2>
+
+<p>The video of this talk is available <a href="http://blip.tv/agaelebe/ruby-rails-future-matt-aimonetti-rails-summit-2009-2748035">here</a>.</p>
+
+<h2>Blog post</h2>
+
+<p>I have had the opportunity to go to and speak at many conferences but this year was the first time I had the chance to go to <a href="http://railssummit.com.br">RailsSummit</a> in São Paulo, Brazil.</p>
+
+<p>I was really looking forward to this trip and I have to say it went beyond my expectations. I had heard really good things from people such as the <a href="http://www.phusion.nl/">Phusion guys</a> (Ninh &amp; Hongli), Gregg Pollack and others.</p>
 
 <p>For those who don't know, RailsSummit is one of the biggest, if not the biggest, Ruby event in Latin America. It's organized yearly by <a href="http://www.locaweb.com.br/">Locaweb</a>, the #1 hosting company in Brazil (props to Akita &amp; Cristiane for their work).</p>
 
