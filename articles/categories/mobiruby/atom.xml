@@ -4,7 +4,7 @@
   <title><![CDATA[Category: MobiRuby | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/mobiruby/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-20T17:11:09+02:00</updated>
+  <updated>2012-04-20T17:24:59+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -79,10 +79,7 @@ under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache licen
 <p>So far this was just an announcement with a code sample and a
 screenshot. That was enough to make the front page of <a href="http://news.ycombinator.com/item?id=3866418">HackerNews</a>. Apparently the author is planning on releasing a first version in a few months.</p>
 
-<div style='display:block; margin:auto;'>
-![MobiRuby](http://mobiruby.org/screenshot1.jpg)
-</div>
-
+<p> <img src="http://mobiruby.org/screenshot1.jpg" title="MobiRuby screenshot" alt="MobiRuby" /></p>
 
 <p>It might surprise some, but I'm quite glad to see this kind of projects
 even though, they compete to some extent against MacRuby. It proves two
