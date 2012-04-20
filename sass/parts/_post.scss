@@ -25,7 +25,7 @@
 			@include link-colors($gray02, $gray01);
 			@include transition(0.3s);
 		}
-		.date, .tags, .comments{
+		.date, .tags, .comments, .legacy{
 			padding-left: 30px;
 			@media screen and (max-width: 800px){
 				@include inline-block;

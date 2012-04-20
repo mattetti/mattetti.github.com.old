@@ -3,6 +3,9 @@ footer{
 	border-top: 1px solid $gray05;
 	text-align: center;
 	font-size: $meta-size;
+  // @media screen and (min-device-width : 320px) {
+  //   display: none;
+  // }
 }
 
 div.vcard{

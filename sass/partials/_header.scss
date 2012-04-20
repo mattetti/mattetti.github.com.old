@@ -1,5 +1,8 @@
 body > header {
   background: $header-bg;
+  @media screen and (min-device-width : 320px) {
+    height: 200px;
+  }
   h1 {
     display: inline-block;
     margin: 0;

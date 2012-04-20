@@ -23,7 +23,10 @@ Let's be honest, Ruby became mainstream a few years back and it isn't the cool u
 ![Matt Aimonetti showing that the end result is what matters the most](/images/matt_aimonetti_timeToMoveOn.jpg)
 
 ##Slides
-[The slides can be donwloaded here]({{ page.slides }}).
+
+<script async class="speakerdeck-embed" data-id="4f904c27a542080022020653" data-ratio="1.299492385786802" src="http://speakerdeck.com/assets/embed.js"></script>
+
+The slides are available on [Matt's SpeakerDeck](http://speakerdeck.com/u/matt_aimonetti/p/ruby-time-to-move-on) and can be [downloaded here]({{ page.slides }}).
 
 ##Video
 

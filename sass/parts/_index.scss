@@ -1,6 +1,15 @@
 div#home{
   padding-top: 40px;
   width: 770px;
+  @media only screen and (max-device-width : 320px) {
+    width: 90%;
+    padding-top: 10px;
+  }
+  .date{
+    text-align: right;
+    float: right;
+    width: 100px;
+   }
   margin: auto;
   p#bio{
     padding-bottom: 30px;
@@ -13,7 +22,6 @@ div#home{
     }
   }
 }
-.date{ width: 100px; text-align: right }
 .slides{
   background: $gray03;
   border-radius: 5px;

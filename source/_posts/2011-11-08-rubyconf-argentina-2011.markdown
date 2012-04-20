@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "RubyConf Argentina 2011"
+title: "RubyConf Argentina 2011 - Inside Ruby"
 date: 2011-11-08 15:42
 comments: false
 categories: 
@@ -25,11 +25,17 @@ and why it's important to understand how automatic memory
 management works to get better performance out of your code.
 
 ##Slides
-[The HTML5 slides can be seen online]({{ page.slides}}) online.
+
+[![Matt Aimonetti's slides of his RubyConf Argentina presentation](/images/Matt_Aimonetti_-_RubyConf_Argentina_2011.jpg)]({{ page.slides }})
+[The HTML5 slides can be seen online]({{ page.slides}}).
 
 ##Video
 
-[![Matt Aimonetti presentation at RubyConf Argentina](/images/matt_aimonetti_presentation_argentina.jpg)](http://vimeo.com/38531248)
+<div class="video-container">
+<iframe src="http://player.vimeo.com/video/38531248?title=0&amp;byline=0&amp;portrait=0" width="600" height="500" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe><p><a href="http://vimeo.com/38531248">Matt Aimonetti - Inside Ruby: concurrency & garbage collection explained</a> from <a href="http://vimeo.com/rubyargentina">Ruby Argentina</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
+</div>
+
+[Vimeo page of the presentation]({{ page.video_page }})
 
 ##Presentation website
 

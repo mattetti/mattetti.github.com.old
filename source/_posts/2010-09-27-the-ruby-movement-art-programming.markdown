@@ -7,9 +7,10 @@ source: merbist.com
 status: publish
 title: The Ruby movement - art & programming
 wordpress_id: '816'
+author: Matt Aimonetti
 categories:
 - Misc
-- ruby
+- Ruby
 - merbist.com
 - blog-post
 ---
@@ -18,4 +19,5 @@ I wrote a guest blog post for [Satish Talim](http://rubylearning.com/blog/about/
 
 You can read it [there](http://rubylearning.com/blog/2010/09/28/the-ruby-movement/).
 
-[![](http://img.skitch.com/20100928-xk8n9kxyd5knaaja31pfpxkk86.png)](http://rubylearning.com/blog/2010/09/28/the-ruby-movement/)
+[![The Ruby Movement by Matt Aimonetti](/images/posts/the-ruby-movement.jpg "The Ruby Movement by Matt Aimonetti")](http://rubylearning.com/blog/2010/09/28/the-ruby-movement/)
+

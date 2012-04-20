@@ -16,9 +16,13 @@
 {% else %}
     <h1 class="title entry-title">{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}</h1>
     <div class="entry">{{ content }}</div>
+
     <div class="meta">
         <div class="date updated">{% include post/date.html %}{{ time }}</div>
         <div class="tags">{% include post/categories.html %}</div>
+        {% if page.legacy_url %}
+          <div class='legacy'><a href="{{ page.legacy_url }}">Original location</a></div>
+        {% endif %}
         <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
         {% if site.disqus_short_name and page.comments == true and site.disqus_show_comment_count == true %}
         <span class="comments"><a href="{{ root_url }}{{ post.url }}#disqus_thread">Comments</a></span>

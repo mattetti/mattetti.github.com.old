@@ -28,6 +28,9 @@ header{
 		@media screen and (max-width: 1040px){
 			float: none !important;
 		}
+    @media screen and (min-device-width : 320px) {
+       float: left !important;
+     }
 	}
   div#matt-aimonetti{
     img.photo{ 
@@ -37,8 +40,15 @@ header{
       position: relative;
       left: -5%;
     }
+    @media screen and (min-device-width : 320px) {
+      padding-left: 30px;
+    }
+  
     ul{
       padding-top: 10px;
+      @media screen and (min-device-width : 320px) {
+        padding-left: 20px;
+      }
       li{
         line-height: 1.4em;
       }
