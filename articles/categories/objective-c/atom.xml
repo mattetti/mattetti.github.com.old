@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Objective-C | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/objective-c/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-20T19:32:37+02:00</updated>
+  <updated>2012-04-20T19:55:44+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -69,12 +69,12 @@ by Ruby's author and sponsored by the Japanese government makes me want to belie
 
 <h2>MobiRuby</h2>
 
-<p><a href="http://mobiruby.org/">MobiRuby</a> is being developed by <a href="https://github.com/masuidrive">Yuichiro MASUI</a> who works for <a href="http://www.appcelerator.com/">Appcelerator</a> the company being the popular <a href="http://www.appcelerator.com/platform/titanium-sdk">Titanium platform</a> to write native iOS, Android apps in JS.</p>
+<p><a href="http://mobiruby.org/">MobiRuby</a> is being developed by <a href="https://github.com/masuidrive">Yuichiro MASUI</a> who works for <a href="http://www.appcelerator.com/">Appcelerator</a> the company behind the popular <a href="http://www.appcelerator.com/platform/titanium-sdk">Titanium platform</a> to write native iOS, Android apps in JS.</p>
 
 <p>MobiRuby is built on top of mruby making it the first demonstration of
 what motivated developers can do with Matz new implementation. Very much
-like mruby, MobiRuby will be released under an OSS license but this time
-under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache license</a>.</p>
+like mruby, MobiRuby will be released under an OSS license but unlike
+mruby, the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache license</a> was chosen.</p>
 
 <p>So far this was just an announcement with a code sample and a
 screenshot. That was enough to make the front page of <a href="http://news.ycombinator.com/item?id=3866418">HackerNews</a>. Apparently the author is planning on releasing a first version in a few months.</p>
