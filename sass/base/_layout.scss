@@ -61,3 +61,13 @@ div.inner{
   }
 }
 
+div.share{
+  @media screen and (max-device-width : 320px) {
+    display: none;
+  }
+  a.addthis_button_compact{
+    width: 200px;
+  }
+}
+
+

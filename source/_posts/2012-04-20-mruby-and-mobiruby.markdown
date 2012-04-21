@@ -59,12 +59,12 @@ by Ruby's author and sponsored by the Japanese government makes me want to belie
 
 ## MobiRuby
 
-[MobiRuby](http://mobiruby.org/) is being developed by [Yuichiro MASUI](https://github.com/masuidrive) who works for [Appcelerator](http://www.appcelerator.com/) the company being the popular [Titanium platform](http://www.appcelerator.com/platform/titanium-sdk) to write native iOS, Android apps in JS.
+[MobiRuby](http://mobiruby.org/) is being developed by [Yuichiro MASUI](https://github.com/masuidrive) who works for [Appcelerator](http://www.appcelerator.com/) the company behind the popular [Titanium platform](http://www.appcelerator.com/platform/titanium-sdk) to write native iOS, Android apps in JS.
 
 MobiRuby is built on top of mruby making it the first demonstration of
 what motivated developers can do with Matz new implementation. Very much
-like mruby, MobiRuby will be released under an OSS license but this time
-under the [Apache license](http://www.apache.org/licenses/LICENSE-2.0.html).
+like mruby, MobiRuby will be released under an OSS license but unlike
+mruby, the [Apache license](http://www.apache.org/licenses/LICENSE-2.0.html) was chosen.
 
 So far this was just an announcement with a code sample and a
 screenshot. That was enough to make the front page of [HackerNews](http://news.ycombinator.com/item?id=3866418). Apparently the author is planning on releasing a first version in a few months.
