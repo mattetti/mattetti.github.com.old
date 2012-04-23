@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/ruby/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-23T12:44:09+02:00</updated>
+  <updated>2012-04-23T16:21:36+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -112,13 +112,14 @@
 
 <h2>Example:</h2>
 
-<pre><code>@array, threads = [], []
+<p><code>ruby
+@array, threads = [], []
 4.times do
   threads &lt;&lt; Thread.new { (1..100_000).each {|n| @array &lt;&lt; n} }
 end
 threads.each{|t| t.join }
 puts @array.size
-</code></pre>
+</code></p>
 
 <p>In the above example, I'm creating an instance variable of Array type and I start 4 threads. Each of these threads adds 100,000 items to the array. We then wait for all the threads to be done and check the size of the array.</p>
 

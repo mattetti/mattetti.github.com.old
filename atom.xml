@@ -4,7 +4,7 @@
   <title><![CDATA[Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-23T12:44:09+02:00</updated>
+  <updated>2012-04-23T16:21:36+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -367,11 +367,50 @@ testing the first betas.</p>
 
 <p>Here is a hello world webservice being implemented using Weasel Diesel and Sinatra:</p>
 
-<p>[gist]https://gist.github.com/2300131[/gist]</p>
+<div><script src='https://gist.github.com/2300131.js?file='></script>
+<noscript><pre><code>describe_service &quot;hello_world&quot; do |service|
+  service.formats   :json
+  service.http_verb :get
+  service.disable_auth # on by default
+
+  # INPUT
+  service.param.string  :name, :default =&gt; 'World'
+
+  # OUTPUT
+  service.response do |response|
+    response.object do |obj|
+        obj.string :message, :doc =&gt; &quot;The greeting message sent back. Defaults to 'World'&quot;
+      obj.datetime :at, :doc =&gt; &quot;The timestamp of when the message was dispatched&quot;
+      end
+  end
+
+  # DOCUMENTATION
+  service.documentation do |doc|
+    doc.overall &quot;This service provides a simple hello world implementation example.&quot;
+    doc.param :name, &quot;The name of the person to greet.&quot;
+    doc.example &quot;&lt;code&gt;curl -I 'http://localhost:9292/hello_world?name=Matt'&lt;/code&gt;&quot;
+ end
+
+  # ACTION/IMPLEMENTATION
+  service.implementation do
+    {:message =&gt; &quot;Hello #{params[:name]}&quot;, :at =&gt; Time.now}.to_json
+  end
+
+end</code></pre></noscript></div>
+
 
 <p>Basis test validating the contract defined in the DSL and the actual output when the service is called:</p>
 
-<p>[gist]https://gist.github.com/2300440[/gist]</p>
+<div><script src='https://gist.github.com/2300440.js?file='></script>
+<noscript><pre><code>class HelloWorldTest &lt; MiniTest::Unit::TestCase
+
+  def test_response
+    TestApi.get &quot;/hello_world&quot;, :name =&gt; 'Matt'
+    assert_api_response
+  end
+
+end</code></pre></noscript></div>
+
 
 <p>Generated documentation:</p>
 
@@ -838,13 +877,20 @@ management works to get better performance out of your code.</p>
 
 <h2>Example:</h2>
 
-<pre><code>@array, threads = [], []
-4.times do
-  threads &lt;&lt; Thread.new { (1..100_000).each {|n| @array &lt;&lt; n} }
-end
-threads.each{|t| t.join }
-puts @array.size
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@array</span><span class="p">,</span> <span class="n">threads</span> <span class="o">=</span> <span class="o">[]</span><span class="p">,</span> <span class="o">[]</span>
+</span><span class='line'><span class="mi">4</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">threads</span> <span class="o">&lt;&lt;</span> <span class="no">Thread</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">100_000</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span><span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="vi">@array</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">}</span> <span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">threads</span><span class="o">.</span><span class="n">each</span><span class="p">{</span><span class="o">|</span><span class="n">t</span><span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">join</span> <span class="p">}</span>
+</span><span class='line'><span class="nb">puts</span> <span class="vi">@array</span><span class="o">.</span><span class="n">size</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>In the above example, I&#8217;m creating an instance variable of Array type and I start 4 threads. Each of these threads adds 100,000 items to the array. We then wait for all the threads to be done and check the size of the array.</p>
 
@@ -1304,47 +1350,85 @@ In Rails, you can actually use a helper method instead: expires_in 1.minute, :pu
 
 <p>In Rails, in the sessions controller or whatever code logs you in, you need to create a new cookie containing the username:</p>
 
-<pre><code>cookies[:username] = {
-         :value =&gt; session[:username],
-         :expires =&gt; 2.days.from_now,
-         :domain =&gt; ".cinematreasures.org"
-       }
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">cookies</span><span class="o">[</span><span class="ss">:username</span><span class="o">]</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>         <span class="ss">:value</span> <span class="o">=&gt;</span> <span class="n">session</span><span class="o">[</span><span class="ss">:username</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>         <span class="ss">:expires</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="o">.</span><span class="n">days</span><span class="o">.</span><span class="n">from_now</span><span class="p">,</span>
+</span><span class='line'>         <span class="ss">:domain</span> <span class="o">=&gt;</span> <span class="s2">&quot;.cinematreasures.org&quot;</span>
+</span><span class='line'>       <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>As you can see, we don&#8217;t store the data in the session cookie and the data won&#8217;t be encrypted. You need to be careful that someone changing his cookie value can&#8217;t access data he/should shouldn&#8217;t. But that&#8217;s a different discussion. Now that the cookie is set, we can read it from JavaScript when the page is loaded.</p>
 
-<pre><code>document.observe("dom:loaded", function() {
-  displayLoggedinUserLinks();
-});
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nb">document</span><span class="p">.</span><span class="nx">observe</span><span class="p">(</span><span class="s2">&quot;dom:loaded&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">displayLoggedinUserLinks</span><span class="p">();</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">readCookie</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>     <span class="kd">var</span> <span class="nx">nameEQ</span> <span class="o">=</span> <span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="p">;</span>
+</span><span class='line'>     <span class="kd">var</span> <span class="nx">ca</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">);</span>
+</span><span class='line'>     <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">ca</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">ca</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+</span><span class='line'>          <span class="k">while</span> <span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">==</span><span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nx">c</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+</span><span class='line'>          <span class="k">if</span> <span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">nameEQ</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="nx">c</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="nx">nameEQ</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span><span class="nx">c</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+</span><span class='line'>     <span class="p">}</span>
+</span><span class='line'>     <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">displayLoggedinUserLinks</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">username</span>            <span class="o">=</span> <span class="nx">readCookie</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">loginLink</span>           <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">logout</span>              <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;logout&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">username</span> <span class="o">==</span> <span class="kc">null</span><span class="p">){</span>
+</span><span class='line'>    <span class="nx">loginLink</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">logout</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span><span class='line'>    <span class="c1">// user is logged in and we have his/her username</span>
+</span><span class='line'>    <span class="nx">loginLink</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="nx">userGreetings</span><span class="p">){</span> <span class="nx">userGreetings</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="s2">&quot;&lt;span id=&quot;</span><span class="nx">username</span><span class="s2">&quot;&gt;username&lt;/span&gt;&quot;</span><span class="p">);</span> <span class="p">}</span>
+</span><span class='line'>    <span class="nx">logout</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">showAvatar</span><span class="p">(</span><span class="nx">username</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-function readCookie(name) {
-     var nameEQ = name + "=";
-     var ca = document.cookie.split(';');
-     for(var i=0;i &lt; ca.length;i++) {
-          var c = ca[i];
-          while (c.charAt(0)==' ') c = c.substring(1,c.length);
-          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-     }
-     return null;
-}
-
-function displayLoggedinUserLinks() {
-  var username            = readCookie('username');
-  var loginLink           = $('login');
-  var logout              = $('logout');
-  if (username == null){
-    loginLink.show();
-    logout.hide();
-  }else{
-    // user is logged in and we have his/her username
-    loginLink.hide();
-    if(userGreetings){ userGreetings.update("&lt;span id="username"&gt;username&lt;/span&gt;"); }
-    logout.show();
-    showAvatar(username);
-  };
-  return true;
-}
-</code></pre>
 
 <p>The code above doesn&#8217;t do much, once the DOM is loaded, the displayLoggedinUserLinks() function gets trigger. This function reads the cookie via the readCookie() function and if a username is found, the login link is hidden, the user name is displayed, as well as the logout link and the avatar. (You can also use a jQuery cookie plugin to handle the cookie, but this is an old example using Prototype, replace the code accordingly)
 When the user logs out, we just need to delete the username cookie and the cached page will be rendered properly. In Rails, you would do delete the cookie like that: cookies.delete(&#8216;username&#8217;).
@@ -1356,14 +1440,22 @@ Quite often you might even want to make an Ajax call to get some information suc
 
 <p>The problem is that the message is part of the rendered page and now for 60 seconds, all people hitting the home page will get the same message. This is why you would want to write a helper that would put this message in a custom cookie that you&#8217;d pull JS and then delete once displayed. You could use a helper like that to set the cookie:</p>
 
-<pre><code>def flash_notice_cookie(msg, expiration=nil)
-  cookies[:flash_notice] = {
-    :value =&gt; msg,
-    :expires =&gt; expiration || 1.minutes.from_now,
-    :domain =&gt; ".cinematreasures.com"
-   }
-end
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">flash_notice_cookie</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">expiration</span><span class="o">=</span><span class="kp">nil</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">cookies</span><span class="o">[</span><span class="ss">:flash_notice</span><span class="o">]</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="ss">:value</span> <span class="o">=&gt;</span> <span class="n">msg</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:expires</span> <span class="o">=&gt;</span> <span class="n">expiration</span> <span class="o">||</span> <span class="mi">1</span><span class="o">.</span><span class="n">minutes</span><span class="o">.</span><span class="n">from_now</span><span class="p">,</span>
+</span><span class='line'>    <span class="ss">:domain</span> <span class="o">=&gt;</span> <span class="s2">&quot;.cinematreasures.com&quot;</span>
+</span><span class='line'>   <span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>And then add a function called when the DOM is ready which loads the message and injects it in the DOM. Once the cookie read, delete it so the message isn&#8217;t displayed again.</p>
 

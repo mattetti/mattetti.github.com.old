@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Software Design | Matt Aimonetti]]></title>
-  <link href="http://matt.aimonetti.net/articles/categories/software-design/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Popular | Matt Aimonetti]]></title>
+  <link href="http://matt.aimonetti.net/articles/categories/popular/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
   <updated>2012-04-23T16:21:36+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
@@ -12,6 +12,183 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[mruby and MobiRuby]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/04/20/mruby-and-mobiruby/"/>
+    <updated>2012-04-20T12:32:00+02:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/04/20/mruby-and-mobiruby</id>
+    <content type="html"><![CDATA[<p>Today, two big Ruby news came directly from Japan:</p>
+
+<ul>
+<li>The Open Source release of <a href="http://en.wikipedia.org/wiki/Yukihiro_Matsumoto">Matz'</a> <a href="https://github.com/mruby/mruby">mruby on GitHub</a>.</li>
+<li>The announce of <a href="http://mobiruby.org/">MobiRuby</a>, an upcoming solution
+to develop iOS and Android applications using Ruby.</li>
+</ul>
+
+
+<p>Probably due to my involvement with the <a href="http://macruby.org/">MacRuby</a>
+project, people have been asking me what I thought of these news.</p>
+
+<h2>mruby</h2>
+
+<p>mruby is far from being a new project. It's based on the RiteVM which is a
+sponsored project by the <a href="http://www.meti.go.jp/english/">Japanese ministry of Economy, Trade and Industry</a> and lead by Ruby's creator: <a href="http://en.wikipedia.org/wiki/Yukihiro_Matsumoto">Yukihiro "Matz" Matsumoto</a> and was explained in details during <a href="http://www.slideshare.net/yukihiro_matz/rubyconf-2010-keynote-by-matz">Matz's RubyConf 2010 keynote</a>.</p>
+
+<p>Back in November 2011 Matz also explained mruby. His talk was recorded
+and he explains very well the current Ruby ecosystem and why mruby makes
+sense.</p>
+
+<div class="video-container">
+<iframe width="560" height="315" src="http://www.youtube.com/embed/sB-IifjyeLI" frameborder="0" allowfullscreen></iframe></div>
+
+
+<p>As explained, the main goal of mruby is to have a Ruby version that can
+be embedded and therefore have a smaller footprint, be compiled and
+linked within another application.</p>
+
+<p>Hiroshi Nakamura gave a great 1 line definition of mruby:</p>
+
+<p><img src="/images/mruby_def.jpg" alt="mruby" /></p>
+
+<p>mruby targets game developers (to use instead of Lua), embedded
+application developers (devices, TV, phones..) and small memory
+footprint server applications (instead of JS for instance).</p>
+
+<p>I'm personally quite excited by mruby, it's not there yet and there is
+still a lot of work to do to prove the value of the project but it's
+certainly a great step in the right direction. What's also really nice
+is that the project is released under an OSS license allowing for all of
+us to contribute and companies to improve the implementation based on
+their own needs.</p>
+
+<p><strong>Summary:</strong> mruby is a promising project even if it is still in its infancy.
+Besides being yet another Ruby implementation, the fact that the
+target audience and the project scope are well defined and that the project is lead
+by Ruby's author and sponsored by the Japanese government makes me want to believe that it can be a successful project. That said Lua is a simpler language and it is already well implemented in the targeted market, so hopefuly Matz, his team and the Japanese government have a plan to advocate and champion this new technology. Good luck to them and I'll keep an attentive eye on the project.</p>
+
+<h2>MobiRuby</h2>
+
+<p><a href="http://mobiruby.org/">MobiRuby</a> is being developed by <a href="https://github.com/masuidrive">Yuichiro MASUI</a> who works for <a href="http://www.appcelerator.com/">Appcelerator</a> the company behind the popular <a href="http://www.appcelerator.com/platform/titanium-sdk">Titanium platform</a> to write native iOS, Android apps in JS.</p>
+
+<p>MobiRuby is built on top of mruby making it the first demonstration of
+what motivated developers can do with Matz new implementation. Very much
+like mruby, MobiRuby will be released under an OSS license but unlike
+mruby, the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache license</a> was chosen.</p>
+
+<p>So far this was just an announcement with a code sample and a
+screenshot. That was enough to make the front page of <a href="http://news.ycombinator.com/item?id=3866418">HackerNews</a>. Apparently the author is planning on releasing a first version in a few months.</p>
+
+<p> <img src="http://mobiruby.org/screenshot1.jpg" title="MobiRuby screenshot" alt="MobiRuby" /></p>
+
+<p>It might surprise some, but I'm quite glad to see this kind of projects
+even though, they compete to some extent against MacRuby. It proves two
+things:</p>
+
+<ul>
+<li>there is a strong interest in having Ruby on mobile devices.</li>
+<li>it's technically possible to do so.</li>
+</ul>
+
+
+<p>Now, this is not something new either, Lua developers have been able to
+write iOS apps for a while, yet the majority of the iOS developers still
+use Objective-C. What are the challenges facing implementations trying
+to replace Objective-C?</p>
+
+<h3>The replacement language might not fit the Cocoa design.</h3>
+
+<p>Developing an iOS/OS X app means that you spend your time using provided
+libraries (called frameworks in Apple's jargon). These frameworks have
+specific patterns, a well defined syntax and usually work in a very
+consistent/constraining way. Or your language is quite similar (like Ruby) and the
+transition is easy, or you need to start writing and maintaining
+wrappers (titanium).</p>
+
+<h3>Bridged runtimes.</h3>
+
+<p>Having 2 runtimes running at the same time is quite challenging and not
+efficient. That's one of the reasons why Apple pushed MacRuby to move from <a href="http://en.wikipedia.org/wiki/RubyCocoa">RubyCocoa</a> being a bridge and to have a Ruby implementation running in Objective-C runtime itself.
+This allows something else, in MacRuby all objects are actually
+Objective-C objects which means you don't need to convert anything and
+Cocoa APIs can be extended from Ruby code by just reopening them.</p>
+
+<h3>Support.</h3>
+
+<p>This one is critical for many. Often, you don't want to have your next big
+project rely on a technology that doesn't have a good backing and
+support. What happens if you build your app using an alternate
+implementation and all a sudden the developer(s) get bored and move on,
+or take another job?
+What about the updates needed as Apple/Google update their platforms?
+It might not be the best reason to not choose an alternative, but it's
+a reasonable reason especially for companies who want to be "safe".</p>
+
+<h3>Cocoa</h3>
+
+<p>Cocoa APIs represent probably 90% of the challenge when writing iOS/OS X
+applications. The APIs, while powerful and efficient, are often a pain
+to get used to and to learn.</p>
+
+<p>You have the challenge of the documentation and the examples that
+are only in Objective-C, requiring that someone <a href="http://www.amazon.com/gp/product/1449380379/ref=as_li_ss_tl?ie=UTF8&amp;tag=merbist-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1449380379">writes a book</a> and/or that
+you convert and maintain an enormous amount of documentation.</p>
+
+<p>You also have all the tools provided by Apple which, you often can't
+fully use because you aren't using their toolchain.</p>
+
+<p>To be honest, after so many years using MacRuby, I think that the real
+value of such a project isn't in the easier syntax but instead in the
+fact that you can easily build wrappers and higher level interfaces
+around repetitive tasks. Having a mix of a well designed DSL and yet
+access to the native object is something extremely powerful.</p>
+
+<h3>Objective-C is evolving.</h3>
+
+<p>Objective-C is evolving, with the introduction of <a href="http://developer.apple.com/library/ios/#releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html">ARC</a>, memory management became much easier. The latest version of clang also granted Objective-C with a nicer syntax thanks to new literals and object subscripting (<a href="http://clang.llvm.org/docs/ObjectiveCLiterals.html">read more</a>). As a matter of fact, Objective-C syntax is getting closer and closer to Ruby's. Making the choice to use an alternate harder and harder to make.</p>
+
+<p>``` objective-c
+// character literals.
+NSNumber *theLetterZ = @'Z';          // equivalent to [NSNumber numberWithChar:'Z']</p>
+
+<p>// integral literals.
+NSNumber *fortyTwo = @42;             // equivalent to [NSNumber numberWithInt:42]</p>
+
+<p>// floating point literals.
+NSNumber *piDouble = @3.1415926535;   // equivalent to [NSNumber numberWithDouble:3.1415926535]</p>
+
+<p>// BOOL literals.
+NSNumber *yesNumber = @YES;           // equivalent to [NSNumber numberWithBool:YES]</p>
+
+<p>// Container literals
+NSArray *array = @[ @"Hello", NSApp, [NSNumber numberWithInt:42] ];
+id value = array[idx];</p>
+
+<p>NSDictionary *dictionary = @{
+  @"name" : NSUserName(),
+  @"date" : [NSDate date],
+  @"processInfo" : [NSProcessInfo processInfo]
+};
+id oldObject = dictionary[key];
+dictionary[key] = newObject;    // replace oldObject with newObject
+```</p>
+
+<h3>Performance.</h3>
+
+<p>Even though devices are more and more powerful, performance is often
+critical and Apple optimized the performance of their solution for their
+language. If you have ever developed a Titanium app, you know that it
+can be an issue and you might have to find workarounds to get decent
+performance.</p>
+
+<p><strong>Summary:</strong> Based on all these things, once MobiRuby will be released, I will be
+able to make a better judgement. But based on what I have seen so far,
+I'm quite concerned by the syntax and the performance we will get out of
+the box. But time will tell and things can always be improved.
+Ruby on iOS/Android is something exciting and I'm looking forward to
+testing the first betas.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Building and implementing a Single Sign-On solution]]></title>
@@ -380,6 +557,183 @@ end</code></pre></noscript></div>
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Data safety and GIL removal]]></title>
+    <link href="http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal/"/>
+    <updated>2011-10-18T15:19:17+02:00</updated>
+    <id>http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal</id>
+    <content type="html"><![CDATA[<p>After my recent <a href="http://rubyconf11.merbist.com">RubyConf talk</a> and <a href="http://merbist.com/2011/10/03/about-concurrency-and-the-gil/">follow up post addressing the Ruby &amp; Python's Global Interpreter Lock</a> (aka GVL/Global VM Lock). a lot of people asked me to explain what I meant by "data safety". While my point isn't to defend one approach or the other, I spent a lot of time explaining why C Ruby and C Python use a GIL and where it matters and where it matters less. As a reminder and as mentioned by Matz himself, the main reason why C Ruby still has a GIL is data safety. But if this point isn't clear to you, you might be missing the main argument supporting the use of a GIL.</p>
+
+<p>Showing obvious concrete examples of data corruption due to unsafe threaded code isn't actually as easy at it sounds. First of all, even with a GIL, developers can write unsafe threaded code. So we need to focus only on the safety problems raised by removing the GIL. To demonstrate what I mean, I will try to create some race conditions and show you the unexpected results you might get. Again, before you go crazy on the comments, remember that threaded code is indeterministic and the code below might potentially work on your machine and that's exactly why it is hard to demonstrate. Race conditions depend on many things, but in this case I will focus on race conditions affecting basic data structures since it might be the most surprising.</p>
+
+<h2>Example:</h2>
+
+<p><code>ruby
+@array, threads = [], []
+4.times do
+  threads &lt;&lt; Thread.new { (1..100_000).each {|n| @array &lt;&lt; n} }
+end
+threads.each{|t| t.join }
+puts @array.size
+</code></p>
+
+<p>In the above example, I'm creating an instance variable of Array type and I start 4 threads. Each of these threads adds 100,000 items to the array. We then wait for all the threads to be done and check the size of the array.</p>
+
+<p>If you run this code in C Ruby the end result will be as expected:</p>
+
+<pre><code>400000
+</code></pre>
+
+<p>Now if you switch to JRuby you might be surprised by the output. If you are lucky you will see the following:</p>
+
+<pre><code>ConcurrencyError: Detected invalid array contents due to unsynchronized modifications with concurrent users
+        &lt;&lt; at org/jruby/RubyArray.java:1147
+  __file__ at demo.rb:3
+      each at org/jruby/RubyRange.java:407
+  __file__ at demo.rb:3
+      call at org/jruby/RubyProc.java:274
+      call at org/jruby/RubyProc.java:233
+</code></pre>
+
+<p>This is actually a good thing. JRuby detects that you are unsafely modifying an instance variable across threads and that data corruption will occur. However, the exception doesn't always get raised and you will potentially see results such as:</p>
+
+<pre><code>335467
+342397
+341080
+</code></pre>
+
+<p>This is a sign that the data was corrupted but that JRuby didn't catch the unsynchronized modification. On the other hand MacRuby and Rubinius 2 (dev) won't raise any exceptions and will just corrupt the data, outputting something like:</p>
+
+<pre><code>294278
+285755
+280704
+279865
+</code></pre>
+
+<p>In other words, if not manually synchronized, shared data can easily be corrupted. You might have two threads modifying the value of the same variable and one of the two threads will step on top of the other leaving you with a race condition. You only need 2 threads accessing the same instance variable at the same time to get a race condition. My example uses more threads and more mutations to make the problem more obvious. Note that TDD wouldn't catch such an issue and even extensive testing will provide very little guarantee that your code is thread safe.</p>
+
+<p> </p>
+
+<h2>So what? Thread safety isn't a new problem.</h2>
+
+<p>That's absolutely correct, ask any decent Java developer out there, he/she will tell how locks are used to "easily" synchronize objects to make your code thread safe. They might also mention the deadlocks and other issues related to that, but that's a different story. One might also argue that when you write web apps, there is very little shared data and the chances of corrupting data across concurrent requests is very small since most of the data is kept in a shared data store outside of the process.</p>
+
+<p>All these arguments are absolutely valid, the challenge is that you have a large community and a large amount of code out there that expects a certain behavior. And removing the GIL does change this behavior. It might not be a big deal for you because you know how to deal with thread safety, but it might be a big deal for others and C Ruby is by far the most used Ruby implementation. It's basically like saying that automatic cars shouldn't be made and sold, and everybody has to switch to stick shifts. They have better gas mileage, I personally enjoy driving then and they are cheaper to build. Removing the GIL is a bit like that. There is a cost associated with this decision and while this cost isn't insane, the people in charge prefer to not pay it.</p>
+
+<p> </p>
+
+<h2>Screw that, I'll switch to Node.js</h2>
+
+<p>I heard a lot of people telling me they were looking into using Node.js because it has a better design and no GIL. While I like Node.js and if I were to implement a chat room or an app keeping connections for a long time, I would certainly compare it closely to EventMachine, I also think that this argument related to the GIL is absurd. First, you have other Ruby implementations which don't have a GIL and are really stable (i.e: JRuby) but then Node basically works the same as Ruby with a GIL. Yes, Node is evented and single threaded but when you think about it, it behaves the same as Ruby 1.9 with its GIL. Many requests come in and they are handled one after the other and because IO requests are non-blocking, multiple requests can be processed concurrently but not in parallel. Well folks, that's exactly how C Ruby works too, and unlike popular believe, most if not all the popular libraries making IO requests are non blocking (when using 1.9). So, next time you try to justify you wanting to toy with Node, please don't use the GIL argument.</p>
+
+<p> </p>
+
+<h2>What should I do?</h2>
+
+<p>As always, evaluate your needs and see what makes sense for your project. Start by making sure you are using Ruby 1.9 and your code makes good use of threading. Then look at your app and how it behaves, is it CPU-bound or IO-bound. Most web apps out there are IO-bound (waiting for the DB, redis or API calls), and when doing an IO call, Ruby's GIL is released allowing another thread to do its work. In that case, not having a GIL in your Ruby implementation won't help you. However, if your app is CPU-bound, then switching to JRuby or Rubinius might be beneficial. However, don't assume anything until you proved it and remember that making such a change will more than likely require some architectural redesign, especially if using JRuby.  But, hey, it might totally be worth it as many proved it in the past.</p>
+
+<p> </p>
+
+<p>I hope I was able to clarify things a bit further. If you wish to dig further, I would highly recommend you read the many discussions the Python community had in the last few years.</p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[About concurrency and the GIL]]></title>
+    <link href="http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil/"/>
+    <updated>2011-10-03T21:23:54+02:00</updated>
+    <id>http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil</id>
+    <content type="html"><![CDATA[<p>During RubyConf 2011, concurrency was a really hot topic. This is not a new issue, and the JRuby team has been talking about true concurrency for quite a while . The Global Interpreter Lock has also been in a subject a<a href="http://wiki.python.org/moin/GlobalInterpreterLock"> lot of discussions in the Python community</a> and it's not surprising that the Ruby community experiences the same debates since the evolution of their implementations are somewhat similar. (There might also be some tension between <a href="http://engineyard.com">EngineYard</a> hiring the JRuby and Rubinius teams and <a href="http://heroku.com">Heroku</a> which <a href="http://blog.heroku.com/archives/2011/7/12/matz_joins_heroku/">recently hired Matz</a> (Ruby's creator) and <a href="https://github.com/nobu">Nobu</a>, the #1 C Ruby contributor)</p>
+
+<p>The GIL was probably even more of a hot topic now that <a href="http://rubini.us/">Rubinius</a> is about the join <a href="http://jruby.org">JRuby</a> and <a href="http://macruby.org">MacRuby</a> in the realm of GIL-less Ruby implementations.</p>
+
+<p>During my RubyConf talk (<a href="http://rubyconf11.merbist.com/">slides here</a>), I tried to explain how C Ruby works and why some decisions like having a GIL were made and why the Ruby core team isn't planning on removing this GIL anytime soon. The GIL is something a lot of Rubyists love to hate, but a lot of people don't seem to question why it's here and why Matz doesn't want to remove it. Defending the C Ruby decision isn't quite easy for me since I spend my free time working on an alternative Ruby implementation which doesn't use a GIL (MacRuby). However, I think it's important that people understand why the MRI team (C Ruby team) and some Pythonistas feels so strongly about the GIL.</p>
+
+<p><strong>What is the GIL?</strong></p>
+
+<p>Here is a quote from the <a href="http://wiki.python.org/moin/GlobalInterpreterLock">Python wiki</a>:</p>
+
+<blockquote><p>In CPython, the <strong>global interpreter lock</strong>, or <strong>GIL</strong>, is a mutex that prevents multiple native threads from executing Python bytecodes at once. This lock is necessary mainly because CPython's memory management is not thread-safe. (However, since the GIL exists, other features have grown to depend on the guarantees that it enforces.) [...] The GIL is controversial because it prevents multithreaded CPython programs from taking full advantage of multiprocessor systems in certain situations. Note that potentially blocking or long-running operations, such as I/O, image processing, and <a href="http://wiki.python.org/moin/NumPy">NumPy</a> number crunching, happen <em>outside</em> the GIL. Therefore it is only in multithreaded programs that spend a lot of time inside the GIL, interpreting CPython bytecode, that the GIL becomes a bottleneck.</p></blockquote>
+
+<p>The same basically applies to C Ruby. To illustrate the quote above, here is a diagram representing two threads being executed by C Ruby:</p>
+
+<p><a href="http://rubyconf11.merbist.com/#44"><img src="http://rubyconf11.merbist.com/images/thread_scheduling.023.jpg" alt="Fair thread scheduling in Ruby by Matt Aimonetti" /></a></p>
+
+<p>Such a scheduling isn't a problem at all when you only have 1 cpu, since a cpu can only execute a piece of code at a time and context switching happens all the time to allow the machine to run multiple processes/threads in parallel. The problem is when you have more than 1 CPU because in that case, if you were to only run 1 Ruby process, then you would most of the time only use 1 cpu at a time. If you are running on a 8 cpu box, that's not cool at all! A lot of people stop at this explanation and imagine that their server can only handle one request at a time and they they rush to sign Greenpeace petitions asking Matz to make Ruby greener by optimizing Ruby and saving CPU cycles. Well, the reality is slightly different, I'll get back to that in a minute. Before I explain "ways to achieve true concurrency with CRuby, let me explain why C Ruby uses a GIL and why each implementation has to make an important choice and in this case both CPython and C Ruby chose to keep their GIL.</p>
+
+<p> </p>
+
+<h3>Why a GIL in the first place?</h3>
+
+<ul>
+<li><p>It makes developer's lives easier (it's harder to corrupt data)</p></li>
+<li><p>It avoids race conditions within C extensions</p></li>
+<li><p>It makes C extensions development easier (no write barriers..)</p></li>
+<li><p>Most of the C libraries which are wrapped are not thread safe</p></li>
+<li><p>Parts of Ruby's implementation aren't threadsafe (Hash for instance)</p></li>
+</ul>
+
+
+<p>As you can see the arguments can be organized in two main categories: data safety and C extensions/implementation. An implementation which doesn't rely too much on C extensions (because they run a bit slow, or because code written in a different language is preferred) is only faced with one argument: data safety.</p>
+
+<p> </p>
+
+<h3></h3>
+
+<h3>Should C Ruby remove its GIL?</h3>
+
+<ul>
+<li><p>No: it potentially makes Ruby code unsafe(r)</p></li>
+<li><p>No: it would break existing C extensions</p></li>
+<li><p>No: it would make writing C extensions harder</p></li>
+<li><p>No: it's a lot of work to change make C Ruby threadsafe</p></li>
+<li><p>No: Ruby is fast enough in most cases</p></li>
+<li><p>No: Memory optimization and GC is more important to tackle first</p></li>
+<li><p>No: C Ruby code would run slower</p></li>
+<li><p>Yes: we really need better/real concurrency</p></li>
+<li><p>Yes: <a href="https://plus.google.com/107994348420168435683/posts/993U42yVbfk">Rubber boots analogy (Gustavo Niemeyer)</a></p></li>
+</ul>
+
+
+<p>Don't count the amount of pros/cons to jump to the conclusion that removing the GIL is a bad idea. A lot of the arguments for removing the GIL are related. At the end of the day it boils down to data safety. During the Q&amp;A section of my RubyConf talk, Matz came up on stage and said data safety was the main reason why C Ruby still has a GIL. Again, this is a topic which was discussed at length in the Python community and I'd encourage you to read arguments from the <a href="http://www.jython.org/">Jython</a> (the equivalent of JRuby for Python) developers, <a href="http://codespeak.net/pypy/dist/pypy/doc/faq.html#does-pypy-have-a-gil-why">the PyPy</a> (the equivalent of Rubinius in the Python community) and CPython developers. (a good collection of arguments are actually available in the comments related to the <a href="https://plus.google.com/107994348420168435683/posts/993U42yVbfk">rubber boots post mentioned earlier</a>)</p>
+
+<p> </p>
+
+<h3>How can true concurrency be achieved using CRuby?</h3>
+
+<ul>
+<li><p>Run multiple processes (which you probably do if you use Thin, Unicorn or Passenger)</p></li>
+<li><p>Use event-driven programming with a process per CPU</p></li>
+<li><p>MultiVMs in a process. Koichi presented his plan to run multiple VMs within a process.  Each VM would have its own GIL and inter VM communication would be faster than inter process. This approach would solve most of the concurrency issues but at the cost of memory.</p></li>
+</ul>
+
+
+<p>Note:  forking a process only saves memory when using REE since it implements a GC patch that makes the forking process Copy on Write friendly. The Ruby core team worked on a patch for Ruby 1.9 to achieve the same result. <a href="http://twitter.com/#!/nari_en">Nari</a> &amp; <a href="http://twitter.com/#!/yukihiro_matz">Matz</a> are currently working on improving the implementation to make sure overall performance isn't affected.</p>
+
+<p>Finally, when developing web applications, each thread spend quite a lot of time in IOs which, as mentioned above won't block the thread scheduler. So if you receive two quasi-concurrent requests you might not even be affected by the GIL as illustrated in <a href="http://yehudakatz.com/2010/08/14/threads-in-ruby-enough-already/">this diagram from Yehuda Katz</a>:</p>
+
+<p><img src="http://yehudakatz.com/wp-content/uploads/2010/08/Untitled.002.png" alt="" /></p>
+
+<p>This is a simplified diagram but you can see that a good chunk of the request life cycle in a Ruby app doesn't require the Ruby thread to be active (CPU Idle blocks) and therefore these 2 requests would be processed almost concurrently.</p>
+
+<p>To boil it down to something simplified, when it comes to the GIL, an implementor has to chose between data safety and memory usage. But it is important to note that context switching between threads is faster than context switching between processes and data safety can and is often achieved in environments without a GIL, but it requires more knowledge and work on the developer side.</p>
+
+<p> </p>
+
+<h3>Conclusion</h3>
+
+<p>The decision to keep or remove the GIL is a bit less simple that it is often described. I respect Matz' decision to keep the GIL even though, I would personally prefer to push the data safety responsibility to the developers. However, I do know that many Ruby developers would end up shooting themselves in the foot and I understand that Matz prefers to avoid that and work on other ways to achieve true concurrency without removing the GIL. What is great with our ecosystem is that we have some diversity, and if you think that a GIL less model is what you need, we have some great alternative implementations that will let you make this choice. I hope that this article will help some Ruby developers understand and appreciate C Ruby's decision and what this decision means to them on a daily basis.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[First step in scaling a web site: HTTP caching]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching/"/>
     <updated>2011-07-11T10:21:02+02:00</updated>
@@ -521,111 +875,6 @@ end
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Video game web framework design]]></title>
-    <link href="http://matt.aimonetti.net/posts/2011/04/14/video-game-web-framework-design/"/>
-    <updated>2011-04-14T10:28:39+02:00</updated>
-    <id>http://matt.aimonetti.net/posts/2011/04/14/video-game-web-framework-design</id>
-    <content type="html"><![CDATA[<p>In this post I will do my best to explain why and how I reinvented the wheel and wrote a custom web framework for some of Sony's <a href="http://www.gameproducer.net/2006/05/26/what-are-aaa-titles/">AAA console titles</a>. My goal is to reflect on my work by walking you through the design process and some of the implementation decisions. This is not about being right or being wrong, it's about designing a technical solution to solve concrete business challenges.</p>
-
-<h2>Problem Domain</h2>
-
-<p>The video game industry is quite special, to say the least. It shares a lot of similarities with the movie industry. The big difference is that  the movie industry hasn't evolved as quickly as the video game  industry has. But the concept is the same, someone comes up with a great  idea, finds a team/studio to develop the game and finds a publisher. The  development length and budget depends on the type of game, but for a AAA  console game, it usually takes a least a <a href="http://www.joystiq.com/2010/03/09/god-of-war-3-has-44-million-dollar-budget/">few million</a> and a minimum of a year of work once the project has received the green light. The creation of such a game involves various teams, designers, artists, animators, audio teams, developers, producers, QA, marketing, management/overhead etc.. Once the game gets released, players purchase the whole game for a one time fee and the studio moves  on to their next game. Of course things are not that simple, with the latest platforms, we now have the option to patch games, add <a href="http://en.wikipedia.org/wiki/Downloadable_content">DLC</a> etc.. But historically, a console game is considered done when it ships, exactly like a movie, and very little work is scheduled post release.</p>
-
-<p>Concretely such an approach exposes a few challenges when trying to implement online features for a <a href="http://www.gameproducer.net/2006/05/26/what-are-aaa-titles/">AAA console title</a>:</p>
-
-<ul>
-<li><p>Communication with the game client network team</p></li>
-<li><p>Scalability, performance</p></li>
-<li><p>Insane deadlines, unstable design (constant change of requirements)</p></li>
-<li><p>Can't afford to keep on working on the system once released (time delimited projects)</p></li>
-</ul>
-
-
-<p> </p>
-
-<h2>Communication</h2>
-
-<p>As in most situations, communication is one of the biggest challenges. Communication is even harder in the video game industry since you have so many teams and experts involved. Each team speaks its own jargon, has its own expertise and its own deadlines. But all focus on the same goal: releasing the best game ever. The team I'm part of has implementing online features as its goal. That's the way we bring business value to our titles. Concretely, that means that we provide the game client developers with a C++ SDK which connects to custom web APIs written in Ruby. The API implementations rely on various data stores (<a href="http://www.mysql.com/">MySQL</a>, <a href="http://redis.io/">Redis</a>, <a href="http://memcached.org/">Memcached</a>, memory) to store and retrieve all sorts of game data.</p>
-
-<p>Nobody but our team should care about the implementation details, after all, the whole point of providing an API is to provide a simple interface so others can do their part of the job in the easiest way possible. This is exactly where communication becomes a problem. The design of these APIs should be the result of the work of two teams with two different domains of expertise and different concerns. One team focuses on client performance, memory optimization and making the online resources available to the game engine without affecting the game play. The other, focuses on server performance, latency, scalability, data storage and system contention under load. Both groups have to come together to find a compromise making each other's job doable. Unfortunately, things are not that simple and game designers (who are usually not technical people) have a hard time <em>not</em> changing their designs and requirements every other week (usually for good reasons) making API design challenging and creating tension between the teams.</p>
-
-<p>From this perspective, the API is the most important deliverable for our team and it should communicate the design goal while being very explicit about how it works, why it works the way it does, and how to implement it client side. This is a very good place where we can improve communication by making sure that we focus on making clear, well designed, well documented, flexible APIs.</p>
-
-<p> </p>
-
-<h2>Scalability, performance</h2>
-
-<p>On the server side, the APIs need to perform and scale to handles tends of thousands of concurrent requests. Web developers often rely on aggressive <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html">HTTP caching</a> but in our case, the web client (our SDK) has a limited amount of memory available and 90% of the requests are user specific (can't use full page HTTP cache) and a lot of these are POST/DELETE requests (can't be cached). That means that, to scale, we have to focus on what most developers don't often have to worry too much about: all the small details which, put together with a high load, end up drastically affecting your performance.</p>
-
-<p>While Ruby is a great language, a lot of the libraries and frameworks are not optimized for performance, at least not the type of performance needed for our use case. However, the good news is that this is easily fixable and many alternatives exist (lots of async, non-blocking drivers for i.e). When obsessed with performance, you quickly learn to properly load test, profile, and monitor your code to find the bottlenecks and the places where you should focus your attention. The big, unique challenge though, is that a console game will more than likely see its peak traffic in the first few weeks, not really giving the chance to the online team to iteratively handle the prod issues. The only solution is to do everything possible before going live to ensure that the system will perform as expected. Of course if we were to write the same services in a more performant language, we would need to spend less time optimizing. But we are gaining so much flexibility by using a higher level programming language that, in my mind, the trade off is totally worth it (plus you still need to spend a lot of time optimizing your code path, even if your code is written in a very fast language).</p>
-
-<p> </p>
-
-<h2>Deadlines, requirement changes</h2>
-
-<p>That's just part of the way the industry works. Unless you work for <a href="http://blizzard.com">Blizzard</a> and you can afford to spend a crazy amount of time and money on the development of a title; you will have to deal with sliding deadlines, requirement changes, scope changes etc... The only way I know how to protect myself from such things is to plan for the worst. Being a non-idealistic (read pessimistic) person helps a lot. When you design your software, make sure your design is sound but flexible enough to handle any major change that you know could happen at any time. Pick your battles and make sure your assumptions are properly thought through, communicated and documented so others understand and accept them. In a nutshell, this is a problem we can't avoid, so you need to embrace it.</p>
-
-<p> </p>
-
-<h2>Limited reusability</h2>
-
-<p>This topic has a lot to do with the previous paragraph. Because scopes can change often and because the deadlines are often crazy, a lot of the time, engineers don't take the time to think about reusability. They slap some code together, pray to the <a href="http://en.wikipedia.org/wiki/Lords_of_Kobol">lords of Kobol</a> and hope that they won't have to look at their code ever again (I'm guilty of having done that too). The result is a lot of throw away code. This is actually quite frequent and normal in our industry. But it doesn't mean that it the right thing to do! The assumption/myth is that each game is different and therefore two games can't be using the same tech solution. My take on that is that it's partly true. But some components are the same for 80% of the games I work on. So why not design them well and reuse the common parts? (A lot of games share the same engines, such as <a href="http://www.unrealengine.com/">Unreal</a> for example, and there is no reason why we can't build a core online engine extended for each title)</p>
-
-<p> </p>
-
-<h2>My approach</h2>
-
-<p>When I joined Sony, I had limited experience with the console video game industry and my experience was not even related to online gaming. So even though I had (strong) opinions (and was often quite (perhaps even too) vocal about them), I did my best to improve existing components and work with the existing system. During that time, the team shipped 4 AAA titles on the existing system. As we were going through the game cycles, I did my best to understand the problem domain, the reasons behind some of the design decisions and finally I looked at what could be done differently to improve our business value. After releasing a title with some serious technical difficulties, I spent some time analyzing and listing the problems we had and their root causes. I asked our senior director for a mission statement and we got the team together to define the desiderata/objectives of our base technology. Here is what we came up with:</p>
-
-<ol>
-<li><p>Stability</p></li>
-<li><p>Performance / Scalability</p></li>
-<li><p>Encapsulation / Modularity</p></li>
-<li><p>Documentation</p></li>
-<li><p>Conventions</p></li>
-<li><p>Reusability / Maintainability</p></li>
-</ol>
-
-
-<p>These objectives are meant to help us objectively evaluate two options. The legacy solution was based on Rails, or more accurately: Rails was used in the legacy solution. Rails had been hacked in so many different ways that it was really hard to update anything without breaking random parts of the framework. The way to do basic things kept being changed, there was no consistent design, no entry points, no conventions and each new game would duplicate the source code of the previously released game and make the game specific changes. Patches were hard to back port and older titles were often not patched up. The performance was atrocious under load, mainly due to hacked-up Rails not performing well. (Rails was allocating so many objects per request that the GC was taking a huge amount of the request cycles, the default XML builder also created a ton load of objects etc...) This was your typical <a href="http://en.wikipedia.org/wiki/Broken_windows_theory">broken windows scenario</a>. Engineers were getting frustrated, motivation was fainting, bugs were piling up and nobody felt ownership over the tech.</p>
-
-<p>Now, to be fair, it is important to explain that the legacy system was hacked up together due to lack of time, lack of resources and a lot of pressure to release something ASAP. So, while the end result sounds bad, the context is very important to note. This is quite common in software engineering and when you get there, the goal is not to point fingers but to identify the good and the bad parts of the original solution. You then use this info to decide what to do: fix the existing system or rewrite, porting the good parts.</p>
-
-<p>Our report also came up with a plan. A plan to redesign our technology stack to match the desiderata previously mentioned. To put it simply, the plan was to write a new custom web framework focusing on stability, performance, modularity and documentation. Now, there are frameworks out there which already do that or value these principles. But none of them focus on web APIs and none of them are specific to game development. Finally, the other issue was that we had invested a lot of time on game specific code and we couldn't throw away all that work, so the new framework had to support a good chunk of legacy code but had to make it run much faster.</p>
-
-<h2>Design choices</h2>
-
-<p><strong>Low conversion cost</strong></p>
-
-<p>Using <a href="http://nodejs.org/">node.js</a> &amp; <a href="http://jashkenas.github.com/coffee-script/">coffee script</a>/<a href="http://www.scala-lang.org/">Scala</a>/<a href="http://weblocks.viridian-project.de/">whatever</a> <a href="http://code.google.com/p/v8cgi/">new</a> <a href="https://github.com/tenderlove/phuby">fancy tech</a> was not really an option. We have a bunch of games out there which are running on the old system and some of these games will have a sequel or a game close enough that we could reuse part of the work. We don't want to have to rewrite the existing code. I therefore made sure that we could reuse 90% of the business logic by adding an abstraction layer doing the heavy lifting at boot time and therefore not affecting the runtime performance. Simple conversion scripts were also written to import the core of the existing code over.</p>
-
-<p><em>Lessons learned:</em> It is very tempting to just redo everything and start from scratch. However, the business logic implementation wasn't the main cause of our problems. Even though I wish we could have redesigned that piece of the puzzle, it didn't make sense from a business perspective. A lot of thought had to be put into how to obtain the expected performance level while keeping the optional model/controller/view combos. By having full control of the "web engine", we managed to isolate things properly without breaking the old paradigms. We also got rid of a lot of assumptions allowing us to design new titles a bit differently while being backward compatible and have our code run dramatically faster.</p>
-
-<p><strong>Web API centric</strong></p>
-
-<p>This is probably the most important design element. If I had to summarize what our system does in just a few words, I would say: a game web API. Of course, it's much more than that. We have admin interfaces, producer dashboards, community websites, lobbies, p2p, BI reports, async processing jobs etc... But at the end of the day, the only one piece you can't remove is the game web API. So I really wanted the design to focus on that aspect. When a developer starts implementing a new online game feature, I want him/her to think about the API. But I also want this API to be extremely well documented so the developer working client-side understands the purpose of the API, how to use it, and what the expected response is right away. I also wanted to be able to automatically test our APIs at a very basic level so we could validate that there are discrepancies between what the client expects and what the server provides. To do that, I created a standalone API DSL with everything needed to describe your API but without any implementation details whatsoever. The API DSL lets the developer define a route (url), the HTTP verb expected, if the request should be authenticated or not, SSL or not, the param rules, default values and finally a response description (which was quite a controversial choice). All of these settings can be documented by the developer. This standalone DSL can then be consumed by different tools. For instance we have a tool extracting all the info into nicely formatted HTML doc for the game client developers. This tool doesn't need to load the framework to just render the documentation. We also use this description at boot time to compile the validation rules and routes, allowing for a much faster request dispatch. And we also use these API description to generate some low level data for the client. Finally, we used the service description DSL to help create mocked service responses allowing the client team to test service designs without having to wait for the implementation streamlining the process.</p>
-
-<p><em>Lessons learned:</em> We had a lot of internal discussions about the need to define the response within the service description. Some argued that it's a duplication since we already had a view and we could parse that to get most of what we needed (which is what the old system was doing). We ended up going with the response description DSL for a few critical reasons: testing and implementation simplicity. <em>Testing:</em> we need to have an API expectation reference and to keep this reference sane so we can see if something is changed. If we were to magically parse the response, we couldn't test the view part of the code against a frame of reference. <em>Implementation simplicity</em>: magically parsing a view template is more tricky that it sounds, you would need to render the template with the right data to make it work properly. Furthermore, you can't document a response easily in the view, and if you do, you arguably break the separation of concern between the description and the implementation. Finally, generated documentation isn't enough and that's why we decided to write English documentation, some being close to the code and some being just good old documentation explaining things outside of the code context.</p>
-
-<p><strong>Modularity</strong></p>
-
-<p>In order to make our code reusable we had to isolate each component and limit the dependencies. We wrote a very simple extension layer allowing each extension to registers itself once detected. The extension interface exposes the path of the extension, its type, models, services, controllers, migrations, seed data, dependencies etc.. Each extension is contained in a folder. (The extension location doesn't matter much but as part of the framework boot sequence, we check a few default places.) The second step of the process is to check a manifest/config file that is specific to each title. The manifest file lists the extensions that should be activated for the title. The framework then activates the marked extensions and has access to libs, models, views, migrations, seed data and of course to load services (DSL mentioned earlier) etc...</p>
-
-<p>Even though we designed the core extensions the best we could, there are cases where some titles will need to extend these extensions. To do that, we added a bunch of hooks that could be implemented on the title side if needed (Ruby makes that super easy and clean to do!). A good example of that is the login sequence or the player data.</p>
-
-<p><em>Lessons learned:</em> The challenge with modularity is to keep things simple and highly performing yet flexible. A key element to manage that is to stay as consistent as possible. Don't implement hooks three different ways, try to keep method signatures consistent, keep it simple and organized.</p>
-
-<p> </p>
-
-<h2>Conclusion</h2>
-
-<p>It's a bit early to say if this rewrite is a success or not and there are still lots of optimizations and technology improvements we are looking forward to doing. Only time will give us enough retrospect to evaluate our work. But because we defined the business value (mission statement) and the technical objectives, it is safe to say that the new framework meets the expectations quite well. On an early benchmark we noted a 10X speed improvement and that's before drilling into the performance optimizations such as making all the calls non-blocking, using better connection pools, cache write through layer... However, there is still one thing that we will have to monitor: how much business value will this framework generate. And I guess that's where we failed to define an agreed upon evaluation grid. I presume that if our developers spend more time designing and implementing APIs and less time debugging that could be considered business value. If we spend less time maintaining or fighting with the game engine, that would also be a win. Finally, if the player experience is improved we will be able to definitely say that we made the right choice.</p>
-
-<p>To conclude, I'd like to highlight my main short coming: I failed to define metrics that would help us evaluate the real business value added to our products. What I consider a technical success might not be a business success. How do you, in your own domain, find ways to define clear and objective metrics?</p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[Ruby concurrency explained]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained/"/>
     <updated>2011-02-22T22:34:30+01:00</updated>
@@ -705,282 +954,6 @@ The aim of this article is to explain as simply as possible the concept of concu
 <li><p><a href="http://www.slideshare.net/ehuard/concurrency-5615029">Elise Huard's RubyConf Concurrency talk slides</a></p></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Designing for scalability]]></title>
-    <link href="http://matt.aimonetti.net/posts/2011/01/31/designing-for-scalability/"/>
-    <updated>2011-01-31T13:30:55+01:00</updated>
-    <id>http://matt.aimonetti.net/posts/2011/01/31/designing-for-scalability</id>
-    <content type="html"><![CDATA[<p>Designing beautiful and scalable software is hard. Really hard.</p>
-
-<p>It's hard for many reasons. But what makes it even harder is that software scalability is a relatively new challenge, something only really done in big companies, companies that are not really keen on sharing their knowledge. The amount of academic work done on software design is quite limited compared to other types of design, but shared knowledge about scalable design is almost nonexistent <em>(Don't expect to find detailed information about scaling online video games either, the industry is super secretive. And even if this is a niche market where finding skilled/experienced developers is really challenging, information is not shared outside a game project).</em></p>
-
-<p>I don't pretend to have the required knowledge to cover this topic at length. However, I do have some exposure and figured I should share what I learned so others can benefit from my experience and push the discussion further.</p>
-
-<p>Designing scalable software is just like any other type of software design, with a few unique constraints. If I had to define the key requirements of a great design I would have to quote Frederick P. Brooks:</p>
-
-<blockquote><p>"Great designs have conceptual integrity - unity, economy, clarity"</p></blockquote>
-
-<p>This is true for any type of design and one should always start by that.
-Don't just jump on your keyboard and start writing tests/code right away. Take a minute to think about your design.
-That will save you hours of refactoring and headaches.</p>
-
-<h2>You're a designer and might not even know it</h2>
-
-<p>You might not be designing the next NASA engine but you are more than likely designing an API that you and others will use. As a matter of fact, unless you write code that will never be seen again, you are writing an Application Programming Interface (API). Every single class, method, function you write is an API that you and others will use. Remember that every time you write code, you are the implementer of a design, and therefore you are a designer.</p>
-
-<p>[caption id="attachment_916" align="alignright" width="150" caption="Giana and I, discussing design patterns"]<a href="http://merbist.com/2011/01/31/designing-for-scalability/giana_and_moi_lowres/"><img src="http://merbist.com/wp-content/uploads/2011/01/giana_and_moi_lowres-150x150.jpg" alt="Giana and Matt Aimonetti" /></a>[/caption]</p>
-
-<p>When thinking about your design, focus on design concepts instead of implementation details. A design concept must be clear, simple to both explain with words and draw on a whiteboard. If you can't draw and explain your design on a whiteboard, you have failed one of the great design requirement: clarity. If you work alone, or your coworkers are tired of hearing you, try rubber ducking your design ideas. It's the same concept as rubber ducking debugging, where a programmer would force himself to explain his code, line-by-line, to a rubber duck on his desk but instead of talking about the code, explain your design and why it's awesome (I've recently done this with my baby girl and it's been really helpful).</p>
-
-<h2>Keeping the design integrity</h2>
-
-<p>One of the challenges of designing scalable software is that your constraints are often very unique to your product. Off the shelf solutions don't work for you, and the specific solution used by another project can't be transposed to your project because the cause and the effect of what you need to scale are different. The problem is that you really quickly lose design integrity.</p>
-
-<p>Let's take a look at a concrete example to see how the design integrity can be lost or even not defined at all.
-Let's pretend we want to write a suite of web APIs for video games.</p>
-
-<p>We can look at this task from different perspectives:<a href="http://merbist.com/2011/01/31/designing-for-scalability/the-shout-2/"><img src="http://merbist.com/wp-content/uploads/2011/01/the-shout1-150x150.jpg" alt="the shout posted by Matt Aimonetti" /></a></p>
-
-<ul>
-<li><p>Video game deadlines are crazy, let's find a way to release as many APIs ASAP.</p></li>
-<li><p>We're going to get a huge amount of traffic, let's make sure we don't crash and burn.</p></li>
-<li><p>We need to make sure our APIs are simple to use for the dev teams integrating them.</p></li>
-</ul>
-
-
-<p>Each of these perspectives reflects a facet of the challenge. Other facets exist that I didn't mention but that a business person might have listed right away, one of which being: How can we do that for the least amount of money?</p>
-
-<p>To design our API suite, we first need to understand the different perspectives. Gaining this understanding will help us design something better but it will also help us communicate better with the different stakeholders. Once we have a decent understanding of the constraints and expectations, someone needs to explicitly define the design values and their priorities. This is a crucial step in the design process. Systems nowadays are too complicated to be handled by only one person and keeping design integrity requires clear communication.</p>
-
-<h2>Design goal and values</h2>
-
-<p>The best way to communicate the design is to write a simple sentence defining the primary goal:
-"Build a robust, efficient and flexible middleware solution leveraged by external teams to develop online video game features."</p>
-
-<p>This is a bit like the mission statement of your project, or the elevator pitch you give someone that asks you what you are working on.</p>
-
-<p>Associated with the primary goal are a host of desiderata, or secondary objectives. These are the key objectives used to weigh technical decisions. It's important for the design to highlight a scale of values so one can refer to them to decide if his/her idea fits the design or not. Here is an example:</p>
-
-<ol>
-<li><p>Stability</p></li>
-<li><p>Performance / Scalability</p></li>
-<li><p>Encapsulation / Modularity</p></li>
-<li><p>Conventions</p></li>
-<li><p>Documentation</p></li>
-<li><p>Reusability / Maintainability</p></li>
-</ol>
-
-
-<p>Often these desiderata are applied to most of your projects and reflect your team/company's technical values. The list might seem simple and unnecessary but, believe me, it will reduce the arguments where John tells Jane that her idea sucks but his is better because he "knows better". Having an objective reference to refer to when trying to decide which is the best way to go is greatly valuable and will reduce the amount of office drama.</p>
-
-<h2>Constraints</h2>
-
-<p>Finally, make sure to explicitly define all the major constraints and to acknowledge the team's concerns. Here is a small example of what could be listed (which also reflect the previously mentioned perspectives):</p>
-
-<ul>
-<li><p>hard deadlines</p></li>
-<li><p>external teams involved</p></li>
-<li><p>huge load expected</p></li>
-<li><p>limited support available</p></li>
-<li><p>requirements changing quickly</p></li>
-<li><p>limited budget</p></li>
-<li><p>unknown hosting architecture/constraints</p></li>
-<li><p>...</p></li>
-</ul>
-
-
-<p>Remember that design is always iterative because the constraints keep changing. That's just the way it is and a lot of technical constraints only appear as you implement or test your design. That's also why the design needs to be clear but the implementation needs to be flexible.</p>
-
-<h2>Reads vs writes</h2>
-
-<p>Most of the web apps out there are read heavy, meaning that the stored data gets more accessed than modified. Scaling these type of systems is easier as one can introduce a cache layer, an intermediary storage, which acts as a fast buffer that avoids putting load on the backends. The cost reduction is huge because if you architected your app properly, the data is read from the data store only once (or once every X minutes) after being created/modified.</p>
-
-<p>Caching is so important that it's even built into the HTTP protocol, making caching trivial.
-Speaking of HTTP, a common problem I often see when serving http content to a browser is that even though the backend calls are the same, some information needs to be customized for the current visitor. This prevents it from caching the entire page. An easy solution in this case is to still cache the entire page but to use javascript to fetch the custom data from the backend and to modify the cached http at the client's browser level directly. As part of your design, you will more than likely need to implement multiple layers of caching and use technologies such as query caching, Varnish, Squid, Memcached, memoization, etc...</p>
-
-<p>The problem is that, as your system gets more traffic, you will notice that the volume of DB/network writes becomes your bottleneck. You will also notice a reduction of your cache/hit ratio because only a small part of your cached data is often retrieved by many clients. At this point, you will need to denormalize to avoid contention, shard your data in silos, or write to cache and flush from cache when the data store is available and not overwhelmed.</p>
-
-<h2>Asynchronous processing</h2>
-
-<p>One way to avoid write contention is to use async processing. The concept is simple. Instead of directly writing to your datastore after your backend receives a request, you put a message in a queue with all the information needed to run the operation later. On the other side, you have a set number of workers receiving messages and operating on them one after the other.</p>
-
-<p>The advantage of such an approach is that you control the amount of workers and therefore the amount of maximum concurrent writes to your datastore. You can also process the queue before it gets worked and and maybe coalesce some messages or remove outdated/duplicated message. Finally, you can assign more workers to some message types, making sure the important messages get processed first.</p>
-
-<p>Another advantage of this design includes not letting the client hang while you're processing the data and potentially timeout. You can also process a long queue faster by starting more workers to catch up and retire them later.
-You app is more resilient to errors and failed async jobs can be restarted.</p>
-
-<h2>Load test, monitor and be proactive</h2>
-
-<p>Even the best designs have weak spots and will have to be improved once they are released. Don't wait for your system to fall apart before looking for solutions. Monitor your app. Every single part of your app. Look for patterns showing signs of potential problems and imagine what you could do to resolve them if they would start manifesting.</p>
-
-<p>Of course before getting there, you will need to understand each part of your system and benchmark/load test/profile your app so you can be ready to face the storm.</p>
-
-<p>Benchmarks and load tests are both super important and, too often, not reflective of what you will really face later on. They are usually great at identifying major problems that should be resolved right away, but fail to show the one big problem you will see on day one when you have to deal with 20k concurrent requests. Use them as indicators, rely on your experience and learn about problems other have faced. This will help you build a knowledge of scalability challenges, their root causes, and their potential solutions.</p>
-
-<p>For benchmarking Ruby code, I use the<a href="http://ruby-doc.org/stdlib/libdoc/benchmark/rdoc/classes/Benchmark.html"> built-in benchmark tool available in the standard lib</a>.
-For simple load testing, I use <a href="http://www.hpl.hp.com/research/linux/httperf/">httperf</a>/<a href="http://www.xenoclast.org/autobench/">autobench</a> and <a href="http://freshmeat.net/projects/siege/">siege</a>.
-For anything more complicated, I use <a href="http://jakarta.apache.org/jmeter/">JMeter</a>.
-In the video game industry, we also often use sims using the client's code to create load.</p>
-
-<p>Benchmarking without profiling is often useless. Unlike other programming languages, Ruby doesn't yet have awesome profiling tools easy to use, but things are evolving quickly. Here are some tools I use regularly.</p>
-
-<p>The <a href="https://github.com/tmm1/perftools.rb">Ruby wrapper</a> around <a href="http://code.google.com/p/google-perftools/">google perftools</a> is really good.
-Before using perftools as often as I do now, I frequently used <a href="http://ruby-prof.rubyforge.org/">ruby-prof</a> with <a href="http://kcachegrind.sourceforge.net/html/Home.html">kcachegrind</a>.
-Ruby 1.9 lets you inspect its garbage collector as explained in a <a href="http://merbist.com/2010/07/29/object-allocation-why-you-should-care/">previous post</a>.
-And when using <a href="http://macruby.org">MacRuby</a>, I often use <a href="http://en.wikipedia.org/wiki/DTrace">DTrace</a>.</p>
-
-<h2>Other misc. things I learned</h2>
-
-<h3>Documentation</h3>
-
-<p>Documentation is critical. It doesn't matter how you do it but you need to make sure you document what you want to build, how you build it, and why you build it. Documenting will help you and the others working on the project, and will keep you in check. I have started documenting an API and then realized that the design was flawed. Maybe it's just the way you name a method, or a class, or it can be a weird method signature or even the entire workflow being wrong, but when you document things, design errors appear more obviously.</p>
-
-<p>To document Ruby code, I use <a href="http://yardoc.org/">yard</a> which is quite similar to <a href="http://en.wikipedia.org/wiki/Javadoc">javadoc</a>. Code documentation, when writing <a href="http://en.wikipedia.org/wiki/Duck_typing">duck typed language</a>, is, for me, very important since it makes the API designer's expectations much clearer. I also often add English documentation, written in markdown files and compiled by yard. If you say that your code is simple and that it doesn't require documentation because anyone can just read it and understand ... then you have totally miss the point. Yes, it's more work to keep documentation and code in sync. But people using web APIs don't have access to the implementation details. The people distributing compiled APIs don't give access to their implementation. And honestly, the API should be decoupled from the implementation. I shouldn't have to guess how to use your API based on how you implemented the code underneath, otherwise my assumptions might be totally wrong.</p>
-
-<h3>Simplicity</h3>
-
-<p>With great power comes great responsibility. The law of system entropy says that systems become more disorganized over time, so don't start with complicated code if you can avoid it! It's not because your programming language lets you do crazy stuff that you have to use it. In 90+% of the time, your code can be written without voodoo and be easier to read, easier to understand, easier to maintain and faster to execute.</p>
-
-<p>If you can't figure out how to <strong><em>not</em></strong> use metaprogramming or weird patterns, take a step back and look at your design, did you miss something?
-Also, don't reinvent the wheel. Use the language the way it was designed to be used. Keep your APIs as small as possible, don't expose too much as it will be virtually impossible to remove it later on.</p>
-
-<p>As an example, look to what extent Rails modified the Ruby language:</p>
-
-<p>In Rails' console (Rails 2, Ruby 1.8.7)</p>
-
-<pre><code>&gt;&gt; Array.ancestors
-=&gt; [Array, ActiveSupport::CoreExtensions::Array::RandomAccess,
- ActiveSupport::CoreExtensions::Array::Grouping, ActiveSupport::CoreExtensions::Array::ExtractOptions,
- ActiveSupport::CoreExtensions::Array::Conversions, ActiveSupport::CoreExtensions::Array::Access,
- Enumerable, Object, ERB::Util, ActiveSupport::Dependencies::Loadable, Base64::Deprecated, Base64,
- Kernel]
-&gt;&gt; [].methods.size
-=&gt; 233
-</code></pre>
-
-<p>In irb:</p>
-
-<pre><code>&gt;&gt; Array.ancestors
-=&gt; [Array, Enumerable, Object, Kernel]
-&gt;&gt; [].methods.size
-=&gt; 149
-</code></pre>
-
-<p>Removing any of these added methods is virtually impossible since some piece of code somewhere might rely on it.</p>
-
-<h3>Abstraction &amp; its dangers</h3>
-
-<p>Often when designing an API, it's preferable to offer a well defined  public API which will delegate the work to a private implementation shared between  multiple public APIs. This approach avoids duplication, makes maintenance easy, and  allows for more flexibility. As an example, we can have a public  matchmaking API which will delegate most of the work to a private  matchmaking interface. If required, swapping the private interface would be  totally transparent to the public API. This approach has a downside, however. Having a shared private implementation does create a duplication of APIs. It leaves us with both a public and a private API because we need an API for public access and a private API for the public API to connect to. But when we weigh the  benefits and look at what is duplicated, we realize that this trade off  is worth it.</p>
-
-<p>Keeping a certain level of abstraction is important to maintaining the separation of concerns as clear as possible. You want to layer your design so that each  layer is responsible for itself, only knows about itself, and has limited  interactions with other layers. By factoring/isolating the different  modules, you can keep a simple, elegant, easy to maintain system. This  is a key element of design but one needs to be careful not to obfuscate  the design by over abstracting his/her code. This is particularly important when designing a scalable app because you will often need to be able to easily swap parts  to optimize each part of your system.</p>
-
-<p>That said, a lot of code out there is unnecessarily complicated. I sometime wonder if the authors of such code try to show that they know some cool language tricks. Or maybe this is due to the fact that, too often, people are impressed by code they don't understand. The problem with overly complicated or magical code is that it creates yet another abstraction layer between the end user and API. It makes the API more opaque, and that's a cost you have to take into consideration. Every time you abstract something you have a cost associated with the abstraction. This cost can be calculated in terms of performance loss, clarity loss and maintainability cost.</p>
-
-<p>This is exactly the same problem encountered when trying to normalize data in a database.
-Normalizing is a great concept which makes a lot of sense ... until you realize that the cost of keeping your data normalized is too great and it becomes a major bottleneck, not letting you scale your application.
-At this moment (and probably only then) that you need to denormalize your data.</p>
-
-<p>It's the same thing with code abstraction. It's fine to abstract, unless the abstraction is such that it requires too much work to understand what is going on. A bit of duplication is often worth it, but be careful to not abuse it.</p>
-
-<h3>Debugging</h3>
-
-<p>Ruby has a decent debugger called <a href="http://bashdb.sourceforge.net/ruby-debug.html">ruby-debug</a> and I'm amazed by the amount of people who haven't heard about it.
-I don't know what I would do if I couldn't use breakpoints and get an interactive shell to debug Ruby code.
-Please people! This is 2011, stop using print statement as a means of debugging!</p>
-
-<h2>Conclusion</h2>
-
-<p>That's is for this post. It was longer than expected and I feel I didn't really cover anything in depth, but hopefully you learned something new or at least read something that piqued your interest. I look forward to reading your comments and, hopefully, your blog posts sharing your experience in designing scalable software.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Causality of scalability]]></title>
-    <link href="http://matt.aimonetti.net/posts/2011/01/18/causality-of-scalability/"/>
-    <updated>2011-01-18T08:00:42+01:00</updated>
-    <id>http://matt.aimonetti.net/posts/2011/01/18/causality-of-scalability</id>
-    <content type="html"><![CDATA[<p>Part of my job at <a href="http://us.playstation.com/">Sony PlayStation</a> is to architect scalable systems which can handle a horde of excited players eager to be the first to play the latest awesome game and who would play for 14-24 hours straight. In other words, I need to make sure a system can "scale". In my case, a scalable system is a system that can go from a few hundred concurrent users/players to hundreds of thousands of concurrent users/players and stay stable for months.</p>
-
-<p>One can achieve scalability in many ways, and if you expect me to provide you with a magical formula you will be disappointed. I actually believe that you can scale almost anything if you have the adequate resources. So saying that X or Y doesn't scale is for me a sign that people are taking shortcuts in their explanations (X or Y are really hard to scale so they don't scale) or that they don't understand the causality of scaling. However what I am exploring in this post is the relationship between cause and effect when trying to make a system scalable. We will see that the scalability challenge is not new and not exclusive to the tech world. We will study the traditional approach to scaling and as well as the challenge of scaling in relation to the web and what to be aware of when planning to make a solution scalable.</p>
-
-<h2>Scaling outside of the tech world</h2>
-
-<p>Trying to scale isn't new. It goes back to well before technology was invented. Scaling something up or increasing something in size or number is a goal businesses have aimed for ever since the oldest profession in the world was invented. <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/4/49/EN_BESKYTTERINDE_AF_INDUSTRIEN.gif/180px-EN_BESKYTTERINDE_AF_INDUSTRIEN.gif" alt="" />A prostitute wanting to scale up her business was limited by her own time and body. She would reach a point where she couldn't take more clients. (Independent contractors surely know what I am talking about!) So a prostitute wanting to scale up would usually become a madam/Mama-san and scale the business by having girls work for her.</p>
-
-<p>Another simple example would be a restaurant. A restaurant can handle up to a certain amount of covers/clients at once, after that, customers have to wait in line. The restaurant example is interesting because you can clearly see that opening a huge restaurant with a capacity of 1,000 covers might not be a good idea. First because the cost of running such a restaurant might be much more than the income generated. But also because even though the restaurant does 1,000 covers at peak time, it doesn't mean that the restaurant will stay that busy during the entire time it's open. So now you have to deal with waiter/waitresses, busboys and other staff who won't have anything to do. As you probably have understood already, scaling a restaurant means that the scaling has to be done in a cost effective manner.  And what's even more interesting is that what we could have thought was the bottleneck (the amount of concurrent covers) can be easily scaled up but it wouldn't provide real scalability. In fact this choice would cascade into other areas of management like staffing and the building size. Often, the scaling solution for restaurants is to open new locations which can result in keeping the lines shorter, targeting new markets and reducing risks since one failing branch won't dramatically affect the others.</p>
-
-<p><img src="http://upload.wikimedia.org/wikipedia/en/thumb/4/4a/Nighthawks.jpg/400px-Nighthawks.jpg" alt="posted by Matt Aimonetti" /></p>
-
-<h2>Scaling in the traditional tech world</h2>
-
-<p>If you've ever done console development or worked on embedded devices, you know that they are restricted by some key elements. <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/PS3Versions.png/220px-PS3Versions.png" alt="posted by Matt Aimonetti" />It can be memory, CPU, hard drive space etc... You have to "cram" as many features as you can into the device, working around the fixed limitations of the hardware. In the console industry, what's interesting to note is that the hardware doesn't change often but people expect than a new game on the same platform will do things better than the previous game, even though the limitations are exactly the same. This is quite a challenging problem because you have to fight against the hardware limitations by optimizing your code to be super efficient. That's exactly the reason why console video game developers manage memory manually instead of relying on a garbage collector. This way they can squeeze every resource they can from the console.</p>
-
-<p>The great advantage of this type of development is that you can reproduce and accurately anticipate issues. The bottlenecks/limitations are well known and immutable! If you find a way around in your lab, you know that the solution will work for everyone. Console video game developers (and to some extent, iOS developers) don't have to wonder how their game will behave if the player has an old graphic card or not enough RAM.</p>
-
-<p>But ever since we started distributing the processing power, scaling technology has become more challenging.</p>
-
-<h2>Scaling on the web</h2>
-
-<p>Scaling a web based solution might actually seem quite like scaling a restaurant, except that you can't easily open multiple locations since the concept of proximity in web browsing isn't really as concrete as in real life. So the solution can't be directly transposed. Most people will only have to scale up by optimizing their code running on one server, or maybe two. That's because their service/app is not, and won't be, generating high traffic. Scaling such systems is common and one can rely on work done in the past decades for good examples of solutions.</p>
-
-<p>However some web apps/games are or will become high traffic. But because every single entrepreneur I've met believes that their solution will be high traffic, they think they need to be able to scale and therefore should be engineered like that from the beginning. (This is, by the way, the reason scalability is a buzzword and you can sell almost anything technical saying that it scales.) The problem with this approach is that people want scalability but don't understand its causality. In other words, they don't understand the relationship between cause and effect related to making a solution scalable.</p>
-
-<p>Basically we can reduce the concept of causality of scalability to something like this: you change a piece of the architecture to handle more traffic, but this part has an effect on other parts that also need to change and the pursuit of scalability almost never ends (just ask Google). <strong>Making a system scalable needs to have well a defined cause and expected effect, otherwise it's a waste</strong>. In other words, the effect of scaling engenders the need for solutions which themselves have complex effects on a lot of aspects of a system. Let's make it clearer by looking at a simple example:</p>
-
-<p><a href="http://merbist.com/2011/01/18/causality-of-scalability/simplestarchitecture/"><img src="http://merbist.com/wp-content/uploads/2011/01/simplestarchitecture-300x269.png" alt="Simple Architecture by Matt Aimonetti" /></a>We have an e-commerce website and this website uses a web application with a database to store products and transactions. Your system is made of 1 webserver handling the requests and one database storing the data. Everything goes well until Black Friday, Christmas or Mother's Day arrives and now some customers are complaining that they can't access your website or that it's too slow. This is also sometimes referred to as the digg/slashdot/reddit effect. All of a sudden you have a peak of traffic and your website can't handle it. This is actually a very simple use case, but that's also the only use case most people on the web need to worry about.</p>
-
-<p>The causality of wanting this solution to scale is simple, you want to scale so you can sell more and have happy customers. The effect is that the system needs to become more complex.</p>
-
-<p>To scale such a system, you need to find the root cause of the problem. You might have a few issues, but start by focusing on the main one. In this case, it's more than likely that your webserver (frontend) cannot handle more than x requests/second. Interestingly enough, the amount of reqs/s might not match the result of your load tests. That's probably because you didn't expect the usage pattern that you are seeing, but that's a whole different topic. At this point you need to understand why you can't go above the x reqs/s limit you're hitting. Where is the bottleneck? Is it that your application code is too slow? Is it the database has been brought to its knees? Or maybe the webserver serves as many requests as technically possible but it's still not enough based on the traffic you are getting.</p>
-
-<p>If we stop right here, we can see that the reasons why the solution doesn't scale can be multiple. But what's even more interesting is that the root cause this time depends on the usage pattern and that it is really hard to anticipate all patterns. If we wanted to make this system scale we could do it different ways.</p>
-
-<p>To give you some canned answers, if the bottleneck is that your code is too slow, you should check if the code is slow because of the DB queries made (too many, slow queries etc..). Is it slow because you are doing something complex that can't be easily improved or is it because you are relying on solutions that are known to not support concurrent traffic easily? More than likely, you will end up going for the easy caching approach. By caching some data (full responses, chunk of data, partial responses etc..) you avoid hitting your application layer and therefore can handle more traffic.</p>
-
-<p>[caption id="attachment_879" align="aligncenter" width="300" caption="Caching avoids data processing &amp; DB access "]<a href="http://merbist.com/2011/01/18/causality-of-scalability/simplestarchitecture3/"><img src="http://merbist.com/wp-content/uploads/2011/01/simplestarchitecture3-300x201.png" alt="More complex Architecture by Matt Aimonetti" /></a>[/caption]</p>
-
-<p>If your code is as fast as it can be, then a solution is to add more application servers or to async some processes. But now that means that you need to change the topology of your system, the way you deploy code and the way you route traffic. You will also increase the load on the database by opening more connections and maybe the database will now becoming the new bottleneck. You might also start seeing race conditions and you are certainly increasing the maintenance and complexity aka cost of your system (caching might end up having the same effect depending on the caching solution chosen).</p>
-
-<p>[caption id="attachment_876" align="aligncenter" width="297" caption="One way of scaling it to load balance the traffic"]<a href="http://merbist.com/2011/01/18/causality-of-scalability/simplestarchitecture2/"><img src="http://merbist.com/wp-content/uploads/2011/01/simplestarchitecture2-297x300.png" alt="load balanced approach by Matt Aimonetti" /></a>[/caption]</p>
-
-<p>Just looking at these possible causes and the various solutions (we didn't even mention DB replication, sharding, NoSQL etc..), we can clearly see that making a system scalable has some concrete effects on system complexity/maintenance which directly translate in cost increase.</p>
-
-<p>If you are an engineer, you obviously want your system to be super scalable and handle millions of requests per second. But if you are a business person, you want to be realistic and evaluate the causality of not scaling after a certain point and convert that as loss. Then you weigh the cost of not scaling with the cost of "maybe" scaling and you make a decision.</p>
-
-<p>The problem here though is that scaling is a bit like another buzzword: SEO (Search Engine Optimization). A lot of people/solutions will promise scaling capabilities without really understanding the big picture. Simple systems can easily scale up using simple solutions but only up to a certain level. After that, what you need to do to scale becomes so complex than anyone promising you the moon probably doesn't know what they are talking about. If there was a one-size-fits-all, easy solution for scaling, we would all be using it, from your brother for his blog, to Google without forgetting Amazon.</p>
-
-<p><img src="http://awsmedia.s3.amazonaws.com/logo_aws.gif" alt="AWS logo posted by Matt Aimonetti" />Speaking of Amazon, I hear a lot of people saying that Amazon AWS services is "THE WAY" (i.e: the only way) to scale your applications. I agree that it's a compelling solution for a lot of cases but it's far from being a silver bullet. Remember that the cause and effect of why you need to scale are probably different than anyone else.</p>
-
-<h2>Amazon Web Services</h2>
-
-<p>Let me give you a very concrete example of where <a href="http://aws.amazon.com/">AWS services</a> might<em> not</em> be a good idea: high traffic sites with lots of database writes and low latency.</p>
-
-<p><a href="http://zynga.com">Zynga</a>, the famous social game company behind Farmville, Mafia Wars etc., is using AWS and it seems that they might have found themselves in the same scenario as above<img src="http://www.zynga.com/img/logo.png" alt="" />. And that would be almost correct. Zynga games have huge traffic and they do a ton of DB writes. However I don't think they need low latency since their game clients are browsers and Flash clients and that their games are mainly async so they just need to be able to handle unstable latency. We'll see in a second how they manage to perform on the AWS cloud.</p>
-
-<p>The major problem with AWS when you have a high traffic site is IO: IO reliability, IO latency, IO availability. By IO, I'm referring to network connection (internal/external) and disk access. Put differently, when you design your system and you know you are going to run on AWS, you need to take into consideration that your solution should survive with zero or limited IO because you will more than likely be IO bound. This means that your traditional design won't work because your database hard drive won't be available for 30s or will be totally saturated. You also need to have a super redundant system because you are going to randomly lose machines. Point number one, moving your existing application from a dedicated hosting solution to AWS might not help you scale if you didn't architect to be resilient to bad IO. Simply put, and to only pick one example: if you were expecting your database to be able to always properly write to disk you will have problems.</p>
-
-<p>[caption id="" align="alignleft" width="184" caption="Octocat, the GitHub mascot"]<img src="http://tctechcrunch.files.wordpress.com/2010/07/github-logo.png" alt="" />[/caption]</p>
-
-<p>The solution depends on how you want to look at it and where you are at in your project. You can go the <a href="http://highscalability.com/blog/2010/2/8/how-farmville-scales-to-harvest-75-million-players-a-month.html">Zynga route and design/redesign your entire architecture to be highly redundant, not rely on disk access</a> (everything is kept in memory and flushed to disk when available) and tolerate a certain % of data loss. Or you can go with the<a href="https://github.com/blog/493-github-is-moving-to-rackspace"> GitHub approach</a><a href="https://github.com/blog/493-github-is-moving-to-rackspace"> and mix dedicated hardware for IO and "cloud" front end servers all on the same network</a>. One solution isn't better than the other, they are just different and depend on your needs. <a href="http://github.com">GitHub</a> and <a href="http://www.zynga.com/">Zynga</a> both need to scale but they have different requirements.</p>
-
-<p>When it comes to scaling, things are not black or white. To stay on the AWS topic, let's take another example: Amazon Relational Database Service (RDS). Earlier today, I was complaining on Twitter that RDS doesn't and probably won't let you use the <a href="http://yoshinorimatsunobu.blogspot.com/2010/10/using-mysql-as-nosql-story-for.html">MySQL HandlerSocket plugin</a> any time soon, even though it's been released for almost 6 months and used in prod by many. Then someone asked me if using this plugin would offset the scalability cost-saving. The quick and wrong answer  is yes. By using the plugin, you can potentially get rid of your Memcached servers, probably your Redis/MongoDB/CouchDB servers or whatever NoSQL solution you write and just keep the database servers you currently have. You might have to beef up your DB servers a bit but it would certainly be a huge cost reduction and your system would be simpler, easier to maintain and the data would be more consistent. Sounds good right? After all the biggest online social game company designed it and uses it.</p>
-
-<p>The only problem is that RDS is an AWS service and like every AWS service, it suffers from poor IO. So, if you were deciding to not use RDS and run your own MySQL servers with the HandlerSocket plugin, it wouldn't bring you much improvement <em>(1)</em>. Actually, if you are already IO bound, it would make things worse, because you are centralizing your system around the most unreliable part of your architecture. Based on that premise, RDS won't support HandlerSocket because RDS runs on the same AWS architecture and has to deal with the same IO constraints. What's the solution, you might ask? Amazon already went through these scaling problems and they offer a custom, non-relational, data storage solution working around their own issues called SimpleDB. But why would they improve RDS and fix a really hard problem when they already offer an alternative solution? Easy. SimpleDB forces you to redesign your architecture to work with their custom solution and, guess what? You are now locked-in to that vendor!</p>
-
-<p>So the answer is yes, you can offset scalability costs if you don't use AWS or any other providers with bad IO. Now you should look at the cost of moving away from AWS and see if it's worth it. How much of your code and of your system is vendor specific? Is that something you can easily change? The <a href="https://github.com/geemus/fog">fog library</a>, for instance, supports multiple cloud providers. Are you using something similar? Can you transition to that?  Can you easily deploy to another hosting company? (<a href="http://opscode.com/chef">Opscode chef</a> makes that task much easier) But if, for one reason or another, you have to stick with AWS/<other cloud provider>, make sure that the business people in charge understand the consequences and the cost related to that choice.</p>
-
-<h2>Conclusion</h2>
-
-<p>My point is not to tell you to not design a scalable solution, or not to use AWS, or that RDS sucks. My point is to show that making a system scale is hard and has some drastic effects that are not always obvious. There aren't any silver bullet solutions and you need to be really careful about the consequences (and costs) involved with trying to scale. Make sure it's worth it and you have a plan. Define measurable goals for your scalability even though it's really hard, don't try to scale to infinity and beyond, that won't work. Having to redesign later on to handle even more traffic, is a good problem to have, don't over engineer.</p>
-
-<p>Finally, be careful to understand the consequences of your decisions. What seems to be an almost trivial scaling move such as moving your app from dedicated hosting to a specific cloud provider might end up getting you in a vendor lock in situation!</p>
-
-<hr />
-
-<p><em>1: I assume that you are IO bound. If you are not and your DB data fits in memory/cache, then HS on AWS is fine but if that's the case what's your bottleneck? ;)</em></p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: blog-post | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/blog-post/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-23T12:44:09+02:00</updated>
+  <updated>2012-04-23T16:21:36+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -167,11 +167,50 @@
 
 <p>Here is a hello world webservice being implemented using Weasel Diesel and Sinatra:</p>
 
-<p>[gist]https://gist.github.com/2300131[/gist]</p>
+<p><div><script src='https://gist.github.com/2300131.js?file='></script>
+<noscript><pre><code>describe_service &quot;hello_world&quot; do |service|
+  service.formats   :json
+  service.http_verb :get
+  service.disable_auth # on by default
+
+  # INPUT
+  service.param.string  :name, :default =&gt; 'World'
+
+  # OUTPUT
+  service.response do |response|
+    response.object do |obj|
+        obj.string :message, :doc =&gt; &quot;The greeting message sent back. Defaults to 'World'&quot;
+      obj.datetime :at, :doc =&gt; &quot;The timestamp of when the message was dispatched&quot;
+      end
+  end
+
+  # DOCUMENTATION
+  service.documentation do |doc|
+    doc.overall &quot;This service provides a simple hello world implementation example.&quot;
+    doc.param :name, &quot;The name of the person to greet.&quot;
+    doc.example &quot;&lt;code&gt;curl -I 'http://localhost:9292/hello_world?name=Matt'&lt;/code&gt;&quot;
+ end
+
+  # ACTION/IMPLEMENTATION
+  service.implementation do
+    {:message =&gt; &quot;Hello #{params[:name]}&quot;, :at =&gt; Time.now}.to_json
+  end
+
+end</code></pre></noscript></div>
+</p>
 
 <p>Basis test validating the contract defined in the DSL and the actual output when the service is called:</p>
 
-<p>[gist]https://gist.github.com/2300440[/gist]</p>
+<p><div><script src='https://gist.github.com/2300440.js?file='></script>
+<noscript><pre><code>class HelloWorldTest &lt; MiniTest::Unit::TestCase
+
+  def test_response
+    TestApi.get &quot;/hello_world&quot;, :name =&gt; 'Matt'
+    assert_api_response
+  end
+
+end</code></pre></noscript></div>
+</p>
 
 <p>Generated documentation:</p>
 
@@ -565,13 +604,14 @@
 
 <h2>Example:</h2>
 
-<pre><code>@array, threads = [], []
+<p><code>ruby
+@array, threads = [], []
 4.times do
   threads &lt;&lt; Thread.new { (1..100_000).each {|n| @array &lt;&lt; n} }
 end
 threads.each{|t| t.join }
 puts @array.size
-</code></pre>
+</code></p>
 
 <p>In the above example, I'm creating an instance variable of Array type and I start 4 threads. Each of these threads adds 100,000 items to the array. We then wait for all the threads to be done and check the size of the array.</p>
 
@@ -992,47 +1032,61 @@ In Rails, you can actually use a helper method instead: expires_in 1.minute, :pu
 
 <p>In Rails, in the sessions controller or whatever code logs you in, you need to create a new cookie containing the username:</p>
 
-<pre><code>cookies[:username] = {
-         :value =&gt; session[:username],
-         :expires =&gt; 2.days.from_now,
-         :domain =&gt; ".cinematreasures.org"
-       }
+<p>``` ruby
+cookies[:username] = {</p>
+
+<pre><code>     :value =&gt; session[:username],
+     :expires =&gt; 2.days.from_now,
+     :domain =&gt; ".cinematreasures.org"
+   }
 </code></pre>
+
+<p>```</p>
 
 <p>As you can see, we don't store the data in the session cookie and the data won't be encrypted. You need to be careful that someone changing his cookie value can't access data he/should shouldn't. But that's a different discussion. Now that the cookie is set, we can read it from JavaScript when the page is loaded.</p>
 
-<pre><code>document.observe("dom:loaded", function() {
+<p>``` javascript
+document.observe("dom:loaded", function() {
   displayLoggedinUserLinks();
-});
+});</p>
 
-function readCookie(name) {
-     var nameEQ = name + "=";
-     var ca = document.cookie.split(';');
-     for(var i=0;i &lt; ca.length;i++) {
-          var c = ca[i];
-          while (c.charAt(0)==' ') c = c.substring(1,c.length);
-          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-     }
-     return null;
-}
+<p>function readCookie(name) {</p>
 
-function displayLoggedinUserLinks() {
+<pre><code> var nameEQ = name + "=";
+ var ca = document.cookie.split(';');
+ for(var i=0;i &lt; ca.length;i++) {
+      var c = ca[i];
+      while (c.charAt(0)==' ') c = c.substring(1,c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+ }
+ return null;
+</code></pre>
+
+<p>}</p>
+
+<p>function displayLoggedinUserLinks() {
   var username            = readCookie('username');
   var loginLink           = $('login');
   var logout              = $('logout');
-  if (username == null){
-    loginLink.show();
-    logout.hide();
-  }else{
-    // user is logged in and we have his/her username
-    loginLink.hide();
-    if(userGreetings){ userGreetings.update("&lt;span id="username"&gt;username&lt;/span&gt;"); }
-    logout.show();
-    showAvatar(username);
-  };
+  if (username == null){</p>
+
+<pre><code>loginLink.show();
+logout.hide();
+</code></pre>
+
+<p>  }else{</p>
+
+<pre><code>// user is logged in and we have his/her username
+loginLink.hide();
+if(userGreetings){ userGreetings.update("&lt;span id="username"&gt;username&lt;/span&gt;"); }
+logout.show();
+showAvatar(username);
+</code></pre>
+
+<p>  };
   return true;
 }
-</code></pre>
+```</p>
 
 <p>The code above doesn't do much, once the DOM is loaded, the displayLoggedinUserLinks() function gets trigger. This function reads the cookie via the readCookie() function and if a username is found, the login link is hidden, the user name is displayed, as well as the logout link and the avatar. (You can also use a jQuery cookie plugin to handle the cookie, but this is an old example using Prototype, replace the code accordingly)
 When the user logs out, we just need to delete the username cookie and the cached page will be rendered properly. In Rails, you would do delete the cookie like that: cookies.delete('username').
@@ -1044,14 +1098,18 @@ Quite often you might even want to make an Ajax call to get some information suc
 
 <p>The problem is that the message is part of the rendered page and now for 60 seconds, all people hitting the home page will get the same message. This is why you would want to write a helper that would put this message in a custom cookie that you'd pull JS and then delete once displayed. You could use a helper like that to set the cookie:</p>
 
-<pre><code>def flash_notice_cookie(msg, expiration=nil)
-  cookies[:flash_notice] = {
-    :value =&gt; msg,
-    :expires =&gt; expiration || 1.minutes.from_now,
-    :domain =&gt; ".cinematreasures.com"
-   }
-end
+<p>``` ruby
+def flash_notice_cookie(msg, expiration=nil)
+  cookies[:flash_notice] = {</p>
+
+<pre><code>:value =&gt; msg,
+:expires =&gt; expiration || 1.minutes.from_now,
+:domain =&gt; ".cinematreasures.com"
 </code></pre>
+
+<p>   }
+end
+```</p>
 
 <p>And then add a function called when the DOM is ready which loads the message and injects it in the DOM. Once the cookie read, delete it so the message isn't displayed again.</p>
 

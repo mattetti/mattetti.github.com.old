@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Concurrency | Matt Aimonetti]]></title>
+  <link href="http://matt.aimonetti.net/articles/categories/concurrency/atom.xml" rel="self"/>
+  <link href="http://matt.aimonetti.net/"/>
+  <updated>2012-04-23T16:21:36+02:00</updated>
+  <id>http://matt.aimonetti.net/</id>
+  <author>
+    <name><![CDATA[Matt Aimonetti]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Data safety and GIL removal]]></title>
+    <link href="http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal/"/>
+    <updated>2011-10-18T15:19:17+02:00</updated>
+    <id>http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal</id>
+    <content type="html"><![CDATA[<p>After my recent <a href="http://rubyconf11.merbist.com">RubyConf talk</a> and <a href="http://merbist.com/2011/10/03/about-concurrency-and-the-gil/">follow up post addressing the Ruby &amp; Python's Global Interpreter Lock</a> (aka GVL/Global VM Lock). a lot of people asked me to explain what I meant by "data safety". While my point isn't to defend one approach or the other, I spent a lot of time explaining why C Ruby and C Python use a GIL and where it matters and where it matters less. As a reminder and as mentioned by Matz himself, the main reason why C Ruby still has a GIL is data safety. But if this point isn't clear to you, you might be missing the main argument supporting the use of a GIL.</p>
+
+<p>Showing obvious concrete examples of data corruption due to unsafe threaded code isn't actually as easy at it sounds. First of all, even with a GIL, developers can write unsafe threaded code. So we need to focus only on the safety problems raised by removing the GIL. To demonstrate what I mean, I will try to create some race conditions and show you the unexpected results you might get. Again, before you go crazy on the comments, remember that threaded code is indeterministic and the code below might potentially work on your machine and that's exactly why it is hard to demonstrate. Race conditions depend on many things, but in this case I will focus on race conditions affecting basic data structures since it might be the most surprising.</p>
+
+<h2>Example:</h2>
+
+<p><code>ruby
+@array, threads = [], []
+4.times do
+  threads &lt;&lt; Thread.new { (1..100_000).each {|n| @array &lt;&lt; n} }
+end
+threads.each{|t| t.join }
+puts @array.size
+</code></p>
+
+<p>In the above example, I'm creating an instance variable of Array type and I start 4 threads. Each of these threads adds 100,000 items to the array. We then wait for all the threads to be done and check the size of the array.</p>
+
+<p>If you run this code in C Ruby the end result will be as expected:</p>
+
+<pre><code>400000
+</code></pre>
+
+<p>Now if you switch to JRuby you might be surprised by the output. If you are lucky you will see the following:</p>
+
+<pre><code>ConcurrencyError: Detected invalid array contents due to unsynchronized modifications with concurrent users
+        &lt;&lt; at org/jruby/RubyArray.java:1147
+  __file__ at demo.rb:3
+      each at org/jruby/RubyRange.java:407
+  __file__ at demo.rb:3
+      call at org/jruby/RubyProc.java:274
+      call at org/jruby/RubyProc.java:233
+</code></pre>
+
+<p>This is actually a good thing. JRuby detects that you are unsafely modifying an instance variable across threads and that data corruption will occur. However, the exception doesn't always get raised and you will potentially see results such as:</p>
+
+<pre><code>335467
+342397
+341080
+</code></pre>
+
+<p>This is a sign that the data was corrupted but that JRuby didn't catch the unsynchronized modification. On the other hand MacRuby and Rubinius 2 (dev) won't raise any exceptions and will just corrupt the data, outputting something like:</p>
+
+<pre><code>294278
+285755
+280704
+279865
+</code></pre>
+
+<p>In other words, if not manually synchronized, shared data can easily be corrupted. You might have two threads modifying the value of the same variable and one of the two threads will step on top of the other leaving you with a race condition. You only need 2 threads accessing the same instance variable at the same time to get a race condition. My example uses more threads and more mutations to make the problem more obvious. Note that TDD wouldn't catch such an issue and even extensive testing will provide very little guarantee that your code is thread safe.</p>
+
+<p> </p>
+
+<h2>So what? Thread safety isn't a new problem.</h2>
+
+<p>That's absolutely correct, ask any decent Java developer out there, he/she will tell how locks are used to "easily" synchronize objects to make your code thread safe. They might also mention the deadlocks and other issues related to that, but that's a different story. One might also argue that when you write web apps, there is very little shared data and the chances of corrupting data across concurrent requests is very small since most of the data is kept in a shared data store outside of the process.</p>
+
+<p>All these arguments are absolutely valid, the challenge is that you have a large community and a large amount of code out there that expects a certain behavior. And removing the GIL does change this behavior. It might not be a big deal for you because you know how to deal with thread safety, but it might be a big deal for others and C Ruby is by far the most used Ruby implementation. It's basically like saying that automatic cars shouldn't be made and sold, and everybody has to switch to stick shifts. They have better gas mileage, I personally enjoy driving then and they are cheaper to build. Removing the GIL is a bit like that. There is a cost associated with this decision and while this cost isn't insane, the people in charge prefer to not pay it.</p>
+
+<p> </p>
+
+<h2>Screw that, I'll switch to Node.js</h2>
+
+<p>I heard a lot of people telling me they were looking into using Node.js because it has a better design and no GIL. While I like Node.js and if I were to implement a chat room or an app keeping connections for a long time, I would certainly compare it closely to EventMachine, I also think that this argument related to the GIL is absurd. First, you have other Ruby implementations which don't have a GIL and are really stable (i.e: JRuby) but then Node basically works the same as Ruby with a GIL. Yes, Node is evented and single threaded but when you think about it, it behaves the same as Ruby 1.9 with its GIL. Many requests come in and they are handled one after the other and because IO requests are non-blocking, multiple requests can be processed concurrently but not in parallel. Well folks, that's exactly how C Ruby works too, and unlike popular believe, most if not all the popular libraries making IO requests are non blocking (when using 1.9). So, next time you try to justify you wanting to toy with Node, please don't use the GIL argument.</p>
+
+<p> </p>
+
+<h2>What should I do?</h2>
+
+<p>As always, evaluate your needs and see what makes sense for your project. Start by making sure you are using Ruby 1.9 and your code makes good use of threading. Then look at your app and how it behaves, is it CPU-bound or IO-bound. Most web apps out there are IO-bound (waiting for the DB, redis or API calls), and when doing an IO call, Ruby's GIL is released allowing another thread to do its work. In that case, not having a GIL in your Ruby implementation won't help you. However, if your app is CPU-bound, then switching to JRuby or Rubinius might be beneficial. However, don't assume anything until you proved it and remember that making such a change will more than likely require some architectural redesign, especially if using JRuby.  But, hey, it might totally be worth it as many proved it in the past.</p>
+
+<p> </p>
+
+<p>I hope I was able to clarify things a bit further. If you wish to dig further, I would highly recommend you read the many discussions the Python community had in the last few years.</p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[About concurrency and the GIL]]></title>
+    <link href="http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil/"/>
+    <updated>2011-10-03T21:23:54+02:00</updated>
+    <id>http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil</id>
+    <content type="html"><![CDATA[<p>During RubyConf 2011, concurrency was a really hot topic. This is not a new issue, and the JRuby team has been talking about true concurrency for quite a while . The Global Interpreter Lock has also been in a subject a<a href="http://wiki.python.org/moin/GlobalInterpreterLock"> lot of discussions in the Python community</a> and it's not surprising that the Ruby community experiences the same debates since the evolution of their implementations are somewhat similar. (There might also be some tension between <a href="http://engineyard.com">EngineYard</a> hiring the JRuby and Rubinius teams and <a href="http://heroku.com">Heroku</a> which <a href="http://blog.heroku.com/archives/2011/7/12/matz_joins_heroku/">recently hired Matz</a> (Ruby's creator) and <a href="https://github.com/nobu">Nobu</a>, the #1 C Ruby contributor)</p>
+
+<p>The GIL was probably even more of a hot topic now that <a href="http://rubini.us/">Rubinius</a> is about the join <a href="http://jruby.org">JRuby</a> and <a href="http://macruby.org">MacRuby</a> in the realm of GIL-less Ruby implementations.</p>
+
+<p>During my RubyConf talk (<a href="http://rubyconf11.merbist.com/">slides here</a>), I tried to explain how C Ruby works and why some decisions like having a GIL were made and why the Ruby core team isn't planning on removing this GIL anytime soon. The GIL is something a lot of Rubyists love to hate, but a lot of people don't seem to question why it's here and why Matz doesn't want to remove it. Defending the C Ruby decision isn't quite easy for me since I spend my free time working on an alternative Ruby implementation which doesn't use a GIL (MacRuby). However, I think it's important that people understand why the MRI team (C Ruby team) and some Pythonistas feels so strongly about the GIL.</p>
+
+<p><strong>What is the GIL?</strong></p>
+
+<p>Here is a quote from the <a href="http://wiki.python.org/moin/GlobalInterpreterLock">Python wiki</a>:</p>
+
+<blockquote><p>In CPython, the <strong>global interpreter lock</strong>, or <strong>GIL</strong>, is a mutex that prevents multiple native threads from executing Python bytecodes at once. This lock is necessary mainly because CPython's memory management is not thread-safe. (However, since the GIL exists, other features have grown to depend on the guarantees that it enforces.) [...] The GIL is controversial because it prevents multithreaded CPython programs from taking full advantage of multiprocessor systems in certain situations. Note that potentially blocking or long-running operations, such as I/O, image processing, and <a href="http://wiki.python.org/moin/NumPy">NumPy</a> number crunching, happen <em>outside</em> the GIL. Therefore it is only in multithreaded programs that spend a lot of time inside the GIL, interpreting CPython bytecode, that the GIL becomes a bottleneck.</p></blockquote>
+
+<p>The same basically applies to C Ruby. To illustrate the quote above, here is a diagram representing two threads being executed by C Ruby:</p>
+
+<p><a href="http://rubyconf11.merbist.com/#44"><img src="http://rubyconf11.merbist.com/images/thread_scheduling.023.jpg" alt="Fair thread scheduling in Ruby by Matt Aimonetti" /></a></p>
+
+<p>Such a scheduling isn't a problem at all when you only have 1 cpu, since a cpu can only execute a piece of code at a time and context switching happens all the time to allow the machine to run multiple processes/threads in parallel. The problem is when you have more than 1 CPU because in that case, if you were to only run 1 Ruby process, then you would most of the time only use 1 cpu at a time. If you are running on a 8 cpu box, that's not cool at all! A lot of people stop at this explanation and imagine that their server can only handle one request at a time and they they rush to sign Greenpeace petitions asking Matz to make Ruby greener by optimizing Ruby and saving CPU cycles. Well, the reality is slightly different, I'll get back to that in a minute. Before I explain "ways to achieve true concurrency with CRuby, let me explain why C Ruby uses a GIL and why each implementation has to make an important choice and in this case both CPython and C Ruby chose to keep their GIL.</p>
+
+<p> </p>
+
+<h3>Why a GIL in the first place?</h3>
+
+<ul>
+<li><p>It makes developer's lives easier (it's harder to corrupt data)</p></li>
+<li><p>It avoids race conditions within C extensions</p></li>
+<li><p>It makes C extensions development easier (no write barriers..)</p></li>
+<li><p>Most of the C libraries which are wrapped are not thread safe</p></li>
+<li><p>Parts of Ruby's implementation aren't threadsafe (Hash for instance)</p></li>
+</ul>
+
+
+<p>As you can see the arguments can be organized in two main categories: data safety and C extensions/implementation. An implementation which doesn't rely too much on C extensions (because they run a bit slow, or because code written in a different language is preferred) is only faced with one argument: data safety.</p>
+
+<p> </p>
+
+<h3></h3>
+
+<h3>Should C Ruby remove its GIL?</h3>
+
+<ul>
+<li><p>No: it potentially makes Ruby code unsafe(r)</p></li>
+<li><p>No: it would break existing C extensions</p></li>
+<li><p>No: it would make writing C extensions harder</p></li>
+<li><p>No: it's a lot of work to change make C Ruby threadsafe</p></li>
+<li><p>No: Ruby is fast enough in most cases</p></li>
+<li><p>No: Memory optimization and GC is more important to tackle first</p></li>
+<li><p>No: C Ruby code would run slower</p></li>
+<li><p>Yes: we really need better/real concurrency</p></li>
+<li><p>Yes: <a href="https://plus.google.com/107994348420168435683/posts/993U42yVbfk">Rubber boots analogy (Gustavo Niemeyer)</a></p></li>
+</ul>
+
+
+<p>Don't count the amount of pros/cons to jump to the conclusion that removing the GIL is a bad idea. A lot of the arguments for removing the GIL are related. At the end of the day it boils down to data safety. During the Q&amp;A section of my RubyConf talk, Matz came up on stage and said data safety was the main reason why C Ruby still has a GIL. Again, this is a topic which was discussed at length in the Python community and I'd encourage you to read arguments from the <a href="http://www.jython.org/">Jython</a> (the equivalent of JRuby for Python) developers, <a href="http://codespeak.net/pypy/dist/pypy/doc/faq.html#does-pypy-have-a-gil-why">the PyPy</a> (the equivalent of Rubinius in the Python community) and CPython developers. (a good collection of arguments are actually available in the comments related to the <a href="https://plus.google.com/107994348420168435683/posts/993U42yVbfk">rubber boots post mentioned earlier</a>)</p>
+
+<p> </p>
+
+<h3>How can true concurrency be achieved using CRuby?</h3>
+
+<ul>
+<li><p>Run multiple processes (which you probably do if you use Thin, Unicorn or Passenger)</p></li>
+<li><p>Use event-driven programming with a process per CPU</p></li>
+<li><p>MultiVMs in a process. Koichi presented his plan to run multiple VMs within a process.  Each VM would have its own GIL and inter VM communication would be faster than inter process. This approach would solve most of the concurrency issues but at the cost of memory.</p></li>
+</ul>
+
+
+<p>Note:  forking a process only saves memory when using REE since it implements a GC patch that makes the forking process Copy on Write friendly. The Ruby core team worked on a patch for Ruby 1.9 to achieve the same result. <a href="http://twitter.com/#!/nari_en">Nari</a> &amp; <a href="http://twitter.com/#!/yukihiro_matz">Matz</a> are currently working on improving the implementation to make sure overall performance isn't affected.</p>
+
+<p>Finally, when developing web applications, each thread spend quite a lot of time in IOs which, as mentioned above won't block the thread scheduler. So if you receive two quasi-concurrent requests you might not even be affected by the GIL as illustrated in <a href="http://yehudakatz.com/2010/08/14/threads-in-ruby-enough-already/">this diagram from Yehuda Katz</a>:</p>
+
+<p><img src="http://yehudakatz.com/wp-content/uploads/2010/08/Untitled.002.png" alt="" /></p>
+
+<p>This is a simplified diagram but you can see that a good chunk of the request life cycle in a Ruby app doesn't require the Ruby thread to be active (CPU Idle blocks) and therefore these 2 requests would be processed almost concurrently.</p>
+
+<p>To boil it down to something simplified, when it comes to the GIL, an implementor has to chose between data safety and memory usage. But it is important to note that context switching between threads is faster than context switching between processes and data safety can and is often achieved in environments without a GIL, but it requires more knowledge and work on the developer side.</p>
+
+<p> </p>
+
+<h3>Conclusion</h3>
+
+<p>The decision to keep or remove the GIL is a bit less simple that it is often described. I respect Matz' decision to keep the GIL even though, I would personally prefer to push the data safety responsibility to the developers. However, I do know that many Ruby developers would end up shooting themselves in the foot and I understand that Matz prefers to avoid that and work on other ways to achieve true concurrency without removing the GIL. What is great with our ecosystem is that we have some diversity, and if you think that a GIL less model is what you need, we have some great alternative implementations that will let you make this choice. I hope that this article will help some Ruby developers understand and appreciate C Ruby's decision and what this decision means to them on a daily basis.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby concurrency explained]]></title>
+    <link href="http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained/"/>
+    <updated>2011-02-22T22:34:30+01:00</updated>
+    <id>http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained</id>
+    <content type="html"><![CDATA[<p>Concurrency is certainly <a href="http://en.wikipedia.org/wiki/Petri_Net">not a new problem</a> but it's getting more and more attention as machines start having more than 1 core, that web traffic increases drastically and that some new technologies show up saying that they are better because they handle concurrency better.
+If that helps, think of concurrency as multitasking. When people say that they want concurrency, they say that they want their code to do multiple different things at the same time. When you are on your computer, you don't expect to have to choose between browsing the web and listening to some music. You more than likely want to run both concurrently. It's the same thing with your code, if you are running a webserver, you probably don't want it to only process one request at a time.
+The aim of this article is to explain as simply as possible the concept of concurrency in Ruby, the reason why it's a complicated topic and finally the different solutions to achieve concurrency.</p>
+
+<p>First off, if you are not really familiar with concurrency, take a minute to <a href="http://en.wikipedia.org/wiki/Concurrency_%28computer_science%29">read the wikipedia article on the topic</a> which is a great recap on the subject. But now, you should have noticed that my above example was more about parallel programming than concurrency, but we'll come back to that in a minute.</p>
+
+<blockquote><p><strong>The real question at the heart of the quest for concurrency is: "how to increase code throughput".</strong></p></blockquote>
+
+<p>We want our code to perform better, and we want it to do more in less time. Let's take two simple and concrete examples to illustrate concurrency. First, let's pretend you are writing a twitter client, you probably want to let the user scroll his/her tweets while the latest updates are  being fetched. In other words, you don't want to block the main loop and interrupt the user interaction while your code is waiting for a response from the Twitter API. To do that, a common solution is to use multiple <strong>threads</strong>. Threads are basically processes that run in the same memory context. We would be using one thread for the main event loop and another thread to process the remote API request. Both threads share the same memory context so once the Twitter API thread is done fetching the data it can update the display. Thankfully, this is usually transparently handled by asynchronous APIs (provided by the OS or the programming language std lib) which avoid blocking the main thread.</p>
+
+<p>The second example is a webserver. Let's say you want to run a Rails application. Because you are awesome, you expect to see a lot of traffic. Probably more than 1 QPS (query/request per second). You benchmarked your application and you know that the average response time is approximately 100ms. Your Rails app can therefore handle 10QPS using a single process (you can do 10 queries at 100ms in a second).</p>
+
+<p>But what happens if your application gets more than 10 requests per second? Well, it's simple, the requests will be backed up and will take longer until some start timing out. This is why you want to improve your concurrency. There are different ways to do that, a lot of people feel really strong about these different solutions but they often forget to explain why they dislike one solution or prefer one over the other. You might have heard people conclusions which are often one of these: <a href="http://canrailsscale.com/">Rails can't scale</a>, you only get concurrency with <a href="http://jruby.org/">JRuby</a>, <a href="http://adam.heroku.com/past/2009/8/13/threads_suck/">threads suck</a>, the only way to concurrency is via threads, we should switch to <a href="http://www.erlang.org/">Erlang</a>/<a href="http://nodejs.org/">Node.js</a>/<a href="http://www.scala-lang.org/">Scala</a>, use<a href="http://www.rubyinside.com/fibers-eventmachine-rack-performance-gains-3395.html"> fibers</a> and you will be fine, add more machines, <a href="http://tomayko.com/writings/unicorn-is-unix">forking > threading</a>.  Depending on who said what and how often you heard it on twitter, conferences, blog posts, you might start believing what others are saying. But do you really understand why people are saying that and are you sure they are right?</p>
+
+<p>The truth is that this is a complicated matter. The good news is that it's not <em>THAT</em> complicated!</p>
+
+<p>The thing to keep in mind is that the concurrency models are often defined by the programming language you use. In the case of Java, <a href="http://download.oracle.com/javase/tutorial/essential/concurrency/index.html">threading is the usual solution</a>, if you want your Java app to be more concurrent, just run every single request in its own thread and you will be fine (kinda). In PHP, you simply don't have threads, instead you will start a new process per request. Both have pros and cons, the advantage of the Java threaded approach is that the memory is shared between the threads so you are saving in memory (and startup time), each thread can easily talk to each other via the shared memory. The advantage of PHP is that you don't have to worry about locks, deadlocks, threadsafe code and all that mess hidden behind threads. Described like that it looks pretty simple, but you might wonder why PHP doesn't have threads and why Java developers don't prefer starting multiple processes. The answer is probably related to the language design decisions. PHP is a language designed for the web and for short lived processes. PHP code should be fast to load and not use too much memory. Java code is slower to boot and to warm up, it usually uses quite a lot of memory. Finally, Java is a general purpose programming language not designed primarily for the internet. Others programming languages like <a href="http://www.erlang.org/">Erlang</a> and <a href="http://www.scala-lang.org/">Scala</a> use a third approach: <a href="http://en.wikipedia.org/wiki/Actor_model">the actor model</a>. The actor model is somewhat a bit of a mix of both solutions, the difference is that actors are a like threads which don't share the same memory context. Communication between actors is done via exchanged messages ensuring that each actor handles its own state and therefore avoiding corrupt data (two threads can modify the same data at the same time, but an actor can't receive two messages at the exact same time). We'll talk about that design pattern later on, so don't worry if you are confused.</p>
+
+<p>What about Ruby? Should Ruby developers use threads, multiple processes, actors, something else? The answer is: <strong>yes</strong>!</p>
+
+<h2>Threads</h2>
+
+<p>Since version 1.9, Ruby has native threads (before that <a href="http://en.wikipedia.org/wiki/Green_threads">green threads</a> were used). So in theory, if we would like to, we should be able to use threads everywhere like most Java developers do. Well, that's almost true, the problem is that Ruby, like Python uses a <a href="http://en.wikipedia.org/wiki/Global_Interpreter_Lock">Global Interpreter Lock</a> (aka GIL). This GIL is a locking mechanism that is meant to protect your data integrity. The GIL only allows data to be modified by one thread at time and therefore doesn't let threads corrupt data but also it doesn't allow them to truly run concurrently. That is why some people say that Ruby and Python are not capable of (true) concurrency.</p>
+
+<p><img src="https://img.skitch.com/20110223-kk58iq5yjdpmyswf7nuya4c4kp.jpg" alt="Global Interpreter Lock by Matt Aimonetti" /></p>
+
+<p>However these people often don't mention that the GIL makes single threaded programs faster, that multi-threaded programs are much easier to develop since the data structures are safe and finally that a lot of C extensions are not thread safe and without the GIL, these C extensions don't behave properly. These arguments don't convince everyone and that's why you will hear some people say you should look at another Ruby implementation without a GIL, such as <a href="http://jruby.org/">JRuby</a>, <a href="http://rubini.us/">Rubinius</a> (hydra branch) or <a href="http://macruby.org">MacRuby</a> (Rubinius &amp; MacRuby also offer other concurrency approaches). If you are using an implementation without a GIL, then using threads in Ruby has exactly the same pros/cons than doing so in Java. However, it means that now you have to deal with the nightmare of threads: making sure your data is safe, doesn't deadlock, check that your code, your libs, plugins and gems are thread safe. Also, running too many threads might affect the performance because your OS doesn't have enough resources to allocate and it ends up spending its time context switching. It's up to you to see if it's worth it for your project.</p>
+
+<h2>Multiple processes &amp; forking</h2>
+
+<p>That's the most commonly used solution to gain concurrency when using Ruby and Python. Because the default language implementation isn't capable of true concurrency or because you want to avoid the challenges of thread programming, you might want to just start more processes. That's really easy as long as you don't want to share states between running processes. If you wanted to do so, you would need to use <a href="http://segment7.net/projects/ruby/drb/introduction.html">DRb</a>, a message bus like <a href="http://www.rabbitmq.com/">RabbitMQ</a>, or a shared data store like memcached or a DB. The caveat is that you now need to use a LOT more memory. If want to run 5 Rails processes and your app uses 100Mb you will now need 500Mb, ouch that's a lot of memory! That is exactly what happens when you use a Rails webserver like Mongrel. Now some other servers like <a href="http://www.modrails.com/">Passenger</a> and <a href="http://unicorn.bogomips.org/">Unicorn</a> found a workaround, they rely on <a href="http://en.wikipedia.org/wiki/Fork_%28operating_system%29">unix forking</a>. The advantage of forking in an unix environment implementing the copy-on-write semantics is that we create a new copy of the main process but they both "share" the same physical memory. However, each process can modify its own memory without affecting the other processes. So now, Passenger can load your 100Mb Rails app in a process, then fork this process 5 times and the total footprint will be just a bit more than 100Mb and you can now handle 5X more concurrent requests. Note that if you are allocating memory in your request processing code (read controller/view) your overall memory will grow but you can still run many more processes before running out of memory. This approach is appealing because really easy and pretty safe. If a forked process acts up or leaks memory, just destroy it and create a new fork from the master process. Note that this approach is also used in <a href="https://github.com/defunkt/resque">Resque</a>, the async job processing solution by <a href="http://github.com">GitHub</a>.</p>
+
+<p>This solution works well if you want to duplicate a full process like a webserver, however it gets less interesting when you just want to execute some code "in the background". Resque took this approach because by nature async jobs can yield weird results, leak memory or hang. Dealing with forks allows for an external control of the processes and the cost of the fork isn't a big deal since we are already in an async processing approach.</p>
+
+<p><img src="http://s3.amazonaws.com/cogit8-org/img/hardcore-forking-action.png" alt="" /></p>
+
+<h2>Actors/Fibers</h2>
+
+<p>Earlier we talked a bit about the <a href="http://en.wikipedia.org/wiki/Actor_model">actor model</a>. Since Ruby 1.9, developers now have access to a new type of "lightweight" threads called <a href="http://www.ruby-doc.org/core-1.9/classes/Fiber.html">Fibers</a>. Fibers are not actors and Ruby doesn't have a native Actor model implementation but some people wrote <a href="http://doc.revactor.org/files/README.html">some actor libs</a> on top of fibers. A fiber is like a simplified thread which isn't scheduled by the VM but by the programmer. Fibers are like blocks which can be paused and resumed from the outside of from within themselves. Fibers are faster and use less memory than threads as demonstrated in <a href="http://oldmoe.blogspot.com/2008/08/ruby-fibers-vs-ruby-threads.html">this blog post</a>. However, because of the GIL, you still cannot truly run more than one concurrent fiber by thread and if you want to use multiple CPU cores, you will need to run fibers within more than one thread. So how do fibers help with concurrency? The answer is that they are part of a bigger solution. Fiber allow developers to manually control the scheduling of "concurrent" code but also to have the code within the fiber to auto schedule itself. That's pretty big because now you can wrap an incoming web request in its own fiber and tell it to send a response back when it's done doing its things. In the meantime, you can move on the to next incoming request. Whenever a request within a fiber is done, it will automatically resume itself and be returned. Sounds great right? Well, the only problem is that if you are doing any type of blocking IO in a fiber, the entire thread is blocked and the other fibers aren't running. Blocking operations are operations like database/memcached queries, http requests... basically things you are probably triggering from your controllers. The good news is that the "only" problem to fix now is to avoid blocking IOs. Let's see how to do that.</p>
+
+<p><img src="https://img.skitch.com/20110223-8wkfs2g12p15ku18rm7aq9negf.jpg" alt="fiber" /></p>
+
+<h2>Non blocking IOs/Reactor pattern.</h2>
+
+<p>The reactor pattern is quite simple to understand really. The heavy work of making blocking IO calls is delegated to an external service (reactor) which can receive concurrent requests. The service handler (reactor) is given callback methods to trigger asynchronously based on the type of response received. Let me take a limited analogy to hopefully explain the design better. It's a bit like if you were asking someone a hard question, the person will take a while to reply but his/her reply will make you decide if you raise a flag or not. You have two options, or you choose to wait for the response and decide to raise the flag based on the response, or your flag logic is already defined and you tell the person what to do based on their answer and move on without having to worry about waiting for the answer. The second approach is exactly what the reactor pattern is. It's obviously slightly more complicated but the key concept is that it allows your code to define methods/blocks to be called based on the response which will come later on.</p>
+
+<p><img src="https://img.skitch.com/20110223-xkit6utnty1sdt84n15w7dgtnh.jpg" alt="Reactor from Matt Aimonetti's blog" /></p>
+
+<p>In the case of a single threaded webserver that's quite important. When a request comes in and your code makes a DB query, you are blocking any other requests from being processed. To avoid that, we could wrap our request in a fiber, trigger an async DB call and pause the fiber so another request can get processed as we are waiting for the DB. Once the DB query comes back, it wakes up the fiber it was trigger from, which then sends the response back to the client. Technically, the server can still only send one response at a time, but now fibers can run in parallel and don't block the main tread by doing blocking IOs (since it's done by the reactor).</p>
+
+<p>This is the approach used by <a href="http://twistedmatrix.com/trac/">Twisted</a>, <a href="http://eventmachine.rubyforge.org/EventMachine/Deferrable.html">EventMachine</a> and <a href="http://nodejs.org/">Node.js</a>. Ruby developers can use EventMachine or an EventMachine based webserver like <a href="http://code.macournoyer.com/thin/">Thin</a> as well as <a href="https://github.com/igrigorik/em-synchrony">EM clients/drivers</a> to make non blocking async calls. Mix that with some Fiber love and you get Ruby concurrency. Be careful though, using Thin, non blocking drivers and Rails in threadsafe mode doesn't mean you are doing concurrent requests. Thin/EM only use one thread and you need to let it know that it's ok to handle the next request as we are waiting. This is done by <a href="http://eventmachine.rubyforge.org/EventMachine/Deferrable.html">deferring the response</a> and let the reactor know about it.</p>
+
+<p>The obvious problem with this approach is that it forces you to change the way you write code. You now need to set a bunch of callbacks, understand the Fiber syntax, and use deferrable responses, I have to admit that this is kind of a pain. If you look at some Node.js code, you will see that it's not always an <a href="http://howtonode.org/control-flow-part-ii/file-write.js">elegant approach</a>. The good news tho, is that this process can be wrapped and your code can be written as it if was processed synchronously while being handled asynchronously under the covers. This is a bit more complex to explain without showing code, so this will be the topic of a future post. But I do believe that things will get much easier soon enough.</p>
+
+<h2>Conclusion</h2>
+
+<p>High concurrency with Ruby is doable and done by many. However, it could made easier. Ruby 1.9 gave us fibers which allow for a more granular control over the concurrency scheduling, combined with non-blocking IO, high concurrency can be achieved. There is also the easy solution of forking a running process to multiply the processing power. However the real question behind this heated debate is what is the future of the Global Interpreter Lock in Ruby, should we remove it to improve concurrency at the cost of dealing with some new major threading issues, unsafe C extensions, etc..? Alternative Ruby implementers seem to believe so, but at the same time Rails still ships with a default mutex lock only allowing requests to be processed one at a time, the reason given being that a lot of people using Rails don't write thread safe code and a lot of plugins are not threadsafe. Is the future of concurrency something more like <a href="http://libdispatch.macosforge.org/">libdispatch</a>/<a href="http://www.macruby.org/documentation/gcd.html">GCD</a> where the threads are handled by the kernel and the developer only deals with a simpler/safer API?</p>
+
+<p>Further reading:</p>
+
+<ul>
+<li><p><a href="http://www.igvita.com/2008/11/13/concurrency-is-a-myth-in-ruby/">Concurrency is a myth in Ruby</a></p></li>
+<li><p><a href="http://oldmoe.blogspot.com/2008/08/ruby-fibers-vs-ruby-threads.html">Ruby fibers vs Ruby threads</a></p></li>
+<li><p><a href="http://www.igvita.com/2010/08/18/multi-core-threads-message-passing/">Multi-core, threads, passing messages</a></p></li>
+<li><p><a href="http://adam.heroku.com/past/2009/8/13/threads_suck/">Threads suck</a></p></li>
+<li><p><a href="http://www.igvita.com/2010/04/15/non-blocking-activerecord-rails/">Non blocking Active Record and Rails</a></p></li>
+<li><p><a href="http://www.mikeperham.com/2010/01/27/scalable-ruby-processing-with-eventmachine/">Scalable Ruby processing with EventMachine</a></p></li>
+<li><p><a href="http://on-ruby.blogspot.com/2008/01/ruby-concurrency-with-actors.html">Ruby concurrency with actors</a></p></li>
+<li><p><a href="http://www.engineyard.com/blog/2010/concurrency-real-and-imagined-in-mri-threads/">Concurrency in MRI; threads</a></p></li>
+<li><p><a href="http://www.infoq.com/news/2007/08/ruby-1-9-fibers">Ruby 1.9 adds fibers for lightweight concurrency</a></p></li>
+<li><p><a href="http://yehudakatz.com/2010/08/14/threads-in-ruby-enough-already/">Threads in Ruby, enough already</a></p></li>
+<li><p><a href="http://www.igvita.com/2010/03/22/untangling-evented-code-with-ruby-fibers">Untangling Evented Code with Ruby Fibers</a></p></li>
+<li><p><a href="http://www.slideshare.net/ehuard/concurrency-5615029">Elise Huard's RubyConf Concurrency talk slides</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -764,7 +764,7 @@
     </url>
     <url>
         <loc>http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained/</loc>
-        <lastmod>2012-04-20T19:13:59+02:00</lastmod>
+        <lastmod>2012-04-23T15:48:11+02:00</lastmod>
     </url>
     <url>
         <loc>http://matt.aimonetti.net/posts/2011/03/07/hey-apple-please-be-nice-and-share/</loc>
@@ -786,7 +786,7 @@
         <loc>
             http://matt.aimonetti.net/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching/
         </loc>
-        <lastmod>2012-04-20T19:13:59+02:00</lastmod>
+        <lastmod>2012-04-23T16:18:12+02:00</lastmod>
     </url>
     <url>
         <loc>http://matt.aimonetti.net/posts/2011/08/30/deploying-a-rails-3-1-app-gotchas/</loc>
@@ -810,7 +810,7 @@
     </url>
     <url>
         <loc>http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil/</loc>
-        <lastmod>2012-04-20T19:13:59+02:00</lastmod>
+        <lastmod>2012-04-23T15:48:57+02:00</lastmod>
     </url>
     <url>
         <loc>http://matt.aimonetti.net/posts/2011/10/11/about-management/</loc>
@@ -818,7 +818,7 @@
     </url>
     <url>
         <loc>http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal/</loc>
-        <lastmod>2012-04-20T19:13:59+02:00</lastmod>
+        <lastmod>2012-04-23T16:17:44+02:00</lastmod>
     </url>
     <url>
         <loc>http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011/</loc>
@@ -842,21 +842,21 @@
         <loc>
             http://matt.aimonetti.net/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/
         </loc>
-        <lastmod>2012-04-20T19:13:59+02:00</lastmod>
+        <lastmod>2012-04-23T15:47:21+02:00</lastmod>
     </url>
     <url>
         <loc>http://matt.aimonetti.net/posts/2012/02/29/learning-from-rails-failures/</loc>
-        <lastmod>2012-04-20T19:13:59+02:00</lastmod>
+        <lastmod>2012-04-23T15:25:53+02:00</lastmod>
     </url>
     <url>
         <loc>
             http://matt.aimonetti.net/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution/
         </loc>
-        <lastmod>2012-04-20T19:13:59+02:00</lastmod>
+        <lastmod>2012-04-23T16:02:22+02:00</lastmod>
     </url>
     <url>
         <loc>http://matt.aimonetti.net/posts/2012/04/20/mruby-and-mobiruby/</loc>
-        <lastmod>2012-04-20T19:55:30+02:00</lastmod>
+        <lastmod>2012-04-23T15:28:02+02:00</lastmod>
     </url>
     <url>
         <loc>http://matt.aimonetti.net/404.html</loc>
@@ -864,18 +864,18 @@
     </url>
     <url>
         <loc>http://matt.aimonetti.net/</loc>
-        <lastmod>2012-04-20T19:55:30+02:00</lastmod>
+        <lastmod>2012-04-23T16:18:12+02:00</lastmod>
     </url>
     <url>
         <loc>http://matt.aimonetti.net/matt_aimonetti/</loc>
-        <lastmod>2012-04-20T19:55:30+02:00</lastmod>
+        <lastmod>2012-04-23T16:18:12+02:00</lastmod>
     </url>
     <url>
         <loc>http://matt.aimonetti.net/posts/archives/</loc>
-        <lastmod>2012-04-20T19:55:30+02:00</lastmod>
+        <lastmod>2012-04-23T16:18:12+02:00</lastmod>
     </url>
     <url>
         <loc>http://matt.aimonetti.net/search/</loc>
-        <lastmod>2012-04-23T12:21:54+02:00</lastmod>
+        <lastmod>2012-04-23T16:18:12+02:00</lastmod>
     </url>
 </urlset>
