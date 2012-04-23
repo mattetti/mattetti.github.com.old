@@ -37,10 +37,7 @@
     </ul>
   <div class="right">
     <div class="right">
-      <form class="search right" action="http://google.com/search" method="get">
-        <input class="left" type="text" name="q" results="0">
-        <input type="hidden" name="q" value="site:matt.aimonetti.net">
-      </form>
+      <div id="cse-search-form">Loading</div>
       <div class="social right">
         
         
@@ -235,6 +232,18 @@ end
   </script>
 
 
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+  var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+    '010526096358170648343:WMX140696544', customSearchOptions);
+  customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+  var options = new google.search.DrawOptions();
+  options.enableSearchboxOnly("http://localhost:4000/search");
+  customSearchControl.draw('cse-search-form', options);
+  }, true);
+</script>
 
 
 

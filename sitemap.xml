@@ -874,4 +874,8 @@
         <loc>http://matt.aimonetti.net/posts/archives/</loc>
         <lastmod>2012-04-20T19:55:30+02:00</lastmod>
     </url>
+    <url>
+        <loc>http://matt.aimonetti.net/search/</loc>
+        <lastmod>2012-04-23T12:21:54+02:00</lastmod>
+    </url>
 </urlset>
