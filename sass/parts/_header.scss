@@ -178,8 +178,11 @@ header{
 			}
 		}
 	}
-	.search{
-
+  #cse-search-form{ float: right; }
+	.gsc-search-box, .search{
+    .gsc-branding, td.gsc-search-button, td.gsc-clear-button { 
+      display: none; 
+    }
     @media screen and (max-width: 468px){
       top: -15px;
       display: block;
@@ -188,8 +191,8 @@ header{
     @media screen and (max-device-width : 320px) {
       display: none;
     }
-		input[type="text"]{
-			background: image-url('search.png') 10px center no-repeat #f2f2f2;
+		td.gsc-input input[type="text"]{
+			background: image-url('search.png') 10px center no-repeat #f2f2f2 !important;
 			color: $gray02;
 			border: 1px solid $gray04;
 			font: 13px $default;

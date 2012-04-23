@@ -12,10 +12,7 @@
     </ul>
   <div class="right">
     <div class="right">
-      <form class="search right" action="{{ site.simple_search }}" method="get">
-        <input class="left" type="text" name="q" results="0">
-        <input type="hidden" name="q" value="site:{{ site.url | shorthand_url }}">
-      </form>
+      <div id="cse-search-form">Loading</div>
       <div class="social right">
         {% if site.facebook_user %}
         <a class="facebook" href="http://www.facebook.com/{{ site.facebook_user }}" title="Facebook">Facebook</a>
