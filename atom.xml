@@ -4,7 +4,7 @@
   <title><![CDATA[Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-25T16:44:47+02:00</updated>
+  <updated>2012-04-25T16:58:48+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -405,6 +405,11 @@ is working on having Ruby available on iOS and Android.</p>
 <p><a href="http://blog.matsumoto-r.jp/">MATSUMOTO Ryosuke</a> is working on an Apache
 module for mruby called <a href="https://github.com/matsumoto-r/mod_mruby">mod_mruby</a> which would
 be comparable to <a href="http://httpd.apache.org/docs/2.3/mod/mod_lua.html">mod_lua</a></p>
+
+<h4>mruby REPL</h4>
+
+<p><a href="">Frank Celler</a> started working and blogging about writing a REPL for
+mruby, go check out <a href="http://www.avocadodb.org/category/mruby">his excellent blog posts</a> on the shell he&#8217;s working on and other stuff he&#8217;s doing with mruby.</p>
 
 <p>But there is plenty more to do, <a href="http://antirez.com/post/scripting-branch-released.html">redis</a>for instance now has/is about to be scriptabled via Lua, what about trying to use mruby to also support Ruby?
 What about scripting game logic and even full games in Ruby?
