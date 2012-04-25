@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mruby | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/mruby/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-25T16:58:48+02:00</updated>
+  <updated>2012-04-25T19:14:55+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -332,7 +332,7 @@ main(int argc, char **argv)
 
 <h2>Future</h2>
 
-<p>It's a bit too early to know if mruby will be succesful or not. Tere are few things I will keep my
+<p>It's a bit too early to know if mruby will be succesful or not. There are few things I will keep my
 eyes on.</p>
 
 <h3>Performance</h3>
