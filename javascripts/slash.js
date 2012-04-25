@@ -33,7 +33,7 @@
 		var _i = i;
 		$(this).find('img').each(function(){
 			var alt = $(this).attr('alt');
-      if !($(this).hasClass('no-caption')){
+      if ($(this).hasClass('no-caption') != true){
         if (alt == '' || typeof alt == 'undefined'){
           $(this).wrap('<a href="'+$(this).attr('src')+'" class="fancybox" rel="gallery'+_i+'" />');
         } else {
