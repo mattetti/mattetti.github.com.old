@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mruby | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/mruby/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-23T18:10:58+02:00</updated>
+  <updated>2012-04-25T16:44:47+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -12,6 +12,386 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Getting started with mruby]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/04/25/getting-started-with-mruby/"/>
+    <updated>2012-04-25T10:59:00+02:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/04/25/getting-started-with-mruby</id>
+    <content type="html"><![CDATA[<p>mruby is the latest Ruby implementation in an already quite long list:</p>
+
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Ruby_MRI">MRI</a></li>
+<li><a href="http://www.rubyenterpriseedition.com/">REE</a></li>
+<li><a href="http://jruby.org/">JRuby</a></li>
+<li><a href="http://rubini.us/">Rubinius</a></li>
+<li><a href="http://macruby.org">MacRuby</a></li>
+<li><a href="http://maglev.github.com/">Maglev</a></li>
+<li><a href="http://www.ironruby.net/">IronRuby</a></li>
+</ul>
+
+
+<p>And many other less known implementations.</p>
+
+<p>This time, the main man behind the project is the Ruby creator
+himself: <a href="http://en.wikipedia.org/wiki/Yukihiro_Matsumoto">Yukihiro 'Matz' Matsumoto</a>.
+I already covered the <a href="http://matt.aimonetti.net/posts/2012/04/20/mruby-and-mobiruby/">announcement, you can read more about it there</a>.</p>
+
+<h2>Why mruby?</h2>
+
+<p>Following my previous <a href="http://matt.aimonetti.net/posts/2012/04/20/mruby-and-mobiruby/">article on mruby</a>, some people seemed to be confused by the "raison d'être"/purpose of the project and the difference between <a href="http://en.wikipedia.org/wiki/Ruby_MRI">MRI</a> and mruby.</p>
+
+<p>mruby is designed to be modular and to be embedded, which means that
+it's expected to live inside other software applications. In other words
+mruby's goal is to make Ruby an embedded language. mruby is library that you link in other applications.</p>
+
+<p>When talking about embedded languages, <a href="http://www.lua.org/">Lua</a> is
+probably the most well known interpreted language.
+<a href="http://www.lua.org/">Lua</a> is usually used for the purpose of offering a
+higher level language (scripting language) inside a software written in a low level language
+(usually C/C++). This is why <a href="http://www.lua.org/">Lua</a> is very popular
+in the game industry to allow a scriptable interface and have parts of
+the code interpreted instead of requiring to recompile the code base
+against the target platform. According to <a href="http://www.satori.org/2009/03/the-engine-survey-general-results/">this survey from 2009</a>,
+Lua was by far the most popular scripting language for game developers.</p>
+
+<p><img src="http://www.satori.org/images/GE1/9Scripting.gif" alt="Lua vs other scripting languages" /></p>
+
+<p>Of course, Lua is also popular outside of the game industry and the
+reasons are simple to understand:</p>
+
+<ul>
+<li>very easily embedded (simple and well documented API)</li>
+<li>small footprint</li>
+<li>portable (runs almost everywhere)</li>
+</ul>
+
+
+<p>That gives you an idea of what mruby is trying to be. As a matter of
+fact, this definition of Lua applies very well to mruby:</p>
+
+<blockquote><p>"Lua is dynamically typed, runs by interpreting bytecode for a register-based virtual machine, and has automatic memory management with incremental garbage collection, making it ideal for configuration, scripting, and rapid prototyping."</p></blockquote>
+
+<h2>Why not Lua?</h2>
+
+<p>This is a matter of taste and requirements. It should eventually boil
+down to the difference in the language designs.</p>
+
+<p><img src='http://matt.aimonetti.net/images/lua_logo.gif' alt='Lua logo, Matt Aimonetti site' style='margin:auto;display:block;width:100px' class='no-caption'/></p>
+
+<blockquote><p>Lua combines simple procedural syntax with powerful data description constructs based on associative arrays and extensible semantics.</p></blockquote>
+
+<p></br>
+ <img src='http://matt.aimonetti.net/images/ruby_logo.png' alt='Ruby logo, Matt Aimonetti site' style='margin:auto;display:block;width:100px'class='no-caption' /></p>
+
+<blockquote><p>Ruby is a dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write.</p></blockquote>
+
+<br style="clear:both">
+
+
+<p>So on one hand you have a very simple language with a focus on
+functional programming and on the other, a <a href="http://www.ruby-lang.org/en/about/">richer language</a> (albeit more
+complex) with a
+main focus on Object Oriented programming.</p>
+
+<p>If you don't know Lua, it's quite close to JavaScript in the sense that
+it's a prototype based language and you can therefore write code that is
+Object Oriented.</p>
+
+<p>Ruby being a full OO and richer language, you can organize your code
+differently and write more of your complex logic in a scriptable language.
+One could even potentially leverage the language to create its own
+Domain Specific Language in pure Ruby and create a "Rails like" experience
+within its application.</p>
+
+<p>To be honest, I don't think that Ruby via mruby will just replace Lua,
+but I do believe it will become a very interesting alternative for some
+use cases. Especially if mruby manages to perform as well as Lua with the
+same type of footprint. There is also the fact that mruby being
+a sponsored project from the Japanese government, I wouldn't be
+surprised to see big Japanese companies experiment with embedding Ruby
+in their devices. After all, software is being added in every object we
+own, rapid development and being first to market is more critical than
+ever which makes mruby is a very attractive solution.</p>
+
+<h2>Getting started</h2>
+
+<p>I wrote a simple hello world example to give you a place to start:</p>
+
+<p>```c</p>
+
+<h1>include &lt;stdlib.h></h1>
+
+<h1>include &lt;stdio.h></h1>
+
+<p>/<em> Include the mruby headers </em>/</p>
+
+<h1>include &lt;mruby.h></h1>
+
+<h1>include &lt;mruby/proc.h></h1>
+
+<h1>include &lt;mruby/data.h></h1>
+
+<p>// eventually to be replaced by #include &lt;mruby/compile.h></p>
+
+<h1>include &lt;compile.h></h1>
+
+<p>int main(void)
+{
+  struct mrb_parser_state <em>p;
+  mrb_state </em>mrb = mrb_open();
+  char code[] = "p 'hello world!'";
+  printf("Executing code with mruby!\n");</p>
+
+<p>  p = mrb_parse_string(mrb, code);
+  int n;
+  n = mrb_generate_code(mrb, p->tree);
+  mrb_run(mrb, mrb_proc_new(mrb, mrb->irep[n]), mrb_top_self(mrb));
+  if (mrb->exc) {
+   mrb_p(mrb, mrb_obj_value(mrb->exc));
+  }
+  return 0;
+}
+<code>``
+This [sample code](https://github.com/mattetti/mruby/tree/samples/samples/helloWorld) is available on my [GitHub repo](https://github.com/mattetti) and can be compiled by using</code>make` (see the <a href="https://github.com/mattetti/mruby/blob/samples/samples/helloWorld/Makefile">Makefile here</a>).</p>
+
+<p>To get started, you just need the <a href="https://github.com/mruby/mruby">mruby source code</a> and a compiler. (I haven't tried to compile mruby or my sample on Windows for this code, but I assume it would work just fine with Visual C++).</p>
+
+<p>The above example is very trivial and takes a line of Ruby code:
+<code>ruby
+p 'hello world!'
+</code>
+that the linked mruby lib interprets.
+You can take the compiled file and use it on other machines using the
+same platform and the code will run fine, just like normal C code.</p>
+
+<p>For a more complete example, take a look at the <a href="https://github.com/mruby/mruby/blob/master/tools/mruby/mruby.c">mruby's standalone
+interpreter</a></p>
+
+<p><div><script src='https://gist.github.com/2489553.js?file='></script>
+<noscript><pre><code>#include &quot;mruby.h&quot;
+#include &quot;mruby/proc.h&quot;
+#include &quot;compile.h&quot;
+#include &quot;mruby/dump.h&quot;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+void ruby_show_version(mrb_state *);
+void ruby_show_copyright(mrb_state *);
+void parser_dump(mrb_state*, struct mrb_ast_node*, int);
+void codedump_all(mrb_state*, int);
+
+struct _args {
+  FILE *rfp;
+  char* cmdline;
+  int mrbfile      : 1;
+  int check_syntax : 1;
+  int verbose      : 1;
+};
+
+static void
+usage(const char *name)
+{
+  static const char *const usage_msg[] = {
+  &quot;switches:&quot;,
+  &quot;-b           load and execute RiteBinary (mrb) file&quot;,
+  &quot;-c           check syntax only&quot;,
+  &quot;-e 'command' one line of script&quot;,
+  &quot;-v           print version number, then run in verbose mode&quot;,
+  &quot;--verbose    run in verbose mode&quot;,
+  &quot;--version    print the version&quot;,
+  &quot;--copyright  print the copyright&quot;,
+  NULL
+  };
+  const char *const *p = usage_msg;
+
+  printf(&quot;Usage: %s [switches] programfile\n&quot;, name);
+  while(*p)
+  printf(&quot;  %s\n&quot;, *p++);
+}
+
+static int
+parse_args(mrb_state *mrb, int argc, char **argv, struct _args *args)
+{
+  char **origargv = argv;
+  int cmdline = 0;
+
+  memset(args, 0, sizeof(*args));
+
+  for (argc--,argv++; argc &gt; 0; argc--,argv++) {
+    if (**argv == '-') {
+      if (strlen(*argv) &lt;= 1)
+        return -1;
+
+      switch ((*argv)[1]) {
+      case 'b':
+        args-&gt;mrbfile = 1;
+        break;
+      case 'c':
+        args-&gt;check_syntax = 1;
+        break;
+      case 'e':
+        cmdline = 1;
+        break;
+      case 'v':
+        ruby_show_version(mrb);
+        args-&gt;verbose = 1;
+        break;
+      case '-':
+        if (strcmp((*argv) + 2, &quot;version&quot;) == 0) {
+          ruby_show_version(mrb);
+        }
+        else if (strcmp((*argv) + 2, &quot;verbose&quot;) == 0) {
+          args-&gt;verbose = 1;
+          break;
+        }
+        else if (strcmp((*argv) + 2, &quot;copyright&quot;) == 0) {
+          ruby_show_copyright(mrb);
+        }
+        else return -3;
+        return 0;
+      }
+    }
+    else if (cmdline) {
+      args-&gt;cmdline = strdup(*argv);
+    }
+    else if (args-&gt;rfp == NULL) {
+      if ((args-&gt;rfp = fopen(*argv, args-&gt;mrbfile ? &quot;rb&quot; : &quot;r&quot;)) == NULL) {
+        printf(&quot;%s: Cannot open program file. (%s)\n&quot;, *origargv, *argv);
+        return 0;
+      }
+    }
+  }
+
+  return 0;
+}
+
+static void
+cleanup(struct _args *args)
+{
+  if (args-&gt;rfp)
+    fclose(args-&gt;rfp);
+  if (args-&gt;cmdline)
+    free(args-&gt;cmdline);
+}
+
+int
+main(int argc, char **argv)
+{
+  mrb_state *mrb = mrb_open();
+  int n = -1;
+  struct _args args;
+  struct mrb_parser_state *p;
+
+  n = parse_args(mrb, argc, argv, &amp;args);
+  if (n &lt; 0 || (args.cmdline == NULL &amp;&amp; args.rfp == NULL)) {
+    cleanup(&amp;args);
+    usage(argv[0]);
+    return n;
+  }
+
+  if (args.mrbfile) {
+    n = mrb_load_irep(mrb, args.rfp);
+  }
+  else {
+    if (args.cmdline) {
+      p = mrb_parse_string(mrb, (char*)args.cmdline);
+    }
+    else {
+      p = mrb_parse_file(mrb, args.rfp);
+    }
+    if (!p || !p-&gt;tree || p-&gt;nerr) {
+      cleanup(&amp;args);
+      return -1;
+    }
+
+    if (args.verbose)
+      parser_dump(mrb, p-&gt;tree, 0);
+
+    n = mrb_generate_code(mrb, p-&gt;tree);
+    mrb_pool_close(p-&gt;pool);
+  }
+
+  if (n &gt;= 0) {
+    if (args.verbose)
+      codedump_all(mrb, n);
+
+    if (!args.check_syntax) {
+      mrb_run(mrb, mrb_proc_new(mrb, mrb-&gt;irep[n]), mrb_top_self(mrb));
+      if (mrb-&gt;exc) {
+	mrb_p(mrb, mrb_obj_value(mrb-&gt;exc));
+      }
+    }
+  }
+
+  cleanup(&amp;args);
+
+  return n &gt; 0 ? 0 : 1;
+}</code></pre></noscript></div>
+</p>
+
+<h2>Future</h2>
+
+<p>It's a bit too early to know if mruby will be succesful or not. Tere are few things I will keep my
+eyes on.</p>
+
+<h3>Performance</h3>
+
+<p>To be a true alternative to Lua, mruby will have to interpret Ruby code
+much faster than what MRI is able to do right now. It will also need to
+keep the memory footprint really tiny. Ruby being a more complicated
+language than Lua, it might be tricky, but we'll see.</p>
+
+<h3>Documentation</h3>
+
+<p>While the idea of using Ruby has a macro language might get a lot of
+people excited, if documentation lacks or if the process is painful, the very same people might
+fallback to another language.
+Historically speaking, the MRI team has had issues with documentation
+and communication due to various factors. I hope that thanks to Matz
+experience and to the strong Ruby community, mruby will become a easy
+and efficient alternative to Lua or people wanting to embed one of the
+greatest interpreted languages.</p>
+
+<h3>Ruby outside of Rails</h3>
+
+<p>While <a href="http://rubyonrails.org">Ruby on Rails</a> really made Ruby popular,
+I'm always a bit dissapointed when I see how many popular projects the
+Ruby community has outside of Rails. Think about it, we have some
+awesome implementation such as JRuby and MacRuby which allow you to use
+an amazing amount of libraries to do the craziest thing one could
+imagine using the language they like the most. But yet, Rails is still
+by far the #1 Ruby project. Of course, there are many non-Rails related
+projects out there, but they don't benefit from Rails' aura.</p>
+
+<p>What I hope with mruby is that it will allow developers to leverage the
+beauty of Ruby and to create other niches for people to have fun.
+Some people already started:</p>
+
+<h4>MobiRuby</h4>
+
+<p><a href="https://github.com/masuidrive">Yuichiro MASUI</a>
+is working on having Ruby available on iOS and Android.</p>
+
+<h4>Ruby for Node.js</h4>
+
+<p>Someone is working on <a href="https://github.com/mattn/mruby-uv">mruby-uv</a> an interface for <a href="https://github.com/joyent/libuv">libuv</a> Node.js' platform layer.</p>
+
+<h4>mod_mruby</h4>
+
+<p><a href="http://blog.matsumoto-r.jp/">MATSUMOTO Ryosuke</a> is working on an Apache
+module for mruby called <a href="https://github.com/matsumoto-r/mod_mruby">mod_mruby</a> which would
+be comparable to <a href="http://httpd.apache.org/docs/2.3/mod/mod_lua.html">mod_lua</a></p>
+
+<p>But there is plenty more to do, <a href="http://antirez.com/post/scripting-branch-released.html">redis</a>for instance now has/is about to be scriptabled via Lua, what about trying to use mruby to also support Ruby?
+What about scripting game logic and even full games in Ruby?
+What about mruby on a <a href="http://www.raspberrypi.org/">Raspberry pi</a>?
+Ruby on my TV, fridge, car, AC, solar panel controller...</p>
+
+<p>I will certainly be looking forward to people trying to reproduce the success
+of Rails in a different domain thanks to the Ruby language.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[mruby and MobiRuby]]></title>
