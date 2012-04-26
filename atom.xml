@@ -4,7 +4,7 @@
   <title><![CDATA[Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-25T23:02:45+02:00</updated>
+  <updated>2012-04-26T10:47:23+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -1010,7 +1010,11 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
 
 <h2>Video</h2>
 
-<p>The video isn&#8217;t yet available but will be posted <a href="http://confreaks.com/events/larubyconf2012">here</a> once processed.</p>
+<p><video width='640' height='360' preload='none' controls poster=' /images/matt_aimonetti_larubyconf2012_video.png'><source src='http://cdn.confreaks.com/system/assets/datas/3173/original/816-larubyconf2012-time-to-move-away-from-ruby-small.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/></video></p>
+
+<h2>Presentation website</h2>
+
+<p>Matt&#8217;s presentation was filmed by <a href="http://confreaks.com">Confreaks</a> and posted <a href="http://confreaks.com/videos/816-larubyconf2012-time-to-move-away-from-ruby">here</a>.</p>
 ]]></content>
   </entry>
   

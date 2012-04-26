@@ -4,7 +4,7 @@
   <title><![CDATA[Category: merbist.com | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/merbist-com/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-25T23:02:45+02:00</updated>
+  <updated>2012-04-26T10:48:23+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -167,50 +167,11 @@
 
 <p>Here is a hello world webservice being implemented using Weasel Diesel and Sinatra:</p>
 
-<p><div><script src='https://gist.github.com/2300131.js?file='></script>
-<noscript><pre><code>describe_service &quot;hello_world&quot; do |service|
-  service.formats   :json
-  service.http_verb :get
-  service.disable_auth # on by default
-
-  # INPUT
-  service.param.string  :name, :default =&gt; 'World'
-
-  # OUTPUT
-  service.response do |response|
-    response.object do |obj|
-        obj.string :message, :doc =&gt; &quot;The greeting message sent back. Defaults to 'World'&quot;
-      obj.datetime :at, :doc =&gt; &quot;The timestamp of when the message was dispatched&quot;
-      end
-  end
-
-  # DOCUMENTATION
-  service.documentation do |doc|
-    doc.overall &quot;This service provides a simple hello world implementation example.&quot;
-    doc.param :name, &quot;The name of the person to greet.&quot;
-    doc.example &quot;&lt;code&gt;curl -I 'http://localhost:9292/hello_world?name=Matt'&lt;/code&gt;&quot;
- end
-
-  # ACTION/IMPLEMENTATION
-  service.implementation do
-    {:message =&gt; &quot;Hello #{params[:name]}&quot;, :at =&gt; Time.now}.to_json
-  end
-
-end</code></pre></noscript></div>
-</p>
+<p>{% gist 2300131 %}</p>
 
 <p>Basis test validating the contract defined in the DSL and the actual output when the service is called:</p>
 
-<p><div><script src='https://gist.github.com/2300440.js?file='></script>
-<noscript><pre><code>class HelloWorldTest &lt; MiniTest::Unit::TestCase
-
-  def test_response
-    TestApi.get &quot;/hello_world&quot;, :name =&gt; 'Matt'
-    assert_api_response
-  end
-
-end</code></pre></noscript></div>
-</p>
+<p>{% gist 2300440 %}</p>
 
 <p>Generated documentation:</p>
 
@@ -1880,7 +1841,7 @@ My presentation focused on 2 axis:</p>
 
 <h2>Video</h2>
 
-<p><video width='640' height='360' preload='none' controls poster=' /images/matt_aimonetti_rubyconf2010.jpeg'><source src='http://cdn.confreaks.com/system/assets/datas/768/original/448-rubyconf2010-macruby-why-and-how-small.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/></video></p>
+<p>{% video http://cdn.confreaks.com/system/assets/datas/768/original/448-rubyconf2010-macruby-why-and-how-small.mp4 640 360 /images/matt_aimonetti_rubyconf2010.jpeg %}</p>
 
 <p>Other video formats are available <a href="http://www.confreaks.com/videos/448-rubyconf2010-macruby-why-and-how">here</a></p>
 

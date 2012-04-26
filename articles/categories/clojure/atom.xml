@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/clojure/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-25T23:02:45+02:00</updated>
+  <updated>2012-04-26T10:48:23+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -32,11 +32,15 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
 <script async class="speakerdeck-embed" data-id="4f904c27a542080022020653" data-ratio="1.299492385786802" src="http://speakerdeck.com/assets/embed.js"></script>
 
 
-<p>The slides are available on <a href="http://speakerdeck.com/u/matt_aimonetti/p/ruby-time-to-move-on">Matt's SpeakerDeck</a> and can be <a href="">downloaded here</a>.</p>
+<p>The slides are available on <a href="http://speakerdeck.com/u/matt_aimonetti/p/ruby-time-to-move-on">Matt's SpeakerDeck</a> and can be <a href="{{%20page.slides%20}}">downloaded here</a>.</p>
 
 <h2>Video</h2>
 
-<p>The video isn't yet available but will be posted <a href="http://confreaks.com/events/larubyconf2012">here</a> once processed.</p>
+<p>{% video http://cdn.confreaks.com/system/assets/datas/3173/original/816-larubyconf2012-time-to-move-away-from-ruby-small.mp4 640 360 /images/matt_aimonetti_larubyconf2012_video.png %}</p>
+
+<h2>Presentation website</h2>
+
+<p>Matt's presentation was filmed by <a href="http://confreaks.com">Confreaks</a> and posted <a href="http://confreaks.com/videos/816-larubyconf2012-time-to-move-away-from-ruby">here</a>.</p>
 ]]></content>
   </entry>
   
