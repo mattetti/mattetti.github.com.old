@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Presentation | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/presentation/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-26T10:48:23+02:00</updated>
+  <updated>2012-04-26T10:49:30+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -32,11 +32,11 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
 <script async class="speakerdeck-embed" data-id="4f904c27a542080022020653" data-ratio="1.299492385786802" src="http://speakerdeck.com/assets/embed.js"></script>
 
 
-<p>The slides are available on <a href="http://speakerdeck.com/u/matt_aimonetti/p/ruby-time-to-move-on">Matt's SpeakerDeck</a> and can be <a href="{{%20page.slides%20}}">downloaded here</a>.</p>
+<p>The slides are available on <a href="http://speakerdeck.com/u/matt_aimonetti/p/ruby-time-to-move-on">Matt's SpeakerDeck</a> and can be <a href="">downloaded here</a>.</p>
 
 <h2>Video</h2>
 
-<p>{% video http://cdn.confreaks.com/system/assets/datas/3173/original/816-larubyconf2012-time-to-move-away-from-ruby-small.mp4 640 360 /images/matt_aimonetti_larubyconf2012_video.png %}</p>
+<p><video width='640' height='360' preload='none' controls poster=' /images/matt_aimonetti_larubyconf2012_video.png'><source src='http://cdn.confreaks.com/system/assets/datas/3173/original/816-larubyconf2012-time-to-move-away-from-ruby-small.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/></video></p>
 
 <h2>Presentation website</h2>
 
@@ -63,8 +63,8 @@ management works to get better performance out of your code.</p>
 
 <h2>Slides</h2>
 
-<p><a href="{{%20page.slides%20}}"><img src="/images/Matt_Aimonetti_-_RubyConf_Argentina_2011.jpg" alt="Matt Aimonetti's slides of his RubyConf Argentina presentation" /></a>
-<a href="{{%20page.slides}}">The HTML5 slides can be seen online</a>.</p>
+<p><a href=""><img src="/images/Matt_Aimonetti_-_RubyConf_Argentina_2011.jpg" alt="Matt Aimonetti's slides of his RubyConf Argentina presentation" /></a>
+<a href="">The HTML5 slides can be seen online</a>.</p>
 
 <h2>Video</h2>
 
@@ -73,11 +73,11 @@ management works to get better performance out of your code.</p>
 </div>
 
 
-<p><a href="{{%20page.video_page%20}}">Vimeo page of the presentation</a></p>
+<p><a href="">Vimeo page of the presentation</a></p>
 
 <h2>Presentation website</h2>
 
-<p>Matt's presentation was filmed by <a href="http://rubyconfigargentina.org/">RubyConf Argentina</a> and posted <a href="{{%20page.video_page%20}}">here</a>.</p>
+<p>Matt's presentation was filmed by <a href="http://rubyconfigargentina.org/">RubyConf Argentina</a> and posted <a href="">here</a>.</p>
 
 <h2>Matt's articles related to this presentation</h2>
 
@@ -107,16 +107,16 @@ some questions related to what was explained.</p>
 
 <h2>Slides</h2>
 
-<p><a href="{{%20page.slides}}">The HTML5 slides can be seen online</a> online.</p>
+<p><a href="">The HTML5 slides can be seen online</a> online.</p>
 
 <h2>Video</h2>
 
-<p>{% video http://cdn.confreaks.com/system/assets/datas/2666/original/714-rubyconf2011-complex-ruby-concepts-dummified-small.mp4 640 360 /images/matt_aimonetti_presentation_ruby.jpg %}</p>
+<p><video width='640' height='360' preload='none' controls poster=' /images/matt_aimonetti_presentation_ruby.jpg'><source src='http://cdn.confreaks.com/system/assets/datas/2666/original/714-rubyconf2011-complex-ruby-concepts-dummified-small.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/></video></p>
 
 <h2>Presentation website</h2>
 
 <p>Matt's presentation was filmed by <a href="http://confreaks.com/">confreaks</a> and the dedicated page
-for the talk is available <a href="{{%20page.video_page%20}}">here</a>.</p>
+for the talk is available <a href="">here</a>.</p>
 
 <h2>Matt's articles related to this presentation</h2>
 
@@ -147,7 +147,7 @@ My presentation focused on 2 axis:</p>
 
 <h2>Video</h2>
 
-<p>{% video http://cdn.confreaks.com/system/assets/datas/768/original/448-rubyconf2010-macruby-why-and-how-small.mp4 640 360 /images/matt_aimonetti_rubyconf2010.jpeg %}</p>
+<p><video width='640' height='360' preload='none' controls poster=' /images/matt_aimonetti_rubyconf2010.jpeg'><source src='http://cdn.confreaks.com/system/assets/datas/768/original/448-rubyconf2010-macruby-why-and-how-small.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/></video></p>
 
 <p>Other video formats are available <a href="http://www.confreaks.com/videos/448-rubyconf2010-macruby-why-and-how">here</a></p>
 
@@ -203,7 +203,7 @@ Since last new a lot of things happened, here is a quick summary:</p>
     <updated>2010-04-11T09:52:00+02:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/04/11/apples-ruby-macruby</id>
     <content type="html"><![CDATA[<p>During <a href="http://confoo.ca/">ConFoo Canada 2010</a> in Montreal, Canada Matt
-Aimonetti gave a talk entitled <em>{{ Apple's Ruby:  MacRuby }}</em>.</p>
+Aimonetti gave a talk entitled <em></em>.</p>
 
 <h2>Description of the talk:</h2>
 
@@ -275,11 +275,11 @@ Aimonetti gave a talk entitled <em>Writing 2D games for the OSX platform in Ruby
 <script async class="speakerdeck-embed" data-id="4f911cf25edf72002200cf4e" data-ratio="1.299492385786802" src="http://speakerdeck.com/assets/embed.js"></script>
 
 
-<p>The slides are available on <a href="http://speakerdeck.com/u/matt_aimonetti/p/rubyconf-2009-writing-2d-games-for-the-osx-platform-in-ruby">Matt's SpeakerDeck</a> and can be <a href="{{%20page.slides%20}}">downloaded here</a>.</p>
+<p>The slides are available on <a href="http://speakerdeck.com/u/matt_aimonetti/p/rubyconf-2009-writing-2d-games-for-the-osx-platform-in-ruby">Matt's SpeakerDeck</a> and can be <a href="">downloaded here</a>.</p>
 
 <h2>Video</h2>
 
-<p>{% video http://cdn.confreaks.com/system/assets/datas/420/original/21-nov-2009-10-25-writing-d-games-for-the-osx-platform-in-ruby-matt-aimonetti-small.mp4 640 360 http://www.confreaks.com/system/videos/images/192/preview/21-nov-2009-10-25-writing-d-games-for-the-osx-platform-in-ruby-matt-aimonetti-preview.png %}</p>
+<p><video width='640' height='360' preload='none' controls poster=' http://www.confreaks.com/system/videos/images/192/preview/21-nov-2009-10-25-writing-d-games-for-the-osx-platform-in-ruby-matt-aimonetti-preview.png'><source src='http://cdn.confreaks.com/system/assets/datas/420/original/21-nov-2009-10-25-writing-d-games-for-the-osx-platform-in-ruby-matt-aimonetti-small.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/></video></p>
 
 <h2>Presentation website</h2>
 
@@ -360,7 +360,7 @@ Aimonetti gave a talk entitled <em>Rails 3: Stepping off of the golden path</em>
 <script async class="speakerdeck-embed" data-id="4f91748891b203001f01a62c" data-ratio="1.299492385786802" src="http://matt.aimonetti.net//speakerdeck.com/assets/embed.js"></script>
 
 
-<p>A PDF version can also be downloaded <a href="{{%20page.slides%20}}">here</a>.</p>
+<p>A PDF version can also be downloaded <a href="">here</a>.</p>
 
 <h2>Video</h2>
 

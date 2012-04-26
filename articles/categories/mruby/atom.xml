@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mruby | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/mruby/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-26T10:48:23+02:00</updated>
+  <updated>2012-04-26T10:49:30+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -168,7 +168,167 @@ same platform and the code will run fine, just like normal C code.</p>
 <p>For a more complete example, take a look at the <a href="https://github.com/mruby/mruby/blob/master/tools/mruby/mruby.c">mruby's standalone
 interpreter</a></p>
 
-<p>{% gist 2489553 %}</p>
+<p><div><script src='https://gist.github.com/2489553.js?file='></script>
+<noscript><pre><code>#include &quot;mruby.h&quot;
+#include &quot;mruby/proc.h&quot;
+#include &quot;compile.h&quot;
+#include &quot;mruby/dump.h&quot;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+void ruby_show_version(mrb_state *);
+void ruby_show_copyright(mrb_state *);
+void parser_dump(mrb_state*, struct mrb_ast_node*, int);
+void codedump_all(mrb_state*, int);
+
+struct _args {
+  FILE *rfp;
+  char* cmdline;
+  int mrbfile      : 1;
+  int check_syntax : 1;
+  int verbose      : 1;
+};
+
+static void
+usage(const char *name)
+{
+  static const char *const usage_msg[] = {
+  &quot;switches:&quot;,
+  &quot;-b           load and execute RiteBinary (mrb) file&quot;,
+  &quot;-c           check syntax only&quot;,
+  &quot;-e 'command' one line of script&quot;,
+  &quot;-v           print version number, then run in verbose mode&quot;,
+  &quot;--verbose    run in verbose mode&quot;,
+  &quot;--version    print the version&quot;,
+  &quot;--copyright  print the copyright&quot;,
+  NULL
+  };
+  const char *const *p = usage_msg;
+
+  printf(&quot;Usage: %s [switches] programfile\n&quot;, name);
+  while(*p)
+  printf(&quot;  %s\n&quot;, *p++);
+}
+
+static int
+parse_args(mrb_state *mrb, int argc, char **argv, struct _args *args)
+{
+  char **origargv = argv;
+  int cmdline = 0;
+
+  memset(args, 0, sizeof(*args));
+
+  for (argc--,argv++; argc &gt; 0; argc--,argv++) {
+    if (**argv == '-') {
+      if (strlen(*argv) &lt;= 1)
+        return -1;
+
+      switch ((*argv)[1]) {
+      case 'b':
+        args-&gt;mrbfile = 1;
+        break;
+      case 'c':
+        args-&gt;check_syntax = 1;
+        break;
+      case 'e':
+        cmdline = 1;
+        break;
+      case 'v':
+        ruby_show_version(mrb);
+        args-&gt;verbose = 1;
+        break;
+      case '-':
+        if (strcmp((*argv) + 2, &quot;version&quot;) == 0) {
+          ruby_show_version(mrb);
+        }
+        else if (strcmp((*argv) + 2, &quot;verbose&quot;) == 0) {
+          args-&gt;verbose = 1;
+          break;
+        }
+        else if (strcmp((*argv) + 2, &quot;copyright&quot;) == 0) {
+          ruby_show_copyright(mrb);
+        }
+        else return -3;
+        return 0;
+      }
+    }
+    else if (cmdline) {
+      args-&gt;cmdline = strdup(*argv);
+    }
+    else if (args-&gt;rfp == NULL) {
+      if ((args-&gt;rfp = fopen(*argv, args-&gt;mrbfile ? &quot;rb&quot; : &quot;r&quot;)) == NULL) {
+        printf(&quot;%s: Cannot open program file. (%s)\n&quot;, *origargv, *argv);
+        return 0;
+      }
+    }
+  }
+
+  return 0;
+}
+
+static void
+cleanup(struct _args *args)
+{
+  if (args-&gt;rfp)
+    fclose(args-&gt;rfp);
+  if (args-&gt;cmdline)
+    free(args-&gt;cmdline);
+}
+
+int
+main(int argc, char **argv)
+{
+  mrb_state *mrb = mrb_open();
+  int n = -1;
+  struct _args args;
+  struct mrb_parser_state *p;
+
+  n = parse_args(mrb, argc, argv, &amp;args);
+  if (n &lt; 0 || (args.cmdline == NULL &amp;&amp; args.rfp == NULL)) {
+    cleanup(&amp;args);
+    usage(argv[0]);
+    return n;
+  }
+
+  if (args.mrbfile) {
+    n = mrb_load_irep(mrb, args.rfp);
+  }
+  else {
+    if (args.cmdline) {
+      p = mrb_parse_string(mrb, (char*)args.cmdline);
+    }
+    else {
+      p = mrb_parse_file(mrb, args.rfp);
+    }
+    if (!p || !p-&gt;tree || p-&gt;nerr) {
+      cleanup(&amp;args);
+      return -1;
+    }
+
+    if (args.verbose)
+      parser_dump(mrb, p-&gt;tree, 0);
+
+    n = mrb_generate_code(mrb, p-&gt;tree);
+    mrb_pool_close(p-&gt;pool);
+  }
+
+  if (n &gt;= 0) {
+    if (args.verbose)
+      codedump_all(mrb, n);
+
+    if (!args.check_syntax) {
+      mrb_run(mrb, mrb_proc_new(mrb, mrb-&gt;irep[n]), mrb_top_self(mrb));
+      if (mrb-&gt;exc) {
+	mrb_p(mrb, mrb_obj_value(mrb-&gt;exc));
+      }
+    }
+  }
+
+  cleanup(&amp;args);
+
+  return n &gt; 0 ? 0 : 1;
+}</code></pre></noscript></div>
+</p>
 
 <h2>Future</h2>
 
