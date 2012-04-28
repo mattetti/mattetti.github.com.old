@@ -4,7 +4,7 @@
   <title><![CDATA[Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-26T12:09:05+02:00</updated>
+  <updated>2012-04-28T10:04:17+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -398,7 +398,7 @@ is working on having Ruby available on iOS and Android.</p>
 
 <h4>Ruby for Node.js</h4>
 
-<p>Someone is working on <a href="https://github.com/mattn/mruby-uv">mruby-uv</a> an interface for <a href="https://github.com/joyent/libuv">libuv</a> Node.js&#8217; platform layer.</p>
+<p><a href="http://mattn.kaoriya.net/">Yasuhiro Matsumoto</a> is working on <a href="https://github.com/mattn/mruby-uv">mruby-uv</a> an interface for <a href="https://github.com/joyent/libuv">libuv</a> Node.js&#8217; platform layer.</p>
 
 <h4>mod_mruby</h4>
 
@@ -411,7 +411,7 @@ be comparable to <a href="http://httpd.apache.org/docs/2.3/mod/mod_lua.html">mod
 <p><a href="">Frank Celler</a> started working and blogging about writing a REPL for
 mruby, go check out <a href="http://www.avocadodb.org/category/mruby">his excellent blog posts</a> on the shell he&#8217;s working on and other stuff he&#8217;s doing with mruby.</p>
 
-<p>But there is plenty more to do, <a href="http://antirez.com/post/scripting-branch-released.html">redis</a>for instance now has/is about to be scriptabled via Lua, what about trying to use mruby to also support Ruby?
+<p>But there is plenty more to do, <a href="http://antirez.com/post/scripting-branch-released.html">redis</a> for instance now has/is about to be scriptabled via Lua, what about trying to use mruby to also support Ruby?
 What about scripting game logic and even full games in Ruby?
 What about mruby on a <a href="http://www.raspberrypi.org/">Raspberry pi</a>?
 Ruby on my TV, fridge, car, AC, solar panel controller&#8230;</p>
@@ -474,6 +474,10 @@ their own needs.</p>
 Besides being yet another Ruby implementation, the fact that the
 target audience and the project scope are well defined and that the project is lead
 by Ruby&#8217;s author and sponsored by the Japanese government makes me want to believe that it can be a successful project. That said Lua is a simpler language and it is already well implemented in the targeted market, so hopefuly Matz, his team and the Japanese government have a plan to advocate and champion this new technology. Good luck to them and I&#8217;ll keep an attentive eye on the project.</p>
+
+<p><strong>
+Update: I wrote a <a href="http://matt.aimonetti.net/posts/2012/04/25/getting-started-with-mruby/">getting started with mruby</a> guide.
+</strong></p>
 
 <h2>MobiRuby</h2>
 
