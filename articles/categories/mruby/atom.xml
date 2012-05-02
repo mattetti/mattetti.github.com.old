@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mruby | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/mruby/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-04-28T10:04:17+02:00</updated>
+  <updated>2012-05-02T14:26:29+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -534,7 +534,7 @@ access to the native object is something extremely powerful.</p>
 
 <h3>Objective-C is evolving.</h3>
 
-<p>Objective-C is evolving, with the introduction of <a href="http://developer.apple.com/library/ios/#releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html">ARC</a>, memory management became much easier. The latest version of clang also granted Objective-C with a nicer syntax thanks to new literals and object subscripting (<a href="http://clang.llvm.org/docs/ObjectiveCLiterals.html">read more</a>). As a matter of fact, Objective-C syntax is getting closer and closer to Ruby's. Making the choice to use an alternate harder and harder to make.</p>
+<p>Objective-C is evolving, with the introduction of <a href="http://developer.apple.com/library/ios/#releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html">ARC</a>, memory management became much easier. The latest version of clang also granted Objective-C with a nicer syntax thanks to new literals and object subscripting (<a href="http://clang.llvm.org/docs/ObjectiveCLiterals.html">read more</a>). As a matter of fact, Objective-C's syntax is getting closer and closer to Ruby's making the choice to use an alternate much harder.</p>
 
 <p>``` objective-c
 // character literals.
