@@ -13,6 +13,7 @@ categories:
 - Software Design
 - merbist.com
 - blog-post
+- Popular
 tags:
 - django
 - documentation

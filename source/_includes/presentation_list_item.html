@@ -1,0 +1,11 @@
+<li class="title entry-title">
+  <a href="{{ root_url }}{{ post.url }}">{{ post.title }}</a>
+  <div class="date updated right">{% include post/date.html %}{{ time }}</div>
+  <span class='slides right'>
+    {% if presentation.slides %}
+      <a href="{{ root_url }}{{ presentation.slides }}">Slides</a>
+    {% else %}
+      Slides
+    {% endif %}
+  </span>
+</li>

@@ -3,6 +3,7 @@ layout: post
 title: "LA RubyConf 2012 - Ruby: time to move on"
 date: 2012-02-04 15:09
 comments: false
+description: "Matt Aimonetti's presentation at LA RubyConf 2012"
 categories: 
 - Presentation
 - RubyConf
@@ -30,4 +31,8 @@ The slides are available on [Matt's SpeakerDeck](http://speakerdeck.com/u/matt_a
 
 ##Video
 
-The video isn't yet available but will be posted [here](http://confreaks.com/events/larubyconf2012) once processed.
+{% video http://cdn.confreaks.com/system/assets/datas/3173/original/816-larubyconf2012-time-to-move-away-from-ruby-small.mp4 640 360 /images/matt_aimonetti_larubyconf2012_video.png %}
+
+##Presentation website
+
+Matt's presentation was filmed by [Confreaks](http://confreaks.com) and posted [here](http://confreaks.com/videos/816-larubyconf2012-time-to-move-away-from-ruby).

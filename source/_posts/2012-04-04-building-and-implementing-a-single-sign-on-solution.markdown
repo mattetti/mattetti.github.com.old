@@ -12,10 +12,12 @@ categories:
 - Tutorial
 - merbist.com
 - blog-post
+- Popular
 tags:
 - architecture
 - crypto
 - SSO
+- Popular
 ---
 
 Most modern web applications start as a monolithic code base and, as complexity increases, the once small app gets split apart into many "modules". In other cases, engineers opt for a [SOA](http://en.wikipedia.org/wiki/Service-oriented_architecture) design approach from the beginning. One way or another, we start running multiple separate applications that need to interact seamlessly. My goal will be to describe some of the high-level challenges and solutions found in implementing a Single-Sign-On service.
@@ -235,12 +237,11 @@ You might be familiar with [Grape](https://github.com/intridea/grape), another D
 
 Here is a hello world webservice being implemented using Weasel Diesel and Sinatra:
 
-
-[gist]https://gist.github.com/2300131[/gist]
+{% gist 2300131 %}
 
 Basis test validating the contract defined in the DSL and the actual output when the service is called:
 
-[gist]https://gist.github.com/2300440[/gist]
+{% gist 2300440 %}
 
 Generated documentation:
 

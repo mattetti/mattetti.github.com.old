@@ -1,16 +1,16 @@
 header{
-	height: 120px;
+	height: 130px;
 	padding: 20px 0;
 	border-bottom: 1px solid $gray04;
 	line-height: 30px;
   background: #272727;
   color: $gray02;
-  @media screen and (max-width : 480px) {
-    height: 130px !important;
-  }
-  @media screen and (max-width : 320px) {
-    height: 130px !important;
-  }
+  // @media screen and (max-width : 480px) {
+  //   height: 130px !important;
+  // }
+  // @media screen and (max-width : 320px) {
+  //   height: 130px !important;
+  // }
 	@media screen and (min-width: 1024px){
 		// height: 120px;
 		// position: relative;
@@ -67,13 +67,18 @@ header{
         line-height: 1.4em;
       }
     }
+    ul.bio-summary{
+      @media screen and (min-width: 1024px){
+        font-size: 110%;
+      }
+    }
   }
 	nav{
 		margin-top: 45px;
-		@media screen and (max-width: 1024px){
-			margin-left: 0;
-			margin-top: 15px;
-			float: none !important;
+		@media screen and (max-width: 320px){
+			// margin-left: 0;
+      margin-top: 15px;
+			// float: none !important;
 		}
 		>ul{
 			@media screen and (max-width: 600px){

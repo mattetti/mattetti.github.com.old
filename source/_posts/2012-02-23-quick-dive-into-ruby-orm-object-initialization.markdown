@@ -14,6 +14,7 @@ categories:
 - Tutorial
 - merbist.com
 - blog-post
+- Popular
 tags:
 - activerecord
 - ORM

@@ -4,17 +4,35 @@ layout: default
 
 <div id='home'>
   {% include bio.html %}
-<h2>Recent Posts</h2>
-<ul class='posts'>
-{% assign index = true %}
-{% for post in paginator.posts %}
-{% assign content = post.content %}
-{% include home_page_article.html %}
-{% endfor %}
-</ul>
+<section id='recent-posts'>
+  <h2>Recent</h2>
+  <ul class='posts'>
+  {% assign index = true %}
+  {% for post in paginator.posts %}
+  {% assign content = post.content %}
+  {% include home_page_article.html %}
+  {% endfor %}
+  </ul>
+</section>
+</br>
+</br>
+
+<section id='popular'>
+  <h2>Popular</h2>
+  <ul class='popular'>
+  {% assign index = true %}
+    {% for post in site.posts %}
+    {% if post.categories contains 'Popular' %}
+      {% assign content = post.content %}
+      {% include home_page_article.html %}
+    {% endif %}
+  {% endfor %}
+  </ul>
+</section>
+
 
 <nav id="pagenavi">
-  <a href="{{ root_url }}/posts/archives" class="center">View older articles</a>
+  <a href="{{ root_url }}/posts/archives" class="center">View all articles</a>
 </nav>
 
 <section id='presentations'>
@@ -22,17 +40,8 @@ layout: default
   <ul>
     {% for post in site.posts %}
       {% if post.categories contains 'Presentation' %}
-        <li class="title entry-title">
-          <a href="{{ root_url }}{{ post.url }}">{{ post.title }}</a>
-          <div class="date updated right">{% include post/date.html %}{{ time }}</div>
-          <span class='slides right'>
-            {% if post.slides %}
-              <a href="{{ root_url }}{{ post.slides }}">Slides</a>
-            {% else %}
-              Slides
-            {% endif %}
-          </span>
-        </li>
+        {% assign presentation = post %}
+        {% include presentation_list_item.html %}
       {% endif %}
     {% endfor %}
   </ul>

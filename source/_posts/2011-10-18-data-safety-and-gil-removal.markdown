@@ -12,6 +12,8 @@ categories:
 - ruby
 - merbist.com
 - blog-post
+- Concurrency
+- Popular
 tags:
 - concurrency
 - gil
@@ -29,14 +31,14 @@ Showing obvious concrete examples of data corruption due to unsafe threaded code
 
 
 
-    
-    @array, threads = [], []
-    4.times do
-      threads << Thread.new { (1..100_000).each {|n| @array << n} }
-    end
-    threads.each{|t| t.join }
-    puts @array.size
-
+``` ruby
+@array, threads = [], []
+4.times do
+  threads << Thread.new { (1..100_000).each {|n| @array << n} }
+end
+threads.each{|t| t.join }
+puts @array.size
+```
 
 In the above example, I'm creating an instance variable of Array type and I start 4 threads. Each of these threads adds 100,000 items to the array. We then wait for all the threads to be done and check the size of the array.
 

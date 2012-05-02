@@ -3,12 +3,14 @@ layout: post
 title: "mruby and MobiRuby"
 date: 2012-04-20 12:32
 comments: true
+description: "mruby and MobiRuby's announcements covered by Matt Aimonetti"
 categories: 
 - Ruby
 - mruby
 - MobiRuby
 - MacRuby
 - Objective-C
+- Popular
 ---
 
 Today, two big Ruby news came directly from Japan:
@@ -56,6 +58,10 @@ their own needs.
 Besides being yet another Ruby implementation, the fact that the
 target audience and the project scope are well defined and that the project is lead
 by Ruby's author and sponsored by the Japanese government makes me want to believe that it can be a successful project. That said Lua is a simpler language and it is already well implemented in the targeted market, so hopefuly Matz, his team and the Japanese government have a plan to advocate and champion this new technology. Good luck to them and I'll keep an attentive eye on the project.
+
+** 
+Update: I wrote a [getting started with mruby](http://matt.aimonetti.net/posts/2012/04/25/getting-started-with-mruby/) guide.
+**
 
 ## MobiRuby
 
@@ -134,7 +140,7 @@ access to the native object is something extremely powerful.
 
 ### Objective-C is evolving.
 
-Objective-C is evolving, with the introduction of [ARC](http://developer.apple.com/library/ios/#releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html), memory management became much easier. The latest version of clang also granted Objective-C with a nicer syntax thanks to new literals and object subscripting ([read more](http://clang.llvm.org/docs/ObjectiveCLiterals.html)). As a matter of fact, Objective-C syntax is getting closer and closer to Ruby's. Making the choice to use an alternate harder and harder to make.
+Objective-C is evolving, with the introduction of [ARC](http://developer.apple.com/library/ios/#releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html), memory management became much easier. The latest version of clang also granted Objective-C with a nicer syntax thanks to new literals and object subscripting ([read more](http://clang.llvm.org/docs/ObjectiveCLiterals.html)). As a matter of fact, Objective-C's syntax is getting closer and closer to Ruby's making the choice to use an alternate much harder.
 
 ``` objective-c
 // character literals.

@@ -9,10 +9,10 @@ title: 'First step in scaling a web site: HTTP caching'
 wordpress_id: '1094'
 categories:
 - JavaScript
-- Misc
 - Software Design
 - merbist.com
 - blog-post
+- Popular
 tags:
 - caching
 - http cache
@@ -53,49 +53,49 @@ The only things that differs from the page rendered when the user is not logged 
 
 In Rails, in the sessions controller or whatever code logs you in, you need to create a new cookie containing the username:
 
-    
-    cookies[:username] = {
-             :value => session[:username],
-             :expires => 2.days.from_now,
-             :domain => ".cinematreasures.org"
-           }
-
+``` ruby
+cookies[:username] = {
+         :value => session[:username],
+         :expires => 2.days.from_now,
+         :domain => ".cinematreasures.org"
+       }
+```
 
 As you can see, we don't store the data in the session cookie and the data won't be encrypted. You need to be careful that someone changing his cookie value can't access data he/should shouldn't. But that's a different discussion. Now that the cookie is set, we can read it from JavaScript when the page is loaded.
 
-    
-    document.observe("dom:loaded", function() {
-      displayLoggedinUserLinks();
-    });
-    
-    function readCookie(name) {
-         var nameEQ = name + "=";
-         var ca = document.cookie.split(';');
-         for(var i=0;i < ca.length;i++) {
-              var c = ca[i];
-              while (c.charAt(0)==' ') c = c.substring(1,c.length);
-              if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-         }
-         return null;
-    }
-    
-    function displayLoggedinUserLinks() {
-      var username            = readCookie('username');
-      var loginLink           = $('login');
-      var logout              = $('logout');
-      if (username == null){
-        loginLink.show();
-        logout.hide();
-      }else{
-        // user is logged in and we have his/her username
-        loginLink.hide();
-        if(userGreetings){ userGreetings.update("<span id="username">username</span>"); }
-        logout.show();
-        showAvatar(username);
-      };
-      return true;
-    }
+``` javascript
+document.observe("dom:loaded", function() {
+  displayLoggedinUserLinks();
+});
 
+function readCookie(name) {
+     var nameEQ = name + "=";
+     var ca = document.cookie.split(';');
+     for(var i=0;i < ca.length;i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1,c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+     }
+     return null;
+}
+
+function displayLoggedinUserLinks() {
+  var username            = readCookie('username');
+  var loginLink           = $('login');
+  var logout              = $('logout');
+  if (username == null){
+    loginLink.show();
+    logout.hide();
+  }else{
+    // user is logged in and we have his/her username
+    loginLink.hide();
+    if(userGreetings){ userGreetings.update("<span id="username">username</span>"); }
+    logout.show();
+    showAvatar(username);
+  };
+  return true;
+}
+```
 
 The code above doesn't do much, once the DOM is loaded, the displayLoggedinUserLinks() function gets trigger. This function reads the cookie via the readCookie() function and if a username is found, the login link is hidden, the user name is displayed, as well as the logout link and the avatar. (You can also use a jQuery cookie plugin to handle the cookie, but this is an old example using Prototype, replace the code accordingly)
 When the user logs out, we just need to delete the username cookie and the cached page will be rendered properly. In Rails, you would do delete the cookie like that: cookies.delete('username').
@@ -107,21 +107,22 @@ Now there is one more problem that people using might encouter: flash notices. F
 
 The problem is that the message is part of the rendered page and now for 60 seconds, all people hitting the home page will get the same message. This is why you would want to write a helper that would put this message in a custom cookie that you'd pull JS and then delete once displayed. You could use a helper like that to set the cookie:
 
-    
-    def flash_notice_cookie(msg, expiration=nil)
-      cookies[:flash_notice] = {
-        :value => msg,
-        :expires => expiration || 1.minutes.from_now,
-        :domain => ".cinematreasures.com"
-       }
-    end
-
+``` ruby
+def flash_notice_cookie(msg, expiration=nil)
+  cookies[:flash_notice] = {
+    :value => msg,
+    :expires => expiration || 1.minutes.from_now,
+    :domain => ".cinematreasures.com"
+   }
+end
+```
 
 And then add a function called when the DOM is ready which loads the message and injects it in the DOM. Once the cookie read, delete it so the message isn't displayed again.
 
  
 
 So there you have it, if you follow these few steps, you should be able to handle easily 10x more traffic without increasing hardware or making any type of crazy code change. Before you start looking into memcached, redis, cdns or whatever, consider HTTP caching and async DOM manipulation. Finally, note that if you can't use Varnish or Squid, you can very easily setup [Rack-Cache](http://rtomayko.github.com/rack-cache/) locally and share the cache via memcached. It's also a great way to test locally.
+
 
 
 

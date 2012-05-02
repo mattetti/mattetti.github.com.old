@@ -1,5 +1,6 @@
 body > header {
   background: $header-bg;
+  font-size: 110%;
   @media screen and (min-device-width : 320px) {
     height: 200px;
   }

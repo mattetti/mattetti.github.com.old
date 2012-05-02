@@ -11,6 +11,8 @@ categories:
 - ruby
 - merbist.com
 - blog-post
+- Popular
+- Concurrency
 tags:
 - concurrency
 - fibers

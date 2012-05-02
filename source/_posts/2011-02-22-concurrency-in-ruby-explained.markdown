@@ -12,6 +12,8 @@ categories:
 - Software Design
 - merbist.com
 - blog-post
+- Concurrency
+- Popular
 tags:
 - async
 - concurrency
