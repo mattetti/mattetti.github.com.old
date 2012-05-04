@@ -1,0 +1,286 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>MacRuby on iOS - RubyMotion review - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Review of RubyMotion (MacRuby on iOS), balanced overview of the pros and cons of this solution to run Ruby on iOS">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://merbist.com/2012/05/04/macruby-on-ios-rubymotion-review/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <a href='/matt_aimonetti'><img class="photo left" title='Matt Aimonetti'
+      alt='Photo of Matt Aimonetti' src="/images/matt_aimonetti.jpg" /></a>
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left bio-summary'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Software Architect</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/posts/archives/">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <div id="cse-search-form">Loading</div>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/">Home</a></li>
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/matt_aimonetti" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">MacRuby on iOS - RubyMotion Review</h1>
+    <div class="entry"><p>Yesterday, <a href="http://www.rubymotion.com/">RubyMotion</a> was released and let&#8217;s be honest, it is the best alternative to Objective-C out there.</p>
+
+<p>RubyMotion is a commercial, proprietary fork of MacRuby that targets iOS. This is not a small achievement, MacRuby relies on Objective C&#8217;s Garbage Collector (libauto) which is not available on iOS. Static compilation and new memory management solution was required to target the iOS platform . The new runtime had to be small and efficient. Furthermore, being able to run code on iOS isn&#8217;t enough, you need tools to interact with the compiler, to debug, to packages applications etc&#8230;</p>
+
+<p>I don&#8217;t think anyone will contest the fact that RubyMotion is a well done product. The question however is, &#8221;<strong>is it worth for you to invest some money, time and energy in this product instead of using Apple&#8217;s language and tools</strong>&#8221;. In this article, I&#8217;ll try to balance the pros and cons of RubyMotion so you can have a better understanding of what RubyMotion could mean for you. As a disclaimer I should say that I was beta testing RubyMotion, that they are strong ties between RubyMotion and the MacRuby project I&#8217;m part of and finally that having MacRuby on iOS has been something I&#8217;ve been looking forward for a very long time.</p>
+
+<p>Over the last few months I&#8217;ve seen RubyMotion take shape and finally hit the big 1.0. As you can see from <a href="http://twitter.com/#!/search/rubymotion?q=rubymotion">Twitter</a> and <a href="http://news.ycombinator.com/item?id=3924657">HackerNews</a>, the Ruby community is excited about being able to use their language to write statically compiled, native iOS apps. Spoiler alert, they are right, it&#8217;s a lot of fun.</p>
+
+<p> </p>
+
+<hr />
+
+<p> </p>
+
+<h2>What I like about RubyMotion:</h2>
+
+<h3>Ruby Language</h3>
+
+<p>I don&#8217;t mind Objective-C, I think it&#8217;s a fine superset of C, with the arrival of blocks, new literals and automatic memory management via ARC, Objective-C is actually getting better over time. But frankly, it&#8217;s not Ruby. You still have to deal with headers, you always have to compile your code via some weird Xcode voodoo settings, testing is a pain, the language, even with the new literals is quite verbose. On the other hand, using Ruby syntax I can get much more flexibility, reuse my code via mixins, easily reopen existing classes etc&#8230; At the end of the day, I end up with some code that seems cleaner, easier to understand and maintain even though I&#8217;m calling the same underlying APIs. Ruby&#8217;s flexibility also allows developers to make their own higher level APIs, take a look at some of the <a href="https://github.com/mattetti/BubbleWrap">wrappers/helpers</a> I wrote while playing with RubyMotion.</p>
+
+<p><a href="http://www.ruby-lang.org/en/"><img src="http://merbist.com/wp-content/uploads/2012/05/matt_aimonetti-Ruby_logo-150x150.jpg" alt="" /></a></p>
+
+<h3>MacRuby</h3>
+
+<p>RubyMotion is based on MacRuby, meaning that all the time and energy invested in the project will benefit RubyMotion&#8217;s users. All the concepts I explain in my <a href="http://shop.oreilly.com/product/0636920000723.do">MacRuby book</a> apply to RubyMotion. You don&#8217;t have to find workarounds to work with native APIs, Ruby objects are Objective-C objects and performance is great. I do regret Apple didn&#8217;t decide to embrace MacRuby for iOS but at the same time, even though we lost the Open Source aspect of the project and Apple&#8217;s backing, we gained much more flexibility and freedom on Laurent&#8217;s part.</p>
+
+<p><a href="https://www.amazon.com/dp/1449380379?tag=merbist-20&amp;camp=213381&amp;creative=390973&amp;linkCode=as4&amp;creativeASIN=1449380379&amp;adid=1SKHT7ABMG1YJZ3136WQ&amp;"><img src="http://merbist.com/wp-content/uploads/matt_aimonetti/matt_aimonetti_macruby_book.gif" alt="" /></a></p>
+
+<h3>REPL/Interactive shell</h3>
+
+<p>RubyMotion doesn&#8217;t currently have a debugger, but it does have something Objective-C developers don&#8217;t have, a <a href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> working with the simulator. This feature is quite handy when debugging your application or learning the Cocoa APIs. You can click on a visual element in the simulator and start modifying the objects in real time in a terminal window and see the modifications in the simulator. It reminds me of the first time I used firebug to edit the html/css of a web page and saw the changes in real time.</p>
+
+<p><a href="http://www.youtube.com/watch?feature=player_embedded&amp;v=rejYKzLglSE#!"><img src="http://merbist.com/wp-content/uploads/2012/05/matt_aimonetti-RubyMotion-REPL-150x150.jpg" alt="" /></a></p>
+
+<h3>Not dependent on Xcode</h3>
+
+<p>Xcode is fine when you write Objective-C code, but it crashes often, it has a complicated UI and never really worked well for MacRuby due to the fact that Objective-C and Ruby have different requirements and the that Xcode is not open source. It&#8217;s also fully controlled by Apple and doesn&#8217;t provide APIs for 3rd party developers. (That said, the Xcode team has often helped out when a new released of Xcode broke MacRuby, so thank you guys).</p>
+
+<p>Being able to use simple rake tasks to compile, simulate and deploy applications is just really really nice. I&#8217;m sure we&#8217;ll end up with better IDE integration, nice GUIs for some who like that, but in the meantime, as a &#8220;hacker&#8221;, I really enjoy the simplicity of the Rake tasks and not being forced in using a specific IDE.</p>
+
+<p> </p>
+
+<h3>Memory management</h3>
+
+<p>Even though ARC made memory management much easier for Objective-C developers, when using RubyMotion you don&#8217;t have to worry about memory (well at least not explicitly, don&#8217;t be dumb and create a bazillion objects and hold references to them either). This includes the CoreFoundation objects that you still have to manually manage in Objective-C. Memory management is transparent and in most cases it&#8217;s really nice.</p>
+
+<p> </p>
+
+<hr />
+
+<p> </p>
+
+<h2>What I like less about RubyMotion</h2>
+
+<p>Here is a list of things that are cons to using RubyMotion, note that while the list is longer than my list of &#8220;pros&#8221;, I listed a lot of small things. I also think that most of these issues will get solved in the next few months.</p>
+
+<p> </p>
+
+<h3>Ruby language</h3>
+
+<p>There are some cases where Ruby just isn&#8217;t that great or is not an option. Examples include dealing with API relying heavily on pointers, when using some of the lower level APIs or when you have to interact with C++ (video game engines for instance). The good news is that within the same project, you can write part of your code in Objective-C and the rest in RubyMotion. The other thing that bothers me a little bit with writing Ruby code for iOS is that you can&#8217;t easily enforce argument types and therefore you are losing a lot of the features provided by Clang to the Objective-C developers. If dream of an optionally typed Ruby but that&#8217;s a different topic.</p>
+
+<p>Another downside of using Ruby is that Ruby developers will assume all standard libraries and gems will be compatible with RubyMotion. This isn&#8217;t the case, you need to think of RubyMotion as only offering the Ruby syntax (modulo a few differences). To be honest, most of the std libs and gems aren&#8217;t that useful when writing iOS apps and even when I write MacRuby apps, I rarely rely on them and pick libraries designed to work in a non blocking, multi threaded environment (usually ObjC libs that I wrap).</p>
+
+<p> </p>
+
+<h3>Cocoa Touch</h3>
+
+<p>If you&#8217;re already an iOS/OS X developer, you know that most of the hurdles aren&#8217;t the language syntax but the Cocoa APIs. These APIs are what you need to interact on a daily basis to create your application. Cocoa APIs are usually considerably low level compared to what you usually see in Python, Ruby or even Java. While they are quite consistent, the APIs still have a stiff learning curve and well, currently,  if you want to write iOS applications, even if you know Ruby, you still have to learn Cocoa.</p>
+
+<p>However, I do think that with RubyMotion popularity, we will start seeing more and more <a href="https://github.com/mattetti/BubbleWrap">wrappers</a> around these, sometimes <a href="https://github.com/HipByte/RubyMotionSamples/blob/master/GestureTable/app/gesture_recognizer.rb">hideous APIs</a>.</p>
+
+<p> </p>
+
+<h3>No Xcode/IDE</h3>
+
+<p>There are cases where an IDE is really practical, especially when learning new APIs. Being able to have code completion, quick access to the documentation, instrumentation, debugging, interface builder, refactoring tools are things that Objective-C developers might have a hard time with when switching to RubyMotion. If you don&#8217;t know Ruby nor Cocoa, getting started with RubyMotion might be quite hard and you are probably not currently in the target audience.</p>
+
+<p> </p>
+
+<h3>Writing UI code by hand</h3>
+
+<p>In some cases, it makes sense, in other, it should be much easier. I know that Laurent is working on a DSL to make that easier and I&#8217;m looking forward to it, but in the mean time, this is quite a painful exercise, especially due to the complexity of the Cocoa UI APIs. Using Xcode&#8217;s interface builder and Storyboards is something I know a lot of us wish we could do with RubyMotion when developing specific types of applications.</p>
+
+<p><a href="http://kurrytran.blogspot.fr/2011/07/simple-ios-5-tutorial-using-storyboard.html"><img src="http://merbist.com/wp-content/uploads/2012/05/matt_aimonetti_storyboard-1.jpg" alt="" /></a></p>
+
+<h3>No debugger</h3>
+
+<p>Again, this is eventually coming but the current lack of debugger can be problematic at times, especially when the problem isn&#8217;t obvious.</p>
+
+<p> </p>
+
+<h3>Lack of clear target audience</h3>
+
+<p>It&#8217;s hard to blame a brand new product for not having clearly defined a target audience. But as a developer I find myself wondering when should I use RubyMotion and what for. Is RubyMotion great for quick prototyping I can then turn into production code? Or is good for throw away prototypes? Is it reserved for &#8220;fart and flash light&#8221; applications? Is it ready for prime time and should I invest and write my new awesome apps using it? Should I convert over my existing code base over from Titanium (or whatever other alternatives you used)? Should I use RubyMotion every time I would use Objective-C?</p>
+
+<p>I guess we will see when the first applications will start hitting the app store and people will start reporting on their experience.</p>
+
+<h3>Documentation</h3>
+
+<p>I&#8217;m partially to blame here since I could have moved my butt and start writing a book but the point is nonetheless valid. All the iOS documentation out there is for Objective-C, all the APIs and samples provided by Apple are obviously only for Objective-C. Thankfully, you can use the 2 MacRuby books available out there to understand how to convert this existing documentation in something useful, but RubyMotion will need to provide better and more adapted documentation for begginners. I have no doubt that this is coming sooner than later.</p>
+
+<p> </p>
+
+<h3>Proprietary solution</h3>
+
+<p>RubyMotion isn&#8217;t open source and currently fully relies on the shoulder of a single man. If unfortunately, Laurent goes out of business or decides to do something else then we will have to rewrite our apps in Objective-C.  Using RubyMotion for a professional product represents a significant business risk, which is exactly the same as using proprietary technology from any vendor. Apple could also decide to switch to JavaScript or rewrite iOS in Java and deprecate Objective-C. Let&#8217;s just say that it is just less likely. I usually favor open source solutions, from the programming language I use to the OS I deploy to. This isn&#8217;t always possible and if you want to write iOS applications, you don&#8217;t currently have a choice. I do wish Laurent had find a way to make money while keeping the source code open, but who knows after he made his first million(s), he might change his mind.</p>
+
+<p><a href="http://merbist.com/wp-content/uploads/2012/05/matt_aimonetti-rms.jpg"><img src="http://merbist.com/wp-content/uploads/2012/05/matt_aimonetti-rms-150x150.jpg" alt="" /></a></p>
+
+<h2>Conclusion</h2>
+
+<p>I would strongly suggest you consider giving RubyMotion a try. I can assure you that it will provide at least a few hours of &#8216;hacking fun&#8217; (and you will be able to brag about havng written your own iPhone app).  It will also help support financially someone who&#8217;s taking a risk in trying to push mobile development to the next level.</p>
+
+<p>While RubyMotion is by far, the best alternative to Objective-C but it is hard to tell 48 hours after its release what people will do with it. Can it transcend the programming language barriers and attract Python, PHP, Java, ObjC and JavaScript developers? What is the sweet spot for RubyMotion applications? Will it weigh in the native vs web app battle? Can it make iOS development more accessible to the mass? I guess time will tell.</p>
+
+<p>What do you think?</p>
+
+<p> </p>
+</div>
+
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-04T07:17:47+02:00" pubdate data-updated="true">May 4<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/merbist-com/'>merbist.com</a>
+  
+</div>
+
+</div>
+        
+          <div class='legacy'><a href="http://merbist.com/2012/05/04/macruby-on-ios-rubymotion-review/">Original location</a></div>
+        
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        <div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+  <a class="addthis_button_tweet"></a>
+  </br>
+	
+	
+  <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+  </br>
+	
+	<a class="addthis_counter addthis_pill_style"></a></br>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4eb4a0c47196e907"></script>
+</div>
+
+        
+    </div>
+
+
+</article>
+
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+  var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+    '010526096358170648343:WMX140696544', customSearchOptions);
+  customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+  var options = new google.search.DrawOptions();
+  options.enableSearchboxOnly("http://matt.aimonetti.net/search");
+  customSearchControl.draw('cse-search-form', options);
+  }, true);
+</script>
+
+
+
+
+
+</body>
+</html>

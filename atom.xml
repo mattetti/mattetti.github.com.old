@@ -4,7 +4,7 @@
   <title><![CDATA[Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-05-02T14:26:29+02:00</updated>
+  <updated>2012-05-04T19:45:57+02:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -12,6 +12,133 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MacRuby on iOS - RubyMotion review]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/05/04/macruby-on-ios-rubymotion-review/"/>
+    <updated>2012-05-04T07:17:47+02:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/05/04/macruby-on-ios-rubymotion-review</id>
+    <content type="html"><![CDATA[<p>Yesterday, <a href="http://www.rubymotion.com/">RubyMotion</a> was released and let&#8217;s be honest, it is the best alternative to Objective-C out there.</p>
+
+<p>RubyMotion is a commercial, proprietary fork of MacRuby that targets iOS. This is not a small achievement, MacRuby relies on Objective C&#8217;s Garbage Collector (libauto) which is not available on iOS. Static compilation and new memory management solution was required to target the iOS platform . The new runtime had to be small and efficient. Furthermore, being able to run code on iOS isn&#8217;t enough, you need tools to interact with the compiler, to debug, to packages applications etc&#8230;</p>
+
+<p>I don&#8217;t think anyone will contest the fact that RubyMotion is a well done product. The question however is, &#8221;<strong>is it worth for you to invest some money, time and energy in this product instead of using Apple&#8217;s language and tools</strong>&#8221;. In this article, I&#8217;ll try to balance the pros and cons of RubyMotion so you can have a better understanding of what RubyMotion could mean for you. As a disclaimer I should say that I was beta testing RubyMotion, that they are strong ties between RubyMotion and the MacRuby project I&#8217;m part of and finally that having MacRuby on iOS has been something I&#8217;ve been looking forward for a very long time.</p>
+
+<p>Over the last few months I&#8217;ve seen RubyMotion take shape and finally hit the big 1.0. As you can see from <a href="http://twitter.com/#!/search/rubymotion?q=rubymotion">Twitter</a> and <a href="http://news.ycombinator.com/item?id=3924657">HackerNews</a>, the Ruby community is excited about being able to use their language to write statically compiled, native iOS apps. Spoiler alert, they are right, it&#8217;s a lot of fun.</p>
+
+<p> </p>
+
+<hr />
+
+<p> </p>
+
+<h2>What I like about RubyMotion:</h2>
+
+<h3>Ruby Language</h3>
+
+<p>I don&#8217;t mind Objective-C, I think it&#8217;s a fine superset of C, with the arrival of blocks, new literals and automatic memory management via ARC, Objective-C is actually getting better over time. But frankly, it&#8217;s not Ruby. You still have to deal with headers, you always have to compile your code via some weird Xcode voodoo settings, testing is a pain, the language, even with the new literals is quite verbose. On the other hand, using Ruby syntax I can get much more flexibility, reuse my code via mixins, easily reopen existing classes etc&#8230; At the end of the day, I end up with some code that seems cleaner, easier to understand and maintain even though I&#8217;m calling the same underlying APIs. Ruby&#8217;s flexibility also allows developers to make their own higher level APIs, take a look at some of the <a href="https://github.com/mattetti/BubbleWrap">wrappers/helpers</a> I wrote while playing with RubyMotion.</p>
+
+<p><a href="http://www.ruby-lang.org/en/"><img src="http://merbist.com/wp-content/uploads/2012/05/matt_aimonetti-Ruby_logo-150x150.jpg" alt="" /></a></p>
+
+<h3>MacRuby</h3>
+
+<p>RubyMotion is based on MacRuby, meaning that all the time and energy invested in the project will benefit RubyMotion&#8217;s users. All the concepts I explain in my <a href="http://shop.oreilly.com/product/0636920000723.do">MacRuby book</a> apply to RubyMotion. You don&#8217;t have to find workarounds to work with native APIs, Ruby objects are Objective-C objects and performance is great. I do regret Apple didn&#8217;t decide to embrace MacRuby for iOS but at the same time, even though we lost the Open Source aspect of the project and Apple&#8217;s backing, we gained much more flexibility and freedom on Laurent&#8217;s part.</p>
+
+<p><a href="https://www.amazon.com/dp/1449380379?tag=merbist-20&amp;camp=213381&amp;creative=390973&amp;linkCode=as4&amp;creativeASIN=1449380379&amp;adid=1SKHT7ABMG1YJZ3136WQ&amp;"><img src="http://merbist.com/wp-content/uploads/matt_aimonetti/matt_aimonetti_macruby_book.gif" alt="" /></a></p>
+
+<h3>REPL/Interactive shell</h3>
+
+<p>RubyMotion doesn&#8217;t currently have a debugger, but it does have something Objective-C developers don&#8217;t have, a <a href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> working with the simulator. This feature is quite handy when debugging your application or learning the Cocoa APIs. You can click on a visual element in the simulator and start modifying the objects in real time in a terminal window and see the modifications in the simulator. It reminds me of the first time I used firebug to edit the html/css of a web page and saw the changes in real time.</p>
+
+<p><a href="http://www.youtube.com/watch?feature=player_embedded&amp;v=rejYKzLglSE#!"><img src="http://merbist.com/wp-content/uploads/2012/05/matt_aimonetti-RubyMotion-REPL-150x150.jpg" alt="" /></a></p>
+
+<h3>Not dependent on Xcode</h3>
+
+<p>Xcode is fine when you write Objective-C code, but it crashes often, it has a complicated UI and never really worked well for MacRuby due to the fact that Objective-C and Ruby have different requirements and the that Xcode is not open source. It&#8217;s also fully controlled by Apple and doesn&#8217;t provide APIs for 3rd party developers. (That said, the Xcode team has often helped out when a new released of Xcode broke MacRuby, so thank you guys).</p>
+
+<p>Being able to use simple rake tasks to compile, simulate and deploy applications is just really really nice. I&#8217;m sure we&#8217;ll end up with better IDE integration, nice GUIs for some who like that, but in the meantime, as a &#8220;hacker&#8221;, I really enjoy the simplicity of the Rake tasks and not being forced in using a specific IDE.</p>
+
+<p> </p>
+
+<h3>Memory management</h3>
+
+<p>Even though ARC made memory management much easier for Objective-C developers, when using RubyMotion you don&#8217;t have to worry about memory (well at least not explicitly, don&#8217;t be dumb and create a bazillion objects and hold references to them either). This includes the CoreFoundation objects that you still have to manually manage in Objective-C. Memory management is transparent and in most cases it&#8217;s really nice.</p>
+
+<p> </p>
+
+<hr />
+
+<p> </p>
+
+<h2>What I like less about RubyMotion</h2>
+
+<p>Here is a list of things that are cons to using RubyMotion, note that while the list is longer than my list of &#8220;pros&#8221;, I listed a lot of small things. I also think that most of these issues will get solved in the next few months.</p>
+
+<p> </p>
+
+<h3>Ruby language</h3>
+
+<p>There are some cases where Ruby just isn&#8217;t that great or is not an option. Examples include dealing with API relying heavily on pointers, when using some of the lower level APIs or when you have to interact with C++ (video game engines for instance). The good news is that within the same project, you can write part of your code in Objective-C and the rest in RubyMotion. The other thing that bothers me a little bit with writing Ruby code for iOS is that you can&#8217;t easily enforce argument types and therefore you are losing a lot of the features provided by Clang to the Objective-C developers. If dream of an optionally typed Ruby but that&#8217;s a different topic.</p>
+
+<p>Another downside of using Ruby is that Ruby developers will assume all standard libraries and gems will be compatible with RubyMotion. This isn&#8217;t the case, you need to think of RubyMotion as only offering the Ruby syntax (modulo a few differences). To be honest, most of the std libs and gems aren&#8217;t that useful when writing iOS apps and even when I write MacRuby apps, I rarely rely on them and pick libraries designed to work in a non blocking, multi threaded environment (usually ObjC libs that I wrap).</p>
+
+<p> </p>
+
+<h3>Cocoa Touch</h3>
+
+<p>If you&#8217;re already an iOS/OS X developer, you know that most of the hurdles aren&#8217;t the language syntax but the Cocoa APIs. These APIs are what you need to interact on a daily basis to create your application. Cocoa APIs are usually considerably low level compared to what you usually see in Python, Ruby or even Java. While they are quite consistent, the APIs still have a stiff learning curve and well, currently,  if you want to write iOS applications, even if you know Ruby, you still have to learn Cocoa.</p>
+
+<p>However, I do think that with RubyMotion popularity, we will start seeing more and more <a href="https://github.com/mattetti/BubbleWrap">wrappers</a> around these, sometimes <a href="https://github.com/HipByte/RubyMotionSamples/blob/master/GestureTable/app/gesture_recognizer.rb">hideous APIs</a>.</p>
+
+<p> </p>
+
+<h3>No Xcode/IDE</h3>
+
+<p>There are cases where an IDE is really practical, especially when learning new APIs. Being able to have code completion, quick access to the documentation, instrumentation, debugging, interface builder, refactoring tools are things that Objective-C developers might have a hard time with when switching to RubyMotion. If you don&#8217;t know Ruby nor Cocoa, getting started with RubyMotion might be quite hard and you are probably not currently in the target audience.</p>
+
+<p> </p>
+
+<h3>Writing UI code by hand</h3>
+
+<p>In some cases, it makes sense, in other, it should be much easier. I know that Laurent is working on a DSL to make that easier and I&#8217;m looking forward to it, but in the mean time, this is quite a painful exercise, especially due to the complexity of the Cocoa UI APIs. Using Xcode&#8217;s interface builder and Storyboards is something I know a lot of us wish we could do with RubyMotion when developing specific types of applications.</p>
+
+<p><a href="http://kurrytran.blogspot.fr/2011/07/simple-ios-5-tutorial-using-storyboard.html"><img src="http://merbist.com/wp-content/uploads/2012/05/matt_aimonetti_storyboard-1.jpg" alt="" /></a></p>
+
+<h3>No debugger</h3>
+
+<p>Again, this is eventually coming but the current lack of debugger can be problematic at times, especially when the problem isn&#8217;t obvious.</p>
+
+<p> </p>
+
+<h3>Lack of clear target audience</h3>
+
+<p>It&#8217;s hard to blame a brand new product for not having clearly defined a target audience. But as a developer I find myself wondering when should I use RubyMotion and what for. Is RubyMotion great for quick prototyping I can then turn into production code? Or is good for throw away prototypes? Is it reserved for &#8220;fart and flash light&#8221; applications? Is it ready for prime time and should I invest and write my new awesome apps using it? Should I convert over my existing code base over from Titanium (or whatever other alternatives you used)? Should I use RubyMotion every time I would use Objective-C?</p>
+
+<p>I guess we will see when the first applications will start hitting the app store and people will start reporting on their experience.</p>
+
+<h3>Documentation</h3>
+
+<p>I&#8217;m partially to blame here since I could have moved my butt and start writing a book but the point is nonetheless valid. All the iOS documentation out there is for Objective-C, all the APIs and samples provided by Apple are obviously only for Objective-C. Thankfully, you can use the 2 MacRuby books available out there to understand how to convert this existing documentation in something useful, but RubyMotion will need to provide better and more adapted documentation for begginners. I have no doubt that this is coming sooner than later.</p>
+
+<p> </p>
+
+<h3>Proprietary solution</h3>
+
+<p>RubyMotion isn&#8217;t open source and currently fully relies on the shoulder of a single man. If unfortunately, Laurent goes out of business or decides to do something else then we will have to rewrite our apps in Objective-C.  Using RubyMotion for a professional product represents a significant business risk, which is exactly the same as using proprietary technology from any vendor. Apple could also decide to switch to JavaScript or rewrite iOS in Java and deprecate Objective-C. Let&#8217;s just say that it is just less likely. I usually favor open source solutions, from the programming language I use to the OS I deploy to. This isn&#8217;t always possible and if you want to write iOS applications, you don&#8217;t currently have a choice. I do wish Laurent had find a way to make money while keeping the source code open, but who knows after he made his first million(s), he might change his mind.</p>
+
+<p><a href="http://merbist.com/wp-content/uploads/2012/05/matt_aimonetti-rms.jpg"><img src="http://merbist.com/wp-content/uploads/2012/05/matt_aimonetti-rms-150x150.jpg" alt="" /></a></p>
+
+<h2>Conclusion</h2>
+
+<p>I would strongly suggest you consider giving RubyMotion a try. I can assure you that it will provide at least a few hours of &#8216;hacking fun&#8217; (and you will be able to brag about havng written your own iPhone app).  It will also help support financially someone who&#8217;s taking a risk in trying to push mobile development to the next level.</p>
+
+<p>While RubyMotion is by far, the best alternative to Objective-C but it is hard to tell 48 hours after its release what people will do with it. Can it transcend the programming language barriers and attract Python, PHP, Java, ObjC and JavaScript developers? What is the sweet spot for RubyMotion applications? Will it weigh in the native vs web app battle? Can it make iOS development more accessible to the mass? I guess time will tell.</p>
+
+<p>What do you think?</p>
+
+<p> </p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Getting started with mruby]]></title>
@@ -2102,111 +2229,6 @@ The attributes function is defined a bit below and and it takes any type of obje
 <p>That might be a shocker at first glance. Going from working on video games to working for a daily-deal startup? It doesn&#8217;t seem like a very smart career move. To be honest, that was my first reaction. But LivingSocial&#8217;s VP of engineering is <a href="http://twitter.com/#!/chadfowler">Chad Fowler</a> (the author of The Passionate Programmer, mentioned earlier) and its VP of R&amp;D is <a href="http://en.wikipedia.org/wiki/Richard_Kilmer_(programmer">Rich Kilmer</a>), InfoEther&#8217;s cofounder and recognized mad-scientist-coder. I&#8217;ve known Chad and Rich for many years, meeting at tech conferences that they organized or were invited to give talks to, and even getting to hack on some projects with Rich. So when they approached me to join them at LivingSocial, I wanted to know more about their own motivations, why I would be a good fit and how the company/job would rate against my list of criteria. We had long and honest discussions and the result is that I am excited to soon be working with one of the best teams I know of. More concretely, I will be working with <a href="http://twitter.com/#!/rich_kilmer">Rich</a>, <a href="http://twitter.com/#!/wbruce">Bruce</a> and <a href="http://twitter.com/#!/go">Michael</a> in helping LivingSocial revolutionize the local market. LivingSocial is a fast growing and successful company with a strong focus on creating a great experience for both customers and merchants. The company&#8217;s vision is well defined and the desire to change the world the way we know it is palpable. Most of the founders have a technical background, they value good engineering practices and have created a nice, positive company culture. Chad has some really awesome, passionate and talented engineers on his team (too many to mention), for whom I have a lot of respect and with whom I look forward to working with.  I also value the fact that LivingSocial trusts and values me enough to let me work remotely. This is very important for me because it shows that my new employer really wants to work with me, trusts me but also is willing to embrace the challenges of having a remote team if that&#8217;s what&#8217;s needed to create the &#8220;right team&#8221;. After looking more deeply at what I need and what LivingSocial is, I believe that I can assist LivingSocial in making a very positive change to the way small businesses around the world are run. And I am looking forward to this.</p>
 
 <p> </p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Video game web framework design]]></title>
-    <link href="http://matt.aimonetti.net/posts/2011/04/14/video-game-web-framework-design/"/>
-    <updated>2011-04-14T10:28:39+02:00</updated>
-    <id>http://matt.aimonetti.net/posts/2011/04/14/video-game-web-framework-design</id>
-    <content type="html"><![CDATA[<p>In this post I will do my best to explain why and how I reinvented the wheel and wrote a custom web framework for some of Sony&#8217;s <a href="http://www.gameproducer.net/2006/05/26/what-are-aaa-titles/">AAA console titles</a>. My goal is to reflect on my work by walking you through the design process and some of the implementation decisions. This is not about being right or being wrong, it&#8217;s about designing a technical solution to solve concrete business challenges.</p>
-
-<h2>Problem Domain</h2>
-
-<p>The video game industry is quite special, to say the least. It shares a lot of similarities with the movie industry. The big difference is that  the movie industry hasn&#8217;t evolved as quickly as the video game  industry has. But the concept is the same, someone comes up with a great  idea, finds a team/studio to develop the game and finds a publisher. The  development length and budget depends on the type of game, but for a AAA  console game, it usually takes a least a <a href="http://www.joystiq.com/2010/03/09/god-of-war-3-has-44-million-dollar-budget/">few million</a> and a minimum of a year of work once the project has received the green light. The creation of such a game involves various teams, designers, artists, animators, audio teams, developers, producers, QA, marketing, management/overhead etc.. Once the game gets released, players purchase the whole game for a one time fee and the studio moves  on to their next game. Of course things are not that simple, with the latest platforms, we now have the option to patch games, add <a href="http://en.wikipedia.org/wiki/Downloadable_content">DLC</a> etc.. But historically, a console game is considered done when it ships, exactly like a movie, and very little work is scheduled post release.</p>
-
-<p>Concretely such an approach exposes a few challenges when trying to implement online features for a <a href="http://www.gameproducer.net/2006/05/26/what-are-aaa-titles/">AAA console title</a>:</p>
-
-<ul>
-<li><p>Communication with the game client network team</p></li>
-<li><p>Scalability, performance</p></li>
-<li><p>Insane deadlines, unstable design (constant change of requirements)</p></li>
-<li><p>Can&#8217;t afford to keep on working on the system once released (time delimited projects)</p></li>
-</ul>
-
-
-<p> </p>
-
-<h2>Communication</h2>
-
-<p>As in most situations, communication is one of the biggest challenges. Communication is even harder in the video game industry since you have so many teams and experts involved. Each team speaks its own jargon, has its own expertise and its own deadlines. But all focus on the same goal: releasing the best game ever. The team I&#8217;m part of has implementing online features as its goal. That&#8217;s the way we bring business value to our titles. Concretely, that means that we provide the game client developers with a C++ SDK which connects to custom web APIs written in Ruby. The API implementations rely on various data stores (<a href="http://www.mysql.com/">MySQL</a>, <a href="http://redis.io/">Redis</a>, <a href="http://memcached.org/">Memcached</a>, memory) to store and retrieve all sorts of game data.</p>
-
-<p>Nobody but our team should care about the implementation details, after all, the whole point of providing an API is to provide a simple interface so others can do their part of the job in the easiest way possible. This is exactly where communication becomes a problem. The design of these APIs should be the result of the work of two teams with two different domains of expertise and different concerns. One team focuses on client performance, memory optimization and making the online resources available to the game engine without affecting the game play. The other, focuses on server performance, latency, scalability, data storage and system contention under load. Both groups have to come together to find a compromise making each other&#8217;s job doable. Unfortunately, things are not that simple and game designers (who are usually not technical people) have a hard time <em>not</em> changing their designs and requirements every other week (usually for good reasons) making API design challenging and creating tension between the teams.</p>
-
-<p>From this perspective, the API is the most important deliverable for our team and it should communicate the design goal while being very explicit about how it works, why it works the way it does, and how to implement it client side. This is a very good place where we can improve communication by making sure that we focus on making clear, well designed, well documented, flexible APIs.</p>
-
-<p> </p>
-
-<h2>Scalability, performance</h2>
-
-<p>On the server side, the APIs need to perform and scale to handles tends of thousands of concurrent requests. Web developers often rely on aggressive <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html">HTTP caching</a> but in our case, the web client (our SDK) has a limited amount of memory available and 90% of the requests are user specific (can&#8217;t use full page HTTP cache) and a lot of these are POST/DELETE requests (can&#8217;t be cached). That means that, to scale, we have to focus on what most developers don&#8217;t often have to worry too much about: all the small details which, put together with a high load, end up drastically affecting your performance.</p>
-
-<p>While Ruby is a great language, a lot of the libraries and frameworks are not optimized for performance, at least not the type of performance needed for our use case. However, the good news is that this is easily fixable and many alternatives exist (lots of async, non-blocking drivers for i.e). When obsessed with performance, you quickly learn to properly load test, profile, and monitor your code to find the bottlenecks and the places where you should focus your attention. The big, unique challenge though, is that a console game will more than likely see its peak traffic in the first few weeks, not really giving the chance to the online team to iteratively handle the prod issues. The only solution is to do everything possible before going live to ensure that the system will perform as expected. Of course if we were to write the same services in a more performant language, we would need to spend less time optimizing. But we are gaining so much flexibility by using a higher level programming language that, in my mind, the trade off is totally worth it (plus you still need to spend a lot of time optimizing your code path, even if your code is written in a very fast language).</p>
-
-<p> </p>
-
-<h2>Deadlines, requirement changes</h2>
-
-<p>That&#8217;s just part of the way the industry works. Unless you work for <a href="http://blizzard.com">Blizzard</a> and you can afford to spend a crazy amount of time and money on the development of a title; you will have to deal with sliding deadlines, requirement changes, scope changes etc&#8230; The only way I know how to protect myself from such things is to plan for the worst. Being a non-idealistic (read pessimistic) person helps a lot. When you design your software, make sure your design is sound but flexible enough to handle any major change that you know could happen at any time. Pick your battles and make sure your assumptions are properly thought through, communicated and documented so others understand and accept them. In a nutshell, this is a problem we can&#8217;t avoid, so you need to embrace it.</p>
-
-<p> </p>
-
-<h2>Limited reusability</h2>
-
-<p>This topic has a lot to do with the previous paragraph. Because scopes can change often and because the deadlines are often crazy, a lot of the time, engineers don&#8217;t take the time to think about reusability. They slap some code together, pray to the <a href="http://en.wikipedia.org/wiki/Lords_of_Kobol">lords of Kobol</a> and hope that they won&#8217;t have to look at their code ever again (I&#8217;m guilty of having done that too). The result is a lot of throw away code. This is actually quite frequent and normal in our industry. But it doesn&#8217;t mean that it the right thing to do! The assumption/myth is that each game is different and therefore two games can&#8217;t be using the same tech solution. My take on that is that it&#8217;s partly true. But some components are the same for 80% of the games I work on. So why not design them well and reuse the common parts? (A lot of games share the same engines, such as <a href="http://www.unrealengine.com/">Unreal</a> for example, and there is no reason why we can&#8217;t build a core online engine extended for each title)</p>
-
-<p> </p>
-
-<h2>My approach</h2>
-
-<p>When I joined Sony, I had limited experience with the console video game industry and my experience was not even related to online gaming. So even though I had (strong) opinions (and was often quite (perhaps even too) vocal about them), I did my best to improve existing components and work with the existing system. During that time, the team shipped 4 AAA titles on the existing system. As we were going through the game cycles, I did my best to understand the problem domain, the reasons behind some of the design decisions and finally I looked at what could be done differently to improve our business value. After releasing a title with some serious technical difficulties, I spent some time analyzing and listing the problems we had and their root causes. I asked our senior director for a mission statement and we got the team together to define the desiderata/objectives of our base technology. Here is what we came up with:</p>
-
-<ol>
-<li><p>Stability</p></li>
-<li><p>Performance / Scalability</p></li>
-<li><p>Encapsulation / Modularity</p></li>
-<li><p>Documentation</p></li>
-<li><p>Conventions</p></li>
-<li><p>Reusability / Maintainability</p></li>
-</ol>
-
-
-<p>These objectives are meant to help us objectively evaluate two options. The legacy solution was based on Rails, or more accurately: Rails was used in the legacy solution. Rails had been hacked in so many different ways that it was really hard to update anything without breaking random parts of the framework. The way to do basic things kept being changed, there was no consistent design, no entry points, no conventions and each new game would duplicate the source code of the previously released game and make the game specific changes. Patches were hard to back port and older titles were often not patched up. The performance was atrocious under load, mainly due to hacked-up Rails not performing well. (Rails was allocating so many objects per request that the GC was taking a huge amount of the request cycles, the default XML builder also created a ton load of objects etc&#8230;) This was your typical <a href="http://en.wikipedia.org/wiki/Broken_windows_theory">broken windows scenario</a>. Engineers were getting frustrated, motivation was fainting, bugs were piling up and nobody felt ownership over the tech.</p>
-
-<p>Now, to be fair, it is important to explain that the legacy system was hacked up together due to lack of time, lack of resources and a lot of pressure to release something ASAP. So, while the end result sounds bad, the context is very important to note. This is quite common in software engineering and when you get there, the goal is not to point fingers but to identify the good and the bad parts of the original solution. You then use this info to decide what to do: fix the existing system or rewrite, porting the good parts.</p>
-
-<p>Our report also came up with a plan. A plan to redesign our technology stack to match the desiderata previously mentioned. To put it simply, the plan was to write a new custom web framework focusing on stability, performance, modularity and documentation. Now, there are frameworks out there which already do that or value these principles. But none of them focus on web APIs and none of them are specific to game development. Finally, the other issue was that we had invested a lot of time on game specific code and we couldn&#8217;t throw away all that work, so the new framework had to support a good chunk of legacy code but had to make it run much faster.</p>
-
-<h2>Design choices</h2>
-
-<p><strong>Low conversion cost</strong></p>
-
-<p>Using <a href="http://nodejs.org/">node.js</a> &amp; <a href="http://jashkenas.github.com/coffee-script/">coffee script</a>/<a href="http://www.scala-lang.org/">Scala</a>/<a href="http://weblocks.viridian-project.de/">whatever</a> <a href="http://code.google.com/p/v8cgi/">new</a> <a href="https://github.com/tenderlove/phuby">fancy tech</a> was not really an option. We have a bunch of games out there which are running on the old system and some of these games will have a sequel or a game close enough that we could reuse part of the work. We don&#8217;t want to have to rewrite the existing code. I therefore made sure that we could reuse 90% of the business logic by adding an abstraction layer doing the heavy lifting at boot time and therefore not affecting the runtime performance. Simple conversion scripts were also written to import the core of the existing code over.</p>
-
-<p><em>Lessons learned:</em> It is very tempting to just redo everything and start from scratch. However, the business logic implementation wasn&#8217;t the main cause of our problems. Even though I wish we could have redesigned that piece of the puzzle, it didn&#8217;t make sense from a business perspective. A lot of thought had to be put into how to obtain the expected performance level while keeping the optional model/controller/view combos. By having full control of the &#8220;web engine&#8221;, we managed to isolate things properly without breaking the old paradigms. We also got rid of a lot of assumptions allowing us to design new titles a bit differently while being backward compatible and have our code run dramatically faster.</p>
-
-<p><strong>Web API centric</strong></p>
-
-<p>This is probably the most important design element. If I had to summarize what our system does in just a few words, I would say: a game web API. Of course, it&#8217;s much more than that. We have admin interfaces, producer dashboards, community websites, lobbies, p2p, BI reports, async processing jobs etc&#8230; But at the end of the day, the only one piece you can&#8217;t remove is the game web API. So I really wanted the design to focus on that aspect. When a developer starts implementing a new online game feature, I want him/her to think about the API. But I also want this API to be extremely well documented so the developer working client-side understands the purpose of the API, how to use it, and what the expected response is right away. I also wanted to be able to automatically test our APIs at a very basic level so we could validate that there are discrepancies between what the client expects and what the server provides. To do that, I created a standalone API DSL with everything needed to describe your API but without any implementation details whatsoever. The API DSL lets the developer define a route (url), the HTTP verb expected, if the request should be authenticated or not, SSL or not, the param rules, default values and finally a response description (which was quite a controversial choice). All of these settings can be documented by the developer. This standalone DSL can then be consumed by different tools. For instance we have a tool extracting all the info into nicely formatted HTML doc for the game client developers. This tool doesn&#8217;t need to load the framework to just render the documentation. We also use this description at boot time to compile the validation rules and routes, allowing for a much faster request dispatch. And we also use these API description to generate some low level data for the client. Finally, we used the service description DSL to help create mocked service responses allowing the client team to test service designs without having to wait for the implementation streamlining the process.</p>
-
-<p><em>Lessons learned:</em> We had a lot of internal discussions about the need to define the response within the service description. Some argued that it&#8217;s a duplication since we already had a view and we could parse that to get most of what we needed (which is what the old system was doing). We ended up going with the response description DSL for a few critical reasons: testing and implementation simplicity. <em>Testing:</em> we need to have an API expectation reference and to keep this reference sane so we can see if something is changed. If we were to magically parse the response, we couldn&#8217;t test the view part of the code against a frame of reference. <em>Implementation simplicity</em>: magically parsing a view template is more tricky that it sounds, you would need to render the template with the right data to make it work properly. Furthermore, you can&#8217;t document a response easily in the view, and if you do, you arguably break the separation of concern between the description and the implementation. Finally, generated documentation isn&#8217;t enough and that&#8217;s why we decided to write English documentation, some being close to the code and some being just good old documentation explaining things outside of the code context.</p>
-
-<p><strong>Modularity</strong></p>
-
-<p>In order to make our code reusable we had to isolate each component and limit the dependencies. We wrote a very simple extension layer allowing each extension to registers itself once detected. The extension interface exposes the path of the extension, its type, models, services, controllers, migrations, seed data, dependencies etc.. Each extension is contained in a folder. (The extension location doesn&#8217;t matter much but as part of the framework boot sequence, we check a few default places.) The second step of the process is to check a manifest/config file that is specific to each title. The manifest file lists the extensions that should be activated for the title. The framework then activates the marked extensions and has access to libs, models, views, migrations, seed data and of course to load services (DSL mentioned earlier) etc&#8230;</p>
-
-<p>Even though we designed the core extensions the best we could, there are cases where some titles will need to extend these extensions. To do that, we added a bunch of hooks that could be implemented on the title side if needed (Ruby makes that super easy and clean to do!). A good example of that is the login sequence or the player data.</p>
-
-<p><em>Lessons learned:</em> The challenge with modularity is to keep things simple and highly performing yet flexible. A key element to manage that is to stay as consistent as possible. Don&#8217;t implement hooks three different ways, try to keep method signatures consistent, keep it simple and organized.</p>
-
-<p> </p>
-
-<h2>Conclusion</h2>
-
-<p>It&#8217;s a bit early to say if this rewrite is a success or not and there are still lots of optimizations and technology improvements we are looking forward to doing. Only time will give us enough retrospect to evaluate our work. But because we defined the business value (mission statement) and the technical objectives, it is safe to say that the new framework meets the expectations quite well. On an early benchmark we noted a 10X speed improvement and that&#8217;s before drilling into the performance optimizations such as making all the calls non-blocking, using better connection pools, cache write through layer&#8230; However, there is still one thing that we will have to monitor: how much business value will this framework generate. And I guess that&#8217;s where we failed to define an agreed upon evaluation grid. I presume that if our developers spend more time designing and implementing APIs and less time debugging that could be considered business value. If we spend less time maintaining or fighting with the game engine, that would also be a win. Finally, if the player experience is improved we will be able to definitely say that we made the right choice.</p>
-
-<p>To conclude, I&#8217;d like to highlight my main short coming: I failed to define metrics that would help us evaluate the real business value added to our products. What I consider a technical success might not be a business success. How do you, in your own domain, find ways to define clear and objective metrics?</p>
 ]]></content>
   </entry>
   
