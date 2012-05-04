@@ -28,7 +28,7 @@
 		location.href = $(this).val();
 	});
 
-	/* caption.js */
+	/* caption.js 
 	$('.entry').each(function(i){
 		var _i = i;
 		$(this).find('img').each(function(){
@@ -41,6 +41,6 @@
         }
       }
 		});
-	});
+	}); */
 	$('.fancybox').fancybox();
 })(jQuery);
