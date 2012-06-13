@@ -4,7 +4,7 @@
   <title><![CDATA[Category: railsontherun.com | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/railsontherun-com/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-05-30T21:50:21+02:00</updated>
+  <updated>2012-06-13T10:20:01-07:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Speed up your Rails XML responses]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/02/22/speed-up-your-rails-xml-responses/"/>
-    <updated>2010-02-22T23:25:09+01:00</updated>
+    <updated>2010-02-22T23:25:09-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/02/22/speed-up-your-rails-xml-responses</id>
     <content type="html"><![CDATA[<p>At <a href="http://www.us.playstation.com/">work</a>, we have an XML API that gets quite a lot of traffic. Last week I looked into improving its performance since we are expecting more traffic soon and want to make sure our response time is optimized.</p>
 
@@ -264,7 +264,7 @@ Percentage of the requests served within a certain time (ms)
   <entry>
     <title type="html"><![CDATA[Googlecharts 1.5.1]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/02/03/googlecharts-1-5-1/"/>
-    <updated>2010-02-03T21:18:23+01:00</updated>
+    <updated>2010-02-03T21:18:23-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/02/03/googlecharts-1-5-1</id>
     <content type="html"><![CDATA[<p>To celebrate the relaunch of this site and since we are waiting for Rails 3.0 beta to be released, I figured I should share with you what I worked on the other night.</p>
 
@@ -294,7 +294,7 @@ Gchart.line(:title =&gt; title, :size =&gt; size, :data =&gt; data, :axis_with_l
   <entry>
     <title type="html"><![CDATA[Rails and Merb core team working together]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/12/24/rails-and-merb-core-team-working-together/"/>
-    <updated>2008-12-24T08:47:00+01:00</updated>
+    <updated>2008-12-24T08:47:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/12/24/rails-and-merb-core-team-working-together</id>
     <content type="html"><![CDATA[<h3>This is huge!</h3>
 
@@ -430,7 +430,7 @@ Gchart.line(:title =&gt; title, :size =&gt; size, :data =&gt; data, :axis_with_l
   <entry>
     <title type="html"><![CDATA[MerbCamp 2008 SanDiego]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/09/16/merbcamp-2008-sandiego/"/>
-    <updated>2008-09-16T06:27:00+02:00</updated>
+    <updated>2008-09-16T06:27:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/09/16/merbcamp-2008-sandiego</id>
     <content type="html"><![CDATA[<p><img src="http://merbivore.com/img/merbcamp_badge_200.gif" alt="merbcamp" /></p>
 
@@ -488,7 +488,7 @@ We hope to see you there, if not, we hope you'll organize your own conference an
   <entry>
     <title type="html"><![CDATA[db fixtures replacement solution step by step]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/09/07/db-fixtures-replacement-solution-step-by-step/"/>
-    <updated>2008-09-07T16:06:00+02:00</updated>
+    <updated>2008-09-07T16:06:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/09/07/db-fixtures-replacement-solution-step-by-step</id>
     <content type="html"><![CDATA[<p>Like most people who started with Rails a while back, I first loved Rails fixtures and ended up hating them (slow, a pain to maintain etc...).</p>
 
@@ -546,7 +546,7 @@ We hope to see you there, if not, we hope you'll organize your own conference an
   <entry>
     <title type="html"><![CDATA[Ruby developers don't scale]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/08/27/ruby-developers-don-t-scale/"/>
-    <updated>2008-08-27T14:58:00+02:00</updated>
+    <updated>2008-08-27T14:58:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/08/27/ruby-developers-don-t-scale</id>
     <content type="html"><![CDATA[<p>Wow, it's been a while since I blogged. With all the cool kids saying that spending time reading RSS feeds is overrated (see <a href="http://rubyhoedown2008.confreaks.com/08-chris-wanstrath-keynote.html">Defunkt's keynote</a> for instance) I even wonder if people will ever read this post!</p>
 
@@ -600,7 +600,7 @@ We hope to see you there, if not, we hope you'll organize your own conference an
   <entry>
     <title type="html"><![CDATA[Googlecharts featured on Github]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/06/27/googlecharts-featured-on-github/"/>
-    <updated>2008-06-27T07:06:00+02:00</updated>
+    <updated>2008-06-27T07:06:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/06/27/googlecharts-featured-on-github</id>
     <content type="html"><![CDATA[<p><a href="http://github.com">Github</a>, probably the most famous social code hosting service just <a href="http://github.com/blog/103-new-homepage">redesigned their homepage</a> and are now featuring hosted projects.</p>
 
@@ -623,7 +623,7 @@ We hope to see you there, if not, we hope you'll organize your own conference an
   <entry>
     <title type="html"><![CDATA[About Metaprogramming speed]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/06/18/about-metaprogramming-speed/"/>
-    <updated>2008-06-18T07:03:00+02:00</updated>
+    <updated>2008-06-18T07:03:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/06/18/about-metaprogramming-speed</id>
     <content type="html"><![CDATA[<p>In a <a href="http://railsontherun.com/2008/5/4/avoid-using-metaprogramming">previous article</a> I took an example of bad metaprogramming and I pushed people to think twice before using metaprogramming.</p>
 
@@ -859,7 +859,7 @@ We hope to see you there, if not, we hope you'll organize your own conference an
   <entry>
     <title type="html"><![CDATA[News update]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/06/18/news-update/"/>
-    <updated>2008-06-18T01:40:00+02:00</updated>
+    <updated>2008-06-18T01:40:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/06/18/news-update</id>
     <content type="html"><![CDATA[<p>I realized I haven't updated this blog in a while. Here is a quick update on what's happened and on things to come:</p>
 
@@ -878,7 +878,7 @@ We hope to see you there, if not, we hope you'll organize your own conference an
   <entry>
     <title type="html"><![CDATA[Avoid using metaprogramming (seriously!)]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/05/04/avoid-using-metaprogramming/"/>
-    <updated>2008-05-04T08:29:00+02:00</updated>
+    <updated>2008-05-04T08:29:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/05/04/avoid-using-metaprogramming</id>
     <content type="html"><![CDATA[<p>Ruby is sexy, Ruby is cool and its metaprogramming potential offers some really cook features. However you might not realize that your cleverness is slowing down your code.</p>
 
@@ -1091,7 +1091,7 @@ no metaprogramming 7.years       0.040000   0.000000   0.040000 (  0.044585)
   <entry>
     <title type="html"><![CDATA[BarCamp San Diego rev.3]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/04/27/barcamp-san-diego-rev-3/"/>
-    <updated>2008-04-27T17:24:00+02:00</updated>
+    <updated>2008-04-27T17:24:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/04/27/barcamp-san-diego-rev-3</id>
     <content type="html"><![CDATA[<p><img src="http://www.barcampsd.org/badges_for_bcsd3/orange.png" alt="BarCamp" /></p>
 
@@ -1130,7 +1130,7 @@ no metaprogramming 7.years       0.040000   0.000000   0.040000 (  0.044585)
   <entry>
     <title type="html"><![CDATA[Freezing Rails with Git]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/04/16/freezing-rails-with-git/"/>
-    <updated>2008-04-16T08:21:00+02:00</updated>
+    <updated>2008-04-16T08:21:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/04/16/freezing-rails-with-git</id>
     <content type="html"><![CDATA[<p>As you've <a href="http://blog.rubyonrails.com/2008/4/11/rails-premieres-on-github">probably heard</a>, Rails now moved to <a href="http://github.com/rails/rails">its own GitHub repo</a>.</p>
 
@@ -1236,7 +1236,7 @@ no metaprogramming 7.years       0.040000   0.000000   0.040000 (  0.044585)
   <entry>
     <title type="html"><![CDATA[Merb tip - how to freeze a project?]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/04/15/merb-tip-how-to-freeze-a-project/"/>
-    <updated>2008-04-15T07:42:00+02:00</updated>
+    <updated>2008-04-15T07:42:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/04/15/merb-tip-how-to-freeze-a-project</id>
     <content type="html"><![CDATA[<p><strong>THIS CONTENT is OUTDATED and can't be used with Merb 1.0 or more recent</strong></p>
 
@@ -1371,7 +1371,7 @@ frozen-merb
   <entry>
     <title type="html"><![CDATA[Rails or Merb, what's best for you?]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/04/10/rails-or-merb-what-s-best-for-you/"/>
-    <updated>2008-04-10T08:10:00+02:00</updated>
+    <updated>2008-04-10T08:10:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/04/10/rails-or-merb-what-s-best-for-you</id>
     <content type="html"><![CDATA[<p><img src="http://brainspl.at/louiecon.gif" alt="" /></p>
 
@@ -1517,7 +1517,7 @@ If you have a lot of views and/or use loads of AJAX, RJS, built-in helpers, you 
   <entry>
     <title type="html"><![CDATA[Merb tips II]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/04/08/merb-tips-2/"/>
-    <updated>2008-04-08T02:11:00+02:00</updated>
+    <updated>2008-04-08T02:11:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/04/08/merb-tips-2</id>
     <content type="html"><![CDATA[<p><em>* this content is now outdated and only applied to Merb 0.9</em>*</p>
 
@@ -1623,7 +1623,7 @@ If you have a lot of views and/or use loads of AJAX, RJS, built-in helpers, you 
   <entry>
     <title type="html"><![CDATA[Merb tips I]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/04/05/merb-tips-1/"/>
-    <updated>2008-04-05T05:59:00+02:00</updated>
+    <updated>2008-04-05T05:59:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/04/05/merb-tips-1</id>
     <content type="html"><![CDATA[<p><em>* this content is now outdated and only applied to Merb 0.9</em>*</p>
 
@@ -1692,7 +1692,7 @@ If you have a lot of views and/or use loads of AJAX, RJS, built-in helpers, you 
   <entry>
     <title type="html"><![CDATA[How Duplo (and I) offended people]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/03/21/how-duplo-and-i-offended-people/"/>
-    <updated>2008-03-21T06:59:00+01:00</updated>
+    <updated>2008-03-21T06:59:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/03/21/how-duplo-and-i-offended-people</id>
     <content type="html"><![CDATA[<p>My <a href="http://railsontherun.com/2008/3/17/rails-the-duplo-generation">recent and certainly provocative post</a> generated a lot of noise. Just by reading some of the <a href="http://railsontherun.com/2008/3/17/rails-the-duplo-generation#comments">comments</a> on my blog or on <a href="http://reddit.com/r/ruby/info/6cbwo/comments/">reddit</a> I could only notice that some people took offense and some people tried to push the metaphor way too far. At the same time, it generated a lot of interesting discussions even <a href="http://msforums.ph/forums/p/47347/226547.aspx">outside</a> of our <em>small</em> Ruby community.</p>
 
@@ -1727,7 +1727,7 @@ If you have a lot of views and/or use loads of AJAX, RJS, built-in helpers, you 
   <entry>
     <title type="html"><![CDATA[Ruby on Rails: the Duplo generation]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/03/17/rails-the-duplo-generation/"/>
-    <updated>2008-03-17T06:39:00+01:00</updated>
+    <updated>2008-03-17T06:39:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/03/17/rails-the-duplo-generation</id>
     <content type="html"><![CDATA[<p><img src="http://cache.lego.com/upload/contentTemplating/LifestyleProductsBags/otherfiles/1033/uploadF2767709-6EFA-4D99-93FA-13F75766309B.jpg" alt="duplo" />
 I'm sure, at least once in your life you played with Duplos.</p>
@@ -1775,7 +1775,7 @@ I'm sure, at least once in your life you played with Duplos.</p>
   <entry>
     <title type="html"><![CDATA[starting the migration to GitHub]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/03/05/starting-the-migration-to-github/"/>
-    <updated>2008-03-05T07:48:00+01:00</updated>
+    <updated>2008-03-05T07:48:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/03/05/starting-the-migration-to-github</id>
     <content type="html"><![CDATA[<p>I started moving some of my projects to <a href="http://github.com">GitHub</a>.</p>
 
@@ -1810,7 +1810,7 @@ Git can act as SVN, but let's be honest, if you switch to a new SCM it needs to 
   <entry>
     <title type="html"><![CDATA[How to use github and submit a patch]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/03/03/how-to-use-github-and-submit-a-patch/"/>
-    <updated>2008-03-03T08:22:00+01:00</updated>
+    <updated>2008-03-03T08:22:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/03/03/how-to-use-github-and-submit-a-patch</id>
     <content type="html"><![CDATA[<p>If you don't know about <a href="http://git.or.cz/">git</a> and <a href="http://github.com">github</a> yet, it's time you clean up your RSS feeds and find some good source of information.</p>
 
@@ -1911,7 +1911,7 @@ git checkout -b coreteam coreteam/master
   <entry>
     <title type="html"><![CDATA[resolving git-svn conflicts]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/02/29/resolving-git-svn-conflicts/"/>
-    <updated>2008-02-29T22:40:00+01:00</updated>
+    <updated>2008-02-29T22:40:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/02/29/resolving-git-svn-conflicts</id>
     <content type="html"><![CDATA[<p>I've been using <a href="http://git.or.cz/">git</a> and <a href="http://www.kernel.org/pub/software/scm/git/docs/git-svn.html">git-svn</a> for a little while and never had a problem... until today.</p>
 
@@ -1974,7 +1974,7 @@ Falling back to patching base and 3-way merge...
   <entry>
     <title type="html"><![CDATA[GumGum launch, or how to avoid a disastrous launch.]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/02/28/gumgum-launch-or-how-to-avoid-a-disastrous-launch/"/>
-    <updated>2008-02-28T08:42:00+01:00</updated>
+    <updated>2008-02-28T08:42:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/02/28/gumgum-launch-or-how-to-avoid-a-disastrous-launch</id>
     <content type="html"><![CDATA[<p>For the last few months I worked on a Rails app called <a href="http://gumgum.com">GumGum</a>. <a href="http://gumgum.com">GumGum</a> is a licensing and distribution platform for online content. <a href="http://gumgum.com">GumGum</a> believes paying a flat rate to license content for online use is illogical. Offline, the flat rate model works because distribution is finite. Online, thanks to Google and other search engines, a story lives forever. <a href="http://gumgum.com">GumGum</a> has developed two usage models to fairly monetize a license: pay-per-use and ad supported. Pay-per-use allows publishers to license content on a CPM basis. Ad supported subsidizes the licensing revenue through advertisements, providing the publisher a free license.</p>
 
@@ -2029,7 +2029,7 @@ Falling back to patching base and 3-way merge...
   <entry>
     <title type="html"><![CDATA[Misc tips and tricks]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/01/30/misc-tips-and-tricks/"/>
-    <updated>2008-01-30T08:00:00+01:00</updated>
+    <updated>2008-01-30T08:00:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/01/30/misc-tips-and-tricks</id>
     <content type="html"><![CDATA[<p>I haven't posted for quite a long time. The thing is I moved to a new place and I'm really busy on working clients + setting up my new office + dealing with way too much paperwork.</p>
 
@@ -2218,7 +2218,7 @@ Falling back to patching base and 3-way merge...
   <entry>
     <title type="html"><![CDATA[RSpec on Rails Matchers plugin]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/01/04/rspec-on-rails-matchers-plugin/"/>
-    <updated>2008-01-04T03:46:00+01:00</updated>
+    <updated>2008-01-04T03:46:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/01/04/rspec-on-rails-matchers-plugin</id>
     <content type="html"><![CDATA[<p><a href="http://rspec.info">RSpec</a> is an awesome testing framework. On top of being the first Ruby <a href="http://en.wikipedia.org/wiki/Behavior_driven_development">BDD</a> framework the core team is doing a great job in enhancing our testing experience and therefore the quality of our code.</p>
 
@@ -2337,7 +2337,7 @@ Falling back to patching base and 3-way merge...
   <entry>
     <title type="html"><![CDATA[Retrospective on Freelancing/Consulting]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/12/31/retrospective-on-freelancing-consulting/"/>
-    <updated>2007-12-31T19:42:00+01:00</updated>
+    <updated>2007-12-31T19:42:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/12/31/retrospective-on-freelancing-consulting</id>
     <content type="html"><![CDATA[<p>Being a consultant is great, being a consultant working exclusively with Ruby is awesome, being a Ruby consultant using Agile methods on great projects with cool clients is just super-awesome. The English language doesn't seem to have a word/expression defining this feeling without using the "f-word" (at least, there's nothing I can think of right now)
 I have to say that I owe a lot to the Ruby community and especially the Rails core team. Without you/them, I wouldn't be able to do what I do and I would certainly not have so much fun.</p>
@@ -2411,7 +2411,7 @@ In 2008, <strong>I really want to improve clients' retrospective</strong>.</p>
   <entry>
     <title type="html"><![CDATA[blog hiccups]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/12/31/blog-hiccups/"/>
-    <updated>2007-12-31T14:14:00+01:00</updated>
+    <updated>2007-12-31T14:14:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/12/31/blog-hiccups</id>
     <content type="html"><![CDATA[<p>Last night I updated my <a href="http://mephistoblog.com/">Mephisto install</a> and switched from awful <a href="http://dreamhost.com/">dreamhost</a> to awesome <a href="http://www.joyent.com/">Joyent</a>. Everything went well until the dreamhost control panel wasn't accessible anymore leaving my site broken for a couple of hours. This should have cleared up by now, but I'm really sorry about that.</p>
 
@@ -2424,7 +2424,7 @@ In 2008, <strong>I really want to improve clients' retrospective</strong>.</p>
   <entry>
     <title type="html"><![CDATA[TimeZone selection]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/12/21/timezone-selection/"/>
-    <updated>2007-12-21T23:47:00+01:00</updated>
+    <updated>2007-12-21T23:47:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/12/21/timezone-selection</id>
     <content type="html"><![CDATA[<p>Supporting TimeZones is a serious pain in a developer's neck. Thankfully, Rails comes with a bunch of tools making our life easier. One of my Rails patch <a href="http://dev.rubyonrails.org/changeset/8473">just got merged</a> in Rails Edge (Future Rails 2.1)  and I believe it will make my life just a tiny be more enjoyable.</p>
 
@@ -2521,7 +2521,7 @@ In 2008, <strong>I really want to improve clients' retrospective</strong>.</p>
   <entry>
     <title type="html"><![CDATA[Rails 2.0.2 with few changes]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/12/17/rails-2-0-2-with-few-changes/"/>
-    <updated>2007-12-17T09:52:00+01:00</updated>
+    <updated>2007-12-17T09:52:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/12/17/rails-2-0-2-with-few-changes</id>
     <content type="html"><![CDATA[<h2>What's new?</h2>
 
@@ -2614,7 +2614,7 @@ db:migrate:reset will drop your database, re create it and migrate it up. Only u
   <entry>
     <title type="html"><![CDATA[Googlecharts 0.1.0 released with new site]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/12/12/googlecharts-0-1-0-released-with-new-site/"/>
-    <updated>2007-12-12T08:02:00+01:00</updated>
+    <updated>2007-12-12T08:02:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/12/12/googlecharts-0-1-0-released-with-new-site</id>
     <content type="html"><![CDATA[<p>I just released Googlecharts 0.1.0 (few bug fixes and enhancements).</p>
 
@@ -2642,7 +2642,7 @@ db:migrate:reset will drop your database, re create it and migrate it up. Only u
   <entry>
     <title type="html"><![CDATA[Google Chart Gem]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/12/10/google-chart-gem/"/>
-    <updated>2007-12-10T06:43:00+01:00</updated>
+    <updated>2007-12-10T06:43:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/12/10/google-chart-gem</id>
     <content type="html"><![CDATA[<h2>update Nov 11: the gem is finally available <a href="http://rubyforge.org/projects/googlecharts/">there</a> or simply:</h2>
 
@@ -2684,7 +2684,7 @@ db:migrate:reset will drop your database, re create it and migrate it up. Only u
   <entry>
     <title type="html"><![CDATA[keeping my javascript files organized]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/12/05/keeping-my-javascript-files-organized/"/>
-    <updated>2007-12-05T04:01:00+01:00</updated>
+    <updated>2007-12-05T04:01:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/12/05/keeping-my-javascript-files-organized</id>
     <content type="html"><![CDATA[<p>I was recently asked by Rubyist friend (<a href="http://joshknowles.com/">Josh Knowles</a>) how I was organizing my Javascript files when using <a href="http://lowpro.stikipad.com/home/show/HomePage">LowPro</a>.</p>
 
@@ -2805,7 +2805,7 @@ This is the default layout used by all my views, I rarely use more than 5 layout
   <entry>
     <title type="html"><![CDATA[a new useless Gem]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/12/04/a-new-useless-gem/"/>
-    <updated>2007-12-04T08:28:00+01:00</updated>
+    <updated>2007-12-04T08:28:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/12/04/a-new-useless-gem</id>
     <content type="html"><![CDATA[<p>During Thanksgiving break I had fun with a friend of mine working on a Ruby challenge while digesting the traditional turkey.</p>
 
@@ -2842,7 +2842,7 @@ This is the default layout used by all my views, I rarely use more than 5 layout
   <entry>
     <title type="html"><![CDATA[Attachment_fu updated!]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/11/28/attachment_fu-updated/"/>
-    <updated>2007-11-28T08:26:00+01:00</updated>
+    <updated>2007-11-28T08:26:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/11/28/attachment_fu-updated</id>
     <content type="html"><![CDATA[<p>I recently bugged <a href="http://techno-weenie.net/">Rick Olson</a> so much about <a href="http://svn.techno-weenie.net/projects/plugins/attachment_fu/">attachment_fu</a> that he gave me SVN access to fix few bugs.</p>
 
@@ -2885,7 +2885,7 @@ This is the default layout used by all my views, I rarely use more than 5 layout
   <entry>
     <title type="html"><![CDATA[LowPro trunk, what's new?]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/11/27/lowpro-0-5-what-s-new/"/>
-    <updated>2007-11-27T06:44:00+01:00</updated>
+    <updated>2007-11-27T06:44:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/11/27/lowpro-0-5-what-s-new</id>
     <content type="html"><![CDATA[<p>If you've read my <a href="http://railsontherun.com/2007/9/27/ajax-pagination-in-less-than-5-minutes">post on Ajax pagination</a> you know that I'm a big fan of <a href="http://www.danwebb.net">Dan Webb</a>'s <a href="http://www.danwebb.net/lowpro">LowPro</a> unobtrusive javascript library.</p>
 
@@ -3049,7 +3049,7 @@ This is the default layout used by all my views, I rarely use more than 5 layout
   <entry>
     <title type="html"><![CDATA[Sexy Chart - The video]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/11/20/sexy-chart-the-video/"/>
-    <updated>2007-11-20T04:46:00+01:00</updated>
+    <updated>2007-11-20T04:46:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/11/20/sexy-chart-the-video</id>
     <content type="html"><![CDATA[<p>A bit more than a month ago I posted a <a href="http://railsontherun.com/2007/10/4/sexy-charts-in-less-than-5-minutes">tutorial</a> on how to use Flash with Rails to <a href="http://railsontherun.com/2007/10/4/sexy-charts-in-less-than-5-minutes">create some awesome/sexy graphs</a>.</p>
 
@@ -3088,7 +3088,7 @@ This is the default layout used by all my views, I rarely use more than 5 layout
   <entry>
     <title type="html"><![CDATA[XP by Ooochie]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/11/14/xp-by-ooochie/"/>
-    <updated>2007-11-14T21:33:00+01:00</updated>
+    <updated>2007-11-14T21:33:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/11/14/xp-by-ooochie</id>
     <content type="html"><![CDATA[<p><img src="http://integrumtech.com/images/emps/lindsay_bigger.jpg" alt="Lindsay" /></p>
 
@@ -3112,7 +3112,7 @@ This is the default layout used by all my views, I rarely use more than 5 layout
   <entry>
     <title type="html"><![CDATA[RSS feed issues]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/11/06/rss-feed-issues/"/>
-    <updated>2007-11-06T04:21:00+01:00</updated>
+    <updated>2007-11-06T04:21:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/11/06/rss-feed-issues</id>
     <content type="html"><![CDATA[<p>Few of you contacted me to let me know that my RSS feed was always getting reset up to few times a day. (Thanks <a href="http://blog.hasmanythrough.com/">Josh</a>).</p>
 
@@ -3131,7 +3131,7 @@ This is the default layout used by all my views, I rarely use more than 5 layout
   <entry>
     <title type="html"><![CDATA[How to test a XML builder view]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/10/31/how-to-test-a-xml-builder-view/"/>
-    <updated>2007-10-31T08:32:00+01:00</updated>
+    <updated>2007-10-31T08:32:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/10/31/how-to-test-a-xml-builder-view</id>
     <content type="html"><![CDATA[<p>As a good Rubyist, I do <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a> and even <a href="http://en.wikipedia.org/wiki/Behavior_driven_development">BDD</a>.</p>
 
@@ -3680,7 +3680,7 @@ xml.instruct! &lt;span class="sy"&gt;:xml&lt;/span&gt;, &lt;span class="sy"&gt;:
   <entry>
     <title type="html"><![CDATA[Leopard - Autotest - Growl Notification]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/10/31/leopard-autotest/"/>
-    <updated>2007-10-31T00:10:00+01:00</updated>
+    <updated>2007-10-31T00:10:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/10/31/leopard-autotest</id>
     <content type="html"><![CDATA[<p><img src="http://farm3.static.flickr.com/2176/1805711983_8d7811d890.jpg?v=0" alt="mac os X leopard" /></p>
 
@@ -3701,7 +3701,7 @@ xml.instruct! &lt;span class="sy"&gt;:xml&lt;/span&gt;, &lt;span class="sy"&gt;:
   <entry>
     <title type="html"><![CDATA[Freelancing - tools]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/10/19/freelancing-tools/"/>
-    <updated>2007-10-19T08:02:00+02:00</updated>
+    <updated>2007-10-19T08:02:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/10/19/freelancing-tools</id>
     <content type="html"><![CDATA[<p>In my <a href="http://railsontherun.com/2007/10/15/freelancing">last post</a> I talked about freelancing. Somebody asked for more details about my "agile tool set" so here I am trying to explain more in details what tools I use.</p>
 
@@ -3770,7 +3770,7 @@ Talking about invoices. I generate invoices once a week and the payment request 
   <entry>
     <title type="html"><![CDATA[Freelancing]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/10/15/freelancing/"/>
-    <updated>2007-10-15T01:04:00+02:00</updated>
+    <updated>2007-10-15T01:04:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/10/15/freelancing</id>
     <content type="html"><![CDATA[<p>I've been a freelancer/consultant/contractor/mercenary for many years now. However, until now, I used to do that on the side. Few months ago, after thinking a lot about it, I finally decided that freelancing was what I wanted to do. I left my job and started my own adventure.</p>
 
@@ -3905,7 +3905,7 @@ Converting the technical details into simple concepts that make sense to both yo
   <entry>
     <title type="html"><![CDATA[Sexy charts in less than 5 minutes]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/10/04/sexy-charts-in-less-than-5-minutes/"/>
-    <updated>2007-10-04T03:06:00+02:00</updated>
+    <updated>2007-10-04T03:06:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/10/04/sexy-charts-in-less-than-5-minutes</id>
     <content type="html"><![CDATA[<h2>NOV 04 Update: demo app now available <a href="http://railsontherun.com/assets/sexy_charts.zip">there</a>. Sexy charts BDD style presentation at the <a href="http://sdruby.com">SDRuby group</a> to be posted soon on <a href="http://podcast.sdruby.com/">video podcast</a></h2>
 
@@ -4261,7 +4261,7 @@ Since you now have a lot of free time, you can start re-factoring your code and 
   <entry>
     <title type="html"><![CDATA[Ajax Pagination in less than 5 minutes]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/09/27/ajax-pagination-in-less-than-5-minutes/"/>
-    <updated>2007-09-27T03:40:00+02:00</updated>
+    <updated>2007-09-27T03:40:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/09/27/ajax-pagination-in-less-than-5-minutes</id>
     <content type="html"><![CDATA[<h2>updated Nov 26 to reflect the recent low pro changes. (please use low pro 0.5 and Prototype 1.6)</h2>
 
@@ -4376,7 +4376,7 @@ Since you now have a lot of free time, you can start re-factoring your code and 
   <entry>
     <title type="html"><![CDATA[my Rails contribution mentioned in DHH keynote]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/09/19/my-rails-contribution-mentioned-in-dhh-keynote/"/>
-    <updated>2007-09-19T02:36:00+02:00</updated>
+    <updated>2007-09-19T02:36:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/09/19/my-rails-contribution-mentioned-in-dhh-keynote</id>
     <content type="html"><![CDATA[<p>That's kind of cool, I was reading a <a href="http://casperfabricius.com/blog/2007/09/18/railsconf2007-dhh/">post</a> about DHH Keynote at RailsConf Europe when I realized that DHH mentioned one of my contribution to Rails Edge.</p>
 
@@ -4442,7 +4442,7 @@ rake db&lt;span class="sy"&gt;:create&lt;/span&gt;                       &lt;spa
   <entry>
     <title type="html"><![CDATA[Ambition, why should you care?]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/09/16/ambition-why-should-you-care/"/>
-    <updated>2007-09-16T01:51:00+02:00</updated>
+    <updated>2007-09-16T01:51:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/09/16/ambition-why-should-you-care</id>
     <content type="html"><![CDATA[<p><img src="http://errtheblog.com/static/images/ambition-tower.png" alt="ambition" /></p>
 
@@ -4719,7 +4719,7 @@ rake db&lt;span class="sy"&gt;:create&lt;/span&gt;                       &lt;spa
   <entry>
     <title type="html"><![CDATA[Edge: more clean up]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/09/11/edge-more-clean-up/"/>
-    <updated>2007-09-11T05:55:00+02:00</updated>
+    <updated>2007-09-11T05:55:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/09/11/edge-more-clean-up</id>
     <content type="html"><![CDATA[<p>As <a href="http://railsontherun.com/2007/9/10/dhh-and-team-busy-cleaning-up-edge">posted yesterday</a> Rails slimmed down during the last few days.</p>
 
@@ -4732,7 +4732,7 @@ rake db&lt;span class="sy"&gt;:create&lt;/span&gt;                       &lt;spa
   <entry>
     <title type="html"><![CDATA[DHH and team busy cleaning up Edge]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/09/10/dhh-and-team-busy-cleaning-up-edge/"/>
-    <updated>2007-09-10T15:12:00+02:00</updated>
+    <updated>2007-09-10T15:12:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/09/10/dhh-and-team-busy-cleaning-up-edge</id>
     <content type="html"><![CDATA[<p><a href="http://www.loudthinking.com/">DHH</a> and <a href="http://www.koziarski.net/">nzkoz</a> have been busy this week end cleaning up Edge and   pushing some features to plugins.</p>
 
@@ -4750,7 +4750,7 @@ rake db&lt;span class="sy"&gt;:create&lt;/span&gt;                       &lt;spa
   <entry>
     <title type="html"><![CDATA[Globalite Major update]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/09/02/globalite-major-update/"/>
-    <updated>2007-09-02T22:21:00+02:00</updated>
+    <updated>2007-09-02T22:21:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/09/02/globalite-major-update</id>
     <content type="html"><![CDATA[<h2><em>I'm glad to announce a major update of Globalite.</em></h2>
 
@@ -4797,7 +4797,7 @@ ranch</code></p>
   <entry>
     <title type="html"><![CDATA[New version of Globalite is coming up]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/08/29/new-version-of-globalite-is-coming-up/"/>
-    <updated>2007-08-29T14:10:00+02:00</updated>
+    <updated>2007-08-29T14:10:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/08/29/new-version-of-globalite-is-coming-up</id>
     <content type="html"><![CDATA[<p>I'm almost ready to update Globalite with 2 major changes:</p>
 
@@ -4816,7 +4816,7 @@ ranch</code></p>
   <entry>
     <title type="html"><![CDATA[Different way of working]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/08/25/differently-way-of-working/"/>
-    <updated>2007-08-25T03:44:00+02:00</updated>
+    <updated>2007-08-25T03:44:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/08/25/differently-way-of-working</id>
     <content type="html"><![CDATA[<p><a href="http://joshknowles.com">Josh Knowles</a> shared with me a great video about working methodologies, client relationship and project management.</p>
 

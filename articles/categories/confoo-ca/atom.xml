@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Confoo.ca | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/confoo-ca/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-05-30T21:50:21+02:00</updated>
+  <updated>2012-06-13T10:20:01-07:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[ConFoo.ca - Rails for non Ruby developers]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/04/11/confoo-dot-ca-rails-for-non-ruby-developers/"/>
-    <updated>2010-04-11T09:51:00+02:00</updated>
+    <updated>2010-04-11T09:51:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/04/11/confoo-dot-ca-rails-for-non-ruby-developers</id>
     <content type="html"><![CDATA[<p>During <a href="http://confoo.ca/">ConFoo Canada 2010</a> in Montreal, Canada Matt
 Aimonetti gave a talk entitled <em>Rails for the non Ruby developers</em>.</p>

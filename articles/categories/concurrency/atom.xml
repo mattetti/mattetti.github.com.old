@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Concurrency | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/concurrency/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-05-30T21:50:21+02:00</updated>
+  <updated>2012-06-13T10:20:01-07:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Data safety and GIL removal]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal/"/>
-    <updated>2011-10-18T15:19:17+02:00</updated>
+    <updated>2011-10-18T15:19:17-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal</id>
     <content type="html"><![CDATA[<p>After my recent <a href="http://rubyconf11.merbist.com">RubyConf talk</a> and <a href="http://merbist.com/2011/10/03/about-concurrency-and-the-gil/">follow up post addressing the Ruby &amp; Python's Global Interpreter Lock</a> (aka GVL/Global VM Lock). a lot of people asked me to explain what I meant by "data safety". While my point isn't to defend one approach or the other, I spent a lot of time explaining why C Ruby and C Python use a GIL and where it matters and where it matters less. As a reminder and as mentioned by Matz himself, the main reason why C Ruby still has a GIL is data safety. But if this point isn't clear to you, you might be missing the main argument supporting the use of a GIL.</p>
 
@@ -105,7 +105,7 @@ puts @array.size
   <entry>
     <title type="html"><![CDATA[About concurrency and the GIL]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil/"/>
-    <updated>2011-10-03T21:23:54+02:00</updated>
+    <updated>2011-10-03T21:23:54-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil</id>
     <content type="html"><![CDATA[<p>During RubyConf 2011, concurrency was a really hot topic. This is not a new issue, and the JRuby team has been talking about true concurrency for quite a while . The Global Interpreter Lock has also been in a subject a<a href="http://wiki.python.org/moin/GlobalInterpreterLock"> lot of discussions in the Python community</a> and it's not surprising that the Ruby community experiences the same debates since the evolution of their implementations are somewhat similar. (There might also be some tension between <a href="http://engineyard.com">EngineYard</a> hiring the JRuby and Rubinius teams and <a href="http://heroku.com">Heroku</a> which <a href="http://blog.heroku.com/archives/2011/7/12/matz_joins_heroku/">recently hired Matz</a> (Ruby's creator) and <a href="https://github.com/nobu">Nobu</a>, the #1 C Ruby contributor)</p>
 
@@ -193,7 +193,7 @@ puts @array.size
   <entry>
     <title type="html"><![CDATA[Ruby concurrency explained]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained/"/>
-    <updated>2011-02-22T22:34:30+01:00</updated>
+    <updated>2011-02-22T22:34:30-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained</id>
     <content type="html"><![CDATA[<p>Concurrency is certainly <a href="http://en.wikipedia.org/wiki/Petri_Net">not a new problem</a> but it's getting more and more attention as machines start having more than 1 core, that web traffic increases drastically and that some new technologies show up saying that they are better because they handle concurrency better.
 If that helps, think of concurrency as multitasking. When people say that they want concurrency, they say that they want their code to do multiple different things at the same time. When you are on your computer, you don't expect to have to choose between browsing the web and listening to some music. You more than likely want to run both concurrently. It's the same thing with your code, if you are running a webserver, you probably don't want it to only process one request at a time.

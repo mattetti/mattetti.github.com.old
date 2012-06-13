@@ -4,7 +4,7 @@
   <title><![CDATA[Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-05-30T21:50:21+02:00</updated>
+  <updated>2012-06-13T10:20:01-07:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -14,9 +14,364 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Rethinking web service development]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/06/13/rethinking-web-service-development/"/>
+    <updated>2012-06-13T18:19:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/06/13/rethinking-web-service-development</id>
+    <content type="html"><![CDATA[<p>While it&#8217;s true that there are still a lot of places where software isn&#8217;t
+leveraged and many places where software needs to evolve, software is nearly everywhere!.
+The type of software we write today needs to interact
+with other software via some sort of network.
+Any web developer out there is used to that, (s)he writes software that
+runs on a server somewhere on the internet and users via a local software
+(browser) consume their web applications using an internet connection.</p>
+
+<p>What has changed in the last few years is that web applications start
+providing more than just dynamically rendered HTML templates.
+JavaScript is used to run more and more logic on the client side and JS
+usually talks to some backends via JSON.
+But web APIs are also more and more used to expose raw data to other
+software. <strong>The challenge though, is that we haven&#8217;t changed the way we
+write web applications to adapt to this new way of providing data.</strong>
+In this article, I&#8217;d like to explore why and how we need to rethink web API development
+and focus on communication and interaction.</p>
+
+<h2>Unlearning</h2>
+
+<p><img src="http://matt.aimonetti.net/images/matt_aimonetti-unlearn.jpeg"
+class='fancybox' rel='gallery0' style="width:250px;display:block;margin:auto"/></p>
+
+<p>Many are used to doing certain
+things a certain way and it&#8217;s really hard to unlearn old habits. The more
+concerning part of this fact is that it makes it <strong>hard for someone to step
+back and evaluate honestly if a technical decision is due to comfort or
+if it&#8217;s truly the right choice to achieve a given goal.</strong>
+Ruby on Rails revolutionized the way we wrote web applications almost 10
+years ago and since then, many web frameworks have adopted the Rails philosophy.
+As a matter of fact, I personally think that when it comes to writing
+front end applications, Rails is still one if not the best web
+frameworks out there. But in its current state, I&#8217;m far from convinced that it&#8217;s a great tool to write
+web APIs mainly because it was not designed for that and because it
+comes with a lot of baggage.</p>
+
+<h2>Focusing on the API</h2>
+
+<p>Let&#8217;s take a step back and consider what is critical when developing a web
+API:</p>
+
+<ul>
+<li><strong>Documentation</strong> for end users to know how to consume your services.</li>
+<li><strong>Consistent and reliable</strong> output so you don&#8217;t break client applications
+relying on your services.</li>
+<li><strong>Maintainability</strong></li>
+</ul>
+
+
+<p>Note that I didn&#8217;t mention performance because I consider performance
+almost always being important.
+I also didn&#8217;t mention the whole
+<a href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST</a>/<a href="http://en.wikipedia.org/wiki/Remote_procedure_call">RPC</a>/<a href="http://en.wikipedia.org/wiki/Hypermedia">Hypstermedia</a> debate
+since I consider it being an implementation detail and a totally orthogonal
+discussion. But for the record, I personally don&#8217;t like solutions forcing you into a specific way of
+providing your data (I&#8217;m looking at you <a href="http://wiki.basho.com/Webmachine.html">webmachine</a>).</p>
+
+<h3>Documentation</h3>
+
+<p>Documentation isn&#8217;t as important when you consume your own APIs because
+you can look at your source code. However it gets much more tricky when
+you start working with other teams. They might not know the
+language/framework you use. They might not have time to go dig into your
+source code to figure out what your <strong>meta-magical piece of clever
+code</strong> does.</p>
+
+<p>Lately more and more applications provide their raw data to the
+outside world via web APIs. The developers who will consume your
+resources don&#8217;t have access to your source code, probably don&#8217;t use the same
+programming language and don&#8217;t have much time to guess how your API
+work. Also your test suite won&#8217;t help communicate how your API works so
+we need to find a different approach.
+Also note that in this scenario, TDD/BDD won&#8217;t help us communicate
+better and tests can&#8217;t be used as documentation since your tests aren&#8217;t
+exposed.</p>
+
+<p><em>Documentation is your #1 way to communicate with your human audience.</em>
+Communication is key and even if as engineers we love to focus on code, if we
+can&#8217;t communicate about it, end users will have a hard time using our
+code and might just not even do it. <strong>The key is to communicate what your API does,
+why someone might want to use it and how to use it.</strong></p>
+
+<h3>Consistent and reliable output</h3>
+
+<p>This point seems obvious but what we realize in reality is that
+for many, API&#8217;s consistency and reliability doesn&#8217;t include
+documentation. You find a lot of APIs out there poorly documented or out
+of sync with the actual implementation.</p>
+
+<p><strong>Documentation is a contract between
+you: the developer and the other developers consuming your APIs.</strong>
+As a developer, when you write any type of tests, they become some sort of quality contract.
+If someone changes your code and break your tests, they break the implicit contract.
+However, when talking about consuming data via an API, things get a bit more complicated.
+We need a way to ensure that the end user expectations are matching our
+implementation/documentation. Unit testing simply can&#8217;t guarantee that. Unit testing will
+guarantee that the logic of your units of code is intact but it can&#8217;t
+easily guarantee that the API output matches the documentation, however
+this is something that has to be done.</p>
+
+<h3>Maintainability</h3>
+
+<p>This is a tricky point since maintainability is very subjective. But I
+think we can agree that <a href="http://en.wikipedia.org/wiki/Decoupling#Software_development">decoupling</a>/<a href="http://en.wikipedia.org/wiki/Separation_of_concerns">separating concerns</a>
+will make our code more maintainable.</p>
+
+<p>That&#8217;s why I personally don&#8217;t think it&#8217;s a good idea to mix HTML
+rendering code and web API code. Consider using different controllers or
+different files depending on the way your code is structured.</p>
+
+<p>I also strongly believe that the implementation details shouldn&#8217;t define
+the way you design your web APIs. Don&#8217;t just slap a CRUD API on top of your
+model and call it done. In most cases, you will pay a high price later
+on if you take this approach because whenever you will need to change your
+web API or your model, you will be stuck. This is because your interface
+is now used by a lot of people and you can&#8217;t easily change it.
+There are many ways to avoid API/model coupling, I don&#8217;t advocate one particularly, but whatever you do,
+be sure you can make your models and APIs can evolve separately.</p>
+
+<br><br>
+
+
+<h2>My approach</h2>
+
+<p>I&#8217;ve been designing and developing web APIs for many years and I&#8217;ve been
+struggling with everything I mentioned until now.
+I don&#8217;t claim that I&#8217;ve found <strong>the</strong> solution but I&#8217;d like to think that I
+found one own way of addressing what are for me some of the most important parts
+of API design.</p>
+
+<h2>Being explicit</h2>
+
+<p>I believe that there is value in being explicit in the way we describe
+web APIs. Sometimes people get confused between being <a href="http://en.wiktionary.org/wiki/verbose">verbose</a> and being
+<a href="http://en.wiktionary.org/wiki/explicit">explicit</a>. These are two different concepts.
+Being explicit can sometimes seem verbose, but we need to evaluate the
+value that can be extracted from the provided information. If there isn&#8217;t any clear value and too many words are used, then we
+aren&#8217;t explicit, we are verbose.</p>
+
+<p>When designing a web API, I don&#8217;t write it for myself, I do it for someone
+else. <strong>It&#8217;s crucial to consider who you are writing for
+and to expose what&#8217;s important for them.</strong>
+A &#8220;small&#8221; problem is that we don&#8217;t show our code to our end users, so we
+need to find a way to explicitly provide the important information and
+to have this information provided to our end users.</p>
+
+<h2>DSL</h2>
+
+<p>For that I use a Domain Specific Language (DSL) which is a fancy way to
+say that I have some specific code allowing me to explicitly define my
+web services. These services exist as objects that can then be used to
+<em>process requests</em> but also to <em>validate inputs</em>, and even more importantly
+to <em>generate documentation</em>.</p>
+
+<p>The DSL allows me to define the following:</p>
+
+<ul>
+<li>details about consuming the service (uri, HTTP verb, authentication details,
+other service details&#8230;)</li>
+<li>incoming params (which ones are allowed, the type, are they required,
+optional?, what are they for)</li>
+<li>service output</li>
+</ul>
+
+
+<p>The input details is really important to validate incoming requests and
+reject them before even dispatching them. This is done for data sanity
+and for security reason. It also defines a strong interface that is
+easier to develop against and to maintain.</p>
+
+<p>The output details might sound quite surprising and redundant. After all, isn&#8217;t that a
+duplication of effort since we already have this information in the
+&#8220;view&#8221;? Well, if we consider the important points I highlighted in the
+first part of this article, we need a way to enforce a &#8220;contract&#8221;
+between the end users and our implementation. To do that, we can&#8217;t
+simply rely on our code since we can&#8217;t trust it. The output is important
+to document the expected output but also to validate that our services
+match our documentation and therefore our &#8220;contract&#8221;.</p>
+
+<p>Here is an example of a Ruby <a href="https://github.com/mattetti/Weasel-Diesel">DSL</a> use to describe a hello world service:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">describe_service</span> <span class="s2">&quot;hello_world&quot;</span> <span class="k">do</span> <span class="o">|</span><span class="n">service</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">service</span><span class="o">.</span><span class="n">formats</span>   <span class="ss">:json</span>
+</span><span class='line'>  <span class="n">service</span><span class="o">.</span><span class="n">http_verb</span> <span class="ss">:get</span>
+</span><span class='line'>  <span class="n">service</span><span class="o">.</span><span class="n">disable_auth</span> <span class="c1"># on by default</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># INPUT</span>
+</span><span class='line'>  <span class="n">service</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">string</span>  <span class="ss">:name</span><span class="p">,</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="s1">&#39;World&#39;</span><span class="p">,</span> <span class="ss">:doc</span> <span class="o">=&gt;</span> <span class="s2">&quot;The name of the person to greet.&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># OUTPUT</span>
+</span><span class='line'>  <span class="n">service</span><span class="o">.</span><span class="n">response</span> <span class="k">do</span> <span class="o">|</span><span class="n">response</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">response</span><span class="o">.</span><span class="n">object</span> <span class="k">do</span> <span class="o">|</span><span class="n">obj</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">obj</span><span class="o">.</span><span class="n">string</span> <span class="ss">:message</span><span class="p">,</span> <span class="ss">:doc</span> <span class="o">=&gt;</span> <span class="s2">&quot;The greeting message sent back. Defaults to &#39;World&#39;&quot;</span>
+</span><span class='line'>      <span class="n">obj</span><span class="o">.</span><span class="n">datetime</span> <span class="ss">:at</span><span class="p">,</span> <span class="ss">:doc</span> <span class="o">=&gt;</span> <span class="s2">&quot;The timestamp of when the message was dispatched&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># DOCUMENTATION</span>
+</span><span class='line'>  <span class="n">service</span><span class="o">.</span><span class="n">documentation</span> <span class="k">do</span> <span class="o">|</span><span class="n">doc</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">doc</span><span class="o">.</span><span class="n">overall</span> <span class="s2">&quot;This service provides a simple hello world implementation example.&quot;</span>
+</span><span class='line'>    <span class="n">doc</span><span class="o">.</span><span class="n">example</span> <span class="s2">&quot;&lt;code&gt;curl -I &#39;http://localhost:9292/hello_world?name=Matt&#39;&lt;/code&gt;&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The DSL style isn&#8217;t really important, what&#8217;s important is that it allows
+us to address some of the concerns we discussed earlier such as clearly
+defined interface that can be communicated as documentation but also
+acts as code. The focus is really on the API and everything fits in one
+page. Because everything is an object and can be inspected, proper
+and up to date documentation can be generated. And the implementation
+can be tested against the documentation since everything is maintained
+as code.</p>
+
+<h2>Being agnostic</h2>
+
+<p>While I like Ruby for many reasons, I don&#8217;t think that it&#8217;s the only
+good language to implement great web services. It actually has its pros
+and cons and so have all the web frameworks out there.
+That&#8217;s why I wrote my DSL as a <a href="https://github.com/mattetti/Weasel-Diesel">standalone library</a> that could virtually
+run on top of any web engine since it only outputs a representation of services.</p>
+
+<p>While I hope to one day create an interesting interop solution across
+programming language (by exporting the objects in a shared data
+structure for instance), I started by focusing on the various Ruby web
+frameworks.</p>
+
+<p>The best starting point for me was to use <a href="http://www.sinatrarb.com/">Sinatra</a>.
+I almost started just using <a href="http://rack.github.com/">rack</a>, but <a href="http://www.sinatrarb.com/">Sinatra</a> was providing me with a bit more feature for very
+little headache and little code to grasp. I wrote <a href="https://github.com/mattetti/wd-sinatra">wd-sinatra</a> which
+is a Ruby gem providing the <a href="https://github.com/mattetti/Weasel-Diesel">WeaselDiesel DSL</a> on top of a Sinatra app.
+It comes with a generator and all the needed hooks to design, implement, test and
+generate documentation for modern web APIs.</p>
+
+<p>Using a simple rake command (Ruby&#8217;s version of make) one can generate
+documentation or test the APIs against the implementations.
+The &#8220;mini framework&#8221; is still very free form and should let you do
+whatever you want. I don&#8217;t even set a default ORM for you to use since
+this choice is highly personal. I do however leave you places to set
+these things.</p>
+
+<p><a href="http://matt.aimonetti.net/images/matt_aimonetti-WeaselDiesel_doc_generation.jpeg"><img src="http://matt.aimonetti.net/images/matt_aimonetti-WeaselDiesel_doc_generation.jpeg" style="width:200px;display:block;margin:auto" rel="gallery1" class="fancybox" title="Matt Aimonetti - WeaselDiesel documentation generation example" alt="Matt Aimonetti - WeaselDiesel documentation generation example"></a></p>
+
+<p>Sinatra and my &#8220;freedom framework&#8221; might seem too free form for
+you. So I&#8217;m currently working on getting the DSL to run on top of Rails,
+and by goal is to actually get it to run with a normal Rails app.</p>
+
+<h2>Reconsidering Rails&#8217; MVC</h2>
+
+<p>The Rails code base is very deeply marked with its own concept of MVC and having controllers and actions.
+The challenge I have is that I like my service to be self contained. I
+want my services to be simple and easy to grasp. I like having 1 service
+per file. Models, libraries and other optional presenters/decorators live separately
+but I like to have my service implementation code with the rest of my
+service description. I honestly don&#8217;t like telling developers that they
+need to go check a route file and that my simple service requires that
+you open 12 files to understand what&#8217;s going on. Simpler is often better
+and that&#8217;s why in <a href="https://github.com/mattetti/wd-sinatra">wd-sinatra</a>
+the DSL and the implementation live together which is quite harder to do
+with Rails.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">describe_service</span> <span class="s2">&quot;hello_world&quot;</span> <span class="k">do</span> <span class="o">|</span><span class="n">service</span><span class="o">|</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># [...] see the DSL section to see how the</span>
+</span><span class='line'>  <span class="c1"># service is described. The block below is being</span>
+</span><span class='line'>  <span class="c1"># being called in the context of the request</span>
+</span><span class='line'>  <span class="c1"># after the request was validated.</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># SERVICE IMPLEMENTATION</span>
+</span><span class='line'>  <span class="c1"># the returned value is used as the response body, all the Sinatra helpers</span>
+</span><span class='line'>  <span class="c1"># are available.</span>
+</span><span class='line'>  <span class="n">service</span><span class="o">.</span><span class="n">implementation</span> <span class="k">do</span>
+</span><span class='line'>    <span class="p">{</span><span class="ss">:message</span> <span class="o">=&gt;</span> <span class="s2">&quot;Hello </span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="ss">:at</span> <span class="o">=&gt;</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="p">}</span><span class="o">.</span><span class="n">to_json</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Learning from experience</h2>
+
+<p>While the DSL fits most of my needs, we all have different use cases.
+While it&#8217;s critical for a library to have a clearly defined objective, it&#8217;s also important to
+have many people help improve it. Part of the learning/vetting
+excercise is to test an approach against different needs to define when
+and why it works well in some cases and why sometinmes it doesn&#8217;t. This
+allows us to define a sweet spot that should match the clearly defined
+objective. However to be able to do that, a design needs to be tested by
+many people. So far my approach seems to work very well when an
+API needs to live outside an application and that 3rd parties need to
+consume the resources. It also seems to work well with edge cases that
+many API designers seem to encounter sooner or later.</p>
+
+<h2>Conclusion</h2>
+
+<p>At the end of the day, we have to remember that API stands for
+<em>Application Programming Interface</em> and that these interfaces have to be
+programmed so humans can write to comsume them. One of Ruby&#8217;s main design points has always
+been to try to address human needs more than computer&#8217;s. As API
+designers/implementers, it seems important to adopt the same approach and
+consider who will use our interfaces.
+I think the discussion should focus more on what to value when
+defining web APIs, instead of arguing about how to implement APIs.
+Standardization is a great concept but a really hard to implement. And
+even with standards, we have to find a way to communicate with the API
+users to express what standards we follow and where to find the various
+entry points.
+Think about your API, <strong>how well does it
+communicate with your future API users</strong>, is it good enough for them to get
+excited? Is it good enough for them to create something amazing with it?
+If not, why not?</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[MacRuby on iOS - RubyMotion review]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/05/04/macruby-on-ios-rubymotion-review/"/>
-    <updated>2012-05-04T07:17:47+02:00</updated>
+    <updated>2012-05-04T07:17:47-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/05/04/macruby-on-ios-rubymotion-review</id>
     <content type="html"><![CDATA[<p>Yesterday, <a href="http://www.rubymotion.com/">RubyMotion</a> was released and let&#8217;s be honest, it is one the best alternatives to Objective-C out there (if not the best).</p>
 
@@ -145,7 +500,7 @@
   <entry>
     <title type="html"><![CDATA[Getting started with mruby]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/04/25/getting-started-with-mruby/"/>
-    <updated>2012-04-25T10:59:00+02:00</updated>
+    <updated>2012-04-25T10:59:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/04/25/getting-started-with-mruby</id>
     <content type="html"><![CDATA[<p>mruby is the latest Ruby implementation in an already quite long list:</p>
 
@@ -553,7 +908,7 @@ of Rails in a different domain thanks to the Ruby language.</p>
   <entry>
     <title type="html"><![CDATA[mruby and MobiRuby]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/04/20/mruby-and-mobiruby/"/>
-    <updated>2012-04-20T12:32:00+02:00</updated>
+    <updated>2012-04-20T12:32:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/04/20/mruby-and-mobiruby</id>
     <content type="html"><![CDATA[<p>Today, two big Ruby news came directly from Japan:</p>
 
@@ -757,7 +1112,7 @@ testing the first betas.</p>
   <entry>
     <title type="html"><![CDATA[Building and implementing a Single Sign-On solution]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution/"/>
-    <updated>2012-04-04T07:29:16+02:00</updated>
+    <updated>2012-04-04T07:29:16-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution</id>
     <content type="html"><![CDATA[<p>Most modern web applications start as a monolithic code base and, as complexity increases, the once small app gets split apart into many &#8220;modules&#8221;. In other cases, engineers opt for a <a href="http://en.wikipedia.org/wiki/Service-oriented_architecture">SOA</a> design approach from the beginning. One way or another, we start running multiple separate applications that need to interact seamlessly. My goal will be to describe some of the high-level challenges and solutions found in implementing a Single-Sign-On service.</p>
 
@@ -966,7 +1321,7 @@ end</code></pre></noscript></div>
   <entry>
     <title type="html"><![CDATA[Learning from Rails' failures]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/02/29/learning-from-rails-failures/"/>
-    <updated>2012-02-29T07:48:08+01:00</updated>
+    <updated>2012-02-29T07:48:08-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/02/29/learning-from-rails-failures</id>
     <content type="html"><![CDATA[<p>Ruby on Rails undisputedly changed the way web frameworks are designed. Rails became a reference when it comes to leveraging conventions, easy baked in feature set and a rich ecosystem. However, I think that Rails did and still does a lot of things pretty poorly.  By writing this post, I&#8217;m not trying to denigrate Rails, there are many other people out there already doing that. My hope is that by listing what I think didn&#8217;t and still doesn&#8217;t go well, we can learn from our mistakes and improve existing solutions or create better new ones.</p>
 
@@ -1035,7 +1390,7 @@ end</code></pre></noscript></div>
   <entry>
     <title type="html"><![CDATA[Quick dive into Ruby ORM object initialization]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/"/>
-    <updated>2012-02-23T09:46:49+01:00</updated>
+    <updated>2012-02-23T09:46:49-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization</id>
     <content type="html"><![CDATA[<p>Yesterday I did some quick digging into how ORM objects are initialized and the performance cost associated to that. In other words, I wanted to see what&#8217;s going on when you initialize an ActiveRecord object.</p>
 
@@ -1123,7 +1478,7 @@ end</code></pre></noscript></div>
   <entry>
     <title type="html"><![CDATA[LA RubyConf 2012 - Ruby: time to move on]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/02/04/larubyconf-2012/"/>
-    <updated>2012-02-04T15:09:00+01:00</updated>
+    <updated>2012-02-04T15:09:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/02/04/larubyconf-2012</id>
     <content type="html"><![CDATA[<p>During <a href="http://larubyconf.org/">LA RubyConf 2012</a> in Los Angeles, CA Matt
 Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
@@ -1154,7 +1509,7 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
   <entry>
     <title type="html"><![CDATA[Books to read in 2012 - recommended to me by Twitter]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter/"/>
-    <updated>2011-12-30T15:28:13+01:00</updated>
+    <updated>2011-12-30T15:28:13-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter</id>
     <content type="html"><![CDATA[<p>Today, I asked on Twitter what non-technical books I should read in 2012.</p>
 
@@ -1317,7 +1672,7 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
   <entry>
     <title type="html"><![CDATA[Developing a Curriculum]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/12/21/developing-a-curriculum/"/>
-    <updated>2011-12-21T06:57:27+01:00</updated>
+    <updated>2011-12-21T06:57:27-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/12/21/developing-a-curriculum</id>
     <content type="html"><![CDATA[<p>Recently I asked a friend of mine to give me pointers on how to develop a curriculum (he used to teach an education PHD program), after discussing his response on Twitter, people asked me to put it somewhere, so here it is:</p>
 
@@ -1368,7 +1723,7 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
   <entry>
     <title type="html"><![CDATA[RubyConf Argentina 2011 - Inside Ruby]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011/"/>
-    <updated>2011-11-08T15:42:00+01:00</updated>
+    <updated>2011-11-08T15:42:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011</id>
     <content type="html"><![CDATA[<p>During <a href="http://rubyconfargentina.org/en">RubyConf Argentina 2011</a> in Buenos Aires, Argentina Matt
 Aimonetti gave a talk entitled <em>Inside Ruby: concurrency &amp; garbage collection explained</em>.</p>
@@ -1414,7 +1769,7 @@ management works to get better performance out of your code.</p>
   <entry>
     <title type="html"><![CDATA[Data safety and GIL removal]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal/"/>
-    <updated>2011-10-18T15:19:17+02:00</updated>
+    <updated>2011-10-18T15:19:17-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal</id>
     <content type="html"><![CDATA[<p>After my recent <a href="http://rubyconf11.merbist.com">RubyConf talk</a> and <a href="http://merbist.com/2011/10/03/about-concurrency-and-the-gil/">follow up post addressing the Ruby &amp; Python&#8217;s Global Interpreter Lock</a> (aka GVL/Global VM Lock). a lot of people asked me to explain what I meant by &#8220;data safety&#8221;. While my point isn&#8217;t to defend one approach or the other, I spent a lot of time explaining why C Ruby and C Python use a GIL and where it matters and where it matters less. As a reminder and as mentioned by Matz himself, the main reason why C Ruby still has a GIL is data safety. But if this point isn&#8217;t clear to you, you might be missing the main argument supporting the use of a GIL.</p>
 
@@ -1509,7 +1864,7 @@ management works to get better performance out of your code.</p>
   <entry>
     <title type="html"><![CDATA[About management]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/10/11/about-management/"/>
-    <updated>2011-10-11T22:53:40+02:00</updated>
+    <updated>2011-10-11T22:53:40-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/10/11/about-management</id>
     <content type="html"><![CDATA[<p>I decided to save myself a session to the shrink and instead just write down my reflection on management. Who knows, some of you might help me and/or challenge my thought process.</p>
 
@@ -1530,7 +1885,7 @@ management works to get better performance out of your code.</p>
   <entry>
     <title type="html"><![CDATA[About concurrency and the GIL]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil/"/>
-    <updated>2011-10-03T21:23:54+02:00</updated>
+    <updated>2011-10-03T21:23:54-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil</id>
     <content type="html"><![CDATA[<p>During RubyConf 2011, concurrency was a really hot topic. This is not a new issue, and the JRuby team has been talking about true concurrency for quite a while . The Global Interpreter Lock has also been in a subject a<a href="http://wiki.python.org/moin/GlobalInterpreterLock"> lot of discussions in the Python community</a> and it&#8217;s not surprising that the Ruby community experiences the same debates since the evolution of their implementations are somewhat similar. (There might also be some tension between <a href="http://engineyard.com">EngineYard</a> hiring the JRuby and Rubinius teams and <a href="http://heroku.com">Heroku</a> which <a href="http://blog.heroku.com/archives/2011/7/12/matz_joins_heroku/">recently hired Matz</a> (Ruby&#8217;s creator) and <a href="https://github.com/nobu">Nobu</a>, the #1 C Ruby contributor)</p>
 
@@ -1618,7 +1973,7 @@ management works to get better performance out of your code.</p>
   <entry>
     <title type="html"><![CDATA[RubyConf 2011 - Complex Ruby concepts simplified]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/10/01/rubyconf-2011/"/>
-    <updated>2011-10-01T15:09:00+02:00</updated>
+    <updated>2011-10-01T15:09:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/10/01/rubyconf-2011</id>
     <content type="html"><![CDATA[<p>During <a href="http://rubyconf.org/">RubyConf 2011</a> in New Orleans, LA Matt
 Aimonetti gave a talk entitled <em>Complex Ruby concepts simplified</em>.</p>
@@ -1657,7 +2012,7 @@ for the talk is available <a href="http://confreaks.com/videos/714-rubyconf2011-
   <entry>
     <title type="html"><![CDATA[How to - cross domain ajax to a Ruby app]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app/"/>
-    <updated>2011-09-14T16:11:41+02:00</updated>
+    <updated>2011-09-14T16:11:41-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app</id>
     <content type="html"><![CDATA[<p>In some cases, you might have a bunch of apps running on different domains/subdomains and/or ports and you would like to make ajax requests between these services. The problem is that browsers wouldn&#8217;t let you make such requests because of the Same Origin Policy which only allowed them to make request to resources within the same domain.</p>
 
@@ -1700,7 +2055,7 @@ end
   <entry>
     <title type="html"><![CDATA[Ruby optimization example and explanation]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/09/05/ruby-optimization-example-and-explaination/"/>
-    <updated>2011-09-05T14:58:21+02:00</updated>
+    <updated>2011-09-05T14:58:21-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/09/05/ruby-optimization-example-and-explaination</id>
     <content type="html"><![CDATA[<p>Recently I wrote a small DSL that allows the user to define some code that then gets executed later on and in different contexts. Imagine something like Sinatra where each route action is defined in a block and then executed in context of an incoming request.</p>
 
@@ -1794,7 +2149,7 @@ end
   <entry>
     <title type="html"><![CDATA[Deploying a Rails 3.1 app - gotchas]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/08/30/deploying-a-rails-3-1-app-gotchas/"/>
-    <updated>2011-08-30T17:20:34+02:00</updated>
+    <updated>2011-08-30T17:20:34-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/08/30/deploying-a-rails-3-1-app-gotchas</id>
     <content type="html"><![CDATA[<p>Recently I had to build a new app as part of my research &amp; development job at <a href="http://livingsocial.com">LivingSocial</a>. My goal was to get the app up and running in just a few weeks, solid application architecture and graphic design included.
 When you need to build an app quickly and you want it to have some solid foundations, Rails is quite useful.
@@ -1864,7 +2219,7 @@ Also, be careful about the order of the file extensions, otherwise it won&#8217;
   <entry>
     <title type="html"><![CDATA[First step in scaling a web site: HTTP caching]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching/"/>
-    <updated>2011-07-11T10:21:02+02:00</updated>
+    <updated>2011-07-11T10:21:02-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching</id>
     <content type="html"><![CDATA[<p>Today my friend <a href="http://twitter.com/mokolabs">Patrick Crowley</a> and I were talking about scaling his website: <a href="http://cinematreasures.org/">http://cinematreasures.org</a> since an article covering his work will soon be published in a very popular newspaper. Patrick&#8217;s site is hosted on <a href="http://www.heroku.com/">Heroku</a> which comes by default with <a href="https://www.varnish-cache.org/">Varnish caching</a> enabled.</p>
 
@@ -2033,7 +2388,7 @@ Quite often you might even want to make an Ajax call to get some information suc
   <entry>
     <title type="html"><![CDATA[Go's reflection example]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/06/27/golang-reflection-exampl/"/>
-    <updated>2011-06-27T12:12:32+02:00</updated>
+    <updated>2011-06-27T12:12:32-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/06/27/golang-reflection-exampl</id>
     <content type="html"><![CDATA[<p>The <a href="http://golang.org/">Go Programming language</a> is really cool language by Google. According to the sales pitch, it&#8217;s a <strong><em>&#8220;fast, statically typed, compiled language that feels like a dynamically typed, interpreted language&#8221;</em></strong>. Well, if you are like me, you don&#8217;t trust sales pitches because you know that people writing them dont&#8217; care about you, they care about their product. However cynical you are, you still have to check the facts. So here is a quick demonstration showing how to use Go&#8217;s reflection feature.</p>
 
@@ -2147,88 +2502,6 @@ Here is a quick rundown of the code:</p>
 The attributes function is defined a bit below and and it takes any type of objects (empty interface) and returns a map, which is like a Hash or a Dictionary. The map has keys of String type and values of &#8220;Type&#8221; type. The &#8220;Type&#8221; type is defined in the reflect package. Inside the function, 23 then use the previously mentioned reflect package to check on the type and the name of each attribute and assign it to a map object. (note that I&#8217;m explicitly returning the map, but I could have done it in a more implicit way)</p>
 
 <p>So there you go, that&#8217;s how you use reflection in Go. Pretty nifty and simple.</p>
-
-<p> </p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Sayonara Sony ]]></title>
-    <link href="http://matt.aimonetti.net/posts/2011/06/10/sayonara-sony/"/>
-    <updated>2011-06-10T08:49:30+02:00</updated>
-    <id>http://matt.aimonetti.net/posts/2011/06/10/sayonara-sony</id>
-    <content type="html"><![CDATA[<p>It&#8217;s now official, I have resigned from Sony Computer Entertainment America.</p>
-
-<p><a href="http://merbist.com/wp-content/uploads/2011/06/playstation-logo.png"><img src="http://merbist.com/wp-content/uploads/2011/06/playstation-logo-150x150.png" alt="" /></a></p>
-
-<p>I was planning on posting this a bit later but since I was politely escorted out of the building by HR/security, I have more free time to let you know of my decision. Before you ask: No, my decision isn&#8217;t directly related to the recent PSN/Sony security breach events and no, I don&#8217;t have your credit card number. More seriously, my decision boils down to something much simpler &amp; concrete: drive and passion.</p>
-
-<p>The concept of drive is very well explained <a href="http://www.youtube.com/watch?v=u6XAPnuFjJc">in this talk</a> by <a href="http://www.danpink.com/">Dan Pink</a> and illustrated by <a href="http://www.thersa.org/">RSA</a>:</p>
-
-<p>As explained, it is proven that when doing cognitive tasks, there are 3 factors that lead to better performance &amp; personal satisfaction:</p>
-
-<ul>
-<li><p>Autonomy: engagement vs compliance</p></li>
-<li><p>Mastery: get better at stuff</p></li>
-<li><p>Purpose: be disruptive but make the world a better place</p></li>
-</ul>
-
-
-<p> </p>
-
-<p>The challenge is that when you work for a big corporation, you rarely see these factors applied. The amount of red tape, management overhead, lack of recognition and accountability result in a low drive by most employees. I think it was the first time in my entire career that I was told by a <a href="http://nateware.com">manager</a> to care less about the quality and end result of our products.</p>
-
-<p>The second important concept that I think is critical when looking at your career is passion. This topic is very well covered in <a href="http://chadfowler.com/">Chad Fowler</a>&#8217;s book: <a href="http://pragprog.com/titles/cfcar2/the-passionate-programmer">The Passionate Programmer</a>.</p>
-
-<p><a href="http://pragprog.com/titles/cfcar2/the-passionate-programmer"><img src="http://imagery.pragprog.com/products/137/cfcar2_xlargecover.jpg?1298589825" alt="" /></a>Here is a quote from Chad&#8217;s book:</p>
-
-<blockquote><p>Fulfillment and happiness don’t (often) come by chance. They require thought, intention, action, and a willingness to change course when you’ve made mistakes. [&#8230;] It might be a technology or business domain that gets you excited. Or, on the other hand, it might be a specific technology or business domain that drags you down. Or a type of organization. Maybe you’re meant for small teams or big teams. Or rigid processes. Or agile processes. Whatever the mix, take some time to find yours. You can fake it for a while, but a lack of passion will catch up with you and your work.</p></blockquote>
-
-<p> </p>
-
-<p>It&#8217;s hard to summarize Chad&#8217;s book into just a few sentences, but what I got from his book is that if, for whatever reason, you lose your passion for your job, you should move on to another place where you can be passionate and excel. In my case, I&#8217;m still very much passionate about video game development but I find my passion seriously affected by an unhealthy work environment, bad communication and a lack of desire to change things in concrete ways. As the saying goes, <a href="http://www.google.com/search?q=people+don't+leave+jobs">&#8220;People don&#8217;t leave jobs&#8230;&#8221;</a></p>
-
-<p> </p>
-
-<h3>What&#8217;s next for me?</h3>
-
-<p>If you are in the software industry you know that everybody is hiring and that there is a real shortage of talent out there. You probably also receive half a dozen emails per week from recruiters offering you &#8220;the best job ever&#8221; with an obscene salary. Well, I receive them too. But in this market, you and I can allow ourselves to be picky and to choose the right job for ourselves. By choosing the right job, we are going to be more passionate, more driven, more efficient and bring a lot more value to our employers, who, in return, will hopefully do everything they can to make sure we grow within the company with a strong desire to do even better. As I was considering what I would want to do if I were to leave Sony, I came up with a few ideas about a job:</p>
-
-<ul>
-<li><p>I don&#8217;t want to live to work, but rather, work to live. (kind of an European cliché sentence)</p></li>
-<li><p>It&#8217;s not about the job title.</p></li>
-<li><p>It&#8217;s not about the pay check.</p></li>
-<li><p>It&#8217;s not about how glamourous an industry  is.</p></li>
-<li><p>What matters is :</p>
-
-<ul>
-<li><p>the company culture.</p></li>
-<li><p>the passion coming from the leaders.</p></li>
-<li><p>the company&#8217;s ambitions.</p></li>
-<li><p>how the company rewards and respects its employees.</p></li>
-<li><p>the autonomy/trust given to the employees.</p></li>
-<li><p>the purpose of the company and its potential to disrupt a market/change the world.</p></li>
-<li><p>personal growth within the company.</p></li>
-</ul>
-</li>
-</ul>
-
-
-<p> </p>
-
-<p>Writing this list helped me realize that I was definitely not in the right place and helped me create a list of criteria to define what kind of job I should be doing instead. As I was thinking about all that, I was reminded of this quote:</p>
-
-<blockquote><p>&#8220;One should not pursue goals that are easily achieved. One must develop an instinct for what one can just barely achieve through one&#8217;s greatest efforts.&#8221; —Albert Einstein</p></blockquote>
-
-<p>This is probably a personality trait, but I like/need to be at the edge of my confort zone. I need to learn new things, experience new challenges. I need to try to solve unsolved problems. So part of me needs a company with a rich culture, a great a vision and leadership, but another part also needs to be allowed to think creatively, to push the existing boundaries, to challenge myself and to try to achieve things through my greatest efforts.</p>
-
-<p>The challenge is that over the last 5-7 years I have become a Ruby specialist. I have learned to understand and master the language, learning its pros/cons and what goes on &#8220;under the hood&#8221;. I have built small and huge solutions for various domain spaces on top of Ruby. I have shared my knowledge giving talks, books, blog posts. I have also spent a lot of time expanding my own computer science knowledge, looking into other programming languages, frameworks, designs. My job at Sony was interesting due to the fact that Ruby is used in a quite singular way with very specific problems and a lot of C/C++ interaction. So while it is true that I am a Ruby specialist, I don&#8217;t like that label. I don&#8217;t like it because it&#8217;s very limiting. My goal is to solve problems and quite often Ruby is a great tool for that, but for some problems, it is not. So I need a job where my expertise is helpful but would not limit my desire to learn new approaches, languages and skills.</p>
-
-<p>And this is why I will soon start working as a <em>Code Alchemist in the LivingSocial R&amp;D&#8217;s lab</em>.</p>
-
-<p><a href="http://merbist.com/2011/06/10/sayonara-sony/livingsocial-2/"><img src="http://merbist.com/wp-content/uploads/2011/06/livingsocial1.png" alt="" /></a></p>
-
-<p>That might be a shocker at first glance. Going from working on video games to working for a daily-deal startup? It doesn&#8217;t seem like a very smart career move. To be honest, that was my first reaction. But LivingSocial&#8217;s VP of engineering is <a href="http://twitter.com/#!/chadfowler">Chad Fowler</a> (the author of The Passionate Programmer, mentioned earlier) and its VP of R&amp;D is <a href="http://en.wikipedia.org/wiki/Richard_Kilmer_(programmer">Rich Kilmer</a>), InfoEther&#8217;s cofounder and recognized mad-scientist-coder. I&#8217;ve known Chad and Rich for many years, meeting at tech conferences that they organized or were invited to give talks to, and even getting to hack on some projects with Rich. So when they approached me to join them at LivingSocial, I wanted to know more about their own motivations, why I would be a good fit and how the company/job would rate against my list of criteria. We had long and honest discussions and the result is that I am excited to soon be working with one of the best teams I know of. More concretely, I will be working with <a href="http://twitter.com/#!/rich_kilmer">Rich</a>, <a href="http://twitter.com/#!/wbruce">Bruce</a> and <a href="http://twitter.com/#!/go">Michael</a> in helping LivingSocial revolutionize the local market. LivingSocial is a fast growing and successful company with a strong focus on creating a great experience for both customers and merchants. The company&#8217;s vision is well defined and the desire to change the world the way we know it is palpable. Most of the founders have a technical background, they value good engineering practices and have created a nice, positive company culture. Chad has some really awesome, passionate and talented engineers on his team (too many to mention), for whom I have a lot of respect and with whom I look forward to working with.  I also value the fact that LivingSocial trusts and values me enough to let me work remotely. This is very important for me because it shows that my new employer really wants to work with me, trusts me but also is willing to embrace the challenges of having a remote team if that&#8217;s what&#8217;s needed to create the &#8220;right team&#8221;. After looking more deeply at what I need and what LivingSocial is, I believe that I can assist LivingSocial in making a very positive change to the way small businesses around the world are run. And I am looking forward to this.</p>
 
 <p> </p>
 ]]></content>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/javascript/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-05-30T21:50:21+02:00</updated>
+  <updated>2012-06-13T10:20:01-07:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[First step in scaling a web site: HTTP caching]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching/"/>
-    <updated>2011-07-11T10:21:02+02:00</updated>
+    <updated>2011-07-11T10:21:02-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching</id>
     <content type="html"><![CDATA[<p>Today my friend <a href="http://twitter.com/mokolabs">Patrick Crowley</a> and I were talking about scaling his website: <a href="http://cinematreasures.org/">http://cinematreasures.org</a> since an article covering his work will soon be published in a very popular newspaper. Patrick's site is hosted on <a href="http://www.heroku.com/">Heroku</a> which comes by default with <a href="https://www.varnish-cache.org/">Varnish caching</a> enabled.</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/rails/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-05-30T21:50:21+02:00</updated>
+  <updated>2012-06-13T10:20:01-07:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[RailsConf 2009 - Rails 3: Stepping off of the golden path]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/05/08/railsconf-2009/"/>
-    <updated>2009-05-08T12:18:18+02:00</updated>
+    <updated>2009-05-08T12:18:18-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/05/08/railsconf-2009</id>
     <content type="html"><![CDATA[<p>During <a href="http://en.oreilly.com/rails2009/">RailsConf 2009</a> in Las Vegas, Nevada Matt
 Aimonetti gave a talk entitled <em>Rails 3: Stepping off of the golden path</em>.</p>
