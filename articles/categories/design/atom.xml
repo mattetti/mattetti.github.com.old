@@ -4,7 +4,7 @@
   <title><![CDATA[Category: design | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/design/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-06-13T10:20:01-07:00</updated>
+  <updated>2012-06-13T10:41:17-07:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -12,6 +12,334 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rethinking web service development]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/06/13/rethinking-web-service-development/"/>
+    <updated>2012-06-13T18:19:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/06/13/rethinking-web-service-development</id>
+    <content type="html"><![CDATA[<p>While it's true that there are still a lot of places where software isn't
+leveraged and many places where software needs to evolve, software is nearly everywhere!.
+The type of software we write today needs to interact
+with other software via some sort of network.
+Any web developer out there is used to that, (s)he writes software that
+runs on a server somewhere on the internet and users via a local software
+(browser) consume their web applications using an internet connection.</p>
+
+<p>What has changed in the last few years is that web applications start
+providing more than just dynamically rendered HTML templates.
+JavaScript is used to run more and more logic on the client side and JS
+usually talks to some backends via JSON.
+But web APIs are also more and more used to expose raw data to other
+software. <strong>The challenge though, is that we haven't changed the way we
+write web applications to adapt to this new way of providing data.</strong>
+In this article, I'd like to explore why and how we need to rethink web API development
+and focus on communication and interaction.</p>
+
+<h2>Unlearning</h2>
+
+<p><a href=""/images/matt_aimonetti-unlearn.jpeg""><img src="/images/matt_aimonetti-unlearn.jpeg"
+style="width:250px;display:block;margin:auto"/></a></p>
+
+<p>Many are used to doing certain
+things a certain way and it's really hard to unlearn old habits. The more
+concerning part of this fact is that it makes it <strong>hard for someone to step
+back and evaluate honestly if a technical decision is due to comfort or
+if it's truly the right choice to achieve a given goal.</strong>
+Ruby on Rails revolutionized the way we wrote web applications almost 10
+years ago and since then, many web frameworks have adopted the Rails philosophy.
+As a matter of fact, I personally think that when it comes to writing
+front end applications, Rails is still one if not the best web
+frameworks out there. But in its current state, I'm far from convinced that it's a great tool to write
+web APIs mainly because it was not designed for that and because it
+comes with a lot of baggage.</p>
+
+<h2>Focusing on the API</h2>
+
+<p>Let's take a step back and consider what is critical when developing a web
+API:</p>
+
+<ul>
+<li><strong>Documentation</strong> for end users to know how to consume your services.</li>
+<li><strong>Consistent and reliable</strong> output so you don't break client applications
+relying on your services.</li>
+<li><strong>Maintainability</strong></li>
+</ul>
+
+
+<p>Note that I didn't mention performance because I consider performance
+almost always being important.
+I also didn't mention the whole
+<a href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST</a>/<a href="http://en.wikipedia.org/wiki/Remote_procedure_call">RPC</a>/<a href="http://en.wikipedia.org/wiki/Hypermedia">Hypstermedia</a> debate
+since I consider it being an implementation detail and a totally orthogonal
+discussion. But for the record, I personally don't like solutions forcing you into a specific way of
+providing your data (I'm looking at you <a href="http://wiki.basho.com/Webmachine.html">webmachine</a>).</p>
+
+<h3>Documentation</h3>
+
+<p>Documentation isn't as important when you consume your own APIs because
+you can look at your source code. However it gets much more tricky when
+you start working with other teams. They might not know the
+language/framework you use. They might not have time to go dig into your
+source code to figure out what your <strong>meta-magical piece of clever
+code</strong> does.</p>
+
+<p>Lately more and more applications provide their raw data to the
+outside world via web APIs. The developers who will consume your
+resources don't have access to your source code, probably don't use the same
+programming language and don't have much time to guess how your API
+work. Also your test suite won't help communicate how your API works so
+we need to find a different approach.
+Also note that in this scenario, TDD/BDD won't help us communicate
+better and tests can't be used as documentation since your tests aren't
+exposed.</p>
+
+<p><em>Documentation is your #1 way to communicate with your human audience.</em>
+Communication is key and even if as engineers we love to focus on code, if we
+can't communicate about it, end users will have a hard time using our
+code and might just not even do it. <strong>The key is to communicate what your API does,
+why someone might want to use it and how to use it.</strong></p>
+
+<h3>Consistent and reliable output</h3>
+
+<p>This point seems obvious but what we realize in reality is that
+for many, API's consistency and reliability doesn't include
+documentation. You find a lot of APIs out there poorly documented or out
+of sync with the actual implementation.</p>
+
+<p><strong>Documentation is a contract between
+you: the developer and the other developers consuming your APIs.</strong>
+As a developer, when you write any type of tests, they become some sort of quality contract.
+If someone changes your code and break your tests, they break the implicit contract.
+However, when talking about consuming data via an API, things get a bit more complicated.
+We need a way to ensure that the end user expectations are matching our
+implementation/documentation. Unit testing simply can't guarantee that. Unit testing will
+guarantee that the logic of your units of code is intact but it can't
+easily guarantee that the API output matches the documentation, however
+this is something that has to be done.</p>
+
+<h3>Maintainability</h3>
+
+<p>This is a tricky point since maintainability is very subjective. But I
+think we can agree that <a href="http://en.wikipedia.org/wiki/Decoupling#Software_development">decoupling</a>/<a href="http://en.wikipedia.org/wiki/Separation_of_concerns">separating concerns</a>
+will make our code more maintainable.</p>
+
+<p>That's why I personally don't think it's a good idea to mix HTML
+rendering code and web API code. Consider using different controllers or
+different files depending on the way your code is structured.</p>
+
+<p>I also strongly believe that the implementation details shouldn't define
+the way you design your web APIs. Don't just slap a CRUD API on top of your
+model and call it done. In most cases, you will pay a high price later
+on if you take this approach because whenever you will need to change your
+web API or your model, you will be stuck. This is because your interface
+is now used by a lot of people and you can't easily change it.
+There are many ways to avoid API/model coupling, I don't advocate one particularly, but whatever you do,
+be sure you can make your models and APIs can evolve separately.</p>
+
+<br><br>
+
+
+<h2>My approach</h2>
+
+<p>I've been designing and developing web APIs for many years and I've been
+struggling with everything I mentioned until now.
+I don't claim that I've found <strong>the</strong> solution but I'd like to think that I
+found one own way of addressing what are for me some of the most important parts
+of API design.</p>
+
+<h2>Being explicit</h2>
+
+<p>I believe that there is value in being explicit in the way we describe
+web APIs. Sometimes people get confused between being <a href="http://en.wiktionary.org/wiki/verbose">verbose</a> and being
+<a href="http://en.wiktionary.org/wiki/explicit">explicit</a>. These are two different concepts.
+Being explicit can sometimes seem verbose, but we need to evaluate the
+value that can be extracted from the provided information. If there isn't any clear value and too many words are used, then we
+aren't explicit, we are verbose.</p>
+
+<p>When designing a web API, I don't write it for myself, I do it for someone
+else. <strong>It's crucial to consider who you are writing for
+and to expose what's important for them.</strong>
+A "small" problem is that we don't show our code to our end users, so we
+need to find a way to explicitly provide the important information and
+to have this information provided to our end users.</p>
+
+<h2>DSL</h2>
+
+<p>For that I use a Domain Specific Language (DSL) which is a fancy way to
+say that I have some specific code allowing me to explicitly define my
+web services. These services exist as objects that can then be used to
+<em>process requests</em> but also to <em>validate inputs</em>, and even more importantly
+to <em>generate documentation</em>.</p>
+
+<p>The DSL allows me to define the following:</p>
+
+<ul>
+<li>details about consuming the service (uri, HTTP verb, authentication details,
+other service details...)</li>
+<li>incoming params (which ones are allowed, the type, are they required,
+optional?, what are they for)</li>
+<li>service output</li>
+</ul>
+
+
+<p>The input details is really important to validate incoming requests and
+reject them before even dispatching them. This is done for data sanity
+and for security reason. It also defines a strong interface that is
+easier to develop against and to maintain.</p>
+
+<p>The output details might sound quite surprising and redundant. After all, isn't that a
+duplication of effort since we already have this information in the
+"view"? Well, if we consider the important points I highlighted in the
+first part of this article, we need a way to enforce a "contract"
+between the end users and our implementation. To do that, we can't
+simply rely on our code since we can't trust it. The output is important
+to document the expected output but also to validate that our services
+match our documentation and therefore our "contract".</p>
+
+<p>Here is an example of a Ruby <a href="https://github.com/mattetti/Weasel-Diesel">DSL</a> use to describe a hello world service:</p>
+
+<p>```ruby
+describe_service "hello_world" do |service|
+  service.formats   :json
+  service.http_verb :get
+  service.disable_auth # on by default</p>
+
+<p>  # INPUT
+  service.param.string  :name, :default => 'World', :doc => "The name of the person to greet."</p>
+
+<p>  # OUTPUT
+  service.response do |response|</p>
+
+<pre><code>response.object do |obj|
+  obj.string :message, :doc =&gt; "The greeting message sent back. Defaults to 'World'"
+  obj.datetime :at, :doc =&gt; "The timestamp of when the message was dispatched"
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  # DOCUMENTATION
+  service.documentation do |doc|</p>
+
+<pre><code>doc.overall "This service provides a simple hello world implementation example."
+doc.example "&lt;code&gt;curl -I 'http://localhost:9292/hello_world?name=Matt'&lt;/code&gt;"
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>The DSL style isn't really important, what's important is that it allows
+us to address some of the concerns we discussed earlier such as clearly
+defined interface that can be communicated as documentation but also
+acts as code. The focus is really on the API and everything fits in one
+page. Because everything is an object and can be inspected, proper
+and up to date documentation can be generated. And the implementation
+can be tested against the documentation since everything is maintained
+as code.</p>
+
+<h2>Being agnostic</h2>
+
+<p>While I like Ruby for many reasons, I don't think that it's the only
+good language to implement great web services. It actually has its pros
+and cons and so have all the web frameworks out there.
+That's why I wrote my DSL as a <a href="https://github.com/mattetti/Weasel-Diesel">standalone library</a> that could virtually
+run on top of any web engine since it only outputs a representation of services.</p>
+
+<p>While I hope to one day create an interesting interop solution across
+programming language (by exporting the objects in a shared data
+structure for instance), I started by focusing on the various Ruby web
+frameworks.</p>
+
+<p>The best starting point for me was to use <a href="http://www.sinatrarb.com/">Sinatra</a>.
+I almost started just using <a href="http://rack.github.com/">rack</a>, but <a href="http://www.sinatrarb.com/">Sinatra</a> was providing me with a bit more feature for very
+little headache and little code to grasp. I wrote <a href="https://github.com/mattetti/wd-sinatra">wd-sinatra</a> which
+is a Ruby gem providing the <a href="https://github.com/mattetti/Weasel-Diesel">WeaselDiesel DSL</a> on top of a Sinatra app.
+It comes with a generator and all the needed hooks to design, implement, test and
+generate documentation for modern web APIs.</p>
+
+<p>Using a simple rake command (Ruby's version of make) one can generate
+documentation or test the APIs against the implementations.
+The "mini framework" is still very free form and should let you do
+whatever you want. I don't even set a default ORM for you to use since
+this choice is highly personal. I do however leave you places to set
+these things.</p>
+
+<p><a href="/images/matt_aimonetti-WeaselDiesel_doc_generation.jpeg"><img src="/images/matt_aimonetti-WeaselDiesel_doc_generation.jpeg" style="width:200px;display:block;margin:auto" rel="gallery1" title="Matt Aimonetti - WeaselDiesel documentation generation example" alt="Matt Aimonetti - WeaselDiesel documentation generation example"></a></p>
+
+<p>Sinatra and my "freedom framework" might seem too free form for
+you. So I'm currently working on getting the DSL to run on top of Rails,
+and by goal is to actually get it to run with a normal Rails app.</p>
+
+<h2>Reconsidering Rails' MVC</h2>
+
+<p>The Rails code base is very deeply marked with its own concept of MVC and having controllers and actions.
+The challenge I have is that I like my service to be self contained. I
+want my services to be simple and easy to grasp. I like having 1 service
+per file. Models, libraries and other optional presenters/decorators live separately
+but I like to have my service implementation code with the rest of my
+service description. I honestly don't like telling developers that they
+need to go check a route file and that my simple service requires that
+you open 12 files to understand what's going on. Simpler is often better
+and that's why in <a href="https://github.com/mattetti/wd-sinatra">wd-sinatra</a>
+the DSL and the implementation live together which is quite harder to do
+with Rails.</p>
+
+<p>```ruby
+describe_service "hello_world" do |service|</p>
+
+<p>  # [...] see the DSL section to see how the
+  # service is described. The block below is being
+  # being called in the context of the request
+  # after the request was validated.</p>
+
+<p>  # SERVICE IMPLEMENTATION
+  # the returned value is used as the response body, all the Sinatra helpers
+  # are available.
+  service.implementation do</p>
+
+<pre><code>{:message =&gt; "Hello #{params[:name]}", :at =&gt; Time.now}.to_json
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h2>Learning from experience</h2>
+
+<p>While the DSL fits most of my needs, we all have different use cases.
+While it's critical for a library to have a clearly defined objective, it's also important to
+have many people help improve it. Part of the learning/vetting
+excercise is to test an approach against different needs to define when
+and why it works well in some cases and why sometinmes it doesn't. This
+allows us to define a sweet spot that should match the clearly defined
+objective. However to be able to do that, a design needs to be tested by
+many people. So far my approach seems to work very well when an
+API needs to live outside an application and that 3rd parties need to
+consume the resources. It also seems to work well with edge cases that
+many API designers seem to encounter sooner or later.</p>
+
+<h2>Conclusion</h2>
+
+<p>At the end of the day, we have to remember that API stands for
+<em>Application Programming Interface</em> and that these interfaces have to be
+programmed so humans can write to comsume them. One of Ruby's main design points has always
+been to try to address human needs more than computer's. As API
+designers/implementers, it seems important to adopt the same approach and
+consider who will use our interfaces.
+I think the discussion should focus more on what to value when
+defining web APIs, instead of arguing about how to implement APIs.
+Standardization is a great concept but a really hard to implement. And
+even with standards, we have to find a way to communicate with the API
+users to express what standards we follow and where to find the various
+entry points.
+Think about your API, <strong>how well does it
+communicate with your future API users</strong>, is it good enough for them to get
+excited? Is it good enough for them to create something amazing with it?
+If not, why not?</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rethinking web service development]]></title>
