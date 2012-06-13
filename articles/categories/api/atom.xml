@@ -4,7 +4,7 @@
   <title><![CDATA[Category: api | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/api/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-06-13T10:44:46-07:00</updated>
+  <updated>2012-06-13T11:57:24-07:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -338,6 +338,10 @@ Think about your API, <strong>how well does it
 communicate with your future API users</strong>, is it good enough for them to get
 excited? Is it good enough for them to create something amazing with it?
 If not, why not?</p>
+
+<h3>Discussion</h3>
+
+<p>Comments are available on <a href="http://news.ycombinator.com/item?id=4107126">this HackerNews thread</a>.</p>
 ]]></content>
   </entry>
   
