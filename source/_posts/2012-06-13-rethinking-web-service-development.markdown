@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Rethinking web service development"
-date: 2012-06-06 18:19
+date: 2012-06-13 18:19
 comments: true
 categories: 
 - webservices
