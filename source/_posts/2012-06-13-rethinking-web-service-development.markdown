@@ -30,8 +30,8 @@ and focus on communication and interaction.
 
 ## Unlearning
 
-<img src="{{ root_url }}/images/matt_aimonetti-unlearn.jpeg"
-class='fancybox' rel='gallery0' style="width:250px;display:block;margin:auto"/>
+<a href="{{ root_url }}/images/matt_aimonetti-unlearn.jpeg"><img src="{{ root_url }}/images/matt_aimonetti-unlearn.jpeg"
+  style="width:250px;display:block;margin:auto"/></a>
 
 Many are used to doing certain
 things a certain way and it's really hard to unlearn old habits. The more
@@ -245,7 +245,7 @@ whatever you want. I don't even set a default ORM for you to use since
 this choice is highly personal. I do however leave you places to set
 these things.
 
-<a href="{{ root_url }}/images/matt_aimonetti-WeaselDiesel_doc_generation.jpeg"><img src="{{ root_url }}/images/matt_aimonetti-WeaselDiesel_doc_generation.jpeg" style="width:200px;display:block;margin:auto" rel="gallery1" class="fancybox" title="Matt Aimonetti - WeaselDiesel documentation generation example" alt="Matt Aimonetti - WeaselDiesel documentation generation example"></a>
+<a href="{{ root_url }}/images/matt_aimonetti-WeaselDiesel_doc_generation.jpeg"><img src="{{ root_url }}/images/matt_aimonetti-WeaselDiesel_doc_generation.jpeg" style="width:200px;display:block;margin:auto" title="Matt Aimonetti - WeaselDiesel documentation generation example" alt="Matt Aimonetti - WeaselDiesel documentation generation example"></a>
 
 Sinatra and my "freedom framework" might seem too free form for
 you. So I'm currently working on getting the DSL to run on top of Rails,
@@ -316,3 +316,7 @@ Think about your API, **how well does it
 communicate with your future API users**, is it good enough for them to get
 excited? Is it good enough for them to create something amazing with it?
 If not, why not?
+
+### Discussion
+
+Comments are available on [this HackerNews thread](http://news.ycombinator.com/item?id=4107126).

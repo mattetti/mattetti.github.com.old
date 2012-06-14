@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Matt Aimonetti]]></title>
-  <link href="http://mattetti.github.com/atom.xml" rel="self"/>
-  <link href="http://mattetti.github.com/"/>
+  <link href="http://matt.aimonetti.net/atom.xml" rel="self"/>
+  <link href="http://matt.aimonetti.net/"/>
   <updated>2012-04-17T18:40:13+02:00</updated>
-  <id>http://mattetti.github.com/</id>
+  <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
     
