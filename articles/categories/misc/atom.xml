@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Misc | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/misc/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-06-26T22:51:26-07:00</updated>
+  <updated>2012-06-27T12:54:46-07:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -1410,35 +1410,6 @@ The final binary looks like an Objective-C binary (except that it's larger)</p><
 
 
 <p>As you can see, <a href="http://macruby.org">MacRuby</a> is moving forward and the experimental branch should soon move to trunk.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[On Engendering Strong Reactions]]></title>
-    <link href="http://matt.aimonetti.net/posts/2009/04/28/on-engendering-strong-reactions/"/>
-    <updated>2009-04-28T17:16:03-07:00</updated>
-    <id>http://matt.aimonetti.net/posts/2009/04/28/on-engendering-strong-reactions</id>
-    <content type="html"><![CDATA[<p>To start with, I would like to make it clear to everyone that I do sincerely care about the larger gender issues that my presentation touched off.  I have also replied and otherwise corresponded with everyone who has contacted me about my presentation, just as I have tried to reply to all of the blog posts that have been brought to my attention.  At this point, however, it is clear that this issue has grown too large to be resolved through one-on-one contact, hence this public statement.</p>
-
-<p>I have made a specific point of exchanging emails with most of the bloggers who addressed the gender issue, and I did so because I care about minority involvement in our community.  I cared about this issue well before GoGaRuCo or this particular presentation, despite what anyone might think to the contrary, running the presentation past my wife/business partner and other colleagues well before I gave my talk.  They, at least, understood the goals of my presentation, which were to leaven an otherwise dry topic with humor.  It genuinely was not my intention to cause offense.  People may be driven by personal choice or cultural background to take offense at any number of things, of course, but I think there is always a clear difference between trying to offend people vs people choosing to take offense.</p>
-
-<p>My view is that offending someone is walking up to them and saying: "You suck, your code sucks and your partner's code sucks!".
-That is not what I did in my talk.  In the case of my talk, people knew what to expect, they <em>picked</em> the talk, and were warned by the organizers before I started that I would be using imagery potentially offensive to some.  The topic of my talk was obvious, and I would have hoped that people who were likely to be offended would have simply chosen not to attend my talk or read my slides on the internet.  It's like complaining that television has too much material unsuitable for children, yet not taking steps to limit their viewing of it.  You can't have it both ways.</p>
-
-<p>Now that I have explained my view point as clearly as I can, I would also like to express my sincere regret that this situation has brought bad publicity to Rails and the loss of one of the Activism team members.  I understand how people who are concerned about gender equality could have taken my presentation badly and misjudge my intentions, if they did not know me.</p>
-
-<p>In the same way, people have been rather quick to judge the entire Ruby/Rails community based on my presentation and the comments of a few people. I have noticed, for example, a lot of comments making sweeping generalizations about Americans, Republicans, women, Ruby, Rails, men etc.. leading to an exchange of insults, things getting personal, and everybody feeling the need to fuel the flames by sharing their own opinion in public.  While there is nothing wrong with sharing your approval or disapproval, I think it has also contributed to blowing this entire thing completely out of proportion.  I would like to ask people to step back and reflect upon whether we are contributing anything useful to the discussion.</p>
-
-<p>We can argue forever about morals, professionalism, ethics, respect, etc., though this is all a distraction from the real problem that was raised by Sarah, namely that we have very few minorities in the Ruby community, especially women.  Minorities do need to be more represented!</p>
-
-<p>So, instead of continuing an increasingly pointless debate about my slides, I would like to encourage the community to look further and see how we can change things.
-Education, outreach, and self-censorship are certainly some of the options available.   Please read <a href="http://www.quirkey.com/blog/2009/04/27/the-ghetto-of-the-mind/">Aaron's blog post</a> and see how you might make a difference.</p>
-
-<p>For those who still want to talk with me, I will be at the <a href="http://en.oreilly.com/rails2009/public/schedule/detail/8772">RailsConf devchix's discussion panel</a> and more importantly, if you care about Rails Activism and you want to see things evolve, be sure to come to our <a href="http://en.oreilly.com/rails2009/public/schedule/detail/9047">Birds of Feather discussion of Rails Activism</a>.</p>
-
-<p><strong>Update:</strong> Some people thought I wasn't clear enough about my position and I therefore tweeted the following: <a href="http://twitter.com/merbist/status/1661486850">"I obviously made a mistake. I didn't mean to offend anyone but since I did, I failed."</a></p>
-
-<p><strong>Update 2:</strong> Kirrily Robert wrote a <a href="http://infotrope.net/blog/2009/08/05/action-and-reaction-on-avoiding-offense/">very insightful article</a>. Borrowing her words, I'd like to reiterate that "It genuinely was not my intention to marginalize or exclude anyone from my talk or from the Ruby community, nor to make them feel uncomfortable."</p>
 ]]></content>
   </entry>
   
