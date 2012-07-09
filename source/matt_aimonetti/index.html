@@ -3,4 +3,8 @@ legacy_url: http://matt.aimonetti.net/about
 layout: default
 ---
 
-
+<script type="text/javascript"> function delayer() {window.location =
+  "{{page.legacy_url}}"}; setTimeout('delayer()', 3000) </script>
+<div>
+  <h2>This page moved, you will be redirected to <a href="{{page.legacy_url}}">{{page.legacy_url}}</a></h2>
+</div>
