@@ -12,6 +12,7 @@ categories:
 - Ruby
 - merbist.com
 - blog-post
+- Popular
 tags:
 - iOS
 - ruby
