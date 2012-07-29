@@ -4,7 +4,7 @@
   <title><![CDATA[Category: blog-post | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/blog-post/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-07-29T16:23:27-07:00</updated>
+  <updated>2012-07-29T16:36:30-07:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -136,9 +136,19 @@
 
 <p>RubyMotion is, by far, my favorite alternative to Objective-C. But it is hard to tell, just 48 hours after its release, what people will do with it. Can it transcend the programming language barriers and attract Python, PHP, Java, ObjC and JavaScript developers? What is the sweet spot for RubyMotion applications? Will it affect the native vs web app battle? Can it make iOS development more accessible to the masses? Only time will tell.</p>
 
-<p>What do you think?</p>
+<br/>
 
-<p> </p>
+
+<hr />
+
+<h3>Update:</h3>
+
+<p>Since RubyMotion 1.0 was released, I spent quite a lot of my free time leading the
+development of <a href="http://bubblewrap.io/">BubbleWrap</a>, a free and open
+source 3rd party library for <a href="http://www.rubymotion.com/">RubyMotion</a>.
+Unfortunately, as of July 2011 <strong>I took a break from this project and
+RubyMotion in general</strong>. I explained my motivations in <a href="https://groups.google.com/d/topic/rubymotion/XIE673vnuQk/discussion">this mailing list
+post</a>.</p>
 ]]></content>
   </entry>
   
