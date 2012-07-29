@@ -186,6 +186,17 @@ I would strongly suggest you consider giving RubyMotion a try. I can assure you 
 
 RubyMotion is, by far, my favorite alternative to Objective-C. But it is hard to tell, just 48 hours after its release, what people will do with it. Can it transcend the programming language barriers and attract Python, PHP, Java, ObjC and JavaScript developers? What is the sweet spot for RubyMotion applications? Will it affect the native vs web app battle? Can it make iOS development more accessible to the masses? Only time will tell.
 
-What do you think?
 
- 
+
+<br/>
+
+* * *
+
+### Update:
+
+Since RubyMotion 1.0 was released, I spent quite a lot of my free time leading the
+development of [BubbleWrap](http://bubblewrap.io/), a free and open
+source 3rd party library for [RubyMotion](http://www.rubymotion.com/).
+Unfortunately, as of July 2011 **I took a break from this project and
+RubyMotion in general**. I explained my motivations in [this mailing list
+post](https://groups.google.com/d/topic/rubymotion/XIE673vnuQk/discussion).
