@@ -4,7 +4,7 @@
   <title><![CDATA[Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-07-31T14:58:47-07:00</updated>
+  <updated>2012-07-31T15:27:17-07:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -19,7 +19,7 @@
     <updated>2012-07-30T14:46:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/07/30/ruby-class-module-mixins</id>
     <content type="html"><![CDATA[<p>When you first get started with the Ruby programming and you come from a different
-language, the only tricky piece is often Ruby&#8217;s approach to block/clojure/anonymous functions.
+language, the only tricky piece is often Ruby&#8217;s approach to block/closure/anonymous functions.
 Sure the metaprogramming seems a bit odd, but you don&#8217;t have to use it.
 That&#8217;s why a lot of developers think that Ruby is a simple language.
 Turns out that when you dig a bit further, you realize that Ruby is
