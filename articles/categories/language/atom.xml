@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: language | Matt Aimonetti]]></title>
+  <link href="http://matt.aimonetti.net/articles/categories/language/atom.xml" rel="self"/>
+  <link href="http://matt.aimonetti.net/"/>
+  <updated>2012-07-31T14:58:47-07:00</updated>
+  <id>http://matt.aimonetti.net/</id>
+  <author>
+    <name><![CDATA[Matt Aimonetti]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby constructs: class, module and mixin]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/07/30/ruby-class-module-mixins/"/>
+    <updated>2012-07-30T14:46:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/07/30/ruby-class-module-mixins</id>
+    <content type="html"><![CDATA[<p>When you first get started with the Ruby programming and you come from a different
+language, the only tricky piece is often Ruby's approach to block/clojure/anonymous functions.
+Sure the metaprogramming seems a bit odd, but you don't have to use it.
+That's why a lot of developers think that Ruby is a simple language.
+Turns out that when you dig a bit further, you realize that Ruby is
+actually quite a complex language. Ask any developer who worked on a
+Ruby implementation, they'll all tell you the same thing: Ruby is full of
+small little things that makes it complicated.</p>
+
+<p>An example of something that might seem simple is inheritance. Ruby,
+unlike C++, doesn't support multiple inheritance. What that means is
+that a Ruby class can only have 1 parent class (superclass). However
+multiple inheritance can be achieved via modules used as a mixins.
+That's a very common pattern, people put some code in a module and then
+mix it in/include it in a bunch of classes.
+The problem I see though, is that people abuse these concepts and don't
+respect the difference between a class, a module and a module used a
+mixin.</p>
+
+<h2>The Class</h2>
+
+<p>Object Oriented Programming 101:</p>
+
+<blockquote><p>"In object-oriented programming, a class is a construct that is used to create instances of itself – referred to as class instances, class objects, instance objects or simply objects. A class defines constituent members which enable its instances to have state and behavior."</p></blockquote>
+
+<p>So if you create a class and you don't create instances, you are using
+the wrong construct. Here is an example of what I often see:</p>
+
+<p>```ruby
+class Settings</p>
+
+<p>  @settings = {}
+  def self.all</p>
+
+<pre><code>@settings
+</code></pre>
+
+<p>  end</p>
+
+<p>  def self.<a href="key"></a></p>
+
+<pre><code>all[key]
+</code></pre>
+
+<p>  end</p>
+
+<p>  def self.[]=(key, value)</p>
+
+<pre><code>all[key] = value
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<p>Which can be used as such:</p>
+
+<p>```ruby
+Settings[:secret] = 42 * Math::PI * Time.now.to_f
+p Settings[:secret]</p>
+
+<h1>=> 177243152913.2707</h1>
+
+<p>```</p>
+
+<p><em>(granted this isn't a great example since we could have used a subclass
+of <code>Hash</code> but just bear with me)</em></p>
+
+<p>Actually, the developer who wrote the code above would probably also use
+some Ruby magic like <code>method_missing</code> to provide a more laxed API and allow for "nicer" getters
+such as <code>Settings.secret</code> and <code>Settings['secret']</code>. I have my
+own thoughts on the topic but it's
+an entirely different subject.</p>
+
+<p>Note also that the way class level methods are defined
+can also be different depending on who wrote the code, you might see the
+following variations (and other more esoteric ones):</p>
+
+<p>```ruby
+class Settings</p>
+
+<p>  def Settings.all; end</p>
+
+<p>  # or
+  class &lt;&lt; self</p>
+
+<pre><code>def all; end
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<p>The <code>Settings</code> code above works, the code is simple, yet I will argue one thing: <strong>it's
+an abuse of the class construct</strong>. We're breaking the #1 rule of classes:
+<em>"create instances of self"</em>.</p>
+
+<p><strong>It's easy, whenever you don't create instances of a class,
+please don't use a class.</strong></p>
+
+<p>That's also true for slightly different examples such as:</p>
+
+<p>```ruby
+class API</p>
+
+<p>  def fetch(id)</p>
+
+<pre><code>HTTP.get('http://matt.aimonetti.net/article/:id', :id =&gt; id)
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<p><code>ruby
+resource = API.new.fetch(42)
+</code></p>
+
+<p>There is no need whatsoever to create an instance of <code>API</code>, using a class is
+picking the wrong construct. Also, I don't care if you use the <code>Singleton</code>
+module to only allow 1 instance of the class, you still shouldn't use a
+class in the above example.</p>
+
+<h2>The Module</h2>
+
+<p>In Ruby's object hierarchy, the Class object actually inherits from the
+Module object.</p>
+
+<p><code>
+ruby -v -e "p Class.ancestors"
+ruby 1.9.3p194 (2012-04-20 revision 35410) [x86_64-darwin11.3.0]
+[Class, Module, Object, Kernel, BasicObject]
+</code></p>
+
+<p>As per Ruby's source code defintion:</p>
+
+<blockquote><p>"A Module is a collection of methods and constants."</p></blockquote>
+
+<p>I like to think of modules as namespaced methods and constants. Whenever
+you want code that logically belongs together but that
+won't require that you create instances of a 'model', then a module is
+the right construct to use.</p>
+
+<p>As a matter of fact, the two examples above are great cases where a
+module should have been used.</p>
+
+<p>The confusing bit is that modules can have module level methods but also
+instance level methods. Here is an example:</p>
+
+<p>```ruby
+module API</p>
+
+<p>  def self.fetch(id)</p>
+
+<pre><code>HTTP.get('http://matt.aimonetti.net/article/:id', :id =&gt; id)
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<p>This is a module level function, it could also be written like that:</p>
+
+<p>```ruby
+module API</p>
+
+<p>  module_function</p>
+
+<p>  def fetch(id)</p>
+
+<pre><code>HTTP.get('http://matt.aimonetti.net/article/:id', :id =&gt; id)
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<p>And be used like that:
+<code>ruby
+resource = API.fetch(42)
+</code></p>
+
+<p>Until now, it makes sense. The weird thing is that even though, modules
+unlike classes aren't meant to create instances, we have the possibility
+to define module instance methods.</p>
+
+<p>```ruby
+module Settings</p>
+
+<p>  DATA = {repo: 'http://github.com/mattetti'}</p>
+
+<p>  def repository</p>
+
+<pre><code>DATA[:repo]
+</code></pre>
+
+<p>  end</p>
+
+<p>  def secret_key</p>
+
+<pre><code>DATA[:key] ||= 42*Math::PI
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<p>Great, but we can't actually use these methods since they are instance
+methods and we don't create instances of modules. Well, that isn't quite
+true, there is a way to access them and that's by using a module as a
+mixin. What that means is that we inject/copy the module code inside a
+class or an(other) object. Example in code:</p>
+
+<p>```ruby
+a = Object.new
+a.extend(Settings)
+a.repository</p>
+
+<h1>=> "http://github.com/mattetti"</h1>
+
+<p>```</p>
+
+<p>Or we can add the code to a class so the instances of this class can
+access our module instance methods:</p>
+
+<p>```ruby
+class Foo
+  include Settings
+end</p>
+
+<p>Foo.new.repository</p>
+
+<h1>=> "http://github.com/mattetti"</h1>
+
+<p>```</p>
+
+<h2>The mixin modules</h2>
+
+<p>There a plenty of resources online about the many ways to use mixins in Ruby to achieve multiple inheritance and do cool stuff.
+But the point of this article is to try to demonstrate that mixins
+shouldn't be abused.</p>
+
+<p>My problem with the above example is that by mixing in the <code>Settings</code>
+module inside our <code>Foo</code> class, we created an uneeded, confusing extra
+level of abstraction. Instances of <code>Foo</code> now have access to two
+methods/objects: <code>repository</code> and <code>secret_key</code>. These methods or the
+objects they refer to don't belong to the <code>Foo</code> class, but it seems
+convenient to not have to type <code>Settings.repository</code> so we mixed things
+in. Plus, a lot of Ruby developers seem to dislike adding class/module
+level methods so they feel that this approach 'feels better'.</p>
+
+<p>Here is the thing, the convenience of typing a few less characters isn't
+worth it. Next time you or someone else will look at an instance of the
+<code>Foo</code> class calling <code>repository</code>, finding where it is defined is going
+to be a pain. That's especially true if you have many mixins in your
+class. <code>Settings</code> will also probably grow and you will end up with a
+bunch of methods that have nothing to do with you class instances.
+In this case, I will call the use of a mixin, an abuse of construct.
+Sure, Ruby allows you to do it, but that doesn't mean it's the right
+thing to do. In Ruby, unlike in Python, there are 101 ways to do a
+simple thing. It doesn't mean that the 101 ways are good, it just means
+that Matz wasn't sure how people would use his programming language and
+chose to give us more freedom to messup/doing it our own way.</p>
+
+<h3>When to use mixins?</h3>
+
+<p>I have my own rule: use mixins whenever you need to <em>share behaviors</em> between
+different classes.</p>
+
+<p>In the above example, we weren't sharing behaviors, we were sharing
+objects, there was no need to actually use a mixin.</p>
+
+<p>That said, rules aren't rules without exceptions. A good example of this
+exception would be the <code>Math</code> module from the standard library.
+This module offers trigonometric and transcendental functions. You might
+think that this module would be designed to be a mixin so you can get
+<code>log</code>, <code>cos</code>, <code>exp</code> and friends available in your math related classes.
+It turns out, all Math's methods are defined a module functions meaning
+that they are meant to be called from the <code>Math</code> module directly.</p>
+
+<p>However, Ruby allows you to mixin module functions, but these functions
+become private. If you do include the module inside your class, your instance methods
+will be able to call <code>hypot(x,y)</code> directly, but these methods won't be
+available from the outside (<code>Foo.new.log(42)</code> would raise an
+exception).</p>
+
+<p>To conclude with mixins: mixins are great but don't abuse them or you
+will endup with so much abstraction that your coworkers will secretely
+call you <a href="http://en.wikipedia.org/wiki/Wassily_Kandinsky">Kandinsky</a>.
+Stick to simple mixins allowing you to share behaviors between at least
+a couple classes. See <code>DataMapper</code> for a great way to use mixins.</p>
+
+<h2>Modules: your secret functional programming weapon</h2>
+
+<p>I have to say that I do like functional programming. The idea of having
+functions not mutating the states of things around them pleases me. It
+just seems clean, you feed data to a function and you get another piece
+of data. No states were changed, maybe some temporary variables were
+allocated to process the data, but the only thing that matters is the
+input and the output. Easy to grasp, easy to follow, no magical states
+being changed by some code fairies.</p>
+
+<p>The good news is that Ruby allows us to write code like that. And this
+is where modules are great. Very much like the <code>Math</code> module we
+discussed above, there are many cases where you want to have a bunch of
+functions that process an input and provide an output without keeping
+any states. A good example of such a module would be a param
+verification filter. The filter takes an input, takes some rules and
+verifies that the input matches the rules.
+Surely, we could create an instance for each verification, this would
+allow to keep states in our class and do the usual OOP things. But we
+could also simply use a module with a bunch of module (level) functions
+that would pass to each other the input they need to not need to keep
+states. The end result will be faster, nicer on the GC and easy to
+follow.</p>
+
+<p>Mixing OOP and functional programming isn't new, ask <a href="http://www.scala-lang.org/">Scala</a> developers!
+If done right, by adopting this approach we can simply our code base,
+make it faster, easier to maintain and not losing the chance to also use
+OOP paradigms when needed.</p>
+
+<h2>Compromise</h2>
+
+<p>As shown earlier, modules and classes have pros and cons. Classes are
+however much more natural to use for Object Oriented Programming. A
+compromise about the <code>Settings</code> examples was suggested by Evan Phoenix.
+The solution is elegant and simple. Use a class and an instance.
+Here is an implementation based on his suggestion:</p>
+
+<p>```ruby
+class AppSettings &lt; Hash</p>
+
+<p>  def custom_method
+  end</p>
+
+<p>end</p>
+
+<p>SETTINGS = AppSettings.new
+```</p>
+
+<p>The point here is not about the class implementation but that fact that we use
+a class and associate an instance of this class to a constant so it can
+be shared all over the place. Wow, a constant, this is so nasty you
+might think. Classes are constants too and so are modules, here we just
+allocate an instance of a class to a constant. Surpisingly simple and efficient.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -4,7 +4,7 @@
   <title><![CDATA[Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-07-29T16:36:30-07:00</updated>
+  <updated>2012-07-31T14:58:47-07:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -12,6 +12,423 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby constructs: class, module and mixin]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/07/30/ruby-class-module-mixins/"/>
+    <updated>2012-07-30T14:46:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/07/30/ruby-class-module-mixins</id>
+    <content type="html"><![CDATA[<p>When you first get started with the Ruby programming and you come from a different
+language, the only tricky piece is often Ruby&#8217;s approach to block/clojure/anonymous functions.
+Sure the metaprogramming seems a bit odd, but you don&#8217;t have to use it.
+That&#8217;s why a lot of developers think that Ruby is a simple language.
+Turns out that when you dig a bit further, you realize that Ruby is
+actually quite a complex language. Ask any developer who worked on a
+Ruby implementation, they&#8217;ll all tell you the same thing: Ruby is full of
+small little things that makes it complicated.</p>
+
+<p>An example of something that might seem simple is inheritance. Ruby,
+unlike C++, doesn&#8217;t support multiple inheritance. What that means is
+that a Ruby class can only have 1 parent class (superclass). However
+multiple inheritance can be achieved via modules used as a mixins.
+That&#8217;s a very common pattern, people put some code in a module and then
+mix it in/include it in a bunch of classes.
+The problem I see though, is that people abuse these concepts and don&#8217;t
+respect the difference between a class, a module and a module used a
+mixin.</p>
+
+<h2>The Class</h2>
+
+<p>Object Oriented Programming 101:</p>
+
+<blockquote><p>&#8220;In object-oriented programming, a class is a construct that is used to create instances of itself – referred to as class instances, class objects, instance objects or simply objects. A class defines constituent members which enable its instances to have state and behavior.&#8221;</p></blockquote>
+
+<p>So if you create a class and you don&#8217;t create instances, you are using
+the wrong construct. Here is an example of what I often see:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Settings</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="vi">@settings</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">all</span>
+</span><span class='line'>    <span class="vi">@settings</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">[]</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">all</span><span class="o">[</span><span class="n">key</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">[]=</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">all</span><span class="o">[</span><span class="n">key</span><span class="o">]</span> <span class="o">=</span> <span class="n">value</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which can be used as such:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Settings</span><span class="o">[</span><span class="ss">:secret</span><span class="o">]</span> <span class="o">=</span> <span class="mi">42</span> <span class="o">*</span> <span class="no">Math</span><span class="o">::</span><span class="no">PI</span> <span class="o">*</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">to_f</span>
+</span><span class='line'><span class="nb">p</span> <span class="no">Settings</span><span class="o">[</span><span class="ss">:secret</span><span class="o">]</span>
+</span><span class='line'><span class="c1"># =&gt; 177243152913.2707</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>(granted this isn&#8217;t a great example since we could have used a subclass
+of <code>Hash</code> but just bear with me)</em></p>
+
+<p>Actually, the developer who wrote the code above would probably also use
+some Ruby magic like <code>method_missing</code> to provide a more laxed API and allow for &#8220;nicer&#8221; getters
+such as <code>Settings.secret</code> and <code>Settings['secret']</code>. I have my
+own thoughts on the topic but it&#8217;s
+an entirely different subject.</p>
+
+<p>Note also that the way class level methods are defined
+can also be different depending on who wrote the code, you might see the
+following variations (and other more esoteric ones):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Settings</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">Settings</span><span class="o">.</span><span class="nf">all</span><span class="p">;</span> <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># or</span>
+</span><span class='line'>  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">all</span><span class="p">;</span> <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>Settings</code> code above works, the code is simple, yet I will argue one thing: <strong>it&#8217;s
+an abuse of the class construct</strong>. We&#8217;re breaking the #1 rule of classes:
+<em>&#8220;create instances of self&#8221;</em>.</p>
+
+<p><strong>It&#8217;s easy, whenever you don&#8217;t create instances of a class,
+please don&#8217;t use a class.</strong></p>
+
+<p>That&#8217;s also true for slightly different examples such as:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">API</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">fetch</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">HTTP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://matt.aimonetti.net/article/:id&#39;</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="nb">id</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">resource</span> <span class="o">=</span> <span class="no">API</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There is no need whatsoever to create an instance of <code>API</code>, using a class is
+picking the wrong construct. Also, I don&#8217;t care if you use the <code>Singleton</code>
+module to only allow 1 instance of the class, you still shouldn&#8217;t use a
+class in the above example.</p>
+
+<h2>The Module</h2>
+
+<p>In Ruby&#8217;s object hierarchy, the Class object actually inherits from the
+Module object.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">ruby</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&quot;p Class.ancestors&quot;</span>
+</span><span class='line'><span class="n">ruby</span> <span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="n">p194</span> <span class="p">(</span><span class="mi">2012</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mi">20</span> <span class="n">revision</span> <span class="mi">35410</span><span class="p">)</span> <span class="o">[</span><span class="n">x86_64</span><span class="o">-</span><span class="n">darwin11</span><span class="o">.</span><span class="mi">3</span><span class="o">.</span><span class="mi">0</span><span class="o">]</span>
+</span><span class='line'><span class="o">[</span><span class="no">Class</span><span class="p">,</span> <span class="no">Module</span><span class="p">,</span> <span class="no">Object</span><span class="p">,</span> <span class="no">Kernel</span><span class="p">,</span> <span class="no">BasicObject</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As per Ruby&#8217;s source code defintion:</p>
+
+<blockquote><p>&#8220;A Module is a collection of methods and constants.&#8221;</p></blockquote>
+
+<p>I like to think of modules as namespaced methods and constants. Whenever
+you want code that logically belongs together but that
+won&#8217;t require that you create instances of a &#8216;model&#8217;, then a module is
+the right construct to use.</p>
+
+<p>As a matter of fact, the two examples above are great cases where a
+module should have been used.</p>
+
+<p>The confusing bit is that modules can have module level methods but also
+instance level methods. Here is an example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">API</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">fetch</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">HTTP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://matt.aimonetti.net/article/:id&#39;</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="nb">id</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is a module level function, it could also be written like that:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">API</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">module_function</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">fetch</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">HTTP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://matt.aimonetti.net/article/:id&#39;</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="nb">id</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And be used like that:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">resource</span> <span class="o">=</span> <span class="no">API</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Until now, it makes sense. The weird thing is that even though, modules
+unlike classes aren&#8217;t meant to create instances, we have the possibility
+to define module instance methods.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Settings</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="no">DATA</span> <span class="o">=</span> <span class="p">{</span><span class="n">repo</span><span class="p">:</span> <span class="s1">&#39;http://github.com/mattetti&#39;</span><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">repository</span>
+</span><span class='line'>    <span class="no">DATA</span><span class="o">[</span><span class="ss">:repo</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">secret_key</span>
+</span><span class='line'>    <span class="no">DATA</span><span class="o">[</span><span class="ss">:key</span><span class="o">]</span> <span class="o">||=</span> <span class="mi">42</span><span class="o">*</span><span class="no">Math</span><span class="o">::</span><span class="no">PI</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Great, but we can&#8217;t actually use these methods since they are instance
+methods and we don&#8217;t create instances of modules. Well, that isn&#8217;t quite
+true, there is a way to access them and that&#8217;s by using a module as a
+mixin. What that means is that we inject/copy the module code inside a
+class or an(other) object. Example in code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="no">Object</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="no">Settings</span><span class="p">)</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">repository</span>
+</span><span class='line'><span class="c1"># =&gt; &quot;http://github.com/mattetti&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Or we can add the code to a class so the instances of this class can
+access our module instance methods:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Foo</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">Settings</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Foo</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">repository</span>
+</span><span class='line'><span class="c1"># =&gt; &quot;http://github.com/mattetti&quot; </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>The mixin modules</h2>
+
+<p>There a plenty of resources online about the many ways to use mixins in Ruby to achieve multiple inheritance and do cool stuff.
+But the point of this article is to try to demonstrate that mixins
+shouldn&#8217;t be abused.</p>
+
+<p>My problem with the above example is that by mixing in the <code>Settings</code>
+module inside our <code>Foo</code> class, we created an uneeded, confusing extra
+level of abstraction. Instances of <code>Foo</code> now have access to two
+methods/objects: <code>repository</code> and <code>secret_key</code>. These methods or the
+objects they refer to don&#8217;t belong to the <code>Foo</code> class, but it seems
+convenient to not have to type <code>Settings.repository</code> so we mixed things
+in. Plus, a lot of Ruby developers seem to dislike adding class/module
+level methods so they feel that this approach &#8216;feels better&#8217;.</p>
+
+<p>Here is the thing, the convenience of typing a few less characters isn&#8217;t
+worth it. Next time you or someone else will look at an instance of the
+<code>Foo</code> class calling <code>repository</code>, finding where it is defined is going
+to be a pain. That&#8217;s especially true if you have many mixins in your
+class. <code>Settings</code> will also probably grow and you will end up with a
+bunch of methods that have nothing to do with you class instances.
+In this case, I will call the use of a mixin, an abuse of construct.
+Sure, Ruby allows you to do it, but that doesn&#8217;t mean it&#8217;s the right
+thing to do. In Ruby, unlike in Python, there are 101 ways to do a
+simple thing. It doesn&#8217;t mean that the 101 ways are good, it just means
+that Matz wasn&#8217;t sure how people would use his programming language and
+chose to give us more freedom to messup/doing it our own way.</p>
+
+<h3>When to use mixins?</h3>
+
+<p>I have my own rule: use mixins whenever you need to <em>share behaviors</em> between
+different classes.</p>
+
+<p>In the above example, we weren&#8217;t sharing behaviors, we were sharing
+objects, there was no need to actually use a mixin.</p>
+
+<p>That said, rules aren&#8217;t rules without exceptions. A good example of this
+exception would be the <code>Math</code> module from the standard library.
+This module offers trigonometric and transcendental functions. You might
+think that this module would be designed to be a mixin so you can get
+<code>log</code>, <code>cos</code>, <code>exp</code> and friends available in your math related classes.
+It turns out, all Math&#8217;s methods are defined a module functions meaning
+that they are meant to be called from the <code>Math</code> module directly.</p>
+
+<p>However, Ruby allows you to mixin module functions, but these functions
+become private. If you do include the module inside your class, your instance methods
+will be able to call <code>hypot(x,y)</code> directly, but these methods won&#8217;t be
+available from the outside (<code>Foo.new.log(42)</code> would raise an
+exception).</p>
+
+<p>To conclude with mixins: mixins are great but don&#8217;t abuse them or you
+will endup with so much abstraction that your coworkers will secretely
+call you <a href="http://en.wikipedia.org/wiki/Wassily_Kandinsky">Kandinsky</a>.
+Stick to simple mixins allowing you to share behaviors between at least
+a couple classes. See <code>DataMapper</code> for a great way to use mixins.</p>
+
+<h2>Modules: your secret functional programming weapon</h2>
+
+<p>I have to say that I do like functional programming. The idea of having
+functions not mutating the states of things around them pleases me. It
+just seems clean, you feed data to a function and you get another piece
+of data. No states were changed, maybe some temporary variables were
+allocated to process the data, but the only thing that matters is the
+input and the output. Easy to grasp, easy to follow, no magical states
+being changed by some code fairies.</p>
+
+<p>The good news is that Ruby allows us to write code like that. And this
+is where modules are great. Very much like the <code>Math</code> module we
+discussed above, there are many cases where you want to have a bunch of
+functions that process an input and provide an output without keeping
+any states. A good example of such a module would be a param
+verification filter. The filter takes an input, takes some rules and
+verifies that the input matches the rules.
+Surely, we could create an instance for each verification, this would
+allow to keep states in our class and do the usual OOP things. But we
+could also simply use a module with a bunch of module (level) functions
+that would pass to each other the input they need to not need to keep
+states. The end result will be faster, nicer on the GC and easy to
+follow.</p>
+
+<p>Mixing OOP and functional programming isn&#8217;t new, ask <a href="http://www.scala-lang.org/">Scala</a> developers!
+If done right, by adopting this approach we can simply our code base,
+make it faster, easier to maintain and not losing the chance to also use
+OOP paradigms when needed.</p>
+
+<h2>Compromise</h2>
+
+<p>As shown earlier, modules and classes have pros and cons. Classes are
+however much more natural to use for Object Oriented Programming. A
+compromise about the <code>Settings</code> examples was suggested by Evan Phoenix.
+The solution is elegant and simple. Use a class and an instance.
+Here is an implementation based on his suggestion:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">AppSettings</span> <span class="o">&lt;</span> <span class="no">Hash</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">custom_method</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">SETTINGS</span> <span class="o">=</span> <span class="no">AppSettings</span><span class="o">.</span><span class="n">new</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The point here is not about the class implementation but that fact that we use
+a class and associate an instance of this class to a constant so it can
+be shared all over the place. Wow, a constant, this is so nasty you
+might think. Classes are constants too and so are modules, here we just
+allocate an instance of a class to a constant. Surpisingly simple and efficient.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rethinking web service development]]></title>
@@ -2396,128 +2813,6 @@ Quite often you might even want to make an Ajax call to get some information suc
 <li><p><a href="http://plugins.jquery.com/project/Cookie">jQuery cookie plugin</a></p></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Go's reflection example]]></title>
-    <link href="http://matt.aimonetti.net/posts/2011/06/27/golang-reflection-exampl/"/>
-    <updated>2011-06-27T12:12:32-07:00</updated>
-    <id>http://matt.aimonetti.net/posts/2011/06/27/golang-reflection-exampl</id>
-    <content type="html"><![CDATA[<p>The <a href="http://golang.org/">Go Programming language</a> is really cool language by Google. According to the sales pitch, it&#8217;s a <strong><em>&#8220;fast, statically typed, compiled language that feels like a dynamically typed, interpreted language&#8221;</em></strong>. Well, if you are like me, you don&#8217;t trust sales pitches because you know that people writing them dont&#8217; care about you, they care about their product. However cynical you are, you still have to check the facts. So here is a quick demonstration showing how to use Go&#8217;s reflection feature.</p>
-
-<p>Installing Go is actually really straight forward on a Mac, and slightly harder on Linux, check <a href="http://golang.org/doc/install.html">this guide </a>to see how to build Go in a few minutes.</p>
-
-<p>Once all setup, you might want to read the documentation to see how to code in Go. Go is actually a kind of nice version of C with a<a href="http://golang.org/doc/go_spec.html"> simplified syntax</a>, no header files, really fast compilation time, a garbage collector and a <a href="http://golang.org/doc/effective_go.html?#interfaces_and_types">simple way to approach object inheritance</a> without turning in the complicated mess C++ is. The language is designed around the concept of <a href="http://golang.org/doc/effective_go.html?h=goroutines#concurrency">goroutines, a very nice way to handle concurrency</a>. It also has some features that Rubyists, Pythonistas and Javascripters wouldn&#8217;t want to live without such as closures and some they probably wish they had such as <a href="http://golang.org/doc/effective_go.html?#defer">defer</a>. But of the things we are used to with dynamic languages is the concept of reflection. In a nutshell, at runtime, your code can reflect on the type of a given object and let the developer act accordingly. Depending on your programming background that might be obvious or you might not see the value. To be honest, that&#8217;s not the question here. What I&#8217;m interested in showing you is how it works.</p>
-
-<p>For the sake of this demo, let&#8217;s pretend we want to have a &#8220;Dish&#8221; data model, each instance of the &#8220;Dish&#8221; type will have a few attributes, an id, a name, an origin and a custom query which really is a function that we store as an attribute. Here is how we would represent that model in Go:</p>
-
-<pre><code>// Data Model
-type Dish struct {
-  Id  int
-  Name string
-  Origin string
-  Query func()
-}
-</code></pre>
-
-<p>This is more or less the equivalent of the following Ruby code:</p>
-
-<pre><code>class Dish
-  attr_accessor :id, :name, :origin, :query
-end
-</code></pre>
-
-<p>Ruby works slightly differently in the sense that defining attribute accessors create getters and setter methods but doesn&#8217;t technically create instance variables until they are used. Here is what I mean:</p>
-
-<pre><code>shabushabu = Dish.new
-shabushabu.instance_variables # =&gt; []
-shabushabu.name = "Shabu-Shabu"
-shabushabu.instance_variables # =&gt; ["@name"]
-shabushabu.origin = "Japan"
-shabushabu.instance_variables # =&gt; ["@name", "@origin"]
-</code></pre>
-
-<p>Another way of checking on the accessors is to check the methods defined on the object:</p>
-
-<pre><code>shabushabu.methods - Object.new.methods
-=&gt; ["name", "name=", "origin", "origin=", "id=", "query", "query="]
-</code></pre>
-
-<p>But anyway, this post isn&#8217;t about Ruby, it&#8217;s about Go and what we would like is to reflect on an object of &#8220;Dish&#8221; type and see its attributes. The good news is that the Go language ships with a <a href="http://golang.org/pkg/reflect/">package to do just that</a>. Here is the full implementation:</p>
-
-<pre><code>package main
-
-import(
-  "fmt"
-  "reflect"
-)
-
-func main(){
-  // iterate through the attributes of a Data Model instance
-  for name, mtype := range attributes(&amp;Dish;{}) {
-    fmt.Printf("Name: %s, Type %s\n", name, mtype.Name())
-  }
-}
-
-// Data Model
-type Dish struct {
-  Id  int
-  Name string
-  Origin string
-  Query func()
-}
-
-// Example of how to use Go's reflection
-// Print the attributes of a Data Model
-func attributes(m interface{}) (map[string]reflect.Type) {
-  typ := reflect.TypeOf(m)
-  // if a pointer to a struct is passed, get the type of the dereferenced object
-  if typ.Kind() == reflect.Ptr{
-    typ = typ.Elem()
-  }
-
-  // create an attribute data structure as a map of types keyed by a string.
-  attrs := make(map[string]reflect.Type)
-  // Only structs are supported so return an empty result if the passed object
-  // isn't a struct
-  if typ.Kind() != reflect.Struct {
-    fmt.Printf("%v type can't have attributes inspected\n", typ.Kind())
-    return attrs
-  }
-
-  // loop through the struct's fields and set the map
-  for i := 0; i &lt; typ.NumField(); i++ {
-    p := typ.Field(i)
-      if !p.Anonymous {
-        attrs[p.Name] = p.Type
-      }
-     }
-
-  return attrs
-}
-</code></pre>
-
-<p>Unfortunately, my code highlighter doesn&#8217;t support the Go syntax, but GitHub does, so here is a <a href="https://gist.github.com/1009629">pretty version</a>.</p>
-
-<p>There are ways of running Go source code like Ruby or Python scripts but in this case, we&#8217;ll use the compiler &amp; linker provided with Go. I named my source file &#8220;example.go&#8221;, and here is how I compiled, linked and run it:</p>
-
-<pre><code>$ 6g example.go &amp;&amp; 6l example.6 &amp;&amp; ./6.out
-Name: Origin, Type string
-Name: Id, Type int
-Name: Query, Type 
-Name: Name, Type string
-</code></pre>
-
-<p>As you can see each attribute is printed out with its name and type. The code might seem a bit odd if you never looked at Go before.
-Here is a quick rundown of the code:</p>
-
-<p>In our main function, we create a new instance of type Dish on which we call attributes on. The call returns a map on which we iterate through and print the attribute name (key) and type (value).
-The attributes function is defined a bit below and and it takes any type of objects (empty interface) and returns a map, which is like a Hash or a Dictionary. The map has keys of String type and values of &#8220;Type&#8221; type. The &#8220;Type&#8221; type is defined in the reflect package. Inside the function, 23 then use the previously mentioned reflect package to check on the type and the name of each attribute and assign it to a map object. (note that I&#8217;m explicitly returning the map, but I could have done it in a more implicit way)</p>
-
-<p>So there you go, that&#8217;s how you use reflection in Go. Pretty nifty and simple.</p>
-
-<p> </p>
 ]]></content>
   </entry>
   

@@ -161,6 +161,9 @@ the wrong construct. Here is an example of what I often see:</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
+<p><em>(granted this isn&#8217;t a great example since we could have used a subclass
+of <code>Hash</code> but just bear with me)</em></p>
+
 <p>Actually, the developer who wrote the code above would probably also use
 some Ruby magic like <code>method_missing</code> to provide a more laxed API and allow for &#8220;nicer&#8221; getters
 such as <code>Settings.secret</code> and <code>Settings['secret']</code>. I have my
@@ -460,6 +463,39 @@ follow.</p>
 If done right, by adopting this approach we can simply our code base,
 make it faster, easier to maintain and not losing the chance to also use
 OOP paradigms when needed.</p>
+
+<h2>Compromise</h2>
+
+<p>As shown earlier, modules and classes have pros and cons. Classes are
+however much more natural to use for Object Oriented Programming. A
+compromise about the <code>Settings</code> examples was suggested by Evan Phoenix.
+The solution is elegant and simple. Use a class and an instance.
+Here is an implementation based on his suggestion:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">AppSettings</span> <span class="o">&lt;</span> <span class="no">Hash</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">custom_method</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">SETTINGS</span> <span class="o">=</span> <span class="no">AppSettings</span><span class="o">.</span><span class="n">new</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The point here is not about the class implementation but that fact that we use
+a class and associate an instance of this class to a constant so it can
+be shared all over the place. Wow, a constant, this is so nasty you
+might think. Classes are constants too and so are modules, here we just
+allocate an instance of a class to a constant. Surpisingly simple and efficient.</p>
 </div>
 
     <div class="meta">
@@ -475,7 +511,7 @@ OOP paradigms when needed.</p>
   
 
 
-<time datetime="2012-07-24T14:46:00-07:00" pubdate data-updated="true">Jul 24<span>th</span>, 2012</time></div>
+<time datetime="2012-07-30T14:46:00-07:00" pubdate data-updated="true">Jul 30<span>th</span>, 2012</time></div>
         <div class="tags">
 
 <div class="cat">
