@@ -4,7 +4,7 @@
   <title><![CDATA[Category: language | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/language/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-07-31T15:27:17-07:00</updated>
+  <updated>2012-08-02T18:41:35-07:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -280,7 +280,7 @@ worth it. Next time you or someone else will look at an instance of the
 <code>Foo</code> class calling <code>repository</code>, finding where it is defined is going
 to be a pain. That's especially true if you have many mixins in your
 class. <code>Settings</code> will also probably grow and you will end up with a
-bunch of methods that have nothing to do with you class instances.
+bunch of methods that have nothing to do with your class instances.
 In this case, I will call the use of a mixin, an abuse of construct.
 Sure, Ruby allows you to do it, but that doesn't mean it's the right
 thing to do. In Ruby, unlike in Python, there are 101 ways to do a

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/ruby/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-07-31T15:27:17-07:00</updated>
+  <updated>2012-08-02T18:41:35-07:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -280,7 +280,7 @@ worth it. Next time you or someone else will look at an instance of the
 <code>Foo</code> class calling <code>repository</code>, finding where it is defined is going
 to be a pain. That's especially true if you have many mixins in your
 class. <code>Settings</code> will also probably grow and you will end up with a
-bunch of methods that have nothing to do with you class instances.
+bunch of methods that have nothing to do with your class instances.
 In this case, I will call the use of a mixin, an abuse of construct.
 Sure, Ruby allows you to do it, but that doesn't mean it's the right
 thing to do. In Ruby, unlike in Python, there are 101 ways to do a
@@ -369,6 +369,118 @@ a class and associate an instance of this class to a constant so it can
 be shared all over the place. Wow, a constant, this is so nasty you
 might think. Classes are constants too and so are modules, here we just
 allocate an instance of a class to a constant. Surpisingly simple and efficient.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby: the differences between dup &amp; clone]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/07/28/ruby-the-differences-between-dup-and-clone/"/>
+    <updated>2012-07-28T12:20:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/07/28/ruby-the-differences-between-dup-and-clone</id>
+    <content type="html"><![CDATA[<p>Have you ever wondered what the differences are between <strong>#dup</strong> and <strong>#clone</strong> in Ruby?</p>
+
+<p>They both create a shallow copy of an object (meaning that they don't copy the objects that might be referenced within the copied object). However, <strong>#clone</strong> does two things that <strong>#dup</strong> doesn't:</p>
+
+<ul>
+<li>copy the singleton class of the copied object</li>
+<li>maintain the frozen status of the copied object</li>
+</ul>
+
+
+<p>Examples of the singleton methods not being copied.</p>
+
+<p>dup:</p>
+
+<p>```ruby
+a = Object.new
+def a.foo; :foo end
+p a.foo</p>
+
+<h1>=> :foo</h1>
+
+<p>b = a.dup
+p b.foo</p>
+
+<h1>=> undefined method `foo' for #&lt;Object:0x007f8bc395ff00> (NoMethodError)</h1>
+
+<p>```</p>
+
+<p>vs clone:</p>
+
+<p>```ruby
+a = Object.new
+def a.foo; :foo end
+p a.foo</p>
+
+<h1>=> :foo</h1>
+
+<p>b = a.clone
+p b.foo</p>
+
+<h1>=> :foo</h1>
+
+<p>```</p>
+
+<p>Frozen state:</p>
+
+<p>```ruby
+a = Object.new
+a.freeze
+p a.frozen?</p>
+
+<h1>=> true</h1>
+
+<p>b = a.dup
+p b.frozen?</p>
+
+<h1>=> false</h1>
+
+<p>c = a.clone
+p c.frozen?</p>
+
+<h1>=> true</h1>
+
+<p>```</p>
+
+<p>Looking at the <a href="https://github.com/rubinius/rubinius/blob/master/kernel/alpha.rb#L230">Rubinius source code</a> makes the difference extremely obvious.</p>
+
+<p>Because of the extra steps, <strong>clone</strong> is a bit slower than <strong>dup</strong> but that's probably <strong>not</strong> what will make your app too slow.</p>
+
+<p>Just a quick note about shallow copies (true for <strong>clone</strong> and <strong>dupe</strong>). Notice how the array referenced by the bar attribute doesn't get copied but shared between the original and the copied instances:</p>
+
+<p>```ruby
+class Foo
+  attr_accessor :bar
+  def initialize</p>
+
+<pre><code>self.bar = [1,2,3]
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>a = Foo.new
+b = a.clone
+p a.bar</p>
+
+<h1>=> [1, 2, 3]</h1>
+
+<p>p b.bar</p>
+
+<h1>=> [1, 2, 3]</h1>
+
+<p>a.bar.clear # clearing the array #bar points to
+p a.bar</p>
+
+<h1>=> []</h1>
+
+<p>p b.bar</p>
+
+<h1>=> []</h1>
+
+<p>```</p>
+
+<p>Both objects, <strong>a</strong> and <strong>b</strong> share the same reference to the array instance created when <strong>a</strong> is initiated. There are a few ways to do a deep copy of an object, but that's a different matter.</p>
 ]]></content>
   </entry>
   
