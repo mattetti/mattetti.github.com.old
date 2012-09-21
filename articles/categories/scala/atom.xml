@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: scala | Matt Aimonetti]]></title>
+  <link href="http://matt.aimonetti.net/articles/categories/scala/atom.xml" rel="self"/>
+  <link href="http://matt.aimonetti.net/"/>
+  <updated>2012-09-21T09:33:01-07:00</updated>
+  <id>http://matt.aimonetti.net/</id>
+  <author>
+    <name><![CDATA[Matt Aimonetti]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[What is Scala's pattern matching]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/09/20/what-is-scala-pattern-matching/"/>
+    <updated>2012-09-20T21:18:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/09/20/what-is-scala-pattern-matching</id>
+    <content type="html"><![CDATA[<p><a href="http://www.scala-lang.org/">Scala</a> is a very interesting programming
+language. It has for goal to provide
+both <a href="http://en.wikipedia.org/wiki/Object-oriented_programming">Object Oriented</a> and <a href="http://en.wikipedia.org/wiki/Functional_programming">Functional Programming</a> paradigms.
+Now <a href="http://www.scala-lang.org/">Scala</a> isn't the only recent programming language out there mixing the two paradigms.
+<a href="http://www.ruby-lang.org/">Ruby</a>, <a href="http://en.wikipedia.org/wiki/JavaScript">JavaScript</a> and <a href="http://clojure.org/">Clojure</a> are other examples of popular
+languages implementing both functional and OO programming patterns. Of
+course, they each have a different take on the problem and that is what
+is interesting.</p>
+
+<p>Instead of arguing the pros and cons of OOP vs FP and how each of the
+previously mentioned languages handle being OOP and FP, I'd like to introduce
+a very powerful <a href="http://www.scala-lang.org/">Scala</a> idiom: <a href="http://en.wikipedia.org/wiki/Pattern_matching">pattern
+matching</a>. Note that
+pattern matching isn't something Scala invented nor that it only exists in
+Scala. Pattern matching can be achieved many different ways. However,
+the majority of the popular languages don't put this concept at the
+center of their language. A few languages way before Scala rested
+heavily on pattern matching such as <a href="http://www.erlang.org/doc/reference_manual/patterns.html">Erlang</a>,
+<a href="http://www.haskell.org/haskellwiki/Haskell">Haskell</a> but that's a different story.
+How does Scala offers Pattern Matching, what is it and finally why is it
+valuable?</p>
+
+<h2>Scala pattern matching by examples</h2>
+
+<p>As its name indicates, pattern matching is used to detect patterns.
+Here is an example that covers a few interesting cases:</p>
+
+<p><code>scala
+def listAnalysis(list: List[Any]) = list match {
+   case Nil =&gt; "empty"
+   case 'a' :: tail =&gt; "starting by 'a'"
+   case (head:Int) :: _ if head &gt; 3 =&gt; "starting by an int greater than 3"
+   case (head:Int) :: _ =&gt; "starting by an int"
+   case _ =&gt; "whatever"
+}
+</code></p>
+
+<p>If you've never seen any Scala that probably looks like gibberish to
+you. Let me break it down:</p>
+
+<p><code>
+def listAnalysis(list: List[Any]) = list match {}
+</code></p>
+
+<p>I define a new function called <code>listAnalysis</code> which takes an argument
+named <code>list</code> which is of type <code>List</code> (this list could contain any kind
+of elements).
+The implementation of this function is a pattern match on the list
+argument.
+The body of this 'pattern match' looks like a classical switch statement.
+But it's actually much more than a simple switch statement. Surely it
+could be used like one, but as we will see, it can do much more.</p>
+
+<p>Note that you can apply a pattern match against more than one object at
+once as shown a bit later.</p>
+
+<p>Let's look at the statements inside the function.</p>
+
+<p><code>scala
+case Nil =&gt; "empty"
+</code></p>
+
+<p>In this case we are checking that the list is empty or nil. If that's
+the case, the statement on the other side of the "fat arrow" is
+executed. In this case, we return a string but we could have called
+another function or so whatever.</p>
+
+<p>Now the second statement is much more complex and much more powerful:</p>
+
+<p><code>scala
+case 'a' :: tail =&gt; "starting by 'a'"
+</code></p>
+
+<p>Remember that we are doing pattern matching against our list object.
+What we are doing here is use the <code>::</code> operator (aka cons operator) to
+extract the head and the rest of the list and then we match the head
+against the the <code>'a'</code> character.</p>
+
+<p>This statement could have been written different ways:</p>
+
+<p><code>scala
+case 'a' :: rest =&gt; "starting by 'a'"
+</code></p>
+
+<p>In that case we named the <code>tail</code> of the list <code>rest</code>, but really we don't
+care how it's called or its value, so the sensitive thing to do is to
+rewrite that statement like that:</p>
+
+<p><code>scala
+case 'a' :: _ =&gt; "starting by 'a'"
+</code></p>
+
+<p>This basically says we are looking for a list that starts by <code>'a'</code> (and we
+don't care about the rest).</p>
+
+<p>Another statement:</p>
+
+<p><code>scala
+case (head:Int) :: _ =&gt; "starting by an int"
+</code></p>
+
+<p>In this case we type match the first element of the list and check that
+we have an integer. Note that using the cons operator in the match cases
+doesn't seem to affect performance. It would seem that at compilation,
+the statement are rewritten to avoid creating uneeded objects (List also implements structural sharing of the tail list).
+I'm not a Scala expert so someone with more experience might be able to
+confirm/clarify.</p>
+
+<p>Now let's look at a variant of this statement:</p>
+
+<p><code>scala
+case (head:Int) :: _ if head &gt; 3 =&gt; "starting by an int greater than 3"
+</code></p>
+
+<p>This is the same statement as above, but we are adding an extra
+condition after the match. This is quite useful when simple matching
+doesn't cut it.</p>
+
+<p>Finally we have a fallback statement:</p>
+
+<p><code>scala
+case _ =&gt; "whatever"
+</code></p>
+
+<p>For more information about the cons operator, <a href="http://www.scala-lang.org/node/112">read about the extractor objects</a> and what they can do.</p>
+
+<p>Here is the result of calling our function with different lists:</p>
+
+<p><code>scala
+listAnalysis(List())                             //&gt; java.lang.String = empty
+listAnalysis("This is a test".toList)            //&gt; java.lang.String = whatever
+listAnalysis("abcde".toList)                     //&gt; java.lang.String = starting by 'a'
+listAnalysis(List(1,2,3))                        //&gt; java.lang.String = starting by an int
+listAnalysis(List(42,24,36))                     //&gt; java.lang.String = starting by an int greater than 3
+listAnalysis("a".toList)                         //&gt; java.lang.String = starting by 'a'
+</code></p>
+
+<p>Here is another example using 2 items for the match:</p>
+
+<p>```scala
+def doubleMatch(foo: Any, bar: Any) = (foo, bar) match {
+  case ('a', 'b') => "a and b"
+  case (1, 'b') => "1 and b"
+  case (1, <em>) => "1 and "+ bar
+  case (a:Float, </em>) => "foo float"
+  case _ => "unknown case"
+}</p>
+
+<p>doubleMatch(1, "test")                           //> java.lang.String = 1 and test
+doubleMatch(1, 'b')                              //> java.lang.String = 1 and b
+doubleMatch(42, Nil)                             //> java.lang.String = unknown case
+doubleMatch('a', 'b')                            //> java.lang.String = a and b
+doubleMatch(4.2f, 42)                            //> java.lang.String = foo float
+```</p>
+
+<h1>Why is pattern matching valuable?</h1>
+
+<p>In short, pattern matching allows the developer to deconstruct a structure to find specific
+elements, in other words the pattern, needed to then constuct an
+object/structure or trigger a function.</p>
+
+<p>It's the opposite process of calling a method on an object. Here we
+start from a structure (instead of the instance of an object), this structure is just a basic struct and
+based on a found pattern, we then trigger a function (with access to the data if we need it).
+When you have a stable and known data structure, it's often very interesting to
+use the pattern matching approach because you can easily expand the
+operations you can execute. However, if your operations are stable but the data changes,
+then the Object Oriented approach seems more adequate.</p>
+
+<p>Besides that, pattern matching will often make your code clearer than
+using if/else statements. Especially in a language like Scala where you
+can define pattern matching function within a function and you can also
+pass pattern matching functions around. Like eveything else, it needs to be used with caution so the intend of
+the code is still understandable. That said it's a great tool to have handy and I've
+had a lot of fun rewriting my newbie Scala code using a more idiomatic
+approach based on pattern matching.</p>
+
+<p>I hope you enjoyed this quick introduction. You can read more about pattern matching in Scala in the following articles:
+ <em>(note: <a href="http://ikaisays.com">Ikai</a>'s post on how he uses regexps with pattern matching is a fun read.)</em></p>
+
+<ul>
+<li><a href="http://www.scala-lang.org/node/120">http://www.scala-lang.org/node/120</a></li>
+<li><a href="http://pragprog.com/magazines/2012-03/scala-for-the-intrigued">http://pragprog.com/magazines/2012-03/scala-for-the-intrigued</a></li>
+<li><a href="http://kerflyn.wordpress.com/2011/02/14/playing-with-scalas-pattern-matching/">http://kerflyn.wordpress.com/2011/02/14/playing-with-scalas-pattern-matching/</a></li>
+<li><a href="http://ikaisays.com/2009/04/04/using-pattern-matching-with-regular-expressions-in-scala/">http://ikaisays.com/2009/04/04/using-pattern-matching-with-regular-expressions-in-scala/</a></li>
+<li><a href="http://www.artima.com/scalazine/articles/pattern_matching.html">http://www.artima.com/scalazine/articles/pattern_matching.html</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

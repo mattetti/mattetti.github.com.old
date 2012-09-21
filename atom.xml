@@ -4,7 +4,7 @@
   <title><![CDATA[Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-08-02T18:41:35-07:00</updated>
+  <updated>2012-09-21T09:33:01-07:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -12,6 +12,236 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[What is Scala's pattern matching]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/09/20/what-is-scala-pattern-matching/"/>
+    <updated>2012-09-20T21:18:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/09/20/what-is-scala-pattern-matching</id>
+    <content type="html"><![CDATA[<p><a href="http://www.scala-lang.org/">Scala</a> is a very interesting programming
+language. It has for goal to provide
+both <a href="http://en.wikipedia.org/wiki/Object-oriented_programming">Object Oriented</a> and <a href="http://en.wikipedia.org/wiki/Functional_programming">Functional Programming</a> paradigms.
+Now <a href="http://www.scala-lang.org/">Scala</a> isn&#8217;t the only recent programming language out there mixing the two paradigms.
+<a href="http://www.ruby-lang.org/">Ruby</a>, <a href="http://en.wikipedia.org/wiki/JavaScript">JavaScript</a> and <a href="http://clojure.org/">Clojure</a> are other examples of popular
+languages implementing both functional and OO programming patterns. Of
+course, they each have a different take on the problem and that is what
+is interesting.</p>
+
+<p>Instead of arguing the pros and cons of OOP vs FP and how each of the
+previously mentioned languages handle being OOP and FP, I&#8217;d like to introduce
+a very powerful <a href="http://www.scala-lang.org/">Scala</a> idiom: <a href="http://en.wikipedia.org/wiki/Pattern_matching">pattern
+matching</a>. Note that
+pattern matching isn&#8217;t something Scala invented nor that it only exists in
+Scala. Pattern matching can be achieved many different ways. However,
+the majority of the popular languages don&#8217;t put this concept at the
+center of their language. A few languages way before Scala rested
+heavily on pattern matching such as <a href="http://www.erlang.org/doc/reference_manual/patterns.html">Erlang</a>,
+<a href="http://www.haskell.org/haskellwiki/Haskell">Haskell</a> but that&#8217;s a different story.
+How does Scala offers Pattern Matching, what is it and finally why is it
+valuable?</p>
+
+<h2>Scala pattern matching by examples</h2>
+
+<p>As its name indicates, pattern matching is used to detect patterns.
+Here is an example that covers a few interesting cases:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">def</span> <span class="n">listAnalysis</span><span class="o">(</span><span class="n">list</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Any</span><span class="o">])</span> <span class="k">=</span> <span class="n">list</span> <span class="k">match</span> <span class="o">{</span>
+</span><span class='line'>   <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="s">&quot;empty&quot;</span>
+</span><span class='line'>   <span class="k">case</span> <span class="-Symbol">&#39;a</span><span class="err">&#39;</span> <span class="o">::</span> <span class="n">tail</span> <span class="k">=&gt;</span> <span class="s">&quot;starting by &#39;a&#39;&quot;</span>
+</span><span class='line'>   <span class="k">case</span> <span class="o">(</span><span class="n">head</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="o">::</span> <span class="k">_</span> <span class="k">if</span> <span class="n">head</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="k">=&gt;</span> <span class="s">&quot;starting by an int greater than 3&quot;</span>
+</span><span class='line'>   <span class="k">case</span> <span class="o">(</span><span class="n">head</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="o">::</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="s">&quot;starting by an int&quot;</span>
+</span><span class='line'>   <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="s">&quot;whatever&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you&#8217;ve never seen any Scala that probably looks like gibberish to
+you. Let me break it down:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">def</span> <span class="n">listAnalysis</span><span class="o">(</span><span class="n">list</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Any</span><span class="o">])</span> <span class="k">=</span> <span class="n">list</span> <span class="k">match</span> <span class="o">{}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I define a new function called <code>listAnalysis</code> which takes an argument
+named <code>list</code> which is of type <code>List</code> (this list could contain any kind
+of elements).
+The implementation of this function is a pattern match on the list
+argument.
+The body of this &#8216;pattern match&#8217; looks like a classical switch statement.
+But it&#8217;s actually much more than a simple switch statement. Surely it
+could be used like one, but as we will see, it can do much more.</p>
+
+<p>Note that you can apply a pattern match against more than one object at
+once as shown a bit later.</p>
+
+<p>Let&#8217;s look at the statements inside the function.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="s">&quot;empty&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this case we are checking that the list is empty or nil. If that&#8217;s
+the case, the statement on the other side of the &#8220;fat arrow&#8221; is
+executed. In this case, we return a string but we could have called
+another function or so whatever.</p>
+
+<p>Now the second statement is much more complex and much more powerful:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">case</span> <span class="-Symbol">&#39;a</span><span class="err">&#39;</span> <span class="o">::</span> <span class="n">tail</span> <span class="k">=&gt;</span> <span class="s">&quot;starting by &#39;a&#39;&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Remember that we are doing pattern matching against our list object.
+What we are doing here is use the <code>::</code> operator (aka cons operator) to
+extract the head and the rest of the list and then we match the head
+against the the <code>'a'</code> character.</p>
+
+<p>This statement could have been written different ways:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">case</span> <span class="-Symbol">&#39;a</span><span class="err">&#39;</span> <span class="o">::</span> <span class="n">rest</span> <span class="k">=&gt;</span> <span class="s">&quot;starting by &#39;a&#39;&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In that case we named the <code>tail</code> of the list <code>rest</code>, but really we don&#8217;t
+care how it&#8217;s called or its value, so the sensitive thing to do is to
+rewrite that statement like that:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">case</span> <span class="-Symbol">&#39;a</span><span class="err">&#39;</span> <span class="o">::</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="s">&quot;starting by &#39;a&#39;&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This basically says we are looking for a list that starts by <code>'a'</code> (and we
+don&#8217;t care about the rest).</p>
+
+<p>Another statement:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">case</span> <span class="o">(</span><span class="n">head</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="o">::</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="s">&quot;starting by an int&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this case we type match the first element of the list and check that
+we have an integer. Note that using the cons operator in the match cases
+doesn&#8217;t seem to affect performance. It would seem that at compilation,
+the statement are rewritten to avoid creating uneeded objects (List also implements structural sharing of the tail list).
+I&#8217;m not a Scala expert so someone with more experience might be able to
+confirm/clarify.</p>
+
+<p>Now let&#8217;s look at a variant of this statement:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">case</span> <span class="o">(</span><span class="n">head</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="o">::</span> <span class="k">_</span> <span class="k">if</span> <span class="n">head</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="k">=&gt;</span> <span class="s">&quot;starting by an int greater than 3&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is the same statement as above, but we are adding an extra
+condition after the match. This is quite useful when simple matching
+doesn&#8217;t cut it.</p>
+
+<p>Finally we have a fallback statement:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="s">&quot;whatever&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For more information about the cons operator, <a href="http://www.scala-lang.org/node/112">read about the extractor objects</a> and what they can do.</p>
+
+<p>Here is the result of calling our function with different lists:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">listAnalysis</span><span class="o">(</span><span class="nc">List</span><span class="o">())</span>                             <span class="c1">//&gt; java.lang.String = empty</span>
+</span><span class='line'><span class="n">listAnalysis</span><span class="o">(</span><span class="s">&quot;This is a test&quot;</span><span class="o">.</span><span class="n">toList</span><span class="o">)</span>            <span class="c1">//&gt; java.lang.String = whatever</span>
+</span><span class='line'><span class="n">listAnalysis</span><span class="o">(</span><span class="s">&quot;abcde&quot;</span><span class="o">.</span><span class="n">toList</span><span class="o">)</span>                     <span class="c1">//&gt; java.lang.String = starting by &#39;a&#39;</span>
+</span><span class='line'><span class="n">listAnalysis</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">))</span>                        <span class="c1">//&gt; java.lang.String = starting by an int</span>
+</span><span class='line'><span class="n">listAnalysis</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">42</span><span class="o">,</span><span class="mi">24</span><span class="o">,</span><span class="mi">36</span><span class="o">))</span>                     <span class="c1">//&gt; java.lang.String = starting by an int greater than 3</span>
+</span><span class='line'><span class="n">listAnalysis</span><span class="o">(</span><span class="s">&quot;a&quot;</span><span class="o">.</span><span class="n">toList</span><span class="o">)</span>                         <span class="c1">//&gt; java.lang.String = starting by &#39;a&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is another example using 2 items for the match:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">def</span> <span class="n">doubleMatch</span><span class="o">(</span><span class="n">foo</span><span class="k">:</span> <span class="kt">Any</span><span class="o">,</span> <span class="n">bar</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="n">foo</span><span class="o">,</span> <span class="n">bar</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">case</span> <span class="o">(</span><span class="-Symbol">&#39;a</span><span class="err">&#39;</span><span class="o">,</span> <span class="-Symbol">&#39;b</span><span class="err">&#39;</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="s">&quot;a and b&quot;</span>
+</span><span class='line'>  <span class="k">case</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="-Symbol">&#39;b</span><span class="err">&#39;</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="s">&quot;1 and b&quot;</span>
+</span><span class='line'>  <span class="k">case</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="k">_</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="s">&quot;1 and &quot;</span><span class="o">+</span> <span class="n">bar</span>
+</span><span class='line'>  <span class="k">case</span> <span class="o">(</span><span class="n">a</span><span class="k">:</span><span class="kt">Float</span><span class="o">,</span> <span class="k">_</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="s">&quot;foo float&quot;</span>
+</span><span class='line'>  <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="s">&quot;unknown case&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">doubleMatch</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">&quot;test&quot;</span><span class="o">)</span>                           <span class="c1">//&gt; java.lang.String = 1 and test</span>
+</span><span class='line'><span class="n">doubleMatch</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="-Symbol">&#39;b</span><span class="err">&#39;</span><span class="o">)</span>                              <span class="c1">//&gt; java.lang.String = 1 and b</span>
+</span><span class='line'><span class="n">doubleMatch</span><span class="o">(</span><span class="mi">42</span><span class="o">,</span> <span class="nc">Nil</span><span class="o">)</span>                             <span class="c1">//&gt; java.lang.String = unknown case</span>
+</span><span class='line'><span class="n">doubleMatch</span><span class="o">(</span><span class="-Symbol">&#39;a</span><span class="err">&#39;</span><span class="o">,</span> <span class="-Symbol">&#39;b</span><span class="err">&#39;</span><span class="o">)</span>                            <span class="c1">//&gt; java.lang.String = a and b</span>
+</span><span class='line'><span class="n">doubleMatch</span><span class="o">(</span><span class="mf">4.2f</span><span class="o">,</span> <span class="mi">42</span><span class="o">)</span>                            <span class="c1">//&gt; java.lang.String = foo float</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Why is pattern matching valuable?</h1>
+
+<p>In short, pattern matching allows the developer to deconstruct a structure to find specific
+elements, in other words the pattern, needed to then constuct an
+object/structure or trigger a function.</p>
+
+<p>It&#8217;s the opposite process of calling a method on an object. Here we
+start from a structure (instead of the instance of an object), this structure is just a basic struct and
+based on a found pattern, we then trigger a function (with access to the data if we need it).
+When you have a stable and known data structure, it&#8217;s often very interesting to
+use the pattern matching approach because you can easily expand the
+operations you can execute. However, if your operations are stable but the data changes,
+then the Object Oriented approach seems more adequate.</p>
+
+<p>Besides that, pattern matching will often make your code clearer than
+using if/else statements. Especially in a language like Scala where you
+can define pattern matching function within a function and you can also
+pass pattern matching functions around. Like eveything else, it needs to be used with caution so the intend of
+the code is still understandable. That said it&#8217;s a great tool to have handy and I&#8217;ve
+had a lot of fun rewriting my newbie Scala code using a more idiomatic
+approach based on pattern matching.</p>
+
+<p>I hope you enjoyed this quick introduction. You can read more about pattern matching in Scala in the following articles:
+ <em>(note: <a href="http://ikaisays.com">Ikai</a>&#8217;s post on how he uses regexps with pattern matching is a fun read.)</em></p>
+
+<ul>
+<li><a href="http://www.scala-lang.org/node/120">http://www.scala-lang.org/node/120</a></li>
+<li><a href="http://pragprog.com/magazines/2012-03/scala-for-the-intrigued">http://pragprog.com/magazines/2012-03/scala-for-the-intrigued</a></li>
+<li><a href="http://kerflyn.wordpress.com/2011/02/14/playing-with-scalas-pattern-matching/">http://kerflyn.wordpress.com/2011/02/14/playing-with-scalas-pattern-matching/</a></li>
+<li><a href="http://ikaisays.com/2009/04/04/using-pattern-matching-with-regular-expressions-in-scala/">http://ikaisays.com/2009/04/04/using-pattern-matching-with-regular-expressions-in-scala/</a></li>
+<li><a href="http://www.artima.com/scalazine/articles/pattern_matching.html">http://www.artima.com/scalazine/articles/pattern_matching.html</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby constructs: class, module and mixin]]></title>
@@ -2703,76 +2933,6 @@ SolutionTwo.new(40){ @origin + 2}.dispatch
   end
 end
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Deploying a Rails 3.1 app - gotchas]]></title>
-    <link href="http://matt.aimonetti.net/posts/2011/08/30/deploying-a-rails-3-1-app-gotchas/"/>
-    <updated>2011-08-30T17:20:34-07:00</updated>
-    <id>http://matt.aimonetti.net/posts/2011/08/30/deploying-a-rails-3-1-app-gotchas</id>
-    <content type="html"><![CDATA[<p>Recently I had to build a new app as part of my research &amp; development job at <a href="http://livingsocial.com">LivingSocial</a>. My goal was to get the app up and running in just a few weeks, solid application architecture and graphic design included.
-When you need to build an app quickly and you want it to have some solid foundations, Rails is quite useful.
-I used Rails 3.1RCx so if we would to keep my app and push it to production, the engineering team wouldn&#8217;t have to update it and the transition should be seamless. I also quite like <a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a> and the app being quite heavy on JavaScript, the choice was easy. Furthermore, my coworker <a href="http://codefluency.com/">Bruce Williams</a> is a fan of <a href="http://sass-lang.com/">SCSS</a> and he&#8217;s writing a <a href="http://pragprog.com/">PragProg</a> book called &#8220;The Rails View&#8221; with other LivingSocialist: <a href="http://www.boboroshi.com/">John Athayde</a>. So you got the point, I&#8217;m using Rails3.1, but this post is about the challenges I faced when it was time to deploy and the solutions I found.</p>
-
-<p>I&#8217;ll skip the intro to Rails 3.1 and how to use the new asset pipeline, refer to the <a href="http://guides.rubyonrails.org/asset_pipeline.html">Rails guide</a> or one of the mainly posts referenced in t<a href="http://jasonrudolph.com/blog/2011/06/06/helpful-resources-for-upgrading-to-rails-3-1/">his post</a> (if I had properly read the <a href="http://guides.rubyonrails.org/asset_pipeline.html">guide</a>, it would have saved me some valuable time, trust me, read it carefuly).</p>
-
-<p>At that point last night, I had my app working great locally, Bruce created some awesome scss code using mixins and nested rules, the HTML was clean and working great, my <a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a> was brewing nicely, all was great until I tried to deploy to our QA environment.</p>
-
-<h3>JavaScript runtime dependency</h3>
-
-<p>The first thing you will notice is that you need the proper JavaScript runtime so the asset pipeline works properly. Not a big deal, you&#8217;ll find a lot of documentation about that. The problem is that you need to update your production environment or use depend on gem that will compile the required runtime (sounds dirty to me). So if you are deploying to many machines and you are using an image solution (EC2 AMI or other), you will need to update your image or spin new instances via updated chef/puppet recipes. In this case, the awesome team at LivingSocial had an image ready for me, so that wasn&#8217;t a big deal, but still, you need to take that in consideration as you are planning to update.</p>
-
-<p>So the asset pipeline optimizes your asset management by processing/compiling asset files for you and optimizing their delivery. Instead of serving static files directly via public/images or public/javascripts you know serve them via the asset pipeline which will take care of compiling your CoffeeScript, grouping and minifying your JS and preprocessing all sorts of format. It also optimizes the caching process by giving a unique filename to each file based on the file metadata and gziping files. This is great, but you really, really, really don&#8217;t want to have your apps take care of that in production. Why wasting precious resources to serve assets when they can be prepared ahead of time. (by making Rails serve static assets, you are seriously reducing the throughput of  your app, please think of the children (or the dolphins/trees if you don&#8217;t like children))</p>
-
-<h3>Capistrano</h3>
-
-<p>Rails obviously has a preprocessor available as a rake task and you should update your deployment recipe to use that new feature. Here is my Capistrano code:</p>
-
-<pre><code>after 'deploy:update_code', 'deploy:compile_assets'
-namespace :deploy do
-  task :compile_assets do
-    run "cd #{release_path}; RAILS_ENV=production rake assets:precompile"
-  end
-end
-</code></pre>
-
-<p>Well, my real code doesn&#8217;t hardcode the RAILS_ENV constant value, it&#8217;s in fact set in each env file, but I simplified it since most people only use 1 env outside of dev &amp; test.</p>
-
-<p>What that will do is compile all the files and dump them in public/assets/. But the file I had called bubble.png now becomes bubble-27543c671a3ab45141ee0d3216085009.png which means that my app is totally broken because images use in Bruce SCSS don&#8217;t load, my js files don&#8217;t load and the app is totally broken. Now this is least fun part, that I wish I had known before. This is where you go back and change your code so it uses magic to get the right file names.</p>
-
-<h3>Images</h3>
-
-<p>Fixing images was actually quite simple, in all my views, I just had to make sure I was using the image_tag helper everywhere.</p>
-
-<h3>CSS</h3>
-
-<p>SCSS files were a bit more tricky, I had to use the new scss preprocessor helpers you will find in the <a href="http://guides.rubyonrails.org/asset_pipeline.html">Rails guide</a> (image_path and image_url). I first looked into using erb, but turned out it wasn&#8217;t needed and the end result is much cleaner.</p>
-
-<h3>Javascript/CoffeeScript</h3>
-
-<p>For the CoffeeScript files, I was referring to image assets in the code and of course all the links were broken. So I had to use ERB in my coffee which looked funky but it worked.</p>
-
-<p>But to get that to work, you need to rename your coffee script and append erb at the end. For instance my feature.js.coffee script had to be renamed feature.js.coffee.erb. That made me cry a little inside, but oh well, at least its not a XML config file. Maybe soon we will start seeing code in filenames or filenames called my_feature.js.compressed.minified.coffee.erb.from_rails.mattetti.org
-Also, be careful about the order of the file extensions, otherwise it won&#8217;t work. I thought I was done, ready to deploy my apps and this time the assets will show up properly. Turns out I was wrong :(</p>
-
-<h3>Rails asset precompilation env specific configuration.</h3>
-
-<p>My css looked good, the precompiling task had run fine but I was missing some js files. I scratched my head as I could only see some of my js files. I then realized that all my JS files were there but some of my CoffeeScript files were missing. The answer was given to me by Bruce who asked me if I had updated my &#8220;config.assets.precompile&#8221; setting. Sometimes I feel that Rails is trying to compete with Struts and here I was really surprised that by default Rails, in production mode only precompiles all static JS and application.js files, but none of the other dynamic js files. Now it does precompile all the scss files, but for a reason I just don&#8217;t understand, it&#8217;s not the case for the JS files. So, you have to go edit production.rb in the config/environments folder and add the other js files you would like Rails to precompile for you.</p>
-
-<p>After making all these changes, I was able to redeploy my app and everything was working again. (you might want to tweak your apache/nginx config as explained in the <a href="http://guides.rubyonrails.org/asset_pipeline.html">Rails guide</a>)</p>
-
-<p> </p>
-
-<h3>Conclusion</h3>
-
-<p>Don&#8217;t be fooled like me and expect that because you have an app running locally, deployment will work right away. Make sure to read about the new features and what&#8217;s needed. Overall, I think that the asset pipeline is a nice addon to Rails and if you don&#8217;t feel like using it, just can put/leave all your files in the public folder and everything will work just like before. I do have to say that I was surprised to see that even in a brand new Rails 3.1 project, Rails isn&#8217;t running in threaded mode by default. But that&#8217;s a different (old) story and I guess people still get more excited about asset management than framework raw performance ;)</p>
-
-<p> </p>
-
-<p> </p>
-
-<p> </p>
 ]]></content>
   </entry>
   

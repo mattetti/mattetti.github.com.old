@@ -1,0 +1,387 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>What is Scala's pattern matching - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="What Is Scala's Pattern Matching Scala is a very interesting programming
+language. It has for goal to provide
+both Object Oriented and Functional Programming paradigms &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <a href='/about/'><img class="photo left" title='About Matt Aimonetti'
+      alt='Photo of Matt Aimonetti' src="/images/matt_aimonetti.jpg" /></a>
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left bio-summary'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Tech Lead</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/posts/archives/">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <div id="cse-search-form">Loading</div>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/">Home</a></li>
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/about/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">What Is Scala's Pattern Matching</h1>
+    <div class="entry"><p><a href="http://www.scala-lang.org/">Scala</a> is a very interesting programming
+language. It has for goal to provide
+both <a href="http://en.wikipedia.org/wiki/Object-oriented_programming">Object Oriented</a> and <a href="http://en.wikipedia.org/wiki/Functional_programming">Functional Programming</a> paradigms.
+Now <a href="http://www.scala-lang.org/">Scala</a> isn&#8217;t the only recent programming language out there mixing the two paradigms.
+<a href="http://www.ruby-lang.org/">Ruby</a>, <a href="http://en.wikipedia.org/wiki/JavaScript">JavaScript</a> and <a href="http://clojure.org/">Clojure</a> are other examples of popular
+languages implementing both functional and OO programming patterns. Of
+course, they each have a different take on the problem and that is what
+is interesting.</p>
+
+<p>Instead of arguing the pros and cons of OOP vs FP and how each of the
+previously mentioned languages handle being OOP and FP, I&#8217;d like to introduce
+a very powerful <a href="http://www.scala-lang.org/">Scala</a> idiom: <a href="http://en.wikipedia.org/wiki/Pattern_matching">pattern
+matching</a>. Note that
+pattern matching isn&#8217;t something Scala invented nor that it only exists in
+Scala. Pattern matching can be achieved many different ways. However,
+the majority of the popular languages don&#8217;t put this concept at the
+center of their language. A few languages way before Scala rested
+heavily on pattern matching such as <a href="http://www.erlang.org/doc/reference_manual/patterns.html">Erlang</a>,
+<a href="http://www.haskell.org/haskellwiki/Haskell">Haskell</a> but that&#8217;s a different story.
+How does Scala offers Pattern Matching, what is it and finally why is it
+valuable?</p>
+
+<h2>Scala pattern matching by examples</h2>
+
+<p>As its name indicates, pattern matching is used to detect patterns.
+Here is an example that covers a few interesting cases:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">def</span> <span class="n">listAnalysis</span><span class="o">(</span><span class="n">list</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Any</span><span class="o">])</span> <span class="k">=</span> <span class="n">list</span> <span class="k">match</span> <span class="o">{</span>
+</span><span class='line'>   <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="s">&quot;empty&quot;</span>
+</span><span class='line'>   <span class="k">case</span> <span class="-Symbol">&#39;a</span><span class="err">&#39;</span> <span class="o">::</span> <span class="n">tail</span> <span class="k">=&gt;</span> <span class="s">&quot;starting by &#39;a&#39;&quot;</span>
+</span><span class='line'>   <span class="k">case</span> <span class="o">(</span><span class="n">head</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="o">::</span> <span class="k">_</span> <span class="k">if</span> <span class="n">head</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="k">=&gt;</span> <span class="s">&quot;starting by an int greater than 3&quot;</span>
+</span><span class='line'>   <span class="k">case</span> <span class="o">(</span><span class="n">head</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="o">::</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="s">&quot;starting by an int&quot;</span>
+</span><span class='line'>   <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="s">&quot;whatever&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you&#8217;ve never seen any Scala that probably looks like gibberish to
+you. Let me break it down:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">def</span> <span class="n">listAnalysis</span><span class="o">(</span><span class="n">list</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Any</span><span class="o">])</span> <span class="k">=</span> <span class="n">list</span> <span class="k">match</span> <span class="o">{}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I define a new function called <code>listAnalysis</code> which takes an argument
+named <code>list</code> which is of type <code>List</code> (this list could contain any kind
+of elements).
+The implementation of this function is a pattern match on the list
+argument.
+The body of this &#8216;pattern match&#8217; looks like a classical switch statement.
+But it&#8217;s actually much more than a simple switch statement. Surely it
+could be used like one, but as we will see, it can do much more.</p>
+
+<p>Note that you can apply a pattern match against more than one object at
+once as shown a bit later.</p>
+
+<p>Let&#8217;s look at the statements inside the function.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="s">&quot;empty&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this case we are checking that the list is empty or nil. If that&#8217;s
+the case, the statement on the other side of the &#8220;fat arrow&#8221; is
+executed. In this case, we return a string but we could have called
+another function or so whatever.</p>
+
+<p>Now the second statement is much more complex and much more powerful:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">case</span> <span class="-Symbol">&#39;a</span><span class="err">&#39;</span> <span class="o">::</span> <span class="n">tail</span> <span class="k">=&gt;</span> <span class="s">&quot;starting by &#39;a&#39;&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Remember that we are doing pattern matching against our list object.
+What we are doing here is use the <code>::</code> operator (aka cons operator) to
+extract the head and the rest of the list and then we match the head
+against the the <code>'a'</code> character.</p>
+
+<p>This statement could have been written different ways:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">case</span> <span class="-Symbol">&#39;a</span><span class="err">&#39;</span> <span class="o">::</span> <span class="n">rest</span> <span class="k">=&gt;</span> <span class="s">&quot;starting by &#39;a&#39;&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In that case we named the <code>tail</code> of the list <code>rest</code>, but really we don&#8217;t
+care how it&#8217;s called or its value, so the sensitive thing to do is to
+rewrite that statement like that:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">case</span> <span class="-Symbol">&#39;a</span><span class="err">&#39;</span> <span class="o">::</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="s">&quot;starting by &#39;a&#39;&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This basically says we are looking for a list that starts by <code>'a'</code> (and we
+don&#8217;t care about the rest).</p>
+
+<p>Another statement:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">case</span> <span class="o">(</span><span class="n">head</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="o">::</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="s">&quot;starting by an int&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this case we type match the first element of the list and check that
+we have an integer. Note that using the cons operator in the match cases
+doesn&#8217;t seem to affect performance. It would seem that at compilation,
+the statement are rewritten to avoid creating uneeded objects (List also implements structural sharing of the tail list).
+I&#8217;m not a Scala expert so someone with more experience might be able to
+confirm/clarify.</p>
+
+<p>Now let&#8217;s look at a variant of this statement:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">case</span> <span class="o">(</span><span class="n">head</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="o">::</span> <span class="k">_</span> <span class="k">if</span> <span class="n">head</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="k">=&gt;</span> <span class="s">&quot;starting by an int greater than 3&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is the same statement as above, but we are adding an extra
+condition after the match. This is quite useful when simple matching
+doesn&#8217;t cut it.</p>
+
+<p>Finally we have a fallback statement:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="s">&quot;whatever&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For more information about the cons operator, <a href="http://www.scala-lang.org/node/112">read about the extractor objects</a> and what they can do.</p>
+
+<p>Here is the result of calling our function with different lists:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">listAnalysis</span><span class="o">(</span><span class="nc">List</span><span class="o">())</span>                             <span class="c1">//&gt; java.lang.String = empty</span>
+</span><span class='line'><span class="n">listAnalysis</span><span class="o">(</span><span class="s">&quot;This is a test&quot;</span><span class="o">.</span><span class="n">toList</span><span class="o">)</span>            <span class="c1">//&gt; java.lang.String = whatever</span>
+</span><span class='line'><span class="n">listAnalysis</span><span class="o">(</span><span class="s">&quot;abcde&quot;</span><span class="o">.</span><span class="n">toList</span><span class="o">)</span>                     <span class="c1">//&gt; java.lang.String = starting by &#39;a&#39;</span>
+</span><span class='line'><span class="n">listAnalysis</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">))</span>                        <span class="c1">//&gt; java.lang.String = starting by an int</span>
+</span><span class='line'><span class="n">listAnalysis</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">42</span><span class="o">,</span><span class="mi">24</span><span class="o">,</span><span class="mi">36</span><span class="o">))</span>                     <span class="c1">//&gt; java.lang.String = starting by an int greater than 3</span>
+</span><span class='line'><span class="n">listAnalysis</span><span class="o">(</span><span class="s">&quot;a&quot;</span><span class="o">.</span><span class="n">toList</span><span class="o">)</span>                         <span class="c1">//&gt; java.lang.String = starting by &#39;a&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is another example using 2 items for the match:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">def</span> <span class="n">doubleMatch</span><span class="o">(</span><span class="n">foo</span><span class="k">:</span> <span class="kt">Any</span><span class="o">,</span> <span class="n">bar</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span> <span class="k">=</span> <span class="o">(</span><span class="n">foo</span><span class="o">,</span> <span class="n">bar</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">case</span> <span class="o">(</span><span class="-Symbol">&#39;a</span><span class="err">&#39;</span><span class="o">,</span> <span class="-Symbol">&#39;b</span><span class="err">&#39;</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="s">&quot;a and b&quot;</span>
+</span><span class='line'>  <span class="k">case</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="-Symbol">&#39;b</span><span class="err">&#39;</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="s">&quot;1 and b&quot;</span>
+</span><span class='line'>  <span class="k">case</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="k">_</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="s">&quot;1 and &quot;</span><span class="o">+</span> <span class="n">bar</span>
+</span><span class='line'>  <span class="k">case</span> <span class="o">(</span><span class="n">a</span><span class="k">:</span><span class="kt">Float</span><span class="o">,</span> <span class="k">_</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="s">&quot;foo float&quot;</span>
+</span><span class='line'>  <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="s">&quot;unknown case&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">doubleMatch</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">&quot;test&quot;</span><span class="o">)</span>                           <span class="c1">//&gt; java.lang.String = 1 and test</span>
+</span><span class='line'><span class="n">doubleMatch</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="-Symbol">&#39;b</span><span class="err">&#39;</span><span class="o">)</span>                              <span class="c1">//&gt; java.lang.String = 1 and b</span>
+</span><span class='line'><span class="n">doubleMatch</span><span class="o">(</span><span class="mi">42</span><span class="o">,</span> <span class="nc">Nil</span><span class="o">)</span>                             <span class="c1">//&gt; java.lang.String = unknown case</span>
+</span><span class='line'><span class="n">doubleMatch</span><span class="o">(</span><span class="-Symbol">&#39;a</span><span class="err">&#39;</span><span class="o">,</span> <span class="-Symbol">&#39;b</span><span class="err">&#39;</span><span class="o">)</span>                            <span class="c1">//&gt; java.lang.String = a and b</span>
+</span><span class='line'><span class="n">doubleMatch</span><span class="o">(</span><span class="mf">4.2f</span><span class="o">,</span> <span class="mi">42</span><span class="o">)</span>                            <span class="c1">//&gt; java.lang.String = foo float</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Why is pattern matching valuable?</h1>
+
+<p>In short, pattern matching allows the developer to deconstruct a structure to find specific
+elements, in other words the pattern, needed to then constuct an
+object/structure or trigger a function.</p>
+
+<p>It&#8217;s the opposite process of calling a method on an object. Here we
+start from a structure (instead of the instance of an object), this structure is just a basic struct and
+based on a found pattern, we then trigger a function (with access to the data if we need it).
+When you have a stable and known data structure, it&#8217;s often very interesting to
+use the pattern matching approach because you can easily expand the
+operations you can execute. However, if your operations are stable but the data changes,
+then the Object Oriented approach seems more adequate.</p>
+
+<p>Besides that, pattern matching will often make your code clearer than
+using if/else statements. Especially in a language like Scala where you
+can define pattern matching function within a function and you can also
+pass pattern matching functions around. Like eveything else, it needs to be used with caution so the intend of
+the code is still understandable. That said it&#8217;s a great tool to have handy and I&#8217;ve
+had a lot of fun rewriting my newbie Scala code using a more idiomatic
+approach based on pattern matching.</p>
+
+<p>I hope you enjoyed this quick introduction. You can read more about pattern matching in Scala in the following articles:
+ <em>(note: <a href="http://ikaisays.com">Ikai</a>&#8217;s post on how he uses regexps with pattern matching is a fun read.)</em></p>
+
+<ul>
+<li><a href="http://www.scala-lang.org/node/120">http://www.scala-lang.org/node/120</a></li>
+<li><a href="http://pragprog.com/magazines/2012-03/scala-for-the-intrigued">http://pragprog.com/magazines/2012-03/scala-for-the-intrigued</a></li>
+<li><a href="http://kerflyn.wordpress.com/2011/02/14/playing-with-scalas-pattern-matching/">http://kerflyn.wordpress.com/2011/02/14/playing-with-scalas-pattern-matching/</a></li>
+<li><a href="http://ikaisays.com/2009/04/04/using-pattern-matching-with-regular-expressions-in-scala/">http://ikaisays.com/2009/04/04/using-pattern-matching-with-regular-expressions-in-scala/</a></li>
+<li><a href="http://www.artima.com/scalazine/articles/pattern_matching.html">http://www.artima.com/scalazine/articles/pattern_matching.html</a></li>
+</ul>
+
+</div>
+
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-20T21:18:00-07:00" pubdate data-updated="true">Sep 20<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/scala/'>scala</a>
+  
+</div>
+
+</div>
+        
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        <div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+  <a class="addthis_button_tweet"></a>
+  </br>
+	
+	
+  <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+  </br>
+	
+	<a class="addthis_counter addthis_pill_style"></a></br>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=mattetti"></script>
+</div>
+
+        
+    </div>
+
+
+</article>
+
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2012 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+  var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+    '010526096358170648343:WMX140696544', customSearchOptions);
+  customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+  var options = new google.search.DrawOptions();
+  options.enableSearchboxOnly("http://matt.aimonetti.net/search");
+  customSearchControl.draw('cse-search-form', options);
+  }, true);
+</script>
+
+
+
+
+
+</body>
+</html>
