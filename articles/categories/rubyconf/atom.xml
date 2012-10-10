@@ -4,7 +4,7 @@
   <title><![CDATA[Category: RubyConf | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/rubyconf/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-09-21T09:33:01-07:00</updated>
+  <updated>2012-10-10T08:57:13-10:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[LA RubyConf 2012 - Ruby: time to move on]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/02/04/larubyconf-2012/"/>
-    <updated>2012-02-04T15:09:00-08:00</updated>
+    <updated>2012-02-04T15:09:00-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/02/04/larubyconf-2012</id>
     <content type="html"><![CDATA[<p>During <a href="http://larubyconf.org/">LA RubyConf 2012</a> in Los Angeles, CA Matt
 Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
@@ -47,7 +47,7 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
   <entry>
     <title type="html"><![CDATA[RubyConf Argentina 2011 - Inside Ruby]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011/"/>
-    <updated>2011-11-08T15:42:00-08:00</updated>
+    <updated>2011-11-08T15:42:00-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011</id>
     <content type="html"><![CDATA[<p>During <a href="http://rubyconfargentina.org/en">RubyConf Argentina 2011</a> in Buenos Aires, Argentina Matt
 Aimonetti gave a talk entitled <em>Inside Ruby: concurrency &amp; garbage collection explained</em>.</p>
@@ -93,7 +93,7 @@ management works to get better performance out of your code.</p>
   <entry>
     <title type="html"><![CDATA[RubyConf 2011 - Complex Ruby concepts simplified]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/10/01/rubyconf-2011/"/>
-    <updated>2011-10-01T15:09:00-07:00</updated>
+    <updated>2011-10-01T15:09:00-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/10/01/rubyconf-2011</id>
     <content type="html"><![CDATA[<p>During <a href="http://rubyconf.org/">RubyConf 2011</a> in New Orleans, LA Matt
 Aimonetti gave a talk entitled <em>Complex Ruby concepts simplified</em>.</p>
@@ -132,7 +132,7 @@ for the talk is available <a href="">here</a>.</p>
   <entry>
     <title type="html"><![CDATA[RubyConf 2009 - 2D games for OS X]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/11/21/rubyconf-2009-2d-games-for-os-x/"/>
-    <updated>2009-11-21T10:25:00-08:00</updated>
+    <updated>2009-11-21T10:25:00-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/11/21/rubyconf-2009-2d-games-for-os-x</id>
     <content type="html"><![CDATA[<p>During <a href="http://rubyconf.org/">RubyConf 2009</a> in San Francisco, CA Matt
 Aimonetti gave a talk entitled <em>Writing 2D games for the OSX platform in Ruby</em>.</p>

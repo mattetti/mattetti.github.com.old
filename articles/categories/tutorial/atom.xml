@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tutorial | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/tutorial/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-09-21T09:33:01-07:00</updated>
+  <updated>2012-10-10T08:57:13-10:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Building and implementing a Single Sign-On solution]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution/"/>
-    <updated>2012-04-04T07:29:16-07:00</updated>
+    <updated>2012-04-04T07:29:16-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution</id>
     <content type="html"><![CDATA[<p>Most modern web applications start as a monolithic code base and, as complexity increases, the once small app gets split apart into many "modules". In other cases, engineers opt for a <a href="http://en.wikipedia.org/wiki/Service-oriented_architecture">SOA</a> design approach from the beginning. One way or another, we start running multiple separate applications that need to interact seamlessly. My goal will be to describe some of the high-level challenges and solutions found in implementing a Single-Sign-On service.</p>
 
@@ -225,7 +225,7 @@ end</code></pre></noscript></div>
   <entry>
     <title type="html"><![CDATA[Quick dive into Ruby ORM object initialization]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/"/>
-    <updated>2012-02-23T09:46:49-08:00</updated>
+    <updated>2012-02-23T09:46:49-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization</id>
     <content type="html"><![CDATA[<p>Yesterday I did some quick digging into how ORM objects are initialized and the performance cost associated to that. In other words, I wanted to see what's going on when you initialize an ActiveRecord object.</p>
 
@@ -313,7 +313,7 @@ end</code></pre></noscript></div>
   <entry>
     <title type="html"><![CDATA[Go's reflection example]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/06/27/golang-reflection-exampl/"/>
-    <updated>2011-06-27T12:12:32-07:00</updated>
+    <updated>2011-06-27T12:12:32-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/06/27/golang-reflection-exampl</id>
     <content type="html"><![CDATA[<p>The <a href="http://golang.org/">Go Programming language</a> is really cool language by Google. According to the sales pitch, it's a <strong><em>"fast, statically typed, compiled language that feels like a dynamically typed, interpreted language"</em></strong>. Well, if you are like me, you don't trust sales pitches because you know that people writing them dont' care about you, they care about their product. However cynical you are, you still have to check the facts. So here is a quick demonstration showing how to use Go's reflection feature.</p>
 
@@ -435,7 +435,7 @@ The attributes function is defined a bit below and and it takes any type of obje
   <entry>
     <title type="html"><![CDATA[MacRuby tips: browse for folder or file dialog]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/10/25/macruby-browse-for-folder-or-file-dialog/"/>
-    <updated>2009-10-25T15:52:14-07:00</updated>
+    <updated>2009-10-25T15:52:14-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/10/25/macruby-browse-for-folder-or-file-dialog</id>
     <content type="html"><![CDATA[<p>This is yet another pretty simple tip.
 Use case: let say you want your applications users to choose one or multiple files or folder on their file system. A good example would be that you want the user to choose a file to process or a folder where to save some data.</p>
@@ -484,7 +484,7 @@ end
   <entry>
     <title type="html"><![CDATA[MacRuby tips: capturing keyboard events]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/10/09/macruby-tips-capturing-keyboard-events/"/>
-    <updated>2009-10-09T19:24:04-07:00</updated>
+    <updated>2009-10-09T19:24:04-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/10/09/macruby-tips-capturing-keyboard-events</id>
     <content type="html"><![CDATA[<p>If you are writing any type of games you might want your users to interact with your application using their keyboards.</p>
 
@@ -607,7 +607,7 @@ end
   <entry>
     <title type="html"><![CDATA[Ruby, Rack and CouchDB = lots of awesomeness]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/07/27/ruby-rack-and-couchdb-lots-of-awesomeness/"/>
-    <updated>2009-07-27T13:49:20-07:00</updated>
+    <updated>2009-07-27T13:49:20-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/07/27/ruby-rack-and-couchdb-lots-of-awesomeness</id>
     <content type="html"><![CDATA[<p>Over the weekend, I spent some time working on a Ruby + Rack +CouchDB project. Three technologies that I know quite well but that I never put to work together at the same time, at least not directly.  Let's call this Part I.</p>
 
@@ -663,7 +663,7 @@ Finally, instead of printing out the logs, we are saving them to the database.</
   <entry>
     <title type="html"><![CDATA[Get on Merb Edge pre 1.0]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/10/04/get-on-merb-edge-pre-10/"/>
-    <updated>2008-10-04T13:00:01-07:00</updated>
+    <updated>2008-10-04T13:00:01-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/10/04/get-on-merb-edge-pre-10</id>
     <content type="html"><![CDATA[<p>Merb 1.0 is almost ready to be pushed out and you might be impatient to start playing with some of the goodies not yet available in the latest stable release. Before getting started, you should know that not everything has been ironed out yet so don't expect to have a fully stable Edge.</p>
 
@@ -734,7 +734,7 @@ Next time you want to update, just come back to the same folder and do the same 
   <entry>
     <title type="html"><![CDATA[problems with urls in Merb HEAD?]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/09/30/problems-with-urls-in-merb-head/"/>
-    <updated>2008-09-30T22:24:29-07:00</updated>
+    <updated>2008-09-30T22:24:29-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/09/30/problems-with-urls-in-merb-head</id>
     <content type="html"><![CDATA[<p>I actually run into a small problem when updated an older Merb app. Here was how my router looked like:</p>
 
@@ -788,7 +788,7 @@ end
   <entry>
     <title type="html"><![CDATA[Write your own custom DataMapper adapter]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/09/29/write-your-own-custom-datamapper-adapter/"/>
-    <updated>2008-09-29T00:38:46-07:00</updated>
+    <updated>2008-09-29T00:38:46-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/09/29/write-your-own-custom-datamapper-adapter</id>
     <content type="html"><![CDATA[<p>If you read this blog, you probably know that <a href="http://merbivore.com">Merb</a>'s best <a href="http://en.wikipedia.org/wiki/Object-relational_mapping">ORM</a> friend is <a href="http://datamapper.org/">DataMapper</a>.</p>
 
@@ -872,7 +872,7 @@ end
   <entry>
     <title type="html"><![CDATA[Deploying a bundled merb app (merb 0.9.7+)]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/09/23/deploying-a-bundled-merb-app-merb-097/"/>
-    <updated>2008-09-23T15:32:41-07:00</updated>
+    <updated>2008-09-23T15:32:41-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/09/23/deploying-a-bundled-merb-app-merb-097</id>
     <content type="html"><![CDATA[<p>Since Merb 0.9.7 the Merb team decided to change the way you can bundle an app. Until 0.9.7 you would use the merb-freezer plugin which was supporting git submodules and gems. The only problem was that you still had to install merb-freezer on your server and it had to stay in sync with your app... kinda lame :(</p>
 

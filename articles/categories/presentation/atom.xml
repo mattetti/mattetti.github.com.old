@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Presentation | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/presentation/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-09-21T09:33:01-07:00</updated>
+  <updated>2012-10-10T08:57:13-10:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -14,9 +14,53 @@
 
   
   <entry>
+    <title type="html"><![CDATA[PulsoConf 2012 - Tour of programming languages]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/10/05/pulsoconf-tour-of-programming-languages/"/>
+    <updated>2012-10-05T15:09:00-10:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/10/05/pulsoconf-tour-of-programming-languages</id>
+    <content type="html"><![CDATA[<p>During <a href="http://pulsoconf.co/">PulsoConf 2012</a> in Bogotá, Colombia Matt
+Aimonetti gave a talk entitled <em>Tower of
+Babel: a tour of programming languages</em>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>Programming languages affect the way one looks and solves problems. But
+comparing programming languages isn't as simple as drawing a table
+comparing features.</p>
+
+<p><img src="/images/matt_aimonetti_languages_table.jpg" alt="Matt Aimonetti compares programming languages" /></p>
+
+<p>In his talk, Matt shows what he likes, dislikes, the philosophy and concrete example of how to use 7 programming
+languages:</p>
+
+<ul>
+<li>Ruby</li>
+<li>JavaScript</li>
+<li>CoffeeScript</li>
+<li>Objective-C</li>
+<li>Clojure</li>
+<li>Scala</li>
+<li>Go</li>
+</ul>
+
+
+<h2>Slides</h2>
+
+<script async class="speakerdeck-embed" data-id="50662c32244a9d000202ba53" data-ratio="1.299492385786802" src="http://matt.aimonetti.net//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>The slides are available on <a href="https://speakerdeck.com/u/matt_aimonetti/p/tower-of-babel-a-tour-of-programming-languages">Matt's SpeakerDeck</a> and can be <a href="">downloaded here</a>.</p>
+
+<h2>Video</h2>
+
+<p>TBD</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[LA RubyConf 2012 - Ruby: time to move on]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/02/04/larubyconf-2012/"/>
-    <updated>2012-02-04T15:09:00-08:00</updated>
+    <updated>2012-02-04T15:09:00-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/02/04/larubyconf-2012</id>
     <content type="html"><![CDATA[<p>During <a href="http://larubyconf.org/">LA RubyConf 2012</a> in Los Angeles, CA Matt
 Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
@@ -47,7 +91,7 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
   <entry>
     <title type="html"><![CDATA[RubyConf Argentina 2011 - Inside Ruby]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011/"/>
-    <updated>2011-11-08T15:42:00-08:00</updated>
+    <updated>2011-11-08T15:42:00-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011</id>
     <content type="html"><![CDATA[<p>During <a href="http://rubyconfargentina.org/en">RubyConf Argentina 2011</a> in Buenos Aires, Argentina Matt
 Aimonetti gave a talk entitled <em>Inside Ruby: concurrency &amp; garbage collection explained</em>.</p>
@@ -93,7 +137,7 @@ management works to get better performance out of your code.</p>
   <entry>
     <title type="html"><![CDATA[RubyConf 2011 - Complex Ruby concepts simplified]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/10/01/rubyconf-2011/"/>
-    <updated>2011-10-01T15:09:00-07:00</updated>
+    <updated>2011-10-01T15:09:00-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/10/01/rubyconf-2011</id>
     <content type="html"><![CDATA[<p>During <a href="http://rubyconf.org/">RubyConf 2011</a> in New Orleans, LA Matt
 Aimonetti gave a talk entitled <em>Complex Ruby concepts simplified</em>.</p>
@@ -132,7 +176,7 @@ for the talk is available <a href="">here</a>.</p>
   <entry>
     <title type="html"><![CDATA[RubyConf 2010 - MacRuby: Why and How]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/11/12/rubyconf-2010-macruby-talk/"/>
-    <updated>2010-11-12T16:00:51-08:00</updated>
+    <updated>2010-11-12T16:00:51-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/11/12/rubyconf-2010-macruby-talk</id>
     <content type="html"><![CDATA[<h2>Description of the talk:</h2>
 
@@ -200,7 +244,7 @@ Since last new a lot of things happened, here is a quick summary:</p>
   <entry>
     <title type="html"><![CDATA[ConFoo.ca - Apple's Ruby:  MacRuby]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/04/11/apples-ruby-macruby/"/>
-    <updated>2010-04-11T09:52:00-07:00</updated>
+    <updated>2010-04-11T09:52:00-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/04/11/apples-ruby-macruby</id>
     <content type="html"><![CDATA[<p>During <a href="http://confoo.ca/">ConFoo Canada 2010</a> in Montreal, Canada Matt
 Aimonetti gave a talk entitled <em></em>.</p>
@@ -228,7 +272,7 @@ The talk itself wasn't recorded.</p>
   <entry>
     <title type="html"><![CDATA[ConFoo.ca - Rails for non Ruby developers]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/04/11/confoo-dot-ca-rails-for-non-ruby-developers/"/>
-    <updated>2010-04-11T09:51:00-07:00</updated>
+    <updated>2010-04-11T09:51:00-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/04/11/confoo-dot-ca-rails-for-non-ruby-developers</id>
     <content type="html"><![CDATA[<p>During <a href="http://confoo.ca/">ConFoo Canada 2010</a> in Montreal, Canada Matt
 Aimonetti gave a talk entitled <em>Rails for the non Ruby developers</em>.</p>
@@ -259,7 +303,7 @@ The talk itself wasn't recorded.</p>
   <entry>
     <title type="html"><![CDATA[RubyConf 2009 - 2D games for OS X]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/11/21/rubyconf-2009-2d-games-for-os-x/"/>
-    <updated>2009-11-21T10:25:00-08:00</updated>
+    <updated>2009-11-21T10:25:00-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/11/21/rubyconf-2009-2d-games-for-os-x</id>
     <content type="html"><![CDATA[<p>During <a href="http://rubyconf.org/">RubyConf 2009</a> in San Francisco, CA Matt
 Aimonetti gave a talk entitled <em>Writing 2D games for the OSX platform in Ruby</em>.</p>
@@ -295,7 +339,7 @@ Aimonetti gave a talk entitled <em>Writing 2D games for the OSX platform in Ruby
   <entry>
     <title type="html"><![CDATA[RailsSummit - The future of Ruby and Rails]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/10/23/railssummit-2009/"/>
-    <updated>2009-10-23T10:17:45-07:00</updated>
+    <updated>2009-10-23T10:17:45-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/10/23/railssummit-2009</id>
     <content type="html"><![CDATA[<p>During <a href="http://www.flickr.com/photos/danicuki/sets/72157622452350763/">Rails Summit2009</a> in São Paulo, Brazil Matt
 Aimonetti gave a talk entitled <em>The future of Ruby and Rails</em>.</p>
@@ -342,7 +386,7 @@ Aimonetti gave a talk entitled <em>The future of Ruby and Rails</em>.</p>
   <entry>
     <title type="html"><![CDATA[RailsConf 2009 - Rails 3: Stepping off of the golden path]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/05/08/railsconf-2009/"/>
-    <updated>2009-05-08T12:18:18-07:00</updated>
+    <updated>2009-05-08T12:18:18-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/05/08/railsconf-2009</id>
     <content type="html"><![CDATA[<p>During <a href="http://en.oreilly.com/rails2009/">RailsConf 2009</a> in Las Vegas, Nevada Matt
 Aimonetti gave a talk entitled <em>Rails 3: Stepping off of the golden path</em>.</p>

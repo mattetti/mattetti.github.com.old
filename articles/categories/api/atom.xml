@@ -4,7 +4,7 @@
   <title><![CDATA[Category: api | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/api/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-09-21T09:33:01-07:00</updated>
+  <updated>2012-10-10T08:57:13-10:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Rethinking web service development]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/06/13/rethinking-web-service-development/"/>
-    <updated>2012-06-13T18:19:00-07:00</updated>
+    <updated>2012-06-13T18:19:00-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/06/13/rethinking-web-service-development</id>
     <content type="html"><![CDATA[<p>While it's true that there are still a lot of places where software isn't
 leveraged and many places where software needs to evolve, software is nearly everywhere!.

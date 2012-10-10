@@ -4,7 +4,7 @@
   <title><![CDATA[Category: language | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/language/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-09-21T09:33:01-07:00</updated>
+  <updated>2012-10-10T08:57:13-10:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Ruby constructs: class, module and mixin]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/07/30/ruby-class-module-mixins/"/>
-    <updated>2012-07-30T14:46:00-07:00</updated>
+    <updated>2012-07-30T14:46:00-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/07/30/ruby-class-module-mixins</id>
     <content type="html"><![CDATA[<p>When you first get started with the Ruby programming and you come from a different
 language, the only tricky piece is often Ruby's approach to block/closure/anonymous functions.

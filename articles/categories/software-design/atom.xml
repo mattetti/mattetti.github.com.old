@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Software Design | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/software-design/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-09-21T09:33:01-07:00</updated>
+  <updated>2012-10-10T08:57:13-10:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Building and implementing a Single Sign-On solution]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution/"/>
-    <updated>2012-04-04T07:29:16-07:00</updated>
+    <updated>2012-04-04T07:29:16-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution</id>
     <content type="html"><![CDATA[<p>Most modern web applications start as a monolithic code base and, as complexity increases, the once small app gets split apart into many "modules". In other cases, engineers opt for a <a href="http://en.wikipedia.org/wiki/Service-oriented_architecture">SOA</a> design approach from the beginning. One way or another, we start running multiple separate applications that need to interact seamlessly. My goal will be to describe some of the high-level challenges and solutions found in implementing a Single-Sign-On service.</p>
 
@@ -225,7 +225,7 @@ end</code></pre></noscript></div>
   <entry>
     <title type="html"><![CDATA[Learning from Rails' failures]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/02/29/learning-from-rails-failures/"/>
-    <updated>2012-02-29T07:48:08-08:00</updated>
+    <updated>2012-02-29T07:48:08-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/02/29/learning-from-rails-failures</id>
     <content type="html"><![CDATA[<p>Ruby on Rails undisputedly changed the way web frameworks are designed. Rails became a reference when it comes to leveraging conventions, easy baked in feature set and a rich ecosystem. However, I think that Rails did and still does a lot of things pretty poorly.  By writing this post, I'm not trying to denigrate Rails, there are many other people out there already doing that. My hope is that by listing what I think didn't and still doesn't go well, we can learn from our mistakes and improve existing solutions or create better new ones.</p>
 
@@ -294,7 +294,7 @@ end</code></pre></noscript></div>
   <entry>
     <title type="html"><![CDATA[Quick dive into Ruby ORM object initialization]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/"/>
-    <updated>2012-02-23T09:46:49-08:00</updated>
+    <updated>2012-02-23T09:46:49-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization</id>
     <content type="html"><![CDATA[<p>Yesterday I did some quick digging into how ORM objects are initialized and the performance cost associated to that. In other words, I wanted to see what's going on when you initialize an ActiveRecord object.</p>
 
@@ -382,7 +382,7 @@ end</code></pre></noscript></div>
   <entry>
     <title type="html"><![CDATA[First step in scaling a web site: HTTP caching]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching/"/>
-    <updated>2011-07-11T10:21:02-07:00</updated>
+    <updated>2011-07-11T10:21:02-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching</id>
     <content type="html"><![CDATA[<p>Today my friend <a href="http://twitter.com/mokolabs">Patrick Crowley</a> and I were talking about scaling his website: <a href="http://cinematreasures.org/">http://cinematreasures.org</a> since an article covering his work will soon be published in a very popular newspaper. Patrick's site is hosted on <a href="http://www.heroku.com/">Heroku</a> which comes by default with <a href="https://www.varnish-cache.org/">Varnish caching</a> enabled.</p>
 
@@ -523,7 +523,7 @@ end
   <entry>
     <title type="html"><![CDATA[Video game web framework design]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/04/14/video-game-web-framework-design/"/>
-    <updated>2011-04-14T10:28:39-07:00</updated>
+    <updated>2011-04-14T10:28:39-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/04/14/video-game-web-framework-design</id>
     <content type="html"><![CDATA[<p>In this post I will do my best to explain why and how I reinvented the wheel and wrote a custom web framework for some of Sony's <a href="http://www.gameproducer.net/2006/05/26/what-are-aaa-titles/">AAA console titles</a>. My goal is to reflect on my work by walking you through the design process and some of the implementation decisions. This is not about being right or being wrong, it's about designing a technical solution to solve concrete business challenges.</p>
 
@@ -628,7 +628,7 @@ end
   <entry>
     <title type="html"><![CDATA[Ruby concurrency explained]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained/"/>
-    <updated>2011-02-22T22:34:30-08:00</updated>
+    <updated>2011-02-22T22:34:30-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained</id>
     <content type="html"><![CDATA[<p>Concurrency is certainly <a href="http://en.wikipedia.org/wiki/Petri_Net">not a new problem</a> but it's getting more and more attention as machines start having more than 1 core, that web traffic increases drastically and that some new technologies show up saying that they are better because they handle concurrency better.
 If that helps, think of concurrency as multitasking. When people say that they want concurrency, they say that they want their code to do multiple different things at the same time. When you are on your computer, you don't expect to have to choose between browsing the web and listening to some music. You more than likely want to run both concurrently. It's the same thing with your code, if you are running a webserver, you probably don't want it to only process one request at a time.
@@ -711,7 +711,7 @@ The aim of this article is to explain as simply as possible the concept of concu
   <entry>
     <title type="html"><![CDATA[Designing for scalability]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/01/31/designing-for-scalability/"/>
-    <updated>2011-01-31T13:30:55-08:00</updated>
+    <updated>2011-01-31T13:30:55-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/01/31/designing-for-scalability</id>
     <content type="html"><![CDATA[<p>Designing beautiful and scalable software is hard. Really hard.</p>
 
@@ -900,7 +900,7 @@ Please people! This is 2011, stop using print statement as a means of debugging!
   <entry>
     <title type="html"><![CDATA[Causality of scalability]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/01/18/causality-of-scalability/"/>
-    <updated>2011-01-18T08:00:42-08:00</updated>
+    <updated>2011-01-18T08:00:42-10:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/01/18/causality-of-scalability</id>
     <content type="html"><![CDATA[<p>Part of my job at <a href="http://us.playstation.com/">Sony PlayStation</a> is to architect scalable systems which can handle a horde of excited players eager to be the first to play the latest awesome game and who would play for 14-24 hours straight. In other words, I need to make sure a system can "scale". In my case, a scalable system is a system that can go from a few hundred concurrent users/players to hundreds of thousands of concurrent users/players and stay stable for months.</p>
 

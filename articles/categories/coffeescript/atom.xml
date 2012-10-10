@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Coffeescript | Matt Aimonetti]]></title>
+  <link href="http://matt.aimonetti.net/articles/categories/coffeescript/atom.xml" rel="self"/>
+  <link href="http://matt.aimonetti.net/"/>
+  <updated>2012-10-10T08:57:13-10:00</updated>
+  <id>http://matt.aimonetti.net/</id>
+  <author>
+    <name><![CDATA[Matt Aimonetti]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PulsoConf 2012 - Tour of programming languages]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/10/05/pulsoconf-tour-of-programming-languages/"/>
+    <updated>2012-10-05T15:09:00-10:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/10/05/pulsoconf-tour-of-programming-languages</id>
+    <content type="html"><![CDATA[<p>During <a href="http://pulsoconf.co/">PulsoConf 2012</a> in Bogotá, Colombia Matt
+Aimonetti gave a talk entitled <em>Tower of
+Babel: a tour of programming languages</em>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>Programming languages affect the way one looks and solves problems. But
+comparing programming languages isn't as simple as drawing a table
+comparing features.</p>
+
+<p><img src="/images/matt_aimonetti_languages_table.jpg" alt="Matt Aimonetti compares programming languages" /></p>
+
+<p>In his talk, Matt shows what he likes, dislikes, the philosophy and concrete example of how to use 7 programming
+languages:</p>
+
+<ul>
+<li>Ruby</li>
+<li>JavaScript</li>
+<li>CoffeeScript</li>
+<li>Objective-C</li>
+<li>Clojure</li>
+<li>Scala</li>
+<li>Go</li>
+</ul>
+
+
+<h2>Slides</h2>
+
+<script async class="speakerdeck-embed" data-id="50662c32244a9d000202ba53" data-ratio="1.299492385786802" src="http://matt.aimonetti.net//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>The slides are available on <a href="https://speakerdeck.com/u/matt_aimonetti/p/tower-of-babel-a-tour-of-programming-languages">Matt's SpeakerDeck</a> and can be <a href="">downloaded here</a>.</p>
+
+<h2>Video</h2>
+
+<p>TBD</p>
+]]></content>
+  </entry>
+  
+</feed>
