@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mruby | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/mruby/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-11-08T20:43:57-08:00</updated>
+  <updated>2012-11-08T21:02:15-08:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[mmm..mruby or why yet another Ruby implementation]]></title>
+    <title type="html"><![CDATA[Aloha RubyConf - mmm..mruby or why yet another Ruby implementation]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/10/09/mmm-dot-mruby-or-why-yet-another-ruby-implementation/"/>
     <updated>2012-10-09T20:14:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/10/09/mmm-dot-mruby-or-why-yet-another-ruby-implementation</id>
@@ -45,7 +45,7 @@ Ruby) and and revisiting Ruby.</p>
 
 <h2>Presentation website</h2>
 
-<p>Matt's presentation was filmed by <a href="http://confreaks.com">Confreaks</a> and posted <a href="http://confreaks.com/videos/816-larubyconf2012-time-to-move-away-from-ruby">here</a>.</p>
+<p>Matt's presentation was filmed by <a href="http://confreaks.com">Confreaks</a> and posted <a href="http://confreaks.com/videos/1252-aloharuby2012-mmm-mruby-or-why-yet-another-ruby-implementation">here</a>.</p>
 ]]></content>
   </entry>
   

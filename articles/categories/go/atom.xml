@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Go | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/go/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-11-08T20:43:57-08:00</updated>
+  <updated>2012-11-08T21:02:15-08:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[RubyConf 2012 - Ruby vs. The World]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/11/02/rubyconf-2012-ruby-vs-the-world/"/>
+    <updated>2012-11-02T20:47:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/11/02/rubyconf-2012-ruby-vs-the-world</id>
+    <content type="html"><![CDATA[<p>During <a href="http://rubyconf.com/">RubyConf 2012</a> in Denver, Colorado Matt
+Aimonetti gave a talk entitled <strong>Ruby Vs. The World</strong>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>Ruby is an awesome programming language, it's so pleasing you probably haven't seriously looked at other languages since you switched. The programming world is evolving fast, new languages are created daily, new trends are emerging. Let's take some time to look at a few languages from a Ruby developer perspective.</p>
+
+<p><img src="https://speakerd.s3.amazonaws.com/presentations/50941f6aeb710400020019ac/slide_19.jpg" alt="Matt Aimonetti talks Scala, Clojure, Go and Ruby" /></p>
+
+<h2>Slides</h2>
+
+<script async class="speakerdeck-embed" data-id="50941f6aeb710400020019ac" data-ratio="1.2994923857868" src="http://matt.aimonetti.net//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>The slides are available on [Matt's SpeakerDeck page]https://speakerdeck.com/matt_aimonetti/ruby-vs-the-world) and can be <a href="">downloaded here</a>.</p>
+
+<h2>Video</h2>
+
+<p>Coming up, the video was recorded and will soon be available <a href="http://confreaks.com/events/rubyconf2012">there</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PulsoConf 2012 - Tour of programming languages]]></title>
