@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/clojure/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-10-10T08:57:13-10:00</updated>
+  <updated>2012-11-08T20:43:57-08:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[PulsoConf 2012 - Tour of programming languages]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/10/05/pulsoconf-tour-of-programming-languages/"/>
-    <updated>2012-10-05T15:09:00-10:00</updated>
+    <updated>2012-10-05T15:09:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/10/05/pulsoconf-tour-of-programming-languages</id>
     <content type="html"><![CDATA[<p>During <a href="http://pulsoconf.co/">PulsoConf 2012</a> in Bogotá, Colombia Matt
 Aimonetti gave a talk entitled <em>Tower of
@@ -60,7 +60,7 @@ languages:</p>
   <entry>
     <title type="html"><![CDATA[LA RubyConf 2012 - Ruby: time to move on]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/02/04/larubyconf-2012/"/>
-    <updated>2012-02-04T15:09:00-10:00</updated>
+    <updated>2012-02-04T15:09:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/02/04/larubyconf-2012</id>
     <content type="html"><![CDATA[<p>During <a href="http://larubyconf.org/">LA RubyConf 2012</a> in Los Angeles, CA Matt
 Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>

@@ -4,7 +4,7 @@
   <title><![CDATA[Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-10-10T08:57:13-10:00</updated>
+  <updated>2012-11-08T20:43:57-08:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -14,9 +14,45 @@
 
   
   <entry>
+    <title type="html"><![CDATA[mmm..mruby or why yet another Ruby implementation]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/10/09/mmm-dot-mruby-or-why-yet-another-ruby-implementation/"/>
+    <updated>2012-10-09T20:14:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/10/09/mmm-dot-mruby-or-why-yet-another-ruby-implementation</id>
+    <content type="html"><![CDATA[<p>During <a href="http://aloharubyconf.com/">Aloha RubyConf 2012</a> in Honolulu, Hawaii Matt
+Aimonetti gave a talk entitled <strong>mmm..mruby or why yet another Ruby implementation</strong>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>mruby is Matz’ new Ruby implementation, it’s not cooler than node.js, it doesn’t natively support Hypstermedia,
+ it looks just like the good old Ruby. So why should we, as a community care?</p>
+
+<p>Matt&#8217;s talk is divided in two parts, an introduction of mruby (embedded
+Ruby) and and revisiting Ruby.</p>
+
+<p><img src="https://speakerd.s3.amazonaws.com/presentations/50752712f8a4020002043005/slide_10.jpg?1350068026" alt="Matt Aimonetti talks about mruby" /></p>
+
+<h2>Slides</h2>
+
+<script async class="speakerdeck-embed" data-id="50752712f8a4020002043005" data-ratio="1.2994923857868" src="http://matt.aimonetti.net//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>The slides are available on [Matt&#8217;s SpeakerDeck page]https://speakerdeck.com/matt_aimonetti/mmmm-dot-mruby-everywhere-and-revisiting-ruby) and can be <a href="https://speakerd.s3.amazonaws.com/presentations/50752712f8a4020002043005/mmmmruby_aloha_rubyconf.pdf">downloaded here</a>.</p>
+
+<h2>Video</h2>
+
+<iframe width="640" height="360" src="http://www.youtube.com/embed/eZYRd86OTbk" frameborder="0" allowfullscreen></iframe>
+
+
+<h2>Presentation website</h2>
+
+<p>Matt&#8217;s presentation was filmed by <a href="http://confreaks.com">Confreaks</a> and posted <a href="http://confreaks.com/videos/816-larubyconf2012-time-to-move-away-from-ruby">here</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[PulsoConf 2012 - Tour of programming languages]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/10/05/pulsoconf-tour-of-programming-languages/"/>
-    <updated>2012-10-05T15:09:00-10:00</updated>
+    <updated>2012-10-05T15:09:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/10/05/pulsoconf-tour-of-programming-languages</id>
     <content type="html"><![CDATA[<p>During <a href="http://pulsoconf.co/">PulsoConf 2012</a> in Bogotá, Colombia Matt
 Aimonetti gave a talk entitled <em>Tower of
@@ -60,7 +96,7 @@ languages:</p>
   <entry>
     <title type="html"><![CDATA[What is Scala's pattern matching]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/09/20/what-is-scala-pattern-matching/"/>
-    <updated>2012-09-20T21:18:00-10:00</updated>
+    <updated>2012-09-20T21:18:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/09/20/what-is-scala-pattern-matching</id>
     <content type="html"><![CDATA[<p><a href="http://www.scala-lang.org/">Scala</a> is a very interesting programming
 language. It has for goal to provide
@@ -290,7 +326,7 @@ approach based on pattern matching.</p>
   <entry>
     <title type="html"><![CDATA[Ruby constructs: class, module and mixin]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/07/30/ruby-class-module-mixins/"/>
-    <updated>2012-07-30T14:46:00-10:00</updated>
+    <updated>2012-07-30T14:46:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/07/30/ruby-class-module-mixins</id>
     <content type="html"><![CDATA[<p>When you first get started with the Ruby programming and you come from a different
 language, the only tricky piece is often Ruby&#8217;s approach to block/closure/anonymous functions.
@@ -707,7 +743,7 @@ allocate an instance of a class to a constant. Surpisingly simple and efficient.
   <entry>
     <title type="html"><![CDATA[Ruby: the differences between dup &amp; clone]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/07/28/ruby-the-differences-between-dup-and-clone/"/>
-    <updated>2012-07-28T12:20:00-10:00</updated>
+    <updated>2012-07-28T12:20:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/07/28/ruby-the-differences-between-dup-and-clone</id>
     <content type="html"><![CDATA[<p>Have you ever wondered what the differences are between <strong>#dup</strong> and <strong>#clone</strong> in Ruby?</p>
 
@@ -836,7 +872,7 @@ allocate an instance of a class to a constant. Surpisingly simple and efficient.
   <entry>
     <title type="html"><![CDATA[Rethinking web service development]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/06/13/rethinking-web-service-development/"/>
-    <updated>2012-06-13T18:19:00-10:00</updated>
+    <updated>2012-06-13T18:19:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/06/13/rethinking-web-service-development</id>
     <content type="html"><![CDATA[<p>While it&#8217;s true that there are still a lot of places where software isn&#8217;t
 leveraged and many places where software needs to evolve, software is nearly everywhere!.
@@ -1195,7 +1231,7 @@ If not, why not?</p>
   <entry>
     <title type="html"><![CDATA[MacRuby on iOS - RubyMotion review]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/05/04/macruby-on-ios-rubymotion-review/"/>
-    <updated>2012-05-04T07:17:47-10:00</updated>
+    <updated>2012-05-04T07:17:47-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/05/04/macruby-on-ios-rubymotion-review</id>
     <content type="html"><![CDATA[<p>Yesterday, <a href="http://www.rubymotion.com/">RubyMotion</a> was released and let&#8217;s be honest, it is one the best alternatives to Objective-C out there (if not the best).</p>
 
@@ -1334,7 +1370,7 @@ post</a>.</p>
   <entry>
     <title type="html"><![CDATA[Getting started with mruby]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/04/25/getting-started-with-mruby/"/>
-    <updated>2012-04-25T10:59:00-10:00</updated>
+    <updated>2012-04-25T10:59:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/04/25/getting-started-with-mruby</id>
     <content type="html"><![CDATA[<p>mruby is the latest Ruby implementation in an already quite long list:</p>
 
@@ -1742,7 +1778,7 @@ of Rails in a different domain thanks to the Ruby language.</p>
   <entry>
     <title type="html"><![CDATA[mruby and MobiRuby]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/04/20/mruby-and-mobiruby/"/>
-    <updated>2012-04-20T12:32:00-10:00</updated>
+    <updated>2012-04-20T12:32:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/04/20/mruby-and-mobiruby</id>
     <content type="html"><![CDATA[<p>Today, two big Ruby news came directly from Japan:</p>
 
@@ -1946,7 +1982,7 @@ testing the first betas.</p>
   <entry>
     <title type="html"><![CDATA[Building and implementing a Single Sign-On solution]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution/"/>
-    <updated>2012-04-04T07:29:16-10:00</updated>
+    <updated>2012-04-04T07:29:16-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution</id>
     <content type="html"><![CDATA[<p>Most modern web applications start as a monolithic code base and, as complexity increases, the once small app gets split apart into many &#8220;modules&#8221;. In other cases, engineers opt for a <a href="http://en.wikipedia.org/wiki/Service-oriented_architecture">SOA</a> design approach from the beginning. One way or another, we start running multiple separate applications that need to interact seamlessly. My goal will be to describe some of the high-level challenges and solutions found in implementing a Single-Sign-On service.</p>
 
@@ -2155,7 +2191,7 @@ end</code></pre></noscript></div>
   <entry>
     <title type="html"><![CDATA[Learning from Rails' failures]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/02/29/learning-from-rails-failures/"/>
-    <updated>2012-02-29T07:48:08-10:00</updated>
+    <updated>2012-02-29T07:48:08-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/02/29/learning-from-rails-failures</id>
     <content type="html"><![CDATA[<p>Ruby on Rails undisputedly changed the way web frameworks are designed. Rails became a reference when it comes to leveraging conventions, easy baked in feature set and a rich ecosystem. However, I think that Rails did and still does a lot of things pretty poorly.  By writing this post, I&#8217;m not trying to denigrate Rails, there are many other people out there already doing that. My hope is that by listing what I think didn&#8217;t and still doesn&#8217;t go well, we can learn from our mistakes and improve existing solutions or create better new ones.</p>
 
@@ -2224,7 +2260,7 @@ end</code></pre></noscript></div>
   <entry>
     <title type="html"><![CDATA[Quick dive into Ruby ORM object initialization]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/"/>
-    <updated>2012-02-23T09:46:49-10:00</updated>
+    <updated>2012-02-23T09:46:49-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization</id>
     <content type="html"><![CDATA[<p>Yesterday I did some quick digging into how ORM objects are initialized and the performance cost associated to that. In other words, I wanted to see what&#8217;s going on when you initialize an ActiveRecord object.</p>
 
@@ -2312,7 +2348,7 @@ end</code></pre></noscript></div>
   <entry>
     <title type="html"><![CDATA[LA RubyConf 2012 - Ruby: time to move on]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/02/04/larubyconf-2012/"/>
-    <updated>2012-02-04T15:09:00-10:00</updated>
+    <updated>2012-02-04T15:09:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/02/04/larubyconf-2012</id>
     <content type="html"><![CDATA[<p>During <a href="http://larubyconf.org/">LA RubyConf 2012</a> in Los Angeles, CA Matt
 Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
@@ -2343,7 +2379,7 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
   <entry>
     <title type="html"><![CDATA[Books to read in 2012 - recommended to me by Twitter]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter/"/>
-    <updated>2011-12-30T15:28:13-10:00</updated>
+    <updated>2011-12-30T15:28:13-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter</id>
     <content type="html"><![CDATA[<p>Today, I asked on Twitter what non-technical books I should read in 2012.</p>
 
@@ -2506,7 +2542,7 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
   <entry>
     <title type="html"><![CDATA[Developing a Curriculum]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/12/21/developing-a-curriculum/"/>
-    <updated>2011-12-21T06:57:27-10:00</updated>
+    <updated>2011-12-21T06:57:27-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/12/21/developing-a-curriculum</id>
     <content type="html"><![CDATA[<p>Recently I asked a friend of mine to give me pointers on how to develop a curriculum (he used to teach an education PHD program), after discussing his response on Twitter, people asked me to put it somewhere, so here it is:</p>
 
@@ -2557,7 +2593,7 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
   <entry>
     <title type="html"><![CDATA[RubyConf Argentina 2011 - Inside Ruby]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011/"/>
-    <updated>2011-11-08T15:42:00-10:00</updated>
+    <updated>2011-11-08T15:42:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011</id>
     <content type="html"><![CDATA[<p>During <a href="http://rubyconfargentina.org/en">RubyConf Argentina 2011</a> in Buenos Aires, Argentina Matt
 Aimonetti gave a talk entitled <em>Inside Ruby: concurrency &amp; garbage collection explained</em>.</p>
@@ -2603,7 +2639,7 @@ management works to get better performance out of your code.</p>
   <entry>
     <title type="html"><![CDATA[Data safety and GIL removal]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal/"/>
-    <updated>2011-10-18T15:19:17-10:00</updated>
+    <updated>2011-10-18T15:19:17-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal</id>
     <content type="html"><![CDATA[<p>After my recent <a href="http://rubyconf11.merbist.com">RubyConf talk</a> and <a href="http://merbist.com/2011/10/03/about-concurrency-and-the-gil/">follow up post addressing the Ruby &amp; Python&#8217;s Global Interpreter Lock</a> (aka GVL/Global VM Lock). a lot of people asked me to explain what I meant by &#8220;data safety&#8221;. While my point isn&#8217;t to defend one approach or the other, I spent a lot of time explaining why C Ruby and C Python use a GIL and where it matters and where it matters less. As a reminder and as mentioned by Matz himself, the main reason why C Ruby still has a GIL is data safety. But if this point isn&#8217;t clear to you, you might be missing the main argument supporting the use of a GIL.</p>
 
@@ -2698,7 +2734,7 @@ management works to get better performance out of your code.</p>
   <entry>
     <title type="html"><![CDATA[About management]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/10/11/about-management/"/>
-    <updated>2011-10-11T22:53:40-10:00</updated>
+    <updated>2011-10-11T22:53:40-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/10/11/about-management</id>
     <content type="html"><![CDATA[<p>I decided to save myself a session to the shrink and instead just write down my reflection on management. Who knows, some of you might help me and/or challenge my thought process.</p>
 
@@ -2719,7 +2755,7 @@ management works to get better performance out of your code.</p>
   <entry>
     <title type="html"><![CDATA[About concurrency and the GIL]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil/"/>
-    <updated>2011-10-03T21:23:54-10:00</updated>
+    <updated>2011-10-03T21:23:54-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil</id>
     <content type="html"><![CDATA[<p>During RubyConf 2011, concurrency was a really hot topic. This is not a new issue, and the JRuby team has been talking about true concurrency for quite a while . The Global Interpreter Lock has also been in a subject a<a href="http://wiki.python.org/moin/GlobalInterpreterLock"> lot of discussions in the Python community</a> and it&#8217;s not surprising that the Ruby community experiences the same debates since the evolution of their implementations are somewhat similar. (There might also be some tension between <a href="http://engineyard.com">EngineYard</a> hiring the JRuby and Rubinius teams and <a href="http://heroku.com">Heroku</a> which <a href="http://blog.heroku.com/archives/2011/7/12/matz_joins_heroku/">recently hired Matz</a> (Ruby&#8217;s creator) and <a href="https://github.com/nobu">Nobu</a>, the #1 C Ruby contributor)</p>
 
@@ -2807,7 +2843,7 @@ management works to get better performance out of your code.</p>
   <entry>
     <title type="html"><![CDATA[RubyConf 2011 - Complex Ruby concepts simplified]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/10/01/rubyconf-2011/"/>
-    <updated>2011-10-01T15:09:00-10:00</updated>
+    <updated>2011-10-01T15:09:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/10/01/rubyconf-2011</id>
     <content type="html"><![CDATA[<p>During <a href="http://rubyconf.org/">RubyConf 2011</a> in New Orleans, LA Matt
 Aimonetti gave a talk entitled <em>Complex Ruby concepts simplified</em>.</p>
@@ -2840,49 +2876,6 @@ for the talk is available <a href="http://confreaks.com/videos/714-rubyconf2011-
 <li><a href="http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained/">Concurrency in Ruby explained</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to - cross domain ajax to a Ruby app]]></title>
-    <link href="http://matt.aimonetti.net/posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app/"/>
-    <updated>2011-09-14T16:11:41-10:00</updated>
-    <id>http://matt.aimonetti.net/posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app</id>
-    <content type="html"><![CDATA[<p>In some cases, you might have a bunch of apps running on different domains/subdomains and/or ports and you would like to make ajax requests between these services. The problem is that browsers wouldn&#8217;t let you make such requests because of the Same Origin Policy which only allowed them to make request to resources within the same domain.</p>
-
-<p>However, most browsers (IE 8+, Firefox 3.5+, Safari 4+, Chrome) implement a simple way to allow cross domain requests as defined in this <a href="http://www.w3.org/TR/cors/">w3C document</a>.</p>
-
-<p>Of course, if your users have an old version of their browser, you  might have to look into jsonp or something else such as cheating by using iframes &amp; setting document.domain. Let&#8217;s pretend for a minute that 100% of your users are on Chrome. The only thing you need to do is set a response header listing the accepted domains or &#8220;*&#8221; for all. A simple Rack middleware to do that would look like that.</p>
-
-<p> </p>
-
-<pre><code>class XOriginEnabler
-  ORIGIN_HEADER = "Access-Control-Allow-Origin"
-
-  def initialize(app, accepted_domain="*")
-    @app = app
-    @accepted_domain = accepted_domain
-  end
-
-  def call(env)
-    status, header, body = @app.call(env)
-    header[ORIGIN_HEADER] = @accepted_domain
-    [status, header, body]
-  end
-end
-</code></pre>
-
-<p>And to use the middleware you would need to set it for use:</p>
-
-<pre><code>use XOriginEnabler
-</code></pre>
-
-<p>To enable all requests from whatever origin, or pass the white listed domain(s) as shown below.</p>
-
-<pre><code>use XOriginEnabler, "demo.mysite.com demo.mysite.fr demo.techcrunch.com"
-</code></pre>
-
-<p>For a full featured middleware, see <a href="https://github.com/cyu/rack-cors">this project</a>.</p>
 ]]></content>
   </entry>
   

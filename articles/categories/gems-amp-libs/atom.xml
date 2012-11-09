@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Gems &amp; Libs | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/gems-amp-libs/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-10-10T08:57:13-10:00</updated>
+  <updated>2012-11-08T20:43:57-08:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Googlecharts 1.5.1]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/02/03/googlecharts-1-5-1/"/>
-    <updated>2010-02-03T21:18:23-10:00</updated>
+    <updated>2010-02-03T21:18:23-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/02/03/googlecharts-1-5-1</id>
     <content type="html"><![CDATA[<p>To celebrate the relaunch of this site and since we are waiting for Rails 3.0 beta to be released, I figured I should share with you what I worked on the other night.</p>
 
@@ -46,7 +46,7 @@ Gchart.line(:title =&gt; title, :size =&gt; size, :data =&gt; data, :axis_with_l
   <entry>
     <title type="html"><![CDATA[Googlecharts featured on Github]]></title>
     <link href="http://matt.aimonetti.net/posts/2008/06/27/googlecharts-featured-on-github/"/>
-    <updated>2008-06-27T07:06:00-10:00</updated>
+    <updated>2008-06-27T07:06:00-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2008/06/27/googlecharts-featured-on-github</id>
     <content type="html"><![CDATA[<p><a href="http://github.com">Github</a>, probably the most famous social code hosting service just <a href="http://github.com/blog/103-new-homepage">redesigned their homepage</a> and are now featuring hosted projects.</p>
 
@@ -69,7 +69,7 @@ Gchart.line(:title =&gt; title, :size =&gt; size, :data =&gt; data, :axis_with_l
   <entry>
     <title type="html"><![CDATA[Googlecharts 0.1.0 released with new site]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/12/12/googlecharts-0-1-0-released-with-new-site/"/>
-    <updated>2007-12-12T08:02:00-10:00</updated>
+    <updated>2007-12-12T08:02:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/12/12/googlecharts-0-1-0-released-with-new-site</id>
     <content type="html"><![CDATA[<p>I just released Googlecharts 0.1.0 (few bug fixes and enhancements).</p>
 
@@ -97,7 +97,7 @@ Gchart.line(:title =&gt; title, :size =&gt; size, :data =&gt; data, :axis_with_l
   <entry>
     <title type="html"><![CDATA[Google Chart Gem]]></title>
     <link href="http://matt.aimonetti.net/posts/2007/12/10/google-chart-gem/"/>
-    <updated>2007-12-10T06:43:00-10:00</updated>
+    <updated>2007-12-10T06:43:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2007/12/10/google-chart-gem</id>
     <content type="html"><![CDATA[<h2>update Nov 11: the gem is finally available <a href="http://rubyforge.org/projects/googlecharts/">there</a> or simply:</h2>
 

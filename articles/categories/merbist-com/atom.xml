@@ -4,7 +4,7 @@
   <title><![CDATA[Category: merbist.com | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/merbist-com/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-10-10T08:57:13-10:00</updated>
+  <updated>2012-11-08T20:43:57-08:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[MacRuby on iOS - RubyMotion review]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/05/04/macruby-on-ios-rubymotion-review/"/>
-    <updated>2012-05-04T07:17:47-10:00</updated>
+    <updated>2012-05-04T07:17:47-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/05/04/macruby-on-ios-rubymotion-review</id>
     <content type="html"><![CDATA[<p>Yesterday, <a href="http://www.rubymotion.com/">RubyMotion</a> was released and let's be honest, it is one the best alternatives to Objective-C out there (if not the best).</p>
 
@@ -155,7 +155,7 @@ post</a>.</p>
   <entry>
     <title type="html"><![CDATA[Building and implementing a Single Sign-On solution]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution/"/>
-    <updated>2012-04-04T07:29:16-10:00</updated>
+    <updated>2012-04-04T07:29:16-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution</id>
     <content type="html"><![CDATA[<p>Most modern web applications start as a monolithic code base and, as complexity increases, the once small app gets split apart into many "modules". In other cases, engineers opt for a <a href="http://en.wikipedia.org/wiki/Service-oriented_architecture">SOA</a> design approach from the beginning. One way or another, we start running multiple separate applications that need to interact seamlessly. My goal will be to describe some of the high-level challenges and solutions found in implementing a Single-Sign-On service.</p>
 
@@ -364,7 +364,7 @@ end</code></pre></noscript></div>
   <entry>
     <title type="html"><![CDATA[Learning from Rails' failures]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/02/29/learning-from-rails-failures/"/>
-    <updated>2012-02-29T07:48:08-10:00</updated>
+    <updated>2012-02-29T07:48:08-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/02/29/learning-from-rails-failures</id>
     <content type="html"><![CDATA[<p>Ruby on Rails undisputedly changed the way web frameworks are designed. Rails became a reference when it comes to leveraging conventions, easy baked in feature set and a rich ecosystem. However, I think that Rails did and still does a lot of things pretty poorly.  By writing this post, I'm not trying to denigrate Rails, there are many other people out there already doing that. My hope is that by listing what I think didn't and still doesn't go well, we can learn from our mistakes and improve existing solutions or create better new ones.</p>
 
@@ -433,7 +433,7 @@ end</code></pre></noscript></div>
   <entry>
     <title type="html"><![CDATA[Quick dive into Ruby ORM object initialization]]></title>
     <link href="http://matt.aimonetti.net/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/"/>
-    <updated>2012-02-23T09:46:49-10:00</updated>
+    <updated>2012-02-23T09:46:49-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization</id>
     <content type="html"><![CDATA[<p>Yesterday I did some quick digging into how ORM objects are initialized and the performance cost associated to that. In other words, I wanted to see what's going on when you initialize an ActiveRecord object.</p>
 
@@ -521,7 +521,7 @@ end</code></pre></noscript></div>
   <entry>
     <title type="html"><![CDATA[Books to read in 2012 - recommended to me by Twitter]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter/"/>
-    <updated>2011-12-30T15:28:13-10:00</updated>
+    <updated>2011-12-30T15:28:13-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/12/30/books-to-read-in-2012-recommended-to-me-by-twitter</id>
     <content type="html"><![CDATA[<p>Today, I asked on Twitter what non-technical books I should read in 2012.</p>
 
@@ -684,7 +684,7 @@ end</code></pre></noscript></div>
   <entry>
     <title type="html"><![CDATA[Developing a Curriculum]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/12/21/developing-a-curriculum/"/>
-    <updated>2011-12-21T06:57:27-10:00</updated>
+    <updated>2011-12-21T06:57:27-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/12/21/developing-a-curriculum</id>
     <content type="html"><![CDATA[<p>Recently I asked a friend of mine to give me pointers on how to develop a curriculum (he used to teach an education PHD program), after discussing his response on Twitter, people asked me to put it somewhere, so here it is:</p>
 
@@ -735,7 +735,7 @@ end</code></pre></noscript></div>
   <entry>
     <title type="html"><![CDATA[Data safety and GIL removal]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal/"/>
-    <updated>2011-10-18T15:19:17-10:00</updated>
+    <updated>2011-10-18T15:19:17-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal</id>
     <content type="html"><![CDATA[<p>After my recent <a href="http://rubyconf11.merbist.com">RubyConf talk</a> and <a href="http://merbist.com/2011/10/03/about-concurrency-and-the-gil/">follow up post addressing the Ruby &amp; Python's Global Interpreter Lock</a> (aka GVL/Global VM Lock). a lot of people asked me to explain what I meant by "data safety". While my point isn't to defend one approach or the other, I spent a lot of time explaining why C Ruby and C Python use a GIL and where it matters and where it matters less. As a reminder and as mentioned by Matz himself, the main reason why C Ruby still has a GIL is data safety. But if this point isn't clear to you, you might be missing the main argument supporting the use of a GIL.</p>
 
@@ -824,7 +824,7 @@ puts @array.size
   <entry>
     <title type="html"><![CDATA[About management]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/10/11/about-management/"/>
-    <updated>2011-10-11T22:53:40-10:00</updated>
+    <updated>2011-10-11T22:53:40-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/10/11/about-management</id>
     <content type="html"><![CDATA[<p>I decided to save myself a session to the shrink and instead just write down my reflection on management. Who knows, some of you might help me and/or challenge my thought process.</p>
 
@@ -845,7 +845,7 @@ puts @array.size
   <entry>
     <title type="html"><![CDATA[About concurrency and the GIL]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil/"/>
-    <updated>2011-10-03T21:23:54-10:00</updated>
+    <updated>2011-10-03T21:23:54-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil</id>
     <content type="html"><![CDATA[<p>During RubyConf 2011, concurrency was a really hot topic. This is not a new issue, and the JRuby team has been talking about true concurrency for quite a while . The Global Interpreter Lock has also been in a subject a<a href="http://wiki.python.org/moin/GlobalInterpreterLock"> lot of discussions in the Python community</a> and it's not surprising that the Ruby community experiences the same debates since the evolution of their implementations are somewhat similar. (There might also be some tension between <a href="http://engineyard.com">EngineYard</a> hiring the JRuby and Rubinius teams and <a href="http://heroku.com">Heroku</a> which <a href="http://blog.heroku.com/archives/2011/7/12/matz_joins_heroku/">recently hired Matz</a> (Ruby's creator) and <a href="https://github.com/nobu">Nobu</a>, the #1 C Ruby contributor)</p>
 
@@ -933,7 +933,7 @@ puts @array.size
   <entry>
     <title type="html"><![CDATA[How to - cross domain ajax to a Ruby app]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app/"/>
-    <updated>2011-09-14T16:11:41-10:00</updated>
+    <updated>2011-09-14T16:11:41-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/09/14/how-to-cross-domain-ajax-in-a-ruby-app</id>
     <content type="html"><![CDATA[<p>In some cases, you might have a bunch of apps running on different domains/subdomains and/or ports and you would like to make ajax requests between these services. The problem is that browsers wouldn't let you make such requests because of the Same Origin Policy which only allowed them to make request to resources within the same domain.</p>
 
@@ -976,7 +976,7 @@ end
   <entry>
     <title type="html"><![CDATA[Ruby optimization example and explanation]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/09/05/ruby-optimization-example-and-explaination/"/>
-    <updated>2011-09-05T14:58:21-10:00</updated>
+    <updated>2011-09-05T14:58:21-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/09/05/ruby-optimization-example-and-explaination</id>
     <content type="html"><![CDATA[<p>Recently I wrote a small DSL that allows the user to define some code that then gets executed later on and in different contexts. Imagine something like Sinatra where each route action is defined in a block and then executed in context of an incoming request.</p>
 
@@ -1070,7 +1070,7 @@ end
   <entry>
     <title type="html"><![CDATA[Deploying a Rails 3.1 app - gotchas]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/08/30/deploying-a-rails-3-1-app-gotchas/"/>
-    <updated>2011-08-30T17:20:34-10:00</updated>
+    <updated>2011-08-30T17:20:34-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/08/30/deploying-a-rails-3-1-app-gotchas</id>
     <content type="html"><![CDATA[<p>Recently I had to build a new app as part of my research &amp; development job at <a href="http://livingsocial.com">LivingSocial</a>. My goal was to get the app up and running in just a few weeks, solid application architecture and graphic design included.
 When you need to build an app quickly and you want it to have some solid foundations, Rails is quite useful.
@@ -1140,7 +1140,7 @@ Also, be careful about the order of the file extensions, otherwise it won't work
   <entry>
     <title type="html"><![CDATA[First step in scaling a web site: HTTP caching]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching/"/>
-    <updated>2011-07-11T10:21:02-10:00</updated>
+    <updated>2011-07-11T10:21:02-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching</id>
     <content type="html"><![CDATA[<p>Today my friend <a href="http://twitter.com/mokolabs">Patrick Crowley</a> and I were talking about scaling his website: <a href="http://cinematreasures.org/">http://cinematreasures.org</a> since an article covering his work will soon be published in a very popular newspaper. Patrick's site is hosted on <a href="http://www.heroku.com/">Heroku</a> which comes by default with <a href="https://www.varnish-cache.org/">Varnish caching</a> enabled.</p>
 
@@ -1281,7 +1281,7 @@ end
   <entry>
     <title type="html"><![CDATA[Go's reflection example]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/06/27/golang-reflection-exampl/"/>
-    <updated>2011-06-27T12:12:32-10:00</updated>
+    <updated>2011-06-27T12:12:32-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/06/27/golang-reflection-exampl</id>
     <content type="html"><![CDATA[<p>The <a href="http://golang.org/">Go Programming language</a> is really cool language by Google. According to the sales pitch, it's a <strong><em>"fast, statically typed, compiled language that feels like a dynamically typed, interpreted language"</em></strong>. Well, if you are like me, you don't trust sales pitches because you know that people writing them dont' care about you, they care about their product. However cynical you are, you still have to check the facts. So here is a quick demonstration showing how to use Go's reflection feature.</p>
 
@@ -1403,7 +1403,7 @@ The attributes function is defined a bit below and and it takes any type of obje
   <entry>
     <title type="html"><![CDATA[Sayonara Sony ]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/06/10/sayonara-sony/"/>
-    <updated>2011-06-10T08:49:30-10:00</updated>
+    <updated>2011-06-10T08:49:30-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/06/10/sayonara-sony</id>
     <content type="html"><![CDATA[<p>It's now official, I have resigned from Sony Computer Entertainment America.</p>
 
@@ -1485,7 +1485,7 @@ The attributes function is defined a bit below and and it takes any type of obje
   <entry>
     <title type="html"><![CDATA[Video game web framework design]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/04/14/video-game-web-framework-design/"/>
-    <updated>2011-04-14T10:28:39-10:00</updated>
+    <updated>2011-04-14T10:28:39-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/04/14/video-game-web-framework-design</id>
     <content type="html"><![CDATA[<p>In this post I will do my best to explain why and how I reinvented the wheel and wrote a custom web framework for some of Sony's <a href="http://www.gameproducer.net/2006/05/26/what-are-aaa-titles/">AAA console titles</a>. My goal is to reflect on my work by walking you through the design process and some of the implementation decisions. This is not about being right or being wrong, it's about designing a technical solution to solve concrete business challenges.</p>
 
@@ -1590,7 +1590,7 @@ The attributes function is defined a bit below and and it takes any type of obje
   <entry>
     <title type="html"><![CDATA[Hey Apple, please be nice and share]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/03/07/hey-apple-please-be-nice-and-share/"/>
-    <updated>2011-03-07T09:00:56-10:00</updated>
+    <updated>2011-03-07T09:00:56-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/03/07/hey-apple-please-be-nice-and-share</id>
     <content type="html"><![CDATA[<p>My name is Matt Aimonetti, and in my free time I work on Apple's open source <a href="http://www.ruby-lang.org">Ruby</a> implementation named <a href="http://macruby.org">MacRuby</a>. I'm also the author of <a href="http://oreilly.com/catalog/0636920000723">O'Reilly's MacRuby book</a>. As you can imagine, I'm very thankful that Apple initiated the MacRuby project a few years ago and have been an avid supporter. MacRuby is awesome to develop OS X native applications using the Ruby language and even allows you to compile down your apps to machine code. It's a great alternative to Objective-C.</p>
 
@@ -1607,7 +1607,7 @@ The attributes function is defined a bit below and and it takes any type of obje
   <entry>
     <title type="html"><![CDATA[Ruby concurrency explained]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained/"/>
-    <updated>2011-02-22T22:34:30-10:00</updated>
+    <updated>2011-02-22T22:34:30-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained</id>
     <content type="html"><![CDATA[<p>Concurrency is certainly <a href="http://en.wikipedia.org/wiki/Petri_Net">not a new problem</a> but it's getting more and more attention as machines start having more than 1 core, that web traffic increases drastically and that some new technologies show up saying that they are better because they handle concurrency better.
 If that helps, think of concurrency as multitasking. When people say that they want concurrency, they say that they want their code to do multiple different things at the same time. When you are on your computer, you don't expect to have to choose between browsing the web and listening to some music. You more than likely want to run both concurrently. It's the same thing with your code, if you are running a webserver, you probably don't want it to only process one request at a time.
@@ -1690,7 +1690,7 @@ The aim of this article is to explain as simply as possible the concept of concu
   <entry>
     <title type="html"><![CDATA[Automatically generating BridgeSupport files]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/02/19/bridgesupport-build/"/>
-    <updated>2011-02-19T16:29:07-10:00</updated>
+    <updated>2011-02-19T16:29:07-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/02/19/bridgesupport-build</id>
     <content type="html"><![CDATA[<p>Today I was helping someone write an Objective-C framework around <a href="http://cocos2d.org/">cocos2d</a>.</p>
 
@@ -1719,7 +1719,7 @@ gen_bridge_metadata --64-bit -f $TARGET_BUILD_DIR/$PROJECT_NAME.framework/ -o $T
   <entry>
     <title type="html"><![CDATA[Designing for scalability]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/01/31/designing-for-scalability/"/>
-    <updated>2011-01-31T13:30:55-10:00</updated>
+    <updated>2011-01-31T13:30:55-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/01/31/designing-for-scalability</id>
     <content type="html"><![CDATA[<p>Designing beautiful and scalable software is hard. Really hard.</p>
 
@@ -1908,7 +1908,7 @@ Please people! This is 2011, stop using print statement as a means of debugging!
   <entry>
     <title type="html"><![CDATA[Causality of scalability]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/01/18/causality-of-scalability/"/>
-    <updated>2011-01-18T08:00:42-10:00</updated>
+    <updated>2011-01-18T08:00:42-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/01/18/causality-of-scalability</id>
     <content type="html"><![CDATA[<p>Part of my job at <a href="http://us.playstation.com/">Sony PlayStation</a> is to architect scalable systems which can handle a horde of excited players eager to be the first to play the latest awesome game and who would play for 14-24 hours straight. In other words, I need to make sure a system can "scale". In my case, a scalable system is a system that can go from a few hundred concurrent users/players to hundreds of thousands of concurrent users/players and stay stable for months.</p>
 
@@ -1995,7 +1995,7 @@ Please people! This is 2011, stop using print statement as a means of debugging!
   <entry>
     <title type="html"><![CDATA[MacRuby book update]]></title>
     <link href="http://matt.aimonetti.net/posts/2011/01/15/macruby-book-update/"/>
-    <updated>2011-01-15T11:48:05-10:00</updated>
+    <updated>2011-01-15T11:48:05-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/01/15/macruby-book-update</id>
     <content type="html"><![CDATA[
 ]]></content>
@@ -2004,7 +2004,7 @@ Please people! This is 2011, stop using print statement as a means of debugging!
   <entry>
     <title type="html"><![CDATA[RubyConf 2010 - MacRuby: Why and How]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/11/12/rubyconf-2010-macruby-talk/"/>
-    <updated>2010-11-12T16:00:51-10:00</updated>
+    <updated>2010-11-12T16:00:51-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/11/12/rubyconf-2010-macruby-talk</id>
     <content type="html"><![CDATA[<h2>Description of the talk:</h2>
 
@@ -2072,7 +2072,7 @@ Since last new a lot of things happened, here is a quick summary:</p>
   <entry>
     <title type="html"><![CDATA[MacRuby, WebKit and JS]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/10/19/macruby-webkit-and-js/"/>
-    <updated>2010-10-19T00:05:37-10:00</updated>
+    <updated>2010-10-19T00:05:37-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/10/19/macruby-webkit-and-js</id>
     <content type="html"><![CDATA[<p>I was working on a piece of code using MacRuby, Webkit and JavaScript. Calling JS from MacRuby is really straight forward but calling Ruby from JS is a but tricky. There is actually a known bug in MacRuby which was giving me a hard time. The bug should be fixed in 0.8 if everything goes according to plan. In the mean time here is a quick run down:</p>
 
@@ -2093,7 +2093,7 @@ Since last new a lot of things happened, here is a quick summary:</p>
   <entry>
     <title type="html"><![CDATA[The Ruby movement - art & programming]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/09/27/the-ruby-movement-art-programming/"/>
-    <updated>2010-09-27T19:12:51-10:00</updated>
+    <updated>2010-09-27T19:12:51-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/09/27/the-ruby-movement-art-programming</id>
     <content type="html"><![CDATA[<p>I wrote a guest blog post for <a href="http://rubylearning.com/blog/about/">Satish Talim</a> over at <a href="http://rubylearning.com/blog/">RubyLearning.org</a></p>
 
@@ -2106,7 +2106,7 @@ Since last new a lot of things happened, here is a quick summary:</p>
   <entry>
     <title type="html"><![CDATA[Discussion with a Java switcher]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/08/22/discussion-with-a-java-switcher/"/>
-    <updated>2010-08-22T17:18:55-10:00</updated>
+    <updated>2010-08-22T17:18:55-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/08/22/discussion-with-a-java-switcher</id>
     <content type="html"><![CDATA[<p>For the past 6 months, I have had regular discussions with an experienced Java developers who switched to Ruby a couple years ago. Names have been changed to protect the guilty but to help you understand my friend 'Duke' better, you need to know that he has been a developer for 10 years and lead many complicated, high traffic projects. He recently released two Ruby on Rails projects and he has been fighting with performance issues and scalability challenges.</p>
 
@@ -2165,7 +2165,7 @@ Since last new a lot of things happened, here is a quick summary:</p>
   <entry>
     <title type="html"><![CDATA[Ruby object allocation & why you should care]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/07/29/object-allocation-why-you-should-care/"/>
-    <updated>2010-07-29T23:47:50-10:00</updated>
+    <updated>2010-07-29T23:47:50-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/07/29/object-allocation-why-you-should-care</id>
     <content type="html"><![CDATA[<p>Recently I was tasked with finding how to optimize a web application with heavy traffic. The application (a Rails 2.3.x app) gets about 3 million requests per hour and most of these requests cannot really be easily cached so they go through the entire stack.</p>
 
@@ -2250,7 +2250,7 @@ Index   1</p>
   <entry>
     <title type="html"><![CDATA[Au Revoir Rails community]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/06/04/au-revoir-rails-community/"/>
-    <updated>2010-06-04T17:45:20-10:00</updated>
+    <updated>2010-06-04T17:45:20-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/06/04/au-revoir-rails-community</id>
     <content type="html"><![CDATA[<p>Time really flies!</p>
 
@@ -2273,7 +2273,7 @@ Index   1</p>
   <entry>
     <title type="html"><![CDATA[Writing an open licensed book]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/05/09/writing-an-open-licensed-book/"/>
-    <updated>2010-05-09T22:40:06-10:00</updated>
+    <updated>2010-05-09T22:40:06-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/05/09/writing-an-open-licensed-book</id>
     <content type="html"><![CDATA[<p>To celebrate last week's release of <a href="http://www.macruby.org/blog/2010/04/30/macruby06.html">MacRuby 0.6</a>, O'Reilly and I started publishing the draft of my MacRuby book online: <a href="http://macruby.labs.oreilly.com/">http://macruby.labs.oreilly.com/</a></p>
 
@@ -2300,7 +2300,7 @@ Index   1</p>
   <entry>
     <title type="html"><![CDATA[I did it wrong]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/03/15/i-did-it-wrong/"/>
-    <updated>2010-03-15T23:50:49-10:00</updated>
+    <updated>2010-03-15T23:50:49-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/03/15/i-did-it-wrong</id>
     <content type="html"><![CDATA[<p>The Ruby community is a well known for at least two things: <strong>being </strong><a href="http://pragprog.com/press_releases/the-passionate-programmer">passionate</a><strong> and being </strong><a href="http://www.bruisin-ales.com/beerblog/wp-content/uploads/2008/09/stoneintro.gif">arrogant</a> .
 Two characteristics that often go together but I am not going to defend or justify anything in this post, instead I will try to reflect on my own experience and will share with you my own view point.</p>
@@ -2330,7 +2330,7 @@ Two characteristics that often go together but I am not going to defend or justi
   <entry>
     <title type="html"><![CDATA[How and why I joined the "suit people"]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/02/02/how-and-why-i-joined-the-suit-people/"/>
-    <updated>2010-02-02T11:19:26-10:00</updated>
+    <updated>2010-02-02T11:19:26-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/02/02/how-and-why-i-joined-the-suit-people</id>
     <content type="html"><![CDATA[<p>It is now official: I have traded my freedom &amp; home office for a job title, an Aeron chair in a cubicle and a 401K.</p>
 
@@ -2408,7 +2408,7 @@ From time to time I will probably use other languages here and there, but that u
   <entry>
     <title type="html"><![CDATA[Undo/Redo in MacRuby]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/02/02/undoredo-in-macruby/"/>
-    <updated>2010-02-02T02:19:44-10:00</updated>
+    <updated>2010-02-02T02:19:44-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/02/02/undoredo-in-macruby</id>
     <content type="html"><![CDATA[
 ]]></content>
@@ -2417,7 +2417,7 @@ From time to time I will probably use other languages here and there, but that u
   <entry>
     <title type="html"><![CDATA[MacRuby 0.5 final is out]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/01/31/macruby-0-5-final-is-out/"/>
-    <updated>2010-01-31T19:13:36-10:00</updated>
+    <updated>2010-01-31T19:13:36-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/01/31/macruby-0-5-final-is-out</id>
     <content type="html"><![CDATA[<p>After going through two betas, MacRuby 0.5 final is now released and can be downloaded by clicking on the icon below:</p>
 
@@ -2448,7 +2448,7 @@ MacRuby 0.5</a></p>
   <entry>
     <title type="html"><![CDATA[How to detect Cylons with MacRuby]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/01/18/how-to-detect-cylons-with-macruby/"/>
-    <updated>2010-01-18T16:13:37-10:00</updated>
+    <updated>2010-01-18T16:13:37-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/01/18/how-to-detect-cylons-with-macruby</id>
     <content type="html"><![CDATA[<p>Over the weekend, MacRuby's trunk became version 0.6 and the bug fixing is currently done in both the 0.5 branch and trunk. Based on MacRuby's usual release cycle I would expect a 0.5 beta3 or 0.5 final to be released soon so most of the work can be focused on trunk.</p>
 
@@ -2560,7 +2560,7 @@ Now that the breakpoint added, we can continue the program execution and just wa
   <entry>
     <title type="html"><![CDATA[Controlling iTunes with MacRuby]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/01/17/controlling-itunes-with-macruby/"/>
-    <updated>2010-01-17T19:54:19-10:00</updated>
+    <updated>2010-01-17T19:54:19-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/01/17/controlling-itunes-with-macruby</id>
     <content type="html"><![CDATA[<p>Since Mac OS X v10.5, Apple added a technology called Scripting Bridge which allows to control and communicate with scriptable applications such as Mail, iChat or iTunes.</p>
 
@@ -3103,7 +3103,7 @@ Returned: SBElementArray
   <entry>
     <title type="html"><![CDATA[Amazon Kindle 2]]></title>
     <link href="http://matt.aimonetti.net/posts/2010/01/05/amazon-kindle-2/"/>
-    <updated>2010-01-05T17:36:12-10:00</updated>
+    <updated>2010-01-05T17:36:12-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2010/01/05/amazon-kindle-2</id>
     <content type="html"><![CDATA[<p>For Noël, my wife got me a new toy: <a href="http://www.amazon.com/gp/product/B0015T963C?ie=UTF8&amp;tag=merbist-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B0015T963C">the Amazon Kindle 2</a>.</p>
 
@@ -3161,7 +3161,7 @@ Returned: SBElementArray
   <entry>
     <title type="html"><![CDATA[IM new year countdown with MacRuby]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/12/31/im-new-year-count-down-with-macruby/"/>
-    <updated>2009-12-31T10:25:50-10:00</updated>
+    <updated>2009-12-31T10:25:50-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/12/31/im-new-year-count-down-with-macruby</id>
     <content type="html"><![CDATA[<p>Here is the geekiest way I found to wish Happy New Year to my IM contacts:</p>
 
@@ -3194,7 +3194,7 @@ end
   <entry>
     <title type="html"><![CDATA[Fun with MacRuby]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/12/29/fun-with-macruby/"/>
-    <updated>2009-12-29T19:09:45-10:00</updated>
+    <updated>2009-12-29T19:09:45-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/12/29/fun-with-macruby</id>
     <content type="html"><![CDATA[<p>To be ready for 2010, I'm taking some time off relaxing and spending time with my family in Florida.</p>
 
@@ -3236,7 +3236,7 @@ puts "明けましておめでとうございます。".language
   <entry>
     <title type="html"><![CDATA[Lots of rubies, now what?]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/11/30/lots-of-rubies-now-what/"/>
-    <updated>2009-11-30T13:38:53-10:00</updated>
+    <updated>2009-11-30T13:38:53-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/11/30/lots-of-rubies-now-what</id>
     <content type="html"><![CDATA[<p>If you were at RubyConf 2009 or looked at the schedule, you saw that the big thing happening in the Ruby scene is the maturation of a many of the Ruby implementations:
 BlueRuby, HotRuby, IronRuby, JRuby, MacRuby, Maglev, MRI, REE, Rubinius, SmallRuby...
@@ -3319,7 +3319,7 @@ Alternative implementations are getting more and more mature and they grow the c
   <entry>
     <title type="html"><![CDATA[The Ruby Revolution, take II]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/11/16/the-ruby-revolution-take-ii/"/>
-    <updated>2009-11-16T08:05:55-10:00</updated>
+    <updated>2009-11-16T08:05:55-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/11/16/the-ruby-revolution-take-ii</id>
     <content type="html"><![CDATA[<p>[caption id="attachment_638" align="alignright" width="300" caption="Mohandas Karamchand Gandhi"]<img src="http://merbist.com/wp-content/uploads/2009/11/GANDHI.jpg" alt="Mohandas Karamchand Gandhi" />[/caption]</p>
 
@@ -3376,7 +3376,7 @@ So, again, do not focus on the adoption but instead look at the influence of the
   <entry>
     <title type="html"><![CDATA[The Ruby revolution is over]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/11/09/the-ruby-revolution-is-over/"/>
-    <updated>2009-11-09T00:10:16-10:00</updated>
+    <updated>2009-11-09T00:10:16-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/11/09/the-ruby-revolution-is-over</id>
     <content type="html"><![CDATA[<p><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Eug%C3%A8ne_Delacroix_-_La_libert%C3%A9_guidant_le_peuple.jpg/300px-Eug%C3%A8ne_Delacroix_-_La_libert%C3%A9_guidant_le_peuple.jpg" alt="Liberté guidant le peuple - Eugene Delacroix posted by Matt Aimonetti" /></p>
 
@@ -3425,7 +3425,7 @@ So, again, do not focus on the adoption but instead look at the influence of the
   <entry>
     <title type="html"><![CDATA[MacRuby tips: browse for folder or file dialog]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/10/25/macruby-browse-for-folder-or-file-dialog/"/>
-    <updated>2009-10-25T15:52:14-10:00</updated>
+    <updated>2009-10-25T15:52:14-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/10/25/macruby-browse-for-folder-or-file-dialog</id>
     <content type="html"><![CDATA[<p>This is yet another pretty simple tip.
 Use case: let say you want your applications users to choose one or multiple files or folder on their file system. A good example would be that you want the user to choose a file to process or a folder where to save some data.</p>
@@ -3474,7 +3474,7 @@ end
   <entry>
     <title type="html"><![CDATA[RailsSummit - The future of Ruby and Rails]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/10/23/railssummit-2009/"/>
-    <updated>2009-10-23T10:17:45-10:00</updated>
+    <updated>2009-10-23T10:17:45-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/10/23/railssummit-2009</id>
     <content type="html"><![CDATA[<p>During <a href="http://www.flickr.com/photos/danicuki/sets/72157622452350763/">Rails Summit2009</a> in São Paulo, Brazil Matt
 Aimonetti gave a talk entitled <em>The future of Ruby and Rails</em>.</p>
@@ -3521,7 +3521,7 @@ Aimonetti gave a talk entitled <em>The future of Ruby and Rails</em>.</p>
   <entry>
     <title type="html"><![CDATA[MacRuby tips: capturing keyboard events]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/10/09/macruby-tips-capturing-keyboard-events/"/>
-    <updated>2009-10-09T19:24:04-10:00</updated>
+    <updated>2009-10-09T19:24:04-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/10/09/macruby-tips-capturing-keyboard-events</id>
     <content type="html"><![CDATA[<p>If you are writing any type of games you might want your users to interact with your application using their keyboards.</p>
 
@@ -3644,7 +3644,7 @@ end
   <entry>
     <title type="html"><![CDATA[MacRuby 0.5 beta 1 and Textorize]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/10/07/macruby-0-5-beta-1-and-textorize/"/>
-    <updated>2009-10-07T20:45:02-10:00</updated>
+    <updated>2009-10-07T20:45:02-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/10/07/macruby-0-5-beta-1-and-textorize</id>
     <content type="html"><![CDATA[<p>Good news everyone!</p>
 
@@ -3685,7 +3685,7 @@ $ open output.png
   <entry>
     <title type="html"><![CDATA[MacRuby tips: how to play an audio file]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/10/06/macruby-tips-how-to-play-an-audio-file/"/>
-    <updated>2009-10-06T19:00:08-10:00</updated>
+    <updated>2009-10-06T19:00:08-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/10/06/macruby-tips-how-to-play-an-audio-file</id>
     <content type="html"><![CDATA[<p>Let's say you would like to play an audio file in your MacRuby app/script, how would you do?
 It's actually pretty simple, you just need to use NSSound. If we wanted to use a system sound we could do:</p>
@@ -3778,7 +3778,7 @@ Once that done, we are starting out run loop.</p>
   <entry>
     <title type="html"><![CDATA[MacRuby tips: embed a custom font]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/10/06/macruby-tips-embed-a-custom-font/"/>
-    <updated>2009-10-06T09:23:44-10:00</updated>
+    <updated>2009-10-06T09:23:44-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/10/06/macruby-tips-embed-a-custom-font</id>
     <content type="html"><![CDATA[<p>Let say you want to release your MacRuby app and use a custom embedded font?
 You probably don't want to force your users to install the font.
@@ -3802,7 +3802,7 @@ CTFontManagerRegisterFontsForURL(font_url, KCTFontManagerScopeProcess, nil)
   <entry>
     <title type="html"><![CDATA[MacRuby soon to reach a new milestone]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/10/05/macruby-soon-to-reach-a-new-milestone/"/>
-    <updated>2009-10-05T23:58:53-10:00</updated>
+    <updated>2009-10-05T23:58:53-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/10/05/macruby-soon-to-reach-a-new-milestone</id>
     <content type="html"><![CDATA[<p>Laurent just posted a <a href="http://bit.ly/2YPwRT">MacRuby status update</a> on the mailing list and the first official beta of MacRuby 0.5 should be released pretty soon.</p>
 
@@ -3842,7 +3842,7 @@ CTFontManagerRegisterFontsForURL(font_url, KCTFontManagerScopeProcess, nil)
   <entry>
     <title type="html"><![CDATA[Blog status]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/08/30/blog-status/"/>
-    <updated>2009-08-30T16:35:01-10:00</updated>
+    <updated>2009-08-30T16:35:01-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/08/30/blog-status</id>
     <content type="html"><![CDATA[<p>I had people asking me how come I was not blogging as much lately. Well, on top of being really busy, I have been blogging on other blogs such as the <a href="http://weblog.rubyonrails.org/">official Rails blog</a>.</p>
 
@@ -3855,7 +3855,7 @@ CTFontManagerRegisterFontsForURL(font_url, KCTFontManagerScopeProcess, nil)
   <entry>
     <title type="html"><![CDATA[Ruby, Rack and CouchDB = lots of awesomeness]]></title>
     <link href="http://matt.aimonetti.net/posts/2009/07/27/ruby-rack-and-couchdb-lots-of-awesomeness/"/>
-    <updated>2009-07-27T13:49:20-10:00</updated>
+    <updated>2009-07-27T13:49:20-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2009/07/27/ruby-rack-and-couchdb-lots-of-awesomeness</id>
     <content type="html"><![CDATA[<p>Over the weekend, I spent some time working on a Ruby + Rack +CouchDB project. Three technologies that I know quite well but that I never put to work together at the same time, at least not directly.  Let's call this Part I.</p>
 
