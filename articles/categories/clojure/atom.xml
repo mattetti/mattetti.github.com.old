@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/clojure/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-11-08T21:02:15-08:00</updated>
+  <updated>2012-11-15T09:32:17-08:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -36,7 +36,14 @@ Aimonetti gave a talk entitled <strong>Ruby Vs. The World</strong>.</p>
 
 <h2>Video</h2>
 
-<p>Coming up, the video was recorded and will soon be available <a href="http://confreaks.com/events/rubyconf2012">there</a>.</p>
+<iframe width="640" height="360" src="http://www.youtube.com/embed/V_k3q37Tieg" frameborder="0" allowfullscreen></iframe>
+
+
+<h2>Presentation website</h2>
+
+<p>Matt's presentation was filmed by <a href="http://confreaks.com">Confreaks</a> and posted <a href="http://confreaks.com/videos/1288-rubyconf2012-ruby-vs-the-world">here</a>.</p>
+
+<p>For more RubyConf 2012 talks, go <a href="http://confreaks.com/events/rubyconf2012">there</a>.</p>
 ]]></content>
   </entry>
   
