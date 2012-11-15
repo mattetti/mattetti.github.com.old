@@ -2,7 +2,7 @@
 layout: post
 title: "Ruby constructs: class, module and mixin"
 date: 2012-07-30 14:46
-comments: true
+comments: false
 categories: 
 - ruby
 - language

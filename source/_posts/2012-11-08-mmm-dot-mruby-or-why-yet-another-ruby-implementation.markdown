@@ -2,7 +2,7 @@
 layout: post
 title: "Aloha RubyConf - mmm..mruby or why yet another Ruby implementation"
 date: 2012-10-09 20:14
-comments: true
+comments: false
 categories: 
 - Presentation
 - Ruby

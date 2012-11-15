@@ -3,7 +3,7 @@ layout: post
 title: "Ruby: the differences between dup &amp; clone"
 date: 2012-07-28 12:20
 legacy_url: http://coderwall.com/p/1zflyg
-comments: true
+comments: false
 categories: 
 - ruby
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: "mruby and MobiRuby"
 date: 2012-04-20 12:32
-comments: true
+comments: false
 description: "mruby and MobiRuby's announcements covered by Matt Aimonetti"
 categories: 
 - Ruby

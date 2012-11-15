@@ -4,6 +4,8 @@ title: "Engineers suck at finding the right jobs"
 date: 2012-11-14 18:53
 comments: true
 categories: 
+- Misc
+- Career
 ---
 
 If you are currently a software engineer you need to realize two things:
@@ -12,14 +14,14 @@ If you are currently a software engineer you need to realize two things:
 * **Your job might not be well suited for you**.
 
 I'll show you why we are lucky bastards, why we aren't so good at
-picking the right jobs and some hints are how to solve this issue.
+picking the right jobs and some hints on how to solve this issue.
 
 <br>
 
 
 I remember a family friend telling me when I was a kid that computers
 are going to be the future and that there will be a lot of jobs in this
-field. I also remember that the idea of seating all day, alone, in front of a
+field. I also remember that the idea of sitting all day, alone, in front of a
 [minitel](http://en.wikipedia.org/wiki/Minitel)-like computer scared the hell out of me. 
 Yet, this person was right and I now work from home, spending 12+ hours
 in front of a monitor and I get emails and phone calls from many people
@@ -41,7 +43,7 @@ But the projects people are now building
 are way more interesting and have a real potential to change other
 people's lives. 
 Before, you had to work from one of the big companies to
-have a chance to do that. But now with internet, smart mobile
+have a chance to do that. But now with internet and smart mobile
 devices everywhere almost any startup (fancy name for small company) can
 have a huge impact (look at Twitter for instance).
 Finally, being a geek is now cool. Movies, cartoons, TV Shows now have
@@ -86,7 +88,7 @@ I had no idea that at $45k/year with basically no health coverage and no
 vacation, I was grossly underpaid and could have been paid twice that amount 
 by a company down the street. (Note: the average software engineer salary in the US 
 is at [$89,000 according to indeed.com](http://www.indeed.com/salary/Software-Engineer.html)).
-The average salary for a high school teacher is [$47/year](http://www.indeed.com/salary?q1=high+school+teacher&l1=)
+The average salary for a high school teacher is [$47k/year](http://www.indeed.com/salary?q1=high+school+teacher&l1=)
 so I wasn't complaining. As a matter of fact, I left this job not
 because of the money but because of many other issues.
 I truly believe that **"Money doesn't buy happiness"** and **it shouldn't be
@@ -294,4 +296,4 @@ tho, I do have a full time job, so don't expect me to reply to your
 emails within the hour)
 
 I finally took the time to enable the comments in this blog. Feel free
-to leave advice or comments.
+to leave advice or feedback.

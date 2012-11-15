@@ -3,7 +3,7 @@ layout: post
 title: "Getting started with mruby"
 description: "Learn to embed Ruby in a C program using mruby."
 date: 2012-04-25 10:59
-comments: true
+comments: false
 categories: 
 - mruby
 - Ruby
