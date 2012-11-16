@@ -185,6 +185,10 @@ Git can act as SVN, but let&#8217;s be honest, if you switch to a new SCM it nee
   options.enableSearchboxOnly("http://matt.aimonetti.net/search");
   customSearchControl.draw('cse-search-form', options);
   }, true);
+
+if (navigator.userAgent.match(/iPad/i) != null) {
+  $('meta[name=viewport]').attr('content', 'width=1020,initial-scale=1,maximum-scale=1');
+}
 </script>
 
 

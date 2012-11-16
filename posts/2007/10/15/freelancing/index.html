@@ -284,6 +284,10 @@ Converting the technical details into simple concepts that make sense to both yo
   options.enableSearchboxOnly("http://matt.aimonetti.net/search");
   customSearchControl.draw('cse-search-form', options);
   }, true);
+
+if (navigator.userAgent.match(/iPad/i) != null) {
+  $('meta[name=viewport]').attr('content', 'width=1020,initial-scale=1,maximum-scale=1');
+}
 </script>
 
 
