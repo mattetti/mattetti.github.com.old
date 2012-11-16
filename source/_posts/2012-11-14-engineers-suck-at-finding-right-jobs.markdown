@@ -63,7 +63,7 @@ I'm not an expert but I have a few guesses I'd like to share with you:
 
 * We don't know our real worth.
 * We don't make long term plans.
-* We get well paid, so why bother changing?
+* We get paid well, so why bother changing?
 * Changing job feels like betrayal.
 * The system is broken.
 
