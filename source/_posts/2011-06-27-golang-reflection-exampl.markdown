@@ -12,9 +12,11 @@ categories:
 - Tutorial
 - merbist.com
 - blog-post
+- Go
+- Golang
 ---
 
-The [Go Programming language](http://golang.org/) is really cool language by Google. According to the sales pitch, it's a **_"fast, statically typed, compiled language that feels like a dynamically typed, interpreted language"_**. Well, if you are like me, you don't trust sales pitches because you know that people writing them dont' care about you, they care about their product. However cynical you are, you still have to check the facts. So here is a quick demonstration showing how to use Go's reflection feature.
+The [Go Programming language](http://golang.org/) is really cool language by Google. According to the sales pitch, it's a **_"fast, statically typed, compiled language that feels like a dynamically typed, interpreted language"_**. Well, if you are like me, you don't trust sales pitches because you know that people writing them don't care about you, they care about their product. However cynical you are, you still have to check the facts. So here is a quick demonstration showing how to use Go's reflection feature.
 
 Installing Go is actually really straight forward on a Mac, and slightly harder on Linux, check [this guide ](http://golang.org/doc/install.html)to see how to build Go in a few minutes.
 

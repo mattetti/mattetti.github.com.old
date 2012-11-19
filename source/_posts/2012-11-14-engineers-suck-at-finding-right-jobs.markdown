@@ -6,6 +6,7 @@ comments: true
 categories: 
 - Misc
 - Career
+- Popular
 ---
 
 If you are currently a software engineer you need to realize two things:
@@ -277,15 +278,22 @@ help**
 if you'd like it. **I promise full anonymity and no strings
 attached**. Just 
 
-* email me (*matt aimonetti / gmail*)
-* tell me about yourself and what you do
-* what direction you'd like your career to take
-* ask any questions you might have 
+* <del>email me</del>
+* <del>tell me about yourself and what you do</del>
+* <del>what direction you'd like your career to take</del>
+* <del>ask any questions you might have </del>
 
-After exchanging a few emails or maybe calls (less preferred), **I'll try to make good use of my network** 
+After exchanging a few emails , **I'll try to make good use of my network** 
 to find you a way to move in your desired direction.
 Or, if you work for an interesting company with current openings, feel free to contact
 me too.
+
+** Update: My inbox is overflowing with emails and I already spent
+literally days replying to as many people as possible. I'm sorry but at
+this time I can't reply to any new enquiries. I'll write a follow up
+blog post that covers what I learned from my interactions with so many
+readers.
+**
 
 I have no idea how this will turn out. Maybe I'll get a couple of emails,
 zero, or way too many to handle -- but it's worth a try. I do have a full time job, 

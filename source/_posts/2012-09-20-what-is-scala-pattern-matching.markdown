@@ -83,7 +83,7 @@ case 'a' :: tail => "starting by 'a'"
 Remember that we are doing pattern matching against our list object.
 What we are doing here is use the `::` operator (aka cons operator) to 
 extract the head and the rest of the list and then we match the head
-against the the `'a'` character.
+against the `'a'` character.
 
 This statement could have been written different ways:
 
