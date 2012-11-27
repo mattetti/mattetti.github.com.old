@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Real life concurrency in Go"
-date: 2012-11-18 17:18
+date: 2012-11-27 10:08
 comments: true
 categories: 
 - Go
