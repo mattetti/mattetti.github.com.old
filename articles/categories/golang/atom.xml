@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Golang | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/golang/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-11-27T10:07:29-08:00</updated>
+  <updated>2012-11-27T11:17:47-08:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -92,7 +92,7 @@ This is called <a href="http://en.wikipedia.org/wiki/Structural_type_system">str
 <p>```go
 func asyncHttpGets(urls []string) []*HttpResponse {</p>
 
-<pre><code>ch := make(chan *HttpResponse, len(urls)) // buffered
+<pre><code>ch := make(chan *HttpResponse)
 responses := []*HttpResponse{}
 for _, url := range urls {
     go func(url string) {
@@ -110,10 +110,9 @@ for {
         if len(responses) == len(urls) {
             return responses
         }
-    default:
-        fmt.Printf(".")
-        time.Sleep(5e7)
-    }
+case &lt;-time.After(50*time.Millisecond):
+  fmt.Printf(".")
+      }
 }
 return responses
 </code></pre>
@@ -182,7 +181,33 @@ in the channel. If there is something, we...</p>
 
 <p>If the length of the array is the same as the length of all urls we want to fetch, we are done
 fetching all our resources and can return.
-While still waiting for responses, the <code>default</code> case statement prints a dot and sleeps a fraction of a second so the loop isn't too tight.</p>
+While still waiting for responses, we print a dot every 50ms.
+In the first version of this blog post I had used a 'default' case
+statement to print the dot and sleep for 50ms so the loop wouldn't be
+too tight and the concurrency effect was more obvious. But some
+<a href="http://news.ycombinator.com/item?id=4837919">HN comments</a> pointed out that it wasn't needed and I shouldn't block.
+For reference here is what I had before:</p>
+
+<p>```go
+for {</p>
+
+<pre><code>    select {
+    case r := &lt;-ch:
+        fmt.Printf("%s was fetched\n", r.url)
+        responses = append(responses, r)
+        if len(responses) == len(urls) {
+            return responses
+        }
+default:
+  fmt.Printf(".")
+  time.Sleep(50*time.Millisecond)
+}
+</code></pre>
+
+<p>}</p>
+
+<p>```
+Thank you HackerNews for fixing my example code :)</p>
 
 <p>With that code constructed, our <code>main</code> can make use of it like this:</p>
 

@@ -192,9 +192,8 @@ This is called <a href="http://en.wikipedia.org/wiki/Structural_type_system">str
 <span class='line-number'>23</span>
 <span class='line-number'>24</span>
 <span class='line-number'>25</span>
-<span class='line-number'>26</span>
 </pre></td><td class='code'><pre><code class='go'><span class='line'><span class="k">func</span> <span class="n">asyncHttpGets</span><span class="p">(</span><span class="n">urls</span> <span class="p">[]</span><span class="nb">string</span><span class="p">)</span> <span class="p">[]*</span><span class="n">HttpResponse</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">ch</span> <span class="p">:=</span> <span class="nb">make</span><span class="p">(</span><span class="k">chan</span> <span class="p">*</span><span class="n">HttpResponse</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="p">))</span> <span class="c1">// buffered</span>
+</span><span class='line'>  <span class="n">ch</span> <span class="p">:=</span> <span class="nb">make</span><span class="p">(</span><span class="k">chan</span> <span class="p">*</span><span class="n">HttpResponse</span><span class="p">)</span>
 </span><span class='line'>  <span class="n">responses</span> <span class="p">:=</span> <span class="p">[]*</span><span class="n">HttpResponse</span><span class="p">{}</span>
 </span><span class='line'>  <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">url</span> <span class="p">:=</span> <span class="k">range</span> <span class="n">urls</span> <span class="p">{</span>
 </span><span class='line'>      <span class="k">go</span> <span class="k">func</span><span class="p">(</span><span class="n">url</span> <span class="nb">string</span><span class="p">)</span> <span class="p">{</span>
@@ -212,10 +211,9 @@ This is called <a href="http://en.wikipedia.org/wiki/Structural_type_system">str
 </span><span class='line'>          <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">responses</span><span class="p">)</span> <span class="p">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'>              <span class="k">return</span> <span class="n">responses</span>
 </span><span class='line'>          <span class="p">}</span>
-</span><span class='line'>      <span class="k">default</span><span class="p">:</span>
-</span><span class='line'>          <span class="n">fmt</span><span class="p">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span>
-</span><span class='line'>          <span class="n">time</span><span class="p">.</span><span class="n">Sleep</span><span class="p">(</span><span class="mf">5e7</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="k">case</span> <span class="p">&lt;-</span><span class="n">time</span><span class="p">.</span><span class="n">After</span><span class="p">(</span><span class="mi">50</span><span class="p">*</span><span class="n">time</span><span class="p">.</span><span class="n">Millisecond</span><span class="p">):</span>
+</span><span class='line'>      <span class="n">fmt</span><span class="p">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">}</span>
 </span><span class='line'>  <span class="p">}</span>
 </span><span class='line'>  <span class="k">return</span> <span class="n">responses</span>
 </span><span class='line'><span class="p">}</span>
@@ -283,7 +281,44 @@ in the channel. If there is something, we&#8230;</p>
 
 <p>If the length of the array is the same as the length of all urls we want to fetch, we are done
 fetching all our resources and can return.
-While still waiting for responses, the <code>default</code> case statement prints a dot and sleeps a fraction of a second so the loop isn&#8217;t too tight.</p>
+While still waiting for responses, we print a dot every 50ms.
+In the first version of this blog post I had used a &#8216;default&#8217; case
+statement to print the dot and sleep for 50ms so the loop wouldn&#8217;t be
+too tight and the concurrency effect was more obvious. But some
+<a href="http://news.ycombinator.com/item?id=4837919">HN comments</a> pointed out that it wasn&#8217;t needed and I shouldn&#8217;t block.
+For reference here is what I had before:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='go'><span class='line'><span class="k">for</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">select</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">case</span> <span class="n">r</span> <span class="p">:=</span> <span class="p">&lt;-</span><span class="n">ch</span><span class="p">:</span>
+</span><span class='line'>          <span class="n">fmt</span><span class="p">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">&quot;%s was fetched\n&quot;</span><span class="p">,</span> <span class="n">r</span><span class="p">.</span><span class="n">url</span><span class="p">)</span>
+</span><span class='line'>          <span class="n">responses</span> <span class="p">=</span> <span class="n">append</span><span class="p">(</span><span class="n">responses</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+</span><span class='line'>          <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">responses</span><span class="p">)</span> <span class="p">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>              <span class="k">return</span> <span class="n">responses</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>    <span class="k">default</span><span class="p">:</span>
+</span><span class='line'>      <span class="n">fmt</span><span class="p">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">time</span><span class="p">.</span><span class="n">Sleep</span><span class="p">(</span><span class="mi">50</span><span class="p">*</span><span class="n">time</span><span class="p">.</span><span class="n">Millisecond</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+Thank you HackerNews for fixing my example code :)</p>
 
 <p>With that code constructed, our <code>main</code> can make use of it like this:</p>
 
