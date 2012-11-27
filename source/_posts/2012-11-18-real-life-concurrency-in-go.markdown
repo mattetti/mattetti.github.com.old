@@ -90,9 +90,9 @@ func asyncHttpGets(urls []string) []*HttpResponse {
 			if len(responses) == len(urls) {
 				return responses
 			}
-    case <-time.After(50*time.Millisecond):
-      fmt.Printf(".")
-		  }
+		case <-time.After(50 * time.Millisecond):
+			fmt.Printf(".")
+		}
 	}
 	return responses
 }
@@ -154,14 +154,16 @@ in the channel. If there is something, we...
 If the length of the array is the same as the length of all urls we want to fetch, we are done
 fetching all our resources and can return.
 While still waiting for responses, we print a dot every 50ms.
+
+**Update:**
 In the first version of this blog post I had used a 'default' case
 statement to print the dot and sleep for 50ms so the loop wouldn't be
 too tight and the concurrency effect was more obvious. But some
 [HN comments](http://news.ycombinator.com/item?id=4837919) pointed out that it wasn't needed and I shouldn't block.
-For reference here is what I had before:
+For reference here is what I had before (don't use this code):
 
 ```go
-for {
+	for {
 		select {
 		case r := <-ch:
 			fmt.Printf("%s was fetched\n", r.url)
@@ -169,14 +171,15 @@ for {
 			if len(responses) == len(urls) {
 				return responses
 			}
-    default:
-      fmt.Printf(".")
-      time.Sleep(50*time.Millisecond)
-    }
-}
-
+		default:
+			fmt.Printf(".")
+			time.Sleep(50 * time.Millisecond)
+		}
+	}
 ``` 
-Thank you HackerNews for fixing my example code :)
+Thank you HackerNews.
+
+
 
 With that code constructed, our `main` can make use of it like this:
 
