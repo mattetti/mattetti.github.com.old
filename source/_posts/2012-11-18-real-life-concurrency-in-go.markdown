@@ -72,7 +72,7 @@ Here is the code:
 
 ```go
 func asyncHttpGets(urls []string) []*HttpResponse {
-	ch := make(chan *HttpResponse, len(urls)) // buffered
+	ch := make(chan *HttpResponse)
 	responses := []*HttpResponse{}
 	for _, url := range urls {
 		go func(url string) {
@@ -90,10 +90,9 @@ func asyncHttpGets(urls []string) []*HttpResponse {
 			if len(responses) == len(urls) {
 				return responses
 			}
-		default:
-			fmt.Printf(".")
-			time.Sleep(5e7)
-		}
+    case <-time.After(50*time.Millisecond):
+      fmt.Printf(".")
+		  }
 	}
 	return responses
 }
@@ -154,7 +153,30 @@ in the channel. If there is something, we...
 
 If the length of the array is the same as the length of all urls we want to fetch, we are done
 fetching all our resources and can return.
-While still waiting for responses, the `default` case statement prints a dot and sleeps a fraction of a second so the loop isn't too tight.
+While still waiting for responses, we print a dot every 50ms.
+In the first version of this blog post I had used a 'default' case
+statement to print the dot and sleep for 50ms so the loop wouldn't be
+too tight and the concurrency effect was more obvious. But some
+[HN comments](http://news.ycombinator.com/item?id=4837919) pointed out that it wasn't needed and I shouldn't block.
+For reference here is what I had before:
+
+```go
+for {
+		select {
+		case r := <-ch:
+			fmt.Printf("%s was fetched\n", r.url)
+			responses = append(responses, r)
+			if len(responses) == len(urls) {
+				return responses
+			}
+    default:
+      fmt.Printf(".")
+      time.Sleep(50*time.Millisecond)
+    }
+}
+
+``` 
+Thank you HackerNews for fixing my example code :)
 
 With that code constructed, our `main` can make use of it like this:
 
