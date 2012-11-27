@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Misc | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/misc/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-11-18T16:46:55-08:00</updated>
+  <updated>2012-11-27T10:07:29-08:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -861,7 +861,7 @@ end
     <link href="http://matt.aimonetti.net/posts/2011/06/27/golang-reflection-exampl/"/>
     <updated>2011-06-27T12:12:32-07:00</updated>
     <id>http://matt.aimonetti.net/posts/2011/06/27/golang-reflection-exampl</id>
-    <content type="html"><![CDATA[<p>The <a href="http://golang.org/">Go Programming language</a> is really cool language by Google. According to the sales pitch, it's a <strong><em>"fast, statically typed, compiled language that feels like a dynamically typed, interpreted language"</em></strong>. Well, if you are like me, you don't trust sales pitches because you know that people writing them dont' care about you, they care about their product. However cynical you are, you still have to check the facts. So here is a quick demonstration showing how to use Go's reflection feature.</p>
+    <content type="html"><![CDATA[<p>The <a href="http://golang.org/">Go Programming language</a> is really cool language by Google. According to the sales pitch, it's a <strong><em>"fast, statically typed, compiled language that feels like a dynamically typed, interpreted language"</em></strong>. Well, if you are like me, you don't trust sales pitches because you know that people writing them don't care about you, they care about their product. However cynical you are, you still have to check the facts. So here is a quick demonstration showing how to use Go's reflection feature.</p>
 
 <p>Installing Go is actually really straight forward on a Mac, and slightly harder on Linux, check <a href="http://golang.org/doc/install.html">this guide </a>to see how to build Go in a few minutes.</p>
 
