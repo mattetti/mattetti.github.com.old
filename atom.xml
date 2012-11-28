@@ -4,7 +4,7 @@
   <title><![CDATA[Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-11-27T11:23:08-08:00</updated>
+  <updated>2012-11-27T21:02:16-08:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -92,9 +92,13 @@ code together.</p>
 
 <p>You can think of a struct type as a simple representation of a class. Technically, we are defining a structure with some typed attributes. We will later on, create instances of this defined type.</p>
 
-<p>Go implements OOP <a href="http://golang.org/doc/go_faq.html#Is_Go_an_object-oriented_language">slightly differently</a> than other languages.
-Functions are defined on an interface, not a class or subclass.
-This is called <a href="http://en.wikipedia.org/wiki/Structural_type_system">structural typing</a>.</p>
+<p>Go implements OOP <a href="http://golang.org/doc/go_faq.html#Is_Go_an_object-oriented_language">slightly differently</a> than other languages.</p>
+
+<blockquote><p>Methods in Go are more general than in C++, Java: they can be defined for any sort of data, even built-in types such as plain, “unboxed” integers. They are not restricted to structs (classes).</p></blockquote>
+
+<p>We can therefore define methods/functions for any type of data,
+including &#8220;any/all&#8221; types.
+This approach to types is called <a href="http://en.wikipedia.org/wiki/Structural_type_system">structural typing</a>.</p>
 
 <p>Here is the code:</p>
 
