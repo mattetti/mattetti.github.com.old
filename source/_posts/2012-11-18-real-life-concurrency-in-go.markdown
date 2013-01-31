@@ -65,8 +65,12 @@ type HttpResponse struct {
 You can think of a struct type as a simple representation of a class. Technically, we are defining a structure with some typed attributes. We will later on, create instances of this defined type.
 
 Go implements OOP [slightly differently](http://golang.org/doc/go_faq.html#Is_Go_an_object-oriented_language) than other languages.
-Functions are defined on an interface, not a class or subclass.
-This is called [structural typing](http://en.wikipedia.org/wiki/Structural_type_system). 
+
+> Methods in Go are more general than in C++, Java: they can be defined for any sort of data, even built-in types such as plain, “unboxed” integers. They are not restricted to structs (classes).
+
+We can therefore define methods/functions for any type of data,
+including "any/all" types.
+This approach to types is called [structural typing](http://en.wikipedia.org/wiki/Structural_type_system). 
 
 Here is the code:
 
