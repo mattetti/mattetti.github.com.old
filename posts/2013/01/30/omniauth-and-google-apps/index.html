@@ -143,7 +143,7 @@ the OpenID library uses our certs to verify the SSL communications:</p>
 
 <p>(Obviously, you need to change the path to your own cert)</p>
 
-<p>We are almost with the setup, we just need two more things:</p>
+<p>We are almost done with the setup, we just need two more things:</p>
 
 <ul>
 <li>make sure you are using a session.</li>
@@ -151,7 +151,7 @@ the OpenID library uses our certs to verify the SSL communications:</p>
 </ul>
 
 
-<p>I&#8217;m using Sinatra, so I&#8217;ll load the <code>Rack::Session</code> middlware before I
+<p>I&#8217;m using Sinatra, so I&#8217;ll load the <code>Rack::Session</code> middleware before I
 set Omniauth:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -235,7 +235,7 @@ instance.</p>
 
 <p>On the landing page, you need to verify that the user is logged in, in
 this case, during the previous step, we added the email of the user to
-her session. We can therefore verify the presence if that information to
+her session. We can therefore verify the presence of that information to
 confirm the authentication status. If the user is authenticated, then we&#8217;ll render an ERB
 template otherwise we&#8217;ll redirect her back to the login page.</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: authentication | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/authentication/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2013-01-31T10:05:18-08:00</updated>
+  <updated>2013-01-31T10:14:39-08:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -66,7 +66,7 @@ OpenID.fetcher.ca_file = "/absolute/path/to/ssl_cacert.pem"
 </code>
 (Obviously, you need to change the path to your own cert)</p>
 
-<p>We are almost with the setup, we just need two more things:</p>
+<p>We are almost done with the setup, we just need two more things:</p>
 
 <ul>
 <li>make sure you are using a session.</li>
@@ -74,7 +74,7 @@ OpenID.fetcher.ca_file = "/absolute/path/to/ssl_cacert.pem"
 </ul>
 
 
-<p>I'm using Sinatra, so I'll load the <code>Rack::Session</code> middlware before I
+<p>I'm using Sinatra, so I'll load the <code>Rack::Session</code> middleware before I
 set Omniauth:</p>
 
 <p><code>ruby
@@ -149,7 +149,7 @@ end
 
 <p>On the landing page, you need to verify that the user is logged in, in
 this case, during the previous step, we added the email of the user to
-her session. We can therefore verify the presence if that information to
+her session. We can therefore verify the presence of that information to
 confirm the authentication status. If the user is authenticated, then we'll render an ERB
 template otherwise we'll redirect her back to the login page.</p>
 
