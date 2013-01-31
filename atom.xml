@@ -4,7 +4,7 @@
   <title><![CDATA[Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2013-01-31T09:56:15-08:00</updated>
+  <updated>2013-01-31T10:05:18-08:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -19,7 +19,7 @@
     <updated>2013-01-30T19:11:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2013/01/30/omniauth-and-google-apps</id>
     <content type="html"><![CDATA[<p>Today I struggled to get <a href="https://github.com/intridea/omniauth">OmniAuth</a> and <a href="https://developers.google.com/accounts/docs/OpenID">Google apps</a> to work properly together.
-I just wanted to add authentication to my application and restrict access to onl my Google Apps domain users.
+I just wanted to add authentication to my application and restrict access to only my Google Apps domain users.
 I was hoping it would be straight forward since I could use Google&#8217;s OpenID service.</p>
 
 <p>Turns out it wasn&#8217;t that hard, but the lack of documentation made me
