@@ -4,7 +4,7 @@
   <title><![CDATA[Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2012-11-27T21:02:16-08:00</updated>
+  <updated>2013-01-31T09:56:15-08:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -12,6 +12,204 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[OmniAuth and Google Apps]]></title>
+    <link href="http://matt.aimonetti.net/posts/2013/01/30/omniauth-and-google-apps/"/>
+    <updated>2013-01-30T19:11:00-08:00</updated>
+    <id>http://matt.aimonetti.net/posts/2013/01/30/omniauth-and-google-apps</id>
+    <content type="html"><![CDATA[<p>Today I struggled to get <a href="https://github.com/intridea/omniauth">OmniAuth</a> and <a href="https://developers.google.com/accounts/docs/OpenID">Google apps</a> to work properly together.
+I just wanted to add authentication to my application and restrict access to onl my Google Apps domain users.
+I was hoping it would be straight forward since I could use Google&#8217;s OpenID service.</p>
+
+<p>Turns out it wasn&#8217;t that hard, but the lack of documentation made me
+lost a couple hours.
+I therefore updated <a href="https://github.com/intridea/omniauth/wiki">OmniAuth&#8217;s wiki</a> and wrote this quick post so hopefully you won&#8217;t waste time looking for simple details.</p>
+
+<h2>Requirements</h2>
+
+<p>You actually only need to add 2 gems to your Gemfile:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;omniauth-openid&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;ruby-openid-apps-discovery&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, the second gem is the one I didn&#8217;t know about.
+The gem is actually provided by <a href="https://github.com/google/ruby-openid-apps-discovery">Google itself</a>. It turns out, Google Apps use a custom discovery protocol.
+They monkey patched the popular OpenID Ruby libraries so you can just drop in
+their gem and their discovery system will magically work.</p>
+
+<h2>Setup</h2>
+
+<p>You need to require 4 files to get everything setup properly:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;omniauth-openid&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;openid&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;openid/store/filesystem&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;gapps_openid&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The first one is the omniauth extension for OpenID, the second one is
+the main Ruby OpenID library (needed so we can set our SSL cert).
+The third one allows us to store temporary data on disk instead of
+keeping it in memory (optional).
+And finally, the last one is Google&#8217;s magical gem to get their discovery
+system working.</p>
+
+<p>Because we are going to communicate via SSL, we want to make sure that
+the OpenID library uses our certs to verify the SSL communications:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">OpenID</span><span class="o">.</span><span class="n">fetcher</span><span class="o">.</span><span class="n">ca_file</span> <span class="o">=</span> <span class="s2">&quot;/absolute/path/to/ssl_cacert.pem&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(Obviously, you need to change the path to your own cert)</p>
+
+<p>We are almost with the setup, we just need two more things:</p>
+
+<ul>
+<li>make sure you are using a session.</li>
+<li>setup OmniAuth</li>
+</ul>
+
+
+<p>I&#8217;m using Sinatra, so I&#8217;ll load the <code>Rack::Session</code> middlware before I
+set Omniauth:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">use</span> <span class="no">Rack</span><span class="o">::</span><span class="no">Session</span><span class="o">::</span><span class="no">Cookie</span><span class="p">,</span> <span class="ss">:secret</span> <span class="o">=&gt;</span> <span class="s1">&#39;supers3cr3t&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(Rails turns that option by default, so you don&#8217;t need to worry about
+it)</p>
+
+<p>Then I can finally setup OmniAuth:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">use</span> <span class="no">OmniAuth</span><span class="o">::</span><span class="no">Builder</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">provider</span> <span class="ss">:open_id</span><span class="p">,</span>  <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s1">&#39;admin&#39;</span><span class="p">,</span>
+</span><span class='line'>                      <span class="ss">:identifier</span> <span class="o">=&gt;</span> <span class="s1">&#39;https://www.google.com/accounts/o8/site-xrds?hd=aimonetti.net&#39;</span><span class="p">,</span>
+</span><span class='line'>                      <span class="ss">:store</span> <span class="o">=&gt;</span> <span class="no">OpenID</span><span class="o">::</span><span class="no">Store</span><span class="o">::</span><span class="no">Filesystem</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;/tmp&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are two important things to notice. First, because I set the
+provider&#8217;s name to be &#8216;admin&#8217;, the magical paths provided by OmiAuth
+will use that name (<code>/auth/admin</code>). Secondly, and more importantly, notice how I added
+the name of my Google Apps domain at the end of the identifier:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s1">&#39;https://www.google.com/accounts/o8/site-xrds?hd=&#39;</span> <span class="o">+</span> <span class="n">your_domain_name</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Sinatra</h2>
+
+<p>In Sinatra, your just need to define the routes OmniAuth would use (same
+goes for Rails, just use the router for that).</p>
+
+<p>By default, omniauth now offers you a <code>/auth/admin</code> endpoint that will
+push the user through Google Apps authentication.
+Once the authentication is over, the user will be redirected to the
+following endpoint:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Callback URL used when the authentication is done</span>
+</span><span class='line'><span class="n">post</span> <span class="s1">&#39;/auth/admin/callback&#39;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">auth_details</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;omniauth.auth&#39;</span><span class="o">]</span>
+</span><span class='line'>  <span class="n">session</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span> <span class="o">=</span> <span class="n">auth_details</span><span class="o">.</span><span class="n">info</span><span class="o">[</span><span class="s1">&#39;email&#39;</span><span class="o">]</span>
+</span><span class='line'>  <span class="n">redirect</span> <span class="s1">&#39;/auth/admin/welcome&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can access the authentication details from <code>request.env['omniauth.auth']</code>
+and redirect the user to another page, like the admin landing page for
+instance.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">get</span> <span class="s1">&#39;/auth/admin/welcome&#39;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">session</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span>
+</span><span class='line'>    <span class="n">erb</span> <span class="ss">:welcome_boss</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="n">redirect</span> <span class="s1">&#39;/auth/admin&#39;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>On the landing page, you need to verify that the user is logged in, in
+this case, during the previous step, we added the email of the user to
+her session. We can therefore verify the presence if that information to
+confirm the authentication status. If the user is authenticated, then we&#8217;ll render an ERB
+template otherwise we&#8217;ll redirect her back to the login page.</p>
+
+<p>We should also provide an endpoint in case the authentication failed:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">get</span> <span class="s1">&#39;/auth/failure&#39;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">params</span><span class="o">[</span><span class="ss">:message</span><span class="o">]</span>
+</span><span class='line'>  <span class="c1"># do whatever you want here.</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that by default, in dev mode, Omniauth won&#8217;t redirect the user
+there. To enable this behavior, use the following snippet (works with any rack app,
+Rails, Sinatra or whatever):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">OmniAuth</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">on_failure</span> <span class="o">=</span> <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="o">|</span><span class="n">env</span><span class="o">|</span>
+</span><span class='line'>  <span class="no">OmniAuth</span><span class="o">::</span><span class="no">FailureEndpoint</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">.</span><span class="n">redirect_to_failure</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Conclusion</h2>
+
+<p>Using Google Apps for authentication with OmniAuth is trivial as long
+you know two things:</p>
+
+<ul>
+<li>the identifier url: <code>'https://www.google.com/accounts/o8/site-xrds?hd=' + your_domain_name</code></li>
+<li>Google&#8217;s discovery service gem</li>
+</ul>
+
+
+<p>This blog post was written using <code>omniauth 1.1.1</code>, <code>omniauth-openid 1.0.1</code>, <code>rack-openid 1.3.1</code> and <code>ruby-openid-apps-discovery 1.2.0</code>. This might not apply to you if you come from the future :)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Real life concurrency in Go]]></title>
@@ -3288,101 +3486,6 @@ management works to get better performance out of your code.</p>
 <li><a href="http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained/">Concurrency in Ruby explained</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Data safety and GIL removal]]></title>
-    <link href="http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal/"/>
-    <updated>2011-10-18T15:19:17-07:00</updated>
-    <id>http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal</id>
-    <content type="html"><![CDATA[<p>After my recent <a href="http://rubyconf11.merbist.com">RubyConf talk</a> and <a href="http://merbist.com/2011/10/03/about-concurrency-and-the-gil/">follow up post addressing the Ruby &amp; Python&#8217;s Global Interpreter Lock</a> (aka GVL/Global VM Lock). a lot of people asked me to explain what I meant by &#8220;data safety&#8221;. While my point isn&#8217;t to defend one approach or the other, I spent a lot of time explaining why C Ruby and C Python use a GIL and where it matters and where it matters less. As a reminder and as mentioned by Matz himself, the main reason why C Ruby still has a GIL is data safety. But if this point isn&#8217;t clear to you, you might be missing the main argument supporting the use of a GIL.</p>
-
-<p>Showing obvious concrete examples of data corruption due to unsafe threaded code isn&#8217;t actually as easy at it sounds. First of all, even with a GIL, developers can write unsafe threaded code. So we need to focus only on the safety problems raised by removing the GIL. To demonstrate what I mean, I will try to create some race conditions and show you the unexpected results you might get. Again, before you go crazy on the comments, remember that threaded code is indeterministic and the code below might potentially work on your machine and that&#8217;s exactly why it is hard to demonstrate. Race conditions depend on many things, but in this case I will focus on race conditions affecting basic data structures since it might be the most surprising.</p>
-
-<h2>Example:</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@array</span><span class="p">,</span> <span class="n">threads</span> <span class="o">=</span> <span class="o">[]</span><span class="p">,</span> <span class="o">[]</span>
-</span><span class='line'><span class="mi">4</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">threads</span> <span class="o">&lt;&lt;</span> <span class="no">Thread</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">100_000</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span><span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="vi">@array</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">}</span> <span class="p">}</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="n">threads</span><span class="o">.</span><span class="n">each</span><span class="p">{</span><span class="o">|</span><span class="n">t</span><span class="o">|</span> <span class="n">t</span><span class="o">.</span><span class="n">join</span> <span class="p">}</span>
-</span><span class='line'><span class="nb">puts</span> <span class="vi">@array</span><span class="o">.</span><span class="n">size</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In the above example, I&#8217;m creating an instance variable of Array type and I start 4 threads. Each of these threads adds 100,000 items to the array. We then wait for all the threads to be done and check the size of the array.</p>
-
-<p>If you run this code in C Ruby the end result will be as expected:</p>
-
-<pre><code>400000
-</code></pre>
-
-<p>Now if you switch to JRuby you might be surprised by the output. If you are lucky you will see the following:</p>
-
-<pre><code>ConcurrencyError: Detected invalid array contents due to unsynchronized modifications with concurrent users
-        &lt;&lt; at org/jruby/RubyArray.java:1147
-  __file__ at demo.rb:3
-      each at org/jruby/RubyRange.java:407
-  __file__ at demo.rb:3
-      call at org/jruby/RubyProc.java:274
-      call at org/jruby/RubyProc.java:233
-</code></pre>
-
-<p>This is actually a good thing. JRuby detects that you are unsafely modifying an instance variable across threads and that data corruption will occur. However, the exception doesn&#8217;t always get raised and you will potentially see results such as:</p>
-
-<pre><code>335467
-342397
-341080
-</code></pre>
-
-<p>This is a sign that the data was corrupted but that JRuby didn&#8217;t catch the unsynchronized modification. On the other hand MacRuby and Rubinius 2 (dev) won&#8217;t raise any exceptions and will just corrupt the data, outputting something like:</p>
-
-<pre><code>294278
-285755
-280704
-279865
-</code></pre>
-
-<p>In other words, if not manually synchronized, shared data can easily be corrupted. You might have two threads modifying the value of the same variable and one of the two threads will step on top of the other leaving you with a race condition. You only need 2 threads accessing the same instance variable at the same time to get a race condition. My example uses more threads and more mutations to make the problem more obvious. Note that TDD wouldn&#8217;t catch such an issue and even extensive testing will provide very little guarantee that your code is thread safe.</p>
-
-<p> </p>
-
-<h2>So what? Thread safety isn&#8217;t a new problem.</h2>
-
-<p>That&#8217;s absolutely correct, ask any decent Java developer out there, he/she will tell how locks are used to &#8220;easily&#8221; synchronize objects to make your code thread safe. They might also mention the deadlocks and other issues related to that, but that&#8217;s a different story. One might also argue that when you write web apps, there is very little shared data and the chances of corrupting data across concurrent requests is very small since most of the data is kept in a shared data store outside of the process.</p>
-
-<p>All these arguments are absolutely valid, the challenge is that you have a large community and a large amount of code out there that expects a certain behavior. And removing the GIL does change this behavior. It might not be a big deal for you because you know how to deal with thread safety, but it might be a big deal for others and C Ruby is by far the most used Ruby implementation. It&#8217;s basically like saying that automatic cars shouldn&#8217;t be made and sold, and everybody has to switch to stick shifts. They have better gas mileage, I personally enjoy driving then and they are cheaper to build. Removing the GIL is a bit like that. There is a cost associated with this decision and while this cost isn&#8217;t insane, the people in charge prefer to not pay it.</p>
-
-<p> </p>
-
-<h2>Screw that, I&#8217;ll switch to Node.js</h2>
-
-<p>I heard a lot of people telling me they were looking into using Node.js because it has a better design and no GIL. While I like Node.js and if I were to implement a chat room or an app keeping connections for a long time, I would certainly compare it closely to EventMachine, I also think that this argument related to the GIL is absurd. First, you have other Ruby implementations which don&#8217;t have a GIL and are really stable (i.e: JRuby) but then Node basically works the same as Ruby with a GIL. Yes, Node is evented and single threaded but when you think about it, it behaves the same as Ruby 1.9 with its GIL. Many requests come in and they are handled one after the other and because IO requests are non-blocking, multiple requests can be processed concurrently but not in parallel. Well folks, that&#8217;s exactly how C Ruby works too, and unlike popular believe, most if not all the popular libraries making IO requests are non blocking (when using 1.9). So, next time you try to justify you wanting to toy with Node, please don&#8217;t use the GIL argument.</p>
-
-<p> </p>
-
-<h2>What should I do?</h2>
-
-<p>As always, evaluate your needs and see what makes sense for your project. Start by making sure you are using Ruby 1.9 and your code makes good use of threading. Then look at your app and how it behaves, is it CPU-bound or IO-bound. Most web apps out there are IO-bound (waiting for the DB, redis or API calls), and when doing an IO call, Ruby&#8217;s GIL is released allowing another thread to do its work. In that case, not having a GIL in your Ruby implementation won&#8217;t help you. However, if your app is CPU-bound, then switching to JRuby or Rubinius might be beneficial. However, don&#8217;t assume anything until you proved it and remember that making such a change will more than likely require some architectural redesign, especially if using JRuby.  But, hey, it might totally be worth it as many proved it in the past.</p>
-
-<p> </p>
-
-<p>I hope I was able to clarify things a bit further. If you wish to dig further, I would highly recommend you read the many discussions the Python community had in the last few years.</p>
-
-<p> </p>
-
-<p> </p>
-
-<p> </p>
-
-<p> </p>
 ]]></content>
   </entry>
   
