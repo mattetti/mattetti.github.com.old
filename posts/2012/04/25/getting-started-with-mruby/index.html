@@ -202,6 +202,43 @@ ever which makes mruby is a very attractive solution.</p>
 <span class='line-number'>14</span>
 <span class='line-number'>15</span>
 <span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdlib.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;stdio.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/* Include the mruby header */</span>
+</span><span class='line'><span class="cp">#include &lt;mruby.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;mruby/compile.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">mrb_state</span> <span class="o">*</span><span class="n">mrb</span> <span class="o">=</span> <span class="n">mrb_open</span><span class="p">();</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="n">code</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;p &#39;hello world!&#39;&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Executing Ruby code with mruby!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">mrb_load_string</span><span class="p">(</span><span class="n">mrb</span><span class="p">,</span> <span class="n">code</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Or the longer/more complex version:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
@@ -215,14 +252,13 @@ ever which makes mruby is a very attractive solution.</p>
 </pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdlib.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;stdio.h&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="cp">/* Include the mruby headers */</span>
+</span><span class='line'><span class="cm">/* Include the mruby headers */</span>
 </span><span class='line'><span class="cp">#include &lt;mruby.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;mruby/proc.h&gt;</span>
 </span><span class='line'><span class="cp">#include &lt;mruby/data.h&gt;</span>
-</span><span class='line'><span class="cp">// eventually to be replaced by #include &lt;mruby/compile.h&gt;</span>
-</span><span class='line'><span class="cp">#include &lt;compile.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;mruby/compile.h&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
 </span><span class='line'><span class="p">{</span>
 </span><span class='line'>  <span class="k">struct</span> <span class="n">mrb_parser_state</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
 </span><span class='line'>  <span class="n">mrb_state</span> <span class="o">*</span><span class="n">mrb</span> <span class="o">=</span> <span class="n">mrb_open</span><span class="p">();</span>
@@ -231,17 +267,34 @@ ever which makes mruby is a very attractive solution.</p>
 </span><span class='line'>
 </span><span class='line'>  <span class="n">p</span> <span class="o">=</span> <span class="n">mrb_parse_string</span><span class="p">(</span><span class="n">mrb</span><span class="p">,</span> <span class="n">code</span><span class="p">);</span>
 </span><span class='line'>  <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">n</span> <span class="o">=</span> <span class="n">mrb_generate_code</span><span class="p">(</span><span class="n">mrb</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">tree</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">n</span> <span class="o">=</span> <span class="n">mrb_generate_code</span><span class="p">(</span><span class="n">mrb</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
 </span><span class='line'>  <span class="n">mrb_run</span><span class="p">(</span><span class="n">mrb</span><span class="p">,</span> <span class="n">mrb_proc_new</span><span class="p">(</span><span class="n">mrb</span><span class="p">,</span> <span class="n">mrb</span><span class="o">-&gt;</span><span class="n">irep</span><span class="p">[</span><span class="n">n</span><span class="p">]),</span> <span class="n">mrb_top_self</span><span class="p">(</span><span class="n">mrb</span><span class="p">));</span>
 </span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">mrb</span><span class="o">-&gt;</span><span class="n">exc</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>   <span class="n">mrb_p</span><span class="p">(</span><span class="n">mrb</span><span class="p">,</span> <span class="n">mrb_obj_value</span><span class="p">(</span><span class="n">mrb</span><span class="o">-&gt;</span><span class="n">exc</span><span class="p">));</span>
+</span><span class='line'>      <span class="n">mrb_p</span><span class="p">(</span><span class="n">mrb</span><span class="p">,</span> <span class="n">mrb_obj_value</span><span class="p">(</span><span class="n">mrb</span><span class="o">-&gt;</span><span class="n">exc</span><span class="p">));</span>
 </span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>This <a href="https://github.com/mattetti/mruby/tree/samples/samples/helloWorld">sample code</a> is available on my <a href="https://github.com/mattetti">GitHub repo</a> and can be compiled by using <code>make</code> (see the <a href="https://github.com/mattetti/mruby/blob/samples/samples/helloWorld/Makefile">Makefile here</a>).</p>
+<p>To compile and link the code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="err">$</span> <span class="n">gcc</span> <span class="o">-</span><span class="n">Iinclude</span> <span class="n">hello</span><span class="p">.</span><span class="n">c</span> <span class="n">lib</span><span class="o">/</span><span class="n">libmruby</span><span class="p">.</span><span class="n">a</span> <span class="o">-</span><span class="n">lm</span> <span class="o">-</span><span class="n">o</span> <span class="n">hello</span><span class="p">.</span><span class="n">out</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To execute it:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="err">$</span> <span class="p">.</span><span class="o">/</span><span class="n">hello</span><span class="p">.</span><span class="n">out</span>
+</span><span class='line'><span class="n">Executing</span> <span class="n">Ruby</span> <span class="n">code</span> <span class="n">with</span> <span class="n">mruby</span><span class="o">!</span>
+</span><span class='line'><span class="s">&quot;hello world!&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>To get started, you just need the <a href="https://github.com/mruby/mruby">mruby source code</a> and a compiler. (I haven&#8217;t tried to compile mruby or my sample on Windows for this code, but I assume it would work just fine with Visual C++).</p>
 
@@ -423,7 +476,7 @@ main(int argc, char **argv)
 
 <h2>Future</h2>
 
-<p>It&#8217;s a bit too early to know if mruby will be succesful or not. There are few things I will keep my
+<p>It&#8217;s a bit too early to know if mruby will be successful or not. There are few things I will keep my
 eyes on.</p>
 
 <h3>Performance</h3>
