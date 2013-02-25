@@ -9,7 +9,7 @@ categories:
 ---
 
 Today I struggled to get [OmniAuth](https://github.com/intridea/omniauth) and [Google apps](https://developers.google.com/accounts/docs/OpenID) to work properly together.
-I just wanted to add authentication to my application and restrict access to onl my Google Apps domain users.
+I just wanted to add authentication to my application and restrict access to only my Google Apps domain users.
 I was hoping it would be straight forward since I could use Google's OpenID service.
 
 Turns out it wasn't that hard, but the lack of documentation made me
@@ -56,12 +56,12 @@ OpenID.fetcher.ca_file = "/absolute/path/to/ssl_cacert.pem"
 ```
 (Obviously, you need to change the path to your own cert)
 
-We are almost with the setup, we just need two more things:
+We are almost done with the setup, we just need two more things:
 
 * make sure you are using a session.
 * setup OmniAuth
 
-I'm using Sinatra, so I'll load the `Rack::Session` middlware before I
+I'm using Sinatra, so I'll load the `Rack::Session` middleware before I
 set Omniauth:
 
 ```ruby
@@ -125,7 +125,7 @@ end
 
 On the landing page, you need to verify that the user is logged in, in
 this case, during the previous step, we added the email of the user to
-her session. We can therefore verify the presence if that information to
+her session. We can therefore verify the presence of that information to
 confirm the authentication status. If the user is authenticated, then we'll render an ERB
 template otherwise we'll redirect her back to the login page.
 

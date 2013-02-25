@@ -108,14 +108,34 @@ I wrote a simple hello world example to give you a place to start:
 #include <stdlib.h>
 #include <stdio.h>
 
+/* Include the mruby header */
+#include <mruby.h>
+#include <mruby/compile.h>
+
+int main(void)
+{
+  mrb_state *mrb = mrb_open();
+  char code[] = "p 'hello world!'";
+  printf("Executing Ruby code with mruby!\n");
+
+  mrb_load_string(mrb, code);
+  return 0;
+}
+```
+
+Or the longer/more complex version:
+
+```c
+#include <stdlib.h>
+#include <stdio.h>
+
 /* Include the mruby headers */
 #include <mruby.h>
 #include <mruby/proc.h>
 #include <mruby/data.h>
-// eventually to be replaced by #include <mruby/compile.h>
-#include <compile.h>
+#include <mruby/compile.h>
 
-int main(void)
+int main(int argc, const char * argv[])
 {
   struct mrb_parser_state *p;
   mrb_state *mrb = mrb_open();
@@ -124,15 +144,30 @@ int main(void)
 
   p = mrb_parse_string(mrb, code);
   int n;
-  n = mrb_generate_code(mrb, p->tree);
+  n = mrb_generate_code(mrb, p);
   mrb_run(mrb, mrb_proc_new(mrb, mrb->irep[n]), mrb_top_self(mrb));
   if (mrb->exc) {
-   mrb_p(mrb, mrb_obj_value(mrb->exc));
+      mrb_p(mrb, mrb_obj_value(mrb->exc));
   }
-  return 0;
+    
+    return 0;
 }
 ```
-This [sample code](https://github.com/mattetti/mruby/tree/samples/samples/helloWorld) is available on my [GitHub repo](https://github.com/mattetti) and can be compiled by using `make` (see the [Makefile here](https://github.com/mattetti/mruby/blob/samples/samples/helloWorld/Makefile)).
+
+To compile and link the code:
+
+```
+$ gcc -Iinclude hello.c lib/libmruby.a -lm -o hello.out
+```
+
+To execute it:
+
+```
+$ ./hello.out
+Executing Ruby code with mruby!
+"hello world!"
+```
+
 
 To get started, you just need the [mruby source code](https://github.com/mruby/mruby) and a compiler. (I haven't tried to compile mruby or my sample on Windows for this code, but I assume it would work just fine with Visual C++).
 
@@ -152,7 +187,7 @@ interpreter](https://github.com/mruby/mruby/blob/master/tools/mruby/mruby.c)
 
 ## Future
 
-It's a bit too early to know if mruby will be succesful or not. There are few things I will keep my
+It's a bit too early to know if mruby will be successful or not. There are few things I will keep my
 eyes on.
 
 ### Performance
