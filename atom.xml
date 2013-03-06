@@ -4,7 +4,7 @@
   <title><![CDATA[Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2013-03-06T13:34:46-08:00</updated>
+  <updated>2013-03-06T13:37:22-08:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -18,7 +18,7 @@
     <link href="http://matt.aimonetti.net/posts/2013/03/05/inspecting-rails-4-request-dispatch-using-ruby-2-dot-0/"/>
     <updated>2013-03-05T22:18:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2013/03/05/inspecting-rails-4-request-dispatch-using-ruby-2-dot-0</id>
-    <content type="html"><![CDATA[<p>Ruby 2.0 has a new cool feature that not a lot of people talk about:
+    <content type="html"><![CDATA[<p>Ruby 2.0 has a cool new feature that many people talk about:
 <a href="http://ruby-doc.org/core-2.0/TracePoint.html">TracePoint</a>.</p>
 
 <p><code>TracePoint</code> essentially allows you to hook into Ruby&#8217;s events and
@@ -188,7 +188,7 @@ tools being developed (production dead-code analyzer, deprecation code path
 finder anyone?)</p>
 
 <p>To end, this short post, here is an interesting quote from <a href="http://chadfowler.com/">Chad
-Fowler</a> Berliner of adoption:</p>
+Fowler</a> Berliner by adoption:</p>
 
 <blockquote><p>Abstractions are expensive. The cost increases exponentially as you add them to a codebase.
 <a href="https://twitter.com/chadfowler/status/308959527217270786">Chad Fowler</a></p></blockquote>
