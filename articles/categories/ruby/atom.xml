@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/ruby/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2013-03-06T08:49:27-08:00</updated>
+  <updated>2013-03-06T13:34:46-08:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -18,7 +18,7 @@
     <link href="http://matt.aimonetti.net/posts/2013/03/05/inspecting-rails-4-request-dispatch-using-ruby-2-dot-0/"/>
     <updated>2013-03-05T22:18:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2013/03/05/inspecting-rails-4-request-dispatch-using-ruby-2-dot-0</id>
-    <content type="html"><![CDATA[<p>Ruby 2.0 has a new cool feature that not a lot of people talked about:
+    <content type="html"><![CDATA[<p>Ruby 2.0 has a new cool feature that not a lot of people talk about:
 <a href="http://ruby-doc.org/core-2.0/TracePoint.html">TracePoint</a>.</p>
 
 <p><code>TracePoint</code> essentially allows you to hook into Ruby's events and
