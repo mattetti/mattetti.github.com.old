@@ -911,31 +911,37 @@
         <lastmod>2013-01-31T10:14:31-08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://matt.aimonetti.net/posts/2013/03/05/inspecting-rails-4-request-dispatch-using-ruby-2-dot-0/
+        </loc>
+        <lastmod>2013-03-05T23:29:51-08:00</lastmod>
+    </url>
+    <url>
         <loc>http://matt.aimonetti.net/404.html</loc>
         <lastmod>2012-04-17T15:29:16-07:00</lastmod>
     </url>
     <url>
         <loc>http://matt.aimonetti.net/about/</loc>
-        <lastmod>2013-02-24T23:42:22-08:00</lastmod>
+        <lastmod>2013-03-05T23:29:51-08:00</lastmod>
     </url>
     <url>
         <loc>http://matt.aimonetti.net/</loc>
-        <lastmod>2013-02-24T23:42:22-08:00</lastmod>
+        <lastmod>2013-03-05T23:29:51-08:00</lastmod>
     </url>
     <url>
         <loc>http://matt.aimonetti.net/matt-aimonetti/</loc>
-        <lastmod>2013-02-24T23:42:22-08:00</lastmod>
+        <lastmod>2013-03-05T23:29:51-08:00</lastmod>
     </url>
     <url>
         <loc>http://matt.aimonetti.net/matt_aimonetti/</loc>
-        <lastmod>2013-02-24T23:42:22-08:00</lastmod>
+        <lastmod>2013-03-05T23:29:51-08:00</lastmod>
     </url>
     <url>
         <loc>http://matt.aimonetti.net/posts/archives/</loc>
-        <lastmod>2013-02-24T23:42:22-08:00</lastmod>
+        <lastmod>2013-03-05T23:29:51-08:00</lastmod>
     </url>
     <url>
         <loc>http://matt.aimonetti.net/search/</loc>
-        <lastmod>2013-02-24T23:42:22-08:00</lastmod>
+        <lastmod>2013-03-05T23:29:51-08:00</lastmod>
     </url>
 </urlset>

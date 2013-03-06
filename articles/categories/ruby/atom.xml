@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/ruby/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2013-02-24T23:42:35-08:00</updated>
+  <updated>2013-03-06T08:46:37-08:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -12,6 +12,131 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Inspecting Rails 4 request dispatch using Ruby 2.0]]></title>
+    <link href="http://matt.aimonetti.net/posts/2013/03/05/inspecting-rails-4-request-dispatch-using-ruby-2-dot-0/"/>
+    <updated>2013-03-05T22:18:00-08:00</updated>
+    <id>http://matt.aimonetti.net/posts/2013/03/05/inspecting-rails-4-request-dispatch-using-ruby-2-dot-0</id>
+    <content type="html"><![CDATA[<p>Ruby 2.0 has a new cool feature that not a lot of people talked about:
+<a href="http://ruby-doc.org/core-2.0/TracePoint.html">TracePoint</a>.</p>
+
+<p><code>TracePoint</code> essentially allows you to hook into Ruby's events and
+listen for events.</p>
+
+<p>Being curious and since I just started a brand new Rails 4/Ruby 2 app, I
+decided to write a little middleware and see what Rails is up to when
+handling incoming requests.</p>
+
+<p>Here is my <a href="https://gist.github.com/mattetti/5097206">TracePoint Rack Middleware</a>.</p>
+
+<p>```ruby
+class TracePoint
+  class Middleware</p>
+
+<pre><code>def initialize(app)
+  @app = app
+end
+
+def call(env)
+  stats = {}
+  trace = TracePoint.new(:call) do |tp|
+    stats[tp.defined_class] ||= {}
+    stats[tp.defined_class][tp.method_id] ||= 0
+    stats[tp.defined_class][tp.method_id] += 1
+  end
+  trace.enable
+  response = @app.call(env)
+  trace.disable
+
+  puts "#{stats.keys.size} classes used"
+  puts "#{stats.map{|k,v| v.keys}.flatten.size} methods used"
+  puts "#{stats.map{|k,v| v.values}.flatten.sum} methods dispatched"
+  response
+end
+</code></pre>
+
+<p>  end
+end
+```
+(the gist shows a modified version so I could dump to disk the json
+representation of the calls)</p>
+
+<p>I then inserted the middleware in Rails:</p>
+
+<p>```ruby</p>
+
+<h1>in application.rb</h1>
+
+<p>config.middleware.insert_before(ActionDispatch::Static, TracePoint::Middleware)
+```</p>
+
+<p>I saved the output in json format for the curious: <a href="https://gist.github.com/mattetti/5097178">click here</a></p>
+
+<p>On average, in production mode, using Ruby 2.0 and Puma on my laptop, my hello world index page takes 5ms.</p>
+
+<p>To render my page, Rails uses (more or less):</p>
+
+<ul>
+<li>250 classes</li>
+<li>750 methods (not including C functions)</li>
+<li>and dispatches 2704 methods (not including calls to C functions)</li>
+</ul>
+
+
+<p>Here is a small selection of some of the methods dispatched:</p>
+
+<p>```json
+"String": {</p>
+
+<pre><code>"underscore": 1,
+"blank?": 14,
+"html_safe": 78
+</code></pre>
+
+<p>  },
+"ActiveSupport::Inflector": {
+  "underscore": 2,
+  "inflections": 2
+},
+"Hash": {
+  "with_indifferent_access": 2,
+  "except": 1,
+  "except!": 1,
+  "stringify_keys": 5,
+  "transform_keys": 13,
+  "stringify_keys!": 1,
+  "transform_keys!": 3,
+  "extractable_options?": 4,
+  "extract!": 2,
+  "symbolize_keys": 8,
+  "reverse_merge": 1,
+  "slice": 2,
+  "symbolize_keys!": 2
+},
+"ActionView::CompiledTemplates": {
+  "<em>app_views_welcome_index_html_erb__4177595130715791755_70209827438920": 1,
+  "</em>app_views_layouts_application_html_erb___652124533295419796_70209827456500": 1
+},
+"ActiveSupport::Notifications::Fanout": {
+  "start": 4,
+  "listeners_for": 12,
+  "listening?": 5,
+  "finish": 3
+}
+```</p>
+
+<p><code>TracePoint</code> is a great new addition and I hope to see some new crazy
+tools being developed (production dead-code analyzer, deprecation code path
+finder anyone?)</p>
+
+<p>To end, this short post, here is an interesting quote from <a href="http://chadfowler.com/">Chad
+Fowler</a> Berliner of adoption:</p>
+
+<blockquote><p>Abstractions are expensive. The cost increases exponentially as you add them to a codebase.
+<a href="https://twitter.com/chadfowler/status/308959527217270786">Chad Fowler</a></p></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby constructs: class, module and mixin]]></title>

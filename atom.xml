@@ -4,7 +4,7 @@
   <title><![CDATA[Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2013-02-24T23:42:35-08:00</updated>
+  <updated>2013-03-06T08:46:37-08:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -12,6 +12,188 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Inspecting Rails 4 request dispatch using Ruby 2.0]]></title>
+    <link href="http://matt.aimonetti.net/posts/2013/03/05/inspecting-rails-4-request-dispatch-using-ruby-2-dot-0/"/>
+    <updated>2013-03-05T22:18:00-08:00</updated>
+    <id>http://matt.aimonetti.net/posts/2013/03/05/inspecting-rails-4-request-dispatch-using-ruby-2-dot-0</id>
+    <content type="html"><![CDATA[<p>Ruby 2.0 has a new cool feature that not a lot of people talked about:
+<a href="http://ruby-doc.org/core-2.0/TracePoint.html">TracePoint</a>.</p>
+
+<p><code>TracePoint</code> essentially allows you to hook into Ruby&#8217;s events and
+listen for events.</p>
+
+<p>Being curious and since I just started a brand new Rails 4/Ruby 2 app, I
+decided to write a little middleware and see what Rails is up to when
+handling incoming requests.</p>
+
+<p>Here is my <a href="https://gist.github.com/mattetti/5097206">TracePoint Rack Middleware</a>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">TracePoint</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">Middleware</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</span><span class='line'>      <span class="vi">@app</span> <span class="o">=</span> <span class="n">app</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">stats</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>      <span class="n">trace</span> <span class="o">=</span> <span class="no">TracePoint</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:call</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">tp</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">stats</span><span class="o">[</span><span class="n">tp</span><span class="o">.</span><span class="n">defined_class</span><span class="o">]</span> <span class="o">||=</span> <span class="p">{}</span>
+</span><span class='line'>        <span class="n">stats</span><span class="o">[</span><span class="n">tp</span><span class="o">.</span><span class="n">defined_class</span><span class="o">][</span><span class="n">tp</span><span class="o">.</span><span class="n">method_id</span><span class="o">]</span> <span class="o">||=</span> <span class="mi">0</span>
+</span><span class='line'>        <span class="n">stats</span><span class="o">[</span><span class="n">tp</span><span class="o">.</span><span class="n">defined_class</span><span class="o">][</span><span class="n">tp</span><span class="o">.</span><span class="n">method_id</span><span class="o">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">trace</span><span class="o">.</span><span class="n">enable</span>
+</span><span class='line'>      <span class="n">response</span> <span class="o">=</span> <span class="vi">@app</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">trace</span><span class="o">.</span><span class="n">disable</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">stats</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2"> classes used&quot;</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">stats</span><span class="o">.</span><span class="n">map</span><span class="p">{</span><span class="o">|</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="o">|</span> <span class="n">v</span><span class="o">.</span><span class="n">keys</span><span class="si">}</span><span class="s2">.flatten.size} methods used&quot;</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">stats</span><span class="o">.</span><span class="n">map</span><span class="p">{</span><span class="o">|</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="o">|</span> <span class="n">v</span><span class="o">.</span><span class="n">values</span><span class="si">}</span><span class="s2">.flatten.sum} methods dispatched&quot;</span>
+</span><span class='line'>      <span class="n">response</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(the gist shows a modified version so I could dump to disk the json
+representation of the calls)</p>
+
+<p>I then inserted the middleware in Rails:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># in application.rb</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">middleware</span><span class="o">.</span><span class="n">insert_before</span><span class="p">(</span><span class="no">ActionDispatch</span><span class="o">::</span><span class="no">Static</span><span class="p">,</span> <span class="no">TracePoint</span><span class="o">::</span><span class="no">Middleware</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I saved the output in json format for the curious: <a href="https://gist.github.com/mattetti/5097178">click here</a></p>
+
+<p>On average, in production mode, using Ruby 2.0 and Puma on my laptop, my hello world index page takes 5ms.</p>
+
+<p>To render my page, Rails uses (more or less):</p>
+
+<ul>
+<li>250 classes</li>
+<li>750 methods (not including C functions)</li>
+<li>and dispatches 2704 methods (not including calls to C functions)</li>
+</ul>
+
+
+<p>Here is a small selection of some of the methods dispatched:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="s2">&quot;String&quot;</span><span class="err">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nt">&quot;underscore&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;blank?&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;html_safe&quot;</span><span class="p">:</span> <span class="mi">78</span>
+</span><span class='line'>  <span class="p">}</span><span class="err">,</span>
+</span><span class='line'><span class="s2">&quot;ActiveSupport::Inflector&quot;</span><span class="err">:</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;underscore&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;inflections&quot;</span><span class="p">:</span> <span class="mi">2</span>
+</span><span class='line'><span class="p">}</span><span class="err">,</span>
+</span><span class='line'><span class="s2">&quot;Hash&quot;</span><span class="err">:</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;with_indifferent_access&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;except&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;except!&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;stringify_keys&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;transform_keys&quot;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;stringify_keys!&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;transform_keys!&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;extractable_options?&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;extract!&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;symbolize_keys&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;reverse_merge&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;slice&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;symbolize_keys!&quot;</span><span class="p">:</span> <span class="mi">2</span>
+</span><span class='line'><span class="p">}</span><span class="err">,</span>
+</span><span class='line'><span class="s2">&quot;ActionView::CompiledTemplates&quot;</span><span class="err">:</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;_app_views_welcome_index_html_erb__4177595130715791755_70209827438920&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;_app_views_layouts_application_html_erb___652124533295419796_70209827456500&quot;</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'><span class="p">}</span><span class="err">,</span>
+</span><span class='line'><span class="s2">&quot;ActiveSupport::Notifications::Fanout&quot;</span><span class="err">:</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;start&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;listeners_for&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;listening?&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;finish&quot;</span><span class="p">:</span> <span class="mi">3</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>TracePoint</code> is a great new addition and I hope to see some new crazy
+tools being developed (production dead-code analyzer, deprecation code path
+finder anyone?)</p>
+
+<p>To end, this short post, here is an interesting quote from <a href="http://chadfowler.com/">Chad
+Fowler</a> Berliner of adoption:</p>
+
+<blockquote><p>Abstractions are expensive. The cost increases exponentially as you add them to a codebase.
+<a href="https://twitter.com/chadfowler/status/308959527217270786">Chad Fowler</a></p></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[OmniAuth and Google Apps]]></title>
@@ -3331,52 +3513,6 @@ Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
 <p> </p>
 
 <p>On a related topic, Chad Fowler posted an interesting <a href="http://chadfowler.com/2011/12/21/re-thinking-software-development-education">blog post about what LivingSocial is doing to change the software development education</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[RubyConf Argentina 2011 - Inside Ruby]]></title>
-    <link href="http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011/"/>
-    <updated>2011-11-08T15:42:00-08:00</updated>
-    <id>http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011</id>
-    <content type="html"><![CDATA[<p>During <a href="http://rubyconfargentina.org/en">RubyConf Argentina 2011</a> in Buenos Aires, Argentina Matt
-Aimonetti gave a talk entitled <em>Inside Ruby: concurrency &amp; garbage collection explained</em>.</p>
-
-<h2>Description of the talk:</h2>
-
-<p>Concurrency in Ruby and Python implementations is quite a hot topic
-nowadays. In this talk, Matt will explain how concurrency works for a
-language that uses a Global Interpreter Lock and it means concretely.
-Finally Aimonetti will also cover Ruby&#8217;s garbage collector (GC)
-and why it&#8217;s important to understand how automatic memory
-management works to get better performance out of your code.</p>
-
-<h2>Slides</h2>
-
-<p><a href="http://rubyconfar.merbist.com/"><img src="http://matt.aimonetti.net/images/Matt_Aimonetti_-_RubyConf_Argentina_2011.jpg" alt="Matt Aimonetti's slides of his RubyConf Argentina presentation" /></a>
-<a href="http://rubyconfar.merbist.com/">The HTML5 slides can be seen online</a>.</p>
-
-<h2>Video</h2>
-
-<div class="video-container">
-<iframe src="http://player.vimeo.com/video/38531248?title=0&amp;byline=0&amp;portrait=0" width="600" height="500" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe><p><a href="http://vimeo.com/38531248">Matt Aimonetti - Inside Ruby: concurrency & garbage collection explained</a> from <a href="http://vimeo.com/rubyargentina">Ruby Argentina</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
-</div>
-
-
-<p><a href="http://vimeo.com/38531248">Vimeo page of the presentation</a></p>
-
-<h2>Presentation website</h2>
-
-<p>Matt&#8217;s presentation was filmed by <a href="http://rubyconfigargentina.org/">RubyConf Argentina</a> and posted <a href="http://vimeo.com/38531248">here</a>.</p>
-
-<h2>Matt&#8217;s articles related to this presentation</h2>
-
-<ul>
-<li><a href="http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil/">About concurrency and the GIL</a></li>
-<li><a href="http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal/">Data safety and GIL removal</a></li>
-<li><a href="http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained/">Concurrency in Ruby explained</a></li>
-</ul>
-
 ]]></content>
   </entry>
   
