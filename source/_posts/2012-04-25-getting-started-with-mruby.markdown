@@ -182,8 +182,6 @@ same platform and the code will run fine, just like normal C code.
 For a more complete example, take a look at the [mruby's standalone
 interpreter](https://github.com/mruby/mruby/blob/master/tools/mruby/mruby.c)
 
-{% gist 2489553 %}
-
 
 ## Future
 
