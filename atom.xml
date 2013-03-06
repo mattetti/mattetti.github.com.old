@@ -4,7 +4,7 @@
   <title><![CDATA[Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2013-03-06T08:46:37-08:00</updated>
+  <updated>2013-03-06T08:49:27-08:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Inspecting Rails 4 request dispatch using Ruby 2.0]]></title>
+    <title type="html"><![CDATA[Inspecting Rails 4 using Ruby 2.0]]></title>
     <link href="http://matt.aimonetti.net/posts/2013/03/05/inspecting-rails-4-request-dispatch-using-ruby-2-dot-0/"/>
     <updated>2013-03-05T22:18:00-08:00</updated>
     <id>http://matt.aimonetti.net/posts/2013/03/05/inspecting-rails-4-request-dispatch-using-ruby-2-dot-0</id>
