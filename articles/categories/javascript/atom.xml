@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaScript | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/javascript/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2013-03-06T13:37:22-08:00</updated>
+  <updated>2013-03-09T08:58:36-08:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -76,8 +76,17 @@ languages:</p>
 
 <p>As you can see, the real strength of HTTP caching is the fact that it's a conditional caching. It's based on the request's URL and some "flags" set in the request/response headers.</p>
 
-<p>Setting these conditions in your app is actually very simple since you just need to set the response's headers. If you are using a Ruby framework you will more than likely have access to the request object via the "request" method and you can set the headers directly like that: "response.headers['Cache-Control'] = 'public, max-age=60'".
-In Rails, you can actually use a helper method instead: expires_in 1.minute, :public => true.</p>
+<p>Setting these conditions in your app is actually very simple since you just need to set the response's headers. If you are using a Ruby framework you will more than likely have access to the request object via the "request" method and you can set the headers directly like that:</p>
+
+<p><code>ruby
+response.headers['Cache-Control'] = 'public, max-age=60'
+</code></p>
+
+<p>In Rails, you can actually use a helper method instead:</p>
+
+<p><code>ruby
+expires_in 1.minute, :public =&gt; true.
+</code></p>
 
 <p>You might have a case where you HAVE TO serve fresh content if available and can't serve stale cached content even for a few seconds. In this case, you can rely on the Etag header value. The Etag is meant to validate the freshness of a cached response. Think of it as a signature (unique ID) that is set on the response and used by the client (or cache layer) to see if the server response has changed or not. The way it works is that the client keeps track of the Etag received for each request (attached to the cached response) and then sends it with the next requests. The HTTP layer or application sees the Etag in the request and can check if it is still valid and the content didn't change. If that's the case, an empty response can be sent with a special HTTP status code (304) to let know the client that the old cached value is still good to be used.  Rails has a helper called "stale?" that helps you do the Etag/last modified check and allows you to not fetch all the objects from the database by doing a cheap check on an attribute (For instance you can check the updated_at value and use that as a condition to pull an object and its relationships).</p>
 
@@ -85,7 +94,7 @@ In Rails, you can actually use a helper method instead: expires_in 1.minute, :pu
 
 <p>Let's stay on CinemaTreasures, when you're logged in, the username is shown on the top of each page:</p>
 
-<p>[caption id="" align="aligncenter" width="574" caption="Once logged in, the username is displayed on all pages"]<img src="https://img.skitch.com/20110710-mh5tqxuw1txf9kppn1smkkarrs.jpg" alt="" />[/caption]</p>
+<p><img src="https://img.skitch.com/20110710-mh5tqxuw1txf9kppn1smkkarrs.jpg" title="Once logged in, the username is displayed on all pages" alt="Once logged in, the username is displayed on all pages" /></p>
 
 <p>The only things that differs from the page rendered when the user is not logged in and when he is, are these 2 links and an avatar. So let's write some code to inject that after rendering the page.</p>
 
