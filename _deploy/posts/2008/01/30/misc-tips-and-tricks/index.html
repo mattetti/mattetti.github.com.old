@@ -1,0 +1,365 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Misc tips and tricks - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Misc Tips and Tricks I haven&#8217;t posted for quite a long time. The thing is I moved to a new place and I&#8217;m really busy on working clients + setting up my new &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2008/01/30/misc-tips-and-tricks/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <a href='/about/'><img class="photo left" title='About Matt Aimonetti'
+      alt='Photo of Matt Aimonetti' src="/images/matt_aimonetti.jpg" /></a>
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left bio-summary'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Tech Lead</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/posts/archives/">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <div id="cse-search-form">Loading</div>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/">Home</a></li>
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/about/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Misc Tips and Tricks</h1>
+    <div class="entry"><p>I haven&#8217;t posted for quite a long time. The thing is I moved to a new place and I&#8217;m really busy on working clients + setting up my new office + dealing with way too much paperwork.</p>
+
+<p>Anyway, enough excuses, here are few tips that I believe will be useful to some of you:</p>
+
+<h2><a href="http://www.zenspider.com/ZSS/Products/ZenTest/">ZenTest Autotest</a></h2>
+
+<p>I love autotest, but you might have noticed that sometimes (especially on big projects), ZenTest might start using more CPU than expected. On my machine, that results in the fan going off and annoying the crap out of me.</p>
+
+<p>The solution is quite simple, exclude all folders you don&#8217;t need to monitor. To do that, update ZenTest to version 3.8.X</p>
+
+<pre><code>&lt;code&gt;sudo gem update ZenTest
+&lt;/code&gt;
+</code></pre>
+
+<p>(older version had a different syntax)</p>
+
+<p>Now, edit your .autotest that should be located in ~/.autotest  (if it doesn&#8217;t exist, create it).</p>
+
+<p>Finally add the following code:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="co"&gt;Autotest&lt;/span&gt;.add_hook &lt;span class="sy"&gt;:initialize&lt;/span&gt; &lt;span class="r"&gt;do&lt;/span&gt; |at|&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="s"&gt;&lt;span class="dl"&gt;%w{&lt;/span&gt;&lt;span class="k"&gt;.svn .hg .git vendor&lt;/span&gt;&lt;span class="dl"&gt;}&lt;/span&gt;&lt;/span&gt;.each {|exception| at.add_exception(exception)}&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;
+</code></pre>
+
+<p>I personally freeze rails in vendor and I autotest is way happier when it doesn&#8217;t have to monitor some extra files. (note that we also exclude folders such as .git or .svn)
+(you can also include files etc&#8230; read more <a href="http://blog.davidchelimsky.net/articles/2008/01/15/rspec-1-1-2-and-zentest-3-8-0">there</a>)</p>
+
+<h2><a href="http://rspec.info">RSpec</a></h2>
+
+<p>RSpec is certainly my favorite Ruby tool and I&#8217;m glad to say that most of my <a href="http://sdruby.com/">SD.rb</a> friends finally got convinced!</p>
+
+<p>Now, few people complained to me about spec failures outputting the full stack such as:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;8&lt;tt&gt;
+&lt;/tt&gt;9&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;10&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;11&lt;tt&gt;
+&lt;/tt&gt;12&lt;tt&gt;
+&lt;/tt&gt;13&lt;tt&gt;
+&lt;/tt&gt;14&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;15&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;16&lt;tt&gt;
+&lt;/tt&gt;17&lt;tt&gt;
+&lt;/tt&gt;18&lt;tt&gt;
+&lt;/tt&gt;19&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;20&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;21&lt;tt&gt;
+&lt;/tt&gt;22&lt;tt&gt;
+&lt;/tt&gt;23&lt;tt&gt;
+&lt;/tt&gt;24&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;25&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;26&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&lt;tt&gt;
+&lt;/tt&gt; &lt;span class="co"&gt;The&lt;/span&gt; &lt;span class="co"&gt;Sessions&lt;/span&gt; controller should fail since it&lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;s a test&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt; &lt;span class="co"&gt;FAILED&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt; expected &lt;span class="pc"&gt;true&lt;/span&gt;, got &lt;span class="pc"&gt;false&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt; test_app-git/trunk/vendor/plugins/rspec/lib/spec/expectations.rb:&lt;span class="i"&gt;52&lt;/span&gt;&lt;span class="sy"&gt;:in&lt;/span&gt; &lt;span class="sh"&gt;&lt;span class="dl"&gt;`&lt;/span&gt;&lt;span class="k"&gt;fail_with'&lt;tt&gt;
+&lt;/tt&gt; test_app-git/trunk/vendor/plugins/rspec/lib/spec/expectations/handler.rb:21:in &lt;/span&gt;&lt;span class="dl"&gt;`&lt;/span&gt;&lt;/span&gt;handle_matcher&lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt; test_app-git/trunk/vendor/plugins/rspec/lib/spec/expectations/extensions/object.rb:34:in `should&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt; ./spec/controllers/sessions_controller_spec.rb:&lt;span class="i"&gt;25&lt;/span&gt;:&lt;tt&gt;
+&lt;/tt&gt; test_app-git/trunk/vendor/plugins/rspec/lib/spec/example/example_methods.rb:&lt;span class="i"&gt;78&lt;/span&gt;&lt;span class="sy"&gt;:in&lt;/span&gt; &lt;span class="sh"&gt;&lt;span class="dl"&gt;`&lt;/span&gt;&lt;span class="k"&gt;instance_eval'&lt;tt&gt;
+&lt;/tt&gt; test_app-git/trunk/vendor/plugins/rspec/lib/spec/example/example_methods.rb:78:in &lt;/span&gt;&lt;span class="dl"&gt;`&lt;/span&gt;&lt;/span&gt;run_with_description_capturing&lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt; test_app-git/trunk/vendor/plugins/rspec/lib/spec/example/example_methods.rb:19:in `execute&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt; &lt;span class="rx"&gt;&lt;span class="dl"&gt;/&lt;/span&gt;&lt;span class="k"&gt;opt&lt;/span&gt;&lt;span class="dl"&gt;/&lt;/span&gt;&lt;/span&gt;local/lib/ruby/&lt;span class="fl"&gt;1.8&lt;/span&gt;/timeout.rb:&lt;span class="i"&gt;48&lt;/span&gt;&lt;span class="sy"&gt;:in&lt;/span&gt; &lt;span class="sh"&gt;&lt;span class="dl"&gt;`&lt;/span&gt;&lt;span class="k"&gt;timeout'&lt;tt&gt;
+&lt;/tt&gt; test_app-git/trunk/vendor/plugins/rspec/lib/spec/example/example_methods.rb:16:in &lt;/span&gt;&lt;span class="dl"&gt;`&lt;/span&gt;&lt;/span&gt;execute&lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt; test_app-git/trunk/vendor/plugins/rspec/lib/spec/example/example_group_methods.rb:288:in `execute_examples&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt; test_app-git/trunk/vendor/plugins/rspec/lib/spec/example/example_group_methods.rb:&lt;span class="i"&gt;287&lt;/span&gt;&lt;span class="sy"&gt;:in&lt;/span&gt; &lt;span class="sh"&gt;&lt;span class="dl"&gt;`&lt;/span&gt;&lt;span class="k"&gt;each'&lt;tt&gt;
+&lt;/tt&gt; test_app-git/trunk/vendor/plugins/rspec/lib/spec/example/example_group_methods.rb:287:in &lt;/span&gt;&lt;span class="dl"&gt;`&lt;/span&gt;&lt;/span&gt;execute_examples&lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt; test_app-git/trunk/vendor/plugins/rspec/lib/spec/example/example_group_methods.rb:121:in `run&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt; test_app-git/trunk/vendor/plugins/rspec/lib/spec/runner/example_group_runner.rb:&lt;span class="i"&gt;22&lt;/span&gt;&lt;span class="sy"&gt;:in&lt;/span&gt; &lt;span class="sh"&gt;&lt;span class="dl"&gt;`&lt;/span&gt;&lt;span class="k"&gt;run'&lt;tt&gt;
+&lt;/tt&gt; test_app-git/trunk/vendor/plugins/rspec/lib/spec/runner/example_group_runner.rb:21:in &lt;/span&gt;&lt;span class="dl"&gt;`&lt;/span&gt;&lt;/span&gt;each&lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt; test_app-git/trunk/vendor/plugins/rspec/lib/spec/runner/example_group_runner.rb:21:in `run&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt; test_app-git/trunk/vendor/plugins/rspec/lib/spec/runner/options.rb:&lt;span class="i"&gt;89&lt;/span&gt;&lt;span class="sy"&gt;:in&lt;/span&gt; &lt;span class="sh"&gt;&lt;span class="dl"&gt;`&lt;/span&gt;&lt;span class="k"&gt;run_examples'&lt;tt&gt;
+&lt;/tt&gt; test_app-git/trunk/vendor/plugins/rspec/lib/spec/runner/command_line.rb:19:in &lt;/span&gt;&lt;span class="dl"&gt;`&lt;/span&gt;&lt;/span&gt;run&lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;&lt;tt&gt;
+&lt;/tt&gt; script/spec:4:&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;  Finished in 6.035147 seconds&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;  400 examples, 1 failure&lt;tt&gt;
+&lt;/tt&gt;&lt;/span&gt;&lt;/span&gt;
+</code></pre>
+
+<p>We can really easily change that, open you spec.opts file located in your spec folder.</p>
+
+<p>it probably looks like that:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;8&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&lt;tt&gt;
+&lt;/tt&gt;  --colour&lt;tt&gt;
+&lt;/tt&gt;  --format&lt;tt&gt;
+&lt;/tt&gt;  progress&lt;tt&gt;
+&lt;/tt&gt;  --loadby&lt;tt&gt;
+&lt;/tt&gt;  mtime&lt;tt&gt;
+&lt;/tt&gt;  --reverse&lt;tt&gt;
+&lt;/tt&gt;  --backtrace&lt;tt&gt;
+&lt;/tt&gt;
+</code></pre>
+
+<p>Get rid of &#8220;&#8211;backtrace&#8221; and your new failure should look like:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;8&lt;tt&gt;
+&lt;/tt&gt;9&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;10&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;11&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="i"&gt;1&lt;/span&gt;)&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;The Sessions controller The Sessions controller should fail since it&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;s a test&lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt; FAILED&lt;tt&gt;
+&lt;/tt&gt;  expected false, got true&lt;tt&gt;
+&lt;/tt&gt;  ./spec/controllers/sessions_controller_spec.rb:25:&lt;tt&gt;
+&lt;/tt&gt;  script/spec:4:&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;  Finished in 0.269956 seconds&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;  15 examples, 1 failure&lt;tt&gt;
+&lt;/tt&gt;  &lt;tt&gt;
+&lt;/tt&gt;&lt;/span&gt;&lt;/span&gt;
+</code></pre>
+
+<h2>Other stuff you may find interesting (in no particular order):</h2>
+
+<ul>
+<li><p><a href="http://opensource.thinkrelevance.com/wiki/spec-converter">spec converter</a></p></li>
+<li><p><a href="http://cells.rubyforge.org/overview.html">Rails Cell</a></p></li>
+<li><p><a href="http://jointheconversation.org/railsgit">Git to manage and deploy a Rails app</a></p></li>
+<li><p><a href="http://rufy.com/contacts/doc/">contacts (retrieve user&#8217;s contacts from yahoo, gmail etc..)</a></p></li>
+<li><p><a href="http://www.hashrocket.com/">Hashrocket</a></p></li>
+<li><p><a href="http://www.amazon.com/Rails-Way-Addison-Wesley-Professional-Ruby/dp/0321445619">one of the best Rails book of the moment</a></p></li>
+<li><p><a href="http://famspam.com/">err&#8217;s new baby</a></p></li>
+<li><p><a href="http://blog.caboo.se/articles/2008/1/30/caboose-conf-2008">caboose conf 08</a></p></li>
+<li><p><a href="http://github.com/">git hub</a></p></li>
+<li><p><a href="http://swxruby.org/">SWX Ruby (or how to get Rails to talk with Flash even faster)</a></p></li>
+<li><p><a href="http://ruby.reddit.com">Ruby Reddit</a></p></li>
+</ul>
+
+</div>
+
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-01-30T08:00:00-08:00" pubdate data-updated="true">Jan 30<span>th</span>, 2008</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        
+          <div class='legacy'><a href="http://railsontherun.com/2008/01/30/misc-tips-and-tricks/">Original article</a></div>
+        
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        <div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+  <a class="addthis_button_tweet"></a>
+  </br>
+	
+	
+  <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+  </br>
+	
+	<a class="addthis_counter addthis_pill_style"></a></br>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=mattetti"></script>
+</div>
+
+        
+    </div>
+
+
+</article>
+
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2013 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+  var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+    '010526096358170648343:WMX140696544', customSearchOptions);
+  customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+  var options = new google.search.DrawOptions();
+  options.enableSearchboxOnly("http://matt.aimonetti.net/search");
+  customSearchControl.draw('cse-search-form', options);
+  }, true);
+
+if (navigator.userAgent.match(/iPad/i) != null) {
+  $('meta[name=viewport]').attr('content', 'width=1200,initial-scale=1,maximum-scale=1');
+}
+</script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'mattaimonetti';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,261 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ruby object allocation & why you should care - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Ruby Object Allocation & Why You Should Care Recently I was tasked with finding how to optimize a web application with heavy traffic. The application (a Rails 2.3.x app &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://merbist.com/2010/07/29/object-allocation-why-you-should-care/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <a href='/about/'><img class="photo left" title='About Matt Aimonetti'
+      alt='Photo of Matt Aimonetti' src="/images/matt_aimonetti.jpg" /></a>
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left bio-summary'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Tech Lead</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/posts/archives/">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <div id="cse-search-form">Loading</div>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/">Home</a></li>
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/about/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Ruby Object Allocation & Why You Should Care</h1>
+    <div class="entry"><p>Recently I was tasked with finding how to optimize a web application with heavy traffic. The application (a Rails 2.3.x app) gets about 3 million requests per hour and most of these requests cannot really be easily cached so they go through the entire stack.</p>
+
+<p>This is probably not the case of most web apps out there. None the less, my findings my help you understand Ruby better and maybe think differently about memory management.</p>
+
+<p>This is certainly not an advanced GC blog post, I will try to keep it as simple as possible. My goal is to show you how Ruby memory allocation works and why it can affect your app performance and finally, how can you avoid to allocate to many objects.</p>
+
+<h2>Ruby memory management.</h2>
+
+<p>Rubyists are quite lucky since they don&#8217;t have to manage the memory themselves. Because developers are lazy and Matz developed his language for people and not machine, memory is managed &#8220;magically&#8221;. Programming should be fun and managing memory isn&#8217;t really considered fun (ask video game developers or iOS programmers ;)).</p>
+
+<p>So in Ruby, the magical memory management is done by a Garbage Collector. The GC&#8217;s job is to run and free objects that were previously allocated but not used anymore. Without a GC we would saturate the memory available on the host running the program or would have to deallocate the memory manually. Ruby&#8217;s GC uses a conservative, stop the world, mark-and-sweep collection mechanism.  More simply, the garbage collection runs when the allocated memory for the process is maxed out. The GC runs and blocks all code from being executed and will free unused objects so new objects can be allocated.</p>
+
+<p>Joe Damato did a great talk on that matter during last RailsConf</p>
+
+<p><a href="http://www.scribd.com/doc/32718051/Garbage-Collection-and-the-Ruby-Heap">Garbage Collection and the Ruby Heap</a></p>
+
+<p>The problem is that Ruby&#8217;s GC was not designed to support hundred thousand objects allocation per second. Unfortunately, that&#8217;s exactly what frameworks like Ruby on Rails do, and you might contribute to the problem too without even knowing it.</p>
+
+<h2>Does it really matter?</h2>
+
+<p>I believe it does. In my case improving the object allocation means much better response time, less servers, less support and less headaches. You might think that servers are cheaper than developers. But more servers mean more developer time spent fixing bugs and more IT support. That&#8217;s why I think, memory management is something Ruby developers should be aware of and should take in consideration, especially the ones writing frameworks, libraries or shared code.</p>
+
+<p>I am using Ruby 1.9 so I could not profile my Rails 2.x app using <a href="http://memprof.com/">memprof</a>, instead I wrote a <a href="http://github.com/mattetti/GC-stats-middleware">simple and basic middleware</a> that keeps track of the memory allocation/deallocation and GC cycles during a web request (Ruby1.9 only). One of my simple Rails2 actions (1 DB call, simple view) is allocating 170,000 objects per requests. Yes, you read right: 170k objects every single request. At 3 million requests/hour, you can imagine that we are spending a LOT of time waiting for the GC. This is obviously not 100% Rails fault as I am sure our code is contributing to the problem. I heard from the memprof guys that Rails was allocating 40k objects. I decided to check Rails3.</p>
+
+<p>After warming up, a basic Rails3 &#8216;hello world&#8217; app clocks at about <strong>8,500 objects allocated per request</strong>, forcing the GC to run more or less every 6 requests. On my machine (mac pro) the GC takes about 20ms to free the objects. A Rack &#8216;hello world&#8217; app clocks at <strong>7 objects</strong> per request and a Sinatra app at <strong>181 objects</strong>. Of course you can&#8217;t really compare these different libraries/frameworks but that gives you an idea of the price you pay to get more features.</p>
+
+<p>One thing to remember is that the more objects you allocate, the more time you &#8220;lose&#8221; at code execution. For more developers, it probably doesn&#8217;t matter much, but if you should still understand that concept especially if you decide to contribute to the OSS community and offer patches, libraries, plugins etc&#8230;</p>
+
+<h1>What can I do?</h1>
+
+<p>Be aware that you are allocating  objects, for instance something as simple as 100.times{ &#8216;foo&#8217; } allocates 100 string objects (strings are mutable and therefore each version requires its own memory allocation).</p>
+
+<p>Make sure to evaluate the libraries you use, for instance switching a Sinatra XML rendering action from Builder to Nokogiri XML Builder saved us about 12k object allocations (Thanks Aaron Patterson). Make sure that <strong>if </strong>you are using a library allocating a LOT of objects, that other alternatives are not available and your choice is worth paying the GC cost. (you might not have a lot of requests/s or might not care for a few dozen ms per requests). You can use memprof or one of the many existing tools to check on the GC cycles using load tests or in dev mode. Also, be careful to analyze the data properly and to not only look at the first request. <a href="http://twitter.com/akeem">Someone</a> sent me <a href="http://memprof.com/dump/4c52503c7fdeb62cff000001">this memory dump</a> from a Rails3 &#8216;hello world&#8217; with Ruby 1.8.7 and it shows that Rails is using <a href="http://memprof.com/dump/4c52503c7fdeb62cff000001/detail?where=%7B%7D">331973 objects</a>.  While this is totally true, it doesn&#8217;t mean that 330k objects are created per request. Instead that means that 330k objects are currently in memory. Rubygems loading already allocate a lot of objects, Rails even more but these objects won&#8217;t be GC&#8217;d and don&#8217;t matter as much as the ones allocated every single request. The total amount of memory used by a Ruby process isn&#8217;t that important, however the fluctuation forcing the GC to run often is. This is why my middleware only cares about the allocation change during a request. (The GC should still traverse the entire memory so, smaller is better)</p>
+
+<p>The more object allocation you do at runtime/per request, the more the GC will need to run, the slower your code will be. So this is not a question of memory space, but more of performance. If your framework/ORM/library/plugin allocates too many objects per request maybe you should start by reporting the problem and if you can, offer some patches.</p>
+
+<p>Here are some hints about memory allocation:</p>
+
+<p>Creating a hash object really allocates more than an object, for instance {&#8216;joe&#8217; => &#8216;male&#8217;, &#8216;jane&#8217; => &#8216;female&#8217;} doesn&#8217;t allocate 1 object but 7. (one hash, 4 strings + 2 key strings) If you can use symbol keys as they won&#8217;t be garbage collected. However because they won&#8217;t be GC&#8217;d you want to make sure to not use totally dynamic keys like converting the username to a symbol, otherwise you will &#8216;leak&#8217; memory.</p>
+
+<p>Looking at a GC cycle in the Rails3 hello world example shows what objects get deallocated:</p>
+
+<blockquote><p>GC run, previous cycle was 6 requests ago.</p></blockquote>
+
+<p>GC 203 invokes. (amount of cycles since the program was started)
+Index   1</p>
+
+<p>Invoke Time(sec)   25.268</p>
+
+<p>Use Size(byte)   4702440</p>
+
+<p>Total Size(byte)   7307264</p>
+
+<p>Total Object   182414</p>
+
+<p>GC Time(ms) 22.35600000000204090611</p>
+
+<h2>56322 freed objects.</h2>
+
+<p><strong>[78%] 44334 freed strings.</strong>
+<strong>[7%] 4325 freed arrays.</strong>
+[0%] 504 freed bignums.
+[1%] 613 freed hashes.
+[0%] 289 freed objects.
+<strong>[5%] 3030 freed parser nodes (eval usage).</strong></p>
+
+<p>I did not list all the object types but it&#8217;s pretty obvious that the main issue in the case of Rails is string allocation. To a certain extend the allocated arrays and the runtime use of eval are not helping either. (what is being eval&#8217;d at runtime anyway?)</p>
+
+<p>If you use the same string in various place of you code, you can &#8220;cache&#8221; them using a local var, instance variable, class variable or constant. Sometimes you can just replaced them by a symbol and save a few allocations/deallocations per request. Whatever you do tho, make sure there is a real need for it. My rule of thumb is that if some code gets exercised by 80% of the requests, it should be really optimized and avoid extra allocations so the GC won&#8217;t slow us down.</p>
+
+<h2>What about a better GC?</h2>
+
+<p>That&#8217;s the easy answer. When I mentioned this problem with Rails, a lot of people told me that I should use JRuby or Rubinius because their GC were much better. Unfortunately, that&#8217;s not that simple and choosing an alternative implementation requires much further research and tests.</p>
+
+<p>But what annoys me with this solution is that using it is not solving the issue, it&#8217;s just working around it. Yes, Ruby&#8217;s GC isn&#8217;t that great but that&#8217;s the not the key issue, <strong>the key issue is that some libraries/frameworks allocate way too many objects</strong> and that nobody seems to care (or to even know it). I know that the Ruby Core Team is working on some optimizations and I am sure Ruby will eventually get an improved GC. In the meantime, it&#8217;s easy to blame Matz, Koichi and the rest of the core team but again, it&#8217;s ignoring that the root cause, totally uncontrolled memory allocation.</p>
+
+<p><strong>Maybe it&#8217;s time for us, Rubyists, to think a bit more about our memory usage.</strong></p>
+</div>
+
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-07-29T23:47:50-07:00" pubdate data-updated="true">Jul 29<span>th</span>, 2010</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/misc/'>Misc</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/merbist-com/'>merbist.com</a>, <a class='category' href='/articles/categories/rails/'>rails</a>, <a class='category' href='/articles/categories/ruby/'>ruby</a>
+  
+</div>
+
+</div>
+        
+          <div class='legacy'><a href="http://merbist.com/2010/07/29/object-allocation-why-you-should-care/">Original article</a></div>
+        
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        <div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+  <a class="addthis_button_tweet"></a>
+  </br>
+	
+	
+  <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+  </br>
+	
+	<a class="addthis_counter addthis_pill_style"></a></br>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=mattetti"></script>
+</div>
+
+        
+    </div>
+
+
+</article>
+
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2013 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+  var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+    '010526096358170648343:WMX140696544', customSearchOptions);
+  customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+  var options = new google.search.DrawOptions();
+  options.enableSearchboxOnly("http://matt.aimonetti.net/search");
+  customSearchControl.draw('cse-search-form', options);
+  }, true);
+
+if (navigator.userAgent.match(/iPad/i) != null) {
+  $('meta[name=viewport]').attr('content', 'width=1200,initial-scale=1,maximum-scale=1');
+}
+</script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'mattaimonetti';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+</body>
+</html>

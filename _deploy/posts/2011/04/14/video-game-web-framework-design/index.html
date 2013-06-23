@@ -1,0 +1,281 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Video game web framework design - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Video Game Web Framework Design In this post I will do my best to explain why and how I reinvented the wheel and wrote a custom web framework for some of Sony&#8217;s &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://merbist.com/2011/04/14/video-game-web-framework-design/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <a href='/about/'><img class="photo left" title='About Matt Aimonetti'
+      alt='Photo of Matt Aimonetti' src="/images/matt_aimonetti.jpg" /></a>
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left bio-summary'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Tech Lead</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/posts/archives/">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <div id="cse-search-form">Loading</div>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/">Home</a></li>
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/about/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Video Game Web Framework Design</h1>
+    <div class="entry"><p>In this post I will do my best to explain why and how I reinvented the wheel and wrote a custom web framework for some of Sony&#8217;s <a href="http://www.gameproducer.net/2006/05/26/what-are-aaa-titles/">AAA console titles</a>. My goal is to reflect on my work by walking you through the design process and some of the implementation decisions. This is not about being right or being wrong, it&#8217;s about designing a technical solution to solve concrete business challenges.</p>
+
+<h2>Problem Domain</h2>
+
+<p>The video game industry is quite special, to say the least. It shares a lot of similarities with the movie industry. The big difference is that  the movie industry hasn&#8217;t evolved as quickly as the video game  industry has. But the concept is the same, someone comes up with a great  idea, finds a team/studio to develop the game and finds a publisher. The  development length and budget depends on the type of game, but for a AAA  console game, it usually takes a least a <a href="http://www.joystiq.com/2010/03/09/god-of-war-3-has-44-million-dollar-budget/">few million</a> and a minimum of a year of work once the project has received the green light. The creation of such a game involves various teams, designers, artists, animators, audio teams, developers, producers, QA, marketing, management/overhead etc.. Once the game gets released, players purchase the whole game for a one time fee and the studio moves  on to their next game. Of course things are not that simple, with the latest platforms, we now have the option to patch games, add <a href="http://en.wikipedia.org/wiki/Downloadable_content">DLC</a> etc.. But historically, a console game is considered done when it ships, exactly like a movie, and very little work is scheduled post release.</p>
+
+<p>Concretely such an approach exposes a few challenges when trying to implement online features for a <a href="http://www.gameproducer.net/2006/05/26/what-are-aaa-titles/">AAA console title</a>:</p>
+
+<ul>
+<li><p>Communication with the game client network team</p></li>
+<li><p>Scalability, performance</p></li>
+<li><p>Insane deadlines, unstable design (constant change of requirements)</p></li>
+<li><p>Can&#8217;t afford to keep on working on the system once released (time delimited projects)</p></li>
+</ul>
+
+
+<p> </p>
+
+<h2>Communication</h2>
+
+<p>As in most situations, communication is one of the biggest challenges. Communication is even harder in the video game industry since you have so many teams and experts involved. Each team speaks its own jargon, has its own expertise and its own deadlines. But all focus on the same goal: releasing the best game ever. The team I&#8217;m part of has implementing online features as its goal. That&#8217;s the way we bring business value to our titles. Concretely, that means that we provide the game client developers with a C++ SDK which connects to custom web APIs written in Ruby. The API implementations rely on various data stores (<a href="http://www.mysql.com/">MySQL</a>, <a href="http://redis.io/">Redis</a>, <a href="http://memcached.org/">Memcached</a>, memory) to store and retrieve all sorts of game data.</p>
+
+<p>Nobody but our team should care about the implementation details, after all, the whole point of providing an API is to provide a simple interface so others can do their part of the job in the easiest way possible. This is exactly where communication becomes a problem. The design of these APIs should be the result of the work of two teams with two different domains of expertise and different concerns. One team focuses on client performance, memory optimization and making the online resources available to the game engine without affecting the game play. The other, focuses on server performance, latency, scalability, data storage and system contention under load. Both groups have to come together to find a compromise making each other&#8217;s job doable. Unfortunately, things are not that simple and game designers (who are usually not technical people) have a hard time <em>not</em> changing their designs and requirements every other week (usually for good reasons) making API design challenging and creating tension between the teams.</p>
+
+<p>From this perspective, the API is the most important deliverable for our team and it should communicate the design goal while being very explicit about how it works, why it works the way it does, and how to implement it client side. This is a very good place where we can improve communication by making sure that we focus on making clear, well designed, well documented, flexible APIs.</p>
+
+<p> </p>
+
+<h2>Scalability, performance</h2>
+
+<p>On the server side, the APIs need to perform and scale to handles tends of thousands of concurrent requests. Web developers often rely on aggressive <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html">HTTP caching</a> but in our case, the web client (our SDK) has a limited amount of memory available and 90% of the requests are user specific (can&#8217;t use full page HTTP cache) and a lot of these are POST/DELETE requests (can&#8217;t be cached). That means that, to scale, we have to focus on what most developers don&#8217;t often have to worry too much about: all the small details which, put together with a high load, end up drastically affecting your performance.</p>
+
+<p>While Ruby is a great language, a lot of the libraries and frameworks are not optimized for performance, at least not the type of performance needed for our use case. However, the good news is that this is easily fixable and many alternatives exist (lots of async, non-blocking drivers for i.e). When obsessed with performance, you quickly learn to properly load test, profile, and monitor your code to find the bottlenecks and the places where you should focus your attention. The big, unique challenge though, is that a console game will more than likely see its peak traffic in the first few weeks, not really giving the chance to the online team to iteratively handle the prod issues. The only solution is to do everything possible before going live to ensure that the system will perform as expected. Of course if we were to write the same services in a more performant language, we would need to spend less time optimizing. But we are gaining so much flexibility by using a higher level programming language that, in my mind, the trade off is totally worth it (plus you still need to spend a lot of time optimizing your code path, even if your code is written in a very fast language).</p>
+
+<p> </p>
+
+<h2>Deadlines, requirement changes</h2>
+
+<p>That&#8217;s just part of the way the industry works. Unless you work for <a href="http://blizzard.com">Blizzard</a> and you can afford to spend a crazy amount of time and money on the development of a title; you will have to deal with sliding deadlines, requirement changes, scope changes etc&#8230; The only way I know how to protect myself from such things is to plan for the worst. Being a non-idealistic (read pessimistic) person helps a lot. When you design your software, make sure your design is sound but flexible enough to handle any major change that you know could happen at any time. Pick your battles and make sure your assumptions are properly thought through, communicated and documented so others understand and accept them. In a nutshell, this is a problem we can&#8217;t avoid, so you need to embrace it.</p>
+
+<p> </p>
+
+<h2>Limited reusability</h2>
+
+<p>This topic has a lot to do with the previous paragraph. Because scopes can change often and because the deadlines are often crazy, a lot of the time, engineers don&#8217;t take the time to think about reusability. They slap some code together, pray to the <a href="http://en.wikipedia.org/wiki/Lords_of_Kobol">lords of Kobol</a> and hope that they won&#8217;t have to look at their code ever again (I&#8217;m guilty of having done that too). The result is a lot of throw away code. This is actually quite frequent and normal in our industry. But it doesn&#8217;t mean that it the right thing to do! The assumption/myth is that each game is different and therefore two games can&#8217;t be using the same tech solution. My take on that is that it&#8217;s partly true. But some components are the same for 80% of the games I work on. So why not design them well and reuse the common parts? (A lot of games share the same engines, such as <a href="http://www.unrealengine.com/">Unreal</a> for example, and there is no reason why we can&#8217;t build a core online engine extended for each title)</p>
+
+<p> </p>
+
+<h2>My approach</h2>
+
+<p>When I joined Sony, I had limited experience with the console video game industry and my experience was not even related to online gaming. So even though I had (strong) opinions (and was often quite (perhaps even too) vocal about them), I did my best to improve existing components and work with the existing system. During that time, the team shipped 4 AAA titles on the existing system. As we were going through the game cycles, I did my best to understand the problem domain, the reasons behind some of the design decisions and finally I looked at what could be done differently to improve our business value. After releasing a title with some serious technical difficulties, I spent some time analyzing and listing the problems we had and their root causes. I asked our senior director for a mission statement and we got the team together to define the desiderata/objectives of our base technology. Here is what we came up with:</p>
+
+<ol>
+<li><p>Stability</p></li>
+<li><p>Performance / Scalability</p></li>
+<li><p>Encapsulation / Modularity</p></li>
+<li><p>Documentation</p></li>
+<li><p>Conventions</p></li>
+<li><p>Reusability / Maintainability</p></li>
+</ol>
+
+
+<p>These objectives are meant to help us objectively evaluate two options. The legacy solution was based on Rails, or more accurately: Rails was used in the legacy solution. Rails had been hacked in so many different ways that it was really hard to update anything without breaking random parts of the framework. The way to do basic things kept being changed, there was no consistent design, no entry points, no conventions and each new game would duplicate the source code of the previously released game and make the game specific changes. Patches were hard to back port and older titles were often not patched up. The performance was atrocious under load, mainly due to hacked-up Rails not performing well. (Rails was allocating so many objects per request that the GC was taking a huge amount of the request cycles, the default XML builder also created a ton load of objects etc&#8230;) This was your typical <a href="http://en.wikipedia.org/wiki/Broken_windows_theory">broken windows scenario</a>. Engineers were getting frustrated, motivation was fainting, bugs were piling up and nobody felt ownership over the tech.</p>
+
+<p>Now, to be fair, it is important to explain that the legacy system was hacked up together due to lack of time, lack of resources and a lot of pressure to release something ASAP. So, while the end result sounds bad, the context is very important to note. This is quite common in software engineering and when you get there, the goal is not to point fingers but to identify the good and the bad parts of the original solution. You then use this info to decide what to do: fix the existing system or rewrite, porting the good parts.</p>
+
+<p>Our report also came up with a plan. A plan to redesign our technology stack to match the desiderata previously mentioned. To put it simply, the plan was to write a new custom web framework focusing on stability, performance, modularity and documentation. Now, there are frameworks out there which already do that or value these principles. But none of them focus on web APIs and none of them are specific to game development. Finally, the other issue was that we had invested a lot of time on game specific code and we couldn&#8217;t throw away all that work, so the new framework had to support a good chunk of legacy code but had to make it run much faster.</p>
+
+<h2>Design choices</h2>
+
+<p><strong>Low conversion cost</strong></p>
+
+<p>Using <a href="http://nodejs.org/">node.js</a> &amp; <a href="http://jashkenas.github.com/coffee-script/">coffee script</a>/<a href="http://www.scala-lang.org/">Scala</a>/<a href="http://weblocks.viridian-project.de/">whatever</a> <a href="http://code.google.com/p/v8cgi/">new</a> <a href="https://github.com/tenderlove/phuby">fancy tech</a> was not really an option. We have a bunch of games out there which are running on the old system and some of these games will have a sequel or a game close enough that we could reuse part of the work. We don&#8217;t want to have to rewrite the existing code. I therefore made sure that we could reuse 90% of the business logic by adding an abstraction layer doing the heavy lifting at boot time and therefore not affecting the runtime performance. Simple conversion scripts were also written to import the core of the existing code over.</p>
+
+<p><em>Lessons learned:</em> It is very tempting to just redo everything and start from scratch. However, the business logic implementation wasn&#8217;t the main cause of our problems. Even though I wish we could have redesigned that piece of the puzzle, it didn&#8217;t make sense from a business perspective. A lot of thought had to be put into how to obtain the expected performance level while keeping the optional model/controller/view combos. By having full control of the &#8220;web engine&#8221;, we managed to isolate things properly without breaking the old paradigms. We also got rid of a lot of assumptions allowing us to design new titles a bit differently while being backward compatible and have our code run dramatically faster.</p>
+
+<p><strong>Web API centric</strong></p>
+
+<p>This is probably the most important design element. If I had to summarize what our system does in just a few words, I would say: a game web API. Of course, it&#8217;s much more than that. We have admin interfaces, producer dashboards, community websites, lobbies, p2p, BI reports, async processing jobs etc&#8230; But at the end of the day, the only one piece you can&#8217;t remove is the game web API. So I really wanted the design to focus on that aspect. When a developer starts implementing a new online game feature, I want him/her to think about the API. But I also want this API to be extremely well documented so the developer working client-side understands the purpose of the API, how to use it, and what the expected response is right away. I also wanted to be able to automatically test our APIs at a very basic level so we could validate that there are discrepancies between what the client expects and what the server provides. To do that, I created a standalone API DSL with everything needed to describe your API but without any implementation details whatsoever. The API DSL lets the developer define a route (url), the HTTP verb expected, if the request should be authenticated or not, SSL or not, the param rules, default values and finally a response description (which was quite a controversial choice). All of these settings can be documented by the developer. This standalone DSL can then be consumed by different tools. For instance we have a tool extracting all the info into nicely formatted HTML doc for the game client developers. This tool doesn&#8217;t need to load the framework to just render the documentation. We also use this description at boot time to compile the validation rules and routes, allowing for a much faster request dispatch. And we also use these API description to generate some low level data for the client. Finally, we used the service description DSL to help create mocked service responses allowing the client team to test service designs without having to wait for the implementation streamlining the process.</p>
+
+<p><em>Lessons learned:</em> We had a lot of internal discussions about the need to define the response within the service description. Some argued that it&#8217;s a duplication since we already had a view and we could parse that to get most of what we needed (which is what the old system was doing). We ended up going with the response description DSL for a few critical reasons: testing and implementation simplicity. <em>Testing:</em> we need to have an API expectation reference and to keep this reference sane so we can see if something is changed. If we were to magically parse the response, we couldn&#8217;t test the view part of the code against a frame of reference. <em>Implementation simplicity</em>: magically parsing a view template is more tricky that it sounds, you would need to render the template with the right data to make it work properly. Furthermore, you can&#8217;t document a response easily in the view, and if you do, you arguably break the separation of concern between the description and the implementation. Finally, generated documentation isn&#8217;t enough and that&#8217;s why we decided to write English documentation, some being close to the code and some being just good old documentation explaining things outside of the code context.</p>
+
+<p><strong>Modularity</strong></p>
+
+<p>In order to make our code reusable we had to isolate each component and limit the dependencies. We wrote a very simple extension layer allowing each extension to registers itself once detected. The extension interface exposes the path of the extension, its type, models, services, controllers, migrations, seed data, dependencies etc.. Each extension is contained in a folder. (The extension location doesn&#8217;t matter much but as part of the framework boot sequence, we check a few default places.) The second step of the process is to check a manifest/config file that is specific to each title. The manifest file lists the extensions that should be activated for the title. The framework then activates the marked extensions and has access to libs, models, views, migrations, seed data and of course to load services (DSL mentioned earlier) etc&#8230;</p>
+
+<p>Even though we designed the core extensions the best we could, there are cases where some titles will need to extend these extensions. To do that, we added a bunch of hooks that could be implemented on the title side if needed (Ruby makes that super easy and clean to do!). A good example of that is the login sequence or the player data.</p>
+
+<p><em>Lessons learned:</em> The challenge with modularity is to keep things simple and highly performing yet flexible. A key element to manage that is to stay as consistent as possible. Don&#8217;t implement hooks three different ways, try to keep method signatures consistent, keep it simple and organized.</p>
+
+<p> </p>
+
+<h2>Conclusion</h2>
+
+<p>It&#8217;s a bit early to say if this rewrite is a success or not and there are still lots of optimizations and technology improvements we are looking forward to doing. Only time will give us enough retrospect to evaluate our work. But because we defined the business value (mission statement) and the technical objectives, it is safe to say that the new framework meets the expectations quite well. On an early benchmark we noted a 10X speed improvement and that&#8217;s before drilling into the performance optimizations such as making all the calls non-blocking, using better connection pools, cache write through layer&#8230; However, there is still one thing that we will have to monitor: how much business value will this framework generate. And I guess that&#8217;s where we failed to define an agreed upon evaluation grid. I presume that if our developers spend more time designing and implementing APIs and less time debugging that could be considered business value. If we spend less time maintaining or fighting with the game engine, that would also be a win. Finally, if the player experience is improved we will be able to definitely say that we made the right choice.</p>
+
+<p>To conclude, I&#8217;d like to highlight my main short coming: I failed to define metrics that would help us evaluate the real business value added to our products. What I consider a technical success might not be a business success. How do you, in your own domain, find ways to define clear and objective metrics?</p>
+</div>
+
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-14T10:28:39-07:00" pubdate data-updated="true">Apr 14<span>th</span>, 2011</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/software-design/'>Software Design</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/merbist-com/'>merbist.com</a>, <a class='category' href='/articles/categories/ruby/'>ruby</a>
+  
+</div>
+
+</div>
+        
+          <div class='legacy'><a href="http://merbist.com/2011/04/14/video-game-web-framework-design/">Original article</a></div>
+        
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        <div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+  <a class="addthis_button_tweet"></a>
+  </br>
+	
+	
+  <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+  </br>
+	
+	<a class="addthis_counter addthis_pill_style"></a></br>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=mattetti"></script>
+</div>
+
+        
+    </div>
+
+
+</article>
+
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2013 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+  var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+    '010526096358170648343:WMX140696544', customSearchOptions);
+  customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+  var options = new google.search.DrawOptions();
+  options.enableSearchboxOnly("http://matt.aimonetti.net/search");
+  customSearchControl.draw('cse-search-form', options);
+  }, true);
+
+if (navigator.userAgent.match(/iPad/i) != null) {
+  $('meta[name=viewport]').attr('content', 'width=1200,initial-scale=1,maximum-scale=1');
+}
+</script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'mattaimonetti';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+</body>
+</html>

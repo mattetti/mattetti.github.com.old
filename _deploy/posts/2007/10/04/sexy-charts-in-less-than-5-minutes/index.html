@@ -1,0 +1,532 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Sexy charts in less than 5 minutes - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Sexy Charts in Less Than 5 Minutes NOV 04 Update: demo app now available there. Sexy charts BDD style presentation at the SDRuby group to be posted soon on video &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2007/10/04/sexy-charts-in-less-than-5-minutes/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <a href='/about/'><img class="photo left" title='About Matt Aimonetti'
+      alt='Photo of Matt Aimonetti' src="/images/matt_aimonetti.jpg" /></a>
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left bio-summary'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Tech Lead</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/posts/archives/">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <div id="cse-search-form">Loading</div>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/">Home</a></li>
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/about/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Sexy Charts in Less Than 5 Minutes</h1>
+    <div class="entry"><h2>NOV 04 Update: demo app now available <a href="http://railsontherun.com/assets/sexy_charts.zip">there</a>. Sexy charts BDD style presentation at the <a href="http://sdruby.com">SDRuby group</a> to be posted soon on <a href="http://podcast.sdruby.com/">video podcast</a></h2>
+
+<p><a href="http://railsontherun.com/2007/9/27/ajax-pagination-in-less-than-5-minutes">Last time</a>, in our <em>&#8216;do it in less than 5 minutes&#8217;</em> series, we saw how to add <a href="http://railsontherun.com/2007/9/27/ajax-pagination-in-less-than-5-minutes">quickly and simply add Ajax pagination</a>.</p>
+
+<p>This time we&#8217;ll see how to add some sexy/fancy charts to your rails app.</p>
+
+<p>The goal is to end up with something like:</p>
+
+<p><img src="http://farm2.static.flickr.com/1322/1480241002_e67637a659_o.png" alt="chart" /></p>
+
+<p><img src="http://farm2.static.flickr.com/1414/1479377969_805d23a55d_o.png" alt="charts2" /></p>
+
+<h2>Various options</h2>
+
+<p>You might have heard or even tried solution such as <a href="http://nubyonrails.com/pages/gruff">Gruff</a> or <a href="http://www.jfree.org/jfreechart/">JFreeChart</a>.</p>
+
+<p>While these solutions are great, they are certainly a pain in the butt. Gruff requires RMagick (avoid RMagick as much as can) and creates static files (a real pain when your graphs change all the time) JFreeChart on the other hand requires Java, Java skills and I hate <a href="http://wiki.rubyonrails.org/rails/pages/HowtoGenerateJFreeCharts">the way</a> you create graphs:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+  &lt;span class="r"&gt;def&lt;/span&gt; &lt;span class="fu"&gt;CreateChart&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;         pipe = &lt;span class="co"&gt;IO&lt;/span&gt;.popen &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;java -cp C:&lt;/span&gt;&lt;span class="ch"&gt;\\&lt;/span&gt;&lt;span class="k"&gt;InstantRails&lt;/span&gt;&lt;span class="ch"&gt;\\&lt;/span&gt;&lt;span class="k"&gt;rails_apps&lt;/span&gt;&lt;span class="ch"&gt;\\&lt;/span&gt;&lt;span class="k"&gt;project&lt;/span&gt;&lt;span class="ch"&gt;\\&lt;/span&gt;&lt;span class="k"&gt;jfree&lt;/span&gt;&lt;span class="ch"&gt;\\&lt;/span&gt;&lt;span class="k"&gt;src;C:&lt;/span&gt;&lt;span class="ch"&gt;\\&lt;/span&gt;&lt;span class="k"&gt;InstantRails&lt;/span&gt;&lt;span class="ch"&gt;\\&lt;/span&gt;&lt;span class="k"&gt;rails_apps&lt;/span&gt;&lt;span class="ch"&gt;\\&lt;/span&gt;&lt;span class="k"&gt;project&lt;/span&gt;&lt;span class="ch"&gt;\\&lt;/span&gt;&lt;span class="k"&gt;jfree&lt;/span&gt;&lt;span class="ch"&gt;\\&lt;/span&gt;&lt;span class="k"&gt;lib&lt;/span&gt;&lt;span class="ch"&gt;\\&lt;/span&gt;&lt;span class="k"&gt;jcommon-1.0.0-rc1.jar;C:&lt;/span&gt;&lt;span class="ch"&gt;\\&lt;/span&gt;&lt;span class="k"&gt;InstantRails&lt;/span&gt;&lt;span class="ch"&gt;\\&lt;/span&gt;&lt;span class="k"&gt;rails_apps&lt;/span&gt;&lt;span class="ch"&gt;\\&lt;/span&gt;&lt;span class="k"&gt;project&lt;/span&gt;&lt;span class="ch"&gt;\\&lt;/span&gt;&lt;span class="k"&gt;jfree&lt;/span&gt;&lt;span class="ch"&gt;\\&lt;/span&gt;&lt;span class="k"&gt;lib&lt;/span&gt;&lt;span class="ch"&gt;\\&lt;/span&gt;&lt;span class="k"&gt;jfreechart-1.0.0-rc1.jar; CreateChart&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt; &lt;tt&gt;
+&lt;/tt&gt;         pipe.close&lt;tt&gt;
+&lt;/tt&gt;         redirect_to &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;/graph/report&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt; &lt;tt&gt;
+&lt;/tt&gt;      &lt;span class="r"&gt;end&lt;/span&gt;
+</code></pre>
+
+<p>Anyway, none of these solutions would let us create our charts in less than 5 minutes so let&#8217;s cut the story short. The best solution IMHO is to use Flash. But <em>wait</em>, you don&#8217;t need to know ActionScript or to own a license of Flash or Flex, we have libraries available for us to use without any Flash knowledge :)</p>
+
+<p><a href="http://www.maani.us/xml_charts/index.php?menu=Gallery">XML/SWF</a> is cool Flash library which should fulfill our needs, you can even find a <a href="http://ziya.liquidrail.com/">rails plugin</a> to make things easier.</p>
+
+<h2>amCharts</h2>
+
+<p>But, to be honest I&#8217;d like to have something a bit &#8220;cleaner/sexy/fancy&#8221; and easier to setup.  So we&#8217;re going to use <a href="http://www.amcharts.com/">amCharts</a>  Don&#8217;t get me wrong, XML/SWF is a great library and you can make your graphs look nice (but you have to pay for support).
+Since we are running out of time let&#8217;s see how to implement a nice graph using <em>my</em> favorite library.</p>
+
+<p><img src="http://www.amcharts.com/images/logo.gif" alt="amcharts" /></p>
+
+<p>[DISCLAIMER: amCharts is <em>NOT open source</em> and <em>NOT free</em>. But, it&#8217;s <em>cheap</em> (85 euros per site) especially when you think of how much time you will save. AND there is a <em>FREE version</em>. The Free version is the same as the full version but with a link back to amcharts.com]</p>
+
+<h2>Setup</h2>
+
+<p>Let&#8217;s go ahead and download one of the package: <a href="http://www.amcharts.com/column/download/">http://www.amcharts.com/column/download/</a> for instance.</p>
+
+<p>Unpack the files and put them in their own folder in your public folder.
+Make sure you have the .swf file (amcolumn.swf for instance), a XML settings file and the fonts folder.
+(You might want to also create an empty amcharts_key.txt in the same folder since the plugin tries to load the key and you don&#8217;t want to pollute your logs.)</p>
+
+<h2>Usage</h2>
+
+<p>Now you need to understand how amCharts works.</p>
+
+<p>After being loaded, amCharts expects a datastream. The datastream is then parsed and displayed as a chart.
+You can modify the aspect of any chart by changing its settings.
+Settings are set at runtime and/or in a setting file.</p>
+
+<p>Great! I won&#8217;t cover the settings file. It&#8217;s a well documented XML file you just copied in your public folder. (or check the documentation)</p>
+
+<p>What we want to focus on, is the <em>datastream</em>. Basically we just need to create a XML file that can be parsed by amCharts.</p>
+
+<p>Let&#8217;s imagine that we have a reports_controller.rb file  We want to display the population of the cities in California.</p>
+
+<p>let&#8217;s add a new action to render our XML file:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;8&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+  &lt;span class="r"&gt;def&lt;/span&gt; &lt;span class="fu"&gt;population&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="iv"&gt;@cities&lt;/span&gt; = &lt;span class="co"&gt;City&lt;/span&gt;.find(&lt;span class="sy"&gt;:all&lt;/span&gt;)&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="iv"&gt;@population_data_link&lt;/span&gt; = formatted_population_reports_url(&lt;span class="sy"&gt;:xml&lt;/span&gt;)&lt;tt&gt;
+&lt;/tt&gt;    respond_to &lt;span class="r"&gt;do&lt;/span&gt; |format|&lt;tt&gt;
+&lt;/tt&gt;      format.html&lt;tt&gt;
+&lt;/tt&gt;      format.xml  { render &lt;span class="sy"&gt;:action&lt;/span&gt; =&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;population.xml.builder&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="sy"&gt;:layout&lt;/span&gt; =&gt; &lt;span class="pc"&gt;false&lt;/span&gt; }&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="r"&gt;end&lt;/span&gt;
+</code></pre>
+
+<p>(notice that I&#8217;m using rails 2.0 and that&#8217;s why my XML template is not RXML)</p>
+
+<p>As you can see, we have 2 values: @cities and @population_data_link</p>
+
+<p>@cities contains all the City records, including their population etc..</p>
+
+<p>@population_data_link contains the url to retrieve the datastream.</p>
+
+<p>If you wonder how I got this url? I&#8217;m simply using a named route defined in my routes.rb:</p>
+
+<pre><code>&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+  map.resources &lt;span class="sy"&gt;:reports&lt;/span&gt;, &lt;span class="sy"&gt;:collection&lt;/span&gt; =&gt; {&lt;span class="sy"&gt;:population&lt;/span&gt; =&gt; &lt;span class="sy"&gt;:get&lt;/span&gt;}
+</code></pre>
+
+<p>(note that you don&#8217;t need to create a restful route for that, a simple named route would have worked too)</p>
+
+<h2>Flash detection</h2>
+
+<p>Since we are going to use Flash, we want to make sure that people have the Flash plugin installed on their browser. For that we will use <a href="http://blog.deconcept.com/swfobject/">swfobject</a>. Simply make sure to add swfobject.js (available in any amChart package) to your public/javascript folder. Then make sure you linked the javascript in your header:</p>
+
+<pre><code>&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+  &lt;%= javascript_include_tag &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;swfobject&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;%&gt;&lt;/span&gt;&lt;/span&gt;
+</code></pre>
+
+<p>We now need to create our 2 views: <em>population.html.erb</em> and <em>population.xml.builder</em></p>
+
+<h2>population.html.erb</h2>
+
+<p>Basically, this view only loads amCharts and provides it with the details of the datastream:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;8&lt;tt&gt;
+&lt;/tt&gt;9&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;10&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;11&lt;tt&gt;
+&lt;/tt&gt;12&lt;tt&gt;
+&lt;/tt&gt;13&lt;tt&gt;
+&lt;/tt&gt;14&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;15&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;16&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+  &lt;div id=&lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;population_chart&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt; &lt;span class="r"&gt;class&lt;/span&gt;=&lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;chart&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;strong&gt;&lt;span class="co"&gt;Text&lt;/span&gt; displayed &lt;span class="r"&gt;when&lt;/span&gt; the user doesn&lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;t have Flash. You might want to display a simple table with the population, search engines and visitor without flash would love that.&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;p&gt; To see this page properly, you need to upgrade your Flash Player, please visit the Adobe web site&lt;/p&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;/div&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;script type="text/javascript"&gt;&lt;tt&gt;
+&lt;/tt&gt;    // &lt;![CDATA[    &lt;tt&gt;
+&lt;/tt&gt;    var so = new SWFObject("/amcolumn/amcolumn.swf", "population_chart", "800", "380", "8", "#000000");&lt;tt&gt;
+&lt;/tt&gt;    so.addVariable("path", "/amcolumn/");&lt;tt&gt;
+&lt;/tt&gt;    so.addVariable("settings_file", escape("/amcolumn/column_settings.xml"));&lt;tt&gt;
+&lt;/tt&gt;    so.addVariable("data_file", escape("&lt;%= @population_data_link %&gt;"));&lt;tt&gt;
+&lt;/tt&gt;    so.addVariable("additional_chart_settings", "&lt;settings&gt;&lt;labels&gt;&lt;label&gt;&lt;x&gt;250&lt;/x&gt;&lt;y&gt;25&lt;/y&gt;&lt;text_size&gt;18&lt;/text_size&gt;&lt;text&gt;&lt;![CDATA[&lt;b&gt;California Population as of &lt;%= Time.now.to_s(:db) %&gt;&lt;/b&gt;]]&gt;&lt;/text&gt;&lt;/label&gt;&lt;/labels&gt;&lt;/settings&gt;");&lt;tt&gt;
+&lt;/tt&gt;    so.addVariable("preloader_color", "#000000");&lt;tt&gt;
+&lt;/tt&gt;    so.write("population_chart");&lt;tt&gt;
+&lt;/tt&gt;    // ]]&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;/script&gt;&lt;/span&gt;&lt;/span&gt;
+</code></pre>
+
+<p>As you can see, we have a div called population_chart. This div is replaced at load time by the Flash object if the visitor has Flash setup locally. Think about providing some data in case the user doesn&#8217;t have Flash.</p>
+
+<p>The rest is simple Javascript. I unpacked the amchart column lib in mypublic/amcolumn folder and that&#8217;s why I setup the path as &#8220;amcolumn&#8221;</p>
+
+<pre><code>&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+  so.addVariable(&lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;path&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;/amcolumn/&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;);
+</code></pre>
+
+<p>My settings file is called column_settings.xml :</p>
+
+<pre><code>&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+  so.addVariable(&lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;settings_file&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, escape(&lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;/amcolumn/column_settings.xml&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;));
+</code></pre>
+
+<p>and the most important part:</p>
+
+<pre><code>&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+  so.addVariable(&lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;data_file&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, escape(&lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;&lt;%= @population_data_link %&gt;&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;));
+</code></pre>
+
+<p>Finally, I added some dynamic settings just to show you how easy it is:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+  so.addVariable(&lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;additional_chart_settings&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;,&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;&lt;settings&gt;&lt;labels&gt;&lt;label&gt;&lt;x&gt;250&lt;/x&gt;&lt;y&gt;25&lt;/y&gt;&lt;text_size&gt;18&lt;/text_size&gt;&lt;text&gt;&lt;![CDATA[&lt;b&gt;California Population as of &lt;%= Time.now.to_s(:db) %&gt;&lt;/b&gt;]]&gt;&lt;/text&gt;&lt;/label&gt;&lt;/labels&gt;&lt;/settings&gt;&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;);
+</code></pre>
+
+<p>Ok, let&#8217;s now create our XML view:</p>
+
+<h2>population.xml.builder</h2>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;8&lt;tt&gt;
+&lt;/tt&gt;9&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;10&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;11&lt;tt&gt;
+&lt;/tt&gt;12&lt;tt&gt;
+&lt;/tt&gt;13&lt;tt&gt;
+&lt;/tt&gt;14&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;15&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;16&lt;tt&gt;
+&lt;/tt&gt;17&lt;tt&gt;
+&lt;/tt&gt;18&lt;tt&gt;
+&lt;/tt&gt;19&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;20&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;21&lt;tt&gt;
+&lt;/tt&gt;22&lt;tt&gt;
+&lt;/tt&gt;23&lt;tt&gt;
+&lt;/tt&gt;24&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;25&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;26&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+  xml.instruct! &lt;span class="sy"&gt;:xml&lt;/span&gt;, &lt;span class="sy"&gt;:version&lt;/span&gt;=&gt;&lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;1.0&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="sy"&gt;:encoding&lt;/span&gt;=&gt;&lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;UTF-8&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  xml.chart &lt;span class="r"&gt;do&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="c"&gt;# xml.message "You can broadcast any message to chart from data XML file", :bg_color =&gt; "#FFFFFF", :text_color =&gt; "#000000"&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;    xml.series &lt;span class="r"&gt;do&lt;/span&gt;    &lt;tt&gt;
+&lt;/tt&gt;      &lt;span class="iv"&gt;@cities&lt;/span&gt;.each_with_index &lt;span class="r"&gt;do&lt;/span&gt; |city, index|&lt;tt&gt;
+&lt;/tt&gt;        xml.value city.name, &lt;span class="sy"&gt;:xid&lt;/span&gt; =&gt; index&lt;tt&gt;
+&lt;/tt&gt;      &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;    xml.graphs &lt;span class="r"&gt;do&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;     &lt;span class="c"&gt;#the gid is used in the settings file to set different settings just for this graph&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;      xml.graph &lt;span class="sy"&gt;:gid&lt;/span&gt; =&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;population&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt; &lt;span class="r"&gt;do&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;        &lt;span class="iv"&gt;@cities&lt;/span&gt;.each_with_index &lt;span class="r"&gt;do&lt;/span&gt; |city, index|&lt;tt&gt;
+&lt;/tt&gt;          population = city.population&lt;tt&gt;
+&lt;/tt&gt;          &lt;span class="r"&gt;case&lt;/span&gt; population&lt;tt&gt;
+&lt;/tt&gt;            &lt;span class="c"&gt;# When the population is &gt; 1 million, show the bar in red/pink&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;            &lt;span class="r"&gt;when&lt;/span&gt; &gt; &lt;span class="i"&gt;100000&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;              xml.value value, &lt;span class="sy"&gt;:xid&lt;/span&gt; =&gt; index, &lt;span class="sy"&gt;:color&lt;/span&gt; =&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;#ff43a8&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="sy"&gt;:gradient_fill_colors&lt;/span&gt; =&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;#960040,#ff43a8&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="sy"&gt;:description&lt;/span&gt; =&gt; level&lt;tt&gt;
+&lt;/tt&gt;            &lt;span class="r"&gt;else&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;              xml.value value, &lt;span class="sy"&gt;:xid&lt;/span&gt; =&gt; index, &lt;span class="sy"&gt;:color&lt;/span&gt; =&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;#00C3C6&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="sy"&gt;:gradient_fill_colors&lt;/span&gt; =&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;#009c9d,#00C3C6&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="sy"&gt;:description&lt;/span&gt; =&gt; level&lt;tt&gt;
+&lt;/tt&gt;            &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;        &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;      &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="r"&gt;end&lt;/span&gt;
+</code></pre>
+
+<p>Nothing fancy, we first created a series with all the city names:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+  xml.series &lt;span class="r"&gt;do&lt;/span&gt;    &lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="iv"&gt;@cities&lt;/span&gt;.each_with_index &lt;span class="r"&gt;do&lt;/span&gt; |city, index|&lt;tt&gt;
+&lt;/tt&gt;      xml.value city.name, &lt;span class="sy"&gt;:xid&lt;/span&gt; =&gt; index&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;  &lt;span class="r"&gt;end&lt;/span&gt;
+</code></pre>
+
+<p>Then we created another node with the values for each city.
+Since it would be cool to display some bars in a different color, we used a case-switch statement:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;8&lt;tt&gt;
+&lt;/tt&gt;9&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;10&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;11&lt;tt&gt;
+&lt;/tt&gt;12&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+    xml.graph &lt;span class="sy"&gt;:gid&lt;/span&gt; =&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;population&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt; &lt;span class="r"&gt;do&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;      &lt;span class="iv"&gt;@cities&lt;/span&gt;.each_with_index &lt;span class="r"&gt;do&lt;/span&gt; |city, index|&lt;tt&gt;
+&lt;/tt&gt;        population = city.population&lt;tt&gt;
+&lt;/tt&gt;        &lt;span class="r"&gt;case&lt;/span&gt; population&lt;tt&gt;
+&lt;/tt&gt;          &lt;span class="c"&gt;# When the population is &gt; 1 million, show the bar in red/pink&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;          &lt;span class="r"&gt;when&lt;/span&gt; &gt; &lt;span class="i"&gt;100000&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;            xml.value value, &lt;span class="sy"&gt;:xid&lt;/span&gt; =&gt; index, &lt;span class="sy"&gt;:color&lt;/span&gt; =&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;#ff43a8&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="sy"&gt;:gradient_fill_colors&lt;/span&gt; =&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;#960040,#ff43a8&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="sy"&gt;:description&lt;/span&gt; =&gt; level&lt;tt&gt;
+&lt;/tt&gt;          &lt;span class="r"&gt;else&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;            xml.value value, &lt;span class="sy"&gt;:xid&lt;/span&gt; =&gt; index, &lt;span class="sy"&gt;:color&lt;/span&gt; =&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;#00C3C6&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="sy"&gt;:gradient_fill_colors&lt;/span&gt; =&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;#009c9d,#00C3C6&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="sy"&gt;:description&lt;/span&gt; =&gt; level&lt;tt&gt;
+&lt;/tt&gt;          &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;      &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;span class="r"&gt;end&lt;/span&gt;
+</code></pre>
+
+<p>Depending on what you want to display, you might need to have different colors or a different tooltip text, or load an animation or image&#8230;  and as you can see, it&#8217;s <em>REALLY</em> easy.</p>
+
+<p>Got to http://yoursite.com/reports/population to enjoy your new fancy graph.</p>
+
+<h2>That&#8217;s it, you are done!</h2>
+
+<p>Time to tweak your settings file to make your graph look <em>awesome</em>.
+Since you now have a lot of free time, you can start re-factoring your code and make sure you have a good test coverage.</p>
+
+<p>Good luck!</p>
+</div>
+
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-10-04T03:06:00-07:00" pubdate data-updated="true">Oct 4<span>th</span>, 2007</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        
+          <div class='legacy'><a href="http://railsontherun.com/2007/10/04/sexy-charts-in-less-than-5-minutes/">Original article</a></div>
+        
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        <div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+  <a class="addthis_button_tweet"></a>
+  </br>
+	
+	
+  <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+  </br>
+	
+	<a class="addthis_counter addthis_pill_style"></a></br>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=mattetti"></script>
+</div>
+
+        
+    </div>
+
+
+</article>
+
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2013 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+  var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+    '010526096358170648343:WMX140696544', customSearchOptions);
+  customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+  var options = new google.search.DrawOptions();
+  options.enableSearchboxOnly("http://matt.aimonetti.net/search");
+  customSearchControl.draw('cse-search-form', options);
+  }, true);
+
+if (navigator.userAgent.match(/iPad/i) != null) {
+  $('meta[name=viewport]').attr('content', 'width=1200,initial-scale=1,maximum-scale=1');
+}
+</script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'mattaimonetti';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+</body>
+</html>

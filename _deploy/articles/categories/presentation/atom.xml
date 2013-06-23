@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Presentation | Matt Aimonetti]]></title>
+  <link href="http://matt.aimonetti.net/articles/categories/presentation/atom.xml" rel="self"/>
+  <link href="http://matt.aimonetti.net/"/>
+  <updated>2013-06-23T10:54:58-07:00</updated>
+  <id>http://matt.aimonetti.net/</id>
+  <author>
+    <name><![CDATA[Matt Aimonetti]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[RubyConf 2012 - Ruby vs. The World]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/11/02/rubyconf-2012-ruby-vs-the-world/"/>
+    <updated>2012-11-02T20:47:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/11/02/rubyconf-2012-ruby-vs-the-world</id>
+    <content type="html"><![CDATA[<p>During <a href="http://rubyconf.com/">RubyConf 2012</a> in Denver, Colorado Matt
+Aimonetti gave a talk entitled <strong>Ruby Vs. The World</strong>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>Ruby is an awesome programming language, it's so pleasing you probably haven't seriously looked at other languages since you switched. The programming world is evolving fast, new languages are created daily, new trends are emerging. Let's take some time to look at a few languages from a Ruby developer perspective.</p>
+
+<p><img src="https://speakerd.s3.amazonaws.com/presentations/50941f6aeb710400020019ac/slide_19.jpg" alt="Matt Aimonetti talks Scala, Clojure, Go and Ruby" /></p>
+
+<h2>Slides</h2>
+
+<script async class="speakerdeck-embed" data-id="50941f6aeb710400020019ac" data-ratio="1.2994923857868" src="http://matt.aimonetti.net//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>The slides are available on [Matt's SpeakerDeck page]https://speakerdeck.com/matt_aimonetti/ruby-vs-the-world) and can be <a href="">downloaded here</a>.</p>
+
+<h2>Video</h2>
+
+<iframe width="640" height="360" src="http://www.youtube.com/embed/V_k3q37Tieg" frameborder="0" allowfullscreen></iframe>
+
+
+<h2>Presentation website</h2>
+
+<p>Matt's presentation was filmed by <a href="http://confreaks.com">Confreaks</a> and posted <a href="http://confreaks.com/videos/1288-rubyconf2012-ruby-vs-the-world">here</a>.</p>
+
+<p>For more RubyConf 2012 talks, go <a href="http://confreaks.com/events/rubyconf2012">there</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Aloha RubyConf - mmm..mruby or why yet another Ruby implementation]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/10/09/mmm-dot-mruby-or-why-yet-another-ruby-implementation/"/>
+    <updated>2012-10-09T20:14:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/10/09/mmm-dot-mruby-or-why-yet-another-ruby-implementation</id>
+    <content type="html"><![CDATA[<p>During <a href="http://aloharubyconf.com/">Aloha RubyConf 2012</a> in Honolulu, Hawaii Matt
+Aimonetti gave a talk entitled <strong>mmm..mruby or why yet another Ruby implementation</strong>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>mruby is Matz’ new Ruby implementation, it’s not cooler than node.js, it doesn’t natively support Hypstermedia,
+ it looks just like the good old Ruby. So why should we, as a community care?</p>
+
+<p>Matt's talk is divided in two parts, an introduction of mruby (embedded
+Ruby) and and revisiting Ruby.</p>
+
+<p><img src="https://speakerd.s3.amazonaws.com/presentations/50752712f8a4020002043005/slide_10.jpg?1350068026" alt="Matt Aimonetti talks about mruby" /></p>
+
+<h2>Slides</h2>
+
+<script async class="speakerdeck-embed" data-id="50752712f8a4020002043005" data-ratio="1.2994923857868" src="http://matt.aimonetti.net//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>The slides are available on [Matt's SpeakerDeck page]https://speakerdeck.com/matt_aimonetti/mmmm-dot-mruby-everywhere-and-revisiting-ruby) and can be <a href="">downloaded here</a>.</p>
+
+<h2>Video</h2>
+
+<iframe width="640" height="360" src="http://www.youtube.com/embed/eZYRd86OTbk" frameborder="0" allowfullscreen></iframe>
+
+
+<h2>Presentation website</h2>
+
+<p>Matt's presentation was filmed by <a href="http://confreaks.com">Confreaks</a> and posted <a href="http://confreaks.com/videos/1252-aloharuby2012-mmm-mruby-or-why-yet-another-ruby-implementation">here</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PulsoConf 2012 - Tour of programming languages]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/10/05/pulsoconf-tour-of-programming-languages/"/>
+    <updated>2012-10-05T15:09:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/10/05/pulsoconf-tour-of-programming-languages</id>
+    <content type="html"><![CDATA[<p>During <a href="http://pulsoconf.co/">PulsoConf 2012</a> in Bogotá, Colombia Matt
+Aimonetti gave a talk entitled <em>Tower of
+Babel: a tour of programming languages</em>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>Programming languages affect the way one looks and solves problems. But
+comparing programming languages isn't as simple as drawing a table
+comparing features.</p>
+
+<p><img src="/images/matt_aimonetti_languages_table.jpg" alt="Matt Aimonetti compares programming languages" /></p>
+
+<p>In his talk, Matt shows what he likes, dislikes, the philosophy and concrete example of how to use 7 programming
+languages:</p>
+
+<ul>
+<li>Ruby</li>
+<li>JavaScript</li>
+<li>CoffeeScript</li>
+<li>Objective-C</li>
+<li>Clojure</li>
+<li>Scala</li>
+<li>Go</li>
+</ul>
+
+
+<h2>Slides</h2>
+
+<script async class="speakerdeck-embed" data-id="50662c32244a9d000202ba53" data-ratio="1.299492385786802" src="http://matt.aimonetti.net//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>The slides are available on <a href="https://speakerdeck.com/u/matt_aimonetti/p/tower-of-babel-a-tour-of-programming-languages">Matt's SpeakerDeck</a> and can be <a href="">downloaded here</a>.</p>
+
+<h2>Video</h2>
+
+<p>TBD</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LA RubyConf 2012 - Ruby: time to move on]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/02/04/larubyconf-2012/"/>
+    <updated>2012-02-04T15:09:00-08:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/02/04/larubyconf-2012</id>
+    <content type="html"><![CDATA[<p>During <a href="http://larubyconf.org/">LA RubyConf 2012</a> in Los Angeles, CA Matt
+Aimonetti gave a talk entitled <em>Ruby: time to move on</em>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>Let's be honest, Ruby became mainstream a few years back and it isn't the cool underground programming language it once was. It's quite likely that your cousin's boyfriend who's "into computers" knows what Ruby on Rails is. There are hundreds of books, conferences, training and meetups for Rubyists. Recruiters fight to hire whoever knows how to generate a scaffolded Rails app. But now cool kids can't stop talking about node.js, CoffeeScript, Clojure, Haskell and pushing code to the UI layer. What does it mean for the new, existing and prospecting Ruby developers? Is it time to jump ship and move on to something else?</p>
+
+<p><img src="/images/matt_aimonetti_timeToMoveOn.jpg" alt="Matt Aimonetti showing that the end result is what matters the most" /></p>
+
+<h2>Slides</h2>
+
+<script async class="speakerdeck-embed" data-id="4f904c27a542080022020653" data-ratio="1.299492385786802" src="http://speakerdeck.com/assets/embed.js"></script>
+
+
+<p>The slides are available on <a href="http://speakerdeck.com/u/matt_aimonetti/p/ruby-time-to-move-on">Matt's SpeakerDeck</a> and can be <a href="">downloaded here</a>.</p>
+
+<h2>Video</h2>
+
+<p><video width='640' height='360' preload='none' controls poster=' /images/matt_aimonetti_larubyconf2012_video.png'><source src='http://cdn.confreaks.com/system/assets/datas/3173/original/816-larubyconf2012-time-to-move-away-from-ruby-small.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/></video></p>
+
+<h2>Presentation website</h2>
+
+<p>Matt's presentation was filmed by <a href="http://confreaks.com">Confreaks</a> and posted <a href="http://confreaks.com/videos/816-larubyconf2012-time-to-move-away-from-ruby">here</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RubyConf Argentina 2011 - Inside Ruby]]></title>
+    <link href="http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011/"/>
+    <updated>2011-11-08T15:42:00-08:00</updated>
+    <id>http://matt.aimonetti.net/posts/2011/11/08/rubyconf-argentina-2011</id>
+    <content type="html"><![CDATA[<p>During <a href="http://rubyconfargentina.org/en">RubyConf Argentina 2011</a> in Buenos Aires, Argentina Matt
+Aimonetti gave a talk entitled <em>Inside Ruby: concurrency &amp; garbage collection explained</em>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>Concurrency in Ruby and Python implementations is quite a hot topic
+nowadays. In this talk, Matt will explain how concurrency works for a
+language that uses a Global Interpreter Lock and it means concretely.
+Finally Aimonetti will also cover Ruby's garbage collector (GC)
+and why it's important to understand how automatic memory
+management works to get better performance out of your code.</p>
+
+<h2>Slides</h2>
+
+<p><a href=""><img src="/images/Matt_Aimonetti_-_RubyConf_Argentina_2011.jpg" alt="Matt Aimonetti's slides of his RubyConf Argentina presentation" /></a>
+<a href="">The HTML5 slides can be seen online</a>.</p>
+
+<h2>Video</h2>
+
+<div class="video-container">
+<iframe src="http://player.vimeo.com/video/38531248?title=0&amp;byline=0&amp;portrait=0" width="600" height="500" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe><p><a href="http://vimeo.com/38531248">Matt Aimonetti - Inside Ruby: concurrency & garbage collection explained</a> from <a href="http://vimeo.com/rubyargentina">Ruby Argentina</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
+</div>
+
+
+<p><a href="">Vimeo page of the presentation</a></p>
+
+<h2>Presentation website</h2>
+
+<p>Matt's presentation was filmed by <a href="http://rubyconfigargentina.org/">RubyConf Argentina</a> and posted <a href="">here</a>.</p>
+
+<h2>Matt's articles related to this presentation</h2>
+
+<ul>
+<li><a href="/posts/2011/10/03/about-concurrency-and-the-gil/">About concurrency and the GIL</a></li>
+<li><a href="/posts/2011/10/18/data-safety-and-gil-removal/">Data safety and GIL removal</a></li>
+<li><a href="/posts/2011/02/22/concurrency-in-ruby-explained/">Concurrency in Ruby explained</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RubyConf 2011 - Complex Ruby concepts simplified]]></title>
+    <link href="http://matt.aimonetti.net/posts/2011/10/01/rubyconf-2011/"/>
+    <updated>2011-10-01T15:09:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2011/10/01/rubyconf-2011</id>
+    <content type="html"><![CDATA[<p>During <a href="http://rubyconf.org/">RubyConf 2011</a> in New Orleans, LA Matt
+Aimonetti gave a talk entitled <em>Complex Ruby concepts simplified</em>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>Programming languages, such as Ruby, are natural and elegant. But to achieve this elegance, things have to happen under the hood. Garbage Collection, concurrency, Global Interpreter Lock, metaprogramming, C extensions are just some of the things happening with or without our knowledge. Trying to understand these concepts, their implementations and their implications in daily coding might seem daunting. However, having a good understanding of these topics will make you a better developer. No CS degree or PhD required to attend this talk.</p>
+
+<p>At the end of the talk, Matz (Ruby's creator) came on stage to answer
+some questions related to what was explained.</p>
+
+<h2>Slides</h2>
+
+<p><a href="">The HTML5 slides can be seen online</a> online.</p>
+
+<h2>Video</h2>
+
+<p><video width='640' height='360' preload='none' controls poster=' /images/matt_aimonetti_presentation_ruby.jpg'><source src='http://cdn.confreaks.com/system/assets/datas/2666/original/714-rubyconf2011-complex-ruby-concepts-dummified-small.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/></video></p>
+
+<h2>Presentation website</h2>
+
+<p>Matt's presentation was filmed by <a href="http://confreaks.com/">confreaks</a> and the dedicated page
+for the talk is available <a href="">here</a>.</p>
+
+<h2>Matt's articles related to this presentation</h2>
+
+<ul>
+<li><a href="/posts/2011/10/03/about-concurrency-and-the-gil/">About concurrency and the GIL</a></li>
+<li><a href="/posts/2011/10/18/data-safety-and-gil-removal/">Data safety and GIL removal</a></li>
+<li><a href="/posts/2011/02/22/concurrency-in-ruby-explained/">Concurrency in Ruby explained</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RubyConf 2010 - MacRuby: Why and How]]></title>
+    <link href="http://matt.aimonetti.net/posts/2010/11/12/rubyconf-2010-macruby-talk/"/>
+    <updated>2010-11-12T16:00:51-08:00</updated>
+    <id>http://matt.aimonetti.net/posts/2010/11/12/rubyconf-2010-macruby-talk</id>
+    <content type="html"><![CDATA[<h2>Description of the talk:</h2>
+
+<p>This year I gave the traditional Apple's MacRuby talk at RubyConf.
+My presentation focused on 2 axis:</p>
+
+<ul>
+<li>What's new since last RubyConf</li>
+<li>Show some examples of how fun it is to hack with MacRuby</li>
+</ul>
+
+
+<h2>Video</h2>
+
+<p><video width='640' height='360' preload='none' controls poster=' /images/matt_aimonetti_rubyconf2010.jpeg'><source src='http://cdn.confreaks.com/system/assets/datas/768/original/448-rubyconf2010-macruby-why-and-how-small.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/></video></p>
+
+<p>Other video formats are available <a href="http://www.confreaks.com/videos/448-rubyconf2010-macruby-why-and-how">here</a></p>
+
+<h2>Slides</h2>
+
+<script async class="speakerdeck-embed" data-id="4f90697149bc25001f023143" data-ratio="1.299492385786802" src="http://speakerdeck.com/assets/embed.js"></script>
+
+
+<p><strong><a href="http://speakerdeck.com/u/matt_aimonetti/p/rubyconf-2010-macruby-why-and-how">Presentation slides available on Speakerdeck</a></strong></p>
+
+<h2>Details of the talk content</h2>
+
+<p>MacRuby is currently at version 0.7.1 and version 0.8 is in preparation.
+Since last new a lot of things happened, here is a quick summary:</p>
+
+<ul>
+<li><p>Cocoa dev is now considered stable.  Apple gave its seal of approval, most of the bugs are fixed and it's currently used on production projects and some apps were even submitted to the Mac App Store.</p></li>
+<li><p>Ahead of Time compilation. This is quite a major improvement with many repercussions. Being to compile your Ruby source code means faster boot time and source obfuscation. Two major things to consider when you want to ship a desktop app.</p></li>
+<li><p>Debugger. MacRuby now ships with its own debugger. Of course you can still use GDB and DTrace, but MacRuby's debugger is really easy to use and very powerful.</p></li>
+<li><p>Grand Central Dispatch support and wrapper API. Having to manage threads can be hard for both developers and for the machines having to run the developer code. GCD is an abstraction layer allowing developers to only focus on business logic without having to worry about the underlying details if you don't want to. The end result is an optimum use of all the cores available on a machine and truly concurrent code. Two important notions when writing desktop apps.</p></li>
+<li><p>ControlTower - A webserver for Rack apps written in MacRuby and using GCD for concurrency.</p></li>
+<li><p>New rewritten and more efficient dispatcher. Practically that means that the dispatcher is now thread safe with a per thread cache.</p></li>
+<li><p>RegExp lib switch from Oniguruma to ICU. This was quite a big change and it was required because Oniguruma isn't thread safe and while C Ruby uses a Global Interpreter Lock. MacRuby on the other hand uses native POSIX threads running on their own non-locking, reentrant VM making thread safety critical.</p></li>
+<li><p>More solid foundations - Some key classes we rewritten to improve performance and flexibility.</p></li>
+<li><p>Support for C blocks - Objective-C has been supporting C blocks for a while and some Cocoa APIs require the use of blocks. MacRuby now allows you to use Ruby blocks and to pass them as C blocks. (new BridgeSupport required)</p></li>
+<li><p>Sandboxing - For safety reasons, MacRuby allows you to now sandbox your applications. You can restrict your app from doing some potential dangerous things such as writing to disk, calling the system, accessing internet etc...</p></li>
+<li><p>Mac App Store - This is not something done by the MacRuby team. But it directly affects MacRuby developers wanting to distribute their applications. Think about the exposure that you can app can have. Even if you have a web app, you can use WebKit to wrap it up, hook up a notification, add to that a local backup solution and geo location. Brilliant way to provide an even better user experience and better product exposure. All that really easily if you already know Ruby.</p></li>
+</ul>
+
+
+<p>To give an idea of what can be done I showed some code samples hopefully showing the cool hacking things one can play with:</p>
+
+<ul>
+<li><p>The first demo shows how to use the speech recognizer. The example is really sample you speak the name of someone and his/her picture shows up on screen. Just a few lines of code and you can start screaming commands to your TV to get it to change channel.</p></li>
+<li><p>The second demo is an extremely simple Gowala client using CoreLocation. Yes, Mac desktop and laptops support geo location.</p></li>
+<li><p>Another example of what you do is a sample letting you import all your twitter followers to your address book.</p></li>
+<li><p>You can also use some of the low level OS features such as the Tokenizer. The next example showed how to extend Ruby and use a C function to detect the language of a string.</p></li>
+<li><p>Finally, the last demo shows how to integrate a bluetooth device to control a HTML view via MacRuby and Javascript. All that in just a few lines of code!</p></li>
+</ul>
+
+
+<p>Basically, MacRuby is now mature and it's time for hackers and people trying to get exposure to give it a try.</p>
+
+<h2>Presentation's website</h2>
+
+<p>A page was setup on the confreaks website and available <a href="http://www.confreaks.com/videos/448-rubyconf2010-macruby-why-and-how">here</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ConFoo.ca - Apple's Ruby:  MacRuby]]></title>
+    <link href="http://matt.aimonetti.net/posts/2010/04/11/apples-ruby-macruby/"/>
+    <updated>2010-04-11T09:52:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2010/04/11/apples-ruby-macruby</id>
+    <content type="html"><![CDATA[<p>During <a href="http://confoo.ca/">ConFoo Canada 2010</a> in Montreal, Canada Matt
+Aimonetti gave a talk entitled <em></em>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>For many years, Apple has been shipping its OS with Ruby. But starting about two years ago, Apple started developing their own Ruby implementation on top of Objective-C runtime for performance and compatibility reasons. A developer can already write a fully native and compiled Cocoa application only using the Ruby language and the Cocoa API. But MacRuby is more than an Objective-C replacement, it allows developers to push the traditional boundaries of desktop/mobile applications &amp; games by offering easy integration of web services, creation of p2p application, native GUI for backends web application, reuse of code and much more.</p>
+
+<p>During his talk, Matt Aimonetti, MacRuby team member, will explain the state of the project, its goal and potential as well as show concrete examples of how to use this powerful new Ruby implementation.</p>
+
+<h2>Slides</h2>
+
+<p>Slides are not currently available.</p>
+
+<h2>Presentation's website</h2>
+
+<p><a href="http://confoo.ca/en/2010/session/apple-s-ruby-macruby">Presentation's website</a> contains limited information about the talk.
+An interview with other developers was filmed during the conference and
+is available <a href="http://www.youtube.com/watch?v=SKB4Re12fII">there</a>. Note
+that the interviewed group speaks in French.
+The talk itself wasn't recorded.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ConFoo.ca - Rails for non Ruby developers]]></title>
+    <link href="http://matt.aimonetti.net/posts/2010/04/11/confoo-dot-ca-rails-for-non-ruby-developers/"/>
+    <updated>2010-04-11T09:51:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2010/04/11/confoo-dot-ca-rails-for-non-ruby-developers</id>
+    <content type="html"><![CDATA[<p>During <a href="http://confoo.ca/">ConFoo Canada 2010</a> in Montreal, Canada Matt
+Aimonetti gave a talk entitled <em>Rails for the non Ruby developers</em>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>Unless you have been living on a different planet for the last few years, you have more than likely heard of Ruby on Rails.
+You have probably heard good and bad things about it, and might even have watched some of the famous screencasts.
+The thing is, you don't really know that much about Ruby and are not sure that it is worth learning yet another programming language and a new framework.
+With companies like Apple, Microsoft and Sun investing in Ruby, you might be surprised by how easy the transition can be.</p>
+
+<p>Matt will show you the pros and cons of using Rails. He'll go through some of the myths around the framework and explain why it might be a better fit than you would expect.</p>
+
+<h2>Slides</h2>
+
+<p>Slides are not currently available.</p>
+
+<h2>Presentation's website</h2>
+
+<p><a href="http://confoo.ca/en/2010/session/rails-for-non-ruby-developers">Presentation's website</a> contains limited information about the talk.
+An interview with other developers was filmed during the conference and
+is available <a href="http://www.youtube.com/watch?v=SKB4Re12fII">there</a>. Note
+that the interviewed group speaks in French.
+The talk itself wasn't recorded.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RubyConf 2009 - 2D games for OS X]]></title>
+    <link href="http://matt.aimonetti.net/posts/2009/11/21/rubyconf-2009-2d-games-for-os-x/"/>
+    <updated>2009-11-21T10:25:00-08:00</updated>
+    <id>http://matt.aimonetti.net/posts/2009/11/21/rubyconf-2009-2d-games-for-os-x</id>
+    <content type="html"><![CDATA[<p>During <a href="http://rubyconf.org/">RubyConf 2009</a> in San Francisco, CA Matt
+Aimonetti gave a talk entitled <em>Writing 2D games for the OSX platform in Ruby</em>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>Are you a developer who would love to get into video games but get scared when he hears "OpenGL" or "rendering engines"? Or Maybe, you never considered writing a video game because you have heard Ruby was slow and you are not ready to give up on your favorite programming language. This talk is for you then. Together, we will build a very simple game using Ruby and the development tools offered by Apple. At the end of the presentation you will be ready to get started on your own project.</p>
+
+<p><a href="http://speakerdeck.com/u/matt_aimonetti/p/rubyconf-2009-writing-2d-games-for-the-osx-platform-in-ruby"><img src="/images/matt_aimonetti_2d_video_games.jpg" alt="Matt Aimonetti demonstrating a simple game workflow" /></a></p>
+
+<h2>Slides</h2>
+
+<script async class="speakerdeck-embed" data-id="4f911cf25edf72002200cf4e" data-ratio="1.299492385786802" src="http://speakerdeck.com/assets/embed.js"></script>
+
+
+<p>The slides are available on <a href="http://speakerdeck.com/u/matt_aimonetti/p/rubyconf-2009-writing-2d-games-for-the-osx-platform-in-ruby">Matt's SpeakerDeck</a> and can be <a href="">downloaded here</a>.</p>
+
+<h2>Video</h2>
+
+<p><video width='640' height='360' preload='none' controls poster=' http://www.confreaks.com/system/videos/images/192/preview/21-nov-2009-10-25-writing-d-games-for-the-osx-platform-in-ruby-matt-aimonetti-preview.png'><source src='http://cdn.confreaks.com/system/assets/datas/420/original/21-nov-2009-10-25-writing-d-games-for-the-osx-platform-in-ruby-matt-aimonetti-small.mp4' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/></video></p>
+
+<h2>Presentation website</h2>
+
+<p>Matt's presentation was filmed by <a href="http://confreaks.com/">confreaks</a> and the dedicated page for the talk is available <a href="http://www.confreaks.com/videos/192-rubyconf2009-writing-2d-games-for-the-osx-platform-in-ruby">here</a></p>
+
+<h2>Source Code</h2>
+
+<p>The code and game demonstrated in this talk is available on Matt
+<a href="https://github.com/mattetti/phileas_frog">Aimonetti's GitHub repository</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RailsSummit - The future of Ruby and Rails]]></title>
+    <link href="http://matt.aimonetti.net/posts/2009/10/23/railssummit-2009/"/>
+    <updated>2009-10-23T10:17:45-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2009/10/23/railssummit-2009</id>
+    <content type="html"><![CDATA[<p>During <a href="http://www.flickr.com/photos/danicuki/sets/72157622452350763/">Rails Summit2009</a> in São Paulo, Brazil Matt
+Aimonetti gave a talk entitled <em>The future of Ruby and Rails</em>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>Plans for Rails 3 and tour of the various Ruby implementations.</p>
+
+<h2>Slides</h2>
+
+<script async class="speakerdeck-embed" data-id="4f90acc391b203001f002180" data-ratio="1.3333333333333333" src="http://matt.aimonetti.net//speakerdeck.com/assets/embed.js"></script>
+
+
+<h2>Video</h2>
+
+<p>The video of this talk is available <a href="http://blip.tv/agaelebe/ruby-rails-future-matt-aimonetti-rails-summit-2009-2748035">here</a>.</p>
+
+<h2>Blog post</h2>
+
+<p>I have had the opportunity to go to and speak at many conferences but this year was the first time I had the chance to go to <a href="http://railssummit.com.br">RailsSummit</a> in São Paulo, Brazil.</p>
+
+<p>I was really looking forward to this trip and I have to say it went beyond my expectations. I had heard really good things from people such as the <a href="http://www.phusion.nl/">Phusion guys</a> (Ninh &amp; Hongli), Gregg Pollack and others.</p>
+
+<p>For those who don't know, RailsSummit is one of the biggest, if not the biggest, Ruby event in Latin America. It's organized yearly by <a href="http://www.locaweb.com.br/">Locaweb</a>, the #1 hosting company in Brazil (props to Akita &amp; Cristiane for their work).</p>
+
+<p><img src="http://farm3.static.flickr.com/2761/4027342992_789777fd03_m_d.jpg" alt="" /></p>
+
+<p>As part of my involvement in the Ruby community I have met a lot of Brazilians always willing to help and especially giving time to translate content. (A good example would be the <a href="http://wiki.rubyonrails.org/pt/start">Portuguese version of the Rails wiki</a> or <a href="http://blog.plataformatec.com.br/">José Valim</a> GSOC contribution) However, I did not realize how fast Rails was growing over here.</p>
+
+<p>To come back to the conference, I have to say it was one of the best conference I have gone to. Chad Fowler, who gave the opening keynote, later told me that it reminded him of the first Ruby conferences in the US . For me, what made a huge difference was the fact that it was a very positive conference. People were happy to be here, eager to share and you could feel the passion. Unfortunately, I missed the first few Ruby conferences, but I can totally imagine how must have been. Passionate people, not trying to push their products but instead, share the cool stuff they've been working on. This is exactly the feeling I had during this conference.</p>
+
+<p>Maybe it's because I don't understand Portuguese well enough or maybe it's just a cultural thing, but the people at the conference were just super friendly and always willing to help. I was really glad to meet those who have been using some of my work, some new people to Ruby and people who don't do Ruby but were just interested in knowing what was going on in the Ruby world.</p>
+
+<p><img src="http://farm3.static.flickr.com/2719/4027357802_1082f38090.jpg" alt="" /></p>
+
+<p>The schedule was pretty packed and the discussions very interesting, you could certainly feel the excitement in the air. Ruby seems to catching up quickly over there. Brazilian Rubyists seem to be very pragmatic and a good illustration of that was certainly made by <a href="http://improveit.com.br/en">Vinicus Teles</a>, Brazil Agile XPert, who shared tips on how to release a successful product.</p>
+
+<p>I stayed a few days after the conference and went to visit the Rubyists in Rio. Rio is a great city. It has some of the best soccer players in the world and some seriously talented software developers. Ruby &amp; Rails are not just the new trendy startup secret to success, companies like globo.com, currently the largest TV network in <a href="http://en.wikipedia.org/wiki/Latin_America">Latin America</a> and the fourth largest in the world, also started using Ruby and Rails. I had the opportunity to visit their office and meet their teams. It's very exciting to see how they use Agile/XP and Ruby and how they seem to be so successful. But I will keep that for another post.</p>
+
+<p>Overall, even though the actual traveling to/from Brazil was a bit long, RailsSummit was a blast. I really hope to be able to come back next year, and by then, hopefully my Portuguese will have improved.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RailsConf 2009 - Rails 3: Stepping off of the golden path]]></title>
+    <link href="http://matt.aimonetti.net/posts/2009/05/08/railsconf-2009/"/>
+    <updated>2009-05-08T12:18:18-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2009/05/08/railsconf-2009</id>
+    <content type="html"><![CDATA[<p>During <a href="http://en.oreilly.com/rails2009/">RailsConf 2009</a> in Las Vegas, Nevada Matt
+Aimonetti gave a talk entitled <em>Rails 3: Stepping off of the golden path</em>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>Back in December 2008, the Rails and Merb core teams surprised everybody by deciding to merge their teams and focus their energy on a common release: Rails 3.0. On one hand, Rails is famous for being an opinionated Rapid Application Development framework following the well known “convention over configuration” design paradigm. On the other hand, Merb is known for its performance, extreme modularity and greenfield experimentations. The new unified team is working on having the best of both worlds, but the real questions are:</p>
+
+<p>How does that affect me as a Ruby/Rails/Merb developer? When should I step off of the golden path and why?</p>
+
+<p>Matt Aimonetti, Merb core and Rails team member will take you through the new world of possibilities now available to Rails 3.0 developers. You will see the pros and cons of different options for people desiring to step off the “golden path”. Matt will show concrete examples of application/cases where alternative solutions could be more appropriate and others where you are better off staying on the golden path</p>
+
+<h2>Slides</h2>
+
+<script async class="speakerdeck-embed" data-id="4f91748891b203001f01a62c" data-ratio="1.299492385786802" src="http://matt.aimonetti.net//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>A PDF version can also be downloaded <a href="">here</a>.</p>
+
+<h2>Video</h2>
+
+<p>The presentation wasn't recorded.</p>
+
+<h2>Blog post</h2>
+
+<p>RailsConf 2009 has now finished.  This time last year, no one would have ever guessed that the Merb and Rails teams would join forces and focus on what will hopefully be known as one of the best Web Frameworks.</p>
+
+<p>It was encouraging to see so many people excited about what's being ported over from Merb and the new options available to people who are currently limited by the existing stack. For those interested in pushing Rails further and doing stuff out of the norm, here are my slides. <a href="http://www.workingwithrails.com/person/5919-arthur-zapparoli">Arthur Zapparoli</a> from <a href="http://www.rubyonrails.pro.br/">Brazilian Rails squad</a> recorded most of the talk and told me he will upload the video ASAP. You can also read <a href="http://yehudakatz.com/2009/05/08/railsconf-wrapup/">Yehuda Katz' blog</a> which covers what he talked about.</p>
+
+<p>It was really great to meet a lot of new people as well as people I only knew via IRC/IM/twitter.</p>
+
+<p>It was a great honor to finally meet <a href="http://twitter.com/dkubb">Dan Kubb</a> (DataMapper), <a href="http://twitter.com/ninh">Ninh Hernandez-Búi</a> &amp; <a href="http://twitter.com/phusion_nl">Hongli McLovin Lai (Phusion)</a>, <a href="http://twitter.com/peterc">Peter Cooper</a> (<a href="http://www.rubyinside.com/">RubyInside</a>), <a href="http://twitter.com/rsim">Raimonds Simanovskis</a> (Oracle adapter for AR), <a href="http://weblogs.java.net/blog/arungupta/">Arun Gupta</a> (Sun/Glassfish),  <a href="http://twitter.com/copiousfreetime">Jeremy Hinegardner</a> (crate), <a href="http://maximilien.org">Michael Maxilien</a> (IBM), Dana Jones (<a href="http://railsbridge.org/">railsbridge</a>), Zach Zolton &amp; Geoff Buesing (CouchRest) and of course the Brazilian crew (lots of awesome .br guys came this year, I'm looking forward to RailsSummit) and last but not least, the French speaking crew (I'm glad to see Ruby is picking up back home). (I know I'm forgetting people... sorry about that)</p>
+
+<p>It was also really nice to chat with some domain experts like Dave Astels, Aslak Hellesøy, Rich Kilmer, David Chelimsky, Ryan Brown, Derek Neighbors etc.. to get their feedback on various projects I'm working on.</p>
+
+<p>Leaving Vegas, I feel like the Rails community is expanding quickly (it was the first RailsConf for 1/4 to 1/5 of the attendees) and that the community is organizing itself to welcome a new audience (better documentation, great initiatives like <a href="http://railsbridge.org/">railsbridge.org</a>, willingness to help), as well as trying to be more available to the 'Enterprise' world.</p>
+
+<p>These feelings were enforced during our Rails Activism BOF and after talking with 3rd party developers and sponsors really trying to solve problems that newcomers to Rails are now facing. This is an exciting time.</p>
+
+<h2>Presentation website</h2>
+
+<p>O'Reilly wrote <a href="http://en.oreilly.com/rails2009/public/schedule/detail/7539">a page</a> covering this presentation.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Go | Matt Aimonetti]]></title>
+  <link href="http://matt.aimonetti.net/articles/categories/go/atom.xml" rel="self"/>
+  <link href="http://matt.aimonetti.net/"/>
+  <updated>2013-06-23T10:54:58-07:00</updated>
+  <id>http://matt.aimonetti.net/</id>
+  <author>
+    <name><![CDATA[Matt Aimonetti]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Real life concurrency in Go]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/11/27/real-life-concurrency-in-go/"/>
+    <updated>2012-11-27T10:08:00-08:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/11/27/real-life-concurrency-in-go</id>
+    <content type="html"><![CDATA[<p>The structure of a programming language reflects the challenges and solutions the
+designers decided to address. Each designer coming with his/her own background
+decides to tackle some specific issues in a novel way and/or often
+decides to borrow existing paradigms from other languages.
+We can't, then, fairly judge a language without understanding
+what problem the language designer was trying to address.</p>
+
+<p>Today we are going to look at <a href="http://golang.org/">Google's Go language</a>.
+Go approaches concurrency from an interesting view point. But instead of digging
+into the history and reasoning which led to this approach, I'd like to
+show you the language constructs by actually writing real life code.</p>
+
+<h2>Fetching web resources concurrently</h2>
+
+<p>The following example is taken from my recent presentation <a href="/posts/2012/11/02/rubyconf-2012-ruby-vs-the-world/">Ruby vs. the World</a>. I explored a few programming languages and
+showed how they changed my Ruby.</p>
+
+<p>To show how <a href="http://golang.org/">Go</a> addresses concurrency, I decided to build a
+program which would concurrently fetch various web resources, wait for all of
+them to be fetched, then process them all at once. In other
+programming languages, we could have used <a href="http://en.wikipedia.org/wiki/Thread_(computing">threads</a>) and a <a href="http://en.wikipedia.org/wiki/Semaphore_(programming">semaphore</a>), <a href="http://en.wikipedia.org/wiki/Actor_model">actors</a> or
+<a href="http://en.wikipedia.org/wiki/Callbacks">callbacks</a>. Go's approach is <a href="http://en.wikipedia.org/wiki/Communicating_sequential_processes">slightly different</a>, let's walk through the
+code together.</p>
+
+<p>The first part of our code gets us setup:</p>
+
+<p>```go
+package main</p>
+
+<p>import (</p>
+
+<pre><code>"fmt"
+"net/http"
+"time"
+</code></pre>
+
+<p>)</p>
+
+<p>var urls = []string{</p>
+
+<pre><code>"http://www.rubyconf.com/",
+"http://golang.org/",
+"http://matt.aimonetti.net/",
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The code above names our package then imports a few standard libraries that we are going to need. It then defines an array/slice of strings representing the urls we are going to fetch.</p>
+
+<p>Next we define a type we will use a bit later:</p>
+
+<p>```go
+type HttpResponse struct {</p>
+
+<pre><code>url      string
+response *http.Response
+err      error
+</code></pre>
+
+<p>}
+```</p>
+
+<p>You can think of a struct type as a simple representation of a class. Technically, we are defining a structure with some typed attributes. We will later on, create instances of this defined type.</p>
+
+<p>Go implements OOP <a href="http://golang.org/doc/go_faq.html#Is_Go_an_object-oriented_language">slightly differently</a> than other languages.</p>
+
+<blockquote><p>Methods in Go are more general than in C++, Java: they can be defined for any sort of data, even built-in types such as plain, “unboxed” integers. They are not restricted to structs (classes).</p></blockquote>
+
+<p>We can therefore define methods/functions for any type of data,
+including "any/all" types.
+This approach to types is called <a href="http://en.wikipedia.org/wiki/Structural_type_system">structural typing</a>.</p>
+
+<p>Here is the code:</p>
+
+<p>```go
+func asyncHttpGets(urls []string) []*HttpResponse {</p>
+
+<pre><code>ch := make(chan *HttpResponse)
+responses := []*HttpResponse{}
+for _, url := range urls {
+    go func(url string) {
+        fmt.Printf("Fetching %s \n", url)
+        resp, err := http.Get(url)
+        ch &lt;- &amp;HttpResponse{url, resp, err}
+    }(url)
+}
+
+for {
+    select {
+    case r := &lt;-ch:
+        fmt.Printf("%s was fetched\n", r.url)
+        responses = append(responses, r)
+        if len(responses) == len(urls) {
+            return responses
+        }
+    case &lt;-time.After(50 * time.Millisecond):
+        fmt.Printf(".")
+    }
+}
+return responses
+</code></pre>
+
+<p>}
+```</p>
+
+<p>This is the meat of our application. And there is quite a lot of going
+on in just a few lines. Assuming you aren't familiar
+with Go, I'll walk though the code.</p>
+
+<p>Let's start with the signature:</p>
+
+<ul>
+<li>the function is named <code>asyncHttpGets</code></li>
+<li>it takes an argument named<code>urls</code> which is an "array" of strings (I used quotes around the word
+array because it's technically what Go calls a slice)</li>
+<li>it returns an "array" of <code>HttpResponse</code> pointers</li>
+</ul>
+
+
+<p>Then in the function body:</p>
+
+<p>We start by creating an instance of a <code>channel</code> and assigning it to the
+<code>ch</code> variable name. Think of a channel as a pipe like in unix.  We can write to and read from that channel.</p>
+
+<p>In the next line we create an empty instance of a slice containing pointers to
+<code>HttpResponse</code> objects.</p>
+
+<p>Then, using the <code>for range</code> language construct, we iterate through our <code>urls</code>, storing the current value being used into the scoped variable <code>url</code>. The <code>url</code> is then available within the block/lambda/closure marked by the curly braces.</p>
+
+<p>Now this is where the async construct comes in. Using the <code>go</code>
+keyword, we define an anonymous function that takes a string argument representing a
+url.</p>
+
+<p>The function prints this string, then uses the <code>net/http</code>
+library to fetch the web resource. We use the returned data to create an
+instance of our <code>HttpResponse</code> type and send it to the channel.</p>
+
+<p>This part gets a bit confusing because I reused the name <code>url</code>. We call this
+anonymous function right away passing it the <code>url</code> variable set
+by the loop.</p>
+
+<p>You might wonder why we bother to create an anonymous function and
+call it right away instead of just executing the code directly.
+The <code>go</code> keyword executes the code that is passed in as a <em>goroutine</em> which is well explained <a href="http://golang.org/doc/effective_go.html#goroutines">here</a></p>
+
+<blockquote><p>A goroutine is a function executing concurrently with other goroutines in the same address space. It is lightweight, costing little more than the allocation of stack space. And the stacks start small, so they are cheap, and grow by allocating (and freeing) heap storage as required.</p></blockquote>
+
+<p>In other words, you start a <em>goroutine</em> and you let the "system" handle
+how it wants to deal with the low level details. Technically, goroutines
+might run in one or multiple threads, but you don't need to know.
+We trigger each http fetch in a separate goroutine
+and then each response is pushed down the channel.</p>
+
+<p>The second block of code begins with another <code>for</code> loop containing a switch/case statement.
+The case statement checks if something is
+in the channel. If there is something, we...</p>
+
+<ul>
+<li>allocate the data to the <code>r</code> variable</li>
+<li>print the resource's url</li>
+<li>append the resource to the slice we created at the beginning of the function.</li>
+</ul>
+
+
+<p>If the length of the array is the same as the length of all urls we want to fetch, we are done
+fetching all our resources and can return.
+While still waiting for responses, we print a dot every 50ms.</p>
+
+<p><strong>Update:</strong>
+In the first version of this blog post I had used a 'default' case
+statement to print the dot and sleep for 50ms so the loop wouldn't be
+too tight and the concurrency effect was more obvious. But some
+<a href="http://news.ycombinator.com/item?id=4837919">HN comments</a> pointed out that it wasn't needed and I shouldn't block.
+For reference here is what I had before (don't use this code):</p>
+
+<p>```go</p>
+
+<pre><code>for {
+    select {
+    case r := &lt;-ch:
+        fmt.Printf("%s was fetched\n", r.url)
+        responses = append(responses, r)
+        if len(responses) == len(urls) {
+            return responses
+        }
+    default:
+        fmt.Printf(".")
+        time.Sleep(50 * time.Millisecond)
+    }
+}
+</code></pre>
+
+<p>```
+Thank you HackerNews.</p>
+
+<p>With that code constructed, our <code>main</code> can make use of it like this:</p>
+
+<p>```go
+func main() {</p>
+
+<pre><code>results := asyncHttpGets(urls)
+for _, result := range results {
+    fmt.Printf("%s status: %s\n", result.url,
+             result.response.Status)
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Compiling and running the code look like this:</p>
+
+<p><code>bash
+$ go build concurrency_example.go &amp;&amp; ./a.out
+.Fetching http://www.rubyconf.com/
+Fetching http://golang.org/
+Fetching http://matt.aimonetti.net/
+.....http://golang.org/ was fetched
+.......http://www.rubyconf.com/ was fetched
+.http://matt.aimonetti.net/ was fetched
+http://golang.org/ status: 200 OK
+http://www.rubyconf.com/ status: 200 OK
+http://matt.aimonetti.net/ status: 200 OK
+</code></p>
+
+<p>As you can see from the print statements, the 3 urls are triggered in a
+sequential way, but the responses come back in different orders due to different server latencies and response transfer time.</p>
+
+<h2>Conclusion</h2>
+
+<p>Go was designed to make concurrency easy for developers.
+It is a very well documented language and you will find <a href="http://golang.org/doc/effective_go.html#concurrency">on this page
+a lot of information about its concurrency philosophy</a> and details about each available constructs works.</p>
+
+<p>I like that the language is very simple and the constructs
+explicit. If you want to write concurrent code, Go pushes you to do it
+in a specific style. That style is clear and comfortable for me. My code stays simple, I don't go crazy with callbacks, and the
+conventions make it simple for everyone else to understand my code.</p>
+
+<p>Whether or not Go appeals to you stylistically, but clearly the designers
+stayed close to the goal of developing to a 21st century C
+with a special focus on concurrency with the unix approach.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RubyConf 2012 - Ruby vs. The World]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/11/02/rubyconf-2012-ruby-vs-the-world/"/>
+    <updated>2012-11-02T20:47:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/11/02/rubyconf-2012-ruby-vs-the-world</id>
+    <content type="html"><![CDATA[<p>During <a href="http://rubyconf.com/">RubyConf 2012</a> in Denver, Colorado Matt
+Aimonetti gave a talk entitled <strong>Ruby Vs. The World</strong>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>Ruby is an awesome programming language, it's so pleasing you probably haven't seriously looked at other languages since you switched. The programming world is evolving fast, new languages are created daily, new trends are emerging. Let's take some time to look at a few languages from a Ruby developer perspective.</p>
+
+<p><img src="https://speakerd.s3.amazonaws.com/presentations/50941f6aeb710400020019ac/slide_19.jpg" alt="Matt Aimonetti talks Scala, Clojure, Go and Ruby" /></p>
+
+<h2>Slides</h2>
+
+<script async class="speakerdeck-embed" data-id="50941f6aeb710400020019ac" data-ratio="1.2994923857868" src="http://matt.aimonetti.net//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>The slides are available on [Matt's SpeakerDeck page]https://speakerdeck.com/matt_aimonetti/ruby-vs-the-world) and can be <a href="">downloaded here</a>.</p>
+
+<h2>Video</h2>
+
+<iframe width="640" height="360" src="http://www.youtube.com/embed/V_k3q37Tieg" frameborder="0" allowfullscreen></iframe>
+
+
+<h2>Presentation website</h2>
+
+<p>Matt's presentation was filmed by <a href="http://confreaks.com">Confreaks</a> and posted <a href="http://confreaks.com/videos/1288-rubyconf2012-ruby-vs-the-world">here</a>.</p>
+
+<p>For more RubyConf 2012 talks, go <a href="http://confreaks.com/events/rubyconf2012">there</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PulsoConf 2012 - Tour of programming languages]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/10/05/pulsoconf-tour-of-programming-languages/"/>
+    <updated>2012-10-05T15:09:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/10/05/pulsoconf-tour-of-programming-languages</id>
+    <content type="html"><![CDATA[<p>During <a href="http://pulsoconf.co/">PulsoConf 2012</a> in Bogotá, Colombia Matt
+Aimonetti gave a talk entitled <em>Tower of
+Babel: a tour of programming languages</em>.</p>
+
+<h2>Description of the talk:</h2>
+
+<p>Programming languages affect the way one looks and solves problems. But
+comparing programming languages isn't as simple as drawing a table
+comparing features.</p>
+
+<p><img src="/images/matt_aimonetti_languages_table.jpg" alt="Matt Aimonetti compares programming languages" /></p>
+
+<p>In his talk, Matt shows what he likes, dislikes, the philosophy and concrete example of how to use 7 programming
+languages:</p>
+
+<ul>
+<li>Ruby</li>
+<li>JavaScript</li>
+<li>CoffeeScript</li>
+<li>Objective-C</li>
+<li>Clojure</li>
+<li>Scala</li>
+<li>Go</li>
+</ul>
+
+
+<h2>Slides</h2>
+
+<script async class="speakerdeck-embed" data-id="50662c32244a9d000202ba53" data-ratio="1.299492385786802" src="http://matt.aimonetti.net//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>The slides are available on <a href="https://speakerdeck.com/u/matt_aimonetti/p/tower-of-babel-a-tour-of-programming-languages">Matt's SpeakerDeck</a> and can be <a href="">downloaded here</a>.</p>
+
+<h2>Video</h2>
+
+<p>TBD</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Go's reflection example]]></title>
+    <link href="http://matt.aimonetti.net/posts/2011/06/27/golang-reflection-exampl/"/>
+    <updated>2011-06-27T12:12:32-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2011/06/27/golang-reflection-exampl</id>
+    <content type="html"><![CDATA[<p>The <a href="http://golang.org/">Go Programming language</a> is really cool language by Google. According to the sales pitch, it's a <strong><em>"fast, statically typed, compiled language that feels like a dynamically typed, interpreted language"</em></strong>. Well, if you are like me, you don't trust sales pitches because you know that people writing them don't care about you, they care about their product. However cynical you are, you still have to check the facts. So here is a quick demonstration showing how to use Go's reflection feature.</p>
+
+<p>Installing Go is actually really straight forward on a Mac, and slightly harder on Linux, check <a href="http://golang.org/doc/install.html">this guide </a>to see how to build Go in a few minutes.</p>
+
+<p>Once all setup, you might want to read the documentation to see how to code in Go. Go is actually a kind of nice version of C with a<a href="http://golang.org/doc/go_spec.html"> simplified syntax</a>, no header files, really fast compilation time, a garbage collector and a <a href="http://golang.org/doc/effective_go.html?#interfaces_and_types">simple way to approach object inheritance</a> without turning in the complicated mess C++ is. The language is designed around the concept of <a href="http://golang.org/doc/effective_go.html?h=goroutines#concurrency">goroutines, a very nice way to handle concurrency</a>. It also has some features that Rubyists, Pythonistas and Javascripters wouldn't want to live without such as closures and some they probably wish they had such as <a href="http://golang.org/doc/effective_go.html?#defer">defer</a>. But of the things we are used to with dynamic languages is the concept of reflection. In a nutshell, at runtime, your code can reflect on the type of a given object and let the developer act accordingly. Depending on your programming background that might be obvious or you might not see the value. To be honest, that's not the question here. What I'm interested in showing you is how it works.</p>
+
+<p>For the sake of this demo, let's pretend we want to have a "Dish" data model, each instance of the "Dish" type will have a few attributes, an id, a name, an origin and a custom query which really is a function that we store as an attribute. Here is how we would represent that model in Go:</p>
+
+<pre><code>// Data Model
+type Dish struct {
+  Id  int
+  Name string
+  Origin string
+  Query func()
+}
+</code></pre>
+
+<p>This is more or less the equivalent of the following Ruby code:</p>
+
+<pre><code>class Dish
+  attr_accessor :id, :name, :origin, :query
+end
+</code></pre>
+
+<p>Ruby works slightly differently in the sense that defining attribute accessors create getters and setter methods but doesn't technically create instance variables until they are used. Here is what I mean:</p>
+
+<pre><code>shabushabu = Dish.new
+shabushabu.instance_variables # =&gt; []
+shabushabu.name = "Shabu-Shabu"
+shabushabu.instance_variables # =&gt; ["@name"]
+shabushabu.origin = "Japan"
+shabushabu.instance_variables # =&gt; ["@name", "@origin"]
+</code></pre>
+
+<p>Another way of checking on the accessors is to check the methods defined on the object:</p>
+
+<pre><code>shabushabu.methods - Object.new.methods
+=&gt; ["name", "name=", "origin", "origin=", "id=", "query", "query="]
+</code></pre>
+
+<p>But anyway, this post isn't about Ruby, it's about Go and what we would like is to reflect on an object of "Dish" type and see its attributes. The good news is that the Go language ships with a <a href="http://golang.org/pkg/reflect/">package to do just that</a>. Here is the full implementation:</p>
+
+<pre><code>package main
+
+import(
+  "fmt"
+  "reflect"
+)
+
+func main(){
+  // iterate through the attributes of a Data Model instance
+  for name, mtype := range attributes(&amp;Dish;{}) {
+    fmt.Printf("Name: %s, Type %s\n", name, mtype.Name())
+  }
+}
+
+// Data Model
+type Dish struct {
+  Id  int
+  Name string
+  Origin string
+  Query func()
+}
+
+// Example of how to use Go's reflection
+// Print the attributes of a Data Model
+func attributes(m interface{}) (map[string]reflect.Type) {
+  typ := reflect.TypeOf(m)
+  // if a pointer to a struct is passed, get the type of the dereferenced object
+  if typ.Kind() == reflect.Ptr{
+    typ = typ.Elem()
+  }
+
+  // create an attribute data structure as a map of types keyed by a string.
+  attrs := make(map[string]reflect.Type)
+  // Only structs are supported so return an empty result if the passed object
+  // isn't a struct
+  if typ.Kind() != reflect.Struct {
+    fmt.Printf("%v type can't have attributes inspected\n", typ.Kind())
+    return attrs
+  }
+
+  // loop through the struct's fields and set the map
+  for i := 0; i &lt; typ.NumField(); i++ {
+    p := typ.Field(i)
+      if !p.Anonymous {
+        attrs[p.Name] = p.Type
+      }
+     }
+
+  return attrs
+}
+</code></pre>
+
+<p>Unfortunately, my code highlighter doesn't support the Go syntax, but GitHub does, so here is a <a href="https://gist.github.com/1009629">pretty version</a>.</p>
+
+<p>There are ways of running Go source code like Ruby or Python scripts but in this case, we'll use the compiler &amp; linker provided with Go. I named my source file "example.go", and here is how I compiled, linked and run it:</p>
+
+<pre><code>$ 6g example.go &amp;&amp; 6l example.6 &amp;&amp; ./6.out
+Name: Origin, Type string
+Name: Id, Type int
+Name: Query, Type 
+Name: Name, Type string
+</code></pre>
+
+<p>As you can see each attribute is printed out with its name and type. The code might seem a bit odd if you never looked at Go before.
+Here is a quick rundown of the code:</p>
+
+<p>In our main function, we create a new instance of type Dish on which we call attributes on. The call returns a map on which we iterate through and print the attribute name (key) and type (value).
+The attributes function is defined a bit below and and it takes any type of objects (empty interface) and returns a map, which is like a Hash or a Dictionary. The map has keys of String type and values of "Type" type. The "Type" type is defined in the reflect package. Inside the function, 23 then use the previously mentioned reflect package to check on the type and the name of each attribute and assign it to a map object. (note that I'm explicitly returning the map, but I could have done it in a more implicit way)</p>
+
+<p>So there you go, that's how you use reflection in Go. Pretty nifty and simple.</p>
+
+<p> </p>
+]]></content>
+  </entry>
+  
+</feed>

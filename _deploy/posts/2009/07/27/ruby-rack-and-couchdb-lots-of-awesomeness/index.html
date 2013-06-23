@@ -1,0 +1,232 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ruby, Rack and CouchDB = lots of awesomeness - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Ruby, Rack and CouchDB = Lots of Awesomeness Over the weekend, I spent some time working on a Ruby + Rack +CouchDB project. Three technologies that I know quite well &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://merbist.com/2009/07/27/ruby-rack-and-couchdb-lots-of-awesomeness/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <a href='/about/'><img class="photo left" title='About Matt Aimonetti'
+      alt='Photo of Matt Aimonetti' src="/images/matt_aimonetti.jpg" /></a>
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left bio-summary'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Tech Lead</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/posts/archives/">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <div id="cse-search-form">Loading</div>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/">Home</a></li>
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/about/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Ruby, Rack and CouchDB = Lots of Awesomeness</h1>
+    <div class="entry"><p>Over the weekend, I spent some time working on a Ruby + Rack +CouchDB project. Three technologies that I know quite well but that I never put to work together at the same time, at least not directly.  Let&#8217;s call this Part I.</p>
+
+<p>Before we get started, let me introduce each component:</p>
+
+<ul>
+<li><p><a href="http://en.wikipedia.org/wiki/Ruby%20%28programming%20language%29">Ruby</a> : if you are reading this blog, you more than likely know at least a little bit about, what I consider, one of the most enjoyable programming language out there. It&#8217;s also a very flexible language that lets us do some interesting things. I could have chosen Python to do the same project but that&#8217;s a whole different topic. For this project we will do something Ruby excels at: reopening existing classes and injecting more code.</p></li>
+<li><p><a href="http://rack.rubyforge.org/">Rack</a>: a webserver interface written in Ruby and inspired by <a href="http://www.wsgi.org/wsgi/">Python&#8217;s WSGI</a>. Basically, it&#8217;s a defined API to interact between webservers and web frameworks. It&#8217;s used by most common Ruby web frameworks, from Sinatra to Rails (btw, Rails3 is going to be even more Rack-focused than it already is). So, very simply put, the webserver receives a request, passes it to Rack, that converts it, passes it to your web framework and the web framework sends a response in the expected format (more on Rack later).</p></li>
+<li><p><a href="http://couchdb.apache.org/">CouchDB</a>: Apache&#8217;s document-oriented database. RESTful API, schema-less, written in Erlang with built-in support for map/reduce. For this project, I&#8217;m using <a href="http://github.com/mattetti/couchrest">CouchRest</a>, a Ruby wrapper for Couch.</p></li>
+</ul>
+
+
+<h2>Goal: Log Couch requests and analyze data</h2>
+
+<p>Let&#8217;s say we have a Rails, Sinatra or Merb application and we are using CouchRest (maybe we are using CouchRest and ActiveRecord, but let&#8217;s ignore that for now).</p>
+
+<p>Everything works fine but we would like to profile our app a little and maybe optimize the DB usage. The default framework loggers don&#8217;t support Couch. The easy way would be to tail the Couch logs or look at the logs in <a href="http://janl.github.com/couchdbx/">CouchDBX</a>. Now, while that works, we can&#8217;t really see what DB calls are made per action, so it makes any optimization work a bit tedious. (Note that Rails3 will have some better conventions for logging, making things even easier)</p>
+
+<p>So, let&#8217;s see how to fix that. Let&#8217;s start by looking at Rack.</p>
+
+<h2>Rack Middleware</h2>
+
+<p>Instead of hacking a web framework specific solution, let&#8217;s use Rack. Rack is dead simple, you just need to write a class that has a <em>call</em> method.
+In our case, we don&#8217;t care about modifying the response, we just want to instrument our app. We just want our middleware to be transparent and let our webserver deal with it normally.</p>
+
+<p>Here we go &#8230; that wasn&#8217;t hard, was it? We keep the application reference in the @app variable when a new instance of the middleware is created. Then when the middleware is called, we just call the rest of the chain and pretend nothing happened.</p>
+
+<p>As you can see, we just added some logging info around the request. Let&#8217;s do one better and save the logs in CouchDB:</p>
+
+<p>Again, nothing complicated. In our rackup file we defined which Couch database to use and we passed it to our middleware (we change our initialize method signature to take the DB).
+Finally, instead of printing out the logs, we are saving them to the database.</p>
+
+<p>W00t! At this point all our requests have been saved in the DB with all the data there, ready to be manipulated by some map/reduce views we will write. For the record, you might want to use the bulk_save approach in CouchDB which will wait for X amount of records to save them in the DB all at once. Couch also let&#8217;s you send new documents, but only save it to the DB every X documents or X seconds.</p>
+
+<p><img src="http://img.skitch.com/20090726-ebmpgjtrc6x8239ia69kmri1rt.jpg" alt="" /></p>
+
+<p>As you can see, our document contains the timestamps and the full environment as a hash.</p>
+
+<p>All of that is nice, but even though we get a lot of information, we could not actually see any of the DB calls made in each request. Let&#8217;s fix that and inject our logger in CouchRest (you could apply the same approach to any adapter).</p>
+
+<p>Let&#8217;s reopen the HTTP Abstraction layer class used by CouchRest and inject some instrumentation:</p>
+
+<p>Again, nothing fancy, we are just opening the module, reopening the methods and wrapping our code around the <em>super</em> call (for those who don&#8217;t know, <em>super</em> calls the original method).</p>
+
+<p>This is all for Part I. In Part II, we&#8217;ll see how to process the logs and make all that data useful.</p>
+
+<p>By the way, if you make it to <a href="http://www.railssummit.com.br/">RailsSummit</a>, I will be giving a talk on Rails3 and the new exciting stuff you will be able to do including Rack based stuff, CouchDB, MongoDB, new DataMapper etc..</p>
+
+<p><a href="http://railssummit.com.br/"><img src="http://railssummit.com.br/images/banners/en_souPalestrante_210x60.jpg" alt="" /></a></p>
+</div>
+
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-07-27T13:49:20-07:00" pubdate data-updated="true">Jul 27<span>th</span>, 2009</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/misc/'>Misc</a>, <a class='category' href='/articles/categories/tutorial/'>Tutorial</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/merb/'>merb</a>, <a class='category' href='/articles/categories/merbist-com/'>merbist.com</a>, <a class='category' href='/articles/categories/rails/'>rails</a>, <a class='category' href='/articles/categories/ruby/'>ruby</a>
+  
+</div>
+
+</div>
+        
+          <div class='legacy'><a href="http://merbist.com/2009/07/27/ruby-rack-and-couchdb-lots-of-awesomeness/">Original article</a></div>
+        
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        <div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+  <a class="addthis_button_tweet"></a>
+  </br>
+	
+	
+  <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+  </br>
+	
+	<a class="addthis_counter addthis_pill_style"></a></br>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=mattetti"></script>
+</div>
+
+        
+    </div>
+
+
+</article>
+
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2013 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+  var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+    '010526096358170648343:WMX140696544', customSearchOptions);
+  customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+  var options = new google.search.DrawOptions();
+  options.enableSearchboxOnly("http://matt.aimonetti.net/search");
+  customSearchControl.draw('cse-search-form', options);
+  }, true);
+
+if (navigator.userAgent.match(/iPad/i) != null) {
+  $('meta[name=viewport]').attr('content', 'width=1200,initial-scale=1,maximum-scale=1');
+}
+</script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'mattaimonetti';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+</body>
+</html>

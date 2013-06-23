@@ -1,0 +1,282 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>RSpec Textmate bundle and RSpec edge - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="RSpec Textmate Bundle and RSpec Edge UPDATE: Aslak Hellesoy just mentioned in a comment that the trunk version of RSpec bundle for TextMate ( svn://rubyforge.org/var/ &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2007/03/30/rspec-textmate-bundle-edge/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <a href='/about/'><img class="photo left" title='About Matt Aimonetti'
+      alt='Photo of Matt Aimonetti' src="/images/matt_aimonetti.jpg" /></a>
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left bio-summary'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Tech Lead</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/posts/archives/">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <div id="cse-search-form">Loading</div>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/">Home</a></li>
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/about/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">RSpec Textmate Bundle and RSpec Edge</h1>
+    <div class="entry"><h2>UPDATE:</h2>
+
+<p><a href="http://blog.aslakhellesoy.com/"> Aslak Hellesoy</a> just mentioned in a comment that the trunk version of RSpec bundle for TextMate ( svn://rubyforge.org/var/svn/rspec/trunk ) doesn&#8217;t require the RSpec Gem installed anymore.</p>
+
+<p>To install the bundle:</p>
+
+<pre><code>&lt;code&gt;
+cd ~/Library/Application\ Support/TextMate/Bundles/
+ svn co svn://rubyforge.org/var/svn/rspec/branches/0.9-dev/RSpec.tmbundle
+&lt;/code&gt;
+</code></pre>
+
+<hr />
+
+<p>I recently discovered RSpec, well, not really, but I finally got to start using
+RSpec.</p>
+
+<p>For those who don&#8217;t know
+<a href="http://rspec.rubyforge.org/">RSpec</a> ,
+RSpec is a BDD testing framework, or in better words: RSpec is a Behaviour
+Definition Framework well suited for practicing Behaviour Driven Development
+(BDD) in Ruby.</p>
+
+<p>If you don&#8217;t know what is BDD, then just check out
+<a href="http://behaviour-driven.org/">http://behaviour-driven.org/</a>, in few words, it&#8217;s TDD (Test Driven Development in better)</p>
+
+<p>Anyway, I&#8217;m working on a Rails project where we use the trunk/edge version RSpec
+plugin. I&#8217;m using my favorite editor:
+<a href="http://macromates.com/">TextMate</a>
+and I noticed that the RSpec team created a
+<a href="http://rspec.rubyforge.org/tools/extensions/editors/textmate.html">cool
+bundle for textmate</a>.</p>
+
+<p>I was quite excited until I tried running a spec and realized that the task
+failed giving some errors about some missing methods&#8230; Well, the thing is we
+replaced &#8220;context &#8230; do&#8221; by &#8220;describe &#8230; do&#8221; and &#8220;specify &#8230; do&#8221; by &#8220;it &#8230;
+do&#8221; see
+<a href="http://blog.davidchelimsky.net/articles/2007/03/11/describe-it-with-rspec">David&#8217;s
+post</a> about this specific change in trunk:</p>
+
+<p>The Textmate bundle uses the ruby gem instead of the plugin and since I&#8217;m trying
+to use methods only defined in trunk the bundle simply dies on me every time I
+try to run my specs.</p>
+
+<p>The only solution for me was to run a trunk version of the RSpec gem, here is
+what to do:</p>
+
+<p>Check out RSpec trunk from:
+svn://rubyforge.org/var/svn/rspec/trunk</p>
+
+<p>Check out RSpec trunk into its own project, or
+if you&#8217;re interested in</p>
+
+<p>using/learning RSpec for a particular Rails
+project, consider using</p>
+
+<p>svn:externals to check out RSpec trunk into your
+[RailsRoot]/vendor</p>
+
+<p>directory:</p>
+
+<p>svn propset svn:externals &#8220;rspec
+svn://rubyforge.org/var/svn/rspec/trunk&#8221;</p>
+
+<p>vendor</p>
+
+<p>then update to grab the latest code from RSpec
+trunk:</p>
+
+<p>svn update
+vendor</p>
+
+<p>Next, build the gem.  You have to be
+standing in vendor/rspec if you&#8217;re</p>
+
+<p>using svn:externals (as described above) or the
+root of RSpec if you checked</p>
+
+<p>it out as its own
+project.</p>
+
+<p>rake gem</p>
+
+<p>then install
+it:</p>
+
+<p>gem install pkg/rspec-X.X.X.gem (where X.X.X is
+the version number reported</p>
+
+<p>in the output from &#8220;rake gem&#8221;)</p>
+
+<p>&#8212;- from
+<a href="http://rubyforge.org/pipermail/rspec-users/2006-November/000135.html">http://rubyforge.org/pipermail/rspec-users/2006-November/000135.html</a></p>
+
+<p>That&#8217;s it, now I can run my specs directly from Textmate the same way I was
+doing with Unit Test.</p>
+
+<p>( on a different post I&#8217;ll explain why I couldn&#8217;t simply run rake:spec )</p>
+</div>
+
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-03-30T04:21:00-07:00" pubdate data-updated="true">Mar 30<span>th</span>, 2007</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        
+          <div class='legacy'><a href="http://railsontherun.com/2007/03/30/rspec-textmate-bundle-edge/">Original article</a></div>
+        
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        <div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+  <a class="addthis_button_tweet"></a>
+  </br>
+	
+	
+  <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+  </br>
+	
+	<a class="addthis_counter addthis_pill_style"></a></br>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=mattetti"></script>
+</div>
+
+        
+    </div>
+
+
+</article>
+
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2013 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+  var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+    '010526096358170648343:WMX140696544', customSearchOptions);
+  customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+  var options = new google.search.DrawOptions();
+  options.enableSearchboxOnly("http://matt.aimonetti.net/search");
+  customSearchControl.draw('cse-search-form', options);
+  }, true);
+
+if (navigator.userAgent.match(/iPad/i) != null) {
+  $('meta[name=viewport]').attr('content', 'width=1200,initial-scale=1,maximum-scale=1');
+}
+</script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'mattaimonetti';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+</body>
+</html>

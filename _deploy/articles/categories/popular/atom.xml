@@ -1,0 +1,1713 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Popular | Matt Aimonetti]]></title>
+  <link href="http://matt.aimonetti.net/articles/categories/popular/atom.xml" rel="self"/>
+  <link href="http://matt.aimonetti.net/"/>
+  <updated>2013-06-23T10:54:58-07:00</updated>
+  <id>http://matt.aimonetti.net/</id>
+  <author>
+    <name><![CDATA[Matt Aimonetti]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Engineers suck at finding the right jobs]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/11/14/engineers-suck-at-finding-right-jobs/"/>
+    <updated>2012-11-14T18:53:00-08:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/11/14/engineers-suck-at-finding-right-jobs</id>
+    <content type="html"><![CDATA[<p>If you are currently a software engineer you need to realize two things:</p>
+
+<ul>
+<li><strong>Now is an awesome time to be a software engineer</strong> (probably the best time ever).</li>
+<li><strong>Your job might not be well suited for you</strong>.</li>
+</ul>
+
+
+<p>I'll show you why we are lucky bastards, why we aren't so good at
+picking the right jobs and some hints on how to solve this issue.</p>
+
+<br>
+
+
+<p>I remember a family friend telling me when I was a kid that computers
+are going to be the future and that there will be a lot of jobs in this
+field. I also remember that the idea of sitting all day, alone, in front of a
+<a href="http://en.wikipedia.org/wiki/Minitel">minitel</a>-like computer scared the hell out of me.
+But he was right and I now work from home, spending 12+ hours
+in front of a monitor. I get emails and phone calls from many people
+reaching out to me to help them find software engineers.</p>
+
+<p>At least three things make "now" the best time to be a software
+engineer:</p>
+
+<ul>
+<li><strong>demand</strong></li>
+<li><strong>projects</strong></li>
+<li><strong>prestige</strong></li>
+</ul>
+
+
+<h2>Good time</h2>
+
+<p>There is a huge demand for engineers. There are many more job openings
+than candidates. But this is much better than in late 90s/early 2000
+when anyone who could write a line of HTML would get a job.
+Now the projects people are building
+are way more interesting and have a real potential to change lives.
+Before, you had to work for a giant company to
+have a chance to do that. But now, with internet and smart mobile
+devices everywhere, almost any startup (fancy name for small company) can
+have a huge impact -- look at Twitter for instance.</p>
+
+<p>Lastly, being a geek is cool. Movies, cartoons, TV Shows now have
+geek heroes (granted they usually don't represent real geeks, but hey
+it's better than nothing).</p>
+
+<h2>The problem</h2>
+
+<p><strong>Most software engineers</strong> I know, are really bad
+at choosing the right job for themselves. They <strong>don't design a career</strong>.
+Engineers are good at solving technical problems in an objective way, but <strong>when it comes
+to our jobs and future, we seem to struggle.</strong></p>
+
+<h2>Why?</h2>
+
+<p>I'm not an expert but I have a few guesses I'd like to share with you:</p>
+
+<ul>
+<li>We don't know our real worth.</li>
+<li>We don't make long term plans.</li>
+<li>We get paid well, so why bother changing?</li>
+<li>Changing job feels like betrayal.</li>
+<li>The system is broken.</li>
+</ul>
+
+
+<h2>Self worth</h2>
+
+<p>Most modern companies need solid engineers to be relevant in the
+short/medium term and they know it. <strong>Most engineers have no idea how
+their talent and dedication converts into real business value</strong>.
+Without that appreciation, they
+can't easily estimate how much they are worth. The
+salary scale for software engineers is dramatically different from other jobs/industries.
+To your business, you might be worth twice or three times the salary of someone like a teacher.
+This is probably not fair because of the social value a teacher offers, but that's the way the <a href="http://en.wikipedia.org/wiki/Law_of_demand">law of
+demand</a> works in our society.
+Knowing how much you are worth to a company and how much to ask is
+critical to properly negotiate or renegotiate a contract.</p>
+
+<p>I remember when I moved to America and was thankful to have a job.
+I had no idea that at $45k/year with basically no health coverage and no
+vacation, I was grossly underpaid and could have been paid twice that amount
+down the street. (Note: the average software engineer salary in the US
+is at <a href="http://www.indeed.com/salary/Software-Engineer.html">$89,000 according to indeed.com</a>).
+The average salary for a high school teacher is <a href="http://www.indeed.com/salary?q1=high+school+teacher&amp;l1=">$47k/year</a>
+so I wasn't complaining. As a matter of fact, I didn't leave this job because of the salary.
+I truly believe that <strong>"Money doesn't buy happiness"</strong> and <strong>it shouldn't be
+your primary reason to accept or leave a job</strong>. Money is nice and
+often makes life easier. But the point is that you have to understand
+how much you're worth, so you can get paid and
+focus on your work.</p>
+
+<h2>Defining a vector</h2>
+
+<p><a href="http://www.kitchensoap.com/about-me/">John Allspaw</a> wrote a great blog
+post about <a href="http://www.kitchensoap.com/2012/10/25/on-being-a-senior-engineer/">what it means to be a senior engineer</a>.
+I strongly recommend you read it. I often look back at it
+and pick up a couple points I need to focus on myself.
+John wrote a book which is a collection of essays and interviews
+regarding tech/web ops.</p>
+
+<p><a href="http://www.amazon.com/gp/product/1449377440/ref=as_li_ss_il?ie=UTF8&camp=1789&creative=390957&creativeASIN=1449377440&linkCode=as2&tag=merbist-20" style="text-align:center; display:block;"><img border="0" src="http://ws.assoc-amazon.com/widgets/q?_encoding=UTF8&ASIN=1449377440&Format=_SL110_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=merbist-20" ></a><img src="http://www.assoc-amazon.com/e/ir?t=merbist-20&l=as2&o=1&a=1449377440" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></p>
+
+<p>Here is a very interesting quote:</p>
+
+<blockquote><p>Not everyone can be senior. If, after five years, you are senior, are you at the peak of your game? After five more years will you not have accrued more invaluable experience? What then? “Super engineer”? Five more years? “Super-duper engineer.” I blame the youth of our discipline for this affliction. [...] Given the dynamics of our industry many elected to move on to managerial positions or risk an entrepreneurial run at things.”</p></blockquote>
+
+<p>There are two very strong points in this quote:</p>
+
+<ul>
+<li>we don't quite know what it means to be a senior engineer (and John's post does a great
+job explaining his take on that).</li>
+<li>many of us end up in managerial positions or leading startups.</li>
+</ul>
+
+
+<p>I might be a bit radical -- but the day I stop learning/improving
+will be the day that I will quit, change jobs or careers. John's post has great pointers
+to help us improve our skills. But the question I'm trying to raise is:</p>
+
+<p><strong>what do we want from our career?</strong></p>
+
+<p>"Career" sounds like a dirty word to many of us. It has a corporate,
+sleazy, back stabbing connotation. When I hear it, I picture a
+cliché stock photography of a bunch of smiling people wearing 80's suits.
+In the context on this post, let's take the Oxford English Dictionary
+definition: "course or progress through life (or a distinct portion of life)".
+The word comes from from French via the Old Occitan word: "carriera" which means "street".</p>
+
+<p><strong>A better word for career might be "path".</strong></p>
+
+<p>I think we have a hard time knowing what kind of path we want to be on.
+When faced with the question, a lot of us answer:
+"solving problems", "having fun", "changing the world".
+All these answers sound good, but they aren't paths, they are just attributes.</p>
+
+<p>I have to admit that I'm still struggling with this question and
+probably will for a while. I'm pretty good at defining short term goals but I
+have a hard time seeing the long term path.
+As a matter of fact, a little while back I was seated in front of <a href="http://www.chadfowler.com/">Chad
+Fowler</a> in his office in Washington, DC.
+Chad wrote a great book called <a href="http://www.amazon.com/gp/product/1934356344/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1934356344&amp;linkCode=as2&amp;tag=merbist-20">"The Passionate Programmer: Creating a Remarkable Career in Software Development"</a>.</p>
+
+<p><a href="http://www.amazon.com/gp/product/1934356344/ref=as_li_ss_il?ie=UTF8&camp=1789&creative=390957&creativeASIN=1934356344&linkCode=as2&tag=merbist-20" style="text-align:center; display:block;"><img border="0" src="http://ws.assoc-amazon.com/widgets/q?_encoding=UTF8&ASIN=1934356344&Format=_SL110_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=merbist-20" ></a><img src="http://www.assoc-amazon.com/e/ir?t=merbist-20&l=as2&o=1&a=1934356344" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></p>
+
+<p>I've read Chad's book (which inspired me in many ways) and have known Chad
+for years. The point of our meeting was to decide what I was going
+to work on next. <strong>Unconsciously, I expected Chad to just tell me what I
+should be doing. I trusted him to pick the right "path" for me.</strong>
+But I was surprised when Chad told me: <em>"you're the
+kind of engineer who can do anything. You're a generalist who can pick
+a topic and become a specialist. So what do you want to do?"</em></p>
+
+<p>I wasn't sure how to take it, it sounded like a compliment but, at the
+same time, <strong>the fact that Chad didn't have a solution to my problem bothered me.</strong>
+I remember thinking, wait, he's the expert and he's deflecting the
+situation by asking me the question I came to ask him. Sure, the
+compliment was nice but that wouldn't solve anything. What does that
+mean about me? If an expert can't figure out what I should do, I might
+be screwed.</p>
+
+<p>Then on my way back home, I realized that <strong>it didn't matter how well Chad knew me,
+he couldn't guess what I even didn't know about myself.</strong></p>
+
+<p><strong>My long term happiness depends on me finding a direction I want my
+professional life to take.</strong>
+In Chad's book, there is a strong focus on finding a market,
+understanding it, developing skills and marketing yourself.
+However there was something I had missed.</p>
+
+<blockquote><p>The goal-oriented, destination-focused thinking that you usually do
+leads only from one goal to the next. It has no logical end. What most
+of us fail to realize is that <em>the path</em> is the end.</p></blockquote>
+
+<p>I've always known that the journey is more important than the destination in itself,
+but what I had missed is that you still need to define a destination or
+maybe more precisely a direction, a vector.
+My problem is that my path was just a bunch of scattered dots. Hopping from one
+to the other, I was hoping it was going to make a pretty drawing. The challenge is
+when I got to a spot, I was stuck not knowing what to do next. I ended up picking another
+short term goal/destination based on the opportunities available at that
+time.</p>
+
+<p>What I should do instead was to <strong>define a general direction and then
+learn through the process.</strong> I believe this will help me enjoy my job more
+than running after goals. It will allow me to see the world differently
+and will help me make the right career choices when the time is right.
+To be honest, I think that's the only way I can build endurance and not
+burn out in 5 years. That said, I'll still have goals,
+deadlines and the usual -- but they won't define my own personal progress.</p>
+
+<h2>Why bother?</h2>
+
+<p>Changing jobs is a pain. As an engineer I weigh the pros and cons and try
+to logically pick the right choice -- at least in theory. In practice I
+avoid dealing with questions that might result in challenging
+consequences.</p>
+
+<p>Quiting a job is tough. You have to tell your current employer and your
+colleagues that you are leaving them for something you think is better
+for you. <strong>The nicer the people you work with, the harder it is. The better
+you are paid, the harder it is.</strong> If you work with nice people and
+you're well paid, leaving is <em>really</em> hard (take note if you run a team).</p>
+
+<p>In our profession, changing jobs isn't usually seen as something
+bad. Recruiters might pressure you to take a new, better job.
+Beware impulsive changes though. Recruiters want their commissions so
+they'll do anything they can do make you switch. They'll try to convince
+you that the grass is greener on the other side. Maybe that's only "bad" recruiters.</p>
+
+<p>There are some recruiters who care about people and companies. Recruiters
+who will help you find the right job for you. However, they
+won't be able to help you if you don't know what direction you want to
+go to.</p>
+
+<p>I remember being stuck in a pretty terrible work environment, being
+underpaid and the projects I was working on weren't going anywhere.
+A friend gave me a Seth Godin's book called <a href="http://www.amazon.com/gp/product/1591841666/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1591841666&amp;linkCode=as2&amp;tag=merbist-20">"The Dip: A Little Book That Teaches You When to Quit (and When to Stick)"</a>.</p>
+
+<p><a href="http://www.amazon.com/gp/product/1591841666/ref=as_li_ss_il?ie=UTF8&camp=1789&creative=390957&creativeASIN=1591841666&linkCode=as2&tag=merbist-20" style="text-align:center; display:block;"><img border="0" src="http://ws.assoc-amazon.com/widgets/q?_encoding=UTF8&ASIN=1591841666&Format=_SL110_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=merbist-20" ></a><img src="http://www.assoc-amazon.com/e/ir?t=merbist-20&l=as2&o=1&a=1591841666" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></p>
+
+<p>I'm not a big fan of self-help/business books, but this book raised a very good and simple question:
+how do the efforts compare to the returns?
+Which situation are you in:</p>
+
+<p><img src="/images/dip.jpg" alt="" /></p>
+
+<p><img src="/images/cliff-dip.jpg" alt="" /></p>
+
+<p>Think about it. <strong>Will the effort you put into your work pay off?</strong>
+If you don't think it will, then you should quit right away.</p>
+
+<p>The logic is pretty simple but requires you to forecast. For that you need
+some sort of metrics helping you to see if you are getting closer or
+further from the direction you set for yourself.</p>
+
+<h2>Trust</h2>
+
+<p>Trust is the key element of any relationship.
+In <a href="http://www.amazon.com/gp/product/B000UCUX0K/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B000UCUX0K&amp;linkCode=as2&amp;tag=merbist-20">The Five Dysfunctions of a Team</a>, Patrick Lencioni explains that the base of management dysfunctions is absence of trust:</p>
+
+<p><img src="/images/fivedysfunctions.gif" alt="" /></p>
+
+<p>Turns out it's the same thing for our careers. We need a team of people
+to help us define a vision/direction and keep us honest and accountable.</p>
+
+<p>Find people who you can trust to talk to about your professional goals,
+your progress, failures and doubts. People who will be honest with you
+and tell you things you might not want to hear. Find mentors and honest
+people. These people don't have to be working in the industry. They just
+have to be able to listen and care.</p>
+
+<p>People like that are extremely hard to find, but so are good executives.
+<strong>I believe that having trustworthy friends (partners/family members..) who care is a big part of what
+makes someone successful.</strong></p>
+
+<h2>My small contribution</h2>
+
+<p>As I explained earlier, I'm no expert and I also struggle with the issues I described.
+However, I'd be glad to provide a bit of my free time to help you think
+through these issues.</p>
+
+<p><strong>A lot of you are doing a great job without the rest
+of us noticing.</strong> If you don't have a popular twitter account, blog, open
+source projects, published books or given talks at conferences, it might
+be hard to get yourself noticed or even know how much you're worth.
+Trust is a big deal and if you are considering moving on, you probably
+don't want your boss and your colleagues to know. You probably also
+don't know good recruiters you can trust. You might not even be sure
+it's worth investing too much time.</p>
+
+<p>Most of you probably won't consider it, but <strong>I'd like to offer my
+help</strong>
+if you'd like it. <strong>I promise full anonymity and no strings
+attached</strong>. Just</p>
+
+<ul>
+<li><del>email me</del></li>
+<li><del>tell me about yourself and what you do</del></li>
+<li><del>what direction you'd like your career to take</del></li>
+<li><del>ask any questions you might have </del></li>
+</ul>
+
+
+<p>After exchanging a few emails , <strong>I'll try to make good use of my network</strong>
+to find you a way to move in your desired direction.
+Or, if you work for an interesting company with current openings, feel free to contact
+me too.</p>
+
+<p><strong> Update: My inbox is overflowing with emails and I already spent
+literally days replying to as many people as possible. I'm sorry but at
+this time I can't reply to any new enquiries. I'll write a follow up
+blog post that covers what I learned from my interactions with so many
+readers.
+</strong></p>
+
+<p>I have no idea how this will turn out. Maybe I'll get a couple of emails,
+zero, or way too many to handle -- but it's worth a try. I do have a full time job,
+so please don't expect me to reply to your emails within the hour.</p>
+
+<p>I finally took the time to enable the comments in this blog. Feel free
+to leave advice or feedback.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rethinking web service development]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/06/13/rethinking-web-service-development/"/>
+    <updated>2012-06-13T18:19:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/06/13/rethinking-web-service-development</id>
+    <content type="html"><![CDATA[<p>While it's true that there are still a lot of places where software isn't
+leveraged and many places where software needs to evolve, software is nearly everywhere!.
+The type of software we write today needs to interact
+with other software via some sort of network.
+Any web developer out there is used to that, (s)he writes software that
+runs on a server somewhere on the internet and users via a local software
+(browser) consume their web applications using an internet connection.</p>
+
+<p>What has changed in the last few years is that web applications start
+providing more than just dynamically rendered HTML templates.
+JavaScript is used to run more and more logic on the client side and JS
+usually talks to some backends via JSON.
+But web APIs are also more and more used to expose raw data to other
+software. <strong>The challenge though, is that we haven't changed the way we
+write web applications to adapt to this new way of providing data.</strong>
+In this article, I'd like to explore why and how we need to rethink web API development
+and focus on communication and interaction.</p>
+
+<h2>Unlearning</h2>
+
+<p><a href="/images/matt_aimonetti-unlearn.jpeg"><img src="/images/matt_aimonetti-unlearn.jpeg"
+  style="width:250px;display:block;margin:auto"/></a></p>
+
+<p>Many are used to doing certain
+things a certain way and it's really hard to unlearn old habits. The more
+concerning part of this fact is that it makes it <strong>hard for someone to step
+back and evaluate honestly if a technical decision is due to comfort or
+if it's truly the right choice to achieve a given goal.</strong>
+Ruby on Rails revolutionized the way we wrote web applications almost 10
+years ago and since then, many web frameworks have adopted the Rails philosophy.
+As a matter of fact, I personally think that when it comes to writing
+front end applications, Rails is still one if not the best web
+frameworks out there. But in its current state, I'm far from convinced that it's a great tool to write
+web APIs mainly because it was not designed for that and because it
+comes with a lot of baggage.</p>
+
+<h2>Focusing on the API</h2>
+
+<p>Let's take a step back and consider what is critical when developing a web
+API:</p>
+
+<ul>
+<li><strong>Documentation</strong> for end users to know how to consume your services.</li>
+<li><strong>Consistent and reliable</strong> output so you don't break client applications
+relying on your services.</li>
+<li><strong>Maintainability</strong></li>
+</ul>
+
+
+<p>Note that I didn't mention performance because I consider performance
+almost always being important.
+I also didn't mention the whole
+<a href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST</a>/<a href="http://en.wikipedia.org/wiki/Remote_procedure_call">RPC</a>/<a href="http://en.wikipedia.org/wiki/Hypermedia">Hypstermedia</a> debate
+since I consider it being an implementation detail and a totally orthogonal
+discussion. But for the record, I personally don't like solutions forcing you into a specific way of
+providing your data (I'm looking at you <a href="http://wiki.basho.com/Webmachine.html">webmachine</a>).</p>
+
+<h3>Documentation</h3>
+
+<p>Documentation isn't as important when you consume your own APIs because
+you can look at your source code. However it gets much more tricky when
+you start working with other teams. They might not know the
+language/framework you use. They might not have time to go dig into your
+source code to figure out what your <strong>meta-magical piece of clever
+code</strong> does.</p>
+
+<p>Lately more and more applications provide their raw data to the
+outside world via web APIs. The developers who will consume your
+resources don't have access to your source code, probably don't use the same
+programming language and don't have much time to guess how your API
+work. Also your test suite won't help communicate how your API works so
+we need to find a different approach.
+Also note that in this scenario, TDD/BDD won't help us communicate
+better and tests can't be used as documentation since your tests aren't
+exposed.</p>
+
+<p><em>Documentation is your #1 way to communicate with your human audience.</em>
+Communication is key and even if as engineers we love to focus on code, if we
+can't communicate about it, end users will have a hard time using our
+code and might just not even do it. <strong>The key is to communicate what your API does,
+why someone might want to use it and how to use it.</strong></p>
+
+<h3>Consistent and reliable output</h3>
+
+<p>This point seems obvious but what we realize in reality is that
+for many, API's consistency and reliability doesn't include
+documentation. You find a lot of APIs out there poorly documented or out
+of sync with the actual implementation.</p>
+
+<p><strong>Documentation is a contract between
+you: the developer and the other developers consuming your APIs.</strong>
+As a developer, when you write any type of tests, they become some sort of quality contract.
+If someone changes your code and break your tests, they break the implicit contract.
+However, when talking about consuming data via an API, things get a bit more complicated.
+We need a way to ensure that the end user expectations are matching our
+implementation/documentation. Unit testing simply can't guarantee that. Unit testing will
+guarantee that the logic of your units of code is intact but it can't
+easily guarantee that the API output matches the documentation, however
+this is something that has to be done.</p>
+
+<h3>Maintainability</h3>
+
+<p>This is a tricky point since maintainability is very subjective. But I
+think we can agree that <a href="http://en.wikipedia.org/wiki/Decoupling#Software_development">decoupling</a>/<a href="http://en.wikipedia.org/wiki/Separation_of_concerns">separating concerns</a>
+will make our code more maintainable.</p>
+
+<p>That's why I personally don't think it's a good idea to mix HTML
+rendering code and web API code. Consider using different controllers or
+different files depending on the way your code is structured.</p>
+
+<p>I also strongly believe that the implementation details shouldn't define
+the way you design your web APIs. Don't just slap a CRUD API on top of your
+model and call it done. In most cases, you will pay a high price later
+on if you take this approach because whenever you will need to change your
+web API or your model, you will be stuck. This is because your interface
+is now used by a lot of people and you can't easily change it.
+There are many ways to avoid API/model coupling, I don't advocate one particularly, but whatever you do,
+be sure you can make your models and APIs can evolve separately.</p>
+
+<br><br>
+
+
+<h2>My approach</h2>
+
+<p>I've been designing and developing web APIs for many years and I've been
+struggling with everything I mentioned until now.
+I don't claim that I've found <strong>the</strong> solution but I'd like to think that I
+found one own way of addressing what are for me some of the most important parts
+of API design.</p>
+
+<h2>Being explicit</h2>
+
+<p>I believe that there is value in being explicit in the way we describe
+web APIs. Sometimes people get confused between being <a href="http://en.wiktionary.org/wiki/verbose">verbose</a> and being
+<a href="http://en.wiktionary.org/wiki/explicit">explicit</a>. These are two different concepts.
+Being explicit can sometimes seem verbose, but we need to evaluate the
+value that can be extracted from the provided information. If there isn't any clear value and too many words are used, then we
+aren't explicit, we are verbose.</p>
+
+<p>When designing a web API, I don't write it for myself, I do it for someone
+else. <strong>It's crucial to consider who you are writing for
+and to expose what's important for them.</strong>
+A "small" problem is that we don't show our code to our end users, so we
+need to find a way to explicitly provide the important information and
+to have this information provided to our end users.</p>
+
+<h2>DSL</h2>
+
+<p>For that I use a Domain Specific Language (DSL) which is a fancy way to
+say that I have some specific code allowing me to explicitly define my
+web services. These services exist as objects that can then be used to
+<em>process requests</em> but also to <em>validate inputs</em>, and even more importantly
+to <em>generate documentation</em>.</p>
+
+<p>The DSL allows me to define the following:</p>
+
+<ul>
+<li>details about consuming the service (uri, HTTP verb, authentication details,
+other service details...)</li>
+<li>incoming params (which ones are allowed, the type, are they required,
+optional?, what are they for)</li>
+<li>service output</li>
+</ul>
+
+
+<p>The input details is really important to validate incoming requests and
+reject them before even dispatching them. This is done for data sanity
+and for security reason. It also defines a strong interface that is
+easier to develop against and to maintain.</p>
+
+<p>The output details might sound quite surprising and redundant. After all, isn't that a
+duplication of effort since we already have this information in the
+"view"? Well, if we consider the important points I highlighted in the
+first part of this article, we need a way to enforce a "contract"
+between the end users and our implementation. To do that, we can't
+simply rely on our code since we can't trust it. The output is important
+to document the expected output but also to validate that our services
+match our documentation and therefore our "contract".</p>
+
+<p>Here is an example of a Ruby <a href="https://github.com/mattetti/Weasel-Diesel">DSL</a> use to describe a hello world service:</p>
+
+<p>```ruby
+describe_service "hello_world" do |service|
+  service.formats   :json
+  service.http_verb :get
+  service.disable_auth # on by default</p>
+
+<p>  # INPUT
+  service.param.string  :name, :default => 'World', :doc => "The name of the person to greet."</p>
+
+<p>  # OUTPUT
+  service.response do |response|</p>
+
+<pre><code>response.object do |obj|
+  obj.string :message, :doc =&gt; "The greeting message sent back. Defaults to 'World'"
+  obj.datetime :at, :doc =&gt; "The timestamp of when the message was dispatched"
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  # DOCUMENTATION
+  service.documentation do |doc|</p>
+
+<pre><code>doc.overall "This service provides a simple hello world implementation example."
+doc.example "&lt;code&gt;curl -I 'http://localhost:9292/hello_world?name=Matt'&lt;/code&gt;"
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>The DSL style isn't really important, what's important is that it allows
+us to address some of the concerns we discussed earlier such as clearly
+defined interface that can be communicated as documentation but also
+acts as code. The focus is really on the API and everything fits in one
+page. Because everything is an object and can be inspected, proper
+and up to date documentation can be generated. And the implementation
+can be tested against the documentation since everything is maintained
+as code.</p>
+
+<h2>Being agnostic</h2>
+
+<p>While I like Ruby for many reasons, I don't think that it's the only
+good language to implement great web services. It actually has its pros
+and cons and so have all the web frameworks out there.
+That's why I wrote my DSL as a <a href="https://github.com/mattetti/Weasel-Diesel">standalone library</a> that could virtually
+run on top of any web engine since it only outputs a representation of services.</p>
+
+<p>While I hope to one day create an interesting interop solution across
+programming language (by exporting the objects in a shared data
+structure for instance), I started by focusing on the various Ruby web
+frameworks.</p>
+
+<p>The best starting point for me was to use <a href="http://www.sinatrarb.com/">Sinatra</a>.
+I almost started just using <a href="http://rack.github.com/">rack</a>, but <a href="http://www.sinatrarb.com/">Sinatra</a> was providing me with a bit more feature for very
+little headache and little code to grasp. I wrote <a href="https://github.com/mattetti/wd-sinatra">wd-sinatra</a> which
+is a Ruby gem providing the <a href="https://github.com/mattetti/Weasel-Diesel">WeaselDiesel DSL</a> on top of a Sinatra app.
+It comes with a generator and all the needed hooks to design, implement, test and
+generate documentation for modern web APIs.</p>
+
+<p>Using a simple rake command (Ruby's version of make) one can generate
+documentation or test the APIs against the implementations.
+The "mini framework" is still very free form and should let you do
+whatever you want. I don't even set a default ORM for you to use since
+this choice is highly personal. I do however leave you places to set
+these things.</p>
+
+<p><a href="/images/matt_aimonetti-WeaselDiesel_doc_generation.jpeg"><img src="/images/matt_aimonetti-WeaselDiesel_doc_generation.jpeg" style="width:200px;display:block;margin:auto" title="Matt Aimonetti - WeaselDiesel documentation generation example" alt="Matt Aimonetti - WeaselDiesel documentation generation example"></a></p>
+
+<p>Sinatra and my "freedom framework" might seem too free form for
+you. So I'm currently working on getting the DSL to run on top of Rails,
+and by goal is to actually get it to run with a normal Rails app.</p>
+
+<h2>Reconsidering Rails' MVC</h2>
+
+<p>The Rails code base is very deeply marked with its own concept of MVC and having controllers and actions.
+The challenge I have is that I like my service to be self contained. I
+want my services to be simple and easy to grasp. I like having 1 service
+per file. Models, libraries and other optional presenters/decorators live separately
+but I like to have my service implementation code with the rest of my
+service description. I honestly don't like telling developers that they
+need to go check a route file and that my simple service requires that
+you open 12 files to understand what's going on. Simpler is often better
+and that's why in <a href="https://github.com/mattetti/wd-sinatra">wd-sinatra</a>
+the DSL and the implementation live together which is quite harder to do
+with Rails.</p>
+
+<p>```ruby
+describe_service "hello_world" do |service|</p>
+
+<p>  # [...] see the DSL section to see how the
+  # service is described. The block below is being
+  # being called in the context of the request
+  # after the request was validated.</p>
+
+<p>  # SERVICE IMPLEMENTATION
+  # the returned value is used as the response body, all the Sinatra helpers
+  # are available.
+  service.implementation do</p>
+
+<pre><code>{:message =&gt; "Hello #{params[:name]}", :at =&gt; Time.now}.to_json
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h2>Learning from experience</h2>
+
+<p>While the DSL fits most of my needs, we all have different use cases.
+While it's critical for a library to have a clearly defined objective, it's also important to
+have many people help improve it. Part of the learning/vetting
+excercise is to test an approach against different needs to define when
+and why it works well in some cases and why sometinmes it doesn't. This
+allows us to define a sweet spot that should match the clearly defined
+objective. However to be able to do that, a design needs to be tested by
+many people. So far my approach seems to work very well when an
+API needs to live outside an application and that 3rd parties need to
+consume the resources. It also seems to work well with edge cases that
+many API designers seem to encounter sooner or later.</p>
+
+<h2>Conclusion</h2>
+
+<p>At the end of the day, we have to remember that API stands for
+<em>Application Programming Interface</em> and that these interfaces have to be
+programmed so humans can write to comsume them. One of Ruby's main design points has always
+been to try to address human needs more than computer's. As API
+designers/implementers, it seems important to adopt the same approach and
+consider who will use our interfaces.
+I think the discussion should focus more on what to value when
+defining web APIs, instead of arguing about how to implement APIs.
+Standardization is a great concept but a really hard to implement. And
+even with standards, we have to find a way to communicate with the API
+users to express what standards we follow and where to find the various
+entry points.
+Think about your API, <strong>how well does it
+communicate with your future API users</strong>, is it good enough for them to get
+excited? Is it good enough for them to create something amazing with it?
+If not, why not?</p>
+
+<h3>Discussion</h3>
+
+<p>Comments are available on <a href="http://news.ycombinator.com/item?id=4107126">this HackerNews thread</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MacRuby on iOS - RubyMotion review]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/05/04/macruby-on-ios-rubymotion-review/"/>
+    <updated>2012-05-04T07:17:47-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/05/04/macruby-on-ios-rubymotion-review</id>
+    <content type="html"><![CDATA[<p>Yesterday, <a href="http://www.rubymotion.com/">RubyMotion</a> was released and let's be honest, it is one the best alternatives to Objective-C out there (if not the best).</p>
+
+<p>RubyMotion is a commercial, proprietary fork of MacRuby that targets iOS. This is not a small achievement, MacRuby relies on Objective C's Garbage Collector (libauto) which is not available on iOS. Static compilation and new memory management solution was required to target the iOS platform . The new runtime had to be small and efficient. Furthermore, being able to run code on iOS isn't enough, you need tools to interact with the compiler, to debug, to packages applications etc...</p>
+
+<p>I don't think anyone will contest the fact that RubyMotion is a well done product. The question however is, "<strong>is it worth for you to invest some money, time and energy in this product instead of using Apple's language and tools</strong>". In this article, I'll try to balance the pros and cons of RubyMotion so you can have a better understanding of what RubyMotion could mean for you. As a disclaimer I should say that I was beta testing RubyMotion, that they are strong ties between RubyMotion and the MacRuby project I'm part of and finally that having MacRuby on iOS has been something I've been looking forward for a very long time.</p>
+
+<p>Over the last few months I've seen RubyMotion take shape and finally hit the big 1.0. As you can see from <a href="http://twitter.com/#!/search/rubymotion?q=rubymotion">Twitter</a> and <a href="http://news.ycombinator.com/item?id=3924657">HackerNews</a>, the Ruby community is excited about being able to use their language to write statically compiled, native iOS apps. Spoiler alert, they are right, it's a lot of fun.</p>
+
+<p> </p>
+
+<hr />
+
+<p> </p>
+
+<h2>What I like about RubyMotion:</h2>
+
+<h3>Ruby Language</h3>
+
+<p>I don't mind Objective-C, I think it's a fine superset of C, with the arrival of blocks, new literals and automatic memory management via ARC, Objective-C is actually getting better over time. But frankly, it's not Ruby. You still have to deal with headers, you always have to compile your code via some weird Xcode voodoo settings, testing is a pain, the language, even with the new literals is quite verbose. On the other hand, using Ruby syntax I can get much more flexibility, reuse my code via mixins, easily reopen existing classes etc... At the end of the day, I end up with some code that seems cleaner, easier to understand and maintain even though I'm calling the same underlying APIs. Ruby's flexibility also allows developers to make their own higher level APIs, take a look at some of the <a href="https://github.com/mattetti/BubbleWrap">wrappers/helpers</a> I wrote while playing with RubyMotion.</p>
+
+<p><a href="http://www.ruby-lang.org/en/"><img src="http://merbist.com/wp-content/uploads/2012/05/matt_aimonetti-Ruby_logo-150x150.jpg" alt="Matt Aimonetti - Ruby Logo" /></a></p>
+
+<h3>MacRuby</h3>
+
+<p>RubyMotion is based on MacRuby, meaning that all the time and energy invested in the project will benefit RubyMotion's users. All the concepts I explain in my <a href="http://shop.oreilly.com/product/0636920000723.do">MacRuby book</a> apply to RubyMotion. You don't have to find workarounds to work with native APIs, Ruby objects are Objective-C objects and performance is great. I do regret Apple didn't decide to embrace MacRuby for iOS but at the same time, even though we lost the Open Source aspect of the project and Apple's backing, we gained much more flexibility and freedom on Laurent's part.</p>
+
+<p><a href="https://www.amazon.com/dp/1449380379?tag=merbist-20&amp;camp=213381&amp;creative=390973&amp;linkCode=as4&amp;creativeASIN=1449380379&amp;adid=1SKHT7ABMG1YJZ3136WQ&amp;"><img src="http://merbist.com/wp-content/uploads/matt_aimonetti/matt_aimonetti_macruby_book.gif" alt="" /></a></p>
+
+<h3>REPL/Interactive shell</h3>
+
+<p>RubyMotion doesn't currently have a debugger, but it does have something Objective-C developers don't have, a <a href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> working with the simulator. This feature is quite handy when debugging your application or learning the Cocoa APIs. You can click on a visual element in the simulator and start modifying the objects in real time in a terminal window and see the modifications in the simulator. It reminds me of the first time I used firebug to edit the html/css of a web page and saw the changes in real time.</p>
+
+<p><a href="http://www.youtube.com/watch?feature=player_embedded&amp;v=rejYKzLglSE#!"><img src="http://merbist.com/wp-content/uploads/2012/05/matt_aimonetti-RubyMotion-REPL-150x150.jpg" alt="Matt Aimonetti - RubyMotion REPL" /></a></p>
+
+<h3>Not dependent on Xcode</h3>
+
+<p>Xcode is fine when you write Objective-C code, but it crashes often, it has a complicated UI and never really worked well for MacRuby due to the fact that Objective-C and Ruby have different requirements and the that Xcode is not open source. It's also fully controlled by Apple and doesn't provide APIs for 3rd party developers. (That said, the Xcode team has often helped out when a new released of Xcode broke MacRuby, so thank you guys).</p>
+
+<p>Being able to use simple rake tasks to compile, simulate and deploy applications is just really really nice. I'm sure we'll end up with better IDE integration, nice GUIs for some who like that, but in the meantime, as a "hacker", I really enjoy the simplicity of the Rake tasks and not being forced in using a specific IDE.</p>
+
+<p> </p>
+
+<h3>Memory management</h3>
+
+<p>Even though ARC made memory management much easier for Objective-C developers, when using RubyMotion you don't have to worry about memory (well at least not explicitly, don't be dumb and create a bazillion objects and hold references to them either). This includes the CoreFoundation objects that you still have to manually manage in Objective-C. Memory management is transparent and in most cases it's really nice.</p>
+
+<p> </p>
+
+<hr />
+
+<p> </p>
+
+<h2>What I like less about RubyMotion</h2>
+
+<p>Here is a list of things that are cons to using RubyMotion, note that while the list is longer than my list of "pros", I listed a lot of small things. I also think that most of these issues will get solved in the next few months.</p>
+
+<p> </p>
+
+<h3>Ruby language</h3>
+
+<p>There are some cases where Ruby just isn't that great or is not an option. Examples include dealing with API relying heavily on pointers, when using some of the lower level APIs or when you have to interact with C++ (video game engines for instance). The good news is that within the same project, you can write part of your code in Objective-C and the rest in RubyMotion. The other thing that bothers me a little bit with writing Ruby code for iOS is that you can't easily enforce argument types and therefore you are losing a lot of the features provided by Clang to the Objective-C developers. I dream of an optionally typed Ruby -- but that's a different topic.</p>
+
+<p>Another downside of using Ruby is that Ruby developers will assume all standard libraries and gems will be compatible with RubyMotion. This isn't the case. You need to think of RubyMotion as only offering the Ruby syntax (modulo a few differences). To be honest, most of the std libs and gems aren't that useful when writing iOS apps. Even when I write MacRuby apps, I rarely rely on them and pick libraries designed to work in a non-blocking, multi-threaded environment (usually ObjC libs that I wrap).</p>
+
+<p> </p>
+
+<h3>Cocoa Touch</h3>
+
+<p>If you're already an iOS/OS X developer, you know that most of the hurdles aren't the language syntax but the Cocoa APIs. These APIs are what you need to interact with to create your application. Cocoa APIs are usually much lower-level compared to what you usually see in Python, Ruby or even Java. While they are quite consistent, the APIs still have a stiff learning curve and currently,  if you want to write iOS applications, even if you know Ruby, you still have to learn Cocoa.</p>
+
+<p>However, I do think that with RubyMotion now building a userbase, we will start seeing more and more <a href="https://github.com/mattetti/BubbleWrap">wrappers</a> around these sometimes <a href="https://github.com/HipByte/RubyMotionSamples/blob/master/GestureTable/app/gesture_recognizer.rb">hideous APIs</a>.</p>
+
+<p> </p>
+
+<h3>No Xcode/IDE</h3>
+
+<p>There are cases where an IDE is really practical, especially when learning new APIs. Being able to have code completion, quick access to the documentation, instrumentation, debugging, interface builder, refactoring tools are things that Objective-C developers might have a hard time with when switching to RubyMotion. If you don't know either Ruby or Cocoa, getting started with RubyMotion might be quite hard and you are probably not currently in the target audience.</p>
+
+<p> </p>
+
+<h3>Writing UI code by hand</h3>
+
+<p>In some cases, it makes sense, in other, it should be much easier. I know that Laurent is working on a DSL to make that easier and I'm looking forward to it. But in the mean time, this is quite a painful exercise, especially due to the complexity of the Cocoa UI APIs. Using Xcode's interface builder and Storyboards is something I know a lot of us wish we could do with RubyMotion when developing specific types of applications.</p>
+
+<p><a href="http://kurrytran.blogspot.fr/2011/07/simple-ios-5-tutorial-using-storyboard.html"><img src="http://merbist.com/wp-content/uploads/2012/05/matt_aimonetti_storyboard-1.jpg" alt="Matt Aimonetti - Xcode iOS storyboard" /></a></p>
+
+<h3>No debugger</h3>
+
+<p>Again, this is eventually coming but the current lack of debugger can be problematic at times, especially when the problem isn't obvious.</p>
+
+<p> </p>
+
+<h3>Lack of clear target audience</h3>
+
+<p>It's hard to blame a brand new product for not having clearly defined a target audience. But as a developer I find myself wondering "when should I use RubyMotion and for what kinds of problems?" Is RubyMotion great for quick prototypes I can then turn into production code? Or is good for throw away prototypes? Is it reserved for "fart and flash light" applications? Is it ready for prime time and should I invest and write my new awesome apps using it? Should I convert over my existing code base over from Titanium (or whatever other alternatives you used)? Should I use RubyMotion every time I would use Objective-C?</p>
+
+<p>I guess we will see when the first applications start hitting the app store and people start reporting on their experience.</p>
+
+<h3>Documentation</h3>
+
+<p>I'm partially to blame here since I could have moved my butt and start writing a book but the point is nonetheless valid. All the iOS documentation out there is for Objective-C, all the APIs and samples provided by Apple are obviously only for Objective-C. Thankfully, you can use the 2 MacRuby books available out there to understand how to convert this existing documentation into something useful, but RubyMotion will need to provide better and more adapted documentation for beginners. I have no doubt that this is coming sooner than later.</p>
+
+<p> </p>
+
+<h3>Proprietary solution</h3>
+
+<p>RubyMotion isn't open source and currently fully relies on the shoulders of a single man. If unfortunately, Laurent goes out of business or decides to do something else then we will have to rewrite our apps in Objective-C.  Using RubyMotion for a professional product represents a significant business risk, which is exactly the same as using proprietary technology from any vendor. Apple could also decide to switch to JavaScript or rewrite iOS in Java and deprecate Objective-C. Let's just say that it is unlikely.</p>
+
+<p>I usually favor open source solutions, from the programming language I use to the OS I deploy on. This isn't always possible and if you want to write iOS applications, you don't currently have a choice. I do wish Laurent had found a way to make money while keeping the source code open. But who knows -- after he makes his first million(s), he might change his mind.</p>
+
+<p><a href="http://merbist.com/wp-content/uploads/2012/05/matt_aimonetti-rms.jpg"><img src="http://merbist.com/wp-content/uploads/2012/05/matt_aimonetti-rms-150x150.jpg" alt="Matt Aimonetti - RMS" /></a></p>
+
+<h2>Conclusion</h2>
+
+<p>I would strongly suggest you consider giving RubyMotion a try. I can assure you that it will provide at least a few hours of 'hacking fun' (and you will be able to brag about havng written your own iPhone app).  It will also help support financially someone who's taking a risk in trying to push mobile development to the next level.</p>
+
+<p>RubyMotion is, by far, my favorite alternative to Objective-C. But it is hard to tell, just 48 hours after its release, what people will do with it. Can it transcend the programming language barriers and attract Python, PHP, Java, ObjC and JavaScript developers? What is the sweet spot for RubyMotion applications? Will it affect the native vs web app battle? Can it make iOS development more accessible to the masses? Only time will tell.</p>
+
+<br/>
+
+
+<hr />
+
+<h3>Update:</h3>
+
+<p>Since RubyMotion 1.0 was released, I spent quite a lot of my free time leading the
+development of <a href="http://bubblewrap.io/">BubbleWrap</a>, a free and open
+source 3rd party library for <a href="http://www.rubymotion.com/">RubyMotion</a>.
+Unfortunately, as of July 2011 <strong>I took a break from this project and
+RubyMotion in general</strong>. I explained my motivations in <a href="https://groups.google.com/d/topic/rubymotion/XIE673vnuQk/discussion">this mailing list
+post</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[mruby and MobiRuby]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/04/20/mruby-and-mobiruby/"/>
+    <updated>2012-04-20T12:32:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/04/20/mruby-and-mobiruby</id>
+    <content type="html"><![CDATA[<p>Today, two big Ruby news came directly from Japan:</p>
+
+<ul>
+<li>The Open Source release of <a href="http://en.wikipedia.org/wiki/Yukihiro_Matsumoto">Matz'</a> <a href="https://github.com/mruby/mruby">mruby on GitHub</a>.</li>
+<li>The announce of <a href="http://mobiruby.org/">MobiRuby</a>, an upcoming solution
+to develop iOS and Android applications using Ruby.</li>
+</ul>
+
+
+<p>Probably due to my involvement with the <a href="http://macruby.org/">MacRuby</a>
+project, people have been asking me what I thought of these news.</p>
+
+<h2>mruby</h2>
+
+<p>mruby is far from being a new project. It's based on the RiteVM which is a
+sponsored project by the <a href="http://www.meti.go.jp/english/">Japanese ministry of Economy, Trade and Industry</a> and lead by Ruby's creator: <a href="http://en.wikipedia.org/wiki/Yukihiro_Matsumoto">Yukihiro "Matz" Matsumoto</a> and was explained in details during <a href="http://www.slideshare.net/yukihiro_matz/rubyconf-2010-keynote-by-matz">Matz's RubyConf 2010 keynote</a>.</p>
+
+<p>Back in November 2011 Matz also explained mruby. His talk was recorded
+and he explains very well the current Ruby ecosystem and why mruby makes
+sense.</p>
+
+<div class="video-container">
+<iframe width="560" height="315" src="http://www.youtube.com/embed/sB-IifjyeLI" frameborder="0" allowfullscreen></iframe></div>
+
+
+<p>As explained, the main goal of mruby is to have a Ruby version that can
+be embedded and therefore have a smaller footprint, be compiled and
+linked within another application.</p>
+
+<p>Hiroshi Nakamura gave a great 1 line definition of mruby:</p>
+
+<p><img src="/images/mruby_def.jpg" alt="mruby" /></p>
+
+<p>mruby targets game developers (to use instead of Lua), embedded
+application developers (devices, TV, phones..) and small memory
+footprint server applications (instead of JS for instance).</p>
+
+<p>I'm personally quite excited by mruby, it's not there yet and there is
+still a lot of work to do to prove the value of the project but it's
+certainly a great step in the right direction. What's also really nice
+is that the project is released under an OSS license allowing for all of
+us to contribute and companies to improve the implementation based on
+their own needs.</p>
+
+<p><strong>Summary:</strong> mruby is a promising project even if it is still in its infancy.
+Besides being yet another Ruby implementation, the fact that the
+target audience and the project scope are well defined and that the project is lead
+by Ruby's author and sponsored by the Japanese government makes me want to believe that it can be a successful project. That said Lua is a simpler language and it is already well implemented in the targeted market, so hopefuly Matz, his team and the Japanese government have a plan to advocate and champion this new technology. Good luck to them and I'll keep an attentive eye on the project.</p>
+
+<p><strong>
+Update: I wrote a <a href="http://matt.aimonetti.net/posts/2012/04/25/getting-started-with-mruby/">getting started with mruby</a> guide.
+</strong></p>
+
+<h2>MobiRuby</h2>
+
+<p><a href="http://mobiruby.org/">MobiRuby</a> is being developed by <a href="https://github.com/masuidrive">Yuichiro MASUI</a> who works for <a href="http://www.appcelerator.com/">Appcelerator</a> the company behind the popular <a href="http://www.appcelerator.com/platform/titanium-sdk">Titanium platform</a> to write native iOS, Android apps in JS.</p>
+
+<p>MobiRuby is built on top of mruby making it the first demonstration of
+what motivated developers can do with Matz new implementation. Very much
+like mruby, MobiRuby will be released under an OSS license but unlike
+mruby, the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache license</a> was chosen.</p>
+
+<p>So far this was just an announcement with a code sample and a
+screenshot. That was enough to make the front page of <a href="http://news.ycombinator.com/item?id=3866418">HackerNews</a>. Apparently the author is planning on releasing a first version in a few months.</p>
+
+<p> <img src="http://mobiruby.org/screenshot1.jpg" title="MobiRuby screenshot" alt="MobiRuby" /></p>
+
+<p>It might surprise some, but I'm quite glad to see this kind of projects
+even though, they compete to some extent against MacRuby. It proves two
+things:</p>
+
+<ul>
+<li>there is a strong interest in having Ruby on mobile devices.</li>
+<li>it's technically possible to do so.</li>
+</ul>
+
+
+<p>Now, this is not something new either, Lua developers have been able to
+write iOS apps for a while, yet the majority of the iOS developers still
+use Objective-C. What are the challenges facing implementations trying
+to replace Objective-C?</p>
+
+<h3>The replacement language might not fit the Cocoa design.</h3>
+
+<p>Developing an iOS/OS X app means that you spend your time using provided
+libraries (called frameworks in Apple's jargon). These frameworks have
+specific patterns, a well defined syntax and usually work in a very
+consistent/constraining way. Or your language is quite similar (like Ruby) and the
+transition is easy, or you need to start writing and maintaining
+wrappers (titanium).</p>
+
+<h3>Bridged runtimes.</h3>
+
+<p>Having 2 runtimes running at the same time is quite challenging and not
+efficient. That's one of the reasons why Apple pushed MacRuby to move from <a href="http://en.wikipedia.org/wiki/RubyCocoa">RubyCocoa</a> being a bridge and to have a Ruby implementation running in Objective-C runtime itself.
+This allows something else, in MacRuby all objects are actually
+Objective-C objects which means you don't need to convert anything and
+Cocoa APIs can be extended from Ruby code by just reopening them.</p>
+
+<h3>Support.</h3>
+
+<p>This one is critical for many. Often, you don't want to have your next big
+project rely on a technology that doesn't have a good backing and
+support. What happens if you build your app using an alternate
+implementation and all a sudden the developer(s) get bored and move on,
+or take another job?
+What about the updates needed as Apple/Google update their platforms?
+It might not be the best reason to not choose an alternative, but it's
+a reasonable reason especially for companies who want to be "safe".</p>
+
+<h3>Cocoa</h3>
+
+<p>Cocoa APIs represent probably 90% of the challenge when writing iOS/OS X
+applications. The APIs, while powerful and efficient, are often a pain
+to get used to and to learn.</p>
+
+<p>You have the challenge of the documentation and the examples that
+are only in Objective-C, requiring that someone <a href="http://www.amazon.com/gp/product/1449380379/ref=as_li_ss_tl?ie=UTF8&amp;tag=merbist-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1449380379">writes a book</a> and/or that
+you convert and maintain an enormous amount of documentation.</p>
+
+<p>You also have all the tools provided by Apple which, you often can't
+fully use because you aren't using their toolchain.</p>
+
+<p>To be honest, after so many years using MacRuby, I think that the real
+value of such a project isn't in the easier syntax but instead in the
+fact that you can easily build wrappers and higher level interfaces
+around repetitive tasks. Having a mix of a well designed DSL and yet
+access to the native object is something extremely powerful.</p>
+
+<h3>Objective-C is evolving.</h3>
+
+<p>Objective-C is evolving, with the introduction of <a href="http://developer.apple.com/library/ios/#releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html">ARC</a>, memory management became much easier. The latest version of clang also granted Objective-C with a nicer syntax thanks to new literals and object subscripting (<a href="http://clang.llvm.org/docs/ObjectiveCLiterals.html">read more</a>). As a matter of fact, Objective-C's syntax is getting closer and closer to Ruby's making the choice to use an alternate much harder.</p>
+
+<p>``` objective-c
+// character literals.
+NSNumber *theLetterZ = @'Z';          // equivalent to [NSNumber numberWithChar:'Z']</p>
+
+<p>// integral literals.
+NSNumber *fortyTwo = @42;             // equivalent to [NSNumber numberWithInt:42]</p>
+
+<p>// floating point literals.
+NSNumber *piDouble = @3.1415926535;   // equivalent to [NSNumber numberWithDouble:3.1415926535]</p>
+
+<p>// BOOL literals.
+NSNumber *yesNumber = @YES;           // equivalent to [NSNumber numberWithBool:YES]</p>
+
+<p>// Container literals
+NSArray *array = @[ @"Hello", NSApp, [NSNumber numberWithInt:42] ];
+id value = array[idx];</p>
+
+<p>NSDictionary *dictionary = @{
+  @"name" : NSUserName(),
+  @"date" : [NSDate date],
+  @"processInfo" : [NSProcessInfo processInfo]
+};
+id oldObject = dictionary[key];
+dictionary[key] = newObject;    // replace oldObject with newObject
+```</p>
+
+<h3>Performance.</h3>
+
+<p>Even though devices are more and more powerful, performance is often
+critical and Apple optimized the performance of their solution for their
+language. If you have ever developed a Titanium app, you know that it
+can be an issue and you might have to find workarounds to get decent
+performance.</p>
+
+<p><strong>Summary:</strong> Based on all these things, once MobiRuby will be released, I will be
+able to make a better judgement. But based on what I have seen so far,
+I'm quite concerned by the syntax and the performance we will get out of
+the box. But time will tell and things can always be improved.
+Ruby on iOS/Android is something exciting and I'm looking forward to
+testing the first betas.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Building and implementing a Single Sign-On solution]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution/"/>
+    <updated>2012-04-04T07:29:16-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/04/04/building-and-implementing-a-single-sign-on-solution</id>
+    <content type="html"><![CDATA[<p>Most modern web applications start as a monolithic code base and, as complexity increases, the once small app gets split apart into many "modules". In other cases, engineers opt for a <a href="http://en.wikipedia.org/wiki/Service-oriented_architecture">SOA</a> design approach from the beginning. One way or another, we start running multiple separate applications that need to interact seamlessly. My goal will be to describe some of the high-level challenges and solutions found in implementing a Single-Sign-On service.</p>
+
+<h2>Authentication vs Authorization</h2>
+
+<p>I wish these two words didn't share the same root because it surely confuses a lot of people. My most frequently-discussed example is <a href="http://en.wikipedia.org/wiki/OAuth">OAuth</a>. Every time I start talking about implementing a centralized/unified authentication system, someone jumps in and suggests that we use <a href="http://en.wikipedia.org/wiki/OAuth">OAuth</a>. The challenge is that <a href="http://en.wikipedia.org/wiki/OAuth">OAuth</a> is an authorization system, not an authentication system.</p>
+
+<p>It's tricky, because you might actually be "authenticating" yourself to website X using OAuth. What you are really doing is allowing website X to use your information stored by the OAuth provider. It is true that OAuth offers a pseudo-authentication approach via its provider but that is not the main goal of <a href="http://en.wikipedia.org/wiki/OAuth">OAuth</a>: the Auth in OAuth stands for Authorization, not Authentication.</p>
+
+<p>Here is how we could briefly describe each role:</p>
+
+<ul>
+<li><p><strong>Authentication</strong>: recognizes who you are.</p></li>
+<li><p><strong>Authorization</strong>: know what you are allowed to do, or what you allow others to do.</p></li>
+</ul>
+
+
+<p>If you are feel stuck in your design and something seems wrong, ask yourself if you might be confused by the 2 auth words. This article will only focus on <strong>authentication</strong>.</p>
+
+<h2>A Common Scenario</h2>
+
+<p><a href="http://merbist.com/wp-content/uploads/2012/04/SSO-simplescenario.png"><img src="http://merbist.com/wp-content/uploads/2012/04/SSO-simplescenario.png" alt="SSO diagram with 3 top applications connecting to an authorization service." /></a></p>
+
+<p>This is probably the most common structure, though I made it slightly more complex by drawing the three main apps in different programming languages. We have three web applications running on different subdomains and sharing account data via a centralized authentication service.</p>
+
+<p><strong>Goals:</strong></p>
+
+<ul>
+<li><p>Keep authentication and basic account data isolated.</p></li>
+<li><p>Allow users to stay logged in while browsing different apps.</p></li>
+</ul>
+
+
+<p>Implementing such a system should be easy. That said, if you migrate an existing app to an architecture like that, you will spend 80% of your time decoupling your legacy code from authentication and wondering what data should be centralized and what should be distributed. Unfortunately, I can't tell you what to do there since this is very domain specific. Instead, let's see how to do the "easy part."</p>
+
+<h2>Centralizing and Isolating Shared Account Data</h2>
+
+<p>At this point, you more than likely have each of your apps talk directly to shared database tables that contain user account data. The first step is to migrate away from doing that. We need a single interface that is the only entry point to create or update shared account data. Some of the data we have in the database might be app specific and therefore should stay within each app, anything that is shared across apps should be moved behind the new interface.</p>
+
+<p>Often your centralized authentication system will store the following information:</p>
+
+<ul>
+<li><p>ID</p></li>
+<li><p>first name</p></li>
+<li><p>last name</p></li>
+<li><p>login/nickname</p></li>
+<li><p>email</p></li>
+<li><p>hashed password</p></li>
+<li><p>salt</p></li>
+<li><p>creation timestamp</p></li>
+<li><p>update timestamp</p></li>
+<li><p>account state (verified, disabled ...)</p></li>
+</ul>
+
+
+<p>Do not duplicate this data in each app, instead have each app rely on the account ID to query data that is specific to a given account in the app. Technically that means that instead of using SQL joins, you will query your database using the ID as part of the condition.</p>
+
+<p>My suggestion is to do things slowly but surely. Migrate your database schema piece by piece assuring that everything works fine. Once the other pieces will be in place, you can migrate one code API a time until your entire code base is moved over. You might want to change your DB credentials to only have read access, then no access at all.</p>
+
+<h2>Login workflow</h2>
+
+<p>Each of our apps already has a way for users to login. We don't want to change the user experience, instead we want to make a transparent modification so the authentication check is done in a centralized way instead of a local way. To do that, the easiest way is to keep your current login forms but instead of POSTing them to your local apps, we'll POST them to a centralized authentication API. (SSL is strongly recommended)</p>
+
+<p><a href="http://merbist.com/wp-content/uploads/2012/04/SSO-login.png"><img src="http://merbist.com/wp-content/uploads/2012/04/SSO-login.png" alt="diagram showing the login workflow" /></a></p>
+
+<p>As shown above, the login form now submits to an endpoint in the authentication application. The form will more than likely include a login or email and a clear text password as well as a hidden callback/redirect url so that the authentication API can redirect the user's browser to the original app. For security reasons, you might want to white list the domains you allow your authentication app to redirect to.</p>
+
+<p>Internally, the Authentication app will validate the identifier (email or login) using a hashed version of the clear password against the matching record in the account data. If the verification is successful, a token will be generated containing some user data (for instance: id, first name, last name, email, created date, authentication timestamp). If the verification failed, the token isn't generated. Finally the user's browser is redirected to the callback/redirect URL provided in the request with the token being passed.</p>
+
+<p>You might want to safely encrypt the data in a way that allows the clients to verify and trust that the token comes from a trusted source. A great solution for that would be to use <a href="http://en.wikipedia.org/wiki/RSA_(algorithm">RSA encryption</a>) with the public key available in all your client apps but the private key only available on the auth server(s). Other strong encryption solutions would also work. For instance, another appropriate approach would be to add a signature to the params sent back. This way the clients could check the authenticity of the params. <a href="http://en.wikipedia.org/wiki/HMAC">HMAC</a> or <a href="http://en.wikipedia.org/wiki/Digital_Signature_Algorithm">DSA</a> signature are great for that but in some cases, you don't want people to see the content of the data you send back. That's especially true if you are sending back a 'mobile' token for instance. But that's a different story. What's important to consider is that we need a way to ensure that the data sent back to the client can't be tampered with. You might also make sure you prevent replay attacks.</p>
+
+<p>On the other side, the application receives a GET request with a token param. If the token is empty or can't be decrypted, authentication failed. At that point, we need to show the user the login page again and let him/her try again. If on the other hand, the token can be decrypted, the content should be saved in the session so future requests can reuse the data.</p>
+
+<p>We described the authentication workflow, but if a user logins in application X, (s)he won't be logged-in in application Y or Z. The trick here, is to set a top level domain cookie that can be seen by all applications running on subdomains. Certainly, this solution only works for apps being on the same domain, but we'll see later how to handle apps on different domains.</p>
+
+<p><a href="http://merbist.com/wp-content/uploads/2012/04/SSO-login-cookie.png"><img src="http://merbist.com/wp-content/uploads/2012/04/SSO-login-cookie.png" alt="" /></a></p>
+
+<p>The cookie doesn't need to contain a lot of data, its value can contain the account id, a timestamp (to know when authentication happened and a trusted signature) and a signature. The signature is critical here since this cookie will allow users to be automatically logged in other sites. I'd recommend the  <a href="http://en.wikipedia.org/wiki/HMAC">HMAC</a> or <a href="http://en.wikipedia.org/wiki/Digital_Signature_Algorithm">DSA</a> encryptions to generate the signature. The DSA encryption, very much like the RSA encryption is an asymmetrical encryption relying on a public/private key. This approach offers more security than having something based a shared secret like HMAC does. But that's really up to you.</p>
+
+<p>Finally, we need to set a filter in your application. This auto-login filter will check the presence of an auth cookie on the top level domain and the absence of local session. If that's the case, a session is automatically created using the user id from the cookie value after the cookie integrity is verified. We could also share the session between all our apps, but in most cases, the data stored by each app is very specific and it's safer/cleaner to keep the sessions isolated. The integration with an app running on a different service will also be easier if the sessions are isolated.</p>
+
+<p> </p>
+
+<h2>Registration</h2>
+
+<p>For registration, as for login, we can take one of two approaches: point the user's browser to the auth API or make S2S (server to server) calls from within our apps to the Authentication app. POSTing a form directly to the API is a great way to reduce duplicated logic and traffic on each client app so I'll demonstrate this approach.</p>
+
+<p><a href="http://merbist.com/wp-content/uploads/2012/04/CopyofSSO-register.png"><img src="http://merbist.com/wp-content/uploads/2012/04/CopyofSSO-register.png" alt="" /></a></p>
+
+<p>As you can see, the approach is the same we used to login. The difference is that instead of returning a token, we just return some params (id, email and potential errors). The redirect/callback url will also obviously be different than for login. You could decide to encrypt the data you send back, but in this scenario, what I would do is set an auth cookie at the .domain.com level when the account is created so the "client" application can auto-login the user. The information sent back in the redirect is used to re-display the register form with the error information and the email entered by the user.</p>
+
+<p>At this point, our implementation is almost complete. We can create an account and login using the defined credentials. Users can switch from one app to another without having to re login because we are using a shared signed cookie that can only be created by the authentication app and can be verified by all "client" apps. Our code is simple, safe and efficient.</p>
+
+<h2>Updating or deleting an account</h2>
+
+<p>The next thing we will need is to update or delete an account. In this case, this is something that needs to be done between a "client" app and the authentication/accounts app. We'll make S2S (server to server) calls. To ensure the security of our apps and to offer a nice way to log requests, API tokens/keys will be used by each client to communicate with the authentication/accounts app. The API key can be passed using a <a href="http://en.wikipedia.org/wiki/List_of_HTTP_header_fields">X-header</a> so this concern stays out of the request params and our code can process separately the authentication via X-header and the actual service implementation. S2S services should have a filter verifying and logging the API requests based on the key sent with the request. The rest is straight forward.</p>
+
+<h2>Using different domains</h2>
+
+<p>Until now, we assumed all our apps were on the same top domain. In reality, you will often find yourself with apps on different domains. This means that you can't use the shared signed cookie approach anymore. However, there is a simple trick that will allow you to avoid requiring your users to re-login as they switch apps.</p>
+
+<p><a href="http://merbist.com/wp-content/uploads/2012/04/SSO-differentdomains-1.png"><img src="http://merbist.com/wp-content/uploads/2012/04/SSO-differentdomains-1.png" alt="" /></a></p>
+
+<p> </p>
+
+<p>The trick consists, when a local session isn't present, of using an iframe in the application using the different domain. The iframe loads a page from the authentication/accounts app which verifies that a valid cookie was set on the main top domain. If that is the case, we can tell the application that the user is already globally logged in and we can tell the iframe host to redirect to an application end point passing an auth token the same way we did during the authentication. The app would then create a session and redirect the user back to where (s)he started. The next requests will see the local session and this process will be ignored.</p>
+
+<p>If the authentication application doesn't find a signed cookie, the iframe can display a login form or redirect the iframe host to a login form depending on the required behavior.</p>
+
+<p>Something to keep in mind when using multiple apps and domains is that you need to keep the shared cookies/sessions in sync, meaning that if you log out from an app, you need to also delete the auth cookie to ensure that users are globally logged out. (It also means that you might always want to use an iframe to check the login status and auto-logoff users).</p>
+
+<p> </p>
+
+<h2>Mobile clients</h2>
+
+<p>Another part of implementing a SSO solution is to handle mobile clients. Mobile clients need to be able to register/login and update accounts. However, unlike S2S service clients, mobile clients should only allow calls to modify data on the behalf of a given user. To do that, I recommend providing opaque mobile tokens during the login process. This token can then be sent with each request in a X-header so the service can authenticate the user making the request. Again, SSL is strongly recommended.</p>
+
+<p>In this approach, we don't use a cookie and we actually don't need a SSO solution, but an unified authentication system.</p>
+
+<p> </p>
+
+<h2>Writing web services</h2>
+
+<p>Our Authentication/Accounts application turns out to be a pure web API app.</p>
+
+<p>We also have 3 sets of APIs:</p>
+
+<ul>
+<li><p>Public APIs: can be accessed from anywhere, no authentication required</p></li>
+<li><p>S2S APIs: authenticated via API keys and only available to trusted clients</p></li>
+<li><p>Mobile APIs: authenticated via a mobile token and limited in scope.</p></li>
+</ul>
+
+
+<p>We don't need dynamic HTML views, just simple web service related code. While this is a little bit off topic, I'd like to take a minute to show you how I personally like writing web service applications.</p>
+
+<p>Something that I care a lot about when I implement web APIs is to validate incoming params. This is an opinionated approach that I picked up while at Sony and that I think should be used every time you implement a web API. As a matter of fact, I wrote a Ruby <a href="https://github.com/mattetti/Weasel-Diesel">DSL library (Weasel Diesel)</a> allowing you <a href="https://github.com/mattetti/sinatra-web-api-example/blob/master/api/hello_world.rb">describe a given service</a>, its <a href="https://github.com/mattetti/sinatra-web-api-example/blob/master/api/hello_world.rb#L7">incoming params</a>, and the <a href="https://github.com/mattetti/sinatra-web-api-example/blob/master/api/hello_world.rb#L10-15">expected output</a>. This DSL is hooked into a web backend so you can implement services using a web engine such as <a href="http://www.sinatrarb.com/">Sinatra</a> or maybe Rails3. Based on the DSL usage, incoming parameters are be verified before being processed. The other advantage is that you can generate documentation based on the API description as well as automated tests.</p>
+
+<p>You might be familiar with <a href="https://github.com/intridea/grape">Grape</a>, another DSL for web services. Besides the obvious style difference <a href="https://github.com/mattetti/Weasel-Diesel">Weasel Diesel </a>offers the following advantages:</p>
+
+<ul>
+<li><p>input validation/sanitization</p></li>
+<li><p>service isolation</p></li>
+<li><p>generated documentation</p></li>
+<li><p>contract based design</p></li>
+</ul>
+
+
+<p>Here is a hello world webservice being implemented using Weasel Diesel and Sinatra:</p>
+
+<p><div><script src='https://gist.github.com/2300131.js?file='></script>
+<noscript><pre><code></code></pre></noscript></div>
+</p>
+
+<p>Basis test validating the contract defined in the DSL and the actual output when the service is called:</p>
+
+<p><div><script src='https://gist.github.com/2300440.js?file='></script>
+<noscript><pre><code></code></pre></noscript></div>
+</p>
+
+<p>Generated documentation:</p>
+
+<p><img src="https://img.skitch.com/20120404-t1j93b73tef5pmd5idfqqa61td.jpg" alt="" /></p>
+
+<p>If the DSL and its features seem appealing to you and you are interested in digging more into it, the easiest way is to fork <a href="https://github.com/mattetti/sinatra-web-api-example/">this demo repo</a> and start writing your own services.</p>
+
+<p>The DSL has been used in production for more than a year, but there certainly are tweaks and small changes that can make the user experience even better. Feel free to fork the <a href="https://github.com/mattetti/Weasel-Diesel">DSL repo</a> and send me Pull Requests.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Learning from Rails' failures]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/02/29/learning-from-rails-failures/"/>
+    <updated>2012-02-29T07:48:08-08:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/02/29/learning-from-rails-failures</id>
+    <content type="html"><![CDATA[<p>Ruby on Rails undisputedly changed the way web frameworks are designed. Rails became a reference when it comes to leveraging conventions, easy baked in feature set and a rich ecosystem. However, I think that Rails did and still does a lot of things pretty poorly.  By writing this post, I'm not trying to denigrate Rails, there are many other people out there already doing that. My hope is that by listing what I think didn't and still doesn't go well, we can learn from our mistakes and improve existing solutions or create better new ones.</p>
+
+<p><a href="http://merbist.com/2012/02/29/learning-from-rails-failures/train_fail/"><img src="http://merbist.com/wp-content/uploads/2012/02/train_fail-300x188.jpg" alt="" /></a></p>
+
+<h2>Migration/upgrades</h2>
+
+<p>Migrating a Rails App from a version to the other is very much like playing the lottery, you are almost sure you will lose. To be more correct, you know things will break, you just don't know what, when and how. The Rails team seems to think that everybody is always running on the cutting edge version and don't consider people who prefer to stay a few version behind for stability reasons. What's worse is that plugins/gems might or might not compatible with the version you are updating to, but you will only know that by trying yourself and letting others try and report potential issues.</p>
+
+<p>This is for me, by far, the biggest issue with Rails and something that should have been fixed a long time ago. If you're using the WordPress blog engine, you know how easy and safe it is to upgrade the engine or the plugins. Granted WordPress isn't a web dev framework, but it gives you an idea of what kind of experience we should be striving for.</p>
+
+<p> </p>
+
+<h2>Stability vs playground zone</h2>
+
+<p>New features are cool and they help make the platform more appealing to new comers. They also help shape the future of a framework. But from my perspective, that shouldn't come to the cost of stability. Rails 3's new asset pipeline is a good example of a half-baked solution shoved in a release at the last minute and creating a nightmare for a lot of us trying to upgrade. I know, I know, you can turn off the asset pipeline and it got better since it was first released. But shouldn't that be the other way around? Shouldn't fun new ideas risking the stability of an app or making migration harder, be off by default and turned on only by people wanting to experiment? When your framework is young, it's normal that you move fast and sometimes break, but once it matures, these things shouldn't happen.</p>
+
+<p> </p>
+
+<h2>Public/private/plugin APIs</h2>
+
+<p>This is more of a recommendation than anything else. When you write a framework in a very dynamic language like Ruby, people will "monkey patch" your code to inject features. Sometimes it is due to software design challenges, sometimes it's because people don't know better. However,  by not explicitly specifying what APIs are private (they can change at anytime, don't touch), what APIs are public (stable, will be slowly deprecated when they need to be changed) and which ones are for plugin devs only (APIs meant for instrumentation, extension etc..), you are making migration to newer versions much harder. You see, if you have a small, clean public API, then it's easy to see what could break, warn developers and avoid migration nightmares. However, you need to start doing that early on in your project, otherwise you will end up like Rails where all code can potentially change anytime.</p>
+
+<p> </p>
+
+<h2>Rails/Merb merge was a mistake</h2>
+
+<p>This is my personal opinion and well, feel free to disagree, nobody will ever be able to know to for sure. Without explaining what happened behind closed doors and the various personal motivations, looking at the end result, I agree with the group of people thinking that the merge didn't turn up to be a good thing. For me, Rails 3 isn't significantly better than Rails 2 and it took forever to be released. You still can't really run a mini Rails stack like promised. I did hear that Strobe (company who was hiring Carl Lerche, Yehuda Katz and contracted Jose Valim) used to have an ActionPack based, mini stack but it was never released and apparently only Rails core members really knew what was going on there. Performance in vanilla Rails 3 are only now getting close to what you had with Rails 2 (and therefore far from the perf you were getting with Merb). Thread-safety is still OFF by default meaning that by default your app uses a giant lock only allowing a process to handle 1 request at a time. For me, the flexibility and performance focus of Merb were mainly lost in the merge with Rails. (Granted, some important things such as ActiveModel, cleaner internals and others have made their way into Rails 3)</p>
+
+<p>But what's worse than everything listed so far is that the lack of competition and the internal rewrites made Rails lose its headstart.  Rails is very much HTML/view focused, its primarily strength is to make server side views trivial and it does an amazing job at that. But let's be honest, that's not the future for web dev. The future is more and more logic pushed to run on the client side (in JS) and the server side being used as an API serving data for the view layer. I'm sorry but adding support for CoffeeScript doesn't really do much to making Rails evolve ahead of what it currently is. Don't get me wrong, I'm a big fan of CoffeeScript, that said I still find that Rails is far from being optimized to developer web APIs in Rails. You can certainly do it, but you are basically using a tool that wasn't designed to write APIs and you pay the overhead for that. If there is one thing I wish Rails will get better at is to make writing pure web APIs better (thankfully there is Sinatra). But at the end of the day, I think that two projects with different philosophies and different approaches are really hard to merge, especially in the open source world. I wouldn't go as far as saying like others that Rails lost its sexiness to node.js because of the wasted time, but I do think that things would have been better for all if that didn't happen. However, I also have to admit that I'm not sure how much of a big deal that is. I prefer to leave the past behind, learn from my own mistake and move on.</p>
+
+<p> </p>
+
+<h2>Technical debts</h2>
+
+<p>Here I'd like to stop to give a huge props to Aaron "<a href="http://twitter.com/tenderlove">@tenderlove</a>" Patterson, the man who's actively working to reduce the <a href="http://en.wikipedia.org/wiki/Technical_debt">technical debts</a> in the Rails code base. This is a really hard job and definitely not a very glamorous one. He's been working on various parts of Rails including its router and its ORM (ActiveRecord). Technical debts are unfortunately normal in most project, but sometimes they are overwhelming to the point that nobody dares touching the code base to clean it up. This is a hard problem, especially when projects move fast like Rails did. But looking back, I think that you want to start tackling technical debts on the side as you move on so you avoid getting to the point that you need a hero to come up and clean the piled errors made in the past. But don't pause your entire project to clean things up otherwise you will lose market, momentum and excitement. I feel that this is also very much true for any legacy project you might pick up as a developer.</p>
+
+<p> </p>
+
+<h2>Keep the cost of entry level low</h2>
+
+<p>Getting started with Rails used to be easier. This can obviously argued since it's very subjective, but from my perspective I think we forgot where we come from and we involuntary expect new comers to come with unrealistic knowledge. Sure, Rails does much more than it used to do, but it's also much harder to get started. I'm not going to argue how harder  it is now or why we got there. Let's just keep in mind that it is a critical thing that should always be re-evaluated. Sure, it's harder when you have an open source project, but it's also up to the leadership to show that they care and to encourage and mentor volunteers to  focus on this important part of a project.</p>
+
+<p> </p>
+
+<h2>Documentation</h2>
+
+<p>Rails documentation isn't bad, but it's far from being great. Documentation certainly isn't one of the Ruby's community strength, especially compared with the Python community, but what saddens me is to see the state of <a href="http://guides.rubyonrails.org/">the official documentation</a> which, should, in theory be the reference. Note that the Rails guides are usually well written and provide value, but they too often seem too light and not useful when you try to do something not totally basic (for instance use an ActiveModel compliant object). That's probably why most people don't refer to them or don't spend too much time there. I'm not trying to blame anyone there. I think that the people who contributed theses guides did an amazing job, but if you want to build a strong and easy to access community, great documentation is key. Look at the <a href="https://docs.djangoproject.com/en/1.3/">Django</a> documentation as a good example. That said, I also need to acknowledge the amazing job done by many community members such as <a href="http://railscasts.com/">Ryan Bates</a> and <a href="http://ruby.railstutorial.org/">Michael Hartl</a> consistently providing high value external documentation via the <a href="http://railscasts.com/">railscasts</a> and the intro to <a href="http://ruby.railstutorial.org/">Rails tutorial</a> available for free.</p>
+
+<p> </p>
+
+<p>In conclusion, I think that there is a lot to learn from Rails, lots of great things as well as lots of things you would want to avoid. We can certainly argue on Hacker News or via comments about whether or not I'm right about Rails failures, my point will still be that the mentioned issues should be avoided in any projects, Rails here is just an example. Many of these issues are currently being addressed by the Rails team but wouldn't it be great if new projects learn from older ones and avoid making the same mistakes? So what other mistakes do you think I forgot to mention and that one should be very careful of avoiding?</p>
+
+<p> </p>
+
+<h3>Updates:</h3>
+
+<ol>
+<li><p>Rails 4 had an API centric app generator but it <a href="https://github.com/rails/rails/commit/6db930cb5bbff9ad824590b5844e04768de240b1">was quickly reverted</a> and will live as gem until it's mature enough.</p></li>
+<li><p>Rails 4 improved the ActiveModel API to be simpler to get started with. See <a href="http://blog.plataformatec.com.br/2012/03/barebone-models-to-use-with-actionpack-in-rails-4-0/">this blog</a> post for more info.</p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quick dive into Ruby ORM object initialization]]></title>
+    <link href="http://matt.aimonetti.net/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization/"/>
+    <updated>2012-02-23T09:46:49-08:00</updated>
+    <id>http://matt.aimonetti.net/posts/2012/02/23/quick-dive-into-ruby-orm-object-initialization</id>
+    <content type="html"><![CDATA[<p>Yesterday I did some quick digging into how ORM objects are initialized and the performance cost associated to that. In other words, I wanted to see what's going on when you initialize an ActiveRecord object.</p>
+
+<p>Before I show you the benchmark numbers and you jump to conclusions, it's important to realize that in the grand scheme of things, the performance cost we are talking is small enough that it is certainly not the main reason why your application is slow. Spoiler alert: ActiveRecord is slow but the cost of initialization isn't by far the worse part of ActiveRecord. Also, even though this article doesn't make activeRecord look good, and I'm not trying to diss it. It's a decent ORM that does a great job in most cases.</p>
+
+<p>Let's get started by the benchmarks number to give us an idea of the damage (using Ruby 1.9.3 p125):</p>
+
+<p> </p>
+
+<pre><code>                                                             | Class | Hash  | AR 3.2.1 | AR no protection | Datamapper | Sequel |
+--------------------------------------------------------------------------------------------------------------------------------------
+.new() x100000                                               | 0.037 | 0.049 | 1.557    | 1.536            | 0.027      | 0.209  |
+.new({:id=&gt;1, :title=&gt;"Foo", :text=&gt;"Bar"}) x100000          | 0.327 | 0.038 | 6.784    | 5.972            | 4.226      | 1.986  |
+</code></pre>
+
+<p> </p>
+
+<p>You can see that I am comparing the allocation of a Class instance, a Hash and some ORM models. The benchmark suite tests the allocation of an empty object and one with passed attributes. The benchmark in question is available <a href="https://github.com/mattetti/benchmarks/blob/master/init_objects.rb">here</a>.</p>
+
+<p>As you can see there seems to be a huge performance difference between allocating a basic class and an ORM class. Instantiating an ActiveRecord class is 20x slower than instantiating a normal class, while ActiveRecord offers some extra features, why is it so much slower, especially at initialization time?</p>
+
+<p>The best way to figure it out is to profile the initialization. For that, I used <a href="https://github.com/tmm1/perftools.rb">perftools.rb</a> and I generated a graph of the call stack.</p>
+
+<p>Here is what Ruby does (and spends its time) when you initialize a new Model instance (click to download the PDF version):</p>
+
+<p> </p>
+
+<p><a href="http://github.com/mattetti/benchmarks/blob/master/ar_init_profile.pdf?raw=true"><img src="http://merbist.com/wp-content/uploads/2012/02/AR-model-instantation-by-Matt-Aimonetti.jpg" alt="Profiler diagram of AR model instantiation by Matt Aimonetti" /></a></p>
+
+<p> </p>
+
+<p>This is quite a scary graph but it shows nicely the features you are getting and their cost associated. For instance, the option of having the before and after initialization callback cost you 14% of your CPU time per instantiation, even though you probably almost never use these callbacks. I'm reading that by interpreting the node called ActiveSupport::Callback#run_callbacks, 3rd level from the top. So 14.1% of the CPU time is spent trying to run callbacks. As a quick note, note that 90.1% of the CPU time is spent initializing objects, the rest is spent in the loop and in the garbage collection (because the profiler runs many loops). You can then follow the code and see how the code works, creating a dynamic class callback method on the fly (the one with the long name) and then recreating the name of this callback to call it each time the object is allocated. It sounds like that's a good place for some micro optimizations which could yield up to 14% performance increase in some cases.</p>
+
+<p>Another major part of the CPU time is spent in ActiveModel's sanitization. This is the piece of code that allows you to block some model attributes to be mass assigned. This is useful when you don't want to sanitize your incoming params but want to create or update a model instance by using all the passed user params. To avoid malicious users to modify some specific params that might be in your model but not in your form, you can protect these attributes. A good example would be an admin flag on a User object. That said, if you manually initialize an instance, you don't need this extra protection, that's why in the benchmark above, I tested and without the protection. As you can see, it makes quite a big difference. The profiler graph of the same initialization without the mass assignment protection logically ends up looking quite different:</p>
+
+<p> </p>
+
+<p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_init_no_protection.pdf?raw=true">
+</a><a href="https://github.com/mattetti/benchmarks/blob/master/ar_init_no_protection.pdf?raw=true"><img src="http://merbist.com/wp-content/uploads/2012/02/AR-model-instantiation-without-mass-assignment-by-Matt-Aimonetti.jpg" alt="Matt Aimonetti shows the stack trace generated by the instantiation of an Active Record model" /></a></p>
+
+<p> </p>
+
+<p><strong>Update:</strong> My colleague <a href="https://twitter.com/#!/glv">Glenn Vanderburg</a> pointed out that some people might assuming that the shown code path is called for each record loaded from the database. This isn't correct, the graph represents instances allocated by calling #new. See the addition at the bottom of the post for more details about what's going on when you fetch data from the DB.</p>
+
+<p>I then decided to look at the graphs for the two other popular Ruby ORMs:</p>
+
+<p><a href="http://datamapper.org/">Datamapper</a></p>
+
+<p><a href="https://github.com/mattetti/benchmarks/blob/master/dm_init_profile.pdf?raw=true"><img src="http://img.skitch.com/20120223-txs4wa7b5rdpg45aj6354xg1wt.jpg" alt="" /></a></p>
+
+<p> </p>
+
+<p>and <a href="http://sequel.rubyforge.org/">Sequel</a></p>
+
+<p><a href="https://github.com/mattetti/benchmarks/blob/master/sequel_init_profile.pdf?raw=true"><img src="http://img.skitch.com/20120223-p2jx6ypk35ucsgtx7p1tcabpes.jpg" alt="" /></a></p>
+
+<p> </p>
+
+<p> </p>
+
+<p>While I didn't give you much insight in ORM code, I hope that this post will motivate you to sometimes take a look under the cover and profile your code to see what's going on and why it might be slow. <strong>Never assume, always measure</strong>. Tools such as perftools are a great way to get a visual feedback and get a better understanding of how the Ruby interpreter is handling your code.</p>
+
+<h2>UPDATE:</h2>
+
+<p>I heard you liked graphs so I added some more, here is what's going on when you do Model.first:</p>
+
+<p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_first_profile.pdf?raw=true"><img src="http://img.skitch.com/20120224-f23s8xctghi8mj6ax3cdw9aq25.jpg" alt="" /></a></p>
+
+<p> </p>
+
+<p>Model.all</p>
+
+<p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_all_profile.pdf?raw=true"><img src="https://img.skitch.com/20120224-q29q4n7bj3i96erk1enxdqxb5e.jpg" alt="" /></a></p>
+
+<p> </p>
+
+<p>And finally this is the code graph for a call to Model.instantiate which is called after a record was retrieved from the database to convert into an Object. (You can see the #instantiate call referenced in the graph above).</p>
+
+<p> </p>
+
+<p><a href="https://github.com/mattetti/benchmarks/blob/master/ar_instantiate_profile.pdf?raw=true"><img src="http://img.skitch.com/20120224-8scmun9n1c9ufdnxa8rq2961bq.jpg" alt="" /></a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Data safety and GIL removal]]></title>
+    <link href="http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal/"/>
+    <updated>2011-10-18T15:19:17-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2011/10/18/data-safety-and-gil-removal</id>
+    <content type="html"><![CDATA[<p>After my recent <a href="http://rubyconf11.merbist.com">RubyConf talk</a> and <a href="http://merbist.com/2011/10/03/about-concurrency-and-the-gil/">follow up post addressing the Ruby &amp; Python's Global Interpreter Lock</a> (aka GVL/Global VM Lock). a lot of people asked me to explain what I meant by "data safety". While my point isn't to defend one approach or the other, I spent a lot of time explaining why C Ruby and C Python use a GIL and where it matters and where it matters less. As a reminder and as mentioned by Matz himself, the main reason why C Ruby still has a GIL is data safety. But if this point isn't clear to you, you might be missing the main argument supporting the use of a GIL.</p>
+
+<p>Showing obvious concrete examples of data corruption due to unsafe threaded code isn't actually as easy at it sounds. First of all, even with a GIL, developers can write unsafe threaded code. So we need to focus only on the safety problems raised by removing the GIL. To demonstrate what I mean, I will try to create some race conditions and show you the unexpected results you might get. Again, before you go crazy on the comments, remember that threaded code is indeterministic and the code below might potentially work on your machine and that's exactly why it is hard to demonstrate. Race conditions depend on many things, but in this case I will focus on race conditions affecting basic data structures since it might be the most surprising.</p>
+
+<h2>Example:</h2>
+
+<p><code>ruby
+@array, threads = [], []
+4.times do
+  threads &lt;&lt; Thread.new { (1..100_000).each {|n| @array &lt;&lt; n} }
+end
+threads.each{|t| t.join }
+puts @array.size
+</code></p>
+
+<p>In the above example, I'm creating an instance variable of Array type and I start 4 threads. Each of these threads adds 100,000 items to the array. We then wait for all the threads to be done and check the size of the array.</p>
+
+<p>If you run this code in C Ruby the end result will be as expected:</p>
+
+<pre><code>400000
+</code></pre>
+
+<p>Now if you switch to JRuby you might be surprised by the output. If you are lucky you will see the following:</p>
+
+<pre><code>ConcurrencyError: Detected invalid array contents due to unsynchronized modifications with concurrent users
+        &lt;&lt; at org/jruby/RubyArray.java:1147
+  __file__ at demo.rb:3
+      each at org/jruby/RubyRange.java:407
+  __file__ at demo.rb:3
+      call at org/jruby/RubyProc.java:274
+      call at org/jruby/RubyProc.java:233
+</code></pre>
+
+<p>This is actually a good thing. JRuby detects that you are unsafely modifying an instance variable across threads and that data corruption will occur. However, the exception doesn't always get raised and you will potentially see results such as:</p>
+
+<pre><code>335467
+342397
+341080
+</code></pre>
+
+<p>This is a sign that the data was corrupted but that JRuby didn't catch the unsynchronized modification. On the other hand MacRuby and Rubinius 2 (dev) won't raise any exceptions and will just corrupt the data, outputting something like:</p>
+
+<pre><code>294278
+285755
+280704
+279865
+</code></pre>
+
+<p>In other words, if not manually synchronized, shared data can easily be corrupted. You might have two threads modifying the value of the same variable and one of the two threads will step on top of the other leaving you with a race condition. You only need 2 threads accessing the same instance variable at the same time to get a race condition. My example uses more threads and more mutations to make the problem more obvious. Note that TDD wouldn't catch such an issue and even extensive testing will provide very little guarantee that your code is thread safe.</p>
+
+<p> </p>
+
+<h2>So what? Thread safety isn't a new problem.</h2>
+
+<p>That's absolutely correct, ask any decent Java developer out there, he/she will tell how locks are used to "easily" synchronize objects to make your code thread safe. They might also mention the deadlocks and other issues related to that, but that's a different story. One might also argue that when you write web apps, there is very little shared data and the chances of corrupting data across concurrent requests is very small since most of the data is kept in a shared data store outside of the process.</p>
+
+<p>All these arguments are absolutely valid, the challenge is that you have a large community and a large amount of code out there that expects a certain behavior. And removing the GIL does change this behavior. It might not be a big deal for you because you know how to deal with thread safety, but it might be a big deal for others and C Ruby is by far the most used Ruby implementation. It's basically like saying that automatic cars shouldn't be made and sold, and everybody has to switch to stick shifts. They have better gas mileage, I personally enjoy driving then and they are cheaper to build. Removing the GIL is a bit like that. There is a cost associated with this decision and while this cost isn't insane, the people in charge prefer to not pay it.</p>
+
+<p> </p>
+
+<h2>Screw that, I'll switch to Node.js</h2>
+
+<p>I heard a lot of people telling me they were looking into using Node.js because it has a better design and no GIL. While I like Node.js and if I were to implement a chat room or an app keeping connections for a long time, I would certainly compare it closely to EventMachine, I also think that this argument related to the GIL is absurd. First, you have other Ruby implementations which don't have a GIL and are really stable (i.e: JRuby) but then Node basically works the same as Ruby with a GIL. Yes, Node is evented and single threaded but when you think about it, it behaves the same as Ruby 1.9 with its GIL. Many requests come in and they are handled one after the other and because IO requests are non-blocking, multiple requests can be processed concurrently but not in parallel. Well folks, that's exactly how C Ruby works too, and unlike popular believe, most if not all the popular libraries making IO requests are non blocking (when using 1.9). So, next time you try to justify you wanting to toy with Node, please don't use the GIL argument.</p>
+
+<p> </p>
+
+<h2>What should I do?</h2>
+
+<p>As always, evaluate your needs and see what makes sense for your project. Start by making sure you are using Ruby 1.9 and your code makes good use of threading. Then look at your app and how it behaves, is it CPU-bound or IO-bound. Most web apps out there are IO-bound (waiting for the DB, redis or API calls), and when doing an IO call, Ruby's GIL is released allowing another thread to do its work. In that case, not having a GIL in your Ruby implementation won't help you. However, if your app is CPU-bound, then switching to JRuby or Rubinius might be beneficial. However, don't assume anything until you proved it and remember that making such a change will more than likely require some architectural redesign, especially if using JRuby.  But, hey, it might totally be worth it as many proved it in the past.</p>
+
+<p> </p>
+
+<p>I hope I was able to clarify things a bit further. If you wish to dig further, I would highly recommend you read the many discussions the Python community had in the last few years.</p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[About concurrency and the GIL]]></title>
+    <link href="http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil/"/>
+    <updated>2011-10-03T21:23:54-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2011/10/03/about-concurrency-and-the-gil</id>
+    <content type="html"><![CDATA[<p>During RubyConf 2011, concurrency was a really hot topic. This is not a new issue, and the JRuby team has been talking about true concurrency for quite a while . The Global Interpreter Lock has also been in a subject a<a href="http://wiki.python.org/moin/GlobalInterpreterLock"> lot of discussions in the Python community</a> and it's not surprising that the Ruby community experiences the same debates since the evolution of their implementations are somewhat similar. (There might also be some tension between <a href="http://engineyard.com">EngineYard</a> hiring the JRuby and Rubinius teams and <a href="http://heroku.com">Heroku</a> which <a href="http://blog.heroku.com/archives/2011/7/12/matz_joins_heroku/">recently hired Matz</a> (Ruby's creator) and <a href="https://github.com/nobu">Nobu</a>, the #1 C Ruby contributor)</p>
+
+<p>The GIL was probably even more of a hot topic now that <a href="http://rubini.us/">Rubinius</a> is about the join <a href="http://jruby.org">JRuby</a> and <a href="http://macruby.org">MacRuby</a> in the realm of GIL-less Ruby implementations.</p>
+
+<p>During my RubyConf talk (<a href="http://rubyconf11.merbist.com/">slides here</a>), I tried to explain how C Ruby works and why some decisions like having a GIL were made and why the Ruby core team isn't planning on removing this GIL anytime soon. The GIL is something a lot of Rubyists love to hate, but a lot of people don't seem to question why it's here and why Matz doesn't want to remove it. Defending the C Ruby decision isn't quite easy for me since I spend my free time working on an alternative Ruby implementation which doesn't use a GIL (MacRuby). However, I think it's important that people understand why the MRI team (C Ruby team) and some Pythonistas feels so strongly about the GIL.</p>
+
+<p><strong>What is the GIL?</strong></p>
+
+<p>Here is a quote from the <a href="http://wiki.python.org/moin/GlobalInterpreterLock">Python wiki</a>:</p>
+
+<blockquote><p>In CPython, the <strong>global interpreter lock</strong>, or <strong>GIL</strong>, is a mutex that prevents multiple native threads from executing Python bytecodes at once. This lock is necessary mainly because CPython's memory management is not thread-safe. (However, since the GIL exists, other features have grown to depend on the guarantees that it enforces.) [...] The GIL is controversial because it prevents multithreaded CPython programs from taking full advantage of multiprocessor systems in certain situations. Note that potentially blocking or long-running operations, such as I/O, image processing, and <a href="http://wiki.python.org/moin/NumPy">NumPy</a> number crunching, happen <em>outside</em> the GIL. Therefore it is only in multithreaded programs that spend a lot of time inside the GIL, interpreting CPython bytecode, that the GIL becomes a bottleneck.</p></blockquote>
+
+<p>The same basically applies to C Ruby. To illustrate the quote above, here is a diagram representing two threads being executed by C Ruby:</p>
+
+<p><a href="http://rubyconf11.merbist.com/#44"><img src="http://rubyconf11.merbist.com/images/thread_scheduling.023.jpg" alt="Fair thread scheduling in Ruby by Matt Aimonetti" /></a></p>
+
+<p>Such a scheduling isn't a problem at all when you only have 1 cpu, since a cpu can only execute a piece of code at a time and context switching happens all the time to allow the machine to run multiple processes/threads in parallel. The problem is when you have more than 1 CPU because in that case, if you were to only run 1 Ruby process, then you would most of the time only use 1 cpu at a time. If you are running on a 8 cpu box, that's not cool at all! A lot of people stop at this explanation and imagine that their server can only handle one request at a time and they they rush to sign Greenpeace petitions asking Matz to make Ruby greener by optimizing Ruby and saving CPU cycles. Well, the reality is slightly different, I'll get back to that in a minute. Before I explain "ways to achieve true concurrency with CRuby, let me explain why C Ruby uses a GIL and why each implementation has to make an important choice and in this case both CPython and C Ruby chose to keep their GIL.</p>
+
+<p> </p>
+
+<h3>Why a GIL in the first place?</h3>
+
+<ul>
+<li><p>It makes developer's lives easier (it's harder to corrupt data)</p></li>
+<li><p>It avoids race conditions within C extensions</p></li>
+<li><p>It makes C extensions development easier (no write barriers..)</p></li>
+<li><p>Most of the C libraries which are wrapped are not thread safe</p></li>
+<li><p>Parts of Ruby's implementation aren't threadsafe (Hash for instance)</p></li>
+</ul>
+
+
+<p>As you can see the arguments can be organized in two main categories: data safety and C extensions/implementation. An implementation which doesn't rely too much on C extensions (because they run a bit slow, or because code written in a different language is preferred) is only faced with one argument: data safety.</p>
+
+<p> </p>
+
+<h3></h3>
+
+<h3>Should C Ruby remove its GIL?</h3>
+
+<ul>
+<li><p>No: it potentially makes Ruby code unsafe(r)</p></li>
+<li><p>No: it would break existing C extensions</p></li>
+<li><p>No: it would make writing C extensions harder</p></li>
+<li><p>No: it's a lot of work to change make C Ruby threadsafe</p></li>
+<li><p>No: Ruby is fast enough in most cases</p></li>
+<li><p>No: Memory optimization and GC is more important to tackle first</p></li>
+<li><p>No: C Ruby code would run slower</p></li>
+<li><p>Yes: we really need better/real concurrency</p></li>
+<li><p>Yes: <a href="https://plus.google.com/107994348420168435683/posts/993U42yVbfk">Rubber boots analogy (Gustavo Niemeyer)</a></p></li>
+</ul>
+
+
+<p>Don't count the amount of pros/cons to jump to the conclusion that removing the GIL is a bad idea. A lot of the arguments for removing the GIL are related. At the end of the day it boils down to data safety. During the Q&amp;A section of my RubyConf talk, Matz came up on stage and said data safety was the main reason why C Ruby still has a GIL. Again, this is a topic which was discussed at length in the Python community and I'd encourage you to read arguments from the <a href="http://www.jython.org/">Jython</a> (the equivalent of JRuby for Python) developers, <a href="http://codespeak.net/pypy/dist/pypy/doc/faq.html#does-pypy-have-a-gil-why">the PyPy</a> (the equivalent of Rubinius in the Python community) and CPython developers. (a good collection of arguments are actually available in the comments related to the <a href="https://plus.google.com/107994348420168435683/posts/993U42yVbfk">rubber boots post mentioned earlier</a>)</p>
+
+<p> </p>
+
+<h3>How can true concurrency be achieved using CRuby?</h3>
+
+<ul>
+<li><p>Run multiple processes (which you probably do if you use Thin, Unicorn or Passenger)</p></li>
+<li><p>Use event-driven programming with a process per CPU</p></li>
+<li><p>MultiVMs in a process. Koichi presented his plan to run multiple VMs within a process.  Each VM would have its own GIL and inter VM communication would be faster than inter process. This approach would solve most of the concurrency issues but at the cost of memory.</p></li>
+</ul>
+
+
+<p>Note:  forking a process only saves memory when using REE since it implements a GC patch that makes the forking process Copy on Write friendly. The Ruby core team worked on a patch for Ruby 1.9 to achieve the same result. <a href="http://twitter.com/#!/nari_en">Nari</a> &amp; <a href="http://twitter.com/#!/yukihiro_matz">Matz</a> are currently working on improving the implementation to make sure overall performance isn't affected.</p>
+
+<p>Finally, when developing web applications, each thread spend quite a lot of time in IOs which, as mentioned above won't block the thread scheduler. So if you receive two quasi-concurrent requests you might not even be affected by the GIL as illustrated in <a href="http://yehudakatz.com/2010/08/14/threads-in-ruby-enough-already/">this diagram from Yehuda Katz</a>:</p>
+
+<p><img src="http://yehudakatz.com/wp-content/uploads/2010/08/Untitled.002.png" alt="" /></p>
+
+<p>This is a simplified diagram but you can see that a good chunk of the request life cycle in a Ruby app doesn't require the Ruby thread to be active (CPU Idle blocks) and therefore these 2 requests would be processed almost concurrently.</p>
+
+<p>To boil it down to something simplified, when it comes to the GIL, an implementor has to chose between data safety and memory usage. But it is important to note that context switching between threads is faster than context switching between processes and data safety can and is often achieved in environments without a GIL, but it requires more knowledge and work on the developer side.</p>
+
+<p> </p>
+
+<h3>Conclusion</h3>
+
+<p>The decision to keep or remove the GIL is a bit less simple that it is often described. I respect Matz' decision to keep the GIL even though, I would personally prefer to push the data safety responsibility to the developers. However, I do know that many Ruby developers would end up shooting themselves in the foot and I understand that Matz prefers to avoid that and work on other ways to achieve true concurrency without removing the GIL. What is great with our ecosystem is that we have some diversity, and if you think that a GIL less model is what you need, we have some great alternative implementations that will let you make this choice. I hope that this article will help some Ruby developers understand and appreciate C Ruby's decision and what this decision means to them on a daily basis.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[First step in scaling a web site: HTTP caching]]></title>
+    <link href="http://matt.aimonetti.net/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching/"/>
+    <updated>2011-07-11T10:21:02-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2011/07/11/first-step-in-scaling-a-web-site-http-caching</id>
+    <content type="html"><![CDATA[<p>Today my friend <a href="http://twitter.com/mokolabs">Patrick Crowley</a> and I were talking about scaling his website: <a href="http://cinematreasures.org/">http://cinematreasures.org</a> since an article covering his work will soon be published in a very popular newspaper. Patrick's site is hosted on <a href="http://www.heroku.com/">Heroku</a> which comes by default with <a href="https://www.varnish-cache.org/">Varnish caching</a> enabled.</p>
+
+<p>The challenge is that a lot of people using the Rails framework are used to doing page caching instead of relying on HTTP caching, even though this feature was added a long time ago. The major problem with page caching is that it doesn't scale that well as soon as you run more than one server. Indeed you would need to store the page content to a shared drive between your servers or use memcached and do some work to avoid hitting your app every single time. On the other hand, HTTP caching is extremely easy to handle at the application level and it will dramatically reduce the amount of requests hitting your app. Let me explain a little more about HTTP caching.</p>
+
+<p>Ryan Tomako wrote an <a href="http://tomayko.com/writings/things-caches-do">excellent post</a> about the details of caching, I strongly recommend you <a href="http://tomayko.com/writings/things-caches-do">read it</a>. In a nutshell, the HTTP caching layer (usually) seats before your application layer and allows you, the developer to store some responses that can be send back to the users based on optional conditions. That might still seem vague, let's take a concrete example. If you look at <a href="http://cinematreasures.org">http://cinematreasures.org</a>'s home page you can see that it's an agglomerate of various information:</p>
+
+<p><a href="http://cinematreasures.org"><img src="https://img.skitch.com/20110709-dnxjhikxr14tdr7e35n97madhn.jpg" alt="CinemaTreasures homepage" /></a></p>
+
+<p>And the bottom of the page contains even more dynamic data such as the popular movie theater photos, latest movie theater videos and latest tweets. One might look at that and say that this page can't really be cached and that the caching should be done at the model layer (i.e. cache the data coming from the database). I would certainly agree that caching the data layer is probably a good idea, but you shouldn't start by that. In fact without caching, this page renders fast enough. The problem is when someone like <a href="http://rogerebert.suntimes.com/">Roger Ebert</a> tweets about <a href="http://twitter.com/#!/ebertchicago/status/85912164648497152">CinemaTreasures</a> the load on the app peaks significantly. At the point, the amount of concurrent connections your app can handle gets put to the challenge. Even though your page load is "fast enough", requests will queue up and some will eventually time out. That's actually a perfect case of HTTP caching.</p>
+
+<p>What we want to do in that case is to cache a version of the home page in Varnish for 60 seconds. During that time, all requests coming to the site, will be served by Varnish and will all get the same cached content. That allows our servers to handle the non cached requests and therefore increase our throughput. What's even better, is that if a user refreshes the home page in his/her browser during the first 60 seconds the requests won't even make it all the way to our servers. All of that thanks to conditions set on the response. The first user hitting the HTTP cache layer (Varnish in this case) won't find a fresh cached response, so varnish will forward the request to our application layer which will send back the homepage to varnish and tell Varnish that this content is good for a full minute so please don't ask for it again until a minute from now. Varnish serves this response to the users' browser and let the browser know that the server said that the response was good enough for a minute so don't bother asking for it again. But now, if during these 60 seconds another user comes in, he will hit Varnish and Varnish will have the cached response from the first user and because the cache is still fresh (it's not been 60 seconds since the first request) and the cache is public, then the same response will be sent to the second user.</p>
+
+<p>As you can see, the real strength of HTTP caching is the fact that it's a conditional caching. It's based on the request's URL and some "flags" set in the request/response headers.</p>
+
+<p>Setting these conditions in your app is actually very simple since you just need to set the response's headers. If you are using a Ruby framework you will more than likely have access to the request object via the "request" method and you can set the headers directly like that: "response.headers['Cache-Control'] = 'public, max-age=60'".
+In Rails, you can actually use a helper method instead: expires_in 1.minute, :public => true.</p>
+
+<p>You might have a case where you HAVE TO serve fresh content if available and can't serve stale cached content even for a few seconds. In this case, you can rely on the Etag header value. The Etag is meant to validate the freshness of a cached response. Think of it as a signature (unique ID) that is set on the response and used by the client (or cache layer) to see if the server response has changed or not. The way it works is that the client keeps track of the Etag received for each request (attached to the cached response) and then sends it with the next requests. The HTTP layer or application sees the Etag in the request and can check if it is still valid and the content didn't change. If that's the case, an empty response can be sent with a special HTTP status code (304) to let know the client that the old cached value is still good to be used.  Rails has a helper called "stale?" that helps you do the Etag/last modified check and allows you to not fetch all the objects from the database by doing a cheap check on an attribute (For instance you can check the updated_at value and use that as a condition to pull an object and its relationships).</p>
+
+<p>So I explain HTTP caching, I often hear people telling me: "that's great Matt, but you know what, that won't work for us because we have custom content that we display specifically to our users". So in that case, you can always set the Cache-Control header to private which will only cache the response in the client's browser and not the cache layer. That's good to some extent, but it can definitely be improved by rethinking a bit your view layer. In most web apps, the page content is rendered by server side code (Rails, Django, node.js, PHP..) and sent to the user all prepared for him. There are a few challenges with this approach, the biggest one is that the server has to wait until everything is ready (all data fetched, view rendered etc...) before sending back a response and before the client's browser can start rendering (there are ways to chunk the response but that's besides the scope of this post). The other is that the same expensive content has to be calculated/rendered for two different users because you might be inserting the username of the current user at the top of the page for instance. A classic way to deal with that is often to use fragment caching, where the expensive rendering is cached and reused by different requests. That's good but if the only reason to do that is because we are displaying some user specific data, there is a simpler way: async page rendering. The concept is extremely simple: remove all user specific content from the rendered page and then inject the user content in a second step once the page is displayed. The advantage is that now the full page can be cached in Varnish (or Squid or whatever you use for HTTP caching). To inject the user content, the easiest way is to use JavaScript.</p>
+
+<p>Let's stay on CinemaTreasures, when you're logged in, the username is shown on the top of each page:</p>
+
+<p>[caption id="" align="aligncenter" width="574" caption="Once logged in, the username is displayed on all pages"]<img src="https://img.skitch.com/20110710-mh5tqxuw1txf9kppn1smkkarrs.jpg" alt="" />[/caption]</p>
+
+<p>The only things that differs from the page rendered when the user is not logged in and when he is, are these 2 links and an avatar. So let's write some code to inject that after rendering the page.</p>
+
+<p>In Rails, in the sessions controller or whatever code logs you in, you need to create a new cookie containing the username:</p>
+
+<p>``` ruby
+cookies[:username] = {</p>
+
+<pre><code>     :value =&gt; session[:username],
+     :expires =&gt; 2.days.from_now,
+     :domain =&gt; ".cinematreasures.org"
+   }
+</code></pre>
+
+<p>```</p>
+
+<p>As you can see, we don't store the data in the session cookie and the data won't be encrypted. You need to be careful that someone changing his cookie value can't access data he/should shouldn't. But that's a different discussion. Now that the cookie is set, we can read it from JavaScript when the page is loaded.</p>
+
+<p>``` javascript
+document.observe("dom:loaded", function() {
+  displayLoggedinUserLinks();
+});</p>
+
+<p>function readCookie(name) {</p>
+
+<pre><code> var nameEQ = name + "=";
+ var ca = document.cookie.split(';');
+ for(var i=0;i &lt; ca.length;i++) {
+      var c = ca[i];
+      while (c.charAt(0)==' ') c = c.substring(1,c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+ }
+ return null;
+</code></pre>
+
+<p>}</p>
+
+<p>function displayLoggedinUserLinks() {
+  var username            = readCookie('username');
+  var loginLink           = $('login');
+  var logout              = $('logout');
+  if (username == null){</p>
+
+<pre><code>loginLink.show();
+logout.hide();
+</code></pre>
+
+<p>  }else{</p>
+
+<pre><code>// user is logged in and we have his/her username
+loginLink.hide();
+if(userGreetings){ userGreetings.update("&lt;span id="username"&gt;username&lt;/span&gt;"); }
+logout.show();
+showAvatar(username);
+</code></pre>
+
+<p>  };
+  return true;
+}
+```</p>
+
+<p>The code above doesn't do much, once the DOM is loaded, the displayLoggedinUserLinks() function gets trigger. This function reads the cookie via the readCookie() function and if a username is found, the login link is hidden, the user name is displayed, as well as the logout link and the avatar. (You can also use a jQuery cookie plugin to handle the cookie, but this is an old example using Prototype, replace the code accordingly)
+When the user logs out, we just need to delete the username cookie and the cached page will be rendered properly. In Rails, you would do delete the cookie like that: cookies.delete('username').
+Quite often you might even want to make an Ajax call to get some information such as the number of user messages or notifications. Using jQuery or whatever JS framework you fancy you can do that once the page is rendered. Here is an example, on this page, you can see the learderboards for MLB The Show. The leaderboards don't change that often, especially the overall leaderboards so they can be cached for a little while, however the player's presence can change anytime. The smart way to deal with that, would be to cache the  leaderboards for a few seconds/minutes and make an ajax call to a presence service passing it a list of user ids collected from the DOM. The service called via Ajax could also be cached  depending on the requirements.</p>
+
+<p>Now there is one more problem that people using might encouter: flash notices. For those of you not familiar with Rails, flash notices are messages set in the controller and passed to the view via the session (at least last time I checked). The problem happens if I'm the home page isn't cached anymore and I logged in which redirects me to the home page with a flash message like so:</p>
+
+<p><img src="https://img.skitch.com/20110710-1u6dn8rrc6r62rsg6niphhd2pi.jpg" alt="" /></p>
+
+<p>The problem is that the message is part of the rendered page and now for 60 seconds, all people hitting the home page will get the same message. This is why you would want to write a helper that would put this message in a custom cookie that you'd pull JS and then delete once displayed. You could use a helper like that to set the cookie:</p>
+
+<p>``` ruby
+def flash_notice_cookie(msg, expiration=nil)
+  cookies[:flash_notice] = {</p>
+
+<pre><code>:value =&gt; msg,
+:expires =&gt; expiration || 1.minutes.from_now,
+:domain =&gt; ".cinematreasures.com"
+</code></pre>
+
+<p>   }
+end
+```</p>
+
+<p>And then add a function called when the DOM is ready which loads the message and injects it in the DOM. Once the cookie read, delete it so the message isn't displayed again.</p>
+
+<p> </p>
+
+<p>So there you have it, if you follow these few steps, you should be able to handle easily 10x more traffic without increasing hardware or making any type of crazy code change. Before you start looking into memcached, redis, cdns or whatever, consider HTTP caching and async DOM manipulation. Finally, note that if you can't use Varnish or Squid, you can very easily setup <a href="http://rtomayko.github.com/rack-cache/">Rack-Cache</a> locally and share the cache via memcached. It's also a great way to test locally.</p>
+
+<hr />
+
+<p><strong>Update:</strong> CinemaTreasures was updated to use HTTP caching as described above. The hosting cost is now half of what it used to be and the throughput is actually higher which offers a better protection against peak traffic.</p>
+
+<hr />
+
+<p> </p>
+
+<p>External resources:</p>
+
+<ul>
+<li><p><a href="http://tomayko.com/writings/things-caches-do">http://tomayko.com/writings/things-caches-do</a></p></li>
+<li><p><a href="http://devcenter.heroku.com/articles/http-caching">HTTP Caching at Heroku</a></p></li>
+<li><p><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html">W3 caching protocol </a></p></li>
+<li><p><a href="http://rtomayko.github.com/rack-cache/">Rack-Cache middleware</a></p></li>
+<li><p><a href="http://www.nolanevans.com/2011/03/optimizing-your-rails-site-with-http.html">Blog post covering HTTP Caching/Varnish/Rails</a></p></li>
+<li><p><a href="http://plugins.jquery.com/project/Cookie">jQuery cookie plugin</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby concurrency explained]]></title>
+    <link href="http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained/"/>
+    <updated>2011-02-22T22:34:30-08:00</updated>
+    <id>http://matt.aimonetti.net/posts/2011/02/22/concurrency-in-ruby-explained</id>
+    <content type="html"><![CDATA[<p>Concurrency is certainly <a href="http://en.wikipedia.org/wiki/Petri_Net">not a new problem</a> but it's getting more and more attention as machines start having more than 1 core, that web traffic increases drastically and that some new technologies show up saying that they are better because they handle concurrency better.
+If that helps, think of concurrency as multitasking. When people say that they want concurrency, they say that they want their code to do multiple different things at the same time. When you are on your computer, you don't expect to have to choose between browsing the web and listening to some music. You more than likely want to run both concurrently. It's the same thing with your code, if you are running a webserver, you probably don't want it to only process one request at a time.
+The aim of this article is to explain as simply as possible the concept of concurrency in Ruby, the reason why it's a complicated topic and finally the different solutions to achieve concurrency.</p>
+
+<p>First off, if you are not really familiar with concurrency, take a minute to <a href="http://en.wikipedia.org/wiki/Concurrency_%28computer_science%29">read the wikipedia article on the topic</a> which is a great recap on the subject. But now, you should have noticed that my above example was more about parallel programming than concurrency, but we'll come back to that in a minute.</p>
+
+<blockquote><p><strong>The real question at the heart of the quest for concurrency is: "how to increase code throughput".</strong></p></blockquote>
+
+<p>We want our code to perform better, and we want it to do more in less time. Let's take two simple and concrete examples to illustrate concurrency. First, let's pretend you are writing a twitter client, you probably want to let the user scroll his/her tweets while the latest updates are  being fetched. In other words, you don't want to block the main loop and interrupt the user interaction while your code is waiting for a response from the Twitter API. To do that, a common solution is to use multiple <strong>threads</strong>. Threads are basically processes that run in the same memory context. We would be using one thread for the main event loop and another thread to process the remote API request. Both threads share the same memory context so once the Twitter API thread is done fetching the data it can update the display. Thankfully, this is usually transparently handled by asynchronous APIs (provided by the OS or the programming language std lib) which avoid blocking the main thread.</p>
+
+<p>The second example is a webserver. Let's say you want to run a Rails application. Because you are awesome, you expect to see a lot of traffic. Probably more than 1 QPS (query/request per second). You benchmarked your application and you know that the average response time is approximately 100ms. Your Rails app can therefore handle 10QPS using a single process (you can do 10 queries at 100ms in a second).</p>
+
+<p>But what happens if your application gets more than 10 requests per second? Well, it's simple, the requests will be backed up and will take longer until some start timing out. This is why you want to improve your concurrency. There are different ways to do that, a lot of people feel really strong about these different solutions but they often forget to explain why they dislike one solution or prefer one over the other. You might have heard people conclusions which are often one of these: <a href="http://canrailsscale.com/">Rails can't scale</a>, you only get concurrency with <a href="http://jruby.org/">JRuby</a>, <a href="http://adam.heroku.com/past/2009/8/13/threads_suck/">threads suck</a>, the only way to concurrency is via threads, we should switch to <a href="http://www.erlang.org/">Erlang</a>/<a href="http://nodejs.org/">Node.js</a>/<a href="http://www.scala-lang.org/">Scala</a>, use<a href="http://www.rubyinside.com/fibers-eventmachine-rack-performance-gains-3395.html"> fibers</a> and you will be fine, add more machines, <a href="http://tomayko.com/writings/unicorn-is-unix">forking > threading</a>.  Depending on who said what and how often you heard it on twitter, conferences, blog posts, you might start believing what others are saying. But do you really understand why people are saying that and are you sure they are right?</p>
+
+<p>The truth is that this is a complicated matter. The good news is that it's not <em>THAT</em> complicated!</p>
+
+<p>The thing to keep in mind is that the concurrency models are often defined by the programming language you use. In the case of Java, <a href="http://download.oracle.com/javase/tutorial/essential/concurrency/index.html">threading is the usual solution</a>, if you want your Java app to be more concurrent, just run every single request in its own thread and you will be fine (kinda). In PHP, you simply don't have threads, instead you will start a new process per request. Both have pros and cons, the advantage of the Java threaded approach is that the memory is shared between the threads so you are saving in memory (and startup time), each thread can easily talk to each other via the shared memory. The advantage of PHP is that you don't have to worry about locks, deadlocks, threadsafe code and all that mess hidden behind threads. Described like that it looks pretty simple, but you might wonder why PHP doesn't have threads and why Java developers don't prefer starting multiple processes. The answer is probably related to the language design decisions. PHP is a language designed for the web and for short lived processes. PHP code should be fast to load and not use too much memory. Java code is slower to boot and to warm up, it usually uses quite a lot of memory. Finally, Java is a general purpose programming language not designed primarily for the internet. Others programming languages like <a href="http://www.erlang.org/">Erlang</a> and <a href="http://www.scala-lang.org/">Scala</a> use a third approach: <a href="http://en.wikipedia.org/wiki/Actor_model">the actor model</a>. The actor model is somewhat a bit of a mix of both solutions, the difference is that actors are a like threads which don't share the same memory context. Communication between actors is done via exchanged messages ensuring that each actor handles its own state and therefore avoiding corrupt data (two threads can modify the same data at the same time, but an actor can't receive two messages at the exact same time). We'll talk about that design pattern later on, so don't worry if you are confused.</p>
+
+<p>What about Ruby? Should Ruby developers use threads, multiple processes, actors, something else? The answer is: <strong>yes</strong>!</p>
+
+<h2>Threads</h2>
+
+<p>Since version 1.9, Ruby has native threads (before that <a href="http://en.wikipedia.org/wiki/Green_threads">green threads</a> were used). So in theory, if we would like to, we should be able to use threads everywhere like most Java developers do. Well, that's almost true, the problem is that Ruby, like Python uses a <a href="http://en.wikipedia.org/wiki/Global_Interpreter_Lock">Global Interpreter Lock</a> (aka GIL). This GIL is a locking mechanism that is meant to protect your data integrity. The GIL only allows data to be modified by one thread at time and therefore doesn't let threads corrupt data but also it doesn't allow them to truly run concurrently. That is why some people say that Ruby and Python are not capable of (true) concurrency.</p>
+
+<p><img src="https://img.skitch.com/20110223-kk58iq5yjdpmyswf7nuya4c4kp.jpg" alt="Global Interpreter Lock by Matt Aimonetti" /></p>
+
+<p>However these people often don't mention that the GIL makes single threaded programs faster, that multi-threaded programs are much easier to develop since the data structures are safe and finally that a lot of C extensions are not thread safe and without the GIL, these C extensions don't behave properly. These arguments don't convince everyone and that's why you will hear some people say you should look at another Ruby implementation without a GIL, such as <a href="http://jruby.org/">JRuby</a>, <a href="http://rubini.us/">Rubinius</a> (hydra branch) or <a href="http://macruby.org">MacRuby</a> (Rubinius &amp; MacRuby also offer other concurrency approaches). If you are using an implementation without a GIL, then using threads in Ruby has exactly the same pros/cons than doing so in Java. However, it means that now you have to deal with the nightmare of threads: making sure your data is safe, doesn't deadlock, check that your code, your libs, plugins and gems are thread safe. Also, running too many threads might affect the performance because your OS doesn't have enough resources to allocate and it ends up spending its time context switching. It's up to you to see if it's worth it for your project.</p>
+
+<h2>Multiple processes &amp; forking</h2>
+
+<p>That's the most commonly used solution to gain concurrency when using Ruby and Python. Because the default language implementation isn't capable of true concurrency or because you want to avoid the challenges of thread programming, you might want to just start more processes. That's really easy as long as you don't want to share states between running processes. If you wanted to do so, you would need to use <a href="http://segment7.net/projects/ruby/drb/introduction.html">DRb</a>, a message bus like <a href="http://www.rabbitmq.com/">RabbitMQ</a>, or a shared data store like memcached or a DB. The caveat is that you now need to use a LOT more memory. If want to run 5 Rails processes and your app uses 100Mb you will now need 500Mb, ouch that's a lot of memory! That is exactly what happens when you use a Rails webserver like Mongrel. Now some other servers like <a href="http://www.modrails.com/">Passenger</a> and <a href="http://unicorn.bogomips.org/">Unicorn</a> found a workaround, they rely on <a href="http://en.wikipedia.org/wiki/Fork_%28operating_system%29">unix forking</a>. The advantage of forking in an unix environment implementing the copy-on-write semantics is that we create a new copy of the main process but they both "share" the same physical memory. However, each process can modify its own memory without affecting the other processes. So now, Passenger can load your 100Mb Rails app in a process, then fork this process 5 times and the total footprint will be just a bit more than 100Mb and you can now handle 5X more concurrent requests. Note that if you are allocating memory in your request processing code (read controller/view) your overall memory will grow but you can still run many more processes before running out of memory. This approach is appealing because really easy and pretty safe. If a forked process acts up or leaks memory, just destroy it and create a new fork from the master process. Note that this approach is also used in <a href="https://github.com/defunkt/resque">Resque</a>, the async job processing solution by <a href="http://github.com">GitHub</a>.</p>
+
+<p>This solution works well if you want to duplicate a full process like a webserver, however it gets less interesting when you just want to execute some code "in the background". Resque took this approach because by nature async jobs can yield weird results, leak memory or hang. Dealing with forks allows for an external control of the processes and the cost of the fork isn't a big deal since we are already in an async processing approach.</p>
+
+<p><img src="http://s3.amazonaws.com/cogit8-org/img/hardcore-forking-action.png" alt="" /></p>
+
+<h2>Actors/Fibers</h2>
+
+<p>Earlier we talked a bit about the <a href="http://en.wikipedia.org/wiki/Actor_model">actor model</a>. Since Ruby 1.9, developers now have access to a new type of "lightweight" threads called <a href="http://www.ruby-doc.org/core-1.9/classes/Fiber.html">Fibers</a>. Fibers are not actors and Ruby doesn't have a native Actor model implementation but some people wrote <a href="http://doc.revactor.org/files/README.html">some actor libs</a> on top of fibers. A fiber is like a simplified thread which isn't scheduled by the VM but by the programmer. Fibers are like blocks which can be paused and resumed from the outside of from within themselves. Fibers are faster and use less memory than threads as demonstrated in <a href="http://oldmoe.blogspot.com/2008/08/ruby-fibers-vs-ruby-threads.html">this blog post</a>. However, because of the GIL, you still cannot truly run more than one concurrent fiber by thread and if you want to use multiple CPU cores, you will need to run fibers within more than one thread. So how do fibers help with concurrency? The answer is that they are part of a bigger solution. Fiber allow developers to manually control the scheduling of "concurrent" code but also to have the code within the fiber to auto schedule itself. That's pretty big because now you can wrap an incoming web request in its own fiber and tell it to send a response back when it's done doing its things. In the meantime, you can move on the to next incoming request. Whenever a request within a fiber is done, it will automatically resume itself and be returned. Sounds great right? Well, the only problem is that if you are doing any type of blocking IO in a fiber, the entire thread is blocked and the other fibers aren't running. Blocking operations are operations like database/memcached queries, http requests... basically things you are probably triggering from your controllers. The good news is that the "only" problem to fix now is to avoid blocking IOs. Let's see how to do that.</p>
+
+<p><img src="https://img.skitch.com/20110223-8wkfs2g12p15ku18rm7aq9negf.jpg" alt="fiber" /></p>
+
+<h2>Non blocking IOs/Reactor pattern.</h2>
+
+<p>The reactor pattern is quite simple to understand really. The heavy work of making blocking IO calls is delegated to an external service (reactor) which can receive concurrent requests. The service handler (reactor) is given callback methods to trigger asynchronously based on the type of response received. Let me take a limited analogy to hopefully explain the design better. It's a bit like if you were asking someone a hard question, the person will take a while to reply but his/her reply will make you decide if you raise a flag or not. You have two options, or you choose to wait for the response and decide to raise the flag based on the response, or your flag logic is already defined and you tell the person what to do based on their answer and move on without having to worry about waiting for the answer. The second approach is exactly what the reactor pattern is. It's obviously slightly more complicated but the key concept is that it allows your code to define methods/blocks to be called based on the response which will come later on.</p>
+
+<p><img src="https://img.skitch.com/20110223-xkit6utnty1sdt84n15w7dgtnh.jpg" alt="Reactor from Matt Aimonetti's blog" /></p>
+
+<p>In the case of a single threaded webserver that's quite important. When a request comes in and your code makes a DB query, you are blocking any other requests from being processed. To avoid that, we could wrap our request in a fiber, trigger an async DB call and pause the fiber so another request can get processed as we are waiting for the DB. Once the DB query comes back, it wakes up the fiber it was trigger from, which then sends the response back to the client. Technically, the server can still only send one response at a time, but now fibers can run in parallel and don't block the main tread by doing blocking IOs (since it's done by the reactor).</p>
+
+<p>This is the approach used by <a href="http://twistedmatrix.com/trac/">Twisted</a>, <a href="http://eventmachine.rubyforge.org/EventMachine/Deferrable.html">EventMachine</a> and <a href="http://nodejs.org/">Node.js</a>. Ruby developers can use EventMachine or an EventMachine based webserver like <a href="http://code.macournoyer.com/thin/">Thin</a> as well as <a href="https://github.com/igrigorik/em-synchrony">EM clients/drivers</a> to make non blocking async calls. Mix that with some Fiber love and you get Ruby concurrency. Be careful though, using Thin, non blocking drivers and Rails in threadsafe mode doesn't mean you are doing concurrent requests. Thin/EM only use one thread and you need to let it know that it's ok to handle the next request as we are waiting. This is done by <a href="http://eventmachine.rubyforge.org/EventMachine/Deferrable.html">deferring the response</a> and let the reactor know about it.</p>
+
+<p>The obvious problem with this approach is that it forces you to change the way you write code. You now need to set a bunch of callbacks, understand the Fiber syntax, and use deferrable responses, I have to admit that this is kind of a pain. If you look at some Node.js code, you will see that it's not always an <a href="http://howtonode.org/control-flow-part-ii/file-write.js">elegant approach</a>. The good news tho, is that this process can be wrapped and your code can be written as it if was processed synchronously while being handled asynchronously under the covers. This is a bit more complex to explain without showing code, so this will be the topic of a future post. But I do believe that things will get much easier soon enough.</p>
+
+<h2>Conclusion</h2>
+
+<p>High concurrency with Ruby is doable and done by many. However, it could made easier. Ruby 1.9 gave us fibers which allow for a more granular control over the concurrency scheduling, combined with non-blocking IO, high concurrency can be achieved. There is also the easy solution of forking a running process to multiply the processing power. However the real question behind this heated debate is what is the future of the Global Interpreter Lock in Ruby, should we remove it to improve concurrency at the cost of dealing with some new major threading issues, unsafe C extensions, etc..? Alternative Ruby implementers seem to believe so, but at the same time Rails still ships with a default mutex lock only allowing requests to be processed one at a time, the reason given being that a lot of people using Rails don't write thread safe code and a lot of plugins are not threadsafe. Is the future of concurrency something more like <a href="http://libdispatch.macosforge.org/">libdispatch</a>/<a href="http://www.macruby.org/documentation/gcd.html">GCD</a> where the threads are handled by the kernel and the developer only deals with a simpler/safer API?</p>
+
+<p>Further reading:</p>
+
+<ul>
+<li><p><a href="http://www.igvita.com/2008/11/13/concurrency-is-a-myth-in-ruby/">Concurrency is a myth in Ruby</a></p></li>
+<li><p><a href="http://oldmoe.blogspot.com/2008/08/ruby-fibers-vs-ruby-threads.html">Ruby fibers vs Ruby threads</a></p></li>
+<li><p><a href="http://www.igvita.com/2010/08/18/multi-core-threads-message-passing/">Multi-core, threads, passing messages</a></p></li>
+<li><p><a href="http://adam.heroku.com/past/2009/8/13/threads_suck/">Threads suck</a></p></li>
+<li><p><a href="http://www.igvita.com/2010/04/15/non-blocking-activerecord-rails/">Non blocking Active Record and Rails</a></p></li>
+<li><p><a href="http://www.mikeperham.com/2010/01/27/scalable-ruby-processing-with-eventmachine/">Scalable Ruby processing with EventMachine</a></p></li>
+<li><p><a href="http://on-ruby.blogspot.com/2008/01/ruby-concurrency-with-actors.html">Ruby concurrency with actors</a></p></li>
+<li><p><a href="http://www.engineyard.com/blog/2010/concurrency-real-and-imagined-in-mri-threads/">Concurrency in MRI; threads</a></p></li>
+<li><p><a href="http://www.infoq.com/news/2007/08/ruby-1-9-fibers">Ruby 1.9 adds fibers for lightweight concurrency</a></p></li>
+<li><p><a href="http://yehudakatz.com/2010/08/14/threads-in-ruby-enough-already/">Threads in Ruby, enough already</a></p></li>
+<li><p><a href="http://www.igvita.com/2010/03/22/untangling-evented-code-with-ruby-fibers">Untangling Evented Code with Ruby Fibers</a></p></li>
+<li><p><a href="http://www.slideshare.net/ehuard/concurrency-5615029">Elise Huard's RubyConf Concurrency talk slides</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

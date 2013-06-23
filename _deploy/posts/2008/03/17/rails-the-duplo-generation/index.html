@@ -1,0 +1,224 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ruby on Rails: the Duplo generation - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Ruby on Rails: The Duplo Generation I&#8217;m sure, at least once in your life you played with Duplos. Duplo bricks are eight times the size in volume, twice the length &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2008/03/17/rails-the-duplo-generation/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <a href='/about/'><img class="photo left" title='About Matt Aimonetti'
+      alt='Photo of Matt Aimonetti' src="/images/matt_aimonetti.jpg" /></a>
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left bio-summary'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Tech Lead</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/posts/archives/">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <div id="cse-search-form">Loading</div>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/">Home</a></li>
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/about/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Ruby on Rails: The Duplo Generation</h1>
+    <div class="entry"><p><img src="http://cache.lego.com/upload/contentTemplating/LifestyleProductsBags/otherfiles/1033/uploadF2767709-6EFA-4D99-93FA-13F75766309B.jpg" alt="duplo" />
+I&#8217;m sure, at least once in your life you played with Duplos.</p>
+
+<p><em>Duplo bricks are eight times the size in volume, twice the length, height and width of traditional Lego bricks, and are <strong>easier to handle for younger children</strong>. Despite their size, they are <strong>still compatible</strong> with traditional Lego brick.</em></p>
+
+<p>Duplos are great to introduce kids to the concept of Lego bricks and to get them to think about building their own creations. However you would freak out if your kid would grow up and not want to start playing with Legos and building more advanced/custom stuff.</p>
+
+<p>Unfortunately, that&#8217;s exactly what&#8217;s going on in the Rails community right now. We created a generation of Duplo developers.</p>
+
+<p><strong>Rick Olson</strong>, AKA <a href="http://techno-weenie.net/">Technoweenie</a> fathered a great majority of this Duplo generation. Rick is a Rails core member and a prolific Rails plugin developer. He has written very popular plugins and Rails apps such as:</p>
+
+<ul>
+<li><p><a href="http://github.com/technoweenie/restful-authentication/tree">restful-authentication</a></p></li>
+<li><p><a href="http://github.com/technoweenie/attachment_fu/tree">attachment_fu</a></p></li>
+<li><p><a href="http://github.com/technoweenie/acts_as_versioned/tree">acts_as_versioned</a></p></li>
+<li><p><a href="http://github.com/technoweenie/permalink_fu/tree">permalink_fu</a></p></li>
+<li><p><a href="http://mephistoblog.com/">mephisto blog engine</a></p></li>
+<li><p><a href="http://beast.caboo.se/">Beast forum</a></p></li>
+</ul>
+
+
+<p>If Rick is the father, the mother of this generation would obviously be <a href="http://www.loudthinking.com/">David Heinemeier Hansson</a>, creator of the Ruby on Rails framework. David has always wanted to make our lives easier, providing us with tools to avoid repeating ourselves and a mass-load of tools to create web apps in no time.</p>
+
+<p>Rick, David and others worked hard to provide the community with tools that cut our development times by 20% to 30% and that&#8217;s just awesome. They basically took their <a href="http://www.meccano.com/">meccano</a> applications and extracted Duplo blocks you can play with.</p>
+
+<p>from <img src="http://upload.wikimedia.org/wikipedia/en/thumb/b/b5/Meccano_model_Steam_shovel_excavator.jpg/250px-Meccano_model_Steam_shovel_excavator.jpg" alt="meccano" /> to <img src="http://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Duplo_bricks.jpg/250px-Duplo_bricks.jpg" alt="Duplo" /></p>
+
+<p><strong>The problem is that a generation of Rubyists has grown up being used to getting everything pre written for them. They haven&#8217;t yet passed the &#8220;Duplo stage&#8221; and basically write applications putting a few blocks together, only writing 10 to 20% and barely understand 5%.</strong></p>
+
+<p>On top of that, what really annoys me is that, these very same developers complain about the existing plugins, always ask for more and don&#8217;t give anything back to the community.</p>
+
+<p>The problem is that it&#8217;s always the same people giving and helping. Relatively quickly, the community grows and people supporting it get tired. I won&#8217;t go as far as <a href="http://www.zedshaw.com/rants/rails_is_a_ghetto.html">Zed and his funny rant</a> but we need to wake up. We need to evolve, learn how Rails magic works, give up the <a href="http://www.therailsway.com/2007/8/1/dangers-of-cargo-culting">cargo culting</a> and start giving back.</p>
+
+<p>The first thing would be to stop complaining about plugins you use on a daily basis and write your own or fork existing ones. <a href="http://github.com">GitHub</a> is a good place to start forking existing projects, if you are a Rails/Ruby beginner, you can help with documentation or submit small patches. <a href="http://hasmanythrough.com">Josh Susser</a> wrote a <a href="http://hasmanythrough.com/layingtracks/LayingTracks.pdf">nice tutorial</a> on how to commit changes (patches/documentation).</p>
+
+<p>Why not blog about issues you have just faced and how you resolved them. Start writing small plugins/gems. Try helping people on the various mailing lists.</p>
+
+<p>And finally, drop the Duplos and start playing with Legos - don&#8217;t use plugins just because they are available to you, make sure you fully understand what the plugins you use do! Learn more about Rails guts and start using it in a way that makes sense to you.</p>
+
+<p>Why not even switch to meccano and take a look at <a href="http://merbivore.com">Merb</a></p>
+</div>
+
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-17T06:39:00-07:00" pubdate data-updated="true">Mar 17<span>th</span>, 2008</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        
+          <div class='legacy'><a href="http://railsontherun.com/2008/03/17/rails-the-duplo-generation/">Original article</a></div>
+        
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        <div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+  <a class="addthis_button_tweet"></a>
+  </br>
+	
+	
+  <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+  </br>
+	
+	<a class="addthis_counter addthis_pill_style"></a></br>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=mattetti"></script>
+</div>
+
+        
+    </div>
+
+
+</article>
+
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2013 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+  var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+    '010526096358170648343:WMX140696544', customSearchOptions);
+  customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+  var options = new google.search.DrawOptions();
+  options.enableSearchboxOnly("http://matt.aimonetti.net/search");
+  customSearchControl.draw('cse-search-form', options);
+  }, true);
+
+if (navigator.userAgent.match(/iPad/i) != null) {
+  $('meta[name=viewport]').attr('content', 'width=1200,initial-scale=1,maximum-scale=1');
+}
+</script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'mattaimonetti';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+</body>
+</html>

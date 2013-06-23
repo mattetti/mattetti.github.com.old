@@ -1,0 +1,263 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Causality of scalability - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Causality of Scalability Part of my job at Sony PlayStation is to architect scalable systems which can handle a horde of excited players eager to be the first to play &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://merbist.com/2011/01/18/causality-of-scalability/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <a href='/about/'><img class="photo left" title='About Matt Aimonetti'
+      alt='Photo of Matt Aimonetti' src="/images/matt_aimonetti.jpg" /></a>
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left bio-summary'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Tech Lead</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/posts/archives/">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <div id="cse-search-form">Loading</div>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/">Home</a></li>
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/about/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Causality of Scalability</h1>
+    <div class="entry"><p>Part of my job at <a href="http://us.playstation.com/">Sony PlayStation</a> is to architect scalable systems which can handle a horde of excited players eager to be the first to play the latest awesome game and who would play for 14-24 hours straight. In other words, I need to make sure a system can &#8220;scale&#8221;. In my case, a scalable system is a system that can go from a few hundred concurrent users/players to hundreds of thousands of concurrent users/players and stay stable for months.</p>
+
+<p>One can achieve scalability in many ways, and if you expect me to provide you with a magical formula you will be disappointed. I actually believe that you can scale almost anything if you have the adequate resources. So saying that X or Y doesn&#8217;t scale is for me a sign that people are taking shortcuts in their explanations (X or Y are really hard to scale so they don&#8217;t scale) or that they don&#8217;t understand the causality of scaling. However what I am exploring in this post is the relationship between cause and effect when trying to make a system scalable. We will see that the scalability challenge is not new and not exclusive to the tech world. We will study the traditional approach to scaling and as well as the challenge of scaling in relation to the web and what to be aware of when planning to make a solution scalable.</p>
+
+<h2>Scaling outside of the tech world</h2>
+
+<p>Trying to scale isn&#8217;t new. It goes back to well before technology was invented. Scaling something up or increasing something in size or number is a goal businesses have aimed for ever since the oldest profession in the world was invented. <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/4/49/EN_BESKYTTERINDE_AF_INDUSTRIEN.gif/180px-EN_BESKYTTERINDE_AF_INDUSTRIEN.gif" alt="" />A prostitute wanting to scale up her business was limited by her own time and body. She would reach a point where she couldn&#8217;t take more clients. (Independent contractors surely know what I am talking about!) So a prostitute wanting to scale up would usually become a madam/Mama-san and scale the business by having girls work for her.</p>
+
+<p>Another simple example would be a restaurant. A restaurant can handle up to a certain amount of covers/clients at once, after that, customers have to wait in line. The restaurant example is interesting because you can clearly see that opening a huge restaurant with a capacity of 1,000 covers might not be a good idea. First because the cost of running such a restaurant might be much more than the income generated. But also because even though the restaurant does 1,000 covers at peak time, it doesn&#8217;t mean that the restaurant will stay that busy during the entire time it&#8217;s open. So now you have to deal with waiter/waitresses, busboys and other staff who won&#8217;t have anything to do. As you probably have understood already, scaling a restaurant means that the scaling has to be done in a cost effective manner.  And what&#8217;s even more interesting is that what we could have thought was the bottleneck (the amount of concurrent covers) can be easily scaled up but it wouldn&#8217;t provide real scalability. In fact this choice would cascade into other areas of management like staffing and the building size. Often, the scaling solution for restaurants is to open new locations which can result in keeping the lines shorter, targeting new markets and reducing risks since one failing branch won&#8217;t dramatically affect the others.</p>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/en/thumb/4/4a/Nighthawks.jpg/400px-Nighthawks.jpg" alt="posted by Matt Aimonetti" /></p>
+
+<h2>Scaling in the traditional tech world</h2>
+
+<p>If you&#8217;ve ever done console development or worked on embedded devices, you know that they are restricted by some key elements. <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/PS3Versions.png/220px-PS3Versions.png" alt="posted by Matt Aimonetti" />It can be memory, CPU, hard drive space etc&#8230; You have to &#8220;cram&#8221; as many features as you can into the device, working around the fixed limitations of the hardware. In the console industry, what&#8217;s interesting to note is that the hardware doesn&#8217;t change often but people expect than a new game on the same platform will do things better than the previous game, even though the limitations are exactly the same. This is quite a challenging problem because you have to fight against the hardware limitations by optimizing your code to be super efficient. That&#8217;s exactly the reason why console video game developers manage memory manually instead of relying on a garbage collector. This way they can squeeze every resource they can from the console.</p>
+
+<p>The great advantage of this type of development is that you can reproduce and accurately anticipate issues. The bottlenecks/limitations are well known and immutable! If you find a way around in your lab, you know that the solution will work for everyone. Console video game developers (and to some extent, iOS developers) don&#8217;t have to wonder how their game will behave if the player has an old graphic card or not enough RAM.</p>
+
+<p>But ever since we started distributing the processing power, scaling technology has become more challenging.</p>
+
+<h2>Scaling on the web</h2>
+
+<p>Scaling a web based solution might actually seem quite like scaling a restaurant, except that you can&#8217;t easily open multiple locations since the concept of proximity in web browsing isn&#8217;t really as concrete as in real life. So the solution can&#8217;t be directly transposed. Most people will only have to scale up by optimizing their code running on one server, or maybe two. That&#8217;s because their service/app is not, and won&#8217;t be, generating high traffic. Scaling such systems is common and one can rely on work done in the past decades for good examples of solutions.</p>
+
+<p>However some web apps/games are or will become high traffic. But because every single entrepreneur I&#8217;ve met believes that their solution will be high traffic, they think they need to be able to scale and therefore should be engineered like that from the beginning. (This is, by the way, the reason scalability is a buzzword and you can sell almost anything technical saying that it scales.) The problem with this approach is that people want scalability but don&#8217;t understand its causality. In other words, they don&#8217;t understand the relationship between cause and effect related to making a solution scalable.</p>
+
+<p>Basically we can reduce the concept of causality of scalability to something like this: you change a piece of the architecture to handle more traffic, but this part has an effect on other parts that also need to change and the pursuit of scalability almost never ends (just ask Google). <strong>Making a system scalable needs to have well a defined cause and expected effect, otherwise it&#8217;s a waste</strong>. In other words, the effect of scaling engenders the need for solutions which themselves have complex effects on a lot of aspects of a system. Let&#8217;s make it clearer by looking at a simple example:</p>
+
+<p><a href="http://merbist.com/2011/01/18/causality-of-scalability/simplestarchitecture/"><img src="http://merbist.com/wp-content/uploads/2011/01/simplestarchitecture-300x269.png" alt="Simple Architecture by Matt Aimonetti" /></a>We have an e-commerce website and this website uses a web application with a database to store products and transactions. Your system is made of 1 webserver handling the requests and one database storing the data. Everything goes well until Black Friday, Christmas or Mother&#8217;s Day arrives and now some customers are complaining that they can&#8217;t access your website or that it&#8217;s too slow. This is also sometimes referred to as the digg/slashdot/reddit effect. All of a sudden you have a peak of traffic and your website can&#8217;t handle it. This is actually a very simple use case, but that&#8217;s also the only use case most people on the web need to worry about.</p>
+
+<p>The causality of wanting this solution to scale is simple, you want to scale so you can sell more and have happy customers. The effect is that the system needs to become more complex.</p>
+
+<p>To scale such a system, you need to find the root cause of the problem. You might have a few issues, but start by focusing on the main one. In this case, it&#8217;s more than likely that your webserver (frontend) cannot handle more than x requests/second. Interestingly enough, the amount of reqs/s might not match the result of your load tests. That&#8217;s probably because you didn&#8217;t expect the usage pattern that you are seeing, but that&#8217;s a whole different topic. At this point you need to understand why you can&#8217;t go above the x reqs/s limit you&#8217;re hitting. Where is the bottleneck? Is it that your application code is too slow? Is it the database has been brought to its knees? Or maybe the webserver serves as many requests as technically possible but it&#8217;s still not enough based on the traffic you are getting.</p>
+
+<p>If we stop right here, we can see that the reasons why the solution doesn&#8217;t scale can be multiple. But what&#8217;s even more interesting is that the root cause this time depends on the usage pattern and that it is really hard to anticipate all patterns. If we wanted to make this system scale we could do it different ways.</p>
+
+<p>To give you some canned answers, if the bottleneck is that your code is too slow, you should check if the code is slow because of the DB queries made (too many, slow queries etc..). Is it slow because you are doing something complex that can&#8217;t be easily improved or is it because you are relying on solutions that are known to not support concurrent traffic easily? More than likely, you will end up going for the easy caching approach. By caching some data (full responses, chunk of data, partial responses etc..) you avoid hitting your application layer and therefore can handle more traffic.</p>
+
+<p>[caption id=&#8221;attachment_879&#8221; align=&#8221;aligncenter&#8221; width=&#8221;300&#8221; caption=&#8221;Caching avoids data processing &amp; DB access &#8220;]<a href="http://merbist.com/2011/01/18/causality-of-scalability/simplestarchitecture3/"><img src="http://merbist.com/wp-content/uploads/2011/01/simplestarchitecture3-300x201.png" alt="More complex Architecture by Matt Aimonetti" /></a>[/caption]</p>
+
+<p>If your code is as fast as it can be, then a solution is to add more application servers or to async some processes. But now that means that you need to change the topology of your system, the way you deploy code and the way you route traffic. You will also increase the load on the database by opening more connections and maybe the database will now becoming the new bottleneck. You might also start seeing race conditions and you are certainly increasing the maintenance and complexity aka cost of your system (caching might end up having the same effect depending on the caching solution chosen).</p>
+
+<p>[caption id=&#8221;attachment_876&#8221; align=&#8221;aligncenter&#8221; width=&#8221;297&#8221; caption=&#8221;One way of scaling it to load balance the traffic&#8221;]<a href="http://merbist.com/2011/01/18/causality-of-scalability/simplestarchitecture2/"><img src="http://merbist.com/wp-content/uploads/2011/01/simplestarchitecture2-297x300.png" alt="load balanced approach by Matt Aimonetti" /></a>[/caption]</p>
+
+<p>Just looking at these possible causes and the various solutions (we didn&#8217;t even mention DB replication, sharding, NoSQL etc..), we can clearly see that making a system scalable has some concrete effects on system complexity/maintenance which directly translate in cost increase.</p>
+
+<p>If you are an engineer, you obviously want your system to be super scalable and handle millions of requests per second. But if you are a business person, you want to be realistic and evaluate the causality of not scaling after a certain point and convert that as loss. Then you weigh the cost of not scaling with the cost of &#8220;maybe&#8221; scaling and you make a decision.</p>
+
+<p>The problem here though is that scaling is a bit like another buzzword: SEO (Search Engine Optimization). A lot of people/solutions will promise scaling capabilities without really understanding the big picture. Simple systems can easily scale up using simple solutions but only up to a certain level. After that, what you need to do to scale becomes so complex than anyone promising you the moon probably doesn&#8217;t know what they are talking about. If there was a one-size-fits-all, easy solution for scaling, we would all be using it, from your brother for his blog, to Google without forgetting Amazon.</p>
+
+<p><img src="http://awsmedia.s3.amazonaws.com/logo_aws.gif" alt="AWS logo posted by Matt Aimonetti" />Speaking of Amazon, I hear a lot of people saying that Amazon AWS services is &#8220;THE WAY&#8221; (i.e: the only way) to scale your applications. I agree that it&#8217;s a compelling solution for a lot of cases but it&#8217;s far from being a silver bullet. Remember that the cause and effect of why you need to scale are probably different than anyone else.</p>
+
+<h2>Amazon Web Services</h2>
+
+<p>Let me give you a very concrete example of where <a href="http://aws.amazon.com/">AWS services</a> might<em> not</em> be a good idea: high traffic sites with lots of database writes and low latency.</p>
+
+<p><a href="http://zynga.com">Zynga</a>, the famous social game company behind Farmville, Mafia Wars etc., is using AWS and it seems that they might have found themselves in the same scenario as above<img src="http://www.zynga.com/img/logo.png" alt="" />. And that would be almost correct. Zynga games have huge traffic and they do a ton of DB writes. However I don&#8217;t think they need low latency since their game clients are browsers and Flash clients and that their games are mainly async so they just need to be able to handle unstable latency. We&#8217;ll see in a second how they manage to perform on the AWS cloud.</p>
+
+<p>The major problem with AWS when you have a high traffic site is IO: IO reliability, IO latency, IO availability. By IO, I&#8217;m referring to network connection (internal/external) and disk access. Put differently, when you design your system and you know you are going to run on AWS, you need to take into consideration that your solution should survive with zero or limited IO because you will more than likely be IO bound. This means that your traditional design won&#8217;t work because your database hard drive won&#8217;t be available for 30s or will be totally saturated. You also need to have a super redundant system because you are going to randomly lose machines. Point number one, moving your existing application from a dedicated hosting solution to AWS might not help you scale if you didn&#8217;t architect to be resilient to bad IO. Simply put, and to only pick one example: if you were expecting your database to be able to always properly write to disk you will have problems.</p>
+
+<p>[caption id=&#8221;&#8221; align=&#8221;alignleft&#8221; width=&#8221;184&#8221; caption=&#8221;Octocat, the GitHub mascot&#8221;]<img src="http://tctechcrunch.files.wordpress.com/2010/07/github-logo.png" alt="" />[/caption]</p>
+
+<p>The solution depends on how you want to look at it and where you are at in your project. You can go the <a href="http://highscalability.com/blog/2010/2/8/how-farmville-scales-to-harvest-75-million-players-a-month.html">Zynga route and design/redesign your entire architecture to be highly redundant, not rely on disk access</a> (everything is kept in memory and flushed to disk when available) and tolerate a certain % of data loss. Or you can go with the<a href="https://github.com/blog/493-github-is-moving-to-rackspace"> GitHub approach</a><a href="https://github.com/blog/493-github-is-moving-to-rackspace"> and mix dedicated hardware for IO and &#8220;cloud&#8221; front end servers all on the same network</a>. One solution isn&#8217;t better than the other, they are just different and depend on your needs. <a href="http://github.com">GitHub</a> and <a href="http://www.zynga.com/">Zynga</a> both need to scale but they have different requirements.</p>
+
+<p>When it comes to scaling, things are not black or white. To stay on the AWS topic, let&#8217;s take another example: Amazon Relational Database Service (RDS). Earlier today, I was complaining on Twitter that RDS doesn&#8217;t and probably won&#8217;t let you use the <a href="http://yoshinorimatsunobu.blogspot.com/2010/10/using-mysql-as-nosql-story-for.html">MySQL HandlerSocket plugin</a> any time soon, even though it&#8217;s been released for almost 6 months and used in prod by many. Then someone asked me if using this plugin would offset the scalability cost-saving. The quick and wrong answer  is yes. By using the plugin, you can potentially get rid of your Memcached servers, probably your Redis/MongoDB/CouchDB servers or whatever NoSQL solution you write and just keep the database servers you currently have. You might have to beef up your DB servers a bit but it would certainly be a huge cost reduction and your system would be simpler, easier to maintain and the data would be more consistent. Sounds good right? After all the biggest online social game company designed it and uses it.</p>
+
+<p>The only problem is that RDS is an AWS service and like every AWS service, it suffers from poor IO. So, if you were deciding to not use RDS and run your own MySQL servers with the HandlerSocket plugin, it wouldn&#8217;t bring you much improvement <em>(1)</em>. Actually, if you are already IO bound, it would make things worse, because you are centralizing your system around the most unreliable part of your architecture. Based on that premise, RDS won&#8217;t support HandlerSocket because RDS runs on the same AWS architecture and has to deal with the same IO constraints. What&#8217;s the solution, you might ask? Amazon already went through these scaling problems and they offer a custom, non-relational, data storage solution working around their own issues called SimpleDB. But why would they improve RDS and fix a really hard problem when they already offer an alternative solution? Easy. SimpleDB forces you to redesign your architecture to work with their custom solution and, guess what? You are now locked-in to that vendor!</p>
+
+<p>So the answer is yes, you can offset scalability costs if you don&#8217;t use AWS or any other providers with bad IO. Now you should look at the cost of moving away from AWS and see if it&#8217;s worth it. How much of your code and of your system is vendor specific? Is that something you can easily change? The <a href="https://github.com/geemus/fog">fog library</a>, for instance, supports multiple cloud providers. Are you using something similar? Can you transition to that?  Can you easily deploy to another hosting company? (<a href="http://opscode.com/chef">Opscode chef</a> makes that task much easier) But if, for one reason or another, you have to stick with AWS/<other cloud provider>, make sure that the business people in charge understand the consequences and the cost related to that choice.</p>
+
+<h2>Conclusion</h2>
+
+<p>My point is not to tell you to not design a scalable solution, or not to use AWS, or that RDS sucks. My point is to show that making a system scale is hard and has some drastic effects that are not always obvious. There aren&#8217;t any silver bullet solutions and you need to be really careful about the consequences (and costs) involved with trying to scale. Make sure it&#8217;s worth it and you have a plan. Define measurable goals for your scalability even though it&#8217;s really hard, don&#8217;t try to scale to infinity and beyond, that won&#8217;t work. Having to redesign later on to handle even more traffic, is a good problem to have, don&#8217;t over engineer.</p>
+
+<p>Finally, be careful to understand the consequences of your decisions. What seems to be an almost trivial scaling move such as moving your app from dedicated hosting to a specific cloud provider might end up getting you in a vendor lock in situation!</p>
+
+<hr />
+
+<p><em>1: I assume that you are IO bound. If you are not and your DB data fits in memory/cache, then HS on AWS is fine but if that&#8217;s the case what&#8217;s your bottleneck? ;)</em></p>
+</div>
+
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-18T08:00:42-08:00" pubdate data-updated="true">Jan 18<span>th</span>, 2011</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/software-design/'>Software Design</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/merbist-com/'>merbist.com</a>
+  
+</div>
+
+</div>
+        
+          <div class='legacy'><a href="http://merbist.com/2011/01/18/causality-of-scalability/">Original article</a></div>
+        
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        <div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+  <a class="addthis_button_tweet"></a>
+  </br>
+	
+	
+  <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+  </br>
+	
+	<a class="addthis_counter addthis_pill_style"></a></br>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=mattetti"></script>
+</div>
+
+        
+    </div>
+
+
+</article>
+
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2013 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+  var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+    '010526096358170648343:WMX140696544', customSearchOptions);
+  customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+  var options = new google.search.DrawOptions();
+  options.enableSearchboxOnly("http://matt.aimonetti.net/search");
+  customSearchControl.draw('cse-search-form', options);
+  }, true);
+
+if (navigator.userAgent.match(/iPad/i) != null) {
+  $('meta[name=viewport]').attr('content', 'width=1200,initial-scale=1,maximum-scale=1');
+}
+</script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'mattaimonetti';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+</body>
+</html>

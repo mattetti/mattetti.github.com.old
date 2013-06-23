@@ -1,0 +1,239 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>resolving git-svn conflicts - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Resolving Git-svn Conflicts I&#8217;ve been using git and git-svn for a little while and never had a problem&#8230; until today. On one of my project, we have a SVN &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2008/02/29/resolving-git-svn-conflicts/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <a href='/about/'><img class="photo left" title='About Matt Aimonetti'
+      alt='Photo of Matt Aimonetti' src="/images/matt_aimonetti.jpg" /></a>
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left bio-summary'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Tech Lead</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/posts/archives/">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <div id="cse-search-form">Loading</div>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/">Home</a></li>
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/about/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Resolving Git-svn Conflicts</h1>
+    <div class="entry"><p>I&#8217;ve been using <a href="http://git.or.cz/">git</a> and <a href="http://www.kernel.org/pub/software/scm/git/docs/git-svn.html">git-svn</a> for a little while and never had a problem&#8230; until today.</p>
+
+<p>On one of my <a href="http://gumgum.com">project</a>, we have a SVN repo but since I prefer using Git, I&#8217;m using git-svn.</p>
+
+<p>Git-svn has been great, it let me create my own local branches for each new set of features (that&#8217;s when I don&#8217;t forget to create a branch) and to commit all the changes back to svn.</p>
+
+<p>The problem today happened after I did a simple git-svn rebase. I had some sort of error and my local repo looked like it got reverted to the head of the svn repo&#8230;.</p>
+
+<pre><code>&lt;code&gt;error: patch failed: trunk/app/models/view.rb:1
+error: trunk/app/models/view.rb: patch does not apply
+[blah blah]
+sing index info to reconstruct a base tree...
+Falling back to patching base and 3-way merge...
+&lt;/code&gt;
+</code></pre>
+
+<p>I hadn&#8217;t committed to SVN for 24 hours and had a lot of work that was just checked in locally&#8230; You can imagine the panic.  <a href="http://notch8.com">Rob</a> started digging in the .git repo to finally find the hash representing the latest delta before the rebase. With the help of the #caboose guys, I did a simple</p>
+
+<pre><code>&lt;code&gt;git reset --hard hash-name
+&lt;/code&gt;
+</code></pre>
+
+<p>Which restore my repo to the pre SVN commit state. Awesome&#8230; however I still had issues to commit my stuff. After a little while I as able to commit again, worked a bit more and tried to commit again&#8230;. same error :(</p>
+
+<p>But this time I noticed I could simply do</p>
+
+<pre><code>&lt;code&gt;git rebase --abort
+&lt;/code&gt;
+</code></pre>
+
+<p>to restore the original branch.an</p>
+
+<p>But I still couldn&#8217;t commit properly&#8230; until I discovered that I just needed to fix the conflicts manually using</p>
+
+<pre><code>&lt;code&gt;git-mergetool
+&lt;/code&gt;
+</code></pre>
+
+<p>git-mergetool uses whichever merge tool available: kdiff3 tkdiff xxdiff meld gvimdiff opendiff emerge vimdiff filemerge</p>
+
+<p>I fixed my conflicts in no time, then did a</p>
+
+<pre><code>&lt;code&gt;git rebase --continue
+&lt;/code&gt;
+</code></pre>
+
+<p>and finally</p>
+
+<pre><code>&lt;code&gt;git-svn dcommit
+&lt;/code&gt;
+</code></pre>
+
+<p>Looking back, I wish I knew how to properly deal with conflicts when using git-svn, I wasted a bit of my precious time ;)  hopefully this post will help you.</p>
+
+<p>p.s:  <a href="http://brian.maybeyoureinsane.net/blog/2008/01/31/git-sake-tasks/">here</a> is an interesting use of Sake to handle git-svn</p>
+</div>
+
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-29T22:40:00-08:00" pubdate data-updated="true">Feb 29<span>th</span>, 2008</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        
+          <div class='legacy'><a href="http://railsontherun.com/2008/02/29/resolving-git-svn-conflicts/">Original article</a></div>
+        
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        <div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+  <a class="addthis_button_tweet"></a>
+  </br>
+	
+	
+  <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+  </br>
+	
+	<a class="addthis_counter addthis_pill_style"></a></br>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=mattetti"></script>
+</div>
+
+        
+    </div>
+
+
+</article>
+
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2013 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+  var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+    '010526096358170648343:WMX140696544', customSearchOptions);
+  customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+  var options = new google.search.DrawOptions();
+  options.enableSearchboxOnly("http://matt.aimonetti.net/search");
+  customSearchControl.draw('cse-search-form', options);
+  }, true);
+
+if (navigator.userAgent.match(/iPad/i) != null) {
+  $('meta[name=viewport]').attr('content', 'width=1200,initial-scale=1,maximum-scale=1');
+}
+</script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'mattaimonetti';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+</body>
+</html>

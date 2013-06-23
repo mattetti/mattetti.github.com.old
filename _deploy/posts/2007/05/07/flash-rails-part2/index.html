@@ -1,0 +1,268 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Rails/Flash, part 2 - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Rails/Flash, Part 2 In part I I explained how to access Rails data from Flash. However Yves aka Kadoudal was wondering what I did with Rails to return the event record &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2007/05/07/flash-rails-part2/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <a href='/about/'><img class="photo left" title='About Matt Aimonetti'
+      alt='Photo of Matt Aimonetti' src="/images/matt_aimonetti.jpg" /></a>
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left bio-summary'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Tech Lead</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/posts/archives/">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <div id="cse-search-form">Loading</div>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/">Home</a></li>
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/about/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Rails/Flash, Part 2</h1>
+    <div class="entry"><p>In <a href="http://www.railsontherun.com/2007/4/9/rails-and-flash">part I</a> I explained how to access Rails data from Flash.</p>
+
+<p>However Yves aka Kadoudal was wondering what I did with Rails to return the event record:</p>
+
+<p>Rails.get(&#8216;events&#8217;, rails_events); how rails returns the event record as we don&#8217;t call a controller/action &#8230; ? I believe doing it RESTFul it&#8217;s depending upon your route ? is it not?</p>
+
+<p>We are actually calling a controller/action If you look at the Restfulflash class, you&#8217;ll notice a function called get</p>
+
+<pre><code>&lt;code&gt;public function get(controller, callback){
+        var railsReply:XML = new XML();
+        railsReply.ignoreWhite = true;
+        railsReply.onLoad = function(success:Boolean){
+            if (success) {
+                    trace ('Rails responded: '+railsReply);
+                    callback.text = railsReply;
+            } else {
+                    trace ('Error while waiting for Rails to reply');
+               callback.text = 'error';
+            }
+        }
+        var railsRequest:XML = new XML();
+        railsRequest.contentType='application/xml';
+        railsRequest.sendAndLoad(this.gateway+controller, railsReply);
+        delete railsRequest;
+    }
+&lt;/code&gt;
+</code></pre>
+
+<p>What&#8217;s really interesting are the following 2 lines:</p>
+
+<p>railsRequest.contentType=&#8221;application/xml&#8221;;
+railsRequest.sendAndLoad(this.gateway+controller, railsReply);</p>
+
+<p>I&#8217;m preparing a request that I will send to my gateway mentioning the controller name. In the previous example I was calling the &#8216;events&#8217; controller: http://mysite.fr/events because I&#8217;m using REST and because my request is a &#8216;get&#8217; Rails will call the index action.</p>
+
+<p>for more info on <a href="http://www.softiesonrails.com/2007/4/10/rest-101-part-3-just-call-me-the-repo-man">RESTful design</a> check the nice series available from the <a href="http://www.softiesonrails.com">softies on rails blog</a></p>
+
+<p>Let&#8217;s just look at my code and see what&#8217;s up with rails magic :)</p>
+
+<p>Here is my index action sending you back a different object based on the header of your request.</p>
+
+<pre><code>&lt;code&gt;class EventsController &lt; ApplicationController
+  # GET /events
+  # GET /events.xml
+  def index
+    @events = Event.find(:all)
+
+    respond_to do |format|
+      format.html # index.rhtml
+      format.xml  { render :xml =&gt; @events.to_xml }
+      format.json { render :json =&gt; @events.to_json }
+    end
+  end
+&lt;/code&gt;
+</code></pre>
+
+<p>That&#8217;s it, and it was automatically created for you by the script/generate scaffold_resource command :)</p>
+
+<p>Since I&#8217;m answering Yves&#8217; questions, let&#8217;s look at his final question:</p>
+
+<p>problem : what if the xml returned is not a record, but it has to be prepared by Rails&#8230;
+I explain, right now my rails view .. I have a javascript object passing all the info via JS
+I would like to replace the datasource file by a direct call to rails from Flash, so this param will disappear&#8230; so (correct me if I am wrong)</p>
+
+<pre><code>1- I need to pass a user_id value in JS to Flash in the script...
+2- Flash need to send a request to Rails (controller/action/id to prepare the xml... ) to get in return a correct xlm object to be displayed
+</code></pre>
+
+<p>1- I&#8217;m not sure why you need to pass the user_id from JS to Flash but I guess Flash doesn&#8217;t know what user to query?? (anyway that would work)</p>
+
+<p>2- If you are using REST, Flash just needs make a get call to /controller/id Make sure to set the request header type as xml, like I did in my function railsRequest.contentType=&#8221;application/xml&#8221;; Otherwise I believe (but didn&#8217;t try) that you can call /events/1.xml where 1 id the id of the event you want to retrieve.</p>
+
+<p>By the way, it will call the show action from the events controller which looks like that:</p>
+
+<pre><code>&lt;code&gt;def show
+  @event = Event.find(params[:id])
+
+  respond_to do |format|
+    format.html # show.rhtml
+    format.xml  { render :xml =&gt; @event.to_xml }
+  end
+end
+&lt;/code&gt;
+</code></pre>
+</div>
+
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-05-07T22:15:00-07:00" pubdate data-updated="true">May 7<span>th</span>, 2007</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        
+          <div class='legacy'><a href="http://railsontherun.com/2007/05/07/flash-rails-part2/">Original article</a></div>
+        
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        <div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+  <a class="addthis_button_tweet"></a>
+  </br>
+	
+	
+  <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+  </br>
+	
+	<a class="addthis_counter addthis_pill_style"></a></br>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=mattetti"></script>
+</div>
+
+        
+    </div>
+
+
+</article>
+
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2013 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+  var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+    '010526096358170648343:WMX140696544', customSearchOptions);
+  customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+  var options = new google.search.DrawOptions();
+  options.enableSearchboxOnly("http://matt.aimonetti.net/search");
+  customSearchControl.draw('cse-search-form', options);
+  }, true);
+
+if (navigator.userAgent.match(/iPad/i) != null) {
+  $('meta[name=viewport]').attr('content', 'width=1200,initial-scale=1,maximum-scale=1');
+}
+</script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'mattaimonetti';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+</body>
+</html>

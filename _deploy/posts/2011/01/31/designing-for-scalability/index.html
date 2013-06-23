@@ -1,0 +1,365 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Designing for scalability - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Designing for Scalability Designing beautiful and scalable software is hard. Really hard. It&#8217;s hard for many reasons. But what makes it even harder is that &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://merbist.com/2011/01/31/designing-for-scalability/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <a href='/about/'><img class="photo left" title='About Matt Aimonetti'
+      alt='Photo of Matt Aimonetti' src="/images/matt_aimonetti.jpg" /></a>
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left bio-summary'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Tech Lead</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/posts/archives/">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <div id="cse-search-form">Loading</div>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/">Home</a></li>
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/about/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Designing for Scalability</h1>
+    <div class="entry"><p>Designing beautiful and scalable software is hard. Really hard.</p>
+
+<p>It&#8217;s hard for many reasons. But what makes it even harder is that software scalability is a relatively new challenge, something only really done in big companies, companies that are not really keen on sharing their knowledge. The amount of academic work done on software design is quite limited compared to other types of design, but shared knowledge about scalable design is almost nonexistent <em>(Don&#8217;t expect to find detailed information about scaling online video games either, the industry is super secretive. And even if this is a niche market where finding skilled/experienced developers is really challenging, information is not shared outside a game project).</em></p>
+
+<p>I don&#8217;t pretend to have the required knowledge to cover this topic at length. However, I do have some exposure and figured I should share what I learned so others can benefit from my experience and push the discussion further.</p>
+
+<p>Designing scalable software is just like any other type of software design, with a few unique constraints. If I had to define the key requirements of a great design I would have to quote Frederick P. Brooks:</p>
+
+<blockquote><p>&#8220;Great designs have conceptual integrity - unity, economy, clarity&#8221;</p></blockquote>
+
+<p>This is true for any type of design and one should always start by that.
+Don&#8217;t just jump on your keyboard and start writing tests/code right away. Take a minute to think about your design.
+That will save you hours of refactoring and headaches.</p>
+
+<h2>You&#8217;re a designer and might not even know it</h2>
+
+<p>You might not be designing the next NASA engine but you are more than likely designing an API that you and others will use. As a matter of fact, unless you write code that will never be seen again, you are writing an Application Programming Interface (API). Every single class, method, function you write is an API that you and others will use. Remember that every time you write code, you are the implementer of a design, and therefore you are a designer.</p>
+
+<p>[caption id=&#8221;attachment_916&#8221; align=&#8221;alignright&#8221; width=&#8221;150&#8221; caption=&#8221;Giana and I, discussing design patterns&#8221;]<a href="http://merbist.com/2011/01/31/designing-for-scalability/giana_and_moi_lowres/"><img src="http://merbist.com/wp-content/uploads/2011/01/giana_and_moi_lowres-150x150.jpg" alt="Giana and Matt Aimonetti" /></a>[/caption]</p>
+
+<p>When thinking about your design, focus on design concepts instead of implementation details. A design concept must be clear, simple to both explain with words and draw on a whiteboard. If you can&#8217;t draw and explain your design on a whiteboard, you have failed one of the great design requirement: clarity. If you work alone, or your coworkers are tired of hearing you, try rubber ducking your design ideas. It&#8217;s the same concept as rubber ducking debugging, where a programmer would force himself to explain his code, line-by-line, to a rubber duck on his desk but instead of talking about the code, explain your design and why it&#8217;s awesome (I&#8217;ve recently done this with my baby girl and it&#8217;s been really helpful).</p>
+
+<h2>Keeping the design integrity</h2>
+
+<p>One of the challenges of designing scalable software is that your constraints are often very unique to your product. Off the shelf solutions don&#8217;t work for you, and the specific solution used by another project can&#8217;t be transposed to your project because the cause and the effect of what you need to scale are different. The problem is that you really quickly lose design integrity.</p>
+
+<p>Let&#8217;s take a look at a concrete example to see how the design integrity can be lost or even not defined at all.
+Let&#8217;s pretend we want to write a suite of web APIs for video games.</p>
+
+<p>We can look at this task from different perspectives:<a href="http://merbist.com/2011/01/31/designing-for-scalability/the-shout-2/"><img src="http://merbist.com/wp-content/uploads/2011/01/the-shout1-150x150.jpg" alt="the shout posted by Matt Aimonetti" /></a></p>
+
+<ul>
+<li><p>Video game deadlines are crazy, let&#8217;s find a way to release as many APIs ASAP.</p></li>
+<li><p>We&#8217;re going to get a huge amount of traffic, let&#8217;s make sure we don&#8217;t crash and burn.</p></li>
+<li><p>We need to make sure our APIs are simple to use for the dev teams integrating them.</p></li>
+</ul>
+
+
+<p>Each of these perspectives reflects a facet of the challenge. Other facets exist that I didn&#8217;t mention but that a business person might have listed right away, one of which being: How can we do that for the least amount of money?</p>
+
+<p>To design our API suite, we first need to understand the different perspectives. Gaining this understanding will help us design something better but it will also help us communicate better with the different stakeholders. Once we have a decent understanding of the constraints and expectations, someone needs to explicitly define the design values and their priorities. This is a crucial step in the design process. Systems nowadays are too complicated to be handled by only one person and keeping design integrity requires clear communication.</p>
+
+<h2>Design goal and values</h2>
+
+<p>The best way to communicate the design is to write a simple sentence defining the primary goal:
+&#8220;Build a robust, efficient and flexible middleware solution leveraged by external teams to develop online video game features.&#8221;</p>
+
+<p>This is a bit like the mission statement of your project, or the elevator pitch you give someone that asks you what you are working on.</p>
+
+<p>Associated with the primary goal are a host of desiderata, or secondary objectives. These are the key objectives used to weigh technical decisions. It&#8217;s important for the design to highlight a scale of values so one can refer to them to decide if his/her idea fits the design or not. Here is an example:</p>
+
+<ol>
+<li><p>Stability</p></li>
+<li><p>Performance / Scalability</p></li>
+<li><p>Encapsulation / Modularity</p></li>
+<li><p>Conventions</p></li>
+<li><p>Documentation</p></li>
+<li><p>Reusability / Maintainability</p></li>
+</ol>
+
+
+<p>Often these desiderata are applied to most of your projects and reflect your team/company&#8217;s technical values. The list might seem simple and unnecessary but, believe me, it will reduce the arguments where John tells Jane that her idea sucks but his is better because he &#8220;knows better&#8221;. Having an objective reference to refer to when trying to decide which is the best way to go is greatly valuable and will reduce the amount of office drama.</p>
+
+<h2>Constraints</h2>
+
+<p>Finally, make sure to explicitly define all the major constraints and to acknowledge the team&#8217;s concerns. Here is a small example of what could be listed (which also reflect the previously mentioned perspectives):</p>
+
+<ul>
+<li><p>hard deadlines</p></li>
+<li><p>external teams involved</p></li>
+<li><p>huge load expected</p></li>
+<li><p>limited support available</p></li>
+<li><p>requirements changing quickly</p></li>
+<li><p>limited budget</p></li>
+<li><p>unknown hosting architecture/constraints</p></li>
+<li><p>&#8230;</p></li>
+</ul>
+
+
+<p>Remember that design is always iterative because the constraints keep changing. That&#8217;s just the way it is and a lot of technical constraints only appear as you implement or test your design. That&#8217;s also why the design needs to be clear but the implementation needs to be flexible.</p>
+
+<h2>Reads vs writes</h2>
+
+<p>Most of the web apps out there are read heavy, meaning that the stored data gets more accessed than modified. Scaling these type of systems is easier as one can introduce a cache layer, an intermediary storage, which acts as a fast buffer that avoids putting load on the backends. The cost reduction is huge because if you architected your app properly, the data is read from the data store only once (or once every X minutes) after being created/modified.</p>
+
+<p>Caching is so important that it&#8217;s even built into the HTTP protocol, making caching trivial.
+Speaking of HTTP, a common problem I often see when serving http content to a browser is that even though the backend calls are the same, some information needs to be customized for the current visitor. This prevents it from caching the entire page. An easy solution in this case is to still cache the entire page but to use javascript to fetch the custom data from the backend and to modify the cached http at the client&#8217;s browser level directly. As part of your design, you will more than likely need to implement multiple layers of caching and use technologies such as query caching, Varnish, Squid, Memcached, memoization, etc&#8230;</p>
+
+<p>The problem is that, as your system gets more traffic, you will notice that the volume of DB/network writes becomes your bottleneck. You will also notice a reduction of your cache/hit ratio because only a small part of your cached data is often retrieved by many clients. At this point, you will need to denormalize to avoid contention, shard your data in silos, or write to cache and flush from cache when the data store is available and not overwhelmed.</p>
+
+<h2>Asynchronous processing</h2>
+
+<p>One way to avoid write contention is to use async processing. The concept is simple. Instead of directly writing to your datastore after your backend receives a request, you put a message in a queue with all the information needed to run the operation later. On the other side, you have a set number of workers receiving messages and operating on them one after the other.</p>
+
+<p>The advantage of such an approach is that you control the amount of workers and therefore the amount of maximum concurrent writes to your datastore. You can also process the queue before it gets worked and and maybe coalesce some messages or remove outdated/duplicated message. Finally, you can assign more workers to some message types, making sure the important messages get processed first.</p>
+
+<p>Another advantage of this design includes not letting the client hang while you&#8217;re processing the data and potentially timeout. You can also process a long queue faster by starting more workers to catch up and retire them later.
+You app is more resilient to errors and failed async jobs can be restarted.</p>
+
+<h2>Load test, monitor and be proactive</h2>
+
+<p>Even the best designs have weak spots and will have to be improved once they are released. Don&#8217;t wait for your system to fall apart before looking for solutions. Monitor your app. Every single part of your app. Look for patterns showing signs of potential problems and imagine what you could do to resolve them if they would start manifesting.</p>
+
+<p>Of course before getting there, you will need to understand each part of your system and benchmark/load test/profile your app so you can be ready to face the storm.</p>
+
+<p>Benchmarks and load tests are both super important and, too often, not reflective of what you will really face later on. They are usually great at identifying major problems that should be resolved right away, but fail to show the one big problem you will see on day one when you have to deal with 20k concurrent requests. Use them as indicators, rely on your experience and learn about problems other have faced. This will help you build a knowledge of scalability challenges, their root causes, and their potential solutions.</p>
+
+<p>For benchmarking Ruby code, I use the<a href="http://ruby-doc.org/stdlib/libdoc/benchmark/rdoc/classes/Benchmark.html"> built-in benchmark tool available in the standard lib</a>.
+For simple load testing, I use <a href="http://www.hpl.hp.com/research/linux/httperf/">httperf</a>/<a href="http://www.xenoclast.org/autobench/">autobench</a> and <a href="http://freshmeat.net/projects/siege/">siege</a>.
+For anything more complicated, I use <a href="http://jakarta.apache.org/jmeter/">JMeter</a>.
+In the video game industry, we also often use sims using the client&#8217;s code to create load.</p>
+
+<p>Benchmarking without profiling is often useless. Unlike other programming languages, Ruby doesn&#8217;t yet have awesome profiling tools easy to use, but things are evolving quickly. Here are some tools I use regularly.</p>
+
+<p>The <a href="https://github.com/tmm1/perftools.rb">Ruby wrapper</a> around <a href="http://code.google.com/p/google-perftools/">google perftools</a> is really good.
+Before using perftools as often as I do now, I frequently used <a href="http://ruby-prof.rubyforge.org/">ruby-prof</a> with <a href="http://kcachegrind.sourceforge.net/html/Home.html">kcachegrind</a>.
+Ruby 1.9 lets you inspect its garbage collector as explained in a <a href="http://merbist.com/2010/07/29/object-allocation-why-you-should-care/">previous post</a>.
+And when using <a href="http://macruby.org">MacRuby</a>, I often use <a href="http://en.wikipedia.org/wiki/DTrace">DTrace</a>.</p>
+
+<h2>Other misc. things I learned</h2>
+
+<h3>Documentation</h3>
+
+<p>Documentation is critical. It doesn&#8217;t matter how you do it but you need to make sure you document what you want to build, how you build it, and why you build it. Documenting will help you and the others working on the project, and will keep you in check. I have started documenting an API and then realized that the design was flawed. Maybe it&#8217;s just the way you name a method, or a class, or it can be a weird method signature or even the entire workflow being wrong, but when you document things, design errors appear more obviously.</p>
+
+<p>To document Ruby code, I use <a href="http://yardoc.org/">yard</a> which is quite similar to <a href="http://en.wikipedia.org/wiki/Javadoc">javadoc</a>. Code documentation, when writing <a href="http://en.wikipedia.org/wiki/Duck_typing">duck typed language</a>, is, for me, very important since it makes the API designer&#8217;s expectations much clearer. I also often add English documentation, written in markdown files and compiled by yard. If you say that your code is simple and that it doesn&#8217;t require documentation because anyone can just read it and understand &#8230; then you have totally miss the point. Yes, it&#8217;s more work to keep documentation and code in sync. But people using web APIs don&#8217;t have access to the implementation details. The people distributing compiled APIs don&#8217;t give access to their implementation. And honestly, the API should be decoupled from the implementation. I shouldn&#8217;t have to guess how to use your API based on how you implemented the code underneath, otherwise my assumptions might be totally wrong.</p>
+
+<h3>Simplicity</h3>
+
+<p>With great power comes great responsibility. The law of system entropy says that systems become more disorganized over time, so don&#8217;t start with complicated code if you can avoid it! It&#8217;s not because your programming language lets you do crazy stuff that you have to use it. In 90+% of the time, your code can be written without voodoo and be easier to read, easier to understand, easier to maintain and faster to execute.</p>
+
+<p>If you can&#8217;t figure out how to <strong><em>not</em></strong> use metaprogramming or weird patterns, take a step back and look at your design, did you miss something?
+Also, don&#8217;t reinvent the wheel. Use the language the way it was designed to be used. Keep your APIs as small as possible, don&#8217;t expose too much as it will be virtually impossible to remove it later on.</p>
+
+<p>As an example, look to what extent Rails modified the Ruby language:</p>
+
+<p>In Rails&#8217; console (Rails 2, Ruby 1.8.7)</p>
+
+<pre><code>&gt;&gt; Array.ancestors
+=&gt; [Array, ActiveSupport::CoreExtensions::Array::RandomAccess,
+ ActiveSupport::CoreExtensions::Array::Grouping, ActiveSupport::CoreExtensions::Array::ExtractOptions,
+ ActiveSupport::CoreExtensions::Array::Conversions, ActiveSupport::CoreExtensions::Array::Access,
+ Enumerable, Object, ERB::Util, ActiveSupport::Dependencies::Loadable, Base64::Deprecated, Base64,
+ Kernel]
+&gt;&gt; [].methods.size
+=&gt; 233
+</code></pre>
+
+<p>In irb:</p>
+
+<pre><code>&gt;&gt; Array.ancestors
+=&gt; [Array, Enumerable, Object, Kernel]
+&gt;&gt; [].methods.size
+=&gt; 149
+</code></pre>
+
+<p>Removing any of these added methods is virtually impossible since some piece of code somewhere might rely on it.</p>
+
+<h3>Abstraction &amp; its dangers</h3>
+
+<p>Often when designing an API, it&#8217;s preferable to offer a well defined  public API which will delegate the work to a private implementation shared between  multiple public APIs. This approach avoids duplication, makes maintenance easy, and  allows for more flexibility. As an example, we can have a public  matchmaking API which will delegate most of the work to a private  matchmaking interface. If required, swapping the private interface would be  totally transparent to the public API. This approach has a downside, however. Having a shared private implementation does create a duplication of APIs. It leaves us with both a public and a private API because we need an API for public access and a private API for the public API to connect to. But when we weigh the  benefits and look at what is duplicated, we realize that this trade off  is worth it.</p>
+
+<p>Keeping a certain level of abstraction is important to maintaining the separation of concerns as clear as possible. You want to layer your design so that each  layer is responsible for itself, only knows about itself, and has limited  interactions with other layers. By factoring/isolating the different  modules, you can keep a simple, elegant, easy to maintain system. This  is a key element of design but one needs to be careful not to obfuscate  the design by over abstracting his/her code. This is particularly important when designing a scalable app because you will often need to be able to easily swap parts  to optimize each part of your system.</p>
+
+<p>That said, a lot of code out there is unnecessarily complicated. I sometime wonder if the authors of such code try to show that they know some cool language tricks. Or maybe this is due to the fact that, too often, people are impressed by code they don&#8217;t understand. The problem with overly complicated or magical code is that it creates yet another abstraction layer between the end user and API. It makes the API more opaque, and that&#8217;s a cost you have to take into consideration. Every time you abstract something you have a cost associated with the abstraction. This cost can be calculated in terms of performance loss, clarity loss and maintainability cost.</p>
+
+<p>This is exactly the same problem encountered when trying to normalize data in a database.
+Normalizing is a great concept which makes a lot of sense &#8230; until you realize that the cost of keeping your data normalized is too great and it becomes a major bottleneck, not letting you scale your application.
+At this moment (and probably only then) that you need to denormalize your data.</p>
+
+<p>It&#8217;s the same thing with code abstraction. It&#8217;s fine to abstract, unless the abstraction is such that it requires too much work to understand what is going on. A bit of duplication is often worth it, but be careful to not abuse it.</p>
+
+<h3>Debugging</h3>
+
+<p>Ruby has a decent debugger called <a href="http://bashdb.sourceforge.net/ruby-debug.html">ruby-debug</a> and I&#8217;m amazed by the amount of people who haven&#8217;t heard about it.
+I don&#8217;t know what I would do if I couldn&#8217;t use breakpoints and get an interactive shell to debug Ruby code.
+Please people! This is 2011, stop using print statement as a means of debugging!</p>
+
+<h2>Conclusion</h2>
+
+<p>That&#8217;s is for this post. It was longer than expected and I feel I didn&#8217;t really cover anything in depth, but hopefully you learned something new or at least read something that piqued your interest. I look forward to reading your comments and, hopefully, your blog posts sharing your experience in designing scalable software.</p>
+</div>
+
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-31T13:30:55-08:00" pubdate data-updated="true">Jan 31<span>st</span>, 2011</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/software-design/'>Software Design</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/merbist-com/'>merbist.com</a>
+  
+</div>
+
+</div>
+        
+          <div class='legacy'><a href="http://merbist.com/2011/01/31/designing-for-scalability/">Original article</a></div>
+        
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        <div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+  <a class="addthis_button_tweet"></a>
+  </br>
+	
+	
+  <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+  </br>
+	
+	<a class="addthis_counter addthis_pill_style"></a></br>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=mattetti"></script>
+</div>
+
+        
+    </div>
+
+
+</article>
+
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2013 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+  var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+    '010526096358170648343:WMX140696544', customSearchOptions);
+  customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+  var options = new google.search.DrawOptions();
+  options.enableSearchboxOnly("http://matt.aimonetti.net/search");
+  customSearchControl.draw('cse-search-form', options);
+  }, true);
+
+if (navigator.userAgent.match(/iPad/i) != null) {
+  $('meta[name=viewport]').attr('content', 'width=1200,initial-scale=1,maximum-scale=1');
+}
+</script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'mattaimonetti';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+</body>
+</html>

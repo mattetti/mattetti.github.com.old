@@ -1,0 +1,219 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Attachment_fu updated! - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Attachment_fu Updated! I recently bugged Rick Olson so much about attachment_fu that he gave me SVN access to fix few bugs. Rick being really busy with ActiveReload he &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2007/11/28/attachment_fu-updated/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <a href='/about/'><img class="photo left" title='About Matt Aimonetti'
+      alt='Photo of Matt Aimonetti' src="/images/matt_aimonetti.jpg" /></a>
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left bio-summary'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Tech Lead</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/posts/archives/">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <div id="cse-search-form">Loading</div>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/">Home</a></li>
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/about/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Attachment_fu Updated!</h1>
+    <div class="entry"><p>I recently bugged <a href="http://techno-weenie.net/">Rick Olson</a> so much about <a href="http://svn.techno-weenie.net/projects/plugins/attachment_fu/">attachment_fu</a> that he gave me SVN access to fix few bugs.</p>
+
+<p>Rick being really busy with <a href="http://activereload.net/">ActiveReload</a> he didn&#8217;t spend too much time maintaining <a href="http://svn.techno-weenie.net/projects/plugins/attachment_fu/">attachment_fu</a>.</p>
+
+<p>On my side of things, I&#8217;ve been using <a href="http://svn.techno-weenie.net/projects/plugins/attachment_fu/">attachment_fu</a> on a lot of projects and I&#8217;ve been fixing bugs and adding new features.</p>
+
+<p>My first contribution to <a href="http://svn.techno-weenie.net/projects/plugins/attachment_fu/">attachment_fu</a> is a fix for the <a href="http://seattlerb.rubyforge.org/ImageScience.html">ImageScience</a> processor.</p>
+
+<p>Attachment_fu is very flexible and let you use your favorite image processor:</p>
+
+<ul>
+<li><p><a href="http://rmagick.rubyforge.org/">RMagick</a> based on <a href="http://www.imagemagick.org/script/mogrify.php">ImageMagick</a> and <a href="http://www.graphicsmagick.org/">GraphicsMagick</a>(known to leak memory and being a pain to setup)</p></li>
+<li><p><a href="http://rubyforge.org/projects/mini-magick/">minimagick</a> based on <a href="http://www.imagemagick.org/script/mogrify.php">ImageMagick</a></p></li>
+<li><p><a href="http://seattlerb.rubyforge.org/ImageScience.html">ImageScience</a> based on <a href="http://sf.net/projects/freeimage">FreeImage</a>.</p></li>
+</ul>
+
+
+<p>Like many rubyists, I like <a href="http://seattlerb.rubyforge.org/ImageScience.html">ImageScience</a> for its simplicity and efficiency. However, <a href="http://svn.techno-weenie.net/projects/plugins/attachment_fu/">attachment_fu</a> had few problems when being used with <a href="http://seattlerb.rubyforge.org/ImageScience.html">ImageScience</a>.</p>
+
+<ul>
+<li><p>File sizes for thumbnails were not saved correctly in the database. Fixed</p></li>
+<li><p>Thumbnails based on a gif files were not processed properly. So, this was the big problem. <a href="http://sf.net/projects/freeimage">FreeImage</a> has issues dealing with resizing gif files because of the gif palette limitation (256 colors). to avoid this problem thumbnails of gif files are converted to png. However the thumbnail content type info in the database was not saved properly. That&#8217;s now fixed.</p></li>
+<li><p>Because of the gif bug reported above, any thumbnail link was broken since it was trying to link to the thumbnail version with a gif extension instead of a png one. Fixed</p></li>
+</ul>
+
+
+<p>I also fixed a small bug related to <a href="http://www.amazon.com/gp/browse.html?node=16427261">S3 storage</a> and the fact that a_fu had issues loading the config file. (Fixed)</p>
+
+<p>I&#8217;ll also try be able to add some of the S3 features I&#8217;ve been working on. As well as maybe enhancing the validation process.</p>
+
+<p>In the mean time, you might want to read <a href="http://the.railsi.st/2007/11/27/roll-your-own-attachment_fu-validations">this blog post</a> about better validation with attachment_fu.</p>
+
+<p>If you are heavily using attachment_fu or starting using it and think that a google group would be great idea, please let me know in the comment and I&#8217;ll try to convince Technoweenie that we need to set that up :)</p>
+
+<p>Ooohh I almost forgot, if you fixed some bugs you found while using a_fu, please contact me so we can get a_fu bug free.</p>
+</div>
+
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-11-28T08:26:00-08:00" pubdate data-updated="true">Nov 28<span>th</span>, 2007</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        
+          <div class='legacy'><a href="http://railsontherun.com/2007/11/28/attachment_fu-updated/">Original article</a></div>
+        
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        <div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+  <a class="addthis_button_tweet"></a>
+  </br>
+	
+	
+  <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+  </br>
+	
+	<a class="addthis_counter addthis_pill_style"></a></br>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=mattetti"></script>
+</div>
+
+        
+    </div>
+
+
+</article>
+
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2013 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+  var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+    '010526096358170648343:WMX140696544', customSearchOptions);
+  customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+  var options = new google.search.DrawOptions();
+  options.enableSearchboxOnly("http://matt.aimonetti.net/search");
+  customSearchControl.draw('cse-search-form', options);
+  }, true);
+
+if (navigator.userAgent.match(/iPad/i) != null) {
+  $('meta[name=viewport]').attr('content', 'width=1200,initial-scale=1,maximum-scale=1');
+}
+</script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'mattaimonetti';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,453 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ambition, why should you care? - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Ambition, Why Should You Care? By now, you should have heard about ambition if not read the latest post from the author. Ambition has a simple goal: making you stop &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://railsontherun.com/2007/09/16/ambition-why-should-you-care/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <a href='/about/'><img class="photo left" title='About Matt Aimonetti'
+      alt='Photo of Matt Aimonetti' src="/images/matt_aimonetti.jpg" /></a>
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left bio-summary'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Tech Lead</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/posts/archives/">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <div id="cse-search-form">Loading</div>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/">Home</a></li>
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/about/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Ambition, Why Should You Care?</h1>
+    <div class="entry"><p><img src="http://errtheblog.com/static/images/ambition-tower.png" alt="ambition" /></p>
+
+<p>By now, you should have heard about <a href="http://errtheblog.com/post/10722">ambition</a> if not <a href="http://errtheblog.com/post/11998">read the latest post from the author</a>.</p>
+
+<p><strong>Ambition has a simple goal: making you stop writing SQL in your queries and only stick to Ruby. (who cares if you use ActiveRecord, Sequel, DataMapper or another ORM)</strong></p>
+
+<p>I&#8217;m so used to the ActiveRecord way of querying the database that I was not fully convinced that Ambition would help me in my daily tasks. I still gave it a try:</p>
+
+<h2>Testing Ambition</h2>
+
+<pre><code>&lt;code&gt;$ sudo gem install ambition -y
+&lt;/code&gt;
+</code></pre>
+
+<p>Started my console</p>
+
+<pre><code>&lt;code&gt;$ script/console
+&lt;/code&gt;
+</code></pre>
+
+<p>and required Ambition</p>
+
+<pre><code>&lt;code&gt;require 'ambition'
+&lt;/code&gt;
+</code></pre>
+
+<p>I started by doing a query the AR way:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+ &lt;span class="co"&gt;Photo&lt;/span&gt;.find(&lt;span class="sy"&gt;:all&lt;/span&gt;, &lt;span class="sy"&gt;:conditions&lt;/span&gt; =&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;photos.title IS NULL AND photos.width &gt; 250 &lt;tt&gt;
+&lt;/tt&gt;AND photos.height &gt; 200 AND users.name = 'test'&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="sy"&gt;:include&lt;/span&gt; =&gt; &lt;span class="sy"&gt;:user&lt;/span&gt;) 
+</code></pre>
+
+<p>And I converted it into an Ambition call:</p>
+
+<pre><code>&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&lt;span class="co"&gt;Photo&lt;/span&gt;.select {|p| p.title == &lt;span class="pc"&gt;nil&lt;/span&gt; &amp;&amp; p.width &gt; &lt;span class="i"&gt;250&lt;/span&gt; &amp;&amp; p.height &gt; &lt;span class="i"&gt;200&lt;/span&gt;  &amp;&amp; p.user.name == &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;test&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;}.entries
+</code></pre>
+
+<p>145 vs 102 keystrokes. 30% less typing with Ambition! I don&#8217;t know about you, but I REALLY prefer the Ruby only query, much cleaner and much &#8220;DRYer&#8221;. However, that&#8217;s not always true:</p>
+
+<pre><code>&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&lt;span class="co"&gt;Photo&lt;/span&gt;.find_by_title(&lt;span class="pc"&gt;nil&lt;/span&gt;)
+</code></pre>
+
+<p>(24chars)</p>
+
+<pre><code>&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&lt;span class="co"&gt;Photo&lt;/span&gt;.detect{|p| p.title == &lt;span class="pc"&gt;nil&lt;/span&gt;}
+</code></pre>
+
+<p> (32 chars)</p>
+
+<p>But what&#8217;s going on behind the scene? Do we have the exact same SQL query sent to our DB?</p>
+
+<p>Well, Ambition doesn&#8217;t generate any SQL, it uses AR to do so. You want to make sure Ambition is not messing with you, try that:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+ &gt;&gt; &lt;span class="co"&gt;Photo&lt;/span&gt;.select {|p| p.title == &lt;span class="pc"&gt;nil&lt;/span&gt; &amp;&amp; p.width &gt; &lt;span class="i"&gt;250&lt;/span&gt; &amp;&amp; p.height &gt; &lt;span class="i"&gt;200&lt;/span&gt;  &amp;&amp; p.user.name == &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;test&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;}.to_hash&lt;tt&gt;
+&lt;/tt&gt; =&gt; {&lt;span class="sy"&gt;:conditions&lt;/span&gt;=&gt;&lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;(photos.`title` IS NULL AND (photos.`width` &gt; 250 AND (photos.`height` &gt; 200 AND users.name = 'test')))&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="sy"&gt;:include&lt;/span&gt;=&gt;[&lt;span class="sy"&gt;:user&lt;/span&gt;]}
+</code></pre>
+
+<p>That&#8217;s pretty hot. Especially when you have to use eager loading!</p>
+
+<p>Obviously you can still do stuff like that:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&lt;span class="co"&gt;Photo&lt;/span&gt;.select {|p| p.title == &lt;span class="pc"&gt;nil&lt;/span&gt; &amp;&amp; p.width &gt; &lt;span class="i"&gt;250&lt;/span&gt; &amp;&amp; p.height &gt; &lt;span class="i"&gt;200&lt;/span&gt;  &amp;&amp; p.user.name == &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;test&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;}.each &lt;span class="r"&gt;do&lt;/span&gt; |photo|&lt;tt&gt;
+&lt;/tt&gt; puts photo.filename&lt;tt&gt;
+&lt;/tt&gt;&lt;span class="r"&gt;end&lt;/span&gt;
+</code></pre>
+
+<p>(note the query will only be made once)</p>
+
+<p>Another cool thing, is to do simple sorting:</p>
+
+<pre><code>&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&gt;&gt; &lt;span class="co"&gt;Photo&lt;/span&gt;.select {|p| p.title == &lt;span class="pc"&gt;nil&lt;/span&gt; &amp;&amp; p.user.name == &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;test&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;}.sort_by { |p| [p.created_at, -p.size] }
+</code></pre>
+
+<p>creates the following:</p>
+
+<pre><code>&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+=&gt; {&lt;span class="sy"&gt;:order&lt;/span&gt;=&gt;&lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;photos.created_at, photos.size DESC&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="sy"&gt;:conditions&lt;/span&gt;=&gt;&lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;(photos.`title` IS NULL AND users.name = 'test')&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="sy"&gt;:include&lt;/span&gt;=&gt;[&lt;span class="sy"&gt;:user&lt;/span&gt;]}
+</code></pre>
+
+<p>or</p>
+
+<pre><code>&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+=&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;SELECT * FROM photos JOIN user WHERE (photos.`title` IS NULL AND users.name = 'test') ORDER BY photos.created_at, photos.size DESC&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;
+</code></pre>
+
+<p>That&#8217;s cool, and you can still sort on relationships:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;7&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&gt;&gt; &lt;span class="co"&gt;Photo&lt;/span&gt;.select {|p| p.title == &lt;span class="pc"&gt;nil&lt;/span&gt; }.sort_by { |p| p.user.name }&lt;tt&gt;
+&lt;/tt&gt;=&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;SELECT * FROM photos JOIN user WHERE photos.`title` IS NULL ORDER BY users.name&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;&lt;&lt;span class="rx"&gt;&lt;span class="dl"&gt;/&lt;/span&gt;&lt;span class="k"&gt;macro:code &gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;tt&gt;
+&lt;/tt&gt;Or directly on the model:&lt;tt&gt;
+&lt;/tt&gt;&lt;tt&gt;
+&lt;/tt&gt;&lt;macro:code lang="ruby"&gt;&gt;&gt; Photo.sort_by(&amp;:title)&lt;tt&gt;
+&lt;/tt&gt;=&gt; "SELECT * FROM photos ORDER BY photos.title"&lt;/span&gt;&lt;/span&gt;
+</code></pre>
+
+<p>To finish, another detail which makes Ambition a great library</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&gt;&gt; &lt;span class="co"&gt;Photo&lt;/span&gt;.any? {|p| p.title =~ &lt;span class="rx"&gt;&lt;span class="dl"&gt;/&lt;/span&gt;&lt;span class="k"&gt;ambition&lt;/span&gt;&lt;span class="dl"&gt;/&lt;/span&gt;&lt;/span&gt; }&lt;tt&gt;
+&lt;/tt&gt;=&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;SELECT count(*) AS count_all FROM photos WHERE (photos.`title` REGEXP 'ambition')&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt; &lt;tt&gt;
+&lt;/tt&gt;=&gt; &lt;span class="pc"&gt;true&lt;/span&gt;
+</code></pre>
+
+<p>And if you were worried that it wouldn&#8217;t work with utf8, check this out:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&gt;&gt; &lt;span class="co"&gt;Photo&lt;/span&gt;.any? {|p| p.title == &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;Ã©cole&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;}&lt;tt&gt;
+&lt;/tt&gt;=&gt; &lt;span class="co"&gt;SET&lt;/span&gt; &lt;span class="co"&gt;NAMES&lt;/span&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;utf8&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;=&gt; &lt;span class="co"&gt;SET&lt;/span&gt; &lt;span class="co"&gt;SQL_AUTO_IS_NULL&lt;/span&gt;=&lt;span class="i"&gt;0&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;=&gt; &lt;span class="co"&gt;SHOW&lt;/span&gt; &lt;span class="co"&gt;FIELDS&lt;/span&gt; &lt;span class="co"&gt;FROM&lt;/span&gt; photos&lt;tt&gt;
+&lt;/tt&gt;=&gt; &lt;span class="co"&gt;SELECT&lt;/span&gt; count(*) &lt;span class="co"&gt;AS&lt;/span&gt; count_all &lt;span class="co"&gt;FROM&lt;/span&gt; photos &lt;span class="co"&gt;WHERE&lt;/span&gt; (photos.`title&lt;span class="sh"&gt;&lt;span class="dl"&gt;`&lt;/span&gt;&lt;span class="k"&gt; = 'Ã©cole') &lt;tt&gt;
+&lt;/tt&gt;=&gt; false&lt;/span&gt;&lt;/span&gt;
+</code></pre>
+
+<h2>Limitations</h2>
+
+<p>The only limitation I found in Ambition is that Ruby code won&#8217;t work in the block, for instance:</p>
+
+<pre><code>&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&gt;&gt; &lt;span class="co"&gt;Photo&lt;/span&gt;.select {|p| p.title == &lt;span class="pc"&gt;nil&lt;/span&gt; &amp;&amp; p.created_at &lt; &lt;span class="i"&gt;1&lt;/span&gt;.week.ago &amp;&amp; p.user.name == &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;test&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;}.entries
+</code></pre>
+
+<p>won&#8217;t work at the moment. To inspect what&#8217;s going simply try:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&gt;&gt; &lt;span class="co"&gt;Photo&lt;/span&gt;.select {|p| p.title == &lt;span class="pc"&gt;nil&lt;/span&gt; &amp;&amp; p.created_at &lt; &lt;span class="i"&gt;1&lt;/span&gt;.week.ago &amp;&amp; p.user.name == &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;test&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;}.to_sql&lt;tt&gt;
+&lt;/tt&gt;=&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;SELECT * FROM photos JOIN user WHERE (photos.`title` IS NULL AND (photos.`created_at` &lt; 1.`week`.`ago` AND users.name = 'test'))&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;
+</code></pre>
+
+<p>You can see that <strong>photos.<code>created_at</code> &lt; 1.<code>week</code>.<code>ago</code></strong>  is the problem.</p>
+
+<p>The recommended way to achieve the same result is to use variables:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&gt;&gt; date = &lt;span class="i"&gt;1&lt;/span&gt;.week.ago&lt;tt&gt;
+&lt;/tt&gt;&gt;&gt; &lt;span class="co"&gt;Photo&lt;/span&gt;.select {|p| p.title == &lt;span class="pc"&gt;nil&lt;/span&gt; &amp;&amp; p.created_at &lt; date &amp;&amp; p.user.name == &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;test&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;}.to_sql&lt;tt&gt;
+&lt;/tt&gt;=&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;SELECT * FROM photos JOIN user WHERE (photos.`title` IS NULL AND (photos.`created_at` &lt; '2007-09-08 19:38:48' AND users.name = 'test'))&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;
+</code></pre>
+
+<p>However, note that method calls will work just fine:</p>
+
+<pre><code>1&lt;tt&gt;
+&lt;/tt&gt;2&lt;tt&gt;
+&lt;/tt&gt;3&lt;tt&gt;
+&lt;/tt&gt;4&lt;tt&gt;
+&lt;/tt&gt;&lt;strong&gt;5&lt;/strong&gt;&lt;tt&gt;
+&lt;/tt&gt;6&lt;tt&gt;
+&lt;/tt&gt;
+
+
+
+
+&gt;&gt; &lt;span class="r"&gt;def&lt;/span&gt; &lt;span class="fu"&gt;time_now_please&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;&gt;&gt; &lt;span class="co"&gt;Time&lt;/span&gt;.now&lt;tt&gt;
+&lt;/tt&gt;&gt;&gt; &lt;span class="r"&gt;end&lt;/span&gt;&lt;tt&gt;
+&lt;/tt&gt;    &lt;tt&gt;
+&lt;/tt&gt;&gt;&gt; &lt;span class="co"&gt;Photo&lt;/span&gt;.select {|p| p.title == &lt;span class="pc"&gt;nil&lt;/span&gt; &amp;&amp; p.created_at &lt; time_now_please &amp;&amp; p.user.name == &lt;span class="s"&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="k"&gt;test&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;/span&gt;}.to_sql&lt;tt&gt;
+&lt;/tt&gt;=&gt; &lt;span class="s"&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="k"&gt;SELECT * FROM photos JOIN user WHERE (photos.`title` IS NULL AND (photos.`created_at` &lt; '2007-09-15 19:41:37' AND users.name = 'test'))&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;/span&gt;   
+</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>For now, Ambition is still just wrapping ActiveRecord::Base#find but the plan is to actually generate SQL. Hopefully we&#8217;ll also be able to use Ruby code from within an Ambition block. Kickers methods are very interesting and could become a really nice way of speeding up your app and keep your code clean.</p>
+
+<p>Ambition is a great query library, I think I&#8217;ll start using it whenever I have &#8220;find&#8221; calls with multiple conditions especially if my conditions are related to another model. However I still didn&#8217;t figure out how to use an inner join with Ambition.</p>
+</div>
+
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-09-16T01:51:00-07:00" pubdate data-updated="true">Sep 16<span>th</span>, 2007</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/ruby/'>Ruby</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/railsontherun-com/'>railsontherun.com</a>
+  
+</div>
+
+</div>
+        
+          <div class='legacy'><a href="http://railsontherun.com/2007/09/16/ambition-why-should-you-care/">Original article</a></div>
+        
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        <div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+  <a class="addthis_button_tweet"></a>
+  </br>
+	
+	
+  <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+  </br>
+	
+	<a class="addthis_counter addthis_pill_style"></a></br>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=mattetti"></script>
+</div>
+
+        
+    </div>
+
+
+</article>
+
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2013 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+  var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+    '010526096358170648343:WMX140696544', customSearchOptions);
+  customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+  var options = new google.search.DrawOptions();
+  options.enableSearchboxOnly("http://matt.aimonetti.net/search");
+  customSearchControl.draw('cse-search-form', options);
+  }, true);
+
+if (navigator.userAgent.match(/iPad/i) != null) {
+  $('meta[name=viewport]').attr('content', 'width=1200,initial-scale=1,maximum-scale=1');
+}
+</script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'mattaimonetti';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+</body>
+</html>

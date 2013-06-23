@@ -1,0 +1,235 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Discussion with a Java switcher - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Discussion With a Java Switcher For the past 6 months, I have had regular discussions with an experienced Java developers who switched to Ruby a couple years ago. Names &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link rel="canonical" href="http://merbist.com/2010/08/22/discussion-with-a-java-switcher/">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <a href='/about/'><img class="photo left" title='About Matt Aimonetti'
+      alt='Photo of Matt Aimonetti' src="/images/matt_aimonetti.jpg" /></a>
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left bio-summary'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Tech Lead</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/posts/archives/">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <div id="cse-search-form">Loading</div>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/">Home</a></li>
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/about/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Discussion With a Java Switcher</h1>
+    <div class="entry"><p>For the past 6 months, I have had regular discussions with an experienced Java developers who switched to Ruby a couple years ago. Names have been changed to protect the guilty but to help you understand my friend &#8216;Duke&#8217; better, you need to know that he has been a developer for 10 years and lead many complicated, high traffic projects. He recently released two Ruby on Rails projects and he has been fighting with performance issues and scalability challenges.</p>
+
+<p>Duke is a happy Ruby developer but he sometimes has a hard time understanding why things are done in a certain way in the Ruby community. Here are some extracts from our conversations. My answers are only based on my own experience and limited knowledge. They are probably not shared by the entire  community, feel free to use the comment section if you want to add more or share your own answers.</p>
+
+<h2>Threads / Concurrency</h2>
+
+<p><strong>Duke:</strong> Why does the Ruby community hate threads so much. It seems to be a taboo discussion and the only answer I hear is that threads are hard to deal with and that Ruby does not have a good threading implementation. What&#8217;s the deal there? If you want concurrent processing, threads are important!</p>
+
+<p><strong>Me:</strong> This is a very good question and I think there are two main reasons why threads and thread safety are not hot topics in the Ruby world. First, look at Ruby&#8217;s main implementation itself. If you are using an old version of Ruby (pre Ruby 1.9) you don&#8217;t use native threads but green threads mapping to only 1 native thread. Ilya has a great (yet a bit old) <a href="http://www.igvita.com/2008/11/13/concurrency-is-a-myth-in-ruby/">blog post explaining the difference</a>, why it matters and also the role and effect of the Global Interpreter Lock (GIL). Also, even though Rubyists like to say that they live in the edge, most of them still use Ruby 1.8 and therefore don&#8217;t really see the improvements in Ruby 1.9 nor yet understand the potential of <a href="http://ruby-doc.org/core-1.9/classes/Fiber.html">fibers</a>.</p>
+
+<p>The other part of the explanation is that the Rails community never really cared until recently. Yehuda Katz recently wrote a <a href="http://yehudakatz.com/2010/08/14/threads-in-ruby-enough-already/">good article on thread safety</a> in Ruby and if you read his post and <a href="http://dpaste.de/5xyG/raw/">Zed Shaw&#8217;s comment</a> you will understand a bit better the historical background. As a matter of fact, the current version of Rails is not multi-threaded by default and developers interested in handling concurrent requests in one process should <a href="http://api.rubyonrails.org/classes/Rails/Configuration.html#M002069">turn on this option</a>. Thread safety appeared for the first time in Rails 2.2 but from what I saw, most people still don&#8217;t enable this option. There are many reasons for that. First, enabling thread safety disables some Rails features like automatic dependency loading after boot and code reloading. A lot of Rails developers take these two features for granted and don&#8217;t understand that they are technically &#8220;hacks&#8221; to make their lives easier. I do believe a lot of Rails developers don&#8217;t understand how threads, thread safety, concurrency, blocking IO and dependencies work. They care about getting their app done and meet their deadlines. They usually use and know Rails without paying too much attention to how Rails extends Ruby. Imagine what would happen if their code wasn&#8217;t thread safe and Rails wasn&#8217;t not using a global lock by default. Now you see why things are not exactly as you expect and also why some Rubyists are getting excited about new projects like <a href="http://nodejs.org/">node.js</a> which takes a different approach.</p>
+
+<p>The other thing to keep in mind is that at least 90 to 95% of the Rails apps out there don&#8217;t get more than a dozen requests/second (a million requests/day). You can scale that kind of load pretty easily using simple approaches like caching,  optimize your DB queries, load balancing to a couple servers. As a matter of fact, compared to the amount of people using Rails on a daily basis, only a very little amount of people are struggling with performance and scalability like you do. This is not an excuse but that explains why these people don&#8217;t care about the things you care about.</p>
+
+<h2>Rails is slow</h2>
+
+<p><strong>Duke:</strong> I don&#8217;t understand why Rails developers are not more concerned about the speed/performance penalty induced by Rails.</p>
+
+<p><strong>Me:</strong> Again, Rails is fast enough for the large majority of developers out there. As you know, as a developer you have to always make compromises. The Rails team always said that development time is more expensive than servers and therefore the focus is on making development easier, faster and more enjoyable. However to get there, they have to somewhat sacrifice some performance. What can be totally unacceptable for you is totally fine for others and your contribution is always welcome. This is probably the root cause of the things you don&#8217;t like in Rails. Rails was built for startups, by startup developers and you don&#8217;t fall in this category. People contributing new features and fixes are the people using Rails for what it is designed to do. There is no real &#8216;Enterprise&#8217; support behind Rails and that might be why you feel the way you feel. Since you find yourself questioning some key Rails conventions and you are struggling with missing features, it looks  to me that you chose the wrong tool for the job since you don&#8217;t even use 70% of the Rails features and are dreaming of things such 3 tier architecture. <a href="http://sinatrarb.com">Sinatra</a> might be a better fit for you if you want lower level control, less conventions and less built-in features.</p>
+
+<h2>Object allocation / Garbage Collection</h2>
+
+<p><strong>Duke:</strong> I recently read that Twitter was spending <a href="http://blog.evanweaver.com/articles/2009/10/21/object-allocations-on-the-web/">20% of its request cycles in the GC</a>, am I the only finding that concerning?</p>
+
+<p><strong>Me:</strong> Most people don&#8217;t realize how the GC works and what it means to allocate objects since Ruby does that automatically. But at the same time, most of these people don&#8217;t really see the affect of the Garbage Collection since they don&#8217;t have that much traffic or they scale in ways that just skips their Ruby stack entirely. (Or they just blame Ruby for being slow)</p>
+
+<p>If you are app deals with mainly reads/GET requests, using HTTP caching (Rails has that built-in) and something like Varnish/<a href="http://rtomayko.github.com/rack-cache/">Rack-cache</a> will dramatically reduce the load on your server apps. Others don&#8217;t investigate their issues and just add more servers. As mentioned in a <a href="http://merbist.com/2010/07/29/object-allocation-why-you-should-care/">previous post</a>, some libraries like Builder are allocating LOTS more objects than others (Nokogiri), use the existing debugging tools to see where your object allocations occur and try to fix/workaround these. In other words, Ruby&#8217;s GC isn&#8217;t great but by ignoring its limitations, we made things even worse. My guess is that the GC is going to improve (other implementations already have better GCs) and that people will realize that Ruby is not magic and critical elements need to be improved.</p>
+
+<h2>Tools</h2>
+
+<p><strong>Duke:</strong> I really have a hard time finding good tools to help scale my apps better and understand where I should optimize my code.</p>
+
+<p><strong>Me: </strong>It is true that we area lacking tools but things are changing. On top of the built-in tools like <a href="http://ruby-doc.org/core-1.9/classes/ObjectSpace.html">ObjectSpace</a>, <a href="http://ruby-doc.org/core-1.9/classes/GC/Profiler.html">GC::Profiler</a>, people interested in performance/debugging are working to provide the Ruby community with their expertise, look at <a href="http://memprof.com/">memprof</a> and <a href="http://rubyforge.org/projects/ruby-debug/">ruby-debug</a> for instance. Of course you can also use tools such as <a href="http://ruby-prof.rubyforge.org/">Ruby-prof</a>, <a href="http://kcachegrind.sourceforge.net/html/Home.html">Kcachegrind</a>, <a href="http://valgrind.org/">Valgrind</a> and <a href="http://www.gnu.org/software/gdb/">GDB</a>. (1.9.2 was <a href="http://github.com/yugui/ruby/tree/feature/dtrace">scheduled to have DTrace support</a> but I did not check yet). Maybe you should be more explicit about what tools you miss and how we could solve the gap.</p>
+
+<h2>ActiveRecord</h2>
+
+<p><strong>Duke:</strong> ActiveRecord doesn&#8217;t do what I need. How come there is no native support for master/slave DBs, sharding, DB view support is buggy,  suggested indexes on queries is not built-in and errors are not handled properly (server is gone, out of sync etc..)?</p>
+
+<p><strong>Me:</strong> You don&#8217;t have to use ActiveRecord, you could use any ORM such as <a href="http://sequel.rubyforge.org/">Sequel</a>, <a href="http://datamapper.org/">DataMapper</a> or your own. But to answer your question, I think that AR doesn&#8217;t do everything you want because nobody contributed these features to the project and the people maintaining ActiveRecord don&#8217;t have the need for these features.</p>
+
+<h2>What can we do?</h2>
+
+<p>We, as a community, need to realize that we have to learn from other communities and other programming languages, this kind of humorous graph is unfortunately not too far from reality.</p>
+
+<p><img src="http://i.imgur.com/G7WyP.gif" alt="" /></p>
+
+<p>Bringing your expertise and knowledge to the Ruby community is important. Looking further than just our own little will push us to improve and fulfill the gaps. Let the community know what tools you are missing, the good practices you think we should be following etc&#8230;</p>
+
+<p>Take for instance <a href="http://nodejs.org/">Node.js</a>, it&#8217;s a port of <a href="http://wiki.github.com/eventmachine/eventmachine/">Ruby&#8217;s EventMachine</a> / <a href="http://twistedmatrix.com/trac/">Python&#8217;s twisted</a>. There is no reasons why the Ruby or Python versions could not do what the Javascript version does. However people are getting excited and are jumping ship. What do we do about that? One way would be to identify what makes node more attractive than EventMachine and what needs to be done so we can offer what people are looking for. I asked this question a few weeks ago and the response was that a lot of the Ruby libraries are blocking and having to check is too bothersome. Maybe that&#8217;s something that the community should be addressing. Node doesn&#8217;t have that many libraries and people will have to write them, in the mean time we can make our libs non-blocking. Also, let&#8217;s not forget that this is not a competition and people should choose the best tool for their projects.</p>
+
+<p>Finally, things don&#8217;t change overnight, as more people encounter the issues you are facing, as we learn from others, part of the community will focus on the problems you are seeing and things will get better. Hopefully, <strong>you</strong> will also be able to contribute and influence the community to build an even better Ruby world.</p>
+</div>
+
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-22T17:18:55-07:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2010</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/misc/'>Misc</a>, <a class='category' href='/articles/categories/blog-post/'>blog-post</a>, <a class='category' href='/articles/categories/merbist-com/'>merbist.com</a>, <a class='category' href='/articles/categories/rails/'>rails</a>, <a class='category' href='/articles/categories/ruby/'>ruby</a>
+  
+</div>
+
+</div>
+        
+          <div class='legacy'><a href="http://merbist.com/2010/08/22/discussion-with-a-java-switcher/">Original article</a></div>
+        
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        <div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+  <a class="addthis_button_tweet"></a>
+  </br>
+	
+	
+  <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+  </br>
+	
+	<a class="addthis_counter addthis_pill_style"></a></br>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=mattetti"></script>
+</div>
+
+        
+    </div>
+
+
+</article>
+
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2013 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+  var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+    '010526096358170648343:WMX140696544', customSearchOptions);
+  customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+  var options = new google.search.DrawOptions();
+  options.enableSearchboxOnly("http://matt.aimonetti.net/search");
+  customSearchControl.draw('cse-search-form', options);
+  }, true);
+
+if (navigator.userAgent.match(/iPad/i) != null) {
+  $('meta[name=viewport]').attr('content', 'width=1200,initial-scale=1,maximum-scale=1');
+}
+</script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'mattaimonetti';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+</body>
+</html>

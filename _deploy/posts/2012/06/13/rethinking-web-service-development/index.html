@@ -1,0 +1,519 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Rethinking web service development - Matt Aimonetti</title>
+    <meta name="author" content="Matt Aimonetti">
+
+    
+    <meta name="description" content="Rethinking Web Service Development While it&#8217;s true that there are still a lot of places where software isn&#8217;t
+leveraged and many places where software needs &hellip;">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+    <link href="/atom.xml" rel="alternate" title="Matt Aimonetti" type="application/atom+xml">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30927742-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+</head>
+
+
+<body>
+	<header><div id='meta' class='inner'>
+  <div id="matt-aimonetti" itemscope itemtype="http://data-vocabulary.org/Person">
+    <a href='/about/'><img class="photo left" title='About Matt Aimonetti'
+      alt='Photo of Matt Aimonetti' src="/images/matt_aimonetti.jpg" /></a>
+    <h1 class="left"><a itemprop="name" href="/">Matt Aimonetti</a></h1>
+    <br>
+    <ul class='left bio-summary'>
+      <li><a href='http://www.linkedin.com/in/mattaimonetti'>Tech Lead</a> at <span itemprop="affiliation">LivingSocial</span></li>
+      <li><a href='http://www.oreillynet.com/pub/au/4385'>Author</a> at <span itemprop="affiliation">O'Reilly</span></li>
+      <li>Open-source <a href="/posts/archives/">evangelist</a></li>
+      <li><a href="https://github.com/mattetti">Web engineer</a></li>
+    </ul>
+  <div class="right">
+    <div class="right">
+      <div id="cse-search-form">Loading</div>
+      <div class="social right">
+        
+        
+        <a class="google" rel='me' href="https://plus.google.com/101114877505962271216?rel=author" title="Google+">Google+</a>
+        
+        
+        <a class="twitter" rel='me' href="http://twitter.com/merbist" title="Twitter">Twitter</a>
+        
+        
+        <a class="github" rel='me' href="https://github.com/mattetti" title="GitHub">GitHub</a>
+        
+        
+        
+        <a class="linkedin" rel='me' href="http://www.linkedin.com/in/mattaimonetti" title="Linkedin">Linkedin</a>
+        
+        
+        <a class="rss" rel='me' href="/atom.xml" title="RSS">RSS</a>
+        
+      </div>
+      <nav class="menu"><ul class="main">
+  <li><a href="/">Home</a></li>
+  <li><a href="/articles/categories/blog-post/">Articles</a></li>
+  <li><a href="/articles/categories/presentation/">Presentations</a></li>
+  <li><a href="/about/" rel='me'>About</a></li>
+</ul>
+</nav>
+    </div>
+  </div>
+</div>
+
+</header>
+	
+
+	<div id="content" class="inner"><article class="post hentry">
+  
+    <h1 class="title entry-title">Rethinking Web Service Development</h1>
+    <div class="entry"><p>While it&#8217;s true that there are still a lot of places where software isn&#8217;t
+leveraged and many places where software needs to evolve, software is nearly everywhere!.
+The type of software we write today needs to interact
+with other software via some sort of network.
+Any web developer out there is used to that, (s)he writes software that
+runs on a server somewhere on the internet and users via a local software
+(browser) consume their web applications using an internet connection.</p>
+
+<p>What has changed in the last few years is that web applications start
+providing more than just dynamically rendered HTML templates.
+JavaScript is used to run more and more logic on the client side and JS
+usually talks to some backends via JSON.
+But web APIs are also more and more used to expose raw data to other
+software. <strong>The challenge though, is that we haven&#8217;t changed the way we
+write web applications to adapt to this new way of providing data.</strong>
+In this article, I&#8217;d like to explore why and how we need to rethink web API development
+and focus on communication and interaction.</p>
+
+<h2>Unlearning</h2>
+
+<p><a href="/images/matt_aimonetti-unlearn.jpeg"><img src="/images/matt_aimonetti-unlearn.jpeg"
+  style="width:250px;display:block;margin:auto"/></a></p>
+
+<p>Many are used to doing certain
+things a certain way and it&#8217;s really hard to unlearn old habits. The more
+concerning part of this fact is that it makes it <strong>hard for someone to step
+back and evaluate honestly if a technical decision is due to comfort or
+if it&#8217;s truly the right choice to achieve a given goal.</strong>
+Ruby on Rails revolutionized the way we wrote web applications almost 10
+years ago and since then, many web frameworks have adopted the Rails philosophy.
+As a matter of fact, I personally think that when it comes to writing
+front end applications, Rails is still one if not the best web
+frameworks out there. But in its current state, I&#8217;m far from convinced that it&#8217;s a great tool to write
+web APIs mainly because it was not designed for that and because it
+comes with a lot of baggage.</p>
+
+<h2>Focusing on the API</h2>
+
+<p>Let&#8217;s take a step back and consider what is critical when developing a web
+API:</p>
+
+<ul>
+<li><strong>Documentation</strong> for end users to know how to consume your services.</li>
+<li><strong>Consistent and reliable</strong> output so you don&#8217;t break client applications
+relying on your services.</li>
+<li><strong>Maintainability</strong></li>
+</ul>
+
+
+<p>Note that I didn&#8217;t mention performance because I consider performance
+almost always being important.
+I also didn&#8217;t mention the whole
+<a href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST</a>/<a href="http://en.wikipedia.org/wiki/Remote_procedure_call">RPC</a>/<a href="http://en.wikipedia.org/wiki/Hypermedia">Hypstermedia</a> debate
+since I consider it being an implementation detail and a totally orthogonal
+discussion. But for the record, I personally don&#8217;t like solutions forcing you into a specific way of
+providing your data (I&#8217;m looking at you <a href="http://wiki.basho.com/Webmachine.html">webmachine</a>).</p>
+
+<h3>Documentation</h3>
+
+<p>Documentation isn&#8217;t as important when you consume your own APIs because
+you can look at your source code. However it gets much more tricky when
+you start working with other teams. They might not know the
+language/framework you use. They might not have time to go dig into your
+source code to figure out what your <strong>meta-magical piece of clever
+code</strong> does.</p>
+
+<p>Lately more and more applications provide their raw data to the
+outside world via web APIs. The developers who will consume your
+resources don&#8217;t have access to your source code, probably don&#8217;t use the same
+programming language and don&#8217;t have much time to guess how your API
+work. Also your test suite won&#8217;t help communicate how your API works so
+we need to find a different approach.
+Also note that in this scenario, TDD/BDD won&#8217;t help us communicate
+better and tests can&#8217;t be used as documentation since your tests aren&#8217;t
+exposed.</p>
+
+<p><em>Documentation is your #1 way to communicate with your human audience.</em>
+Communication is key and even if as engineers we love to focus on code, if we
+can&#8217;t communicate about it, end users will have a hard time using our
+code and might just not even do it. <strong>The key is to communicate what your API does,
+why someone might want to use it and how to use it.</strong></p>
+
+<h3>Consistent and reliable output</h3>
+
+<p>This point seems obvious but what we realize in reality is that
+for many, API&#8217;s consistency and reliability doesn&#8217;t include
+documentation. You find a lot of APIs out there poorly documented or out
+of sync with the actual implementation.</p>
+
+<p><strong>Documentation is a contract between
+you: the developer and the other developers consuming your APIs.</strong>
+As a developer, when you write any type of tests, they become some sort of quality contract.
+If someone changes your code and break your tests, they break the implicit contract.
+However, when talking about consuming data via an API, things get a bit more complicated.
+We need a way to ensure that the end user expectations are matching our
+implementation/documentation. Unit testing simply can&#8217;t guarantee that. Unit testing will
+guarantee that the logic of your units of code is intact but it can&#8217;t
+easily guarantee that the API output matches the documentation, however
+this is something that has to be done.</p>
+
+<h3>Maintainability</h3>
+
+<p>This is a tricky point since maintainability is very subjective. But I
+think we can agree that <a href="http://en.wikipedia.org/wiki/Decoupling#Software_development">decoupling</a>/<a href="http://en.wikipedia.org/wiki/Separation_of_concerns">separating concerns</a>
+will make our code more maintainable.</p>
+
+<p>That&#8217;s why I personally don&#8217;t think it&#8217;s a good idea to mix HTML
+rendering code and web API code. Consider using different controllers or
+different files depending on the way your code is structured.</p>
+
+<p>I also strongly believe that the implementation details shouldn&#8217;t define
+the way you design your web APIs. Don&#8217;t just slap a CRUD API on top of your
+model and call it done. In most cases, you will pay a high price later
+on if you take this approach because whenever you will need to change your
+web API or your model, you will be stuck. This is because your interface
+is now used by a lot of people and you can&#8217;t easily change it.
+There are many ways to avoid API/model coupling, I don&#8217;t advocate one particularly, but whatever you do,
+be sure you can make your models and APIs can evolve separately.</p>
+
+<br><br>
+
+
+<h2>My approach</h2>
+
+<p>I&#8217;ve been designing and developing web APIs for many years and I&#8217;ve been
+struggling with everything I mentioned until now.
+I don&#8217;t claim that I&#8217;ve found <strong>the</strong> solution but I&#8217;d like to think that I
+found one own way of addressing what are for me some of the most important parts
+of API design.</p>
+
+<h2>Being explicit</h2>
+
+<p>I believe that there is value in being explicit in the way we describe
+web APIs. Sometimes people get confused between being <a href="http://en.wiktionary.org/wiki/verbose">verbose</a> and being
+<a href="http://en.wiktionary.org/wiki/explicit">explicit</a>. These are two different concepts.
+Being explicit can sometimes seem verbose, but we need to evaluate the
+value that can be extracted from the provided information. If there isn&#8217;t any clear value and too many words are used, then we
+aren&#8217;t explicit, we are verbose.</p>
+
+<p>When designing a web API, I don&#8217;t write it for myself, I do it for someone
+else. <strong>It&#8217;s crucial to consider who you are writing for
+and to expose what&#8217;s important for them.</strong>
+A &#8220;small&#8221; problem is that we don&#8217;t show our code to our end users, so we
+need to find a way to explicitly provide the important information and
+to have this information provided to our end users.</p>
+
+<h2>DSL</h2>
+
+<p>For that I use a Domain Specific Language (DSL) which is a fancy way to
+say that I have some specific code allowing me to explicitly define my
+web services. These services exist as objects that can then be used to
+<em>process requests</em> but also to <em>validate inputs</em>, and even more importantly
+to <em>generate documentation</em>.</p>
+
+<p>The DSL allows me to define the following:</p>
+
+<ul>
+<li>details about consuming the service (uri, HTTP verb, authentication details,
+other service details&#8230;)</li>
+<li>incoming params (which ones are allowed, the type, are they required,
+optional?, what are they for)</li>
+<li>service output</li>
+</ul>
+
+
+<p>The input details is really important to validate incoming requests and
+reject them before even dispatching them. This is done for data sanity
+and for security reason. It also defines a strong interface that is
+easier to develop against and to maintain.</p>
+
+<p>The output details might sound quite surprising and redundant. After all, isn&#8217;t that a
+duplication of effort since we already have this information in the
+&#8220;view&#8221;? Well, if we consider the important points I highlighted in the
+first part of this article, we need a way to enforce a &#8220;contract&#8221;
+between the end users and our implementation. To do that, we can&#8217;t
+simply rely on our code since we can&#8217;t trust it. The output is important
+to document the expected output but also to validate that our services
+match our documentation and therefore our &#8220;contract&#8221;.</p>
+
+<p>Here is an example of a Ruby <a href="https://github.com/mattetti/Weasel-Diesel">DSL</a> use to describe a hello world service:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">describe_service</span> <span class="s2">&quot;hello_world&quot;</span> <span class="k">do</span> <span class="o">|</span><span class="n">service</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">service</span><span class="o">.</span><span class="n">formats</span>   <span class="ss">:json</span>
+</span><span class='line'>  <span class="n">service</span><span class="o">.</span><span class="n">http_verb</span> <span class="ss">:get</span>
+</span><span class='line'>  <span class="n">service</span><span class="o">.</span><span class="n">disable_auth</span> <span class="c1"># on by default</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># INPUT</span>
+</span><span class='line'>  <span class="n">service</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">string</span>  <span class="ss">:name</span><span class="p">,</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="s1">&#39;World&#39;</span><span class="p">,</span> <span class="ss">:doc</span> <span class="o">=&gt;</span> <span class="s2">&quot;The name of the person to greet.&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># OUTPUT</span>
+</span><span class='line'>  <span class="n">service</span><span class="o">.</span><span class="n">response</span> <span class="k">do</span> <span class="o">|</span><span class="n">response</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">response</span><span class="o">.</span><span class="n">object</span> <span class="k">do</span> <span class="o">|</span><span class="n">obj</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">obj</span><span class="o">.</span><span class="n">string</span> <span class="ss">:message</span><span class="p">,</span> <span class="ss">:doc</span> <span class="o">=&gt;</span> <span class="s2">&quot;The greeting message sent back. Defaults to &#39;World&#39;&quot;</span>
+</span><span class='line'>      <span class="n">obj</span><span class="o">.</span><span class="n">datetime</span> <span class="ss">:at</span><span class="p">,</span> <span class="ss">:doc</span> <span class="o">=&gt;</span> <span class="s2">&quot;The timestamp of when the message was dispatched&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># DOCUMENTATION</span>
+</span><span class='line'>  <span class="n">service</span><span class="o">.</span><span class="n">documentation</span> <span class="k">do</span> <span class="o">|</span><span class="n">doc</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">doc</span><span class="o">.</span><span class="n">overall</span> <span class="s2">&quot;This service provides a simple hello world implementation example.&quot;</span>
+</span><span class='line'>    <span class="n">doc</span><span class="o">.</span><span class="n">example</span> <span class="s2">&quot;&lt;code&gt;curl -I &#39;http://localhost:9292/hello_world?name=Matt&#39;&lt;/code&gt;&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The DSL style isn&#8217;t really important, what&#8217;s important is that it allows
+us to address some of the concerns we discussed earlier such as clearly
+defined interface that can be communicated as documentation but also
+acts as code. The focus is really on the API and everything fits in one
+page. Because everything is an object and can be inspected, proper
+and up to date documentation can be generated. And the implementation
+can be tested against the documentation since everything is maintained
+as code.</p>
+
+<h2>Being agnostic</h2>
+
+<p>While I like Ruby for many reasons, I don&#8217;t think that it&#8217;s the only
+good language to implement great web services. It actually has its pros
+and cons and so have all the web frameworks out there.
+That&#8217;s why I wrote my DSL as a <a href="https://github.com/mattetti/Weasel-Diesel">standalone library</a> that could virtually
+run on top of any web engine since it only outputs a representation of services.</p>
+
+<p>While I hope to one day create an interesting interop solution across
+programming language (by exporting the objects in a shared data
+structure for instance), I started by focusing on the various Ruby web
+frameworks.</p>
+
+<p>The best starting point for me was to use <a href="http://www.sinatrarb.com/">Sinatra</a>.
+I almost started just using <a href="http://rack.github.com/">rack</a>, but <a href="http://www.sinatrarb.com/">Sinatra</a> was providing me with a bit more feature for very
+little headache and little code to grasp. I wrote <a href="https://github.com/mattetti/wd-sinatra">wd-sinatra</a> which
+is a Ruby gem providing the <a href="https://github.com/mattetti/Weasel-Diesel">WeaselDiesel DSL</a> on top of a Sinatra app.
+It comes with a generator and all the needed hooks to design, implement, test and
+generate documentation for modern web APIs.</p>
+
+<p>Using a simple rake command (Ruby&#8217;s version of make) one can generate
+documentation or test the APIs against the implementations.
+The &#8220;mini framework&#8221; is still very free form and should let you do
+whatever you want. I don&#8217;t even set a default ORM for you to use since
+this choice is highly personal. I do however leave you places to set
+these things.</p>
+
+<p><a href="/images/matt_aimonetti-WeaselDiesel_doc_generation.jpeg"><img src="/images/matt_aimonetti-WeaselDiesel_doc_generation.jpeg" style="width:200px;display:block;margin:auto" title="Matt Aimonetti - WeaselDiesel documentation generation example" alt="Matt Aimonetti - WeaselDiesel documentation generation example"></a></p>
+
+<p>Sinatra and my &#8220;freedom framework&#8221; might seem too free form for
+you. So I&#8217;m currently working on getting the DSL to run on top of Rails,
+and by goal is to actually get it to run with a normal Rails app.</p>
+
+<h2>Reconsidering Rails&#8217; MVC</h2>
+
+<p>The Rails code base is very deeply marked with its own concept of MVC and having controllers and actions.
+The challenge I have is that I like my service to be self contained. I
+want my services to be simple and easy to grasp. I like having 1 service
+per file. Models, libraries and other optional presenters/decorators live separately
+but I like to have my service implementation code with the rest of my
+service description. I honestly don&#8217;t like telling developers that they
+need to go check a route file and that my simple service requires that
+you open 12 files to understand what&#8217;s going on. Simpler is often better
+and that&#8217;s why in <a href="https://github.com/mattetti/wd-sinatra">wd-sinatra</a>
+the DSL and the implementation live together which is quite harder to do
+with Rails.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">describe_service</span> <span class="s2">&quot;hello_world&quot;</span> <span class="k">do</span> <span class="o">|</span><span class="n">service</span><span class="o">|</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># [...] see the DSL section to see how the</span>
+</span><span class='line'>  <span class="c1"># service is described. The block below is being</span>
+</span><span class='line'>  <span class="c1"># being called in the context of the request</span>
+</span><span class='line'>  <span class="c1"># after the request was validated.</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># SERVICE IMPLEMENTATION</span>
+</span><span class='line'>  <span class="c1"># the returned value is used as the response body, all the Sinatra helpers</span>
+</span><span class='line'>  <span class="c1"># are available.</span>
+</span><span class='line'>  <span class="n">service</span><span class="o">.</span><span class="n">implementation</span> <span class="k">do</span>
+</span><span class='line'>    <span class="p">{</span><span class="ss">:message</span> <span class="o">=&gt;</span> <span class="s2">&quot;Hello </span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="ss">:at</span> <span class="o">=&gt;</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="p">}</span><span class="o">.</span><span class="n">to_json</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Learning from experience</h2>
+
+<p>While the DSL fits most of my needs, we all have different use cases.
+While it&#8217;s critical for a library to have a clearly defined objective, it&#8217;s also important to
+have many people help improve it. Part of the learning/vetting
+excercise is to test an approach against different needs to define when
+and why it works well in some cases and why sometinmes it doesn&#8217;t. This
+allows us to define a sweet spot that should match the clearly defined
+objective. However to be able to do that, a design needs to be tested by
+many people. So far my approach seems to work very well when an
+API needs to live outside an application and that 3rd parties need to
+consume the resources. It also seems to work well with edge cases that
+many API designers seem to encounter sooner or later.</p>
+
+<h2>Conclusion</h2>
+
+<p>At the end of the day, we have to remember that API stands for
+<em>Application Programming Interface</em> and that these interfaces have to be
+programmed so humans can write to comsume them. One of Ruby&#8217;s main design points has always
+been to try to address human needs more than computer&#8217;s. As API
+designers/implementers, it seems important to adopt the same approach and
+consider who will use our interfaces.
+I think the discussion should focus more on what to value when
+defining web APIs, instead of arguing about how to implement APIs.
+Standardization is a great concept but a really hard to implement. And
+even with standards, we have to find a way to communicate with the API
+users to express what standards we follow and where to find the various
+entry points.
+Think about your API, <strong>how well does it
+communicate with your future API users</strong>, is it good enough for them to get
+excited? Is it good enough for them to create something amazing with it?
+If not, why not?</p>
+
+<h3>Discussion</h3>
+
+<p>Comments are available on <a href="http://news.ycombinator.com/item?id=4107126">this HackerNews thread</a>.</p>
+</div>
+
+    <div class="meta">
+        <div class="date updated">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-13T18:19:00-07:00" pubdate data-updated="true">Jun 13<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+<div class="cat">
+  
+    <a class='category' href='/articles/categories/popular/'>Popular</a>, <a class='category' href='/articles/categories/api/'>api</a>, <a class='category' href='/articles/categories/design/'>design</a>, <a class='category' href='/articles/categories/webservices/'>webservices</a>
+  
+</div>
+
+</div>
+        
+        <div class='vcard author'>By <span class='fn'>Matt Aimonetti</span></div>
+        <div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+  <a class="addthis_button_tweet"></a>
+  </br>
+	
+	
+  <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+  </br>
+	
+	<a class="addthis_counter addthis_pill_style"></a></br>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=mattetti"></script>
+</div>
+
+        
+    </div>
+
+
+</article>
+
+
+</div>
+	<footer class="inner"><div id='copyright-notice'>Copyright &copy; 2013 Matt Aimonetti</div>
+</footer>
+	<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script src="/javascripts/slash.js"></script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+  var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+    '010526096358170648343:WMX140696544', customSearchOptions);
+  customSearchControl.setResultSetSize(google.search.Search.LARGE_RESULTSET);
+  var options = new google.search.DrawOptions();
+  options.enableSearchboxOnly("http://matt.aimonetti.net/search");
+  customSearchControl.draw('cse-search-form', options);
+  }, true);
+
+if (navigator.userAgent.match(/iPad/i) != null) {
+  $('meta[name=viewport]').attr('content', 'width=1200,initial-scale=1,maximum-scale=1');
+}
+</script>
+
+
+
+
+
+</body>
+</html>
