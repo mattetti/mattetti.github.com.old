@@ -102,19 +102,8 @@
 
 <p>As you can see, the real strength of HTTP caching is the fact that it&#8217;s a conditional caching. It&#8217;s based on the request&#8217;s URL and some &#8220;flags&#8221; set in the request/response headers.</p>
 
-<p>Setting these conditions in your app is actually very simple since you just need to set the response&#8217;s headers. If you are using a Ruby framework you will more than likely have access to the request object via the &#8220;request&#8221; method and you can set the headers directly like that:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Cache-Control&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;public, max-age=60&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In Rails, you can actually use a helper method instead:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">expires_in</span> <span class="mi">1</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="ss">:public</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="o">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<p>Setting these conditions in your app is actually very simple since you just need to set the response&#8217;s headers. If you are using a Ruby framework you will more than likely have access to the request object via the &#8220;request&#8221; method and you can set the headers directly like that: &#8220;response.headers[&#8216;Cache-Control&#8217;] = &#8216;public, max-age=60&#8217;&#8221;.
+In Rails, you can actually use a helper method instead: expires_in 1.minute, :public => true.</p>
 
 <p>You might have a case where you HAVE TO serve fresh content if available and can&#8217;t serve stale cached content even for a few seconds. In this case, you can rely on the Etag header value. The Etag is meant to validate the freshness of a cached response. Think of it as a signature (unique ID) that is set on the response and used by the client (or cache layer) to see if the server response has changed or not. The way it works is that the client keeps track of the Etag received for each request (attached to the cached response) and then sends it with the next requests. The HTTP layer or application sees the Etag in the request and can check if it is still valid and the content didn&#8217;t change. If that&#8217;s the case, an empty response can be sent with a special HTTP status code (304) to let know the client that the old cached value is still good to be used.  Rails has a helper called &#8220;stale?&#8221; that helps you do the Etag/last modified check and allows you to not fetch all the objects from the database by doing a cheap check on an attribute (For instance you can check the updated_at value and use that as a condition to pull an object and its relationships).</p>
 
@@ -122,7 +111,7 @@
 
 <p>Let&#8217;s stay on CinemaTreasures, when you&#8217;re logged in, the username is shown on the top of each page:</p>
 
-<p><img src="https://img.skitch.com/20110710-mh5tqxuw1txf9kppn1smkkarrs.jpg" title="Once logged in, the username is displayed on all pages" alt="Once logged in, the username is displayed on all pages" /></p>
+<p>[caption id=&#8221;&#8221; align=&#8221;aligncenter&#8221; width=&#8221;574&#8221; caption=&#8221;Once logged in, the username is displayed on all pages&#8221;]<img src="https://img.skitch.com/20110710-mh5tqxuw1txf9kppn1smkkarrs.jpg" alt="" />[/caption]</p>
 
 <p>The only things that differs from the page rendered when the user is not logged in and when he is, are these 2 links and an avatar. So let&#8217;s write some code to inject that after rendering the page.</p>
 

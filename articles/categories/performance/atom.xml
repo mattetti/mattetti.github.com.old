@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: golang | Matt Aimonetti]]></title>
-  <link href="http://matt.aimonetti.net/articles/categories/golang/atom.xml" rel="self"/>
+  <title><![CDATA[Category: performance | Matt Aimonetti]]></title>
+  <link href="http://matt.aimonetti.net/articles/categories/performance/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
   <updated>2013-06-23T11:53:25-07:00</updated>
   <id>http://matt.aimonetti.net/</id>

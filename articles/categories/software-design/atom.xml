@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Software Design | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/software-design/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2013-03-09T12:09:14-08:00</updated>
+  <updated>2013-06-23T11:53:25-07:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -168,48 +168,13 @@
 <p>Here is a hello world webservice being implemented using Weasel Diesel and Sinatra:</p>
 
 <p><div><script src='https://gist.github.com/2300131.js?file='></script>
-<noscript><pre><code>describe_service &quot;hello_world&quot; do |service|
-  service.formats   :json
-  service.http_verb :get
-  service.disable_auth # on by default
-
-  # INPUT
-  service.param.string  :name, :default =&gt; 'World'
-
-  # OUTPUT
-  service.response do |response|
-    response.object do |obj|
-        obj.string :message, :doc =&gt; &quot;The greeting message sent back. Defaults to 'World'&quot;
-      obj.datetime :at, :doc =&gt; &quot;The timestamp of when the message was dispatched&quot;
-      end
-  end
-
-  # DOCUMENTATION
-  service.documentation do |doc|
-    doc.overall &quot;This service provides a simple hello world implementation example.&quot;
-    doc.param :name, &quot;The name of the person to greet.&quot;
-    doc.example &quot;&lt;code&gt;curl -I 'http://localhost:9292/hello_world?name=Matt'&lt;/code&gt;&quot;
- end
-
-  # ACTION/IMPLEMENTATION
-  service.implementation do
-    {:message =&gt; &quot;Hello #{params[:name]}&quot;, :at =&gt; Time.now}.to_json
-  end
-
-end</code></pre></noscript></div>
+<noscript><pre><code></code></pre></noscript></div>
 </p>
 
 <p>Basis test validating the contract defined in the DSL and the actual output when the service is called:</p>
 
 <p><div><script src='https://gist.github.com/2300440.js?file='></script>
-<noscript><pre><code>class HelloWorldTest &lt; MiniTest::Unit::TestCase
-
-  def test_response
-    TestApi.get &quot;/hello_world&quot;, :name =&gt; 'Matt'
-    assert_api_response
-  end
-
-end</code></pre></noscript></div>
+<noscript><pre><code></code></pre></noscript></div>
 </p>
 
 <p>Generated documentation:</p>
@@ -398,17 +363,8 @@ end</code></pre></noscript></div>
 
 <p>As you can see, the real strength of HTTP caching is the fact that it's a conditional caching. It's based on the request's URL and some "flags" set in the request/response headers.</p>
 
-<p>Setting these conditions in your app is actually very simple since you just need to set the response's headers. If you are using a Ruby framework you will more than likely have access to the request object via the "request" method and you can set the headers directly like that:</p>
-
-<p><code>ruby
-response.headers['Cache-Control'] = 'public, max-age=60'
-</code></p>
-
-<p>In Rails, you can actually use a helper method instead:</p>
-
-<p><code>ruby
-expires_in 1.minute, :public =&gt; true.
-</code></p>
+<p>Setting these conditions in your app is actually very simple since you just need to set the response's headers. If you are using a Ruby framework you will more than likely have access to the request object via the "request" method and you can set the headers directly like that: "response.headers['Cache-Control'] = 'public, max-age=60'".
+In Rails, you can actually use a helper method instead: expires_in 1.minute, :public => true.</p>
 
 <p>You might have a case where you HAVE TO serve fresh content if available and can't serve stale cached content even for a few seconds. In this case, you can rely on the Etag header value. The Etag is meant to validate the freshness of a cached response. Think of it as a signature (unique ID) that is set on the response and used by the client (or cache layer) to see if the server response has changed or not. The way it works is that the client keeps track of the Etag received for each request (attached to the cached response) and then sends it with the next requests. The HTTP layer or application sees the Etag in the request and can check if it is still valid and the content didn't change. If that's the case, an empty response can be sent with a special HTTP status code (304) to let know the client that the old cached value is still good to be used.  Rails has a helper called "stale?" that helps you do the Etag/last modified check and allows you to not fetch all the objects from the database by doing a cheap check on an attribute (For instance you can check the updated_at value and use that as a condition to pull an object and its relationships).</p>
 
@@ -416,7 +372,7 @@ expires_in 1.minute, :public =&gt; true.
 
 <p>Let's stay on CinemaTreasures, when you're logged in, the username is shown on the top of each page:</p>
 
-<p><img src="https://img.skitch.com/20110710-mh5tqxuw1txf9kppn1smkkarrs.jpg" title="Once logged in, the username is displayed on all pages" alt="Once logged in, the username is displayed on all pages" /></p>
+<p>[caption id="" align="aligncenter" width="574" caption="Once logged in, the username is displayed on all pages"]<img src="https://img.skitch.com/20110710-mh5tqxuw1txf9kppn1smkkarrs.jpg" alt="" />[/caption]</p>
 
 <p>The only things that differs from the page rendered when the user is not logged in and when he is, are these 2 links and an avatar. So let's write some code to inject that after rendering the page.</p>
 

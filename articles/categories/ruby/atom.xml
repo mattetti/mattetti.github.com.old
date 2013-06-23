@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Matt Aimonetti]]></title>
   <link href="http://matt.aimonetti.net/articles/categories/ruby/atom.xml" rel="self"/>
   <link href="http://matt.aimonetti.net/"/>
-  <updated>2013-03-09T12:09:14-08:00</updated>
+  <updated>2013-06-23T11:53:25-07:00</updated>
   <id>http://matt.aimonetti.net/</id>
   <author>
     <name><![CDATA[Matt Aimonetti]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using Go vs Ruby for web APIs]]></title>
+    <link href="http://matt.aimonetti.net/posts/2013/06/23/using-go-vs-ruby-for-web-apis/"/>
+    <updated>2013-06-23T09:50:00-07:00</updated>
+    <id>http://matt.aimonetti.net/posts/2013/06/23/using-go-vs-ruby-for-web-apis</id>
+    <content type="html"><![CDATA[<p>A few days ago, I was wondering if using <a href="http://golang.org/">Go</a> would be worth it when developing new web APIs.
+I obviously knew that Go would be faster than Ruby, but I wasn't sure
+how much faster. I also wondering about the amount of work required to
+write get a full API implemented.</p>
+
+<p>I therefore wrote the same web API in Ruby (using Rails) and in Go (at
+first using Revel and then rewriting it without a framework since Go's
+std lib have everything one might need).
+The API spec was simple:
+* extract an authorization token contained in the request header
+* use the token to query a MySQL database
+* respond by sending back the MySQL row in json format
+* return 401 if the token isn't value</p>
+
+<p>I didn't try to optimize the Ruby code, nor the Go code. The idea wasn't
+to get precise benchmark results, the goal was to get an idea of how
+much faster Go was in a real life situation. The other goal was to
+evaluate the amount of work needed to write web APIs in Go for someone
+who already knows the language.</p>
+
+<p>At the end of the day the API implemented in Go is more than 50x faster than
+the Ruby version. Interesting enough, writing the code and tests for the
+Go API was pretty close to the Ruby experience (more on that later).
+50X performance gain, including high concurrency support might be a very
+good argument to start using some Go when it makes sense.</p>
+
+<p>I documented my experiment on <a href="https://plus.google.com/101114877505962271216/posts/PeZk8FY3PWY">Google+</a>, click the following screenshot to read more.</p>
+
+<p><a href="https://plus.google.com/101114877505962271216/posts/PeZk8FY3PWY"><img src="/images/matt_aimonetti-golang_vs_ruby_api_exp.png" alt="Matt Aimonetti's Go vs Ruby post on Google+" /></a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Inspecting Rails 4 using Ruby 2.0]]></title>

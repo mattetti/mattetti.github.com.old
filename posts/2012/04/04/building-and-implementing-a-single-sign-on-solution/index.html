@@ -238,48 +238,13 @@
 <p>Here is a hello world webservice being implemented using Weasel Diesel and Sinatra:</p>
 
 <div><script src='https://gist.github.com/2300131.js?file='></script>
-<noscript><pre><code>describe_service &quot;hello_world&quot; do |service|
-  service.formats   :json
-  service.http_verb :get
-  service.disable_auth # on by default
-
-  # INPUT
-  service.param.string  :name, :default =&gt; 'World'
-
-  # OUTPUT
-  service.response do |response|
-    response.object do |obj|
-        obj.string :message, :doc =&gt; &quot;The greeting message sent back. Defaults to 'World'&quot;
-      obj.datetime :at, :doc =&gt; &quot;The timestamp of when the message was dispatched&quot;
-      end
-  end
-
-  # DOCUMENTATION
-  service.documentation do |doc|
-    doc.overall &quot;This service provides a simple hello world implementation example.&quot;
-    doc.param :name, &quot;The name of the person to greet.&quot;
-    doc.example &quot;&lt;code&gt;curl -I 'http://localhost:9292/hello_world?name=Matt'&lt;/code&gt;&quot;
- end
-
-  # ACTION/IMPLEMENTATION
-  service.implementation do
-    {:message =&gt; &quot;Hello #{params[:name]}&quot;, :at =&gt; Time.now}.to_json
-  end
-
-end</code></pre></noscript></div>
+<noscript><pre><code></code></pre></noscript></div>
 
 
 <p>Basis test validating the contract defined in the DSL and the actual output when the service is called:</p>
 
 <div><script src='https://gist.github.com/2300440.js?file='></script>
-<noscript><pre><code>class HelloWorldTest &lt; MiniTest::Unit::TestCase
-
-  def test_response
-    TestApi.get &quot;/hello_world&quot;, :name =&gt; 'Matt'
-    assert_api_response
-  end
-
-end</code></pre></noscript></div>
+<noscript><pre><code></code></pre></noscript></div>
 
 
 <p>Generated documentation:</p>
